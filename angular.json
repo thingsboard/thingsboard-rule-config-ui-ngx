@@ -1,0 +1,37 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "rulenode-core-config": {
+      "projectType": "library",
+      "root": "projects/rulenode-core-config",
+      "sourceRoot": "projects/rulenode-core-config/src",
+      "prefix": "tb",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/rulenode-core-config/tsconfig.lib.json",
+            "project": "projects/rulenode-core-config/ng-package.json"
+          }
+        },
+        "serve": {
+          "builder": "@tb/custom-builder:static-serve",
+          "options": {
+            "port": 5000,
+            "tsConfig": "projects/rulenode-core-config/tsconfig.lib.json",
+            "project": "projects/rulenode-core-config/ng-package.json",
+            "staticServeConfig": "static.serve.conf.js"
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "rulenode-core-config"
+}

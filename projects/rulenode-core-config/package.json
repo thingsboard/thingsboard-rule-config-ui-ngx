@@ -1,0 +1,11 @@
+{
+  "name": "rulenode-core-config",
+  "version": "3.0.0",
+  "peerDependencies": {
+    "@angular/common": "^8.2.14",
+    "@angular/core": "^8.2.14",
+    "@ngrx/store": "^8.5.2",
+    "@ngx-translate/core": "^11.0.1",
+    "thingsboard": "file:./target/git-tmp/thingsboard/ui-ngx"
+  }
+}

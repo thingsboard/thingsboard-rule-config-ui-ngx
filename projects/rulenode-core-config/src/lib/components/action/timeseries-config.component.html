@@ -1,0 +1,12 @@
+<section [formGroup]="timeseriesConfigForm" fxLayout="column">
+  <mat-form-field fxFlex class="mat-block">
+    <mat-label translate>tb.rulenode.default-ttl</mat-label>
+    <input type="number" min="0" step="1" matInput formControlName="defaultTTL" required>
+    <mat-error *ngIf="timeseriesConfigForm.get('defaultTTL').hasError('required')">
+      {{ 'tb.rulenode.default-ttl-required' | translate }}
+    </mat-error>
+    <mat-error *ngIf="timeseriesConfigForm.get('defaultTTL').hasError('min')">
+      {{ 'tb.rulenode.min-default-ttl-message' | translate }}
+    </mat-error>
+  </mat-form-field>
+</section>
