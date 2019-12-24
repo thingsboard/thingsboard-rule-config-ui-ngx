@@ -1,0 +1,12 @@
+<section [formGroup]="rpcRequestConfigForm" fxLayout="column">
+  <mat-form-field fxFlex class="mat-block">
+    <mat-label translate>tb.rulenode.timeout-sec</mat-label>
+    <input type="number" min="0" step="1" matInput formControlName="timeoutInSeconds" required>
+    <mat-error *ngIf="rpcRequestConfigForm.get('timeoutInSeconds').hasError('required')">
+      {{ 'tb.rulenode.timeout-required' | translate }}
+    </mat-error>
+    <mat-error *ngIf="rpcRequestConfigForm.get('timeoutInSeconds').hasError('min')">
+      {{ 'tb.rulenode.min-timeout-message' | translate }}
+    </mat-error>
+  </mat-form-field>
+</section>

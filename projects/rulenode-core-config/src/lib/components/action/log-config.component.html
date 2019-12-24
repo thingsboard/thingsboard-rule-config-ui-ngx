@@ -1,0 +1,14 @@
+<section [formGroup]="logConfigForm" fxLayout="column">
+  <label translate class="tb-title no-padding">tb.rulenode.to-string</label>
+  <tb-js-func #jsFuncComponent
+              formControlName="jsScript"
+              functionName="ToString"
+              [functionArgs]="['msg', 'metadata', 'msgType']"
+              noValidate="true">
+  </tb-js-func>
+  <div fxLayout="row">
+    <button mat-button mat-raised-button color="primary" (click)="testScript()">
+      {{ 'tb.rulenode.test-to-string-function' | translate }}
+    </button>
+  </div>
+</section>

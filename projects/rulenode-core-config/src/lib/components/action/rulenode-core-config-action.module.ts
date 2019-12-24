@@ -3,11 +3,15 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '@shared/public-api';
 import { AttributesConfigComponent } from './attributes-config.component';
 import { TimeseriesConfigComponent } from './timeseries-config.component';
+import { RpcRequestConfigComponent } from './rpc-request-config.component';
+import { LogConfigComponent } from './log-config.component';
 
 @NgModule({
   declarations: [
     AttributesConfigComponent,
-    TimeseriesConfigComponent
+    TimeseriesConfigComponent,
+    RpcRequestConfigComponent,
+    LogConfigComponent
   ],
   imports: [
     CommonModule,
@@ -15,7 +19,9 @@ import { TimeseriesConfigComponent } from './timeseries-config.component';
   ],
   exports: [
     AttributesConfigComponent,
-    TimeseriesConfigComponent
+    TimeseriesConfigComponent,
+    RpcRequestConfigComponent,
+    LogConfigComponent
   ]
 })
 export class RuleNodeCoreConfigActionModule {
