@@ -1,0 +1,15 @@
+<section [formGroup]="tenantAttributesConfigForm" fxLayout="column">
+  <label translate class="tb-title tb-required">tb.rulenode.attr-mapping</label>
+  <mat-checkbox fxFlex formControlName="telemetry" style="padding-bottom: 16px;">
+    {{ 'tb.rulenode.latest-telemetry' | translate }}
+  </mat-checkbox>
+  <tb-kv-map-config
+    required
+    formControlName="attrMapping"
+    requiredText="tb.rulenode.attr-mapping-required"
+    keyText="{{ tenantAttributesConfigForm.get('telemetry').value ? 'tb.rulenode.source-telemetry' : 'tb.rulenode.source-attribute' }}"
+    keyRequiredText="{{ tenantAttributesConfigForm.get('telemetry').value ? 'tb.rulenode.source-telemetry-required' : 'tb.rulenode.source-attribute-required' }}"
+    valText="tb.rulenode.target-attribute"
+    valRequiredText="tb.rulenode.target-attribute-required">
+  </tb-kv-map-config>
+</section>

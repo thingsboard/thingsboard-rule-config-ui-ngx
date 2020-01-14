@@ -9,16 +9,21 @@ import { SharedModule } from '@shared/public-api';
 import addRuleNodeCoreLocaleEnglish from './locale/rulenode-core-locale.constant';
 import { EmptyConfigComponent } from './components/empty-config.component';
 import { RuleNodeCoreConfigActionModule } from './components/action/rulenode-core-config-action.module';
+import { RuleNodeCoreConfigFilterModule } from './components/filter/rulenode-core-config-filter.module';
+import { RulenodeCoreConfigEnrichmentModule } from './components/enrichment/rulenode-core-config-enrichment.module';
 
 @NgModule({
   declarations: [
-    EmptyConfigComponent],
+    EmptyConfigComponent
+  ],
   imports: [
     CommonModule,
     SharedModule
   ],
   exports: [
     RuleNodeCoreConfigActionModule,
+    RuleNodeCoreConfigFilterModule,
+    RulenodeCoreConfigEnrichmentModule,
     EmptyConfigComponent
   ]
 })

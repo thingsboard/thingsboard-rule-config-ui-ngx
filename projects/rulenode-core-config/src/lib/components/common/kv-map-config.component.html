@@ -1,0 +1,52 @@
+<section fxLayout="column" class="tb-kv-map-config" [formGroup]="kvListFormGroup">
+  <div class="header" fxFlex fxLayout="row" fxLayoutGap="8px">
+    <span class="cell" fxFlex translate>{{ keyText }}</span>
+    <span class="cell" fxFlex translate>{{ valText }}</span>
+    <span [fxShow]="!disabled" style="width: 52px;" innerHTML="&nbsp"></span>
+  </div>
+  <div class="body">
+    <div class="row" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px"
+         formArrayName="keyVals"
+         *ngFor="let keyValControl of keyValsFormArray().controls; let $index = index">
+      <mat-form-field fxFlex floatLabel="always" hideRequiredMarker class="cell mat-block">
+        <mat-label></mat-label>
+        <input [formControl]="keyValControl.get('key')" matInput required
+               placeholder="{{ keyText | translate }}"/>
+        <mat-error *ngIf="keyValControl.get('key').hasError('required')">
+          {{ keyRequiredText | translate }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex floatLabel="always" hideRequiredMarker class="cell mat-block">
+        <mat-label></mat-label>
+        <input [formControl]="keyValControl.get('value')" matInput required
+               placeholder="{{ valText | translate }}"/>
+        <mat-error *ngIf="keyValControl.get('value').hasError('required')">
+          {{ valRequiredText | translate }}
+        </mat-error>
+      </mat-form-field>
+      <button mat-button mat-icon-button color="primary"
+              [fxShow]="!disabled"
+              type="button"
+              (click)="removeKeyVal($index)"
+              [disabled]="isLoading$ | async"
+              matTooltip="{{ 'tb.key-val.remove-entry' | translate }}"
+              matTooltipPosition="above">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <tb-error [error]="ngControl.hasError('kvMap')
+                  ? translate.instant(requiredText) : ''"></tb-error>
+  <div style="margin-top: 8px;">
+    <button mat-button mat-raised-button color="primary"
+            [fxShow]="!disabled"
+            [disabled]="isLoading$ | async"
+            (click)="addKeyVal()"
+            type="button"
+            matTooltip="{{ 'tb.key-val.add-entry' | translate }}"
+            matTooltipPosition="above">
+      <mat-icon>add</mat-icon>
+      {{ 'action.add' | translate }}
+    </button>
+  </div>
+</section>

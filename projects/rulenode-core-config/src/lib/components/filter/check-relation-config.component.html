@@ -1,0 +1,33 @@
+<section [formGroup]="checkRelationConfigForm" fxLayout="column">
+  <mat-checkbox fxFlex formControlName="checkForSingleEntity" style="padding-bottom: 16px;">
+    {{ 'tb.rulenode.check-relation-to-specific-entity' | translate }}
+  </mat-checkbox>
+  <div class="tb-hint" translate>tb.rulenode.check-relation-hint</div>
+  <mat-form-field class="mat-block" style="min-width: 100px;">
+    <mat-label translate>relation.direction</mat-label>
+    <mat-select formControlName="direction" required>
+      <mat-option *ngFor="let direction of entitySearchDirection" [value]="direction">
+        {{ entitySearchDirectionTranslationsMap.get(direction) | translate }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div fxLayout="row" *ngIf="checkRelationConfigForm.get('checkForSingleEntity').value" style="padding-top: 20px">
+    <tb-entity-type-select
+      style="min-width: 100px; padding-bottom: 20px; padding-right: 8px;"
+      showLabel
+      required
+      formControlName="entityType">
+    </tb-entity-type-select>
+    <tb-entity-autocomplete
+      fxFlex
+      required
+      *ngIf="checkRelationConfigForm.get('entityType').value"
+      [entityType]="checkRelationConfigForm.get('entityType').value"
+      formControlName="entityId">
+    </tb-entity-autocomplete>
+  </div>
+  <tb-relation-type-autocomplete
+    required
+    formControlName="relationType">
+  </tb-relation-type-autocomplete>
+</section>

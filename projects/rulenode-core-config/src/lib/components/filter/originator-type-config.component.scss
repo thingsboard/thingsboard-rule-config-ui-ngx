@@ -1,0 +1,10 @@
+:host ::ng-deep {
+  tb-entity-type-list {
+    .mat-form-field-flex {
+      padding-top: 0;
+    }
+    .mat-form-field-infix {
+      border-top: 0;
+    }
+  }
+}

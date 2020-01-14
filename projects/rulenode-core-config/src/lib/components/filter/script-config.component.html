@@ -1,0 +1,14 @@
+<section [formGroup]="scriptConfigForm" fxLayout="column">
+  <label translate class="tb-title no-padding">tb.rulenode.filter</label>
+  <tb-js-func #jsFuncComponent
+              formControlName="jsScript"
+              functionName="Filter"
+              [functionArgs]="['msg', 'metadata', 'msgType']"
+              noValidate="true">
+  </tb-js-func>
+  <div fxLayout="row">
+    <button mat-button mat-raised-button color="primary" (click)="testScript()">
+      {{ 'tb.rulenode.test-filter-function' | translate }}
+    </button>
+  </div>
+</section>

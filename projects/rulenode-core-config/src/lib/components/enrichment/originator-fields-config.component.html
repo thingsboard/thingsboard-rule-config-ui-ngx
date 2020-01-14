@@ -1,0 +1,12 @@
+<section [formGroup]="originatorFieldsConfigForm" fxLayout="column">
+  <label translate class="tb-title tb-required">tb.rulenode.fields-mapping</label>
+  <tb-kv-map-config
+    required
+    formControlName="fieldsMapping"
+    requiredText="tb.rulenode.fields-mapping-required"
+    keyText="tb.rulenode.source-field"
+    keyRequiredText="tb.rulenode.source-field-required"
+    valText="tb.rulenode.target-attribute"
+    valRequiredText="tb.rulenode.target-attribute-required">
+  </tb-kv-map-config>
+</section>

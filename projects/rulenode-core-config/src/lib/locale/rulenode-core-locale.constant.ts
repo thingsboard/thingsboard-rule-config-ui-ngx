@@ -35,12 +35,15 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'fetch-mode-hint': 'If selected fetch mode \'ALL\'  you able to choose telemetry sampling order.',
           'order-by': 'Order by',
           'order-by-hint': 'Select to choose telemetry sampling order.',
+          limit: 'Limit',
+          'limit-hint': 'Min limit value is 2, max - 1000. In case you want to fetch a single entry, ' +
+            'select fetch mode \'FIRST\' or \'LAST\'.',
           'time-unit-milliseconds': 'Milliseconds',
           'time-unit-seconds': 'Seconds',
           'time-unit-minutes': 'Minutes',
           'time-unit-hours': 'Hours',
           'time-unit-days': 'Days',
-          'time-value-range': 'Time value should be in a range from 1 to 2147483647\'.',
+          'time-value-range': 'Time value should be in a range from 1 to 2147483647.',
           'start-interval-value-required': 'Start interval value is required.',
           'end-interval-value-required': 'End interval value is required.',
           filter: 'Filter',
@@ -341,7 +344,11 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'min-outside-duration-value-required': 'Minimal outside duration is required',
           'min-outside-duration-time-unit': 'Minimal outside duration time unit',
           'tell-failure-if-absent': 'Tell Failure',
-          'tell-failure-if-absent-hint': 'If at least one selected key doesn\'t exist the outbound message will report "Failure".'
+          'tell-failure-if-absent-hint': 'If at least one selected key doesn\'t exist the outbound message will report "Failure".',
+          'get-latest-value-with-ts': 'Fetch Latest telemetry with Timestamp',
+          'get-latest-value-with-ts-hint':
+            'If selected, latest telemetry values will be added to the outbound message metadata with timestamp, ' +
+            'e.g: "temp": "&lcub;\\"ts\\":1574329385897,\\"value\\":42&rcub;"',
         },
         'key-val': {
           key: 'Key',

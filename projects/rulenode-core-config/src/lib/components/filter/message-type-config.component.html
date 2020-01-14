@@ -1,0 +1,51 @@
+<mat-form-field [formGroup]="messageTypeConfigForm" style="width: 100%;">
+  <mat-label translate>tb.rulenode.message-types-filter</mat-label>
+  <mat-chip-list #chipList>
+    <mat-chip
+      *ngFor="let messageType of messageTypes"
+      [selectable]="true"
+      [removable]="true"
+      (removed)="remove(messageType)">
+      {{messageType.name}}
+      <mat-icon matChipRemove>close</mat-icon>
+    </mat-chip>
+    <input matInput type="text" placeholder="{{ 'tb.rulenode.message-type' | translate }}"
+           style="max-width: 200px;"
+           #messageTypeInput
+           formControlName="messageType"
+           matAutocompleteOrigin
+           #origin="matAutocompleteOrigin"
+           [matAutocompleteConnectedTo]="origin"
+           [matAutocomplete]="messageTypeAutocomplete"
+           [matChipInputFor]="chipList"
+           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+           (matChipInputTokenEnd)="add($event)">
+  </mat-chip-list>
+  <mat-autocomplete #messageTypeAutocomplete="matAutocomplete"
+                    class="tb-autocomplete"
+                    (optionSelected)="selected($event)"
+                    [displayWith]="displayMessageTypeFn">
+    <mat-option *ngFor="let messageType of filteredMessageTypes | async" [value]="messageType">
+      <span [innerHTML]="messageType.name | highlight:searchText"></span>
+    </mat-option>
+    <mat-option *ngIf="(filteredMessageTypes | async)?.length === 0" [value]="null" class="tb-not-found">
+      <div class="tb-not-found-content" (click)="$event.stopPropagation()">
+        <div *ngIf="!textIsNotEmpty(searchText); else searchNotEmpty">
+          <span translate>tb.rulenode.no-message-types-found</span>
+        </div>
+        <ng-template #searchNotEmpty>
+                <span>
+                  {{ translate.get('tb.rulenode.no-message-type-matching',
+                  {messageType: truncate.transform(searchText, true, 6, &apos;...&apos;)}) | async }}
+                </span>
+        </ng-template>
+        <span>
+          <a translate (click)="createMessageType($event, searchText)">tb.rulenode.create-new-message-type</a>
+        </span>
+      </div>
+    </mat-option>
+  </mat-autocomplete>
+  <mat-error *ngIf="chipList.errorState">
+    {{ 'tb.rulenode.message-types-required' | translate }}
+  </mat-error>
+</mat-form-field>
