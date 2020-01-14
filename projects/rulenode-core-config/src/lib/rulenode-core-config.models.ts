@@ -1,3 +1,19 @@
+export enum OriginatorSource {
+  CUSTOMER = 'CUSTOMER',
+  TENANT = 'TENANT',
+  RELATED = 'RELATED',
+  ALARM_ORIGINATOR = 'ALARM_ORIGINATOR'
+}
+
+export const originatorSourceTranslations = new Map<OriginatorSource, string>(
+  [
+    [OriginatorSource.CUSTOMER, 'tb.rulenode.originator-customer'],
+    [OriginatorSource.TENANT, 'tb.rulenode.originator-tenant'],
+    [OriginatorSource.RELATED, 'tb.rulenode.originator-related'],
+    [OriginatorSource.ALARM_ORIGINATOR, 'tb.rulenode.originator-alarm-originator'],
+  ]
+);
+
 export enum PerimeterType {
   CIRCLE = 'CIRCLE',
   POLYGON = 'POLYGON'

@@ -11,6 +11,7 @@ import { EmptyConfigComponent } from './components/empty-config.component';
 import { RuleNodeCoreConfigActionModule } from './components/action/rulenode-core-config-action.module';
 import { RuleNodeCoreConfigFilterModule } from './components/filter/rulenode-core-config-filter.module';
 import { RulenodeCoreConfigEnrichmentModule } from './components/enrichment/rulenode-core-config-enrichment.module';
+import { RulenodeCoreConfigTransformModule } from './components/transform/rulenode-core-config-transform.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { RulenodeCoreConfigEnrichmentModule } from './components/enrichment/rule
     RuleNodeCoreConfigActionModule,
     RuleNodeCoreConfigFilterModule,
     RulenodeCoreConfigEnrichmentModule,
+    RulenodeCoreConfigTransformModule,
     EmptyConfigComponent
   ]
 })

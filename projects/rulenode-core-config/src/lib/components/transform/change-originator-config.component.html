@@ -1,0 +1,18 @@
+<section [formGroup]="changeOriginatorConfigForm" fxLayout="column">
+  <mat-form-field class="mat-block">
+    <mat-label translate>tb.rulenode.originator-source</mat-label>
+    <mat-select formControlName="originatorSource" required>
+      <mat-option *ngFor="let source of originatorSources" [value]="source">
+        {{ originatorSourceTranslationMap.get(source) | translate }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <section fxLayout="column" *ngIf="changeOriginatorConfigForm.get('originatorSource').value === originatorSource.RELATED">
+    <label translate class="tb-title tb-required">tb.rulenode.relations-query</label>
+    <tb-relations-query-config
+      required
+      formControlName="relationsQuery"
+      style="padding-bottom: 15px;">
+    </tb-relations-query-config>
+  </section>
+</section>

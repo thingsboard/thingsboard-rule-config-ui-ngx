@@ -5,13 +5,25 @@ import { AttributesConfigComponent } from './attributes-config.component';
 import { TimeseriesConfigComponent } from './timeseries-config.component';
 import { RpcRequestConfigComponent } from './rpc-request-config.component';
 import { LogConfigComponent } from './log-config.component';
+import { AssignCustomerConfigComponent } from './assign-customer-config.component';
+import { ClearAlarmConfigComponent } from './clear-alarm-config.component';
+import { CreateAlarmConfigComponent } from './create-alarm-config.component';
+import { CreateRelationConfigComponent } from './create-relation-config.component';
+import { MsgDelayConfigComponent } from './msg-delay-config.component';
+import { DeleteRelationConfigComponent } from './delete-relation-config.component';
 
 @NgModule({
   declarations: [
     AttributesConfigComponent,
     TimeseriesConfigComponent,
     RpcRequestConfigComponent,
-    LogConfigComponent
+    LogConfigComponent,
+    AssignCustomerConfigComponent,
+    ClearAlarmConfigComponent,
+    CreateAlarmConfigComponent,
+    CreateRelationConfigComponent,
+    MsgDelayConfigComponent,
+    DeleteRelationConfigComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +33,13 @@ import { LogConfigComponent } from './log-config.component';
     AttributesConfigComponent,
     TimeseriesConfigComponent,
     RpcRequestConfigComponent,
-    LogConfigComponent
+    LogConfigComponent,
+    AssignCustomerConfigComponent,
+    ClearAlarmConfigComponent,
+    CreateAlarmConfigComponent,
+    CreateRelationConfigComponent,
+    MsgDelayConfigComponent,
+    DeleteRelationConfigComponent
   ]
 })
 export class RuleNodeCoreConfigActionModule {
