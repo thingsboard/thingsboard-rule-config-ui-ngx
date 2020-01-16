@@ -156,6 +156,10 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'endpoint-url-pattern-hint': 'HTTP URL address pattern, use <code>${metaKeyName}</code> to substitute variables from metadata',
           'request-method': 'Request method',
           'use-simple-client-http-factory': 'Use simple client HTTP factory',
+          'read-timeout': 'Read timeout in millis',
+          'read-timeout-hint': 'The value of 0 means an infinite timeout',
+          'max-parallel-requests-count': 'Max number of parallel requests',
+          'max-parallel-requests-count-hint': 'The value of 0 specifies no limit in parallel processing',
           headers: 'Headers',
           'headers-hint': 'Use <code>${metaKeyName}</code> in header/value fields to substitute variables from metadata',
           header: 'Header',
@@ -352,6 +356,9 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'get-latest-value-with-ts-hint':
             'If selected, latest telemetry values will be added to the outbound message metadata with timestamp, ' +
             'e.g: "temp": "&lcub;\\"ts\\":1574329385897,\\"value\\":42&rcub;"',
+          'use-redis-queue': 'Use redis queue for message persistence',
+          'trim-redis-queue': 'Trim redis queue',
+          'redis-queue-max-size': 'Redis queue max size'
         },
         'key-val': {
           key: 'Key',

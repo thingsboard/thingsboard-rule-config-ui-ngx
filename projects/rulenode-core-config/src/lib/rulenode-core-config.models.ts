@@ -121,3 +121,10 @@ export const mqttCredentialsTypeTranslations = new Map<MqttCredentialsType, stri
     ['cert.PEM', 'tb.rulenode.credentials-pem']
   ]
 );
+
+export enum HttpRequestType {
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  DELETE = 'DELETE'
+}

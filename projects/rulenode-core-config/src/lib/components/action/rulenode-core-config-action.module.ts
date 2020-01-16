@@ -23,6 +23,9 @@ import { SqsConfigComponent } from './sqs-config.component';
 import { PubSubConfigComponent } from './pubsub-config.component';
 import { KafkaConfigComponent } from './kafka-config.component';
 import { MqttConfigComponent } from './mqtt-config.component';
+import { RabbitMqConfigComponent } from './rabbit-mq-config.component';
+import { RestApiCallConfigComponent } from './rest-api-call-config.component';
+import { SendEmailConfigComponent } from './send-email-config.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,10 @@ import { MqttConfigComponent } from './mqtt-config.component';
     SqsConfigComponent,
     PubSubConfigComponent,
     KafkaConfigComponent,
-    MqttConfigComponent
+    MqttConfigComponent,
+    RabbitMqConfigComponent,
+    RestApiCallConfigComponent,
+    SendEmailConfigComponent
   ],
   imports: [
     CommonModule,
@@ -74,7 +80,10 @@ import { MqttConfigComponent } from './mqtt-config.component';
     SqsConfigComponent,
     PubSubConfigComponent,
     KafkaConfigComponent,
-    MqttConfigComponent
+    MqttConfigComponent,
+    RabbitMqConfigComponent,
+    RestApiCallConfigComponent,
+    SendEmailConfigComponent
   ]
 })
 export class RuleNodeCoreConfigActionModule {

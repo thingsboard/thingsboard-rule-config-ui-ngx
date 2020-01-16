@@ -1,0 +1,53 @@
+<section [formGroup]="restApiCallConfigForm" fxLayout="column">
+  <mat-form-field class="mat-block" style="padding-bottom: 16px;">
+    <mat-label translate>tb.rulenode.endpoint-url-pattern</mat-label>
+    <input required matInput formControlName="restEndpointUrlPattern">
+    <mat-error *ngIf="restApiCallConfigForm.get('restEndpointUrlPattern').hasError('required')">
+      {{ 'tb.rulenode.endpoint-url-pattern-required' | translate }}
+    </mat-error>
+    <mat-hint innerHTML="{{ 'tb.rulenode.endpoint-url-pattern-hint' | translate }}"></mat-hint>
+  </mat-form-field>
+  <mat-form-field class="mat-block">
+    <mat-label translate>tb.rulenode.request-method</mat-label>
+    <mat-select formControlName="requestMethod">
+      <mat-option *ngFor="let requestType of httpRequestTypes" [value]="requestType">
+        {{ requestType }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-checkbox formControlName="useSimpleClientHttpFactory" style="padding-bottom: 16px;">
+    {{ 'tb.rulenode.use-simple-client-http-factory' | translate }}
+  </mat-checkbox>
+  <mat-form-field *ngIf="restApiCallConfigForm.get('useSimpleClientHttpFactory').value === false" class="mat-block" style="padding-bottom: 16px;">
+    <mat-label translate>tb.rulenode.read-timeout</mat-label>
+    <input type="number" step="1" min="0" matInput formControlName="readTimeoutMs">
+    <mat-hint innerHTML="{{ 'tb.rulenode.read-timeout-hint' | translate }}"></mat-hint>
+  </mat-form-field>
+  <mat-form-field class="mat-block" style="padding-bottom: 16px;">
+    <mat-label translate>tb.rulenode.max-parallel-requests-count</mat-label>
+    <input type="number" step="1" min="0" matInput formControlName="maxParallelRequestsCount">
+    <mat-hint innerHTML="{{ 'tb.rulenode.max-parallel-requests-count-hint' | translate }}"></mat-hint>
+  </mat-form-field>
+  <label translate class="tb-title">tb.rulenode.headers</label>
+  <div class="tb-hint" translate>tb.rulenode.headers-hint</div>
+  <tb-kv-map-config
+    required="false"
+    formControlName="headers"
+    keyText="tb.rulenode.header"
+    keyRequiredText="tb.rulenode.header-required"
+    valText="tb.rulenode.value"
+    valRequiredText="tb.rulenode.value-required">
+  </tb-kv-map-config>
+  <mat-checkbox formControlName="useRedisQueueForMsgPersistence" style="padding-bottom: 16px;">
+    {{ 'tb.rulenode.use-redis-queue' | translate }}
+  </mat-checkbox>
+  <div fxLayout="column" *ngIf="restApiCallConfigForm.get('useRedisQueueForMsgPersistence').value === true">
+    <mat-checkbox formControlName="trimQueue" style="padding-bottom: 16px;">
+      {{ 'tb.rulenode.trim-redis-queue' | translate }}
+    </mat-checkbox>
+    <mat-form-field class="mat-block">
+      <mat-label translate>tb.rulenode.redis-queue-max-size</mat-label>
+      <input type="number" step="1" min="0" matInput formControlName="maxQueueSize">
+    </mat-form-field>
+  </div>
+</section>
