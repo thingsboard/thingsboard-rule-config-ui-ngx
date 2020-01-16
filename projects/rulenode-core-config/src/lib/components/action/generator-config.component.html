@@ -1,0 +1,41 @@
+<section [formGroup]="generatorConfigForm" fxLayout="column">
+  <mat-form-field class="mat-block">
+    <mat-label translate>tb.rulenode.message-count</mat-label>
+    <input required type="number" min="0" step="1" matInput formControlName="msgCount">
+    <mat-error *ngIf="generatorConfigForm.get('msgCount').hasError('required')">
+      {{ 'tb.rulenode.message-count-required' | translate }}
+    </mat-error>
+    <mat-error *ngIf="generatorConfigForm.get('msgCount').hasError('min')">
+      {{ 'tb.rulenode.min-message-count-message' | translate }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="mat-block">
+    <mat-label translate>tb.rulenode.period-seconds</mat-label>
+    <input required type="number" min="1" step="1" matInput formControlName="periodInSeconds">
+    <mat-error *ngIf="generatorConfigForm.get('periodInSeconds').hasError('required')">
+      {{ 'tb.rulenode.period-seconds-required' | translate }}
+    </mat-error>
+    <mat-error *ngIf="generatorConfigForm.get('periodInSeconds').hasError('min')">
+      {{ 'tb.rulenode.min-period-seconds-message' | translate }}
+    </mat-error>
+  </mat-form-field>
+  <div fxLayout="column">
+    <label class="tb-small">{{ 'tb.rulenode.originator' | translate }}</label>
+    <tb-entity-select
+      required="false"
+      formControlName="originator">
+    </tb-entity-select>
+  </div>
+  <label translate class="tb-title no-padding">tb.rulenode.generate</label>
+  <tb-js-func #jsFuncComponent
+              formControlName="jsScript"
+              functionName="Generate"
+              [functionArgs]="['prevMsg', 'prevMetadata', 'prevMsgType']"
+              noValidate="true">
+  </tb-js-func>
+  <div fxLayout="row" style="padding-bottom: 16px;">
+    <button mat-button mat-raised-button color="primary" (click)="testScript()">
+      {{ 'tb.rulenode.test-generator-function' | translate }}
+    </button>
+  </div>
+</section>

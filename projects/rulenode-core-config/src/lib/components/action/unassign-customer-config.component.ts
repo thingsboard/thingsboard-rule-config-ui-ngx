@@ -5,13 +5,13 @@ import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'tb-action-node-assign-to-customer-config',
-  templateUrl: './assign-customer-config.component.html',
+  selector: 'tb-action-node-un-assign-to-customer-config',
+  templateUrl: './unassign-customer-config.component.html',
   styleUrls: []
 })
-export class AssignCustomerConfigComponent extends RuleNodeConfigurationComponent {
+export class UnassignCustomerConfigComponent extends RuleNodeConfigurationComponent {
 
-  assignCustomerConfigForm: FormGroup;
+  unassignCustomerConfigForm: FormGroup;
 
   constructor(protected store: Store<AppState>,
               private fb: FormBuilder) {
@@ -19,15 +19,13 @@ export class AssignCustomerConfigComponent extends RuleNodeConfigurationComponen
   }
 
   protected configForm(): FormGroup {
-    return this.assignCustomerConfigForm;
+    return this.unassignCustomerConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
-    this.assignCustomerConfigForm = this.fb.group({
+    this.unassignCustomerConfigForm = this.fb.group({
       customerNamePattern: [configuration ? configuration.customerNamePattern : null, [Validators.required]],
-      createCustomerIfNotExists: [configuration ? configuration.createCustomerIfNotExists : false, []],
       customerCacheExpiration: [configuration ? configuration.customerCacheExpiration : null, [Validators.required, Validators.min(0)]]
     });
   }
-
 }

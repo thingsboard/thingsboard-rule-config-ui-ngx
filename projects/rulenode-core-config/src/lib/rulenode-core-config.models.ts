@@ -98,3 +98,26 @@ export enum SamplingOrder {
   ASC = 'ASC',
   DESC = 'DESC'
 }
+
+export enum SqsQueueType {
+  STANDARD = 'STANDARD',
+  FIFO = 'FIFO'
+}
+
+export const sqsQueueTypeTranslations = new Map<SqsQueueType, string>(
+  [
+    [SqsQueueType.STANDARD, 'tb.rulenode.sqs-queue-standard'],
+    [SqsQueueType.FIFO, 'tb.rulenode.sqs-queue-fifo'],
+  ]
+);
+
+export type MqttCredentialsType = 'anonymous' | 'basic' | 'cert.PEM';
+export const mqttCredentialsTypes: MqttCredentialsType[] = ['anonymous', 'basic', 'cert.PEM'];
+
+export const mqttCredentialsTypeTranslations = new Map<MqttCredentialsType, string>(
+  [
+    ['anonymous', 'tb.rulenode.credentials-anonymous'],
+    ['basic', 'tb.rulenode.credentials-basic'],
+    ['cert.PEM', 'tb.rulenode.credentials-pem']
+  ]
+);

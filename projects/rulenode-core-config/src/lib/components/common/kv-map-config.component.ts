@@ -134,15 +134,17 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
 
   public validate(c: FormControl) {
     const kvList: {key: string; value: string}[] = this.kvListFormGroup.get('keyVals').value;
-    let valid = true;
-    if (!kvList.length) {
-      valid = !this.required;
+    if (!kvList.length && this.required) {
+      return {
+        kvMapRequired: true
+      };
     }
-    return (valid) ? null : {
-      kvMap: {
-        valid: false,
-      },
-    };
+    if (!this.kvListFormGroup.valid) {
+      return {
+        kvFieldsRequired: true
+      };
+    }
+    return null;
   }
 
   private updateModel() {

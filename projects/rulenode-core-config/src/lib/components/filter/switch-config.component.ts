@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './switch-config.component.html',
   styleUrls: []
 })
-export class SwitchConfigComponent extends RuleNodeConfigurationComponent implements OnInit {
+export class SwitchConfigComponent extends RuleNodeConfigurationComponent {
 
   @ViewChild('jsFuncComponent', {static: true}) jsFuncComponent: JsFuncComponent;
 
@@ -23,20 +23,13 @@ export class SwitchConfigComponent extends RuleNodeConfigurationComponent implem
     super(store);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
+  protected configForm(): FormGroup {
+    return this.switchConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.switchConfigForm = this.fb.group({
       jsScript: [configuration ? configuration.jsScript : null, [Validators.required]]
-    });
-    this.switchConfigForm.valueChanges.subscribe((updated: RuleNodeConfiguration) => {
-      if (this.switchConfigForm.valid) {
-        this.notifyConfigurationUpdated(updated);
-      } else {
-        this.notifyConfigurationUpdated(null);
-      }
     });
   }
 

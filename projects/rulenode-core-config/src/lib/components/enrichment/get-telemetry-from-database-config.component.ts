@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -12,7 +12,7 @@ import { FetchMode, SamplingOrder, TimeUnit, timeUnitTranslations } from '../../
   templateUrl: './get-telemetry-from-database-config.component.html',
   styleUrls: ['./get-telemetry-from-database-config.component.scss']
 })
-export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurationComponent implements OnInit, AfterViewInit {
+export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurationComponent {
 
   getTelemetryFromDatabaseConfigForm: FormGroup;
 
@@ -31,16 +31,8 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
     super(store);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (!this.validateConfig()) {
-        this.notifyConfigurationUpdated(null);
-      }
-    }, 0);
+  protected configForm(): FormGroup {
+    return this.getTelemetryFromDatabaseConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
@@ -57,27 +49,13 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
       startIntervalPattern: [configuration ? configuration.startIntervalPattern : null, []],
       endIntervalPattern: [configuration ? configuration.endIntervalPattern : null, []],
     });
-    this.updateValidators(false);
-    this.getTelemetryFromDatabaseConfigForm.get('fetchMode').valueChanges.subscribe(
-      () => {
-        this.updateValidators(true);
-      }
-    );
-    this.getTelemetryFromDatabaseConfigForm.get('useMetadataIntervalPatterns').valueChanges.subscribe(
-      () => {
-        this.updateValidators(true);
-      }
-    );
-    this.getTelemetryFromDatabaseConfigForm.valueChanges.subscribe((updated: RuleNodeConfiguration) => {
-      if (this.validateConfig()) {
-        this.notifyConfigurationUpdated(this.getTelemetryFromDatabaseConfigForm.value);
-      } else {
-        this.notifyConfigurationUpdated(null);
-      }
-    });
   }
 
-  private updateValidators(emitEvent: boolean) {
+  protected validatorTriggers(): string[] {
+    return ['fetchMode', 'useMetadataIntervalPatterns'];
+  }
+
+  protected updateValidators(emitEvent: boolean) {
     const fetchMode: FetchMode = this.getTelemetryFromDatabaseConfigForm.get('fetchMode').value;
     const useMetadataIntervalPatterns: boolean = this.getTelemetryFromDatabaseConfigForm.get('useMetadataIntervalPatterns').value;
     if (fetchMode && fetchMode === FetchMode.ALL) {
@@ -112,10 +90,6 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
     this.getTelemetryFromDatabaseConfigForm.get('endIntervalTimeUnit').updateValueAndValidity({emitEvent});
     this.getTelemetryFromDatabaseConfigForm.get('startIntervalPattern').updateValueAndValidity({emitEvent});
     this.getTelemetryFromDatabaseConfigForm.get('endIntervalPattern').updateValueAndValidity({emitEvent});
-  }
-
-  private validateConfig(): boolean {
-    return this.getTelemetryFromDatabaseConfigForm.valid;
   }
 
   removeKey(key: string, keysField: string): void {

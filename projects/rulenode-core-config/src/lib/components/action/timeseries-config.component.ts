@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './timeseries-config.component.html',
   styleUrls: []
 })
-export class TimeseriesConfigComponent extends RuleNodeConfigurationComponent implements OnInit {
+export class TimeseriesConfigComponent extends RuleNodeConfigurationComponent {
 
   timeseriesConfigForm: FormGroup;
 
@@ -18,20 +18,13 @@ export class TimeseriesConfigComponent extends RuleNodeConfigurationComponent im
     super(store);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
+  protected configForm(): FormGroup {
+    return this.timeseriesConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.timeseriesConfigForm = this.fb.group({
       defaultTTL: [configuration ? configuration.defaultTTL : null, [Validators.required, Validators.min(0)]]
-    });
-    this.timeseriesConfigForm.valueChanges.subscribe((updated: RuleNodeConfiguration) => {
-      if (this.timeseriesConfigForm.valid) {
-        this.notifyConfigurationUpdated(updated);
-      } else {
-        this.notifyConfigurationUpdated(null);
-      }
     });
   }
 }

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { EntityType, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './originator-type-config.component.html',
   styleUrls: ['./originator-type-config.component.scss']
 })
-export class OriginatorTypeConfigComponent extends RuleNodeConfigurationComponent implements OnInit, AfterViewInit {
+export class OriginatorTypeConfigComponent extends RuleNodeConfigurationComponent {
 
   originatorTypeConfigForm: FormGroup;
 
@@ -30,33 +30,14 @@ export class OriginatorTypeConfigComponent extends RuleNodeConfigurationComponen
     super(store);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (!this.validateConfig()) {
-        this.notifyConfigurationUpdated(null);
-      }
-    }, 0);
+  protected configForm(): FormGroup {
+    return this.originatorTypeConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.originatorTypeConfigForm = this.fb.group({
       originatorTypes: [configuration ? configuration.originatorTypes : null, [Validators.required]]
     });
-    this.originatorTypeConfigForm.valueChanges.subscribe((updated: RuleNodeConfiguration) => {
-      if (this.originatorTypeConfigForm.valid) {
-        this.notifyConfigurationUpdated(updated);
-      } else {
-        this.notifyConfigurationUpdated(null);
-      }
-    });
-  }
-
-  private validateConfig(): boolean {
-    return this.originatorTypeConfigForm.valid;
   }
 
 }

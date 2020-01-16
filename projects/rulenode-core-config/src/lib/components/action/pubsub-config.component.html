@@ -1,0 +1,36 @@
+<section [formGroup]="pubSubConfigForm" fxLayout="column">
+  <mat-form-field class="mat-block">
+    <mat-label translate>tb.rulenode.gcp-project-id</mat-label>
+    <input required matInput formControlName="projectId">
+    <mat-error *ngIf="pubSubConfigForm.get('projectId').hasError('required')">
+      {{ 'tb.rulenode.gcp-project-id-required' | translate }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="mat-block">
+    <mat-label translate>tb.rulenode.pubsub-topic-name</mat-label>
+    <input required matInput formControlName="topicName">
+    <mat-error *ngIf="pubSubConfigForm.get('topicName').hasError('required')">
+      {{ 'tb.rulenode.pubsub-topic-name-required' | translate }}
+    </mat-error>
+  </mat-form-field>
+  <tb-file-input style="padding-bottom: 24px;"
+                 formControlName="serviceAccountKey"
+                 [existingFileName]="pubSubConfigForm.get('serviceAccountKeyFileName').value"
+                 (fileNameChanged)="pubSubConfigForm.get('serviceAccountKeyFileName').setValue($event)"
+                 required
+                 requiredAsError
+                 label="{{'tb.rulenode.gcp-service-account-key' | translate}}"
+                 noFileText="tb.rulenode.no-file"
+                 dropLabel="{{'tb.rulenode.drop-file' | translate}}">
+  </tb-file-input>
+  <label translate class="tb-title">tb.rulenode.message-attributes</label>
+  <div class="tb-hint" translate>tb.rulenode.message-attributes-hint</div>
+  <tb-kv-map-config
+    required="false"
+    formControlName="messageAttributes"
+    keyText="tb.rulenode.name"
+    keyRequiredText="tb.rulenode.name-required"
+    valText="tb.rulenode.value"
+    valRequiredText="tb.rulenode.value-required">
+  </tb-kv-map-config>
+</section>

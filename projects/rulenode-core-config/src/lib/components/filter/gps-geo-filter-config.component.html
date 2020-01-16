@@ -32,14 +32,14 @@
     <div fxLayout="row" fxLayoutGap="8px">
       <mat-form-field fxFlex>
         <mat-label translate>tb.rulenode.circle-center-latitude</mat-label>
-        <input type="number" min="0" step="0.1" matInput formControlName="centerLatitude" required>
+        <input type="number" min="-90" max="90" step="0.1" matInput formControlName="centerLatitude" required>
         <mat-error *ngIf="geoFilterConfigForm.get('centerLatitude').hasError('required')">
           {{ 'tb.rulenode.circle-center-latitude-required' | translate }}
         </mat-error>
       </mat-form-field>
       <mat-form-field fxFlex>
         <mat-label translate>tb.rulenode.circle-center-longitude</mat-label>
-        <input type="number" min="0" step="0.1" matInput formControlName="centerLongitude" required>
+        <input type="number" min="-180" max="180" step="0.1" matInput formControlName="centerLongitude" required>
         <mat-error *ngIf="geoFilterConfigForm.get('centerLongitude').hasError('required')">
           {{ 'tb.rulenode.circle-center-longitude-required' | translate }}
         </mat-error>

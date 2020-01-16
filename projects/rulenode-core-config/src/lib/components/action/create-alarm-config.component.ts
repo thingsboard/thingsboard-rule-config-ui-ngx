@@ -1,16 +1,16 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AppState, NodeScriptTestService } from '@core/public-api';
 import {
-  RuleNodeConfiguration,
-  RuleNodeConfigurationComponent,
-  JsFuncComponent,
   AlarmSeverity,
-  alarmSeverityTranslations
+  alarmSeverityTranslations,
+  JsFuncComponent,
+  RuleNodeConfiguration,
+  RuleNodeConfigurationComponent
 } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { ENTER, COMMA, SEMICOLON } from '@angular/cdk/keycodes';
+import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material';
 
 @Component({
@@ -18,7 +18,7 @@ import { MatChipInputEvent } from '@angular/material';
   templateUrl: './create-alarm-config.component.html',
   styleUrls: []
 })
-export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent implements OnInit, AfterViewInit {
+export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
 
   @ViewChild('jsFuncComponent', {static: true}) jsFuncComponent: JsFuncComponent;
 
@@ -36,16 +36,8 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent i
     super(store);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (!this.validateConfig()) {
-        this.notifyConfigurationUpdated(null);
-      }
-    }, 0);
+  protected configForm(): FormGroup {
+    return this.createAlarmConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
@@ -57,20 +49,13 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent i
       propagate: [configuration ? configuration.propagate : false, []],
       relationTypes: [configuration ? configuration.relationTypes : null, []]
     });
-    this.updateValidators(false);
-    this.createAlarmConfigForm.get('useMessageAlarmData').valueChanges.subscribe(() => {
-      this.updateValidators(true);
-    });
-    this.createAlarmConfigForm.valueChanges.subscribe((updated: RuleNodeConfiguration) => {
-      if (this.validateConfig()) {
-        this.notifyConfigurationUpdated(updated);
-      } else {
-        this.notifyConfigurationUpdated(null);
-      }
-    });
   }
 
-  private updateValidators(emitEvent: boolean) {
+  protected validatorTriggers(): string[] {
+    return ['useMessageAlarmData'];
+  }
+
+  protected updateValidators(emitEvent: boolean) {
     const useMessageAlarmData: boolean = this.createAlarmConfigForm.get('useMessageAlarmData').value;
     if (useMessageAlarmData) {
       this.createAlarmConfigForm.get('alarmType').setValidators([]);
@@ -81,10 +66,6 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent i
     }
     this.createAlarmConfigForm.get('alarmType').updateValueAndValidity({emitEvent});
     this.createAlarmConfigForm.get('severity').updateValueAndValidity({emitEvent});
-  }
-
-  private validateConfig(): boolean {
-    return this.createAlarmConfigForm.valid;
   }
 
   testScript() {

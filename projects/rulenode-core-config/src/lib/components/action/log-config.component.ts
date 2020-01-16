@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AppState, NodeScriptTestService } from '@core/public-api';
-import { RuleNodeConfiguration, RuleNodeConfigurationComponent, JsFuncComponent } from '@shared/public-api';
+import { JsFuncComponent, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './log-config.component.html',
   styleUrls: []
 })
-export class LogConfigComponent extends RuleNodeConfigurationComponent implements OnInit {
+export class LogConfigComponent extends RuleNodeConfigurationComponent {
 
   @ViewChild('jsFuncComponent', {static: true}) jsFuncComponent: JsFuncComponent;
 
@@ -23,20 +23,13 @@ export class LogConfigComponent extends RuleNodeConfigurationComponent implement
     super(store);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
+  protected configForm(): FormGroup {
+    return this.logConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.logConfigForm = this.fb.group({
       jsScript: [configuration ? configuration.jsScript : null, [Validators.required]]
-    });
-    this.logConfigForm.valueChanges.subscribe((updated: RuleNodeConfiguration) => {
-      if (this.logConfigForm.valid) {
-        this.notifyConfigurationUpdated(updated);
-      } else {
-        this.notifyConfigurationUpdated(null);
-      }
     });
   }
 

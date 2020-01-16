@@ -1,0 +1,133 @@
+<section [formGroup]="mqttConfigForm" fxLayout="column">
+  <mat-form-field class="mat-block" style="padding-bottom: 16px;">
+    <mat-label translate>tb.rulenode.topic-pattern</mat-label>
+    <input required matInput formControlName="topicPattern">
+    <mat-error *ngIf="mqttConfigForm.get('topicPattern').hasError('required')">
+      {{ 'tb.rulenode.topic-pattern-required' | translate }}
+    </mat-error>
+    <mat-hint innerHTML="{{ 'tb.rulenode.mqtt-topic-pattern-hint' | translate }}"></mat-hint>
+  </mat-form-field>
+  <div fxFlex fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="8px">
+    <mat-form-field fxFlex="60" class="mat-block">
+      <mat-label translate>tb.rulenode.host</mat-label>
+      <input required matInput formControlName="host">
+      <mat-error *ngIf="mqttConfigForm.get('host').hasError('required')">
+        {{ 'tb.rulenode.host-required' | translate }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex="40" class="mat-block">
+      <mat-label translate>tb.rulenode.port</mat-label>
+      <input required type="number" step="1" min="1" max="65535" matInput formControlName="port">
+      <mat-error *ngIf="mqttConfigForm.get('port').hasError('required')">
+        {{ 'tb.rulenode.port-required' | translate }}
+      </mat-error>
+      <mat-error *ngIf="mqttConfigForm.get('port').hasError('min')">
+        {{ 'tb.rulenode.port-range' | translate }}
+      </mat-error>
+      <mat-error *ngIf="mqttConfigForm.get('port').hasError('max')">
+        {{ 'tb.rulenode.port-range' | translate }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex="40" class="mat-block">
+      <mat-label translate>tb.rulenode.connect-timeout</mat-label>
+      <input required type="number" step="1" min="1" max="200" matInput formControlName="connectTimeoutSec">
+      <mat-error *ngIf="mqttConfigForm.get('connectTimeoutSec').hasError('required')">
+        {{ 'tb.rulenode.connect-timeout-required' | translate }}
+      </mat-error>
+      <mat-error *ngIf="mqttConfigForm.get('connectTimeoutSec').hasError('min')">
+        {{ 'tb.rulenode.connect-timeout-range' | translate }}
+      </mat-error>
+      <mat-error *ngIf="mqttConfigForm.get('connectTimeoutSec').hasError('max')">
+        {{ 'tb.rulenode.connect-timeout-range' | translate }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <mat-form-field class="mat-block">
+    <mat-label translate>tb.rulenode.client-id</mat-label>
+    <input matInput formControlName="clientId">
+  </mat-form-field>
+  <mat-checkbox formControlName="cleanSession" style="padding-bottom: 16px;">
+    {{ 'tb.rulenode.clean-session' | translate }}
+  </mat-checkbox>
+  <mat-checkbox formControlName="ssl" style="padding-bottom: 16px;">
+    {{ 'tb.rulenode.enable-ssl' | translate }}
+  </mat-checkbox>
+  <mat-expansion-panel class="tb-mqtt-credentials-panel-group">
+    <mat-expansion-panel-header>
+      <mat-panel-title translate>tb.rulenode.credentials</mat-panel-title>
+      <mat-panel-description>
+        {{ mqttCredentialsTypeTranslationsMap.get(mqttConfigForm.get('credentials').get('type').value) | translate }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <section formGroupName="credentials" fxLayout="column">
+      <mat-form-field class="mat-block">
+        <mat-label translate>tb.rulenode.credentials-type</mat-label>
+        <mat-select formControlName="type" required>
+          <mat-option *ngFor="let credentialsType of allMqttCredentialsTypes" [value]="credentialsType">
+            {{ mqttCredentialsTypeTranslationsMap.get(credentialsType) | translate }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="mqttConfigForm.get('credentials').get('type').hasError('required')">
+          {{ 'tb.rulenode.credentials-type-required' | translate }}
+        </mat-error>
+      </mat-form-field>
+      <section fxLayout="column" [ngSwitch]="mqttConfigForm.get('credentials').get('type').value">
+        <ng-template ngSwitchCase="anonymous">
+        </ng-template>
+        <ng-template ngSwitchCase="basic">
+          <mat-form-field class="mat-block">
+            <mat-label translate>tb.rulenode.username</mat-label>
+            <input required matInput formControlName="username">
+            <mat-error *ngIf="mqttConfigForm.get('credentials').get('username').hasError('required')">
+              {{ 'tb.rulenode.username-required' | translate }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="mat-block">
+            <mat-label translate>tb.rulenode.password</mat-label>
+            <input type="password" required matInput formControlName="password">
+            <mat-error *ngIf="mqttConfigForm.get('credentials').get('password').hasError('required')">
+              {{ 'tb.rulenode.password-required' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </ng-template>
+        <ng-template ngSwitchCase="cert.PEM">
+          <tb-file-input formControlName="caCert"
+                         inputId="caCertSelect"
+                         [existingFileName]="mqttConfigForm.get('credentials').get('caCertFileName').value"
+                         (fileNameChanged)="mqttConfigForm.get('credentials').get('caCertFileName').setValue($event)"
+                         required
+                         requiredAsError
+                         label="{{'tb.rulenode.ca-cert' | translate}}"
+                         noFileText="tb.rulenode.no-file"
+                         dropLabel="{{'tb.rulenode.drop-file' | translate}}">
+          </tb-file-input>
+          <tb-file-input formControlName="cert"
+                         inputId="CertSelect"
+                         [existingFileName]="mqttConfigForm.get('credentials').get('certFileName').value"
+                         (fileNameChanged)="mqttConfigForm.get('credentials').get('certFileName').setValue($event)"
+                         required
+                         requiredAsError
+                         label="{{'tb.rulenode.cert' | translate}}"
+                         noFileText="tb.rulenode.no-file"
+                         dropLabel="{{'tb.rulenode.drop-file' | translate}}">
+          </tb-file-input>
+          <tb-file-input style="padding-bottom: 8px;"
+                         formControlName="privateKey"
+                         inputId="privateKeySelect"
+                         [existingFileName]="mqttConfigForm.get('credentials').get('privateKeyFileName').value"
+                         (fileNameChanged)="mqttConfigForm.get('credentials').get('privateKeyFileName').setValue($event)"
+                         required
+                         requiredAsError
+                         label="{{'tb.rulenode.private-key' | translate}}"
+                         noFileText="tb.rulenode.no-file"
+                         dropLabel="{{'tb.rulenode.drop-file' | translate}}">
+          </tb-file-input>
+          <mat-form-field class="mat-block">
+            <mat-label translate>tb.rulenode.private-key-password</mat-label>
+            <input type="password" matInput formControlName="password">
+          </mat-form-field>
+        </ng-template>
+      </section>
+    </section>
+  </mat-expansion-panel>
+</section>

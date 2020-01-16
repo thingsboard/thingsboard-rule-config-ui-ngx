@@ -1,0 +1,75 @@
+<section [formGroup]="kafkaConfigForm" fxLayout="column">
+  <mat-form-field class="mat-block">
+    <mat-label translate>tb.rulenode.topic-pattern</mat-label>
+    <input required matInput formControlName="topicPattern">
+    <mat-error *ngIf="kafkaConfigForm.get('topicPattern').hasError('required')">
+      {{ 'tb.rulenode.topic-pattern-required' | translate }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="mat-block">
+    <mat-label translate>tb.rulenode.bootstrap-servers</mat-label>
+    <input required matInput formControlName="bootstrapServers">
+    <mat-error *ngIf="kafkaConfigForm.get('bootstrapServers').hasError('required')">
+      {{ 'tb.rulenode.bootstrap-servers-required' | translate }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="mat-block">
+    <mat-label translate>tb.rulenode.retries</mat-label>
+    <input type="number" step="1" min="0" matInput formControlName="retries">
+    <mat-error *ngIf="kafkaConfigForm.get('retries').hasError('min')">
+      {{ 'tb.rulenode.min-retries-message' | translate }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="mat-block">
+    <mat-label translate>tb.rulenode.batch-size-bytes</mat-label>
+    <input type="number" step="1" min="0" matInput formControlName="batchSize">
+    <mat-error *ngIf="kafkaConfigForm.get('batchSize').hasError('min')">
+      {{ 'tb.rulenode.min-batch-size-bytes-message' | translate }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="mat-block">
+    <mat-label translate>tb.rulenode.linger-ms</mat-label>
+    <input type="number" step="1" min="0" matInput formControlName="linger">
+    <mat-error *ngIf="kafkaConfigForm.get('linger').hasError('min')">
+      {{ 'tb.rulenode.min-linger-ms-message' | translate }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="mat-block">
+    <mat-label translate>tb.rulenode.buffer-memory-bytes</mat-label>
+    <input type="number" step="1" min="0" matInput formControlName="bufferMemory">
+    <mat-error *ngIf="kafkaConfigForm.get('bufferMemory').hasError('min')">
+      {{ 'tb.rulenode.min-buffer-memory-bytes-message' | translate }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="mat-block">
+    <mat-label translate>tb.rulenode.acks</mat-label>
+    <mat-select formControlName="acks" required>
+      <mat-option *ngFor="let ackValue of ackValues" [value]="ackValue">
+        {{ ackValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="mat-block">
+    <mat-label translate>tb.rulenode.key-serializer</mat-label>
+    <input required matInput formControlName="keySerializer">
+    <mat-error *ngIf="kafkaConfigForm.get('keySerializer').hasError('required')">
+      {{ 'tb.rulenode.key-serializer-required' | translate }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="mat-block">
+    <mat-label translate>tb.rulenode.value-serializer</mat-label>
+    <input required matInput formControlName="valueSerializer">
+    <mat-error *ngIf="kafkaConfigForm.get('valueSerializer').hasError('required')">
+      {{ 'tb.rulenode.value-serializer-required' | translate }}
+    </mat-error>
+  </mat-form-field>
+  <label translate class="tb-title">tb.rulenode.other-properties</label>
+  <tb-kv-map-config
+    required="false"
+    formControlName="otherProperties"
+    keyText="tb.rulenode.key"
+    keyRequiredText="tb.rulenode.key-required"
+    valText="tb.rulenode.value"
+    valRequiredText="tb.rulenode.value-required">
+  </tb-kv-map-config>
+</section>

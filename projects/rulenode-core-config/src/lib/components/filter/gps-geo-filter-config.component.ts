@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -10,7 +10,7 @@ import { PerimeterType, perimeterTypeTranslations, RangeUnit, rangeUnitTranslati
   templateUrl: './gps-geo-filter-config.component.html',
   styleUrls: []
 })
-export class GpsGeoFilterConfigComponent extends RuleNodeConfigurationComponent implements OnInit, AfterViewInit {
+export class GpsGeoFilterConfigComponent extends RuleNodeConfigurationComponent {
 
   geoFilterConfigForm: FormGroup;
 
@@ -26,16 +26,8 @@ export class GpsGeoFilterConfigComponent extends RuleNodeConfigurationComponent 
     super(store);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (!this.validateConfig()) {
-        this.notifyConfigurationUpdated(null);
-      }
-    }, 0);
+  protected configForm(): FormGroup {
+    return this.geoFilterConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
@@ -50,27 +42,13 @@ export class GpsGeoFilterConfigComponent extends RuleNodeConfigurationComponent 
       rangeUnit: [configuration ? configuration.rangeUnit : null, []],
       polygonsDefinition: [configuration ? configuration.polygonsDefinition : null, []]
     });
-    this.updateValidators(false);
-    this.geoFilterConfigForm.get('fetchPerimeterInfoFromMessageMetadata').valueChanges.subscribe(
-      () => {
-        this.updateValidators(true);
-      }
-    );
-    this.geoFilterConfigForm.get('perimeterType').valueChanges.subscribe(
-      () => {
-        this.updateValidators(true);
-      }
-    );
-    this.geoFilterConfigForm.valueChanges.subscribe((updated: RuleNodeConfiguration) => {
-      if (this.validateConfig()) {
-        this.notifyConfigurationUpdated(this.geoFilterConfigForm.value);
-      } else {
-        this.notifyConfigurationUpdated(null);
-      }
-    });
   }
 
-  private updateValidators(emitEvent: boolean) {
+  protected validatorTriggers(): string[] {
+    return ['fetchPerimeterInfoFromMessageMetadata', 'perimeterType'];
+  }
+
+  protected updateValidators(emitEvent: boolean) {
     const fetchPerimeterInfoFromMessageMetadata: boolean = this.geoFilterConfigForm.get('fetchPerimeterInfoFromMessageMetadata').value;
     const perimeterType: PerimeterType = this.geoFilterConfigForm.get('perimeterType').value;
     if (fetchPerimeterInfoFromMessageMetadata) {
@@ -79,9 +57,11 @@ export class GpsGeoFilterConfigComponent extends RuleNodeConfigurationComponent 
       this.geoFilterConfigForm.get('perimeterType').setValidators([Validators.required]);
     }
     if (!fetchPerimeterInfoFromMessageMetadata && perimeterType === PerimeterType.CIRCLE) {
-      this.geoFilterConfigForm.get('centerLatitude').setValidators([Validators.required]);
-      this.geoFilterConfigForm.get('centerLongitude').setValidators([Validators.required]);
-      this.geoFilterConfigForm.get('range').setValidators([Validators.required]);
+      this.geoFilterConfigForm.get('centerLatitude').setValidators([Validators.required,
+        Validators.min(-90), Validators.max(90)]);
+      this.geoFilterConfigForm.get('centerLongitude').setValidators([Validators.required,
+        Validators.min(-180), Validators.max(180)]);
+      this.geoFilterConfigForm.get('range').setValidators([Validators.required, Validators.min(0)]);
       this.geoFilterConfigForm.get('rangeUnit').setValidators([Validators.required]);
     } else {
       this.geoFilterConfigForm.get('centerLatitude').setValidators([]);
@@ -100,9 +80,5 @@ export class GpsGeoFilterConfigComponent extends RuleNodeConfigurationComponent 
     this.geoFilterConfigForm.get('range').updateValueAndValidity({emitEvent});
     this.geoFilterConfigForm.get('rangeUnit').updateValueAndValidity({emitEvent});
     this.geoFilterConfigForm.get('polygonsDefinition').updateValueAndValidity({emitEvent});
-  }
-
-  private validateConfig(): boolean {
-    return this.geoFilterConfigForm.valid;
   }
 }

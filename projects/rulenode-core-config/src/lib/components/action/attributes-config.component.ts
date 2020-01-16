@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
-import { AttributeScope, RuleNodeConfiguration,
-         RuleNodeConfigurationComponent, telemetryTypeTranslations } from '@shared/public-api';
+import { AttributeScope, RuleNodeConfiguration, RuleNodeConfigurationComponent, telemetryTypeTranslations } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -10,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './attributes-config.component.html',
   styleUrls: []
 })
-export class AttributesConfigComponent extends RuleNodeConfigurationComponent implements OnInit {
+export class AttributesConfigComponent extends RuleNodeConfigurationComponent {
 
   attributeScopes = Object.keys(AttributeScope);
   telemetryTypeTranslationsMap = telemetryTypeTranslations;
@@ -22,20 +21,13 @@ export class AttributesConfigComponent extends RuleNodeConfigurationComponent im
     super(store);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
+  protected configForm(): FormGroup {
+    return this.attributesConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.attributesConfigForm = this.fb.group({
       scope: [configuration ? configuration.scope : null, [Validators.required]]
-    });
-    this.attributesConfigForm.valueChanges.subscribe((updated: RuleNodeConfiguration) => {
-      if (this.attributesConfigForm.valid) {
-        this.notifyConfigurationUpdated(updated);
-      } else {
-        this.notifyConfigurationUpdated(null);
-      }
     });
   }
 

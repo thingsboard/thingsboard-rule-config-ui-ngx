@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AppState } from '@core/public-api';
-import { LinkLabel, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
+import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EntityDetailsField, entityDetailsTranslations } from '../../rulenode-core-config.models';
@@ -14,7 +14,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material';
   templateUrl: './entity-details-config.component.html',
   styleUrls: ['./entity-details-config.component.scss']
 })
-export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent implements OnInit, AfterViewInit {
+export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent implements OnInit {
 
   @ViewChild('detailsInput', {static: false}) detailsInput: ElementRef<HTMLInputElement>;
 
@@ -52,29 +52,21 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
       );
   }
 
+  protected configForm(): FormGroup {
+    return this.entityDetailsConfigForm;
+  }
 
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (!this.validateConfig()) {
-        this.notifyConfigurationUpdated(null);
-      }
-    }, 0);
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    this.searchText = '';
+    this.detailsFormControl.patchValue('', {emitEvent: true});
+    return configuration;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
-    this.searchText = '';
     this.entityDetailsConfigForm = this.fb.group({
       detailsList: [configuration ? configuration.detailsList : null, [Validators.required]],
       addToMetadata: [configuration ? configuration.addToMetadata : false, []]
     });
-    this.entityDetailsConfigForm.valueChanges.subscribe((updated: RuleNodeConfiguration) => {
-      if (this.entityDetailsConfigForm.valid) {
-        this.notifyConfigurationUpdated(updated);
-      } else {
-        this.notifyConfigurationUpdated(null);
-      }
-    });
-    this.detailsFormControl.patchValue('', {emitEvent: true});
   }
 
   displayDetails(details?: EntityDetailsField): string | undefined {
@@ -127,9 +119,5 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
       this.detailsInput.nativeElement.blur();
       this.detailsInput.nativeElement.focus();
     }, 0);
-  }
-
-  private validateConfig(): boolean {
-    return this.entityDetailsConfigForm.valid;
   }
 }

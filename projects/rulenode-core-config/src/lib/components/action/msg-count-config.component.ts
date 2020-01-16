@@ -5,13 +5,13 @@ import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'tb-enrichment-node-tenant-attributes-config',
-  templateUrl: './tenant-attributes-config.component.html',
+  selector: 'tb-action-node-msg-count-config',
+  templateUrl: './msg-count-config.component.html',
   styleUrls: []
 })
-export class TenantAttributesConfigComponent extends RuleNodeConfigurationComponent {
+export class MsgCountConfigComponent extends RuleNodeConfigurationComponent {
 
-  tenantAttributesConfigForm: FormGroup;
+  msgCountConfigForm: FormGroup;
 
   constructor(protected store: Store<AppState>,
               private fb: FormBuilder) {
@@ -19,13 +19,14 @@ export class TenantAttributesConfigComponent extends RuleNodeConfigurationCompon
   }
 
   protected configForm(): FormGroup {
-    return this.tenantAttributesConfigForm;
+    return this.msgCountConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
-    this.tenantAttributesConfigForm = this.fb.group({
-      telemetry: [configuration ? configuration.telemetry : false, []],
-      attrMapping: [configuration ? configuration.attrMapping : null, [Validators.required]]
+    this.msgCountConfigForm = this.fb.group({
+      interval: [configuration ? configuration.interval : null, [Validators.required, Validators.min(1)]],
+      telemetryPrefix: [configuration ? configuration.telemetryPrefix : null, [Validators.required]]
     });
   }
+
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AppState, NodeScriptTestService } from '@core/public-api';
-import { RuleNodeConfiguration, RuleNodeConfigurationComponent, JsFuncComponent } from '@shared/public-api';
+import { JsFuncComponent, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './clear-alarm-config.component.html',
   styleUrls: []
 })
-export class ClearAlarmConfigComponent extends RuleNodeConfigurationComponent implements OnInit {
+export class ClearAlarmConfigComponent extends RuleNodeConfigurationComponent {
 
   @ViewChild('jsFuncComponent', {static: true}) jsFuncComponent: JsFuncComponent;
 
@@ -23,21 +23,14 @@ export class ClearAlarmConfigComponent extends RuleNodeConfigurationComponent im
     super(store);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
+  protected configForm(): FormGroup {
+    return this.clearAlarmConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.clearAlarmConfigForm = this.fb.group({
       alarmDetailsBuildJs: [configuration ? configuration.alarmDetailsBuildJs : null, [Validators.required]],
       alarmType: [configuration ? configuration.alarmType : null, [Validators.required]]
-    });
-    this.clearAlarmConfigForm.valueChanges.subscribe((updated: RuleNodeConfiguration) => {
-      if (this.clearAlarmConfigForm.valid) {
-        this.notifyConfigurationUpdated(updated);
-      } else {
-        this.notifyConfigurationUpdated(null);
-      }
     });
   }
 

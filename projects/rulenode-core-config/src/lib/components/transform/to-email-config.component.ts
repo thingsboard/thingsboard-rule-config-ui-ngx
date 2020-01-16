@@ -1,16 +1,15 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { OriginatorSource, originatorSourceTranslations } from '../../rulenode-core-config.models';
 
 @Component({
   selector: 'tb-transformation-node-to-email-config',
   templateUrl: './to-email-config.component.html',
   styleUrls: []
 })
-export class ToEmailConfigComponent extends RuleNodeConfigurationComponent implements OnInit, AfterViewInit {
+export class ToEmailConfigComponent extends RuleNodeConfigurationComponent {
 
   toEmailConfigForm: FormGroup;
 
@@ -19,17 +18,8 @@ export class ToEmailConfigComponent extends RuleNodeConfigurationComponent imple
     super(store);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
-  }
-
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (!this.validateConfig()) {
-        this.notifyConfigurationUpdated(null);
-      }
-    }, 0);
+  protected configForm(): FormGroup {
+    return this.toEmailConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
@@ -41,16 +31,5 @@ export class ToEmailConfigComponent extends RuleNodeConfigurationComponent imple
       subjectTemplate: [configuration ? configuration.subjectTemplate : null, [Validators.required]],
       bodyTemplate: [configuration ? configuration.bodyTemplate : null, [Validators.required]]
     });
-    this.toEmailConfigForm.valueChanges.subscribe((updated: RuleNodeConfiguration) => {
-      if (this.toEmailConfigForm.valid) {
-        this.notifyConfigurationUpdated(updated);
-      } else {
-        this.notifyConfigurationUpdated(null);
-      }
-    });
-  }
-
-  private validateConfig(): boolean {
-    return this.toEmailConfigForm.valid;
   }
 }

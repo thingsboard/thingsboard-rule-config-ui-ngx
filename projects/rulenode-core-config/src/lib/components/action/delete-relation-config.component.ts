@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { AppState, NodeScriptTestService } from '@core/public-api';
+import { Component } from '@angular/core';
+import { AppState } from '@core/public-api';
 import {
   EntitySearchDirection,
   entitySearchDirectionTranslations,
@@ -9,14 +9,13 @@ import {
 } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'tb-action-node-delete-relation-config',
   templateUrl: './delete-relation-config.component.html',
   styleUrls: []
 })
-export class DeleteRelationConfigComponent extends RuleNodeConfigurationComponent implements OnInit, AfterViewInit {
+export class DeleteRelationConfigComponent extends RuleNodeConfigurationComponent {
 
   directionTypes = Object.keys(EntitySearchDirection);
   directionTypeTranslations = entitySearchDirectionTranslations;
@@ -30,16 +29,8 @@ export class DeleteRelationConfigComponent extends RuleNodeConfigurationComponen
     super(store);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (!this.validateConfig()) {
-        this.notifyConfigurationUpdated(null);
-      }
-    }, 0);
+  protected configForm(): FormGroup {
+    return this.deleteRelationConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
@@ -51,23 +42,13 @@ export class DeleteRelationConfigComponent extends RuleNodeConfigurationComponen
       relationType: [configuration ? configuration.relationType : null, [Validators.required]],
       entityCacheExpiration: [configuration ? configuration.entityCacheExpiration : null, [Validators.required, Validators.min(0)]],
     });
-    this.updateValidators(false, false);
-    this.deleteRelationConfigForm.get('deleteForSingleEntity').valueChanges.subscribe(() => {
-      this.updateValidators(true, true);
-    });
-    this.deleteRelationConfigForm.get('entityType').valueChanges.subscribe(() => {
-      this.updateValidators(true, false);
-    });
-    this.deleteRelationConfigForm.valueChanges.subscribe((updated: RuleNodeConfiguration) => {
-      if (this.validateConfig()) {
-        this.notifyConfigurationUpdated(updated);
-      } else {
-        this.notifyConfigurationUpdated(null);
-      }
-    });
   }
 
-  private updateValidators(emitEvent: boolean, emitEntityTypeEvent: boolean) {
+  protected validatorTriggers(): string[] {
+    return ['deleteForSingleEntity', 'entityType'];
+  }
+
+  protected updateValidators(emitEvent: boolean) {
     const deleteForSingleEntity: boolean = this.deleteRelationConfigForm.get('deleteForSingleEntity').value;
     const entityType: EntityType = this.deleteRelationConfigForm.get('entityType').value;
     if (deleteForSingleEntity) {
@@ -80,12 +61,8 @@ export class DeleteRelationConfigComponent extends RuleNodeConfigurationComponen
     } else {
       this.deleteRelationConfigForm.get('entityNamePattern').setValidators([]);
     }
-    this.deleteRelationConfigForm.get('entityType').updateValueAndValidity({emitEvent: emitEntityTypeEvent});
+    this.deleteRelationConfigForm.get('entityType').updateValueAndValidity({emitEvent: false});
     this.deleteRelationConfigForm.get('entityNamePattern').updateValueAndValidity({emitEvent});
-  }
-
-  private validateConfig(): boolean {
-    return this.deleteRelationConfigForm.valid;
   }
 
 }

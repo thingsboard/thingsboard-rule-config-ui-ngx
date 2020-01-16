@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './customer-attributes-config.component.html',
   styleUrls: []
 })
-export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComponent implements OnInit, AfterViewInit {
+export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComponent {
 
   customerAttributesConfigForm: FormGroup;
 
@@ -18,17 +18,8 @@ export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComp
     super(store);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
-  }
-
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (!this.validateConfig()) {
-        this.notifyConfigurationUpdated(null);
-      }
-    }, 0);
+  protected configForm(): FormGroup {
+    return this.customerAttributesConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
@@ -36,16 +27,6 @@ export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComp
       telemetry: [configuration ? configuration.telemetry : false, []],
       attrMapping: [configuration ? configuration.attrMapping : null, [Validators.required]]
     });
-    this.customerAttributesConfigForm.valueChanges.subscribe((updated: RuleNodeConfiguration) => {
-      if (this.customerAttributesConfigForm.valid) {
-        this.notifyConfigurationUpdated(updated);
-      } else {
-        this.notifyConfigurationUpdated(null);
-      }
-    });
   }
 
-  private validateConfig(): boolean {
-    return this.customerAttributesConfigForm.valid;
-  }
 }

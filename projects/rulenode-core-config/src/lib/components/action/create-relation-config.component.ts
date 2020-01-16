@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { AppState, NodeScriptTestService } from '@core/public-api';
+import { Component } from '@angular/core';
+import { AppState } from '@core/public-api';
 import {
   EntitySearchDirection,
   entitySearchDirectionTranslations,
@@ -9,14 +9,13 @@ import {
 } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'tb-action-node-create-relation-config',
   templateUrl: './create-relation-config.component.html',
   styleUrls: []
 })
-export class CreateRelationConfigComponent extends RuleNodeConfigurationComponent implements OnInit, AfterViewInit {
+export class CreateRelationConfigComponent extends RuleNodeConfigurationComponent {
 
   directionTypes = Object.keys(EntitySearchDirection);
   directionTypeTranslations = entitySearchDirectionTranslations;
@@ -30,16 +29,8 @@ export class CreateRelationConfigComponent extends RuleNodeConfigurationComponen
     super(store);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (!this.validateConfig()) {
-        this.notifyConfigurationUpdated(null);
-      }
-    }, 0);
+  protected configForm(): FormGroup {
+    return this.createRelationConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
@@ -54,20 +45,13 @@ export class CreateRelationConfigComponent extends RuleNodeConfigurationComponen
       changeOriginatorToRelatedEntity: [configuration ? configuration.changeOriginatorToRelatedEntity : false, []],
       entityCacheExpiration: [configuration ? configuration.entityCacheExpiration : null, [Validators.required, Validators.min(0)]],
     });
-    this.updateValidators(false);
-    this.createRelationConfigForm.get('entityType').valueChanges.subscribe(() => {
-      this.updateValidators(true);
-    });
-    this.createRelationConfigForm.valueChanges.subscribe((updated: RuleNodeConfiguration) => {
-      if (this.validateConfig()) {
-        this.notifyConfigurationUpdated(updated);
-      } else {
-        this.notifyConfigurationUpdated(null);
-      }
-    });
   }
 
-  private updateValidators(emitEvent: boolean) {
+  protected validatorTriggers(): string[] {
+    return ['entityType'];
+  }
+
+  protected updateValidators(emitEvent: boolean) {
     const entityType: EntityType = this.createRelationConfigForm.get('entityType').value;
     if (entityType) {
       this.createRelationConfigForm.get('entityNamePattern').setValidators([Validators.required]);
@@ -81,10 +65,6 @@ export class CreateRelationConfigComponent extends RuleNodeConfigurationComponen
     }
     this.createRelationConfigForm.get('entityNamePattern').updateValueAndValidity({emitEvent});
     this.createRelationConfigForm.get('entityTypePattern').updateValueAndValidity({emitEvent});
-  }
-
-  private validateConfig(): boolean {
-    return this.createRelationConfigForm.valid;
   }
 
 }

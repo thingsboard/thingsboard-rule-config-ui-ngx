@@ -5,13 +5,13 @@ import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'tb-enrichment-node-tenant-attributes-config',
-  templateUrl: './tenant-attributes-config.component.html',
+  selector: 'tb-action-node-custom-table-config',
+  templateUrl: './save-to-custom-table-config.component.html',
   styleUrls: []
 })
-export class TenantAttributesConfigComponent extends RuleNodeConfigurationComponent {
+export class SaveToCustomTableConfigComponent extends RuleNodeConfigurationComponent {
 
-  tenantAttributesConfigForm: FormGroup;
+  saveToCustomTableConfigForm: FormGroup;
 
   constructor(protected store: Store<AppState>,
               private fb: FormBuilder) {
@@ -19,13 +19,13 @@ export class TenantAttributesConfigComponent extends RuleNodeConfigurationCompon
   }
 
   protected configForm(): FormGroup {
-    return this.tenantAttributesConfigForm;
+    return this.saveToCustomTableConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
-    this.tenantAttributesConfigForm = this.fb.group({
-      telemetry: [configuration ? configuration.telemetry : false, []],
-      attrMapping: [configuration ? configuration.attrMapping : null, [Validators.required]]
+    this.saveToCustomTableConfigForm = this.fb.group({
+      tableName: [configuration ? configuration.tableName : null, [Validators.required]],
+      fieldsMapping: [configuration ? configuration.fieldsMapping : null, [Validators.required]]
     });
   }
 }

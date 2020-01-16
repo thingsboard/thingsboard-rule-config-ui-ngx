@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
@@ -10,7 +10,7 @@ import { OriginatorSource, originatorSourceTranslations } from '../../rulenode-c
   templateUrl: './change-originator-config.component.html',
   styleUrls: []
 })
-export class ChangeOriginatorConfigComponent extends RuleNodeConfigurationComponent implements OnInit, AfterViewInit {
+export class ChangeOriginatorConfigComponent extends RuleNodeConfigurationComponent {
 
   originatorSource = OriginatorSource;
   originatorSources = Object.keys(OriginatorSource);
@@ -23,17 +23,8 @@ export class ChangeOriginatorConfigComponent extends RuleNodeConfigurationCompon
     super(store);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
-  }
-
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (!this.validateConfig()) {
-        this.notifyConfigurationUpdated(null);
-      }
-    }, 0);
+  protected configForm(): FormGroup {
+    return this.changeOriginatorConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
@@ -41,20 +32,13 @@ export class ChangeOriginatorConfigComponent extends RuleNodeConfigurationCompon
       originatorSource: [configuration ? configuration.originatorSource : null, [Validators.required]],
       relationsQuery: [configuration ? configuration.relationsQuery : null, []]
     });
-    this.updateValidators(false);
-    this.changeOriginatorConfigForm.get('originatorSource').valueChanges.subscribe(() => {
-      this.updateValidators(true);
-    });
-    this.changeOriginatorConfigForm.valueChanges.subscribe((updated: RuleNodeConfiguration) => {
-      if (this.changeOriginatorConfigForm.valid) {
-        this.notifyConfigurationUpdated(updated);
-      } else {
-        this.notifyConfigurationUpdated(null);
-      }
-    });
   }
 
-  private updateValidators(emitEvent: boolean) {
+  protected validatorTriggers(): string[] {
+    return ['originatorSource'];
+  }
+
+  protected updateValidators(emitEvent: boolean) {
     const originatorSource: OriginatorSource = this.changeOriginatorConfigForm.get('originatorSource').value;
     if (originatorSource && originatorSource === OriginatorSource.RELATED) {
       this.changeOriginatorConfigForm.get('relationsQuery').setValidators([Validators.required]);
@@ -62,9 +46,5 @@ export class ChangeOriginatorConfigComponent extends RuleNodeConfigurationCompon
       this.changeOriginatorConfigForm.get('relationsQuery').setValidators([]);
     }
     this.changeOriginatorConfigForm.get('relationsQuery').updateValueAndValidity({emitEvent});
-  }
-
-  private validateConfig(): boolean {
-    return this.changeOriginatorConfigForm.valid;
   }
 }

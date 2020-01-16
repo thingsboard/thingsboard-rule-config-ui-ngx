@@ -8,6 +8,7 @@ import { MessageTypeConfigComponent } from './message-type-config.component';
 import { OriginatorTypeConfigComponent } from './originator-type-config.component';
 import { ScriptConfigComponent } from './script-config.component';
 import { SwitchConfigComponent } from './switch-config.component';
+import { RulenodeCoreConfigCommonModule } from '../common/rulenode-core-config-common.module';
 
 @NgModule({
   declarations: [
@@ -19,10 +20,11 @@ import { SwitchConfigComponent } from './switch-config.component';
     ScriptConfigComponent,
     SwitchConfigComponent
   ],
-  imports: [
-    CommonModule,
-    SharedModule
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        RulenodeCoreConfigCommonModule
+    ],
   exports: [
     CheckMessageConfigComponent,
     CheckRelationConfigComponent,

@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AppState, NodeScriptTestService } from '@core/public-api';
-import { RuleNodeConfiguration, RuleNodeConfigurationComponent, JsFuncComponent } from '@shared/public-api';
+import { JsFuncComponent, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './script-config.component.html',
   styleUrls: []
 })
-export class ScriptConfigComponent extends RuleNodeConfigurationComponent implements OnInit {
+export class ScriptConfigComponent extends RuleNodeConfigurationComponent {
 
   @ViewChild('jsFuncComponent', {static: true}) jsFuncComponent: JsFuncComponent;
 
@@ -23,20 +23,13 @@ export class ScriptConfigComponent extends RuleNodeConfigurationComponent implem
     super(store);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
+  protected configForm(): FormGroup {
+    return this.scriptConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.scriptConfigForm = this.fb.group({
       jsScript: [configuration ? configuration.jsScript : null, [Validators.required]]
-    });
-    this.scriptConfigForm.valueChanges.subscribe((updated: RuleNodeConfiguration) => {
-      if (this.scriptConfigForm.valid) {
-        this.notifyConfigurationUpdated(updated);
-      } else {
-        this.notifyConfigurationUpdated(null);
-      }
     });
   }
 

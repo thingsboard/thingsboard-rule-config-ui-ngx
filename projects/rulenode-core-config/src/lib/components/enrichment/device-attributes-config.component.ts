@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { MatChipInputEvent } from '@angular/material';
@@ -11,7 +11,7 @@ import { MatChipInputEvent } from '@angular/material';
   templateUrl: './device-attributes-config.component.html',
   styleUrls: ['./device-attributes-config.component.scss']
 })
-export class DeviceAttributesConfigComponent extends RuleNodeConfigurationComponent implements OnInit, AfterViewInit {
+export class DeviceAttributesConfigComponent extends RuleNodeConfigurationComponent {
 
   deviceAttributesConfigForm: FormGroup;
 
@@ -22,16 +22,8 @@ export class DeviceAttributesConfigComponent extends RuleNodeConfigurationCompon
     super(store);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (!this.validateConfig()) {
-        this.notifyConfigurationUpdated(null);
-      }
-    }, 0);
+  protected configForm(): FormGroup {
+    return this.deviceAttributesConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
@@ -44,17 +36,6 @@ export class DeviceAttributesConfigComponent extends RuleNodeConfigurationCompon
       latestTsKeyNames: [configuration ? configuration.latestTsKeyNames : null, []],
       getLatestValueWithTs: [configuration ? configuration.getLatestValueWithTs : false, []]
     });
-    this.deviceAttributesConfigForm.valueChanges.subscribe((updated: RuleNodeConfiguration) => {
-      if (this.validateConfig()) {
-        this.notifyConfigurationUpdated(this.deviceAttributesConfigForm.value);
-      } else {
-        this.notifyConfigurationUpdated(null);
-      }
-    });
-  }
-
-  private validateConfig(): boolean {
-    return this.deviceAttributesConfigForm.valid;
   }
 
   removeKey(key: string, keysField: string): void {

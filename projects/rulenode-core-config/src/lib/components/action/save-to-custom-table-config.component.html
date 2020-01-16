@@ -1,0 +1,20 @@
+<section [formGroup]="saveToCustomTableConfigForm" fxLayout="column">
+  <mat-form-field class="mat-block" style="padding-bottom: 16px;">
+    <mat-label translate>tb.rulenode.custom-table-name</mat-label>
+    <input required matInput formControlName="tableName">
+    <mat-error *ngIf="saveToCustomTableConfigForm.get('tableName').hasError('required')">
+      {{ 'tb.rulenode.custom-table-name-required' | translate }}
+    </mat-error>
+    <mat-hint innerHTML="{{ 'tb.rulenode.custom-table-hint' | translate }}"></mat-hint>
+  </mat-form-field>
+  <label translate class="tb-title tb-required">tb.rulenode.fields-mapping</label>
+  <tb-kv-map-config
+    required
+    formControlName="fieldsMapping"
+    requiredText="tb.rulenode.fields-mapping-required"
+    keyText="tb.rulenode.message-field"
+    keyRequiredText="tb.rulenode.message-field-required"
+    valText="tb.rulenode.table-col"
+    valRequiredText="tb.rulenode.table-col-required">
+  </tb-kv-map-config>
+</section>

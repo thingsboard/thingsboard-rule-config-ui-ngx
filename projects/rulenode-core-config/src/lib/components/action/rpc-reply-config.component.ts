@@ -2,16 +2,16 @@ import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'tb-filter-node-message-type-config',
-  templateUrl: './message-type-config.component.html',
+  selector: 'tb-action-node-rpc-reply-config',
+  templateUrl: './rpc-reply-config.component.html',
   styleUrls: []
 })
-export class MessageTypeConfigComponent extends RuleNodeConfigurationComponent {
+export class RpcReplyConfigComponent extends RuleNodeConfigurationComponent {
 
-  messageTypeConfigForm: FormGroup;
+  rpcReplyConfigForm: FormGroup;
 
   constructor(protected store: Store<AppState>,
               private fb: FormBuilder) {
@@ -19,12 +19,12 @@ export class MessageTypeConfigComponent extends RuleNodeConfigurationComponent {
   }
 
   protected configForm(): FormGroup {
-    return this.messageTypeConfigForm;
+    return this.rpcReplyConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
-    this.messageTypeConfigForm = this.fb.group({
-      messageTypes: [configuration ? configuration.messageTypes : null, [Validators.required]]
+    this.rpcReplyConfigForm = this.fb.group({
+      requestIdMetaDataAttribute: [configuration ? configuration.requestIdMetaDataAttribute : null, []]
     });
   }
 }

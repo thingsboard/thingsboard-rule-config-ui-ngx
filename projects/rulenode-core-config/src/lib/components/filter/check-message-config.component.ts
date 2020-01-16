@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormControl, FormGroup, ValidatorFn } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { MatChipInputEvent } from '@angular/material';
@@ -11,7 +11,7 @@ import { MatChipInputEvent } from '@angular/material';
   templateUrl: './check-message-config.component.html',
   styleUrls: ['./check-message-config.component.scss']
 })
-export class CheckMessageConfigComponent extends RuleNodeConfigurationComponent implements OnInit, AfterViewInit {
+export class CheckMessageConfigComponent extends RuleNodeConfigurationComponent {
 
   checkMessageConfigForm: FormGroup;
 
@@ -22,16 +22,8 @@ export class CheckMessageConfigComponent extends RuleNodeConfigurationComponent 
     super(store);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (!this.validateConfig()) {
-        this.notifyConfigurationUpdated(null);
-      }
-    }, 0);
+  protected configForm(): FormGroup {
+    return this.checkMessageConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
@@ -40,16 +32,9 @@ export class CheckMessageConfigComponent extends RuleNodeConfigurationComponent 
       metadataNames: [configuration ? configuration.metadataNames : null, []],
       checkAllKeys: [configuration ? configuration.checkAllKeys : false, []],
     });
-    this.checkMessageConfigForm.valueChanges.subscribe((updated: RuleNodeConfiguration) => {
-      if (this.validateConfig()) {
-        this.notifyConfigurationUpdated(this.checkMessageConfigForm.value);
-      } else {
-        this.notifyConfigurationUpdated(null);
-      }
-    });
   }
 
-  private validateConfig(): boolean {
+  protected validateConfig(): boolean {
     const messageNames: string[] = this.checkMessageConfigForm.get('messageNames').value;
     const metadataNames: string[] = this.checkMessageConfigForm.get('metadataNames').value;
     return messageNames.length > 0 || metadataNames.length > 0;

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -11,7 +11,7 @@ import { MatChipInputEvent } from '@angular/material';
   templateUrl: './originator-attributes-config.component.html',
   styleUrls: ['./originator-attributes-config.component.scss']
 })
-export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationComponent implements OnInit, AfterViewInit {
+export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationComponent {
 
   originatorAttributesConfigForm: FormGroup;
 
@@ -22,16 +22,8 @@ export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationCo
     super(store);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (!this.validateConfig()) {
-        this.notifyConfigurationUpdated(null);
-      }
-    }, 0);
+  protected configForm(): FormGroup {
+    return this.originatorAttributesConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
@@ -43,17 +35,6 @@ export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationCo
       latestTsKeyNames: [configuration ? configuration.latestTsKeyNames : null, []],
       getLatestValueWithTs: [configuration ? configuration.getLatestValueWithTs : false, []]
     });
-    this.originatorAttributesConfigForm.valueChanges.subscribe((updated: RuleNodeConfiguration) => {
-      if (this.validateConfig()) {
-        this.notifyConfigurationUpdated(this.originatorAttributesConfigForm.value);
-      } else {
-        this.notifyConfigurationUpdated(null);
-      }
-    });
-  }
-
-  private validateConfig(): boolean {
-    return this.originatorAttributesConfigForm.valid;
   }
 
   removeKey(key: string, keysField: string): void {

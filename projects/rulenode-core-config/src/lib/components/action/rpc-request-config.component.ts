@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './rpc-request-config.component.html',
   styleUrls: []
 })
-export class RpcRequestConfigComponent extends RuleNodeConfigurationComponent implements OnInit {
+export class RpcRequestConfigComponent extends RuleNodeConfigurationComponent {
 
   rpcRequestConfigForm: FormGroup;
 
@@ -18,20 +18,13 @@ export class RpcRequestConfigComponent extends RuleNodeConfigurationComponent im
     super(store);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
+  protected configForm(): FormGroup {
+    return this.rpcRequestConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.rpcRequestConfigForm = this.fb.group({
       timeoutInSeconds: [configuration ? configuration.timeoutInSeconds : null, [Validators.required, Validators.min(0)]]
-    });
-    this.rpcRequestConfigForm.valueChanges.subscribe((updated: RuleNodeConfiguration) => {
-      if (this.rpcRequestConfigForm.valid) {
-        this.notifyConfigurationUpdated(updated);
-      } else {
-        this.notifyConfigurationUpdated(null);
-      }
     });
   }
 }

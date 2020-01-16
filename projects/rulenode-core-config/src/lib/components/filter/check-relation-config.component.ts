@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -14,7 +14,7 @@ import {
   templateUrl: './check-relation-config.component.html',
   styleUrls: []
 })
-export class CheckRelationConfigComponent extends RuleNodeConfigurationComponent implements OnInit, AfterViewInit {
+export class CheckRelationConfigComponent extends RuleNodeConfigurationComponent {
 
   checkRelationConfigForm: FormGroup;
 
@@ -26,16 +26,8 @@ export class CheckRelationConfigComponent extends RuleNodeConfigurationComponent
     super(store);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (!this.validateConfig()) {
-        this.notifyConfigurationUpdated(null);
-      }
-    }, 0);
+  protected configForm(): FormGroup {
+    return this.checkRelationConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
@@ -48,22 +40,18 @@ export class CheckRelationConfigComponent extends RuleNodeConfigurationComponent
         configuration && configuration.checkForSingleEntity ? [Validators.required] : []],
       relationType: [configuration ? configuration.relationType : null, [Validators.required]]
     });
-    this.checkRelationConfigForm.get('checkForSingleEntity').valueChanges.subscribe((checkForSingleEntity: boolean) => {
-      this.checkRelationConfigForm.get('entityType').setValidators(checkForSingleEntity ? [Validators.required] : []);
-      this.checkRelationConfigForm.get('entityType').updateValueAndValidity();
-      this.checkRelationConfigForm.get('entityId').setValidators(checkForSingleEntity ? [Validators.required] : []);
-      this.checkRelationConfigForm.get('entityId').updateValueAndValidity();
-    });
-    this.checkRelationConfigForm.valueChanges.subscribe((updated: RuleNodeConfiguration) => {
-      if (this.validateConfig()) {
-        this.notifyConfigurationUpdated(this.checkRelationConfigForm.value);
-      } else {
-        this.notifyConfigurationUpdated(null);
-      }
-    });
   }
 
-  private validateConfig(): boolean {
-    return this.checkRelationConfigForm.valid;
+  protected validatorTriggers(): string[] {
+    return ['checkForSingleEntity'];
   }
+
+  protected updateValidators(emitEvent: boolean) {
+    const checkForSingleEntity: boolean = this.checkRelationConfigForm.get('checkForSingleEntity').value;
+    this.checkRelationConfigForm.get('entityType').setValidators(checkForSingleEntity ? [Validators.required] : []);
+    this.checkRelationConfigForm.get('entityType').updateValueAndValidity({emitEvent});
+    this.checkRelationConfigForm.get('entityId').setValidators(checkForSingleEntity ? [Validators.required] : []);
+    this.checkRelationConfigForm.get('entityId').updateValueAndValidity({emitEvent});
+  }
+
 }
