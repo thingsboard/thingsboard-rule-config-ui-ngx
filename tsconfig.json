@@ -18,6 +18,7 @@
       "node_modules/thingsboard/src/typings/rawloader.typings.d.ts",
       "node_modules/thingsboard/src/typings/jquery.typings.d.ts",
       "node_modules/thingsboard/src/typings/jquery.flot.typings.d.ts",
+      "node_modules/thingsboard/src/typings/jquery.jstree.typings.d.ts",
       "node_modules/thingsboard/src/typings/split.js.typings.d.ts"
     ],
     "lib": [

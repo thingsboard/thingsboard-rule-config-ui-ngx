@@ -6103,6 +6103,15 @@
       "integrity": "sha512-B1Br8yE27obcYvFx5ECZswT/947aAFNb9lHqnkUOhtOfvJqaa6Axibo4T+5G6iQlUfjgSd8am9R/9j9UBfRlrw==",
       "dev": true
     },
+    "@types/jstree": {
+      "version": "3.3.39",
+      "resolved": "https://registry.npmjs.org/@types/jstree/-/jstree-3.3.39.tgz",
+      "integrity": "sha512-lUUl9NCRqziIXYTC0n6NUykQS0oII5tUhXq6/pXVZSbrbcxB0jr3i7Bpn/8v6f8BVA9su1/NF/DoJ8IrwKuzKw==",
+      "dev": true,
+      "requires": {
+        "@types/jquery": "*"
+      }
+    },
     "@types/minimatch": {
       "version": "3.0.3",
       "resolved": "https://registry.npmjs.org/@types/minimatch/-/minimatch-3.0.3.tgz",
@@ -6137,6 +6146,12 @@
       "version": "0.0.32",
       "resolved": "https://registry.npmjs.org/@types/q/-/q-0.0.32.tgz",
       "integrity": "sha1-vShOV8hPEyXacCur/IKlMoGQwMU=",
+      "dev": true
+    },
+    "@types/raphael": {
+      "version": "2.1.30",
+      "resolved": "https://registry.npmjs.org/@types/raphael/-/raphael-2.1.30.tgz",
+      "integrity": "sha1-dsvqSlVrol6xxtf6XnGsSOcvgc8=",
       "dev": true
     },
     "@types/react": {
@@ -9347,6 +9362,12 @@
       "integrity": "sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=",
       "dev": true
     },
+    "eve-raphael": {
+      "version": "0.5.0",
+      "resolved": "https://registry.npmjs.org/eve-raphael/-/eve-raphael-0.5.0.tgz",
+      "integrity": "sha1-F8dUt5K+7z+maE15z1pHxjxM2jA=",
+      "dev": true
+    },
     "eventemitter3": {
       "version": "4.0.0",
       "resolved": "https://registry.npmjs.org/eventemitter3/-/eventemitter3-4.0.0.tgz",
@@ -11603,6 +11624,24 @@
         "@babel/runtime": "^7.3.1",
         "css-vendor": "^2.0.6",
         "jss": "10.0.0"
+      }
+    },
+    "jstree": {
+      "version": "3.3.8",
+      "resolved": "https://registry.npmjs.org/jstree/-/jstree-3.3.8.tgz",
+      "integrity": "sha512-0/nhGxVLSGfGQyVg+q59ocqSEKWRDKHoA8wNrcOIvlzCCw19tzvcMNGJ19hf+U0b7fycABowkny7fQPcLgUwwA==",
+      "dev": true,
+      "requires": {
+        "jquery": ">=1.9.1"
+      }
+    },
+    "jstree-bootstrap-theme": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/jstree-bootstrap-theme/-/jstree-bootstrap-theme-1.0.1.tgz",
+      "integrity": "sha1-fV7cc6hG6Np/lPV6HMXd7p2eq0s=",
+      "dev": true,
+      "requires": {
+        "jquery": ">=1.9.1"
       }
     },
     "jszip": {
@@ -14659,6 +14698,15 @@
       "integrity": "sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==",
       "dev": true
     },
+    "raphael": {
+      "version": "2.3.0",
+      "resolved": "https://registry.npmjs.org/raphael/-/raphael-2.3.0.tgz",
+      "integrity": "sha512-w2yIenZAQnp257XUWGni4bLMVxpUpcIl7qgxEgDIXtmSypYtlNxfXWpOBxs7LBTps5sDwhRnrToJrMUrivqNTQ==",
+      "dev": true,
+      "requires": {
+        "eve-raphael": "0.5.0"
+      }
+    },
     "raw-body": {
       "version": "2.4.0",
       "resolved": "https://registry.npmjs.org/raw-body/-/raw-body-2.4.0.tgz",
@@ -16812,6 +16860,8 @@
         "jquery.terminal": "^2.9.0",
         "js-beautify": "^1.10.2",
         "json-schema-defaults": "^0.4.0",
+        "jstree": "^3.3.8",
+        "jstree-bootstrap-theme": "^1.0.1",
         "material-design-icons": "^3.0.1",
         "messageformat": "^2.3.0",
         "moment": "^2.24.0",
@@ -16822,6 +16872,7 @@
         "ngx-translate-messageformat-compiler": "^4.5.0",
         "objectpath": "^1.2.2",
         "prop-types": "^15.7.2",
+        "raphael": "^2.3.0",
         "rc-select": "^9.2.1",
         "react": "^16.12.0",
         "react-ace": "^8.0.0",
