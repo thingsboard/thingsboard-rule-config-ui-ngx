@@ -44,9 +44,9 @@ export class MessageTypesConfigComponent extends PageComponent implements Contro
   @Input()
   disabled: boolean;
 
-  @ViewChild('chipList') chipList: MatChipList;
-  @ViewChild('messageTypeAutocomplete') matAutocomplete: MatAutocomplete;
-  @ViewChild('messageTypeInput') messageTypeInput: ElementRef<HTMLInputElement>;
+  @ViewChild('chipList', {static: false}) chipList: MatChipList;
+  @ViewChild('messageTypeAutocomplete', {static: false}) matAutocomplete: MatAutocomplete;
+  @ViewChild('messageTypeInput', {static: false}) messageTypeInput: ElementRef<HTMLInputElement>;
 
   separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
 

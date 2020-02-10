@@ -16,7 +16,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material';
 })
 export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent implements OnInit {
 
-  @ViewChild('detailsInput') detailsInput: ElementRef<HTMLInputElement>;
+  @ViewChild('detailsInput', {static: false}) detailsInput: ElementRef<HTMLInputElement>;
 
   entityDetailsConfigForm: FormGroup;
   detailsFormControl: FormControl;
