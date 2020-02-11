@@ -2,10 +2,13 @@
   "name": "rulenode-core-config",
   "version": "3.0.0",
   "peerDependencies": {
-    "@angular/common": "^8.2.14",
-    "@angular/core": "^8.2.14",
-    "@ngrx/store": "^8.5.2",
-    "@ngx-translate/core": "^11.0.1",
-    "thingsboard": "file:./target/git-tmp/thingsboard/ui-ngx"
+    "@angular/common": "^9.0.0",
+    "@angular/core": "^9.0.0",
+    "@angular/cdk": "~9.0.0",
+    "@angular/forms": "~9.0.0",
+    "@angular/material": "^9.0.0",
+    "@angular/router": "~9.0.0",
+    "@ngrx/store": "^8.6.0",
+    "@ngx-translate/core": "^12.0.0"
   }
 }

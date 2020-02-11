@@ -7,7 +7,7 @@ import { EntityDetailsField, entityDetailsTranslations } from '../../rulenode-co
 import { Observable, of } from 'rxjs';
 import { map, mergeMap, share, startWith } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
-import { MatAutocompleteSelectedEvent } from '@angular/material';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'tb-enrichment-node-entity-details-config',

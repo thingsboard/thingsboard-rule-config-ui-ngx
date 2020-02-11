@@ -26,6 +26,9 @@
       "dom"
     ],
     "paths": {
+      "@angular/*": [
+        "./node_modules/@angular/*"
+      ],
       "rulenode-core-config": [
         "dist/rulenode-core-config"
       ],
