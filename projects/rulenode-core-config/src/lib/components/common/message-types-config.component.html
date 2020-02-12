@@ -12,6 +12,7 @@
     <input matInput type="text" placeholder="{{ placeholder | translate }}"
            style="max-width: 200px;"
            #messageTypeInput
+           (focusin)="onFocus()"
            formControlName="messageType"
            matAutocompleteOrigin
            #origin="matAutocompleteOrigin"

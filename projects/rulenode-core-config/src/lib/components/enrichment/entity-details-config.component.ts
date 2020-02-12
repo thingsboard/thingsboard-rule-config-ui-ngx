@@ -38,11 +38,7 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
     for (const field of Object.keys(EntityDetailsField)) {
       this.entityDetailsList.push(EntityDetailsField[field]);
     }
-  }
-
-  ngOnInit() {
     this.detailsFormControl = new FormControl('');
-    super.ngOnInit();
     this.filteredEntityDetails = this.detailsFormControl.valueChanges
       .pipe(
         startWith(''),
@@ -50,6 +46,10 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
         mergeMap(name => this.fetchEntityDetails(name) ),
         share()
       );
+  }
+
+  ngOnInit() {
+    super.ngOnInit();
   }
 
   protected configForm(): FormGroup {
@@ -110,6 +110,10 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
       detailsList.push(details);
       this.entityDetailsConfigForm.get('detailsList').setValue(detailsList);
     }
+  }
+
+  onEntityDetailsInputFocus() {
+    this.detailsFormControl.updateValueAndValidity({onlySelf: true, emitEvent: true});
   }
 
   clear(value: string = '') {

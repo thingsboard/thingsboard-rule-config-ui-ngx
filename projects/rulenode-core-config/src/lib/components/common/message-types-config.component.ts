@@ -199,6 +199,10 @@ export class MessageTypesConfigComponent extends PageComponent implements Contro
     }
   }
 
+  onFocus() {
+    this.messageTypeConfigForm.get('messageType').updateValueAndValidity({onlySelf: true, emitEvent: true});
+  }
+
   clear(value: string = '') {
     this.messageTypeInput.nativeElement.value = value;
     this.messageTypeConfigForm.get('messageType').patchValue(null, {emitEvent: true});
