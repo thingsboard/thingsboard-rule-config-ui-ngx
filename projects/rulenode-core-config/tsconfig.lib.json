@@ -5,7 +5,7 @@
     "target": "es5",
     "declaration": true,
     "inlineSources": true,
-    "types": ["node", "jquery", "flot", "tooltipster", "tinycolor2", "js-beautify", "jstree", "raphael"],
+    "types": ["node", "jquery", "flot", "tooltipster", "tinycolor2", "js-beautify", "jstree", "raphael", "canvas-gauges"],
     "lib": [
       "dom",
       "es2018"
