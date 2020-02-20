@@ -1,4 +1,7 @@
 <section fxLayout="column" [formGroup]="deviceRelationsQueryFormGroup">
+  <mat-checkbox formControlName="fetchLastLevelOnly" style="padding-bottom: 16px;">
+    {{ 'relation.last-level-relation' | translate }}
+  </mat-checkbox>
   <div fxLayoutGap="8px" fxLayout="row">
     <mat-form-field class="mat-block" style="min-width: 100px;">
       <mat-label translate>relation.direction</mat-label>

@@ -6,6 +6,7 @@ import { AppState } from '@core/public-api';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 interface DeviceRelationsQuery {
+  fetchLastLevelOnly: boolean;
   direction: EntitySearchDirection;
   maxLevel?: number;
   relationType?: string;
@@ -53,6 +54,7 @@ export class DeviceRelationsQueryConfigComponent extends PageComponent implement
 
   ngOnInit(): void {
     this.deviceRelationsQueryFormGroup = this.fb.group({
+      fetchLastLevelOnly: [false, []],
       direction: [null, [Validators.required]],
       maxLevel: [null, []],
       relationType: [null],

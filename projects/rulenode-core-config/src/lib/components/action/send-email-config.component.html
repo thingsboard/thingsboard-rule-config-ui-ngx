@@ -46,6 +46,14 @@
     <mat-checkbox formControlName="enableTls" style="padding-bottom: 16px;">
       {{ 'tb.rulenode.enable-tls' | translate }}
     </mat-checkbox>
+    <mat-form-field class="mat-block" *ngIf="sendEmailConfigForm.get('enableTls').value === true">
+      <mat-label translate>tb.rulenode.tls-version</mat-label>
+      <mat-select formControlName="tlsVersion">
+        <mat-option *ngFor="let tlsVersion of tlsVersions" [value]="tlsVersion">
+          {{ tlsVersion }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
     <mat-form-field class="mat-block" floatLabel="always">
       <mat-label translate>tb.rulenode.username</mat-label>
       <input matInput placeholder="{{ 'tb.rulenode.enter-username' | translate }}" formControlName="username">

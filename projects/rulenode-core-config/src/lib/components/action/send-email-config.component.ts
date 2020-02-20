@@ -18,6 +18,8 @@ export class SendEmailConfigComponent extends RuleNodeConfigurationComponent {
     'smtps'
   ];
 
+  tlsVersions = ['TLSv1.0', 'TLSv1.1', 'TLSv1.2', 'TLSv1.3'];
+
   constructor(protected store: Store<AppState>,
               private fb: FormBuilder) {
     super(store);
@@ -35,6 +37,7 @@ export class SendEmailConfigComponent extends RuleNodeConfigurationComponent {
       smtpPort: [configuration ? configuration.smtpPort : null, []],
       timeout: [configuration ? configuration.timeout : null, []],
       enableTls: [configuration ? configuration.enableTls : false, []],
+      tlsVersion: [configuration ? configuration.tlsVersion : null, []],
       username: [configuration ? configuration.username : null, []],
       password: [configuration ? configuration.password : null, []]
     });
