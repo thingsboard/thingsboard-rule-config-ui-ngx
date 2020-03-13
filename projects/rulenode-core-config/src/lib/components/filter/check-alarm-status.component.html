@@ -1,0 +1,46 @@
+<section [formGroup]="alarmStatusConfigForm" fxLayout="column">
+  <mat-form-field class="mat-block" class="alarm-status-list">
+  <mat-label translate>tb.rulenode.alarm-status-filter</mat-label>
+  <mat-chip-list #alarmStatusChipList required>
+    <mat-chip
+      *ngFor="let alarmStatus of alarmStatusConfigForm.get('alarmStatusList').value;"
+      (removed)="removeAlarmStatus(alarmStatus)">
+        <span>
+          <strong>{{alarmStatusTranslationsMap.get(alarmStatus) | translate}}</strong>
+        </span>
+      <mat-icon matChipRemove>close</mat-icon>
+    </mat-chip>
+    <input matInput type="text"
+           style="max-width: 200px;"
+           #alarmStatusInput
+           (focusin)="onAlarmStatusInputFocus()"
+           [formControl]="statusFormControl"
+           matAutocompleteOrigin
+           #origin="matAutocompleteOrigin"
+           [matAutocompleteConnectedTo]="origin"
+           [matAutocomplete]="alarmStatusAutocomplete"
+           [matChipInputFor]="alarmStatusChipList">
+  </mat-chip-list>
+  <mat-autocomplete #alarmStatusAutocomplete="matAutocomplete"
+                    class="tb-autocomplete"
+                    (optionSelected)="alarmStatusSelected($event)"
+                    [displayWith]="displayStatusFn">
+    <mat-option *ngFor="let status of filteredAlarmStatus | async" [value]="status">
+      <span [innerHTML]="alarmStatusTranslationsMap.get(status) | translate | highlight:searchText"></span>
+    </mat-option>
+    <mat-option *ngIf="(filteredAlarmStatus | async)?.length === 0" [value]="null" class="tb-not-found">
+      <div class="tb-not-found-content" (click)="$event.stopPropagation()">
+        <div>
+          <span translate>tb.rulenode.no-alarm-status-matching</span>
+        </div>
+      </div>
+    </mat-option>
+  </mat-autocomplete>
+  </mat-form-field>
+  <tb-error [error]="(statusFormControl.touched &&
+                     alarmStatusConfigForm.get('alarmStatusList').hasError('required'))
+                  ? translate.instant('tb.rulenode.alarm-status-list-empty') : ''"></tb-error>
+  </section>
+
+
+
