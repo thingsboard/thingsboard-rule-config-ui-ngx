@@ -65,7 +65,6 @@ export class CheckAlarmStatusComponent extends RuleNodeConfigurationComponent im
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.alarmStatusConfigForm = this.fb.group({
       alarmStatusList: [configuration ? configuration.alarmStatusList : null, [Validators.required]],
-      addToMetadata: [configuration ? configuration.addToMetadata : false, []]
     });
   }
 
