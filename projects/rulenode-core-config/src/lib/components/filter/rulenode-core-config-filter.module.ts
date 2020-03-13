@@ -8,6 +8,7 @@ import { MessageTypeConfigComponent } from './message-type-config.component';
 import { OriginatorTypeConfigComponent } from './originator-type-config.component';
 import { ScriptConfigComponent } from './script-config.component';
 import { SwitchConfigComponent } from './switch-config.component';
+import { CheckAlarmStatusComponent } from './check-alarm-status.component';
 import { RulenodeCoreConfigCommonModule } from '../common/rulenode-core-config-common.module';
 
 @NgModule({
@@ -18,13 +19,14 @@ import { RulenodeCoreConfigCommonModule } from '../common/rulenode-core-config-c
     MessageTypeConfigComponent,
     OriginatorTypeConfigComponent,
     ScriptConfigComponent,
-    SwitchConfigComponent
+    SwitchConfigComponent,
+    CheckAlarmStatusComponent
   ],
-    imports: [
-        CommonModule,
-        SharedModule,
-        RulenodeCoreConfigCommonModule
-    ],
+  imports: [
+    CommonModule,
+    SharedModule,
+    RulenodeCoreConfigCommonModule
+  ],
   exports: [
     CheckMessageConfigComponent,
     CheckRelationConfigComponent,
@@ -32,7 +34,8 @@ import { RulenodeCoreConfigCommonModule } from '../common/rulenode-core-config-c
     MessageTypeConfigComponent,
     OriginatorTypeConfigComponent,
     ScriptConfigComponent,
-    SwitchConfigComponent
+    SwitchConfigComponent,
+    CheckAlarmStatusComponent
   ]
 })
 export class RuleNodeCoreConfigFilterModule {
