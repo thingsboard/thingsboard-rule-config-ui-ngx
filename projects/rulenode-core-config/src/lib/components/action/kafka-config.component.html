@@ -72,4 +72,19 @@
     valText="tb.rulenode.value"
     valRequiredText="tb.rulenode.value-required">
   </tb-kv-map-config>
+  <mat-checkbox fxFlex formControlName="addMetadataKeyValuesAsKafkaHeaders" style="padding-bottom: 16px;">
+    {{ 'tb.rulenode.add-metadata-key-values-as-kafka-headers' | translate }}
+  </mat-checkbox>
+  <div class="tb-hint" style="padding-bottom: 16px;" translate>tb.rulenode.add-metadata-key-values-as-kafka-headers-hint</div>
+  <mat-form-field class="mat-block" *ngIf="kafkaConfigForm.get('addMetadataKeyValuesAsKafkaHeaders').value">
+    <mat-label translate>tb.rulenode.charset-encoding</mat-label>
+    <mat-select formControlName="kafkaHeadersCharset" required>
+      <mat-option *ngFor="let charsetType of charsetTypes" [value]="charsetType">
+        {{ charsetTypesTranslationsMap.get(charsetType) | translate }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="kafkaConfigForm.get('kafkaHeadersCharset').hasError('required')">
+      {{ 'tb.rulenode.charset-encoding-required' | translate }}
+    </mat-error>
+  </mat-form-field>
 </section>

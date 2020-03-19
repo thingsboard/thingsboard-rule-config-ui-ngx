@@ -128,3 +128,23 @@ export enum HttpRequestType {
   PUT = 'PUT',
   DELETE = 'DELETE'
 }
+
+export enum CharsetTypes {
+  'US-ASCII' = 'US-ASCII',
+  'ISO-8859-1' = 'ISO-8859-1',
+  'UTF-8' = 'UTF-8',
+  'UTF-16BE' = 'UTF-16BE',
+  'UTF-16LE' = 'UTF-16LE',
+  'UTF-16' = 'UTF-16',
+}
+
+export const charsetTypesTranslations = new Map<CharsetTypes, string>(
+  [
+    [CharsetTypes['US-ASCII'], 'tb.rulenode.charset-us-ascii'],
+    [CharsetTypes['ISO-8859-1'], 'tb.rulenode.charset-iso-8859-1'],
+    [CharsetTypes['UTF-8'], 'tb.rulenode.charset-utf-8'],
+    [CharsetTypes['UTF-16BE'], 'tb.rulenode.charset-utf-16be'],
+    [CharsetTypes['UTF-16LE'], 'tb.rulenode.charset-utf-16le'],
+    [CharsetTypes['UTF-16'], 'tb.rulenode.charset-utf-16']
+  ]
+);

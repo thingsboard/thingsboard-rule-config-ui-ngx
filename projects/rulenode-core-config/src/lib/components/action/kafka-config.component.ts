@@ -3,6 +3,7 @@ import { AppState } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CharsetTypes, charsetTypesTranslations} from '../../rulenode-core-config.models';
 
 @Component({
   selector: 'tb-action-node-kafka-config',
@@ -12,6 +13,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class KafkaConfigComponent extends RuleNodeConfigurationComponent {
 
   kafkaConfigForm: FormGroup;
+
+  charsetTypes = Object.keys(CharsetTypes);
+  charsetTypesTranslationsMap = charsetTypesTranslations;
 
   ackValues: string[] = ['all', '-1', '0', '1'];
 
@@ -35,7 +39,10 @@ export class KafkaConfigComponent extends RuleNodeConfigurationComponent {
       acks: [configuration ? configuration.acks : null, [Validators.required]],
       keySerializer: [configuration ? configuration.keySerializer : null, [Validators.required]],
       valueSerializer: [configuration ? configuration.valueSerializer : null, [Validators.required]],
-      otherProperties: [configuration ? configuration.otherProperties : null, []]
+      otherProperties: [configuration ? configuration.otherProperties : null, []],
+      addMetadataKeyValuesAsKafkaHeaders: [configuration ? configuration.addMetadataKeyValuesAsKafkaHeaders : false, []],
+      kafkaHeadersCharset: [configuration && configuration.kafkaHeadersCharset ?
+        configuration.kafkaHeadersCharset : CharsetTypes['UTF-8'], [Validators.required]]
     });
   }
 
