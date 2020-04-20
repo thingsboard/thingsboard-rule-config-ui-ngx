@@ -82,6 +82,6 @@ export class RelationsQueryConfigComponent extends PageComponent implements Cont
   }
 
   writeValue(query: RelationsQuery): void {
-    this.relationsQueryFormGroup.reset(query, {emitEvent: false});
+    this.relationsQueryFormGroup.reset(query || {}, {emitEvent: false});
   }
 }
