@@ -362,7 +362,18 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
             'e.g: "temp": "&lcub;\\"ts\\":1574329385897,\\"value\\":42&rcub;"',
           'use-redis-queue': 'Use redis queue for message persistence',
           'trim-redis-queue': 'Trim redis queue',
-          'redis-queue-max-size': 'Redis queue max size'
+          'redis-queue-max-size': 'Redis queue max size',
+          'add-metadata-key-values-as-kafka-headers': 'Add Message metadata key-value pairs to Kafka record headers',
+          'add-metadata-key-values-as-kafka-headers-hint': 'If selected, key-value pairs from message metadata will be added to the outgoing records headers as byte arrays with predefined charset encoding.',
+          'charset-encoding': 'Charset encoding',
+          'charset-encoding-required': 'Charset encoding is required.',
+          'charset-us-ascii': 'US-ASCII',
+          'charset-iso-8859-1': 'ISO-8859-1',
+          'charset-utf-8': 'UTF-8',
+          'charset-utf-16be': 'UTF-16BE',
+          'charset-utf-16le': 'UTF-16LE',
+          'charset-utf-16': 'UTF-16',
+          'select-queue-hint': 'The queue name can be selected from a drop-down list or add a custom name.'
         },
         'key-val': {
           key: 'Key',

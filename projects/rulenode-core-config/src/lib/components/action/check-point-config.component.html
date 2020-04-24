@@ -1,0 +1,8 @@
+<section [formGroup]="checkPointConfigForm" fxLayout="column">
+  <tb-queue-type-list
+    required
+    [queueType]="serviceType"
+    formControlName="queueName">
+  </tb-queue-type-list>
+  <div class="tb-hint" translate>tb.rulenode.select-queue-hint</div>
+</section>

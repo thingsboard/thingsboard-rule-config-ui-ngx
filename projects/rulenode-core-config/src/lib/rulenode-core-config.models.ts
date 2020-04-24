@@ -128,3 +128,23 @@ export enum HttpRequestType {
   PUT = 'PUT',
   DELETE = 'DELETE'
 }
+
+export const ToByteStandartCharsetTypes = [
+  'US-ASCII',
+  'ISO-8859-1',
+  'UTF-8',
+  'UTF-16BE',
+  'UTF-16LE',
+  'UTF-16'
+];
+
+export const ToByteStandartCharsetTypeTranslations = new Map<string, string>(
+  [
+    ['US-ASCII', 'tb.rulenode.charset-us-ascii'],
+    ['ISO-8859-1', 'tb.rulenode.charset-iso-8859-1'],
+    ['UTF-8', 'tb.rulenode.charset-utf-8'],
+    ['UTF-16BE', 'tb.rulenode.charset-utf-16be'],
+    ['UTF-16LE', 'tb.rulenode.charset-utf-16le'],
+    ['UTF-16', 'tb.rulenode.charset-utf-16'],
+  ]
+);

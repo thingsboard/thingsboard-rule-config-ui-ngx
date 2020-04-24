@@ -26,6 +26,7 @@ import { MqttConfigComponent } from './mqtt-config.component';
 import { RabbitMqConfigComponent } from './rabbit-mq-config.component';
 import { RestApiCallConfigComponent } from './rest-api-call-config.component';
 import { SendEmailConfigComponent } from './send-email-config.component';
+import { CheckPointConfigComponent } from './check-point-config.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { SendEmailConfigComponent } from './send-email-config.component';
     MqttConfigComponent,
     RabbitMqConfigComponent,
     RestApiCallConfigComponent,
-    SendEmailConfigComponent
+    SendEmailConfigComponent,
+    CheckPointConfigComponent
   ],
   imports: [
     CommonModule,
@@ -83,7 +85,8 @@ import { SendEmailConfigComponent } from './send-email-config.component';
     MqttConfigComponent,
     RabbitMqConfigComponent,
     RestApiCallConfigComponent,
-    SendEmailConfigComponent
+    SendEmailConfigComponent,
+    CheckPointConfigComponent
   ]
 })
 export class RuleNodeCoreConfigActionModule {
