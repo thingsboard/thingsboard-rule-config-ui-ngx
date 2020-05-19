@@ -1,3 +1,5 @@
+import { EntitySearchDirection, EntityTypeFilter } from '@shared/public-api';
+
 export enum OriginatorSource {
   CUSTOMER = 'CUSTOMER',
   TENANT = 'TENANT',
@@ -148,3 +150,10 @@ export const ToByteStandartCharsetTypeTranslations = new Map<string, string>(
     ['UTF-16', 'tb.rulenode.charset-utf-16'],
   ]
 );
+
+export interface RelationsQuery {
+  fetchLastLevelOnly: boolean;
+  direction: EntitySearchDirection;
+  maxLevel?: number;
+  filters?: EntityTypeFilter[];
+}

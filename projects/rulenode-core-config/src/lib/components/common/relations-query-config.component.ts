@@ -1,16 +1,10 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
-import { EntitySearchDirection, entitySearchDirectionTranslations, EntityType, EntityTypeFilter, PageComponent } from '@shared/public-api';
+import { EntitySearchDirection, entitySearchDirectionTranslations, PageComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/public-api';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-
-interface RelationsQuery {
-  fetchLastLevelOnly: boolean;
-  direction: EntitySearchDirection;
-  maxLevel?: number;
-  filters?: EntityTypeFilter[];
-}
+import { RelationsQuery } from '../../rulenode-core-config.models';
 
 @Component({
   selector: 'tb-relations-query-config',
