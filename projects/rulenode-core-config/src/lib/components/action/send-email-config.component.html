@@ -54,6 +54,38 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <tb-checkbox formControlName="enableProxy" style="display: block; padding-bottom: 16px;">
+      {{ 'tb.rulenode.enable-proxy' | translate }}
+    </tb-checkbox>
+    <div *ngIf="sendEmailConfigForm.get('enableProxy').value">
+      <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="8px">
+        <mat-form-field class="mat-block" fxFlex="100" fxFlex.gt-sm="60">
+          <mat-label translate>tb.rulenode.proxy-host</mat-label>
+          <input matInput required formControlName="proxyHost">
+          <mat-error *ngIf="sendEmailConfigForm.get('proxyHost').hasError('required')">
+            {{ 'tb.rulenode.proxy-host-required' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="mat-block" fxFlex="100" fxFlex.gt-sm="40">
+          <mat-label translate>tb.rulenode.proxy-port</mat-label>
+          <input matInput required formControlName="proxyPort" type="number" step="1" min="1" max="65535">
+          <mat-error *ngIf="sendEmailConfigForm.get('proxyPort').hasError('required')">
+            {{ 'tb.rulenode.proxy-port-required' | translate }}
+          </mat-error>
+          <mat-error *ngIf="sendEmailConfigForm.get('proxyPort').hasError('min') || sendEmailConfigForm.get('proxyPort').hasError('max')">
+            {{ 'tb.rulenode.proxy-port-range' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <mat-form-field class="mat-block">
+        <mat-label translate>tb.rulenode.proxy-user</mat-label>
+        <input matInput formControlName="proxyUser">
+      </mat-form-field>
+      <mat-form-field class="mat-block">
+        <mat-label translate>tb.rulenode.proxy-password</mat-label>
+        <input matInput formControlName="proxyPassword">
+      </mat-form-field>
+    </div>
     <mat-form-field class="mat-block" floatLabel="always">
       <mat-label translate>tb.rulenode.username</mat-label>
       <input matInput placeholder="{{ 'tb.rulenode.enter-username' | translate }}" formControlName="username">

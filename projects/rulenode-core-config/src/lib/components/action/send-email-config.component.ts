@@ -38,31 +38,45 @@ export class SendEmailConfigComponent extends RuleNodeConfigurationComponent {
       timeout: [configuration ? configuration.timeout : null, []],
       enableTls: [configuration ? configuration.enableTls : false, []],
       tlsVersion: [configuration ? configuration.tlsVersion : null, []],
+      enableProxy: [configuration ? configuration.enableProxy : false, []],
+      proxyHost: [configuration ? configuration.proxyHost : null, []],
+      proxyPort: [configuration ? configuration.proxyPort : null, []],
+      proxyUser: [configuration ? configuration.proxyUser :null, []],
+      proxyPassword: [configuration ? configuration.proxyPassword :null, []],
       username: [configuration ? configuration.username : null, []],
       password: [configuration ? configuration.password : null, []]
     });
   }
 
   protected validatorTriggers(): string[] {
-    return ['useSystemSmtpSettings'];
+    return ['useSystemSmtpSettings', 'enableProxy'];
   }
 
   protected updateValidators(emitEvent: boolean) {
     const useSystemSmtpSettings: boolean = this.sendEmailConfigForm.get('useSystemSmtpSettings').value;
+    const enableProxy: boolean = this.sendEmailConfigForm.get('enableProxy').value;
     if (useSystemSmtpSettings) {
       this.sendEmailConfigForm.get('smtpProtocol').setValidators([]);
       this.sendEmailConfigForm.get('smtpHost').setValidators([]);
       this.sendEmailConfigForm.get('smtpPort').setValidators([]);
       this.sendEmailConfigForm.get('timeout').setValidators([]);
+      this.sendEmailConfigForm.get('proxyHost').setValidators([]);
+      this.sendEmailConfigForm.get('proxyPort').setValidators([]);
     } else {
       this.sendEmailConfigForm.get('smtpProtocol').setValidators([Validators.required]);
       this.sendEmailConfigForm.get('smtpHost').setValidators([Validators.required]);
       this.sendEmailConfigForm.get('smtpPort').setValidators([Validators.required, Validators.min(1), Validators.max(65535)]);
       this.sendEmailConfigForm.get('timeout').setValidators([Validators.required, Validators.min(0)]);
+      this.sendEmailConfigForm.get('proxyHost').setValidators(enableProxy ? [Validators.required] : []);
+      this.sendEmailConfigForm.get('proxyPort').setValidators(enableProxy ?
+        [Validators.required, Validators.min(1), Validators.max(65535)] : []);
     }
     this.sendEmailConfigForm.get('smtpProtocol').updateValueAndValidity({emitEvent});
     this.sendEmailConfigForm.get('smtpHost').updateValueAndValidity({emitEvent});
     this.sendEmailConfigForm.get('smtpPort').updateValueAndValidity({emitEvent});
     this.sendEmailConfigForm.get('timeout').updateValueAndValidity({emitEvent});
+    this.sendEmailConfigForm.get('proxyHost').updateValueAndValidity({emitEvent});
+    this.sendEmailConfigForm.get('proxyPort').updateValueAndValidity({emitEvent});
   }
+
 }
