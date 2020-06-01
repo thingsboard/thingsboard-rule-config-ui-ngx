@@ -77,4 +77,16 @@ export class SendEmailConfigComponent extends RuleNodeConfigurationComponent {
     this.sendEmailConfigForm.get('smtpPort').updateValueAndValidity({emitEvent});
     this.sendEmailConfigForm.get('timeout').updateValueAndValidity({emitEvent});
   }
+
+  enableProxy(): boolean {
+    const enableProxy: boolean = this.sendEmailConfigForm.get('enableProxy').value === true;
+    if (enableProxy) {
+      this.sendEmailConfigForm.get('proxyHost').enable();
+      this.sendEmailConfigForm.get('proxyPort').enable();
+    } else {
+      this.sendEmailConfigForm.get('proxyHost').disable();
+      this.sendEmailConfigForm.get('proxyPort').disable();
+    }
+    return enableProxy;
+  }
 }
