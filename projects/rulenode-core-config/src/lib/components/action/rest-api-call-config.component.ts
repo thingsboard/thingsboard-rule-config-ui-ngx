@@ -14,6 +14,8 @@ export class RestApiCallConfigComponent extends RuleNodeConfigurationComponent {
 
   restApiCallConfigForm: FormGroup;
 
+  proxySchemes: string[] = ['http', 'https'];
+
   httpRequestTypes = Object.keys(HttpRequestType);
 
   constructor(protected store: Store<AppState>,
@@ -30,6 +32,13 @@ export class RestApiCallConfigComponent extends RuleNodeConfigurationComponent {
       restEndpointUrlPattern: [configuration ? configuration.restEndpointUrlPattern : null, [Validators.required]],
       requestMethod: [configuration ? configuration.requestMethod : null, [Validators.required]],
       useSimpleClientHttpFactory: [configuration ? configuration.useSimpleClientHttpFactory : false, []],
+      enableProxy: [configuration ? configuration.enableProxy : false, []],
+      useSystemProxyProperties: [configuration ? configuration.enableProxy : false, []],
+      proxyScheme: [configuration ? configuration.proxyHost : null, []],
+      proxyHost: [configuration ? configuration.proxyHost : null, []],
+      proxyPort: [configuration ? configuration.proxyPort : null, []],
+      proxyUser: [configuration ? configuration.proxyUser :null, []],
+      proxyPassword: [configuration ? configuration.proxyPassword :null, []],
       readTimeoutMs: [configuration ? configuration.readTimeoutMs : null, []],
       maxParallelRequestsCount: [configuration ? configuration.maxParallelRequestsCount : null, [Validators.min(0)]],
       headers: [configuration ? configuration.headers : null, []],
@@ -40,17 +49,30 @@ export class RestApiCallConfigComponent extends RuleNodeConfigurationComponent {
   }
 
   protected validatorTriggers(): string[] {
-    return ['useSimpleClientHttpFactory', 'useRedisQueueForMsgPersistence'];
+    return ['useSimpleClientHttpFactory', 'useRedisQueueForMsgPersistence', 'enableProxy', 'useSystemProxyProperties'];
   }
 
   protected updateValidators(emitEvent: boolean) {
     const useSimpleClientHttpFactory: boolean = this.restApiCallConfigForm.get('useSimpleClientHttpFactory').value;
     const useRedisQueueForMsgPersistence: boolean = this.restApiCallConfigForm.get('useRedisQueueForMsgPersistence').value;
-    if (useSimpleClientHttpFactory) {
-      this.restApiCallConfigForm.get('readTimeoutMs').setValidators([]);
+    const enableProxy: boolean = this.restApiCallConfigForm.get('enableProxy').value;
+    const useSystemProxyProperties: boolean = this.restApiCallConfigForm.get('useSystemProxyProperties').value;
+
+    if (enableProxy && !useSystemProxyProperties) {
+      this.restApiCallConfigForm.get('proxyHost').setValidators(enableProxy ? [Validators.required] : []);
+      this.restApiCallConfigForm.get('proxyPort').setValidators(enableProxy ?
+        [Validators.required, Validators.min(1), Validators.max(65535)] : []);
     } else {
-      this.restApiCallConfigForm.get('readTimeoutMs').setValidators([Validators.min(0)]);
+      this.restApiCallConfigForm.get('proxyHost').setValidators([]);
+      this.restApiCallConfigForm.get('proxyPort').setValidators([]);
+
+      if (useSimpleClientHttpFactory) {
+        this.restApiCallConfigForm.get('readTimeoutMs').setValidators([]);
+      } else {
+        this.restApiCallConfigForm.get('readTimeoutMs').setValidators([Validators.min(0)]);
+      }
     }
+
     if (useRedisQueueForMsgPersistence) {
       this.restApiCallConfigForm.get('maxQueueSize').setValidators([Validators.min(0)]);
     } else {
@@ -58,5 +80,7 @@ export class RestApiCallConfigComponent extends RuleNodeConfigurationComponent {
     }
     this.restApiCallConfigForm.get('readTimeoutMs').updateValueAndValidity({emitEvent});
     this.restApiCallConfigForm.get('maxQueueSize').updateValueAndValidity({emitEvent});
+    this.restApiCallConfigForm.get('proxyHost').updateValueAndValidity({emitEvent});
+    this.restApiCallConfigForm.get('proxyPort').updateValueAndValidity({emitEvent});
   }
 }

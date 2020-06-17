@@ -15,10 +15,57 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-checkbox formControlName="useSimpleClientHttpFactory" style="padding-bottom: 16px;">
+  <mat-checkbox formControlName="enableProxy" style="padding-bottom: 16px;">
+    {{ 'tb.rulenode.enable-proxy' | translate }}
+  </mat-checkbox>
+  <mat-checkbox *ngIf="!restApiCallConfigForm.get('enableProxy').value" formControlName="useSimpleClientHttpFactory" style="padding-bottom: 16px;">
     {{ 'tb.rulenode.use-simple-client-http-factory' | translate }}
   </mat-checkbox>
-  <mat-form-field *ngIf="restApiCallConfigForm.get('useSimpleClientHttpFactory').value === false" class="mat-block" style="padding-bottom: 16px;">
+  <div *ngIf="restApiCallConfigForm.get('enableProxy').value">
+    <mat-checkbox formControlName="useSystemProxyProperties" style="padding-bottom: 16px;">
+      {{ 'tb.rulenode.use-system-proxy-properties' | translate }}
+    </mat-checkbox>
+    <div *ngIf="!restApiCallConfigForm.get('useSystemProxyProperties').value">
+      <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="8px">
+        <mat-form-field class="mat-block" fxFlex="100" fxFlex.gt-sm="10">
+          <mat-label translate>tb.rulenode.proxy-scheme</mat-label>
+          <mat-select formControlName="proxyScheme">
+            <mat-option *ngFor="let proxyScheme of proxySchemes" [value]="proxyScheme">
+              {{ proxyScheme }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="md-block" fxFlex="100" fxFlex.gt-sm="50">
+          <mat-label translate>tb.rulenode.proxy-host</mat-label>
+          <input matInput required formControlName="proxyHost">
+          <mat-error *ngIf="restApiCallConfigForm.get('proxyHost').hasError('required')">
+            {{ 'tb.rulenode.proxy-host-required' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="mat-block" fxFlex="100" fxFlex.gt-sm="40">
+          <mat-label translate>tb.rulenode.proxy-port</mat-label>
+          <input matInput required formControlName="proxyPort" type="number" step="1" min="1" max="65535">
+          <mat-error *ngIf="restApiCallConfigForm.get('proxyPort').hasError('required')">
+            {{ 'tb.rulenode.proxy-port-required' | translate }}
+          </mat-error>
+          <mat-error
+            *ngIf="restApiCallConfigForm.get('proxyPort').hasError('min') || restApiCallConfigForm.get('proxyPort').hasError('max')">
+            {{ 'tb.rulenode.proxy-port-range' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <mat-form-field class="mat-block">
+        <mat-label translate>tb.rulenode.proxy-user</mat-label>
+        <input matInput formControlName="proxyUser">
+      </mat-form-field>
+      <mat-form-field class="mat-block">
+        <mat-label translate>tb.rulenode.proxy-password</mat-label>
+        <input matInput formControlName="proxyPassword">
+      </mat-form-field>
+    </div>
+  </div>
+  <mat-form-field *ngIf="!restApiCallConfigForm.get('useSimpleClientHttpFactory').value || restApiCallConfigForm.get('enableProxy').value" class="mat-block"
+                  style="padding-bottom: 16px;">
     <mat-label translate>tb.rulenode.read-timeout</mat-label>
     <input type="number" step="1" min="0" matInput formControlName="readTimeoutMs">
     <mat-hint innerHTML="{{ 'tb.rulenode.read-timeout-hint' | translate }}"></mat-hint>
