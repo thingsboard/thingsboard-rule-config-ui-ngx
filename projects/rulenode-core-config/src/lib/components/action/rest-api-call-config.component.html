@@ -44,7 +44,7 @@
         </mat-form-field>
         <mat-form-field class="mat-block" fxFlex="100" fxFlex.gt-sm="40">
           <mat-label translate>tb.rulenode.proxy-port</mat-label>
-          <input matInput required formControlName="proxyPort" type="number" step="1" min="1" max="65535">
+          <input matInput required formControlName="proxyPort" type="number" step="1">
           <mat-error *ngIf="restApiCallConfigForm.get('proxyPort').hasError('required')">
             {{ 'tb.rulenode.proxy-port-required' | translate }}
           </mat-error>
