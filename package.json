@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "scripts": {
     "cleanup": "rm -rf ./target",
-    "getthingsboard": "git clone git@github.com:thingsboard/thingsboard.git ./target/git-tmp/thingsboard",
+    "getthingsboard": "git clone --depth 1 git@github.com:thingsboard/thingsboard.git ./target/git-tmp/thingsboard",
     "ng": "ng",
     "start": "node --max_old_space_size=8048 ./node_modules/@angular/cli/bin/ng serve",
     "build": "ng build && node install.js",
