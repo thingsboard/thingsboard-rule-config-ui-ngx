@@ -1,0 +1,102 @@
+<section [formGroup]="azureIotHubConfigForm" fxLayout="column">
+  <mat-form-field class="mat-block" style="padding-bottom: 16px;">
+    <mat-label translate>tb.rulenode.topic</mat-label>
+    <input required matInput formControlName="topicPattern">
+    <mat-error *ngIf="azureIotHubConfigForm.get('topicPattern').hasError('required')">
+      {{ 'tb.rulenode.topic-required' | translate }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="mat-block">
+    <mat-label translate>tb.rulenode.hostname</mat-label>
+    <input required matInput formControlName="host">
+    <mat-error *ngIf="azureIotHubConfigForm.get('host').hasError('required')">
+      {{ 'tb.rulenode.hostname-required' | translate }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="mat-block">
+    <mat-label translate>tb.rulenode.device-id</mat-label>
+    <input required matInput formControlName="clientId">
+    <mat-error *ngIf="azureIotHubConfigForm.get('clientId').hasError('required')">
+      {{ 'tb.rulenode.device-id-required' | translate }}
+    </mat-error>
+  </mat-form-field>
+  <mat-expansion-panel class="tb-mqtt-credentials-panel-group">
+    <mat-expansion-panel-header>
+      <mat-panel-title translate>tb.rulenode.credentials</mat-panel-title>
+      <mat-panel-description>
+        {{ azureIotHubCredentialsTypeTranslationsMap.get(azureIotHubConfigForm.get('credentials').get('type').value) | translate }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <section formGroupName="credentials" fxLayout="column">
+      <mat-form-field class="mat-block">
+        <mat-label translate>tb.rulenode.credentials-type</mat-label>
+        <mat-select formControlName="type" required>
+          <mat-option *ngFor="let credentialsType of allAzureIotHubCredentialsTypes" [value]="credentialsType">
+            {{ azureIotHubCredentialsTypeTranslationsMap.get(credentialsType) | translate }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="azureIotHubConfigForm.get('credentials').get('type').hasError('required')">
+          {{ 'tb.rulenode.credentials-type-required' | translate }}
+        </mat-error>
+      </mat-form-field>
+      <section fxLayout="column" [ngSwitch]="azureIotHubConfigForm.get('credentials').get('type').value">
+        <ng-template ngSwitchCase="anonymous">
+        </ng-template>
+        <ng-template ngSwitchCase="sas">
+          <mat-form-field class="mat-block">
+            <mat-label translate>tb.rulenode.sas-key</mat-label>
+            <input type="password" required matInput formControlName="sasKey">
+            <mat-error *ngIf="azureIotHubConfigForm.get('credentials').get('sasKey').hasError('required')">
+              {{ 'tb.rulenode.sas-key-required' | translate }}
+            </mat-error>
+          </mat-form-field>
+          <tb-file-input formControlName="caCert"
+                         inputId="caCertSelect"
+                         [existingFileName]="azureIotHubConfigForm.get('credentials').get('caCertFileName').value"
+                         (fileNameChanged)="azureIotHubConfigForm.get('credentials').get('caCertFileName').setValue($event)"
+                         requiredAsError
+                         label="{{'tb.rulenode.azure-ca-cert' | translate}}"
+                         noFileText="tb.rulenode.no-file"
+                         dropLabel="{{'tb.rulenode.drop-file' | translate}}">
+          </tb-file-input>
+        </ng-template>
+        <ng-template ngSwitchCase="cert.PEM">
+          <tb-file-input formControlName="caCert"
+                         inputId="caCertSelect"
+                         [existingFileName]="azureIotHubConfigForm.get('credentials').get('caCertFileName').value"
+                         (fileNameChanged)="azureIotHubConfigForm.get('credentials').get('caCertFileName').setValue($event)"
+                         requiredAsError
+                         label="{{'tb.rulenode.azure-ca-cert' | translate}}"
+                         noFileText="tb.rulenode.no-file"
+                         dropLabel="{{'tb.rulenode.drop-file' | translate}}">
+          </tb-file-input>
+          <tb-file-input formControlName="cert"
+                         inputId="CertSelect"
+                         [existingFileName]="azureIotHubConfigForm.get('credentials').get('certFileName').value"
+                         (fileNameChanged)="azureIotHubConfigForm.get('credentials').get('certFileName').setValue($event)"
+                         required
+                         requiredAsError
+                         label="{{'tb.rulenode.cert' | translate}}"
+                         noFileText="tb.rulenode.no-file"
+                         dropLabel="{{'tb.rulenode.drop-file' | translate}}">
+          </tb-file-input>
+          <tb-file-input style="padding-bottom: 8px;"
+                         formControlName="privateKey"
+                         inputId="privateKeySelect"
+                         [existingFileName]="azureIotHubConfigForm.get('credentials').get('privateKeyFileName').value"
+                         (fileNameChanged)="azureIotHubConfigForm.get('credentials').get('privateKeyFileName').setValue($event)"
+                         required
+                         requiredAsError
+                         label="{{'tb.rulenode.private-key' | translate}}"
+                         noFileText="tb.rulenode.no-file"
+                         dropLabel="{{'tb.rulenode.drop-file' | translate}}">
+          </tb-file-input>
+          <mat-form-field class="mat-block">
+            <mat-label translate>tb.rulenode.private-key-password</mat-label>
+            <input type="password" matInput formControlName="password">
+          </mat-form-field>
+        </ng-template>
+      </section>
+    </section>
+  </mat-expansion-panel>
+</section>

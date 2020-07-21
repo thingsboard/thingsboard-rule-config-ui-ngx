@@ -27,6 +27,7 @@ import { RabbitMqConfigComponent } from './rabbit-mq-config.component';
 import { RestApiCallConfigComponent } from './rest-api-call-config.component';
 import { SendEmailConfigComponent } from './send-email-config.component';
 import { CheckPointConfigComponent } from './check-point-config.component';
+import { AzureIotHubConfigComponent } from './azure-iot-hub-config.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { CheckPointConfigComponent } from './check-point-config.component';
     RabbitMqConfigComponent,
     RestApiCallConfigComponent,
     SendEmailConfigComponent,
-    CheckPointConfigComponent
+    CheckPointConfigComponent,
+    AzureIotHubConfigComponent
   ],
   imports: [
     CommonModule,
@@ -86,7 +88,8 @@ import { CheckPointConfigComponent } from './check-point-config.component';
     RabbitMqConfigComponent,
     RestApiCallConfigComponent,
     SendEmailConfigComponent,
-    CheckPointConfigComponent
+    CheckPointConfigComponent,
+    AzureIotHubConfigComponent
   ]
 })
 export class RuleNodeCoreConfigActionModule {
