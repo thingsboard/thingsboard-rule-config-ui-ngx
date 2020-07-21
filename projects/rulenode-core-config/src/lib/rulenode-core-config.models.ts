@@ -124,6 +124,16 @@ export const mqttCredentialsTypeTranslations = new Map<MqttCredentialsType, stri
   ]
 );
 
+export type AzureIotHubCredentialsType = 'sas' | 'cert.PEM';
+export const azureIotHubCredentialsTypes: AzureIotHubCredentialsType[] = ['sas', 'cert.PEM'];
+
+export const azureIotHubCredentialsTypeTranslations = new Map<AzureIotHubCredentialsType, string>(
+  [
+    ['sas', 'tb.rulenode.credentials-sas'],
+    ['cert.PEM', 'tb.rulenode.credentials-pem']
+  ]
+);
+
 export enum HttpRequestType {
   GET = 'GET',
   POST = 'POST',
