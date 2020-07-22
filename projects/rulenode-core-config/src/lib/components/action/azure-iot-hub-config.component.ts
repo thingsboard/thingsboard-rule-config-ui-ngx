@@ -45,7 +45,8 @@ export class AzureIotHubConfigComponent extends RuleNodeConfigurationComponent {
           privateKey: [configuration && configuration.credentials ? configuration.credentials.privateKey : null, []],
           privateKeyFileName: [configuration && configuration.credentials ? configuration.credentials.privateKeyFileName : null, []],
           cert: [configuration && configuration.credentials ? configuration.credentials.cert : null, []],
-          certFileName: [configuration && configuration.credentials ? configuration.credentials.certFileName : null, []]
+          certFileName: [configuration && configuration.credentials ? configuration.credentials.certFileName : null, []],
+          password: [configuration && configuration.credentials ? configuration.credentials.password : null, []],
         }
       )
     });
@@ -58,6 +59,8 @@ export class AzureIotHubConfigComponent extends RuleNodeConfigurationComponent {
         configuration.credentials = {
           type: credentialsType,
           sasKey: configuration.credentials.sasKey,
+          caCert: configuration.credentials.caCert,
+          caCertFileName: configuration.credentials.caCertFileName
         };
         break;
       case 'cert.PEM':
@@ -77,8 +80,6 @@ export class AzureIotHubConfigComponent extends RuleNodeConfigurationComponent {
       credentialsControl.reset({ type: credentialsType }, {emitEvent: false});
     }
     credentialsControl.get('sasKey').setValidators([]);
-    credentialsControl.get('caCert').setValidators([]);
-    credentialsControl.get('caCertFileName').setValidators([]);
     credentialsControl.get('privateKey').setValidators([]);
     credentialsControl.get('privateKeyFileName').setValidators([]);
     credentialsControl.get('cert').setValidators([]);
@@ -95,8 +96,6 @@ export class AzureIotHubConfigComponent extends RuleNodeConfigurationComponent {
         break;
     }
     credentialsControl.get('sasKey').updateValueAndValidity({emitEvent});
-    credentialsControl.get('caCert').updateValueAndValidity({emitEvent});
-    credentialsControl.get('caCertFileName').updateValueAndValidity({emitEvent});
     credentialsControl.get('privateKey').updateValueAndValidity({emitEvent});
     credentialsControl.get('privateKeyFileName').updateValueAndValidity({emitEvent});
     credentialsControl.get('cert').updateValueAndValidity({emitEvent});
