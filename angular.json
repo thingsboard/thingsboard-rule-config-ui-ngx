@@ -33,5 +33,8 @@
       }
     }
   },
-  "defaultProject": "rulenode-core-config"
+  "defaultProject": "rulenode-core-config",
+  "cli": {
+    "analytics": "b87d6eec-2350-470c-8b85-c50dd4e38123"
+  }
 }

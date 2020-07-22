@@ -54,17 +54,13 @@ export class AzureIotHubConfigComponent extends RuleNodeConfigurationComponent {
 
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
     const credentialsType: AzureIotHubCredentialsType = configuration.credentials.type;
-    switch (credentialsType) {
-      case 'sas':
+      if (credentialsType === 'sas') {
         configuration.credentials = {
           type: credentialsType,
           sasKey: configuration.credentials.sasKey,
           caCert: configuration.credentials.caCert,
           caCertFileName: configuration.credentials.caCertFileName
         };
-        break;
-      case 'cert.PEM':
-        break;
     }
     return configuration;
   }
