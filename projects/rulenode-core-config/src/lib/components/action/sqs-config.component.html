@@ -26,7 +26,7 @@
     </mat-error>
   </mat-form-field>
   <label translate class="tb-title">tb.rulenode.message-attributes</label>
-  <div class="tb-hint" translate>tb.rulenode.message-attributes-hint</div>
+  <div class="tb-hint" innerHTML="{{ 'tb.rulenode.message-attributes-hint' | translate}}}"></div>
   <tb-kv-map-config
     required="false"
     formControlName="messageAttributes"

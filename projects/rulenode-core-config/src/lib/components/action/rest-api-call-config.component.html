@@ -76,7 +76,7 @@
     <mat-hint innerHTML="{{ 'tb.rulenode.max-parallel-requests-count-hint' | translate }}"></mat-hint>
   </mat-form-field>
   <label translate class="tb-title">tb.rulenode.headers</label>
-  <div class="tb-hint" translate>tb.rulenode.headers-hint</div>
+  <div class="tb-hint" innerHTML="{{ 'tb.rulenode.headers-hint' | translate }}"></div>
   <tb-kv-map-config
     required="false"
     formControlName="headers"
