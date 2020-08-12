@@ -20,6 +20,7 @@
              (matChipInputTokenEnd)="addKey($event, 'clientAttributeNames')"
              [matChipInputAddOnBlur]="true">
     </mat-chip-list>
+    <mat-hint innerHTML="{{ 'tb.rulenode.client-attributes-hint' | translate }}"></mat-hint>
   </mat-form-field>
   <label translate class="tb-title no-padding">tb.rulenode.shared-attributes</label>
   <mat-form-field floatLabel="always" class="mat-block">
@@ -38,6 +39,7 @@
              (matChipInputTokenEnd)="addKey($event, 'sharedAttributeNames')"
              [matChipInputAddOnBlur]="true">
     </mat-chip-list>
+    <mat-hint innerHTML="{{ 'tb.rulenode.shared-attributes-hint' | translate }}"></mat-hint>
   </mat-form-field>
   <label translate class="tb-title no-padding">tb.rulenode.server-attributes</label>
   <mat-form-field floatLabel="always" class="mat-block">
@@ -56,6 +58,7 @@
              (matChipInputTokenEnd)="addKey($event, 'serverAttributeNames')"
              [matChipInputAddOnBlur]="true">
     </mat-chip-list>
+    <mat-hint innerHTML="{{ 'tb.rulenode.server-attributes-hint' | translate }}"></mat-hint>
   </mat-form-field>
   <label translate class="tb-title no-padding">tb.rulenode.latest-timeseries</label>
   <mat-form-field floatLabel="always" class="mat-block">
@@ -74,6 +77,7 @@
              (matChipInputTokenEnd)="addKey($event, 'latestTsKeyNames')"
              [matChipInputAddOnBlur]="true">
     </mat-chip-list>
+    <mat-hint innerHTML="{{ 'tb.rulenode.latest-timeseries-hint' | translate }}"></mat-hint>
   </mat-form-field>
   <mat-checkbox formControlName="getLatestValueWithTs" style="padding-bottom: 16px;">
     {{ 'tb.rulenode.get-latest-value-with-ts' | translate }}
