@@ -4,7 +4,7 @@
   "scripts": {
     "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
     "cleanup": "rm -rf ./target",
-    "getthingsboard": "git clone --depth 1 -b feature/angular-10-migration git@github.com:thingsboard/thingsboard.git ./target/git-tmp/thingsboard",
+    "getthingsboard": "git clone --depth 1 git@github.com:thingsboard/thingsboard.git ./target/git-tmp/thingsboard",
     "ng": "ng",
     "start": "node --max_old_space_size=8048 ./node_modules/@angular/cli/bin/ng serve",
     "build": "ng build && node install.js",
