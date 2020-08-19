@@ -29,3 +29,11 @@ Configuration UI for ThingsBoard Rule Nodes
     Resulting **rulenode-core-config.js**
     should be copied to ```rule-engine/rule-engine-components/src/main/resources/public/static/rulenode/```
     directory of ThingsBoard repository.
+
+6) Run Rule Nodes UI in hot redeploy mode
+
+    ```
+    npm start
+    ```
+    
+    By default, Rule Nodes UI will be available on port 5000 (http://localhost:5000)
