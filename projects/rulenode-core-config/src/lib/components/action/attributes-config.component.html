@@ -7,4 +7,10 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <div *ngIf="attributesConfigForm.get('scope').value === 'SHARED_SCOPE'">
+    <mat-checkbox formControlName="notNotifyDevice">
+      {{ 'tb.rulenode.not-notify-device' | translate }}
+    </mat-checkbox>
+    <div class="tb-hint" style="padding-bottom: 16px;" translate>tb.rulenode.not-notify-device-hint</div>
+  </div>
 </section>
