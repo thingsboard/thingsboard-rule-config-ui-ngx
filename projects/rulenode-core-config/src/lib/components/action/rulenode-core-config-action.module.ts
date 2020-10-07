@@ -28,6 +28,7 @@ import { RestApiCallConfigComponent } from './rest-api-call-config.component';
 import { SendEmailConfigComponent } from './send-email-config.component';
 import { CheckPointConfigComponent } from './check-point-config.component';
 import { AzureIotHubConfigComponent } from './azure-iot-hub-config.component';
+import { DeviceProfileConfigComponent } from './device-profile-config.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { AzureIotHubConfigComponent } from './azure-iot-hub-config.component';
     RestApiCallConfigComponent,
     SendEmailConfigComponent,
     CheckPointConfigComponent,
-    AzureIotHubConfigComponent
+    AzureIotHubConfigComponent,
+    DeviceProfileConfigComponent
   ],
   imports: [
     CommonModule,
@@ -89,7 +91,8 @@ import { AzureIotHubConfigComponent } from './azure-iot-hub-config.component';
     RestApiCallConfigComponent,
     SendEmailConfigComponent,
     CheckPointConfigComponent,
-    AzureIotHubConfigComponent
+    AzureIotHubConfigComponent,
+    DeviceProfileConfigComponent
   ]
 })
 export class RuleNodeCoreConfigActionModule {
