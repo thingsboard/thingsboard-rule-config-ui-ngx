@@ -399,7 +399,9 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'charset-utf-16be': 'UTF-16BE',
           'charset-utf-16le': 'UTF-16LE',
           'charset-utf-16': 'UTF-16',
-          'select-queue-hint': 'The queue name can be selected from a drop-down list or add a custom name.'
+          'select-queue-hint': 'The queue name can be selected from a drop-down list or add a custom name.',
+          'persist-alarm-rules': 'Persist state of alarm rules',
+          'fetch-alarm-rules': 'Fetch state of alarm rules'
         },
         'key-val': {
           key: 'Key',

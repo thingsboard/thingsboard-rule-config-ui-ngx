@@ -1,0 +1,8 @@
+<section [formGroup]="deviceProfile" fxLayout="column">
+  <mat-checkbox fxFlex formControlName="persistAlarmRulesState" style="padding-bottom: 16px;">
+    {{ 'tb.rulenode.persist-alarm-rules' | translate }}
+  </mat-checkbox>
+  <mat-checkbox fxFlex formControlName="fetchAlarmRulesStateOnStart" style="padding-bottom: 16px;">
+    {{ 'tb.rulenode.fetch-alarm-rules' | translate }}
+  </mat-checkbox>
+</section>
