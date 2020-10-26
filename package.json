@@ -53,7 +53,7 @@
     "ngrx-store-freeze": "^0.2.4",
     "prettier": "^2.0.5",
     "protractor": "~7.0.0",
-    "rxjs": "~6.6.2",
+    "rxjs": "~6.6.3",
     "thingsboard": "file:./target/git-tmp/thingsboard/ui-ngx",
     "ts-node": "~8.10.2",
     "tslib": "^2.0.1",
