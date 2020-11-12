@@ -6,19 +6,19 @@ Configuration UI for ThingsBoard Rule Nodes
 
 1) Cleanup
     ```
-    npm run cleanup 
+    yarn run cleanup 
     ```
 2) Get ThingsBoard UI dependency
     ```
-    npm run getthingsboard 
+    yarn run getthingsboard 
     ```
 3) Install dependencies
     ```
-    npm install 
+    yarn install 
     ```
 4) Production build    
     ```
-    npm run build 
+    yarn run build 
     ```
     Resulting JavaScript should be here:
     ```
@@ -33,7 +33,7 @@ Configuration UI for ThingsBoard Rule Nodes
 6) Run Rule Nodes UI in hot redeploy mode
 
     ```
-    npm start
+    yarn start
     ```
     
     By default, Rule Nodes UI will be available on port 5000 (http://localhost:5000)
