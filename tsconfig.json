@@ -42,7 +42,10 @@
       "@core/*": ["node_modules/thingsboard/src/app/core/*"],
       "@shared/*": ["node_modules/thingsboard/src/app/shared/*"],
       "@modules/*": ["node_modules/thingsboard/src/app/modules/*"],
-      "@home/*": ["node_modules/thingsboard/src/app/modules/home/*"]
+      "@home/*": ["node_modules/thingsboard/src/app/modules/home/*"],
+      "ace": [
+        "node_modules/ace-builds/src-noconflict/ace.js"
+      ]
     }
   }
 }
