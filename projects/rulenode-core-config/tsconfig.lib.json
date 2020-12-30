@@ -5,6 +5,7 @@
     "target": "es5",
     "declaration": true,
     "inlineSources": true,
+    "module": "esnext",
     "types": ["node", "jquery", "flot", "tooltipster", "tinycolor2", "js-beautify", "jstree", "raphael", "canvas-gauges", "mousetrap"],
     "lib": [
       "dom",
