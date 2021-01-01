@@ -1,0 +1,70 @@
+<section [formGroup]="sendFcmConfigForm" fxLayout="column">
+  <mat-form-field class="mat-block">
+    <mat-label translate>tb.rulenode.fcm-title</mat-label>
+    <input required matInput formControlName="title">
+    <mat-error *ngIf="sendFcmConfigForm.get('title').hasError('required')">
+      {{ 'tb.rulenode.fcm-title-required' | translate }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="mat-block">
+    <mat-label translate>tb.rulenode.fcm-message</mat-label>
+    <input required matInput formControlName="message">
+    <mat-error *ngIf="sendFcmConfigForm.get('message').hasError('required')">
+      {{ 'tb.rulenode.fcm-message-required' | translate }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="mat-block">
+    <mat-label translate>tb.rulenode.fcm-target</mat-label>
+    <mat-select formControlName="targetType" required>
+      <mat-option value="TOPIC">{{'tb.rulenode.fcm-topic' | translate}}</mat-option>
+      <mat-option value="ALL_TENANT_ADMIN_USERS">{{'tb.rulenode.fcm-all-tenant-admin-users' | translate}}</mat-option>
+      <mat-option value="ALL_TENANT_USERS">{{'tb.rulenode.fcm-all-tenant-users' | translate}}</mat-option>
+      <mat-option value="ALL_CUSTOMER_USERS">{{'tb.rulenode.fcm-all-customer-users' | translate}}</mat-option>
+      <mat-option value="SINGLE_CUSTOMER_USER">{{'tb.rulenode.fcm-single-customer-user' | translate}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div
+    *ngIf="sendFcmConfigForm.get('targetType').value === 'ALL_CUSTOMER_USERS' || sendFcmConfigForm.get('targetType').value === 'SINGLE_CUSTOMER_USER'">
+    <tb-entity-autocomplete formControlName="customerId" labelText="tb.rulenode.fcm-customer" required
+      [entityType]="customerEntityType">
+    </tb-entity-autocomplete>
+  </div>
+  <mat-form-field class="mat-block"
+    *ngIf="sendFcmConfigForm.get('targetType').value === 'SINGLE_CUSTOMER_USER' && selectedCustomer.name != 'Public'">
+    <mat-label translate>tb.rulenode.fcm-customer-user</mat-label>
+    <mat-select formControlName="customerUserId" required (openedChange)="onCustomerSelectOpened($event)">
+      <mat-option *ngFor="let customerUser of customerUserList" [value]="customerUser.id.id">
+        {{ customerUser.firstName ? customerUser.firstName : ' '}}
+        {{ customerUser.lastName ? customerUser.lastName : ' '}} ( {{customerUser.name}} )
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="sendFcmConfigForm.get('customerUserId').hasError('required')">
+      {{ 'tb.rulenode.fcm-customer-user-required' | translate }}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="mat-block">
+    <mat-label translate>tb.rulenode.fcm-topic</mat-label>
+    <input required matInput formControlName="topic">
+    <mat-error *ngIf="sendFcmConfigForm.get('topic').hasError('required')">
+      {{ 'tb.rulenode.fcm-topic-required' | translate }}
+    </mat-error>
+    <mat-hint *ngIf="sendFcmConfigForm.get('targetType').value === 'ALL_TENANT_ADMIN_USERS'"
+      innerHTML="{{ 'tb.rulenode.fcm-all-tenant-admin-users-hint' | translate }}"></mat-hint>
+    <mat-hint *ngIf="sendFcmConfigForm.get('targetType').value === 'ALL_TENANT_USERS'"
+      innerHTML="{{ 'tb.rulenode.fcm-all-tenant-users-hint' | translate }}"></mat-hint>
+    <mat-hint *ngIf="sendFcmConfigForm.get('targetType').value === 'ALL_CUSTOMER_USERS'"
+      innerHTML="{{ 'tb.rulenode.fcm-customer-hint' | translate }}"></mat-hint>
+    <mat-hint *ngIf="sendFcmConfigForm.get('targetType').value === 'SINGLE_CUSTOMER_USER'"
+      innerHTML="{{ 'tb.rulenode.fcm-customer-user-hint' | translate }}"></mat-hint>
+  </mat-form-field>
+  <br>
+  <mat-checkbox formControlName="addMetadataKeyValues" style="padding-bottom: 16px;">
+    {{ 'tb.rulenode.fcm-add-metadata' | translate }}
+  </mat-checkbox>
+  <label translate class="tb-title">tb.rulenode.fcm-other-properties</label>
+  <div class="tb-hint" innerHTML="{{ 'tb.rulenode.fcm-other-properties-hint' | translate }}"></div>
+  <tb-kv-map-config required="false" formControlName="otherProperties" keyText="tb.rulenode.key"
+    keyRequiredText="tb.rulenode.key-required" valText="tb.rulenode.value" valRequiredText="tb.rulenode.value-required">
+  </tb-kv-map-config>
+</section>

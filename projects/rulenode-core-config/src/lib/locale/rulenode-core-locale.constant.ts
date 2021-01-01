@@ -1,4 +1,5 @@
 import { TranslateService } from '@ngx-translate/core';
+import { trTR } from './locale-tr.constants';
 
 export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService) {
 
@@ -410,7 +411,27 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'charset-utf-16': 'UTF-16',
           'select-queue-hint': 'The queue name can be selected from a drop-down list or add a custom name.',
           'persist-alarm-rules': 'Persist state of alarm rules',
-          'fetch-alarm-rules': 'Fetch state of alarm rules'
+          'fetch-alarm-rules': 'Fetch state of alarm rules',
+          'fcm-title' : 'Title',
+          'fcm-title-required' : 'Title is required',
+          'fcm-message' : 'Message body',
+          'fcm-message-required' : 'Message body is required',
+          'fcm-target': 'Target',
+          'fcm-target-required': 'Target is required',
+          'fcm-topic': 'Topic',
+          'fcm-all-tenant-admin-users': 'All tenant admin users',
+          'fcm-all-tenant-users': 'All tenant users',
+          'fcm-all-customer-users': 'All customer users',
+          'fcm-single-customer-user': 'Single customer user',
+          'fcm-customer': 'Customer',
+          'fcm-customer-user': 'Customer user',
+          'fcm-all-tenant-admin-users-hint': "All admin users of current tenant will be notified",
+          'fcm-all-tenant-users-hint': "All users of current tenant (tenant admin and customer users) will be notified",
+          'fcm-customer-hint': "All users of this customer will be notified",
+          'fcm-customer-user-hint': "A selected customer user will be notified",
+          'fcm-other-properties': 'Other data properties',
+          'fcm-other-properties-hint': 'You can add custom key values to notification data',
+          'fcm-add-metadata': 'Add metada to notification data'
         },
         'key-val': {
           key: 'Key',
@@ -421,4 +442,5 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
       }
     };
     translate.setTranslation('en_US', enUS, true);
+    translate.setTranslation('tr_TR', trTR, true);
 }
