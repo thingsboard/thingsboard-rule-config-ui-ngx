@@ -3,7 +3,7 @@ import { AppState } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MqttCredentialsType, mqttCredentialsTypes, mqttCredentialsTypeTranslations } from '../../rulenode-core-config.models';
+import { credentialsType, credentialsTypes, credentialsTypeTranslations } from '../../rulenode-core-config.models';
 
 @Component({
   selector: 'tb-action-node-mqtt-config',
@@ -14,8 +14,8 @@ export class MqttConfigComponent extends RuleNodeConfigurationComponent {
 
   mqttConfigForm: FormGroup;
 
-  allMqttCredentialsTypes = mqttCredentialsTypes;
-  mqttCredentialsTypeTranslationsMap = mqttCredentialsTypeTranslations;
+  allCredentialsTypes = credentialsTypes;
+  credentialsTypeTranslationsMap = credentialsTypeTranslations;
 
   constructor(protected store: Store<AppState>,
               private fb: FormBuilder) {
@@ -53,7 +53,7 @@ export class MqttConfigComponent extends RuleNodeConfigurationComponent {
   }
 
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
-    const credentialsType: MqttCredentialsType = configuration.credentials.type;
+    const credentialsType: credentialsType = configuration.credentials.type;
     switch (credentialsType) {
       case 'anonymous':
         configuration.credentials = {
@@ -80,7 +80,7 @@ export class MqttConfigComponent extends RuleNodeConfigurationComponent {
 
   protected updateValidators(emitEvent: boolean) {
     const credentialsControl = this.mqttConfigForm.get('credentials');
-    const credentialsType: MqttCredentialsType = credentialsControl.get('type').value;
+    const credentialsType: credentialsType = credentialsControl.get('type').value;
     if (emitEvent) {
       credentialsControl.reset({ type: credentialsType }, {emitEvent: false});
     }

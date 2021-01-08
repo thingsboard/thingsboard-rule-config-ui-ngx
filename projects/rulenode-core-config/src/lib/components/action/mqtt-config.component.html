@@ -56,15 +56,15 @@
     <mat-expansion-panel-header>
       <mat-panel-title translate>tb.rulenode.credentials</mat-panel-title>
       <mat-panel-description>
-        {{ mqttCredentialsTypeTranslationsMap.get(mqttConfigForm.get('credentials').get('type').value) | translate }}
+        {{ credentialsTypeTranslationsMap.get(mqttConfigForm.get('credentials').get('type').value) | translate }}
       </mat-panel-description>
     </mat-expansion-panel-header>
     <section formGroupName="credentials" fxLayout="column">
       <mat-form-field class="mat-block">
         <mat-label translate>tb.rulenode.credentials-type</mat-label>
         <mat-select formControlName="type" required>
-          <mat-option *ngFor="let credentialsType of allMqttCredentialsTypes" [value]="credentialsType">
-            {{ mqttCredentialsTypeTranslationsMap.get(credentialsType) | translate }}
+          <mat-option *ngFor="let credentialsType of allCredentialsTypes" [value]="credentialsType">
+            {{ credentialsTypeTranslationsMap.get(credentialsType) | translate }}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="mqttConfigForm.get('credentials').get('type').hasError('required')">

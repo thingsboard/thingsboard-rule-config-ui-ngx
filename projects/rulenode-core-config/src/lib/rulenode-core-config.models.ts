@@ -113,10 +113,10 @@ export const sqsQueueTypeTranslations = new Map<SqsQueueType, string>(
   ]
 );
 
-export type MqttCredentialsType = 'anonymous' | 'basic' | 'cert.PEM';
-export const mqttCredentialsTypes: MqttCredentialsType[] = ['anonymous', 'basic', 'cert.PEM'];
+export type credentialsType = 'anonymous' | 'basic' | 'cert.PEM';
+export const credentialsTypes: credentialsType[] = ['anonymous', 'basic', 'cert.PEM'];
 
-export const mqttCredentialsTypeTranslations = new Map<MqttCredentialsType, string>(
+export const credentialsTypeTranslations = new Map<credentialsType, string>(
   [
     ['anonymous', 'tb.rulenode.credentials-anonymous'],
     ['basic', 'tb.rulenode.credentials-basic'],
