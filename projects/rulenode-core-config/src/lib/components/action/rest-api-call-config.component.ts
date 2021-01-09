@@ -143,12 +143,13 @@ export class RestApiCallConfigComponent extends RuleNodeConfigurationComponent {
         credentialsControl.get('password').setValidators([Validators.required]);
         break;
       case 'cert.PEM':
-        credentialsControl.get('caCert').setValidators([Validators.required]);
-        credentialsControl.get('caCertFileName').setValidators([Validators.required]);
-        credentialsControl.get('privateKey').setValidators([Validators.required]);
-        credentialsControl.get('privateKeyFileName').setValidators([Validators.required]);
-        credentialsControl.get('cert').setValidators([Validators.required]);
-        credentialsControl.get('certFileName').setValidators([Validators.required]);
+        // TODO: Validator should check that or caCert or cert-key pair was specified.
+        // credentialsControl.get('caCert').setValidators([Validators.required]);
+        // credentialsControl.get('caCertFileName').setValidators([Validators.required]);
+        // credentialsControl.get('privateKey').setValidators([Validators.required]);
+        // credentialsControl.get('privateKeyFileName').setValidators([Validators.required]);
+        // credentialsControl.get('cert').setValidators([Validators.required]);
+        // credentialsControl.get('certFileName').setValidators([Validators.required]);
         break;
     }
     credentialsControl.get('username').updateValueAndValidity({emitEvent});

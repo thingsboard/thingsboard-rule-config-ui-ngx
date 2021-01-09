@@ -140,8 +140,6 @@
                          inputId="caCertSelect"
                          [existingFileName]="restApiCallConfigForm.get('credentials').get('caCertFileName').value"
                          (fileNameChanged)="restApiCallConfigForm.get('credentials').get('caCertFileName').setValue($event)"
-                         required
-                         requiredAsError
                          label="{{'tb.rulenode.ca-cert' | translate}}"
                          noFileText="tb.rulenode.no-file"
                          dropLabel="{{'tb.rulenode.drop-file' | translate}}">
@@ -150,8 +148,6 @@
                          inputId="CertSelect"
                          [existingFileName]="restApiCallConfigForm.get('credentials').get('certFileName').value"
                          (fileNameChanged)="restApiCallConfigForm.get('credentials').get('certFileName').setValue($event)"
-                         required
-                         requiredAsError
                          label="{{'tb.rulenode.cert' | translate}}"
                          noFileText="tb.rulenode.no-file"
                          dropLabel="{{'tb.rulenode.drop-file' | translate}}">
@@ -161,8 +157,6 @@
                          inputId="privateKeySelect"
                          [existingFileName]="restApiCallConfigForm.get('credentials').get('privateKeyFileName').value"
                          (fileNameChanged)="restApiCallConfigForm.get('credentials').get('privateKeyFileName').setValue($event)"
-                         required
-                         requiredAsError
                          label="{{'tb.rulenode.private-key' | translate}}"
                          noFileText="tb.rulenode.no-file"
                          dropLabel="{{'tb.rulenode.drop-file' | translate}}">
