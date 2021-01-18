@@ -3,7 +3,7 @@ import { AppState } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpRequestType, credentialsType, credentialsTypes, credentialsTypeTranslations } from '../../rulenode-core-config.models';
+import { HttpRequestType } from '../../rulenode-core-config.models';
 
 @Component({
   selector: 'tb-action-node-rest-api-call-config',
@@ -13,9 +13,6 @@ import { HttpRequestType, credentialsType, credentialsTypes, credentialsTypeTran
 export class RestApiCallConfigComponent extends RuleNodeConfigurationComponent {
 
   restApiCallConfigForm: FormGroup;
-
-  allCredentialsTypes = credentialsTypes;
-  credentialsTypeTranslationsMap = credentialsTypeTranslations;
 
   proxySchemes: string[] = ['http', 'https'];
 
@@ -49,46 +46,12 @@ export class RestApiCallConfigComponent extends RuleNodeConfigurationComponent {
       trimQueue: [configuration ? configuration.trimQueue : false, []],
       maxQueueSize: [configuration ? configuration.maxQueueSize : null, []],
       ssl: [configuration ? configuration.ssl : false, []],
-      credentials: this.fb.group(
-        {
-          type: [configuration && configuration.credentials ? configuration.credentials.type : null, [Validators.required]],
-          username: [configuration && configuration.credentials ? configuration.credentials.username : null, []],
-          password: [configuration && configuration.credentials ? configuration.credentials.password : null, []],
-          caCert: [configuration && configuration.credentials ? configuration.credentials.caCert : null, []],
-          caCertFileName: [configuration && configuration.credentials ? configuration.credentials.caCertFileName : null, []],
-          privateKey: [configuration && configuration.credentials ? configuration.credentials.privateKey : null, []],
-          privateKeyFileName: [configuration && configuration.credentials ? configuration.credentials.privateKeyFileName : null, []],
-          cert: [configuration && configuration.credentials ? configuration.credentials.cert : null, []],
-          certFileName: [configuration && configuration.credentials ? configuration.credentials.certFileName : null, []]
-        }
-      )
+      credentials: [configuration ? configuration.credentials : null, []]
     });
   }
 
-  protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
-    const credentialsType: credentialsType = configuration.credentials.type;
-    switch (credentialsType) {
-      case 'anonymous':
-        configuration.credentials = {
-          type: credentialsType
-        };
-        break;
-      case 'basic':
-        configuration.credentials = {
-          type: credentialsType,
-          username: configuration.credentials.username,
-          password: configuration.credentials.password,
-        };
-        break;
-      case 'cert.PEM':
-        delete configuration.credentials.username;
-        break;
-    }
-    return configuration;
-  }
-
   protected validatorTriggers(): string[] {
-    return ['useSimpleClientHttpFactory', 'useRedisQueueForMsgPersistence', 'enableProxy', 'useSystemProxyProperties', 'credentials.type'];
+    return ['useSimpleClientHttpFactory', 'useRedisQueueForMsgPersistence', 'enableProxy', 'useSystemProxyProperties'];
   }
 
   protected updateValidators(emitEvent: boolean) {
@@ -121,45 +84,6 @@ export class RestApiCallConfigComponent extends RuleNodeConfigurationComponent {
     this.restApiCallConfigForm.get('maxQueueSize').updateValueAndValidity({emitEvent});
     this.restApiCallConfigForm.get('proxyHost').updateValueAndValidity({emitEvent});
     this.restApiCallConfigForm.get('proxyPort').updateValueAndValidity({emitEvent});
-
-    const credentialsControl = this.restApiCallConfigForm.get('credentials');
-    const credentialsType: credentialsType = credentialsControl.get('type').value;
-    if (emitEvent) {
-      credentialsControl.reset({ type: credentialsType }, {emitEvent: false});
-    }
-    credentialsControl.get('username').setValidators([]);
-    credentialsControl.get('password').setValidators([]);
-    credentialsControl.get('caCert').setValidators([]);
-    credentialsControl.get('caCertFileName').setValidators([]);
-    credentialsControl.get('privateKey').setValidators([]);
-    credentialsControl.get('privateKeyFileName').setValidators([]);
-    credentialsControl.get('cert').setValidators([]);
-    credentialsControl.get('certFileName').setValidators([]);
-    switch (credentialsType) {
-      case 'anonymous':
-        break;
-      case 'basic':
-        credentialsControl.get('username').setValidators([Validators.required]);
-        credentialsControl.get('password').setValidators([Validators.required]);
-        break;
-      case 'cert.PEM':
-        // TODO: Validator should check that or caCert or cert-key pair was specified.
-        // credentialsControl.get('caCert').setValidators([Validators.required]);
-        // credentialsControl.get('caCertFileName').setValidators([Validators.required]);
-        // credentialsControl.get('privateKey').setValidators([Validators.required]);
-        // credentialsControl.get('privateKeyFileName').setValidators([Validators.required]);
-        // credentialsControl.get('cert').setValidators([Validators.required]);
-        // credentialsControl.get('certFileName').setValidators([Validators.required]);
-        break;
-    }
-    credentialsControl.get('username').updateValueAndValidity({emitEvent});
-    credentialsControl.get('password').updateValueAndValidity({emitEvent});
-    credentialsControl.get('caCert').updateValueAndValidity({emitEvent});
-    credentialsControl.get('caCertFileName').updateValueAndValidity({emitEvent});
-    credentialsControl.get('privateKey').updateValueAndValidity({emitEvent});
-    credentialsControl.get('privateKeyFileName').updateValueAndValidity({emitEvent});
-    credentialsControl.get('cert').updateValueAndValidity({emitEvent});
-    credentialsControl.get('certFileName').updateValueAndValidity({emitEvent});
-
+    this.restApiCallConfigForm.get('credentials').updateValueAndValidity({emitEvent});
   }
 }
