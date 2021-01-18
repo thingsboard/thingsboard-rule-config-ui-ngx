@@ -318,6 +318,15 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'proxy-user': 'Proxy user',
           'proxy-password': 'Proxy password',
           'proxy-scheme': 'Proxy scheme',
+          'numbers-to-template': 'Phone Numbers To Template',
+          'numbers-to-template-required': 'Phone Numbers To Template is required',
+          'numbers-to-template-hint': 'Comma separated Phone Numbers, use <code>${metaKeyName}</code>' +
+            ' to substitute variables from metadata',
+          'sms-message-template': 'SMS message Template',
+          'sms-message-template-required': 'SMS message Template is required',
+          'sms-message-template-hint': 'SMS message template, use <code>${metaKeyName}</code>' +
+            ' to substitute variables from metadata',
+          'use-system-sms-settings': 'Use system SMS provider settings',
           'min-period-0-seconds-message': 'Only 0 second minimum period is allowed.',
           'max-pending-messages': 'Maximum pending messages',
           'max-pending-messages-required': 'Maximum pending messages is required.',
