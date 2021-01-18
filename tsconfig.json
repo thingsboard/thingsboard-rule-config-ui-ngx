@@ -9,7 +9,7 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "allowUmdGlobalAccess": true,
-    "module": "es2015",
+    "module": "es2020",
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es5",
@@ -42,7 +42,22 @@
       "@core/*": ["node_modules/thingsboard/src/app/core/*"],
       "@shared/*": ["node_modules/thingsboard/src/app/shared/*"],
       "@modules/*": ["node_modules/thingsboard/src/app/modules/*"],
-      "@home/*": ["node_modules/thingsboard/src/app/modules/home/*"]
+      "@home/*": ["node_modules/thingsboard/src/app/modules/home/*"],
+      "ace": [
+        "node_modules/ace-builds/src-noconflict/ace.js"
+      ],
+      "jquery": [
+        "node_modules/jquery/dist/jquery.min.js"
+      ],
+      "jquery.terminal": [
+        "node_modules/jquery.terminal/js/jquery.terminal.js"
+      ],
+      "tooltipster": [
+        "node_modules/tooltipster/dist/js/tooltipster.bundle.min.js"
+      ],
+      "jstree": [
+        "node_modules/jstree/dist/jstree.min.js"
+      ]
     }
   }
 }
