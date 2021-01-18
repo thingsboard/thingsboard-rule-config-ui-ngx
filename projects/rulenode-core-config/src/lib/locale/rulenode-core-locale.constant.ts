@@ -257,6 +257,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'credentials-anonymous': 'Anonymous',
           'credentials-basic': 'Basic',
           'credentials-pem': 'PEM',
+          'credentials-pem-hint': 'At least Server CA certificate file or a pair of Client certificate and Client private key files are required',
           'credentials-sas': 'Shared Access Signature',
           'sas-key': 'SAS Key',
           'sas-key-required': 'SAS Key is required.',
