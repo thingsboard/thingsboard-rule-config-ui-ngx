@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '@shared/public-api';
+import { HomeComponentsModule } from '@home/components/public-api';
 import { AttributesConfigComponent } from './attributes-config.component';
 import { TimeseriesConfigComponent } from './timeseries-config.component';
 import { RpcRequestConfigComponent } from './rpc-request-config.component';
@@ -29,6 +30,7 @@ import { SendEmailConfigComponent } from './send-email-config.component';
 import { CheckPointConfigComponent } from './check-point-config.component';
 import { AzureIotHubConfigComponent } from './azure-iot-hub-config.component';
 import { DeviceProfileConfigComponent } from './device-profile-config.component';
+import { SendSmsConfigComponent } from './send-sms-config.component';
 
 @NgModule({
   declarations: [
@@ -58,11 +60,13 @@ import { DeviceProfileConfigComponent } from './device-profile-config.component'
     SendEmailConfigComponent,
     CheckPointConfigComponent,
     AzureIotHubConfigComponent,
-    DeviceProfileConfigComponent
+    DeviceProfileConfigComponent,
+    SendSmsConfigComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
+    HomeComponentsModule,
     RulenodeCoreConfigCommonModule
   ],
   exports: [
@@ -92,7 +96,8 @@ import { DeviceProfileConfigComponent } from './device-profile-config.component'
     SendEmailConfigComponent,
     CheckPointConfigComponent,
     AzureIotHubConfigComponent,
-    DeviceProfileConfigComponent
+    DeviceProfileConfigComponent,
+    SendSmsConfigComponent
   ]
 })
 export class RuleNodeCoreConfigActionModule {
