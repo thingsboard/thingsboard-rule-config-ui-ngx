@@ -45,7 +45,6 @@ export class RestApiCallConfigComponent extends RuleNodeConfigurationComponent {
       useRedisQueueForMsgPersistence: [configuration ? configuration.useRedisQueueForMsgPersistence : false, []],
       trimQueue: [configuration ? configuration.trimQueue : false, []],
       maxQueueSize: [configuration ? configuration.maxQueueSize : null, []],
-      ssl: [configuration ? configuration.ssl : false, []],
       credentials: [configuration ? configuration.credentials : null, []]
     });
   }
