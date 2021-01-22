@@ -6,13 +6,15 @@ import { KvMapConfigComponent } from './kv-map-config.component';
 import { DeviceRelationsQueryConfigComponent } from './device-relations-query-config.component';
 import { RelationsQueryConfigComponent } from './relations-query-config.component';
 import { MessageTypesConfigComponent } from './message-types-config.component';
+import { CredentialsConfigComponent } from './credentials-config.component';
 
 @NgModule({
   declarations: [
     KvMapConfigComponent,
     DeviceRelationsQueryConfigComponent,
     RelationsQueryConfigComponent,
-    MessageTypesConfigComponent
+    MessageTypesConfigComponent,
+    CredentialsConfigComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { MessageTypesConfigComponent } from './message-types-config.component';
     KvMapConfigComponent,
     DeviceRelationsQueryConfigComponent,
     RelationsQueryConfigComponent,
-    MessageTypesConfigComponent
+    MessageTypesConfigComponent,
+    CredentialsConfigComponent
   ]
 })
 export class RulenodeCoreConfigCommonModule {

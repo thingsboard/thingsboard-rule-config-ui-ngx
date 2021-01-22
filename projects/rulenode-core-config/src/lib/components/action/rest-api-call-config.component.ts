@@ -44,7 +44,8 @@ export class RestApiCallConfigComponent extends RuleNodeConfigurationComponent {
       headers: [configuration ? configuration.headers : null, []],
       useRedisQueueForMsgPersistence: [configuration ? configuration.useRedisQueueForMsgPersistence : false, []],
       trimQueue: [configuration ? configuration.trimQueue : false, []],
-      maxQueueSize: [configuration ? configuration.maxQueueSize : null, []]
+      maxQueueSize: [configuration ? configuration.maxQueueSize : null, []],
+      credentials: [configuration ? configuration.credentials : null, []]
     });
   }
 
@@ -82,5 +83,6 @@ export class RestApiCallConfigComponent extends RuleNodeConfigurationComponent {
     this.restApiCallConfigForm.get('maxQueueSize').updateValueAndValidity({emitEvent});
     this.restApiCallConfigForm.get('proxyHost').updateValueAndValidity({emitEvent});
     this.restApiCallConfigForm.get('proxyPort').updateValueAndValidity({emitEvent});
+    this.restApiCallConfigForm.get('credentials').updateValueAndValidity({emitEvent});
   }
 }
