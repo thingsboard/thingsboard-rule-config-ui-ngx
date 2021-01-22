@@ -97,5 +97,5 @@
       <input type="number" step="1" min="0" matInput formControlName="maxQueueSize">
     </mat-form-field>
   </div>
-  <tb-credentials-config formControlName="credentials"></tb-credentials-config>
+  <tb-credentials-config formControlName="credentials" [disableCertPemCredentials]="restApiCallConfigForm.get('useSimpleClientHttpFactory').value"></tb-credentials-config>
 </section>

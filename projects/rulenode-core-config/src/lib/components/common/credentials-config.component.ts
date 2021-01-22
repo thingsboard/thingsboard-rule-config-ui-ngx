@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, forwardRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import {
   ControlValueAccessor,
   FormBuilder, FormControl,
@@ -47,7 +47,7 @@ interface CredentialsConfig {
     }
   ]
 })
-export class CredentialsConfigComponent extends PageComponent implements ControlValueAccessor, OnInit, Validator, OnDestroy {
+export class CredentialsConfigComponent extends PageComponent implements ControlValueAccessor, OnInit, Validator, OnDestroy, OnChanges {
 
   credentialsConfigFormGroup: FormGroup;
 
@@ -61,6 +61,9 @@ export class CredentialsConfigComponent extends PageComponent implements Control
   set required(value: boolean) {
     this.requiredValue = coerceBooleanProperty(value);
   }
+
+  @Input()
+  disableCertPemCredentials = false;
 
   allCredentialsTypes = credentialsTypes;
   credentialsTypeTranslationsMap = credentialsTypeTranslations;
@@ -98,6 +101,22 @@ export class CredentialsConfigComponent extends PageComponent implements Control
     );
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    for (const propName of Object.keys(changes)) {
+      const change = changes[propName];
+      if (!change.firstChange && change.currentValue !== change.previousValue) {
+        if (change.currentValue && propName === 'disableCertPemCredentials') {
+          const credentialsTypeValue: credentialsType = this.credentialsConfigFormGroup.get('type').value;
+          if (credentialsTypeValue === 'cert.PEM') {
+            setTimeout(() => {
+              this.credentialsConfigFormGroup.get('type').patchValue('anonymous', {emitEvent: true});
+            });
+          }
+        }
+      }
+    }
+  }
+
   ngOnDestroy() {
     this.subscriptions.forEach(s => s.unsubscribe());
   }
@@ -120,16 +139,16 @@ export class CredentialsConfigComponent extends PageComponent implements Control
 
   updateView() {
     let credentialsConfigValue = this.credentialsConfigFormGroup.value;
-    const credentialsType: credentialsType = credentialsConfigValue.type;
-    switch (credentialsType) {
+    const credentialsTypeValue: credentialsType = credentialsConfigValue.type;
+    switch (credentialsTypeValue) {
       case 'anonymous':
         credentialsConfigValue = {
-          type: credentialsType
+          type: credentialsTypeValue
         };
         break;
       case 'basic':
         credentialsConfigValue = {
-          type: credentialsType,
+          type: credentialsTypeValue,
           username: credentialsConfigValue.username,
           password: credentialsConfigValue.password,
         };
@@ -171,14 +190,14 @@ export class CredentialsConfigComponent extends PageComponent implements Control
   }
 
   protected updateValidators(emitEvent: boolean = false) {
-    const credentialsType: credentialsType = this.credentialsConfigFormGroup.get('type').value;
+    const credentialsTypeValue: credentialsType = this.credentialsConfigFormGroup.get('type').value;
     if (emitEvent) {
-      this.credentialsConfigFormGroup.reset({ type: credentialsType }, {emitEvent: false});
+      this.credentialsConfigFormGroup.reset({ type: credentialsTypeValue }, {emitEvent: false});
     }
     this.credentialsConfigFormGroup.setValidators([]);
     this.credentialsConfigFormGroup.get('username').setValidators([]);
     this.credentialsConfigFormGroup.get('password').setValidators([]);
-    switch (credentialsType) {
+    switch (credentialsTypeValue) {
       case 'anonymous':
         break;
       case 'basic':
