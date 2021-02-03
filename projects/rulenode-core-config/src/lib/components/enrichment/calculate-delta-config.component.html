@@ -1,0 +1,47 @@
+<section [formGroup]="calculateDeltaConfigForm" fxLayout="column">
+  <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="8px">
+    <mat-form-field class="mat-block" fxFlex="100" fxFlex.gt-sm="38">
+      <mat-label translate>tb.rulenode.input-value-key</mat-label>
+      <input required matInput formControlName="inputValueKey">
+      <mat-error *ngIf="calculateDeltaConfigForm.get('inputValueKey').hasError('required')">
+        {{ 'tb.rulenode.input-value-key-required' | translate }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="mat-block" fxFlex="100" fxFlex.gt-sm="38">
+      <mat-label translate>tb.rulenode.output-value-key</mat-label>
+      <input required matInput formControlName="outputValueKey">
+      <mat-error *ngIf="calculateDeltaConfigForm.get('outputValueKey').hasError('required')">
+        {{ 'tb.rulenode.output-value-key-required' | translate }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="mat-block" fxFlex="100" fxFlex.gt-sm="24">
+      <mat-label translate>tb.rulenode.round</mat-label>
+      <input type="number" min="0" max="15" step="1" matInput formControlName="round">
+      <mat-error *ngIf="calculateDeltaConfigForm.get('round').hasError('min')">
+        {{ 'tb.rulenode.round-range' | translate }}
+      </mat-error>
+      <mat-error *ngIf="calculateDeltaConfigForm.get('round').hasError('max')">
+        {{ 'tb.rulenode.round-range' | translate }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <mat-checkbox formControlName="useCache" style="padding-bottom: 16px;">
+    {{ 'tb.rulenode.use-cache' | translate }}
+  </mat-checkbox>
+  <mat-checkbox formControlName="tellFailureIfInputValueKeyIsAbsent" style="padding-bottom: 16px;">
+    {{ 'tb.rulenode.tell-failure-if-input-value-key-is-absent' | translate }}
+  </mat-checkbox>
+  <mat-checkbox formControlName="tellFailureIfDeltaIsNegative" style="padding-bottom: 16px;">
+    {{ 'tb.rulenode.tell-failure-if-delta-is-negative' | translate }}
+  </mat-checkbox>
+  <mat-checkbox formControlName="addPeriodBetweenMsgs" style="padding-bottom: 16px;">
+    {{ 'tb.rulenode.add-period-between-msgs' | translate }}
+  </mat-checkbox>
+  <mat-form-field class="mat-block" *ngIf="calculateDeltaConfigForm.get('addPeriodBetweenMsgs').value">
+    <mat-label translate>tb.rulenode.period-value-key</mat-label>
+    <input required matInput formControlName="periodValueKey">
+    <mat-error *ngIf="calculateDeltaConfigForm.get('periodValueKey').hasError('required')">
+      {{ 'tb.rulenode.period-value-key-required' | translate }}
+    </mat-error>
+  </mat-form-field>
+</section>
