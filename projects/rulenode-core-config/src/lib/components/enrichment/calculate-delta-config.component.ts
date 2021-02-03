@@ -45,9 +45,6 @@ export class CalculateDeltaConfigComponent extends RuleNodeConfigurationComponen
     } else {
       this.calculateDeltaConfigForm.get('periodValueKey').setValidators([]);
     }
-    this.calculateDeltaConfigForm.get('inputValueKey').updateValueAndValidity({emitEvent});
-    this.calculateDeltaConfigForm.get('outputValueKey').updateValueAndValidity({emitEvent});
-    this.calculateDeltaConfigForm.get('round').updateValueAndValidity({emitEvent});
     this.calculateDeltaConfigForm.get('periodValueKey').updateValueAndValidity({emitEvent});
   }
 
