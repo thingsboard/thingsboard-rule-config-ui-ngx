@@ -411,7 +411,19 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'charset-utf-16': 'UTF-16',
           'select-queue-hint': 'The queue name can be selected from a drop-down list or add a custom name.',
           'persist-alarm-rules': 'Persist state of alarm rules',
-          'fetch-alarm-rules': 'Fetch state of alarm rules'
+          'fetch-alarm-rules': 'Fetch state of alarm rules',
+          'input-value-key': 'Input value key',
+          'input-value-key-required': 'Input value key is required.',
+          'output-value-key': 'Output value key',
+          'output-value-key-required': 'Output value key is required.',
+          round: 'Decimals',
+          'round-range': 'Decimals should be in a range from 0 to 15.',
+          'use-cache': 'Use cache for latest value',
+          'tell-failure-if-input-value-key-is-absent': 'Tell Failure if input value key is absent',
+          'tell-failure-if-delta-is-negative': 'Tell Failure if delta is negative',
+          'add-period-between-msgs': 'Add period between messages',
+          'period-value-key': 'Period value key',
+          'period-key-required': 'Period value key is required.'
         },
         'key-val': {
           key: 'Key',

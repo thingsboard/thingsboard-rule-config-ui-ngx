@@ -1,7 +1,7 @@
 <section fxLayout="column" class="tb-kv-map-config" [formGroup]="kvListFormGroup">
   <div class="header" fxFlex fxLayout="row" fxLayoutGap="8px">
-    <span class="cell" fxFlex translate>{{ keyText }}</span>
-    <span class="cell" fxFlex translate>{{ valText }}</span>
+    <span class="cell" fxFlex>{{ keyText | translate }}</span>
+    <span class="cell" fxFlex>{{ valText | translate }}</span>
     <span [fxShow]="!disabled" style="width: 52px;" innerHTML="&nbsp"></span>
   </div>
   <div class="body">

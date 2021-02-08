@@ -10,6 +10,7 @@ import { OriginatorFieldsConfigComponent } from './originator-fields-config.comp
 import { GetTelemetryFromDatabaseConfigComponent } from './get-telemetry-from-database-config.component';
 import { RelatedAttributesConfigComponent } from './related-attributes-config.component';
 import { TenantAttributesConfigComponent } from './tenant-attributes-config.component';
+import { CalculateDeltaConfigComponent } from './calculate-delta-config.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TenantAttributesConfigComponent } from './tenant-attributes-config.comp
     OriginatorFieldsConfigComponent,
     GetTelemetryFromDatabaseConfigComponent,
     RelatedAttributesConfigComponent,
-    TenantAttributesConfigComponent
+    TenantAttributesConfigComponent,
+    CalculateDeltaConfigComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { TenantAttributesConfigComponent } from './tenant-attributes-config.comp
     OriginatorFieldsConfigComponent,
     GetTelemetryFromDatabaseConfigComponent,
     RelatedAttributesConfigComponent,
-    TenantAttributesConfigComponent
+    TenantAttributesConfigComponent,
+    CalculateDeltaConfigComponent
   ]
 })
 export class RulenodeCoreConfigEnrichmentModule {
