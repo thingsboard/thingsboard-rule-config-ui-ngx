@@ -1,10 +1,11 @@
 <section [formGroup]="kafkaConfigForm" fxLayout="column">
-  <mat-form-field class="mat-block">
+  <mat-form-field class="mat-block" style="padding-bottom: 8px;">
     <mat-label translate>tb.rulenode.topic-pattern</mat-label>
     <input required matInput formControlName="topicPattern">
     <mat-error *ngIf="kafkaConfigForm.get('topicPattern').hasError('required')">
       {{ 'tb.rulenode.topic-pattern-required' | translate }}
     </mat-error>
+    <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
   <mat-form-field class="mat-block">
     <mat-label translate>tb.rulenode.bootstrap-servers</mat-label>

@@ -5,7 +5,7 @@
     <mat-error *ngIf="unassignCustomerConfigForm.get('customerNamePattern').hasError('required')">
       {{ 'tb.rulenode.customer-name-pattern-required' | translate }}
     </mat-error>
-    <mat-hint innerHTML="{{ 'tb.rulenode.customer-name-pattern-hint' | translate }}"></mat-hint>
+    <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
   <mat-form-field class="mat-block" style="padding-bottom: 16px;">
     <mat-label translate>tb.rulenode.customer-cache-expiration</mat-label>
@@ -16,6 +16,6 @@
     <mat-error *ngIf="unassignCustomerConfigForm.get('customerCacheExpiration').hasError('min')">
       {{ 'tb.rulenode.customer-cache-expiration-range' | translate }}
     </mat-error>
-    <mat-hint innerHTML="{{ 'tb.rulenode.customer-cache-expiration-hint' | translate }}"></mat-hint>
+    <mat-hint translate>tb.rulenode.customer-cache-expiration-hint</mat-hint>
   </mat-form-field>
 </section>

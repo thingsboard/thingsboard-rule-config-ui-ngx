@@ -1,6 +1,6 @@
 <section [formGroup]="getTelemetryFromDatabaseConfigForm" fxLayout="column">
   <label translate class="tb-title no-padding">tb.rulenode.latest-timeseries</label>
-  <mat-form-field floatLabel="always" class="mat-block">
+  <mat-form-field floatLabel="always" class="mat-block" style="padding-bottom: 16px;">
     <mat-label></mat-label>
     <mat-chip-list #latestTimeseriesChipList>
       <mat-chip
@@ -16,7 +16,7 @@
              (matChipInputTokenEnd)="addKey($event, 'latestTsKeyNames')"
              [matChipInputAddOnBlur]="true">
     </mat-chip-list>
-    <mat-hint innerHTML="{{ 'tb.rulenode.latest-timeseries-hint' | translate }}"></mat-hint>
+    <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
   <mat-form-field class="mat-block" style="padding-bottom: 16px;">
     <mat-label translate>tb.rulenode.fetch-mode</mat-label>
@@ -43,7 +43,7 @@
       <mat-hint translate>tb.rulenode.limit-hint</mat-hint>
     </mat-form-field>
   </div>
-  <mat-checkbox formControlName="useMetadataIntervalPatterns">
+  <mat-checkbox formControlName="useMetadataIntervalPatterns" style="padding-bottom: 8px;">
     {{ 'tb.rulenode.use-metadata-interval-patterns' | translate }}
   </mat-checkbox>
   <div class="tb-hint" style="padding-bottom: 16px;" translate>tb.rulenode.use-metadata-interval-patterns-hint</div>
@@ -102,7 +102,7 @@
       <mat-error *ngIf="getTelemetryFromDatabaseConfigForm.get('startIntervalPattern').hasError('required')">
         {{ 'tb.rulenode.start-interval-pattern-required' | translate }}
       </mat-error>
-      <mat-hint innerHTML="{{ 'tb.rulenode.start-interval-pattern-hint' | translate }}"></mat-hint>
+      <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
     </mat-form-field>
     <mat-form-field class="mat-block" style="padding-bottom: 16px;">
       <mat-label translate>tb.rulenode.end-interval-pattern</mat-label>
@@ -110,7 +110,7 @@
       <mat-error *ngIf="getTelemetryFromDatabaseConfigForm.get('endIntervalPattern').hasError('required')">
         {{ 'tb.rulenode.end-interval-pattern-required' | translate }}
       </mat-error>
-      <mat-hint innerHTML="{{ 'tb.rulenode.end-interval-pattern-hint' | translate }}"></mat-hint>
+      <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
     </mat-form-field>
   </ng-template>
 </section>

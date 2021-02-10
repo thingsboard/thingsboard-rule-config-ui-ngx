@@ -17,6 +17,6 @@
     <mat-error *ngIf="clearAlarmConfigForm.get('alarmType').hasError('required')">
       {{ 'tb.rulenode.alarm-type-required' | translate }}
     </mat-error>
-    <mat-hint innerHTML="{{ 'tb.rulenode.entity-type-pattern-hint' | translate }}"></mat-hint>
+    <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
 </section>

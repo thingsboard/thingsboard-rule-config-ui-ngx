@@ -21,7 +21,7 @@
       <mat-error *ngIf="msgDelayConfigForm.get('periodInSecondsPattern').hasError('required')">
         {{ 'tb.rulenode.period-in-seconds-pattern-required' | translate }}
       </mat-error>
-      <mat-hint innerHTML="{{ 'tb.rulenode.period-in-seconds-pattern-hint' | translate }}"></mat-hint>
+      <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
     </mat-form-field>
   </ng-template>
   <mat-form-field class="mat-block">

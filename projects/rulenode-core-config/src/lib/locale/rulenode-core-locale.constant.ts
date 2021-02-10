@@ -9,10 +9,8 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'create-entity-if-not-exists-hint': 'Create a new entity set above if it does not exist.',
           'entity-name-pattern': 'Name pattern',
           'entity-name-pattern-required': 'Name pattern is required',
-          'entity-name-pattern-hint': 'Name pattern, use <code>${metaKeyName}</code> to substitute variables from metadata',
           'entity-type-pattern': 'Type pattern',
           'entity-type-pattern-required': 'Type pattern is required',
-          'entity-type-pattern-hint': 'Type pattern, use <code>${metaKeyName}</code> to substitute variables from metadata',
           'entity-cache-expiration': 'Entities cache expiration time (sec)',
           'entity-cache-expiration-hint':
             'Specifies maximum time interval allowed to store found entity records. 0 value means that records will never expire.',
@@ -22,7 +20,6 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'customer-name-pattern-required': 'Customer name pattern is required',
           'create-customer-if-not-exists': 'Create new customer if not exists',
           'customer-cache-expiration': 'Customers cache expiration time (sec)',
-          'customer-name-pattern-hint': 'Customer name pattern, use <code>${metaKeyName}</code> to substitute variables from metadata',
           'customer-cache-expiration-hint':
             'Specifies maximum time interval allowed to store found customer records. 0 value means that records will never expire.',
           'customer-cache-expiration-required': 'Customers cache expiration time is required.',
@@ -56,22 +53,17 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'create-new-message-type': 'Create a new one!',
           'message-types-required': 'Message types are required.',
           'client-attributes': 'Client attributes',
-          'client-attributes-hint': 'Client attributes, use <code>${metaKeyName}</code> to substitute variables from metadata',
           'shared-attributes': 'Shared attributes',
-          'shared-attributes-hint': 'Shared attributes, use <code>${metaKeyName}</code> to substitute variables from metadata',
           'server-attributes': 'Server attributes',
-          'server-attributes-hint': 'Server attributes, use <code>${metaKeyName}</code> to substitute variables from metadata',
           'notify-device': 'Notify Device',
           'notify-device-hint': 'If the message arrives from the device, we will push it back to the device by default.',
           'latest-timeseries': 'Latest timeseries',
-          'latest-timeseries-hint': 'Latest timeseries, use <code>${metaKeyName}</code> to substitute variables from metadata',
           'data-keys': 'Message data',
           'metadata-keys': 'Message metadata',
           'relations-query': 'Relations query',
           'device-relations-query': 'Device relations query',
           'max-relation-level': 'Max relation level',
           'relation-type-pattern': 'Relation type pattern',
-          'relation-type-pattern-hint': 'Relation type pattern, use <code>${metaKeyName}</code> to substitute variables from metadata',
           'relation-type-pattern-required': 'Relation type pattern is required',
           'relation-types-list': 'Relation types to propagate',
           'relation-types-list-hint': 'If Propagate relation types are not selected, ' +
@@ -105,14 +97,12 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'min-message-count-message': 'Only 0 minimum message count is allowed.',
           'period-seconds': 'Period in seconds',
           'period-seconds-required': 'Period is required.',
-          'use-metadata-period-in-seconds-patterns': 'Use metadata period in seconds pattern',
+          'use-metadata-period-in-seconds-patterns': 'Use period in seconds pattern',
           'use-metadata-period-in-seconds-patterns-hint':
-            'If selected, rule node use period in seconds interval pattern from message metadata ' +
+            'If selected, rule node use period in seconds interval pattern from message metadata or data ' +
             'assuming that intervals are in the seconds.',
-          'period-in-seconds-pattern': 'Period in seconds metadata pattern',
+          'period-in-seconds-pattern': 'Period in seconds pattern',
           'period-in-seconds-pattern-required': 'Period in seconds pattern is required',
-          'period-in-seconds-pattern-hint':
-            'Period in seconds pattern, use <code>${metaKeyName}</code> to substitute variables from metadata',
           'min-period-seconds-message': 'Only 1 second minimum period is allowed.',
           originator: 'Originator',
           'message-body': 'Message body',
@@ -143,26 +133,24 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'test-to-string-function': 'Test to string function',
           'from-template': 'From Template',
           'from-template-required': 'From Template is required',
-          'from-template-hint': 'From address template, use <code>${metaKeyName}</code> to substitute variables from metadata',
           'to-template': 'To Template',
           'to-template-required': 'To Template is required',
           'mail-address-list-template-hint':
-            'Comma separated address list, use <code>${metaKeyName}</code> to substitute variables from metadata',
+            'Comma separated address list, use <code><span style="color: #000;">$&#123;</span>metadataKey<span style="color: #000;">' +
+            '&#125;</span></code> for value from metadata, <code><span style="color: #000;">$[</span>messageKey' +
+            '<span style="color: #000;">]</span></code> for value from message body',
           'cc-template': 'Cc Template',
           'bcc-template': 'Bcc Template',
           'subject-template': 'Subject Template',
           'subject-template-required': 'Subject Template is required',
-          'subject-template-hint': 'Mail subject template, use <code>${metaKeyName}</code> to substitute variables from metadata',
           'body-template': 'Body Template',
           'body-template-required': 'Body Template is required',
-          'body-template-hint': 'Mail body template, use <code>${metaKeyName}</code> to substitute variables from metadata',
           'request-id-metadata-attribute': 'Request Id Metadata attribute name',
           'timeout-sec': 'Timeout in seconds',
           'timeout-required': 'Timeout is required',
           'min-timeout-message': 'Only 0 minimum timeout value is allowed.',
           'endpoint-url-pattern': 'Endpoint URL pattern',
           'endpoint-url-pattern-required': 'Endpoint URL pattern is required',
-          'endpoint-url-pattern-hint': 'HTTP URL address pattern, use <code>${metaKeyName}</code> to substitute variables from metadata',
           'request-method': 'Request method',
           'use-simple-client-http-factory': 'Use simple client HTTP factory',
           'read-timeout': 'Read timeout in millis',
@@ -170,14 +158,15 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'max-parallel-requests-count': 'Max number of parallel requests',
           'max-parallel-requests-count-hint': 'The value of 0 specifies no limit in parallel processing',
           headers: 'Headers',
-          'headers-hint': 'Use <code>${metaKeyName}</code> in header/value fields to substitute variables from metadata',
+          'headers-hint': 'Use <code><span style="color: #000;">$&#123;</span>metadataKey<span style="color: #000;">&#125;</span></code> ' +
+            'for value from metadata, <code><span style="color: #000;">$[</span>messageKey<span style="color: #000;">]</span></code> ' +
+            'for value from message body in header/value fields',
           header: 'Header',
           'header-required': 'Header is required',
           value: 'Value',
           'value-required': 'Value is required',
           'topic-pattern': 'Topic pattern',
           'topic-pattern-required': 'Topic pattern is required',
-          'mqtt-topic-pattern-hint': 'MQTT topic pattern, use <code>${metaKeyName}</code> to substitute variables from metadata',
           topic: 'Topic',
           'topic-required': 'Topic is required',
           'bootstrap-servers': 'Bootstrap servers',
@@ -200,7 +189,6 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'value-serializer-required': 'Value serializer is required',
           'topic-arn-pattern': 'Topic ARN pattern',
           'topic-arn-pattern-required': 'Topic ARN pattern is required',
-          'topic-arn-pattern-hint': 'Topic ARN pattern, use <code>${metaKeyName}</code> to substitute variables from metadata',
           'aws-access-key-id': 'AWS Access Key ID',
           'aws-access-key-id-required': 'AWS Access Key ID is required',
           'aws-secret-access-key': 'AWS Secret Access Key',
@@ -226,7 +214,6 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'client-properties': 'Client properties',
           'queue-url-pattern': 'Queue URL pattern',
           'queue-url-pattern-required': 'Queue URL pattern is required',
-          'queue-url-pattern-hint': 'Queue URL pattern, use <code>${metaKeyName}</code> to substitute variables from metadata',
           'delay-seconds': 'Delay (seconds)',
           'min-delay-seconds-message': 'Only 0 seconds minimum value is allowed.',
           'max-delay-seconds-message': 'Only 900 seconds maximum value is allowed.',
@@ -242,7 +229,9 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'pubsub-topic-name': 'Topic name',
           'pubsub-topic-name-required': 'Topic name is required',
           'message-attributes': 'Message attributes',
-          'message-attributes-hint': 'Use <code>${metaKeyName}</code> in name/value fields to substitute variables from metadata',
+          'message-attributes-hint': 'Use <code><span style="color: #000;">$&#123;</span>metadataKey<span style="color: #000;">&#125;</span></code> ' +
+                        'for value from metadata, <code><span style="color: #000;">$[</span>messageKey<span style="color: #000;">]</span></code> ' +
+                        'for value from message body in name/value fields',
           'connect-timeout': 'Connection timeout (sec)',
           'connect-timeout-required': 'Connection timeout is required.',
           'connect-timeout-range': 'Connection timeout should be in a range from 1 to 200.',
@@ -273,9 +262,9 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'drop-file': 'Drop a file or click to select a file to upload.',
           'private-key-password': 'Private key password',
           'use-system-smtp-settings': 'Use system SMTP settings',
-          'use-metadata-interval-patterns': 'Use metadata interval patterns',
+          'use-metadata-interval-patterns': 'Use interval patterns',
           'use-metadata-interval-patterns-hint':
-            'If selected, rule node use start and end interval patterns from message metadata ' +
+            'If selected, rule node use start and end interval patterns from message metadata or data ' +
             'assuming that intervals are in the milliseconds.',
           'use-message-alarm-data': 'Use message alarm data',
           'check-all-keys': 'Check that all selected keys are present',
@@ -295,8 +284,6 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'end-interval-pattern': 'End interval pattern',
           'start-interval-pattern-required': 'Start interval pattern is required',
           'end-interval-pattern-required': 'End interval pattern is required',
-          'start-interval-pattern-hint': 'Start interval pattern, use <code>${metaKeyName}</code> to substitute variables from metadata',
-          'end-interval-pattern-hint': 'End interval pattern, use <code>${metaKeyName}</code> to substitute variables from metadata',
           'smtp-protocol': 'Protocol',
           'smtp-host': 'SMTP host',
           'smtp-host-required': 'SMTP host is required.',
@@ -321,12 +308,11 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'proxy-scheme': 'Proxy scheme',
           'numbers-to-template': 'Phone Numbers To Template',
           'numbers-to-template-required': 'Phone Numbers To Template is required',
-          'numbers-to-template-hint': 'Comma separated Phone Numbers, use <code>${metaKeyName}</code>' +
-            ' to substitute variables from metadata',
+          'numbers-to-template-hint': 'Comma separated Phone Numbers, use <code><span style="color: #000;">$&#123;</span>' +
+            'metadataKey<span style="color: #000;">&#125;</span></code> for value from metadata, <code><span style="color: #000;">' +
+            '$[</span>messageKey<span style="color: #000;">]</span></code> for value from message body',
           'sms-message-template': 'SMS message Template',
           'sms-message-template-required': 'SMS message Template is required',
-          'sms-message-template-hint': 'SMS message template, use <code>${metaKeyName}</code>' +
-            ' to substitute variables from metadata',
           'use-system-sms-settings': 'Use system SMS provider settings',
           'min-period-0-seconds-message': 'Only 0 second minimum period is allowed.',
           'max-pending-messages': 'Maximum pending messages',
@@ -423,7 +409,10 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'tell-failure-if-delta-is-negative': 'Tell Failure if delta is negative',
           'add-period-between-msgs': 'Add period between messages',
           'period-value-key': 'Period value key',
-          'period-key-required': 'Period value key is required.'
+          'period-key-required': 'Period value key is required.',
+          'general-pattern-hint': 'Hint: use <code><span style="color: #000;">$&#123;</span>metadataKey<span style="color: #000;">&#125;</span></code> ' +
+            'for value from metadata, <code><span style="color: #000;">$[</span>messageKey<span style="color: #000;">]</span></code> ' +
+            'for value from message body'
         },
         'key-val': {
           key: 'Key',

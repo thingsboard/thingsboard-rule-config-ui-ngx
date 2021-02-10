@@ -14,23 +14,23 @@
       required
       formControlName="entityType">
     </tb-entity-type-select>
-    <mat-form-field *ngIf="createRelationConfigForm.get('entityType').value" fxFlex class="mat-block" style="padding-bottom: 32px;">
+    <mat-form-field *ngIf="createRelationConfigForm.get('entityType').value" fxFlex class="mat-block" style="padding-bottom: 40px;">
       <mat-label translate>tb.rulenode.entity-name-pattern</mat-label>
       <input required matInput formControlName="entityNamePattern">
       <mat-error *ngIf="createRelationConfigForm.get('entityNamePattern').hasError('required')">
         {{ 'tb.rulenode.entity-name-pattern-required' | translate }}
       </mat-error>
-      <mat-hint innerHTML="{{ 'tb.rulenode.entity-name-pattern-hint' | translate }}"></mat-hint>
+      <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
     </mat-form-field>
     <mat-form-field *ngIf="createRelationConfigForm.get('entityType').value === entityType.DEVICE ||
                            createRelationConfigForm.get('entityType').value === entityType.ASSET"
-                    fxFlex class="mat-block" style="padding-bottom: 32px;">
+                    fxFlex class="mat-block" style="padding-bottom: 40px;">
       <mat-label translate>tb.rulenode.entity-type-pattern</mat-label>
       <input required matInput formControlName="entityTypePattern">
       <mat-error *ngIf="createRelationConfigForm.get('entityTypePattern').hasError('required')">
         {{ 'tb.rulenode.entity-type-pattern-required' | translate }}
       </mat-error>
-      <mat-hint innerHTML="{{ 'tb.rulenode.entity-type-pattern-hint' | translate }}"></mat-hint>
+      <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
     </mat-form-field>
   </div>
   <mat-form-field class="mat-block" style="padding-bottom: 16px;">
@@ -39,7 +39,7 @@
     <mat-error *ngIf="createRelationConfigForm.get('relationType').hasError('required')">
       {{ 'tb.rulenode.relation-type-pattern-required' | translate }}
     </mat-error>
-    <mat-hint innerHTML="{{ 'tb.rulenode.relation-type-pattern-hint' | translate }}"></mat-hint>
+    <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
   <section *ngIf="createRelationConfigForm.get('entityType').value === entityType.CUSTOMER ||
                   createRelationConfigForm.get('entityType').value === entityType.DEVICE ||
@@ -66,6 +66,6 @@
     <mat-error *ngIf="createRelationConfigForm.get('entityCacheExpiration').hasError('min')">
       {{ 'tb.rulenode.entity-cache-expiration-range' | translate }}
     </mat-error>
-    <mat-hint innerHTML="{{ 'tb.rulenode.entity-cache-expiration-hint' | translate }}"></mat-hint>
+    <mat-hint translate>tb.rulenode.entity-cache-expiration-hint</mat-hint>
   </mat-form-field>
 </section>

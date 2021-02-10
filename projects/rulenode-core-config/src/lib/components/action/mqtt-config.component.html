@@ -5,7 +5,7 @@
     <mat-error *ngIf="mqttConfigForm.get('topicPattern').hasError('required')">
       {{ 'tb.rulenode.topic-pattern-required' | translate }}
     </mat-error>
-    <mat-hint innerHTML="{{ 'tb.rulenode.mqtt-topic-pattern-hint' | translate }}"></mat-hint>
+    <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
   <div fxFlex fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="8px">
     <mat-form-field fxFlex="60" class="mat-block">
