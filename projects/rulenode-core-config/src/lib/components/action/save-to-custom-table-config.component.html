@@ -5,7 +5,7 @@
     <mat-error *ngIf="saveToCustomTableConfigForm.get('tableName').hasError('required')">
       {{ 'tb.rulenode.custom-table-name-required' | translate }}
     </mat-error>
-    <mat-hint innerHTML="{{ 'tb.rulenode.custom-table-hint' | translate }}"></mat-hint>
+    <mat-hint translate>tb.rulenode.custom-table-hint</mat-hint>
   </mat-form-field>
   <label translate class="tb-title tb-required">tb.rulenode.fields-mapping</label>
   <tb-kv-map-config

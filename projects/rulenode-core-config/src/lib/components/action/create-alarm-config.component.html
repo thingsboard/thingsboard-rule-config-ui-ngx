@@ -16,15 +16,15 @@
   </mat-checkbox>
   <section fxLayout="column" *ngIf="createAlarmConfigForm.get('useMessageAlarmData').value === false">
     <section fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="8px">
-      <mat-form-field fxFlex class="mat-block" style="padding-bottom: 16px;">
+      <mat-form-field fxFlex style="padding-bottom: 32px;">
         <mat-label translate>tb.rulenode.alarm-type</mat-label>
         <input required matInput formControlName="alarmType">
         <mat-error *ngIf="createAlarmConfigForm.get('alarmType').hasError('required')">
           {{ 'tb.rulenode.alarm-type-required' | translate }}
         </mat-error>
-        <mat-hint innerHTML="{{ 'tb.rulenode.entity-type-pattern-hint' | translate }}"></mat-hint>
+        <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
       </mat-form-field>
-      <mat-form-field fxFlex class="mat-block">
+      <mat-form-field fxFlex>
         <mat-label translate>tb.rulenode.alarm-severity</mat-label>
         <mat-select formControlName="severity" required>
           <mat-option *ngFor="let severity of alarmSeverities" [value]="severity">
@@ -40,7 +40,7 @@
       {{ 'tb.rulenode.propagate' | translate }}
     </mat-checkbox>
     <section *ngIf="createAlarmConfigForm.get('propagate').value === true">
-      <mat-form-field floatLabel="always" class="mat-block">
+      <mat-form-field floatLabel="always" class="mat-block" style="padding-bottom: 16px;">
         <mat-label translate>tb.rulenode.relation-types-list</mat-label>
         <mat-chip-list #relationTypesChipList>
           <mat-chip
@@ -56,7 +56,7 @@
                  (matChipInputTokenEnd)="addKey($event, 'relationTypes')"
                  [matChipInputAddOnBlur]="true">
         </mat-chip-list>
-        <mat-hint innerHTML="{{ 'tb.rulenode.relation-types-list-hint' | translate }}"></mat-hint>
+        <mat-hint translate>tb.rulenode.relation-types-list-hint</mat-hint>
       </mat-form-field>
     </section>
   </section>

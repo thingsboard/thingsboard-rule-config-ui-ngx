@@ -5,7 +5,7 @@
     <mat-error *ngIf="restApiCallConfigForm.get('restEndpointUrlPattern').hasError('required')">
       {{ 'tb.rulenode.endpoint-url-pattern-required' | translate }}
     </mat-error>
-    <mat-hint innerHTML="{{ 'tb.rulenode.endpoint-url-pattern-hint' | translate }}"></mat-hint>
+    <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
   <mat-form-field class="mat-block">
     <mat-label translate>tb.rulenode.request-method</mat-label>
@@ -68,15 +68,15 @@
                   style="padding-bottom: 16px;">
     <mat-label translate>tb.rulenode.read-timeout</mat-label>
     <input type="number" step="1" min="0" matInput formControlName="readTimeoutMs">
-    <mat-hint innerHTML="{{ 'tb.rulenode.read-timeout-hint' | translate }}"></mat-hint>
+    <mat-hint translate>tb.rulenode.read-timeout-hint</mat-hint>
   </mat-form-field>
   <mat-form-field class="mat-block" style="padding-bottom: 16px;">
     <mat-label translate>tb.rulenode.max-parallel-requests-count</mat-label>
     <input type="number" step="1" min="0" matInput formControlName="maxParallelRequestsCount">
-    <mat-hint innerHTML="{{ 'tb.rulenode.max-parallel-requests-count-hint' | translate }}"></mat-hint>
+    <mat-hint translate>tb.rulenode.max-parallel-requests-count-hint</mat-hint>
   </mat-form-field>
   <label translate class="tb-title">tb.rulenode.headers</label>
-  <div class="tb-hint" innerHTML="{{ 'tb.rulenode.headers-hint' | translate }}"></div>
+  <div class="tb-hint" [innerHTML]="'tb.rulenode.headers-hint' | translate | safeHtml"></div>
   <tb-kv-map-config
     required="false"
     formControlName="headers"

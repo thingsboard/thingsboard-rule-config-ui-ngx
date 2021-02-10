@@ -1,10 +1,10 @@
 <section [formGroup]="originatorAttributesConfigForm" fxLayout="column">
-  <mat-checkbox fxFlex formControlName="tellFailureIfAbsent" style="padding-bottom: 16px;">
+  <mat-checkbox fxFlex formControlName="tellFailureIfAbsent" style="padding-bottom: 8px;">
     {{ 'tb.rulenode.tell-failure-if-absent' | translate }}
   </mat-checkbox>
   <div class="tb-hint" translate>tb.rulenode.tell-failure-if-absent-hint</div>
   <label translate class="tb-title no-padding">tb.rulenode.client-attributes</label>
-  <mat-form-field floatLabel="always" class="mat-block">
+  <mat-form-field floatLabel="always" class="mat-block" style="padding-bottom: 16px;">
     <mat-label></mat-label>
     <mat-chip-list #clientAttributesChipList>
       <mat-chip
@@ -20,10 +20,10 @@
              (matChipInputTokenEnd)="addKey($event, 'clientAttributeNames')"
              [matChipInputAddOnBlur]="true">
     </mat-chip-list>
-    <mat-hint innerHTML="{{ 'tb.rulenode.client-attributes-hint' | translate }}"></mat-hint>
+    <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
   <label translate class="tb-title no-padding">tb.rulenode.shared-attributes</label>
-  <mat-form-field floatLabel="always" class="mat-block">
+  <mat-form-field floatLabel="always" class="mat-block" style="padding-bottom: 16px;">
     <mat-label></mat-label>
     <mat-chip-list #sharedAttributesChipList>
       <mat-chip
@@ -39,10 +39,10 @@
              (matChipInputTokenEnd)="addKey($event, 'sharedAttributeNames')"
              [matChipInputAddOnBlur]="true">
     </mat-chip-list>
-    <mat-hint innerHTML="{{ 'tb.rulenode.shared-attributes-hint' | translate }}"></mat-hint>
+    <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
   <label translate class="tb-title no-padding">tb.rulenode.server-attributes</label>
-  <mat-form-field floatLabel="always" class="mat-block">
+  <mat-form-field floatLabel="always" class="mat-block" style="padding-bottom: 16px;">
     <mat-label></mat-label>
     <mat-chip-list #serverAttributesChipList>
       <mat-chip
@@ -58,10 +58,10 @@
              (matChipInputTokenEnd)="addKey($event, 'serverAttributeNames')"
              [matChipInputAddOnBlur]="true">
     </mat-chip-list>
-    <mat-hint innerHTML="{{ 'tb.rulenode.server-attributes-hint' | translate }}"></mat-hint>
+    <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
   <label translate class="tb-title no-padding">tb.rulenode.latest-timeseries</label>
-  <mat-form-field floatLabel="always" class="mat-block">
+  <mat-form-field floatLabel="always" class="mat-block" style="padding-bottom: 16px;">
     <mat-label></mat-label>
     <mat-chip-list #latestTimeseriesChipList>
       <mat-chip
@@ -77,10 +77,10 @@
              (matChipInputTokenEnd)="addKey($event, 'latestTsKeyNames')"
              [matChipInputAddOnBlur]="true">
     </mat-chip-list>
-    <mat-hint innerHTML="{{ 'tb.rulenode.latest-timeseries-hint' | translate }}"></mat-hint>
+    <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
-  <mat-checkbox formControlName="getLatestValueWithTs" style="padding-bottom: 16px;">
+  <mat-checkbox formControlName="getLatestValueWithTs" style="padding-bottom: 8px;">
     {{ 'tb.rulenode.get-latest-value-with-ts' | translate }}
   </mat-checkbox>
-  <div class="tb-hint" innerHTML="{{ 'tb.rulenode.get-latest-value-with-ts-hint' | translate }}"></div>
+  <div class="tb-hint" translate>tb.rulenode.get-latest-value-with-ts-hint</div>
 </section>

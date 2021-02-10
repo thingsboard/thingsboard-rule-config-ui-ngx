@@ -24,7 +24,7 @@
                  dropLabel="{{'tb.rulenode.drop-file' | translate}}">
   </tb-file-input>
   <label translate class="tb-title">tb.rulenode.message-attributes</label>
-  <div class="tb-hint" innerHTML="{{ 'tb.rulenode.message-attributes-hint' | translate}}"></div>
+  <div class="tb-hint" [innerHTML]="'tb.rulenode.message-attributes-hint' | translate | safeHtml"></div>
   <tb-kv-map-config
     required="false"
     formControlName="messageAttributes"

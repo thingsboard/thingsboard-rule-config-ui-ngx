@@ -5,7 +5,7 @@
     <mat-error *ngIf="toEmailConfigForm.get('fromTemplate').hasError('required')">
       {{ 'tb.rulenode.from-template-required' | translate }}
     </mat-error>
-    <mat-hint innerHTML="{{ 'tb.rulenode.from-template-hint' | translate }}"></mat-hint>
+    <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
   <mat-form-field class="mat-block" style="padding-bottom: 16px;">
     <mat-label translate>tb.rulenode.to-template</mat-label>
@@ -13,25 +13,25 @@
     <mat-error *ngIf="toEmailConfigForm.get('toTemplate').hasError('required')">
       {{ 'tb.rulenode.to-template-required' | translate }}
     </mat-error>
-    <mat-hint innerHTML="{{ 'tb.rulenode.mail-address-list-template-hint' | translate }}"></mat-hint>
+    <mat-hint [innerHTML]="'tb.rulenode.mail-address-list-template-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
-  <mat-form-field class="mat-block" style="padding-bottom: 16px;">
+  <mat-form-field class="mat-block" style="padding-bottom: 24px;">
     <mat-label translate>tb.rulenode.cc-template</mat-label>
     <textarea matInput formControlName="ccTemplate" rows="2"></textarea>
-    <mat-hint innerHTML="{{ 'tb.rulenode.mail-address-list-template-hint' | translate }}"></mat-hint>
+    <mat-hint [innerHTML]="'tb.rulenode.mail-address-list-template-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
-  <mat-form-field class="mat-block" style="padding-bottom: 16px;">
+  <mat-form-field class="mat-block" style="padding-bottom: 24px;">
     <mat-label translate>tb.rulenode.bcc-template</mat-label>
     <textarea matInput formControlName="bccTemplate" rows="2"></textarea>
-    <mat-hint innerHTML="{{ 'tb.rulenode.mail-address-list-template-hint' | translate }}"></mat-hint>
+    <mat-hint [innerHTML]="'tb.rulenode.mail-address-list-template-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
-  <mat-form-field class="mat-block" style="padding-bottom: 16px;">
+  <mat-form-field class="mat-block" style="padding-bottom: 24px;">
     <mat-label translate>tb.rulenode.subject-template</mat-label>
     <textarea required matInput formControlName="subjectTemplate" rows="2"></textarea>
     <mat-error *ngIf="toEmailConfigForm.get('subjectTemplate').hasError('required')">
       {{ 'tb.rulenode.subject-template-required' | translate }}
     </mat-error>
-    <mat-hint innerHTML="{{ 'tb.rulenode.subject-template-hint' | translate }}"></mat-hint>
+    <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
   <mat-form-field class="mat-block" style="padding-bottom: 16px;">
     <mat-label translate>tb.rulenode.body-template</mat-label>
@@ -39,6 +39,6 @@
     <mat-error *ngIf="toEmailConfigForm.get('bodyTemplate').hasError('required')">
       {{ 'tb.rulenode.body-template-required' | translate }}
     </mat-error>
-    <mat-hint innerHTML="{{ 'tb.rulenode.body-template-hint' | translate }}"></mat-hint>
+    <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
 </section>
