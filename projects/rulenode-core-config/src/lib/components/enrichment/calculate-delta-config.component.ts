@@ -33,7 +33,6 @@ export class CalculateDeltaConfigComponent extends RuleNodeConfigurationComponen
       addPeriodBetweenMsgs: [configuration ? configuration.addPeriodBetweenMsgs : false, []],
       periodValueKey: [configuration ? configuration.periodValueKey : null, []],
       round: [configuration ? configuration.round : null, [Validators.min(0), Validators.max(15)]],
-      tellFailureIfInputValueKeyIsAbsent: [configuration ? configuration.tellFailureIfInputValueKeyIsAbsent : null, []],
       tellFailureIfDeltaIsNegative: [configuration ? configuration.tellFailureIfDeltaIsNegative : null, []]
     });
   }
