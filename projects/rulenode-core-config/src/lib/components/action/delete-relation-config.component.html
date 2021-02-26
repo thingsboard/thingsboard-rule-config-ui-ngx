@@ -21,7 +21,8 @@
     <mat-form-field *ngIf="deleteRelationConfigForm.get('entityType').value" fxFlex class="mat-block" style="padding-bottom: 32px;">
       <mat-label translate>tb.rulenode.entity-name-pattern</mat-label>
       <input required matInput formControlName="entityNamePattern">
-      <mat-error *ngIf="deleteRelationConfigForm.get('entityNamePattern').hasError('required')">
+      <mat-error *ngIf="deleteRelationConfigForm.get('entityNamePattern').hasError('required') ||
+                        deleteRelationConfigForm.get('entityNamePattern').hasError('pattern')">
         {{ 'tb.rulenode.entity-name-pattern-required' | translate }}
       </mat-error>
       <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>

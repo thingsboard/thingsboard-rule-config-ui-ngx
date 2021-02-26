@@ -54,12 +54,12 @@ export class CreateRelationConfigComponent extends RuleNodeConfigurationComponen
   protected updateValidators(emitEvent: boolean) {
     const entityType: EntityType = this.createRelationConfigForm.get('entityType').value;
     if (entityType) {
-      this.createRelationConfigForm.get('entityNamePattern').setValidators([Validators.required]);
+      this.createRelationConfigForm.get('entityNamePattern').setValidators([Validators.required, Validators.pattern(/.*\S.*/)]);
     } else {
       this.createRelationConfigForm.get('entityNamePattern').setValidators([]);
     }
     if (entityType && (entityType === EntityType.DEVICE || entityType === EntityType.ASSET)) {
-      this.createRelationConfigForm.get('entityTypePattern').setValidators([Validators.required]);
+      this.createRelationConfigForm.get('entityTypePattern').setValidators([Validators.required, Validators.pattern(/.*\S.*/)]);
     } else {
       this.createRelationConfigForm.get('entityTypePattern').setValidators([]);
     }
@@ -67,4 +67,9 @@ export class CreateRelationConfigComponent extends RuleNodeConfigurationComponen
     this.createRelationConfigForm.get('entityTypePattern').updateValueAndValidity({emitEvent});
   }
 
+  protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    configuration.entityNamePattern = configuration.entityNamePattern ? configuration.entityNamePattern.trim() : null;
+    configuration.entityTypePattern = configuration.entityTypePattern ? configuration.entityTypePattern.trim() : null;
+    return configuration;
+  }
 }

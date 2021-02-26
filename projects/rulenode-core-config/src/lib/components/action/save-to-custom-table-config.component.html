@@ -2,7 +2,8 @@
   <mat-form-field class="mat-block" style="padding-bottom: 16px;">
     <mat-label translate>tb.rulenode.custom-table-name</mat-label>
     <input required matInput formControlName="tableName">
-    <mat-error *ngIf="saveToCustomTableConfigForm.get('tableName').hasError('required')">
+    <mat-error *ngIf="saveToCustomTableConfigForm.get('tableName').hasError('required') ||
+                      saveToCustomTableConfigForm.get('tableName').hasError('pattern')">
       {{ 'tb.rulenode.custom-table-name-required' | translate }}
     </mat-error>
     <mat-hint translate>tb.rulenode.custom-table-hint</mat-hint>
