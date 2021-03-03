@@ -17,7 +17,8 @@
     <mat-form-field *ngIf="createRelationConfigForm.get('entityType').value" fxFlex class="mat-block" style="padding-bottom: 40px;">
       <mat-label translate>tb.rulenode.entity-name-pattern</mat-label>
       <input required matInput formControlName="entityNamePattern">
-      <mat-error *ngIf="createRelationConfigForm.get('entityNamePattern').hasError('required')">
+      <mat-error *ngIf="createRelationConfigForm.get('entityNamePattern').hasError('required') ||
+                        createRelationConfigForm.get('entityNamePattern').hasError('pattern')">
         {{ 'tb.rulenode.entity-name-pattern-required' | translate }}
       </mat-error>
       <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
@@ -27,7 +28,8 @@
                     fxFlex class="mat-block" style="padding-bottom: 40px;">
       <mat-label translate>tb.rulenode.entity-type-pattern</mat-label>
       <input required matInput formControlName="entityTypePattern">
-      <mat-error *ngIf="createRelationConfigForm.get('entityTypePattern').hasError('required')">
+      <mat-error *ngIf="createRelationConfigForm.get('entityTypePattern').hasError('required') ||
+                        createRelationConfigForm.get('entityTypePattern').hasError('pattern')">
         {{ 'tb.rulenode.entity-type-pattern-required' | translate }}
       </mat-error>
       <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>

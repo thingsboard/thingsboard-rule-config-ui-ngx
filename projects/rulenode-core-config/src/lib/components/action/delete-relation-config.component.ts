@@ -57,7 +57,7 @@ export class DeleteRelationConfigComponent extends RuleNodeConfigurationComponen
       this.deleteRelationConfigForm.get('entityType').setValidators([]);
     }
     if (deleteForSingleEntity && entityType) {
-      this.deleteRelationConfigForm.get('entityNamePattern').setValidators([Validators.required]);
+      this.deleteRelationConfigForm.get('entityNamePattern').setValidators([Validators.required, Validators.pattern(/.*\S.*/)]);
     } else {
       this.deleteRelationConfigForm.get('entityNamePattern').setValidators([]);
     }
@@ -65,4 +65,8 @@ export class DeleteRelationConfigComponent extends RuleNodeConfigurationComponen
     this.deleteRelationConfigForm.get('entityNamePattern').updateValueAndValidity({emitEvent});
   }
 
+  protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    configuration.entityNamePattern = configuration.entityNamePattern ? configuration.entityNamePattern.trim() : null;
+    return configuration;
+  }
 }

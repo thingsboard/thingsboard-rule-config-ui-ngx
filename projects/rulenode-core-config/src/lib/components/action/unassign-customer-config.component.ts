@@ -24,8 +24,13 @@ export class UnassignCustomerConfigComponent extends RuleNodeConfigurationCompon
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.unassignCustomerConfigForm = this.fb.group({
-      customerNamePattern: [configuration ? configuration.customerNamePattern : null, [Validators.required]],
+      customerNamePattern: [configuration ? configuration.customerNamePattern : null, [Validators.required, Validators.pattern(/.*\S.*/)]],
       customerCacheExpiration: [configuration ? configuration.customerCacheExpiration : null, [Validators.required, Validators.min(0)]]
     });
+  }
+
+  protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    configuration.customerNamePattern = configuration.customerNamePattern.trim();
+    return configuration;
   }
 }

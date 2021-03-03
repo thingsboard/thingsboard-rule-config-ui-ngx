@@ -2,7 +2,8 @@
   <mat-form-field class="mat-block" style="padding-bottom: 16px;">
     <mat-label translate>tb.rulenode.customer-name-pattern</mat-label>
     <input required matInput formControlName="customerNamePattern">
-    <mat-error *ngIf="unassignCustomerConfigForm.get('customerNamePattern').hasError('required')">
+    <mat-error *ngIf="unassignCustomerConfigForm.get('customerNamePattern').hasError('required') ||
+                      unassignCustomerConfigForm.get('customerNamePattern').hasError('pattern')">
       {{ 'tb.rulenode.customer-name-pattern-required' | translate }}
     </mat-error>
     <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
