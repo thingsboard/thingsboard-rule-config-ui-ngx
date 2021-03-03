@@ -405,7 +405,6 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           round: 'Decimals',
           'round-range': 'Decimals should be in a range from 0 to 15.',
           'use-cache': 'Use cache for latest value',
-          'tell-failure-if-input-value-key-is-absent': 'Tell Failure if input value key is absent',
           'tell-failure-if-delta-is-negative': 'Tell Failure if delta is negative',
           'add-period-between-msgs': 'Add period between messages',
           'period-value-key': 'Period value key',
