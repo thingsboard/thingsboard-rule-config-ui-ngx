@@ -23,7 +23,7 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
 
   samplingOrders = Object.keys(SamplingOrder);
 
-  timeUnits = Object.keys(TimeUnit);
+  timeUnits = Object.values(TimeUnit);
   timeUnitsTranslationMap = timeUnitTranslations;
 
   constructor(protected store: Store<AppState>,
