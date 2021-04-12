@@ -267,6 +267,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
             'If selected, rule node use start and end interval patterns from message metadata or data ' +
             'assuming that intervals are in the milliseconds.',
           'use-message-alarm-data': 'Use message alarm data',
+          'use-dynamically-change-the-severity-of-alar':'Use dynamically change the severity of alarm',
           'check-all-keys': 'Check that all selected keys are present',
           'check-all-keys-hint': 'If selected, checks that all specified keys are present in the message data and metadata.',
           'check-relation-to-specific-entity': 'Check relation to specific entity',
@@ -411,7 +412,10 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'period-key-required': 'Period value key is required.',
           'general-pattern-hint': 'Hint: use <code><span style="color: #000;">$&#123;</span>metadataKey<span style="color: #000;">&#125;</span></code> ' +
             'for value from metadata, <code><span style="color: #000;">$[</span>messageKey<span style="color: #000;">]</span></code> ' +
-            'for value from message body'
+            'for value from message body',
+          'alarm-severity-pattern-hint': 'Hint: use <code><span style="color: #000;">$&#123;</span>metadataKey<span style="color: #000;">&#125;</span></code> ' +
+            'for value from metadata, <code><span style="color: #000;">$[</span>messageKey<span style="color: #000;">]</span></code> ' +
+            'for value from message body. Alarm severity should be system (CRITICAL, MAJOR etc.)'
         },
         'key-val': {
           key: 'Key',
