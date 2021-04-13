@@ -47,11 +47,11 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
       severity: [configuration ? configuration.severity : null, []],
       propagate: [configuration ? configuration.propagate : false, []],
       relationTypes: [configuration ? configuration.relationTypes : null, []],
-      metadataSeverityCheck: false
+      dynamicSeverity: false
     });
 
-    this.createAlarmConfigForm.get('metadataSeverityCheck').valueChanges.subscribe((metadataSeverityCheck) => {
-      if(metadataSeverityCheck){
+    this.createAlarmConfigForm.get('dynamicSeverity').valueChanges.subscribe((dynamicSeverity) => {
+      if(dynamicSeverity){
         this.createAlarmConfigForm.get('severity').patchValue('',{emitEvent:false});
       } else {
         this.createAlarmConfigForm.get('severity').patchValue(this.alarmSeverities[0],{emitEvent:false});
