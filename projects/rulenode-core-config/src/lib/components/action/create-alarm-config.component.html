@@ -11,9 +11,14 @@
       {{ 'tb.rulenode.test-details-function' | translate }}
     </button>
   </div>
-  <mat-checkbox formControlName="useMessageAlarmData" style="padding-bottom: 16px;">
-    {{ 'tb.rulenode.use-message-alarm-data' | translate }}
-  </mat-checkbox>
+  <div fxLayout="column" fxLayout.gt-sm="row">
+    <mat-checkbox formControlName="useMessageAlarmData" style="padding-bottom: 16px; flex: 1;">
+      {{ 'tb.rulenode.use-message-alarm-data' | translate }}
+    </mat-checkbox>
+    <mat-checkbox  *ngIf="createAlarmConfigForm.get('useMessageAlarmData').value === false" formControlName="dynamicSeverity" style="padding-bottom: 16px; flex: 1;">
+      {{ 'tb.rulenode.use-dynamically-change-the-severity-of-alar' | translate }}
+    </mat-checkbox>
+  </div>
   <section fxLayout="column" *ngIf="createAlarmConfigForm.get('useMessageAlarmData').value === false">
     <section fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="8px">
       <mat-form-field fxFlex style="padding-bottom: 32px;">
@@ -24,17 +29,25 @@
         </mat-error>
         <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
       </mat-form-field>
-      <mat-form-field fxFlex>
-        <mat-label translate>tb.rulenode.alarm-severity</mat-label>
-        <mat-select formControlName="severity" required>
-          <mat-option *ngFor="let severity of alarmSeverities" [value]="severity">
-            {{ alarmSeverityTranslationMap.get(severity) | translate }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="createAlarmConfigForm.get('severity').hasError('required')">
-          {{ 'tb.rulenode.alarm-severity-required' | translate }}
-        </mat-error>
-      </mat-form-field>
+        <mat-form-field fxFlex *ngIf = "!createAlarmConfigForm.get('dynamicSeverity').value">
+          <mat-label translate>tb.rulenode.alarm-severity</mat-label>
+          <mat-select formControlName="severity" required>
+            <mat-option *ngFor="let severity of alarmSeverities" [value]="severity">
+              {{ alarmSeverityTranslationMap.get(severity) | translate }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="createAlarmConfigForm.get('severity').hasError('required')">
+            {{ 'tb.rulenode.alarm-severity-required' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex *ngIf = "createAlarmConfigForm.get('dynamicSeverity').value" style="padding-bottom: 32px;">
+          <mat-label>    {{ 'tb.rulenode.alarm-severity' | translate }}</mat-label>
+          <input matInput formControlName="severity" required>
+          <mat-error *ngIf="createAlarmConfigForm.get('severity').hasError('required')">
+            {{ 'tb.rulenode.alarm-severity-required' | translate }}
+          </mat-error>
+          <mat-hint [innerHTML]="'tb.rulenode.alarm-severity-pattern-hint' | translate | safeHtml"></mat-hint>
+        </mat-form-field>
     </section>
     <mat-checkbox formControlName="propagate" style="padding-bottom: 16px;">
       {{ 'tb.rulenode.propagate' | translate }}

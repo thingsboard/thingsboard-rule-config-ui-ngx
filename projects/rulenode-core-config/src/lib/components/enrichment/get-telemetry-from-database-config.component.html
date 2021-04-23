@@ -1,5 +1,5 @@
 <section [formGroup]="getTelemetryFromDatabaseConfigForm" fxLayout="column">
-  <label translate class="tb-title no-padding">tb.rulenode.latest-timeseries</label>
+  <label translate class="tb-title no-padding">tb.rulenode.timeseries-key</label>
   <mat-form-field floatLabel="always" class="mat-block" style="padding-bottom: 16px;">
     <mat-label></mat-label>
     <mat-chip-list #latestTimeseriesChipList>
@@ -9,7 +9,7 @@
         {{key}}
         <mat-icon matChipRemove>close</mat-icon>
       </mat-chip>
-      <input matInput type="text" placeholder="{{'tb.rulenode.latest-timeseries' | translate}}"
+      <input matInput type="text" placeholder="{{'tb.rulenode.timeseries-key' | translate}}"
              style="max-width: 200px;"
              [matChipInputFor]="latestTimeseriesChipList"
              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"

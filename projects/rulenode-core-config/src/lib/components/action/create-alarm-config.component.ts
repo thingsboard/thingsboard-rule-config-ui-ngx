@@ -24,7 +24,6 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
 
   alarmSeverities = Object.keys(AlarmSeverity);
   alarmSeverityTranslationMap = alarmSeverityTranslations;
-
   createAlarmConfigForm: FormGroup;
 
   separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
@@ -47,9 +46,20 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
       alarmType: [configuration ? configuration.alarmType : null, []],
       severity: [configuration ? configuration.severity : null, []],
       propagate: [configuration ? configuration.propagate : false, []],
-      relationTypes: [configuration ? configuration.relationTypes : null, []]
+      relationTypes: [configuration ? configuration.relationTypes : null, []],
+      dynamicSeverity: false
     });
+
+    this.createAlarmConfigForm.get('dynamicSeverity').valueChanges.subscribe((dynamicSeverity) => {
+      if(dynamicSeverity){
+        this.createAlarmConfigForm.get('severity').patchValue('',{emitEvent:false});
+      } else {
+        this.createAlarmConfigForm.get('severity').patchValue(this.alarmSeverities[0],{emitEvent:false});
+      }
+    })
+
   }
+
 
   protected validatorTriggers(): string[] {
     return ['useMessageAlarmData'];
