@@ -24,7 +24,7 @@ export class ToEmailConfigComponent extends RuleNodeConfigurationComponent {
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
-    this.selectorArray = [{name:'Plaim Text',value: false}, {name:'HTML','value': true}, {name:'Dynamic',value: 'dynamic'}];
+    this.selectorArray = [{name:'Plaim Text',value: false}, {name:'HTML', value: true}, {name:'Dynamic',value: 'dynamic'}];
     this.toEmailConfigForm = this.fb.group({
       fromTemplate: [configuration ? configuration.fromTemplate : null, [Validators.required]],
       toTemplate: [configuration ? configuration.toTemplate : null, [Validators.required]],
