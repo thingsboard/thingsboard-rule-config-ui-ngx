@@ -31,6 +31,8 @@ import { CheckPointConfigComponent } from './check-point-config.component';
 import { AzureIotHubConfigComponent } from './azure-iot-hub-config.component';
 import { DeviceProfileConfigComponent } from './device-profile-config.component';
 import { SendSmsConfigComponent } from './send-sms-config.component';
+import { PushToEdgeConfigComponent } from './push-to-edge-config.component';
+import { PushToCloudConfigComponent } from './push-to-cloud-config.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { SendSmsConfigComponent } from './send-sms-config.component';
     CheckPointConfigComponent,
     AzureIotHubConfigComponent,
     DeviceProfileConfigComponent,
-    SendSmsConfigComponent
+    SendSmsConfigComponent,
+    PushToEdgeConfigComponent,
+    PushToCloudConfigComponent
   ],
   imports: [
     CommonModule,
@@ -97,7 +101,9 @@ import { SendSmsConfigComponent } from './send-sms-config.component';
     CheckPointConfigComponent,
     AzureIotHubConfigComponent,
     DeviceProfileConfigComponent,
-    SendSmsConfigComponent
+    SendSmsConfigComponent,
+    PushToEdgeConfigComponent,
+    PushToCloudConfigComponent
   ]
 })
 export class RuleNodeCoreConfigActionModule {

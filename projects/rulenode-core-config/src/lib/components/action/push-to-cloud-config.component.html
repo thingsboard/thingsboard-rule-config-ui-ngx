@@ -1,0 +1,10 @@
+<section [formGroup]="pushToCloudConfigForm" fxLayout="column">
+  <mat-form-field fxFlex class="mat-block">
+    <mat-label translate>attribute.attributes-scope</mat-label>
+    <mat-select formControlName="scope" required>
+      <mat-option *ngFor="let scope of attributeScopes" [value]="scope">
+        {{ telemetryTypeTranslationsMap.get(scope) | translate }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</section>
