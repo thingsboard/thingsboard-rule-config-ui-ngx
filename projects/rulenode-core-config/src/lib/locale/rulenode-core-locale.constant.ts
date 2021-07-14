@@ -146,8 +146,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'subject-template-required': 'Subject Template is required',
           'body-template': 'Body Template',
           'body-template-required': 'Body Template is required',
-          'html-template': 'HTML template',
-          'dynamic-html-template': 'Dynamic HTML template',
+          'dynamic-mail-body-type': 'Dynamic mail body type',
           'mail-body-type': 'Mail body type',
           'request-id-metadata-attribute': 'Request Id Metadata attribute name',
           'timeout-sec': 'Timeout in seconds',
@@ -426,6 +425,11 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           value: 'Value',
           'remove-entry': 'Remove entry',
           'add-entry': 'Add entry'
+        },
+        'mail-body-type': {
+          'plain-text': 'Plain Text',
+          html: 'HTML',
+          dynamic: 'Dynamic'
         }
       }
     };

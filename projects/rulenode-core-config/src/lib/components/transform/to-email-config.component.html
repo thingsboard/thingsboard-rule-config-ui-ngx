@@ -33,21 +33,19 @@
     </mat-error>
     <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
-  <section fxLayout="row" fxLayout.lt-md="column" style="padding-bottom: 16px;" >
-    <mat-form-field style="padding-right: 8px;" class="mat-block">
-      <mat-label translate>tb.rulenode.mail-body-type</mat-label>
-      <mat-select formControlName="mailBodyType">
-        <mat-option *ngFor="let value of selectorArray" [value]="value.value">
-          {{value.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field class="mat-block" *ngIf="toEmailConfigForm.get('mailBodyType').value === 'dynamic'" style="flex: 1 1 0%;">
-      <mat-label translate>tb.rulenode.html-template</mat-label>
-      <input matInput formControlName="isHtmlTemplate">
-      <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
-    </mat-form-field>
-  </section>
+  <mat-form-field class="mat-block">
+    <mat-label translate>tb.rulenode.mail-body-type</mat-label>
+    <mat-select formControlName="mailBodyType">
+      <mat-option *ngFor="let type of mailBodyTypes" [value]="type.value">
+        {{ type.name | translate }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="mat-block" *ngIf="toEmailConfigForm.get('mailBodyType').value === 'dynamic'" style="padding-bottom: 16px;">
+    <mat-label translate>tb.rulenode.dynamic-mail-body-type</mat-label>
+    <input required matInput formControlName="isHtmlTemplate">
+    <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
+  </mat-form-field>
   <mat-form-field class="mat-block" style="padding-bottom: 16px;">
     <mat-label translate>tb.rulenode.body-template</mat-label>
     <textarea required matInput formControlName="bodyTemplate" rows="6"></textarea>
