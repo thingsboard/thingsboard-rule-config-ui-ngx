@@ -48,6 +48,7 @@
   <mat-form-field class="mat-block">
     <mat-label translate>tb.rulenode.password</mat-label>
     <input type="password" matInput formControlName="password">
+    <tb-toggle-password matSuffix></tb-toggle-password>
   </mat-form-field>
   <mat-checkbox formControlName="automaticRecoveryEnabled" style="padding-bottom: 16px;">
     {{ 'tb.rulenode.automatic-recovery' | translate }}
