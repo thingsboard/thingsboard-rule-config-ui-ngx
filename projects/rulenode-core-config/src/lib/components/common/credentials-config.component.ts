@@ -65,6 +65,9 @@ export class CredentialsConfigComponent extends PageComponent implements Control
   @Input()
   disableCertPemCredentials = false;
 
+  @Input()
+  passwordFieldRquired = true;
+
   allCredentialsTypes = credentialsTypes;
   credentialsTypeTranslationsMap = credentialsTypeTranslations;
 
@@ -202,7 +205,7 @@ export class CredentialsConfigComponent extends PageComponent implements Control
         break;
       case 'basic':
         this.credentialsConfigFormGroup.get('username').setValidators([Validators.required]);
-        this.credentialsConfigFormGroup.get('password').setValidators([Validators.required]);
+        this.credentialsConfigFormGroup.get('password').setValidators(this.passwordFieldRquired ? [Validators.required] : []);
         break;
       case 'cert.PEM':
         this.credentialsConfigFormGroup.setValidators([this.requiredFilesSelected(
