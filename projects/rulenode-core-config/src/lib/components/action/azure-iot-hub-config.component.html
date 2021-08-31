@@ -48,6 +48,7 @@
             <mat-form-field class="mat-block">
               <mat-label translate>tb.rulenode.sas-key</mat-label>
               <input type="password" required matInput formControlName="sasKey" autocomplete="new-password">
+              <tb-toggle-password matSuffix></tb-toggle-password>
               <mat-error *ngIf="azureIotHubConfigForm.get('credentials.sasKey').hasError('required')">
                 {{ 'tb.rulenode.sas-key-required' | translate }}
               </mat-error>
@@ -94,6 +95,7 @@
             <mat-form-field class="mat-block">
               <mat-label translate>tb.rulenode.private-key-password</mat-label>
               <input type="password" matInput formControlName="password" autocomplete="new-password">
+              <tb-toggle-password matSuffix></tb-toggle-password>
             </mat-form-field>
           </ng-template>
         </section>
