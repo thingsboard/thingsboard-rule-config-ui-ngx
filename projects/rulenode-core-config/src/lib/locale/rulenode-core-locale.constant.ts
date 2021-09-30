@@ -156,6 +156,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'endpoint-url-pattern-required': 'Endpoint URL pattern is required',
           'request-method': 'Request method',
           'use-simple-client-http-factory': 'Use simple client HTTP factory',
+          'ignore-request-body': 'Without request body',
           'read-timeout': 'Read timeout in millis',
           'read-timeout-hint': 'The value of 0 means an infinite timeout',
           'max-parallel-requests-count': 'Max number of parallel requests',
