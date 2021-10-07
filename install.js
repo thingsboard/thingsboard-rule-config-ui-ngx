@@ -4,8 +4,12 @@ const path = require('path');
 let _projectRoot = null;
 
 (async() => {
-  await fse.move(sourcePackage(),
+  await fse.copy(sourcePackage(),
     targetPackage(),
+    {overwrite: true});
+
+  await fse.copy(sourceAssets(),
+    targetAssets(),
     {overwrite: true});
 })();
 
@@ -21,5 +25,13 @@ function sourcePackage() {
 }
 
 function targetPackage() {
-  return path.join(projectRoot(), 'target', 'generated-resources', 'public', 'static', 'rulenode-core-config.js');
+  return path.join(projectRoot(), 'target', 'generated-resources', 'public', 'static', 'rulenode', 'rulenode-core-config.js');
+}
+
+function sourceAssets() {
+  return path.join(projectRoot(), 'dist', 'rulenode-core-config', 'assets');
+}
+
+function targetAssets() {
+  return path.join(projectRoot(), 'target', 'generated-resources', 'public', 'assets');
 }

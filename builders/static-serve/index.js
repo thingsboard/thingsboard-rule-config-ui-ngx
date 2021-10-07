@@ -45,7 +45,13 @@ function createServer(options, context) {
     for (const path of Object.keys(staticServeConfig)) {
         const route = staticServeConfig[path];
         app.get(path, (req, res) => {
-            res.sendFile(path_1.resolve(context.workspaceRoot, route.target));
+            if (path.endsWith('*')) {
+                const target = req.params[0];
+                res.sendFile(path_1.resolve(context.workspaceRoot, route.target + target));
+            }
+            else {
+                res.sendFile(path_1.resolve(context.workspaceRoot, route.target));
+            }
         });
     }
     /* app.get(options.path, (req, res) => {

@@ -62,7 +62,12 @@ export function createServer(options: StaticServeOptions, context: BuilderContex
   for (const path of Object.keys(staticServeConfig)) {
     const route = staticServeConfig[path];
     app.get(path, (req, res) => {
-      res.sendFile(resolve(context.workspaceRoot, route.target));
+      if (path.endsWith('*')) {
+        const target = req.params[0];
+        res.sendFile(resolve(context.workspaceRoot, route.target + target));
+      } else {
+        res.sendFile(resolve(context.workspaceRoot, route.target));
+      }
     });
   }
 
