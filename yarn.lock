@@ -1490,10 +1490,10 @@
   dependencies:
     "@types/jquery" "*"
 
-"@types/marked@^1.1.0":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@types/marked/-/marked-1.2.2.tgz#1f858a0e690247ecf3b2eef576f98f86e8d960d4"
-  integrity sha512-wLfw1hnuuDYrFz97IzJja0pdVsC0oedtS4QsKH1/inyW9qkLQbXgMUqEQT0MVtUBx3twjWeInUfjQbhBVLECXw==
+"@types/marked@^2.0.0":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@types/marked/-/marked-2.0.5.tgz#453e27f1e97199d45bb25297b0dd2b9bbc1e05ea"
+  integrity sha512-shRZ7XnYFD/8n8zSjKvFdto1QNSf4tONZIlNEZGrJe8GsOE8DL/hG1Hbl8gZlfLnjS7+f5tZGIaTgfpyW38h4w==
 
 "@types/minimatch@*":
   version "3.0.4"
@@ -3047,6 +3047,11 @@ commander@^4.0.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/commander/-/commander-4.1.1.tgz#9fd602bd936294e9e9ef46a3f4d6964044b18068"
   integrity sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==
+
+commander@^6.0.0:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-6.2.1.tgz#0792eb682dfbc325999bb2b84fddddba110ac73c"
+  integrity sha512-U7VdrJFnJgo4xjrHpTzu0yrHPGImdsmD95ZlgYSEajAn2JKzDhDTPG9kBTefmObL2w/ngeZnilk+OV9CG3d7UA==
 
 commondir@^1.0.1:
   version "1.0.1"
@@ -6144,12 +6149,12 @@ karma@~5.1.1:
     ua-parser-js "0.7.21"
     yargs "^15.3.1"
 
-katex@^0.12.0:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/katex/-/katex-0.12.0.tgz#2fb1c665dbd2b043edcf8a1f5c555f46beaa0cb9"
-  integrity sha512-y+8btoc/CK70XqcHqjxiGWBOeIL8upbS0peTPXTvgrh21n1RiWWcIpSWM+4uXq+IAgNh9YYQWdc7LVDPDAEEAg==
+katex@^0.13.0:
+  version "0.13.18"
+  resolved "https://registry.yarnpkg.com/katex/-/katex-0.13.18.tgz#ba89e8e4b70cc2325e25e019a62b9fe71e5c2931"
+  integrity sha512-a3dC4NSVSDU3O1WZbTnOiA8rVNJ2lSiomOl0kmckCIGObccIHXof7gAseIY0o1gjEspe+34ZeSEX2D1ChFKIvA==
   dependencies:
-    commander "^2.19.0"
+    commander "^6.0.0"
 
 keyv@^3.0.0:
   version "3.1.0"
@@ -6503,10 +6508,10 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-marked@^1.1.0:
-  version "1.2.9"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-1.2.9.tgz#53786f8b05d4c01a2a5a76b7d1ec9943d29d72dc"
-  integrity sha512-H8lIX2SvyitGX+TRdtS06m1jHMijKN/XjfH6Ooii9fvxMlh8QdqBfBDkGUpMWH2kQNrtixjzYUa3SH8ROTgRRw==
+marked@^2.0.0:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-2.1.3.tgz#bd017cef6431724fd4b27e0657f5ceb14bff3753"
+  integrity sha512-/Q+7MGzaETqifOMWYEA7HVMaZb4XbcRfaOzcSsHZEith83KGlvaSG33u0SKu89Mj5h+T8V2hM+8O45Qc5XTgwA==
 
 material-design-icons@^3.0.1:
   version "3.0.1"
@@ -6976,16 +6981,16 @@ ngx-hm-carousel@^2.0.0-rc.1:
     hammerjs "^2.0.8"
     resize-observer-polyfill "^1.5.1"
 
-ngx-markdown@^10.1.1:
-  version "10.1.1"
-  resolved "https://registry.yarnpkg.com/ngx-markdown/-/ngx-markdown-10.1.1.tgz#17840c773db7ced4b18ccbf2e8cb06182e422de3"
-  integrity sha512-bUVgN6asb35d5U4xM5CNfo7pSpuwqJSdTgK0PhNZzLiaiyPIK2owtLF6sWGhxTThJu+LngJPjj4MQ+AFe/s8XQ==
+ngx-markdown@^11.1.3:
+  version "11.1.3"
+  resolved "https://registry.yarnpkg.com/ngx-markdown/-/ngx-markdown-11.1.3.tgz#4d01c2dc425e5a46d1b6aa8517d9a1c1feaa1efd"
+  integrity sha512-z32q8l76ubrcP62L03mdvrizwueLBHV10LkT8MEDnFcjmY+8J1PytxFJ9EBTJpvc+CaPolgAoi7felN2XJZTSg==
   dependencies:
-    "@types/marked" "^1.1.0"
+    "@types/marked" "^2.0.0"
     emoji-toolkit "^6.0.1"
-    katex "^0.12.0"
-    marked "^1.1.0"
-    prismjs "^1.20.0"
+    katex "^0.13.0"
+    marked "^2.0.0"
+    prismjs "^1.23.0"
     tslib "^2.0.0"
 
 ngx-sharebuttons@^8.0.5:
@@ -8099,11 +8104,6 @@ prettier@^2.1.2:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.3.0.tgz#b6a5bf1284026ae640f17f7ff5658a7567fc0d18"
   integrity sha512-kXtO4s0Lz/DW/IJ9QdWhAf7/NmPWQXkFr/r/WkR3vyI+0v8amTDxiaQSLzs8NBlytfLWX/7uQUMIW677yLKl4w==
-
-prismjs@^1.20.0:
-  version "1.25.0"
-  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.25.0.tgz#6f822df1bdad965734b310b315a23315cf999756"
-  integrity sha512-WCjJHl1KEWbnkQom1+SzftbtXMKQoezOCYs5rECqMN+jP+apI7ftoflyqigqzopSO3hMhTEb0mFClA8lkolgEg==
 
 prismjs@^1.23.0:
   version "1.23.0"
@@ -9982,7 +9982,7 @@ terser@^4.1.2, terser@^4.3.8, terser@^4.6.13:
     ngx-drag-drop "^2.0.0"
     ngx-flowchart "git://github.com/thingsboard/ngx-flowchart.git#master"
     ngx-hm-carousel "^2.0.0-rc.1"
-    ngx-markdown "^10.1.1"
+    ngx-markdown "^11.1.3"
     ngx-sharebuttons "^8.0.5"
     ngx-translate-messageformat-compiler "^4.9.0"
     objectpath "^2.0.0"
