@@ -71,7 +71,8 @@ export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
       this.translate.instant('tb.rulenode.generator'),
       'Generate',
       ['prevMsg', 'prevMetadata', 'prevMsgType'],
-      this.ruleNodeId
+      this.ruleNodeId,
+      'rulenode/generator_node_script_fn'
     ).subscribe((theScript) => {
       if (theScript) {
         this.generatorConfigForm.get('jsScript').setValue(theScript);

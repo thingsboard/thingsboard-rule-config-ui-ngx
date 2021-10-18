@@ -41,7 +41,8 @@ export class LogConfigComponent extends RuleNodeConfigurationComponent {
       this.translate.instant('tb.rulenode.to-string'),
       'ToString',
       ['msg', 'metadata', 'msgType'],
-      this.ruleNodeId
+      this.ruleNodeId,
+      'rulenode/log_node_script_fn'
     ).subscribe((theScript) => {
       if (theScript) {
         this.logConfigForm.get('jsScript').setValue(theScript);

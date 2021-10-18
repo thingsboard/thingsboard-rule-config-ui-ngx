@@ -86,7 +86,8 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
       this.translate.instant('tb.rulenode.details'),
       'Details',
       ['msg', 'metadata', 'msgType'],
-      this.ruleNodeId
+      this.ruleNodeId,
+      'rulenode/create_alarm_node_script_fn'
     ).subscribe((theScript) => {
       if (theScript) {
         this.createAlarmConfigForm.get('alarmDetailsBuildJs').setValue(theScript);

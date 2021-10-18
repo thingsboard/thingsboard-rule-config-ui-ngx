@@ -41,7 +41,8 @@ export class SwitchConfigComponent extends RuleNodeConfigurationComponent {
       this.translate.instant('tb.rulenode.switch'),
       'Switch',
       ['msg', 'metadata', 'msgType'],
-      this.ruleNodeId
+      this.ruleNodeId,
+      'rulenode/switch_node_script_fn'
     ).subscribe((theScript) => {
       if (theScript) {
         this.switchConfigForm.get('jsScript').setValue(theScript);

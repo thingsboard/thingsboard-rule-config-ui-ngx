@@ -42,7 +42,8 @@ export class ClearAlarmConfigComponent extends RuleNodeConfigurationComponent {
       this.translate.instant('tb.rulenode.details'),
       'Details',
       ['msg', 'metadata', 'msgType'],
-      this.ruleNodeId
+      this.ruleNodeId,
+      'rulenode/clear_alarm_node_script_fn'
     ).subscribe((theScript) => {
       if (theScript) {
         this.clearAlarmConfigForm.get('alarmDetailsBuildJs').setValue(theScript);

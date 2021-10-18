@@ -41,7 +41,8 @@ export class ScriptConfigComponent extends RuleNodeConfigurationComponent {
       this.translate.instant('tb.rulenode.filter'),
       'Filter',
       ['msg', 'metadata', 'msgType'],
-      this.ruleNodeId
+      this.ruleNodeId,
+      'rulenode/filter_node_script_fn'
     ).subscribe((theScript) => {
       if (theScript) {
         this.scriptConfigForm.get('jsScript').setValue(theScript);
