@@ -3,7 +3,7 @@ import { AppState } from '@core/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
-import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
+import { aggregationTranslations, AggregationType, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { FetchMode, SamplingOrder, TimeUnit, timeUnitTranslations } from '../../rulenode-core-config.models';
 
@@ -17,6 +17,10 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
   getTelemetryFromDatabaseConfigForm: FormGroup;
 
   separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
+
+  aggregationTypes = AggregationType;
+  aggregations = Object.keys(AggregationType);
+  aggregationTypesTranslations = aggregationTranslations;
 
   fetchMode = FetchMode;
   fetchModes = Object.keys(FetchMode);
@@ -38,6 +42,7 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.getTelemetryFromDatabaseConfigForm = this.fb.group({
       latestTsKeyNames: [configuration ? configuration.latestTsKeyNames : null, []],
+      aggregation: [configuration ? configuration.aggregation : null, [Validators.required]],
       fetchMode: [configuration ? configuration.fetchMode : null, [Validators.required]],
       orderBy: [configuration ? configuration.orderBy : null, []],
       limit: [configuration ? configuration.limit : null, []],
@@ -59,9 +64,11 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
     const fetchMode: FetchMode = this.getTelemetryFromDatabaseConfigForm.get('fetchMode').value;
     const useMetadataIntervalPatterns: boolean = this.getTelemetryFromDatabaseConfigForm.get('useMetadataIntervalPatterns').value;
     if (fetchMode && fetchMode === FetchMode.ALL) {
+      this.getTelemetryFromDatabaseConfigForm.get('aggregation').setValidators([Validators.required]);
       this.getTelemetryFromDatabaseConfigForm.get('orderBy').setValidators([Validators.required]);
       this.getTelemetryFromDatabaseConfigForm.get('limit').setValidators([Validators.required, Validators.min(2), Validators.max(1000)]);
     } else {
+      this.getTelemetryFromDatabaseConfigForm.get('aggregation').setValidators([]);
       this.getTelemetryFromDatabaseConfigForm.get('orderBy').setValidators([]);
       this.getTelemetryFromDatabaseConfigForm.get('limit').setValidators([]);
     }
@@ -82,6 +89,7 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
       this.getTelemetryFromDatabaseConfigForm.get('startIntervalPattern').setValidators([]);
       this.getTelemetryFromDatabaseConfigForm.get('endIntervalPattern').setValidators([]);
     }
+    this.getTelemetryFromDatabaseConfigForm.get('aggregation').updateValueAndValidity({emitEvent});
     this.getTelemetryFromDatabaseConfigForm.get('orderBy').updateValueAndValidity({emitEvent});
     this.getTelemetryFromDatabaseConfigForm.get('limit').updateValueAndValidity({emitEvent});
     this.getTelemetryFromDatabaseConfigForm.get('startInterval').updateValueAndValidity({emitEvent});
