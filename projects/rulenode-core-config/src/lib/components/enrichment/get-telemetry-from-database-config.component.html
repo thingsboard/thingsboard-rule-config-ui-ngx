@@ -28,6 +28,14 @@
     <mat-hint translate>tb.rulenode.fetch-mode-hint</mat-hint>
   </mat-form-field>
   <div fxLayout="column" *ngIf="getTelemetryFromDatabaseConfigForm.get('fetchMode').value === fetchMode.ALL">
+    <mat-form-field>
+      <mat-label translate>aggregation.function</mat-label>
+      <mat-select formControlName="aggregation" required>
+        <mat-option *ngFor="let aggregation of aggregations" [value]="aggregation">
+          {{ aggregationTypesTranslations.get(aggregationTypes[aggregation]) | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
     <mat-form-field class="mat-block" style="padding-bottom: 16px;">
       <mat-label translate>tb.rulenode.order-by</mat-label>
       <mat-select formControlName="orderBy" required>
