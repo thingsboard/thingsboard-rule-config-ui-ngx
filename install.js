@@ -7,10 +7,6 @@ let _projectRoot = null;
   await fse.copy(sourcePackage(),
     targetPackage(),
     {overwrite: true});
-
-  await fse.copy(sourceAssets(),
-    targetAssets(),
-    {overwrite: true});
 })();
 
 function projectRoot() {
@@ -26,12 +22,4 @@ function sourcePackage() {
 
 function targetPackage() {
   return path.join(projectRoot(), 'target', 'generated-resources', 'public', 'static', 'rulenode', 'rulenode-core-config.js');
-}
-
-function sourceAssets() {
-  return path.join(projectRoot(), 'dist', 'rulenode-core-config', 'assets');
-}
-
-function targetAssets() {
-  return path.join(projectRoot(), 'target', 'generated-resources', 'public', 'assets');
 }
