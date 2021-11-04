@@ -21,6 +21,9 @@
   <mat-checkbox *ngIf="!restApiCallConfigForm.get('enableProxy').value" formControlName="useSimpleClientHttpFactory" style="padding-bottom: 16px;">
     {{ 'tb.rulenode.use-simple-client-http-factory' | translate }}
   </mat-checkbox>
+  <mat-checkbox formControlName="ignoreRequestBody" style="padding-bottom: 16px;">
+    {{ 'tb.rulenode.ignore-request-body' | translate }}
+  </mat-checkbox>
   <div *ngIf="restApiCallConfigForm.get('enableProxy').value">
     <mat-checkbox formControlName="useSystemProxyProperties" style="padding-bottom: 16px;">
       {{ 'tb.rulenode.use-system-proxy-properties' | translate }}
