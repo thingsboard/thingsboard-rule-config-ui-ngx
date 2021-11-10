@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'tb-action-node-mqtt-config',
   templateUrl: './mqtt-config.component.html',
-  styleUrls: []
+  styleUrls: ['./mqtt-config.component.scss']
 })
 export class MqttConfigComponent extends RuleNodeConfigurationComponent {
 
