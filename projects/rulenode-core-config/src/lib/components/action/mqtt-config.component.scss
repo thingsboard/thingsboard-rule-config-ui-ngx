@@ -2,4 +2,8 @@
   .tb-mqtt-credentials-panel-group {
     margin: 0 6px;
   }
+  .tb-hint.client-id {
+    margin-top: -1.25em;
+    max-width: fit-content;
+  }
 }
