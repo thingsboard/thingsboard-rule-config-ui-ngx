@@ -424,7 +424,8 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
             'for value from message body',
           'alarm-severity-pattern-hint': 'Hint: use <code><span style="color: #000;">$&#123;</span>metadataKey<span style="color: #000;">&#125;</span></code> ' +
             'for value from metadata, <code><span style="color: #000;">$[</span>messageKey<span style="color: #000;">]</span></code> ' +
-            'for value from message body. Alarm severity should be system (CRITICAL, MAJOR etc.)'
+            'for value from message body. Alarm severity should be system (CRITICAL, MAJOR etc.)',
+          'skip-latest-persistence': 'Skip latest persistence'
         },
         'key-val': {
           key: 'Key',
