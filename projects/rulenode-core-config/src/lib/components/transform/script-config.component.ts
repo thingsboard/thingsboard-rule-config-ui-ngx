@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './script-config.component.html',
   styleUrls: []
 })
-export class ScriptConfigComponent extends RuleNodeConfigurationComponent {
+export class TransformScriptConfigComponent extends RuleNodeConfigurationComponent {
 
   @ViewChild('jsFuncComponent', {static: true}) jsFuncComponent: JsFuncComponent;
 

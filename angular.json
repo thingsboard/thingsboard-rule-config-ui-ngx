@@ -15,11 +15,19 @@
       },
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "projects/rulenode-core-config/tsconfig.lib.json",
             "project": "projects/rulenode-core-config/ng-package.json"
-          }
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/rulenode-core-config/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/rulenode-core-config/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@tb/custom-builder:static-serve",
