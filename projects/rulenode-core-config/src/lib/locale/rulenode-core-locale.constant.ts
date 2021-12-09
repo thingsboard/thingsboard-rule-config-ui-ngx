@@ -339,6 +339,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'entity-details-title': 'Title',
           'entity-details-country': 'Country',
           'entity-details-state': 'State',
+          'entity-details-city': 'City',
           'entity-details-zip': 'Zip',
           'entity-details-address': 'Address',
           'entity-details-address2': 'Address2',
