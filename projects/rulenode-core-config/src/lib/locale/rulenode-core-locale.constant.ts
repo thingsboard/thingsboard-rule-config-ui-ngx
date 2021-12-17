@@ -426,7 +426,8 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'alarm-severity-pattern-hint': 'Hint: use <code><span style="color: #000;">$&#123;</span>metadataKey<span style="color: #000;">&#125;</span></code> ' +
             'for value from metadata, <code><span style="color: #000;">$[</span>messageKey<span style="color: #000;">]</span></code> ' +
             'for value from message body. Alarm severity should be system (CRITICAL, MAJOR etc.)',
-          'output-node-name-hint': 'The <b>rule node name</b> corresponds to the <b>relation type</b> of the output message, and it is used to forward messages to other rule nodes in the caller rule chain.'
+          'output-node-name-hint': 'The <b>rule node name</b> corresponds to the <b>relation type</b> of the output message, and it is used to forward messages to other rule nodes in the caller rule chain.',
+          'skip-latest-persistence': 'Skip latest persistence'
         },
         'key-val': {
           key: 'Key',
