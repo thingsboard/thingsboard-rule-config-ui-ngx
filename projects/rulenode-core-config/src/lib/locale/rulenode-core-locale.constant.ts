@@ -429,11 +429,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'output-node-name-hint': 'The <b>rule node name</b> corresponds to the <b>relation type</b> of the output message, and it is used to forward messages to other rule nodes in the caller rule chain.',
           'skip-latest-persistence': 'Skip latest persistence',
           'use-server-ts': 'Use server ts',
-          'use-server-ts-hint': 'Enable this setting to use the timestamp of the message processing instead of the timestamp from the message. Useful for all sorts of sequential processing if you merge messages from multiple sources (devices, assets, etc).\n' +
-            'In the case of sequential processing, the platform guarantees that the messages are processed in the order of their submission to the queue. ' +
-            'However, the timestamp of the messages originated by multiple devices/servers may be unsynchronized long before they are pushed to the queue. ' +
-            'The DB layer has certain optimizations to ignore the updates of the "attributes" and "latest values" tables if the new record has a timestamp that is older than the previous record. ' +
-            'So, to make sure that all the messages will be processed correctly, one should enable this parameter for sequential message processing scenarios.',
+          'use-server-ts-hint': 'Enable this setting to use the timestamp of the message processing instead of the timestamp from the message. Useful for all sorts of sequential processing if you merge messages from multiple sources (devices, assets, etc).',
           'kv-map-pattern-hint': 'Hint: use <code><span style="color: #000;">$&#123;</span>metadataKey<span style="color: #000;">&#125;</span></code> ' +
             'for value from metadata, <code><span style="color: #000;">$[</span>messageKey<span style="color: #000;">]</span></code> ' +
             'for value from message body to substitute "Source" and "Target" key names',
