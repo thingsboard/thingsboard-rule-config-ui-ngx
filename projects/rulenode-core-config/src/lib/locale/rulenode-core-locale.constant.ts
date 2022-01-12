@@ -428,6 +428,8 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
             'for value from message body. Alarm severity should be system (CRITICAL, MAJOR etc.)',
           'output-node-name-hint': 'The <b>rule node name</b> corresponds to the <b>relation type</b> of the output message, and it is used to forward messages to other rule nodes in the caller rule chain.',
           'skip-latest-persistence': 'Skip latest persistence',
+          'use-server-ts': 'Use server ts',
+          'use-server-ts-hint': 'Enable this setting to use the timestamp of the message processing instead of the timestamp from the message. Useful for all sorts of sequential processing if you merge messages from multiple sources (devices, assets, etc).',
           'kv-map-pattern-hint': 'Hint: use <code><span style="color: #000;">$&#123;</span>metadataKey<span style="color: #000;">&#125;</span></code> ' +
             'for value from metadata, <code><span style="color: #000;">$[</span>messageKey<span style="color: #000;">]</span></code> ' +
             'for value from message body to substitute "Source" and "Target" key names',
