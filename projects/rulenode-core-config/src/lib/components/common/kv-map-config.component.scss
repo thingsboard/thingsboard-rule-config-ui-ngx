@@ -23,11 +23,6 @@
       max-height: 300px;
       overflow: auto;
 
-      .row {
-        padding-top: 5px;
-        max-height: 40px;
-      }
-
       .cell {
         padding-left: 5px;
         padding-right: 5px;
@@ -41,7 +36,6 @@
     .body {
       mat-form-field.cell {
         margin: 0px;
-        max-height: 40px;
 
         .mat-form-field-infix {
           border-top: 0;
@@ -50,6 +44,7 @@
 
       button.mat-button {
         margin: 0;
+        align-self: baseline;
       }
     }
   }

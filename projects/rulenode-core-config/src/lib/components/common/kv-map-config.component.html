@@ -34,6 +34,7 @@
         <mat-icon>close</mat-icon>
       </button>
     </div>
+    <div *ngIf="hintText" class="tb-hint" [innerHTML]="hintText | translate | safeHtml"></div>
   </div>
   <tb-error [error]="ngControl.hasError('kvMapRequired')
                   ? translate.instant(requiredText) : ''"></tb-error>

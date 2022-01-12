@@ -45,6 +45,8 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
 
   @Input() valRequiredText: string;
 
+  @Input() hintText: string;
+
   private requiredValue: boolean;
   get required(): boolean {
     return this.requiredValue;
