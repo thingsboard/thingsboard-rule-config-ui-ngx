@@ -28,7 +28,7 @@ export class AttributesConfigComponent extends RuleNodeConfigurationComponent {
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.attributesConfigForm = this.fb.group({
       scope: [configuration ? configuration.scope : null, [Validators.required]],
-      notifyDevice: [configuration ? configuration.scope : true, []]
+      notifyDevice: [configuration ? configuration.notifyDevice : true, []]
     });
   }
 
