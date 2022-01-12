@@ -47,10 +47,14 @@
     <input matInput formControlName="clientId">
   </mat-form-field>
   <div class="tb-hint client-id" translate>tb.rulenode.client-id-hint</div>
-  <mat-checkbox formControlName="cleanSession" style="padding-bottom: 16px;">
+  <mat-checkbox formControlName="appendClientIdSuffix">
+    {{ 'tb.rulenode.append-client-id-suffix' | translate }}
+  </mat-checkbox>
+  <div class="tb-hint client-id">{{ "tb.rulenode.client-id-suffix-hint" | translate }}</div>
+  <mat-checkbox formControlName="cleanSession">
     {{ 'tb.rulenode.clean-session' | translate }}
   </mat-checkbox>
-  <mat-checkbox formControlName="ssl" style="padding-bottom: 16px;">
+  <mat-checkbox formControlName="ssl">
     {{ 'tb.rulenode.enable-ssl' | translate }}
   </mat-checkbox>
   <tb-credentials-config formControlName="credentials" [passwordFieldRquired]="false"></tb-credentials-config>

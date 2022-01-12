@@ -240,11 +240,16 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'connect-timeout-required': 'Connection timeout is required.',
           'connect-timeout-range': 'Connection timeout should be in a range from 1 to 200.',
           'client-id': 'Client ID',
-          'client-id-hint': 'Hint: Optional. Leave empty for auto-generated client id. Be careful when specifying the Client ID.' +
-              'Majority of the MQTT brokers will not allow multiple connections with the same client id. ' +
-              'To connect to such brokers, your mqtt client id must be unique. ' +
-              'When platform is running in a micro-services mode, the copy of rule nodeis launched in each micro-service. ' +
-              'This will automatically lead to multiple mqtt clients with the same id and may cause failures of the rule node.',
+          'client-id-hint': 'Hint: Optional. Leave empty for auto-generated Client ID. Be careful when specifying the Client ID. ' +
+              'Majority of the MQTT brokers will not allow multiple connections with the same Client ID. ' +
+              'To connect to such brokers, your mqtt Client ID must be unique. ' +
+              'When platform is running in a micro-services mode, the copy of rule node is launched in each micro-service. ' +
+              'This will automatically lead to multiple mqtt clients with the same ID and may cause failures of the rule node. ' +
+              'To avoid such failures enable "Add Service ID as suffix to Client ID" option below.',
+          'append-client-id-suffix': 'Add Service ID as suffix to Client ID',
+          'client-id-suffix-hint': 'Hint: Optional. Applied when "Client ID" specified explicitly. ' +
+            'If selected then Service ID will be added to Client ID as a suffix. ' +
+            'Helps to avoid failures when platform is running in a micro-services mode.',
           'device-id':'Device ID',
           'device-id-required':'Device ID is required.',
           'clean-session': 'Clean session',
