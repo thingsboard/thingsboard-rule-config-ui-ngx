@@ -11,6 +11,8 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'entity-name-pattern-required': 'Name pattern is required',
           'entity-type-pattern': 'Type pattern',
           'entity-type-pattern-required': 'Type pattern is required',
+          'entity-label-pattern': 'Label pattern',
+          'entity-description-pattern': 'Description pattern',
           'entity-cache-expiration': 'Entities cache expiration time (sec)',
           'entity-cache-expiration-hint':
             'Specifies maximum time interval allowed to store found entity records. 0 value means that records will never expire.',
@@ -438,6 +440,10 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'kv-map-pattern-hint': 'Hint: use <code><span style="color: #000;">$&#123;</span>metadataKey<span style="color: #000;">&#125;</span></code> ' +
             'for value from metadata, <code><span style="color: #000;">$[</span>messageKey<span style="color: #000;">]</span></code> ' +
             'for value from message body to substitute "Source" and "Target" key names',
+          'delete-all-data-for-keys': 'Delete all data for keys',
+          'rewrite-latest-if-deleted': 'Rewrite latest if deleted',
+          'is-gateway': 'Is Gateway',
+          'overwrite-activity-time': 'Overwrite activity time for connected device'
         },
         'key-val': {
           key: 'Key',

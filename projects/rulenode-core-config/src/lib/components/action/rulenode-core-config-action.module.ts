@@ -33,6 +33,8 @@ import { DeviceProfileConfigComponent } from './device-profile-config.component'
 import { SendSmsConfigComponent } from './send-sms-config.component';
 import { PushToEdgeConfigComponent } from './push-to-edge-config.component';
 import { PushToCloudConfigComponent } from './push-to-cloud-config.component';
+import { GetOrCreateDeviceConfigComponent } from './get-or-create-device-config.component';
+import { GetOrCreateAssetConfigComponent } from './get-or-create-asset-config.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { PushToCloudConfigComponent } from './push-to-cloud-config.component';
     ClearAlarmConfigComponent,
     CreateAlarmConfigComponent,
     CreateRelationConfigComponent,
+    GetOrCreateDeviceConfigComponent,
+    GetOrCreateAssetConfigComponent,
     MsgDelayConfigComponent,
     DeleteRelationConfigComponent,
     GeneratorConfigComponent,
@@ -82,6 +86,8 @@ import { PushToCloudConfigComponent } from './push-to-cloud-config.component';
     ClearAlarmConfigComponent,
     CreateAlarmConfigComponent,
     CreateRelationConfigComponent,
+    GetOrCreateDeviceConfigComponent,
+    GetOrCreateAssetConfigComponent,
     MsgDelayConfigComponent,
     DeleteRelationConfigComponent,
     GeneratorConfigComponent,

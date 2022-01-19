@@ -5,6 +5,8 @@ export * from './check-point-config.component';
 export * from './clear-alarm-config.component';
 export * from './create-alarm-config.component';
 export * from './create-relation-config.component';
+export * from './get-or-create-device-config.component';
+export * from './get-or-create-asset-config.component';
 export * from './delete-relation-config.component';
 export * from './device-profile-config.component';
 export * from './generator-config.component';
