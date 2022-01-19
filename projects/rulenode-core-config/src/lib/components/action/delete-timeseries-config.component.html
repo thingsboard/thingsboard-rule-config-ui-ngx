@@ -1,0 +1,100 @@
+<section [formGroup]="deleteTimeseriesConfigForm" fxLayout="column" style="min-width: 760px">
+  <label translate class="tb-title no-padding">tb.rulenode.timeseries-keys</label>
+  <mat-form-field floatLabel="always" class="mat-block" style="padding-bottom: 16px;">
+    <mat-label></mat-label>
+    <mat-chip-list #latestTimeseriesChipList>
+      <mat-chip
+        *ngFor="let key of deleteTimeseriesConfigForm.get('keys').value;"
+        (removed)="removeKey(key, 'keys')">
+        {{key}}
+        <mat-icon matChipRemove>close</mat-icon>
+      </mat-chip>
+      <input matInput type="text" placeholder="{{'tb.rulenode.timeseries-key' | translate}}"
+             style="max-width: 200px;"
+             [matChipInputFor]="latestTimeseriesChipList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             (matChipInputTokenEnd)="addKey($event, 'keys')"
+             [matChipInputAddOnBlur]="true">
+    </mat-chip-list>
+    <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
+  </mat-form-field>
+  <mat-checkbox formControlName="deleteAllDataForKeys" style="padding-bottom: 8px;">
+    {{ 'tb.rulenode.delete-all-data-for-keys' | translate }}
+  </mat-checkbox>
+  <mat-checkbox *ngIf="deleteTimeseriesConfigForm.get('deleteAllDataForKeys').value === false" formControlName="rewriteLatestIfDeleted" style="padding-bottom: 8px;">
+    {{ 'tb.rulenode.rewrite-latest-if-deleted' | translate }}
+  </mat-checkbox>
+  <div *ngIf="deleteTimeseriesConfigForm.get('deleteAllDataForKeys').value === false">
+    <mat-checkbox formControlName="useMetadataIntervalPatterns" style="padding-bottom: 8px;">
+      {{ 'tb.rulenode.use-metadata-interval-patterns' | translate }}
+    </mat-checkbox>
+    <div class="tb-hint" style="padding-bottom: 16px;" translate>tb.rulenode.use-metadata-interval-patterns-hint</div>
+    <div fxLayout="column" *ngIf="deleteTimeseriesConfigForm.get('useMetadataIntervalPatterns').value === false; else intervalPattern">
+      <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="8px">
+        <mat-form-field fxFlex class="mat-block">
+          <mat-label translate>tb.rulenode.start-interval</mat-label>
+          <input type="number" step="1" min="1" max="2147483647" matInput formControlName="startTs" required>
+          <mat-error *ngIf="deleteTimeseriesConfigForm.get('startTs').hasError('required')">
+            {{ 'tb.rulenode.start-interval-value-required' | translate }}
+          </mat-error>
+          <mat-error *ngIf="deleteTimeseriesConfigForm.get('startTs').hasError('min')">
+            {{ 'tb.rulenode.time-value-range' | translate }}
+          </mat-error>
+          <mat-error *ngIf="deleteTimeseriesConfigForm.get('startTs').hasError('max')">
+            {{ 'tb.rulenode.time-value-range' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex class="mat-block">
+          <mat-label translate>tb.rulenode.start-interval-time-unit</mat-label>
+          <mat-select formControlName="startTsTimeUnit" required>
+            <mat-option *ngFor="let timeUnit of timeUnits" [value]="timeUnit">
+              {{ timeUnitsTranslationMap.get(timeUnit) | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="8px">
+        <mat-form-field fxFlex class="mat-block">
+          <mat-label translate>tb.rulenode.end-interval</mat-label>
+          <input type="number" step="1" min="1" max="2147483647" matInput formControlName="endTs" required>
+          <mat-error *ngIf="deleteTimeseriesConfigForm.get('endTs').hasError('required')">
+            {{ 'tb.rulenode.end-interval-value-required' | translate }}
+          </mat-error>
+          <mat-error *ngIf="deleteTimeseriesConfigForm.get('endTs').hasError('min')">
+            {{ 'tb.rulenode.time-value-range' | translate }}
+          </mat-error>
+          <mat-error *ngIf="deleteTimeseriesConfigForm.get('endTs').hasError('max')">
+            {{ 'tb.rulenode.time-value-range' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex class="mat-block">
+          <mat-label translate>tb.rulenode.end-interval-time-unit</mat-label>
+          <mat-select formControlName="endTsTimeUnit" required>
+            <mat-option *ngFor="let timeUnit of timeUnits" [value]="timeUnit">
+              {{ timeUnitsTranslationMap.get(timeUnit) | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <ng-template #intervalPattern>
+      <mat-form-field class="mat-block" style="padding-bottom: 16px;">
+        <mat-label translate>tb.rulenode.start-interval-pattern</mat-label>
+        <input matInput formControlName="startTsIntervalPattern" required>
+        <mat-error *ngIf="deleteTimeseriesConfigForm.get('startTsIntervalPattern').hasError('required')">
+          {{ 'tb.rulenode.start-interval-pattern-required' | translate }}
+        </mat-error>
+        <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
+      </mat-form-field>
+      <mat-form-field class="mat-block" style="padding-bottom: 16px;">
+        <mat-label translate>tb.rulenode.end-interval-pattern</mat-label>
+        <input matInput formControlName="endTsIntervalPattern" required>
+        <mat-error *ngIf="deleteTimeseriesConfigForm.get('endTsIntervalPattern').hasError('required')">
+          {{ 'tb.rulenode.end-interval-pattern-required' | translate }}
+        </mat-error>
+        <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
+      </mat-form-field>
+    </ng-template>
+  </div>
+
+</section>

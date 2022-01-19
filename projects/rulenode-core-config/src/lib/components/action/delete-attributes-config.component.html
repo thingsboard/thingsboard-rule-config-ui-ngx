@@ -1,0 +1,29 @@
+<section [formGroup]="deleteAttributesConfigForm" fxLayout="column">
+  <mat-form-field fxFlex class="mat-block">
+    <mat-label translate>attribute.attributes-scope</mat-label>
+    <mat-select formControlName="scope" required>
+      <mat-option *ngFor="let scope of attributeScopes" [value]="scope">
+        {{ telemetryTypeTranslationsMap.get(scope) | translate }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <label translate class="tb-title no-padding">tb.rulenode.attribute-keys</label>
+  <mat-form-field floatLabel="always" class="mat-block" style="padding-bottom: 16px;">
+    <mat-label></mat-label>
+    <mat-chip-list #attributesKeyChipList>
+      <mat-chip
+        *ngFor="let key of deleteAttributesConfigForm.get('attributesKeys').value;"
+        (removed)="removeKey(key, 'attributesKeys')">
+        {{key}}
+        <mat-icon matChipRemove>close</mat-icon>
+      </mat-chip>
+      <input matInput type="text" placeholder="{{'tb.rulenode.attribute-key' | translate}}"
+             style="max-width: 200px;"
+             [matChipInputFor]="attributesKeyChipList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             (matChipInputTokenEnd)="addKey($event, 'attributesKeys')"
+             [matChipInputAddOnBlur]="true">
+    </mat-chip-list>
+    <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
+  </mat-form-field>
+</section>

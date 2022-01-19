@@ -33,6 +33,8 @@ import { DeviceProfileConfigComponent } from './device-profile-config.component'
 import { SendSmsConfigComponent } from './send-sms-config.component';
 import { PushToEdgeConfigComponent } from './push-to-edge-config.component';
 import { PushToCloudConfigComponent } from './push-to-cloud-config.component';
+import { DeleteAttributesConfigComponent } from './delete-attributes-config.component';
+import { DeleteTimeseriesConfigComponent } from './delete-timeseries-config.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { PushToCloudConfigComponent } from './push-to-cloud-config.component';
     CreateRelationConfigComponent,
     MsgDelayConfigComponent,
     DeleteRelationConfigComponent,
+    DeleteAttributesConfigComponent,
+    DeleteTimeseriesConfigComponent,
     GeneratorConfigComponent,
     GpsGeoActionConfigComponent,
     MsgCountConfigComponent,
@@ -84,6 +88,8 @@ import { PushToCloudConfigComponent } from './push-to-cloud-config.component';
     CreateRelationConfigComponent,
     MsgDelayConfigComponent,
     DeleteRelationConfigComponent,
+    DeleteAttributesConfigComponent,
+    DeleteTimeseriesConfigComponent,
     GeneratorConfigComponent,
     GpsGeoActionConfigComponent,
     MsgCountConfigComponent,
