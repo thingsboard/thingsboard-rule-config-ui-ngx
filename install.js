@@ -17,7 +17,7 @@ function projectRoot() {
 }
 
 function sourcePackage() {
-  return path.join(projectRoot(), 'dist', 'rulenode-core-config', 'fesm2015', 'rulenode-core-config.js');
+  return path.join(projectRoot(), 'dist', 'rulenode-core-config', 'system', 'rulenode-core-config.js');
 }
 
 function targetPackage() {
