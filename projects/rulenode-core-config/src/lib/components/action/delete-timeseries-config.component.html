@@ -3,8 +3,8 @@
     <mat-label translate>tb.rulenode.timeseries-keys</mat-label>
     <mat-chip-list #latestTimeseriesChipList required>
       <mat-chip
-        *ngFor="let key of deleteTimeseriesConfigForm.get('keys').value;"
-        (removed)="removeKey(key, 'keys')">
+        *ngFor="let key of deleteTimeseriesConfigForm.get('keysPatterns').value;"
+        (removed)="removeKey(key, 'keysPatterns')">
         {{key}}
         <mat-icon matChipRemove>close</mat-icon>
       </mat-chip>
@@ -12,10 +12,10 @@
              style="max-width: 200px;"
              [matChipInputFor]="latestTimeseriesChipList"
              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-             (matChipInputTokenEnd)="addKey($event, 'keys')"
+             (matChipInputTokenEnd)="addKey($event, 'keysPatterns')"
              [matChipInputAddOnBlur]="true">
     </mat-chip-list>
-    <mat-error *ngIf="deleteTimeseriesConfigForm.get('keys').hasError('required')">
+    <mat-error *ngIf="deleteTimeseriesConfigForm.get('keysPatterns').hasError('required')">
       {{ 'tb.rulenode.timeseries-keys-required' | translate }}
     </mat-error>
     <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>

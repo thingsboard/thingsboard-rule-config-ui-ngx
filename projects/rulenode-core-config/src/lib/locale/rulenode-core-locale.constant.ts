@@ -447,7 +447,9 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
             'for value from metadata, <code><span style="color: #000;">$[</span>messageKey<span style="color: #000;">]</span></code> ' +
             'for value from message body to substitute "Source" and "Target" key names',
           'delete-all-data-for-keys': 'Delete all data for keys',
-          'rewrite-latest-if-deleted': 'Rewrite latest if deleted'
+          'rewrite-latest-if-deleted': 'Rewrite latest if deleted',
+          'attributes-scope-pattern': 'Attributes scope pattern',
+          'attributes-scope-pattern-required': 'Attributes scope pattern is required',
         },
         'key-val': {
           key: 'Key',

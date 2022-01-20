@@ -36,19 +36,9 @@ export class DeleteAttributesConfigComponent extends RuleNodeConfigurationCompon
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.deleteAttributesConfigForm = this.fb.group({
-      scope: [configuration ? configuration.scope: AttributeScope.SERVER_SCOPE, Validators.required],
-      attributesKeys: [configuration ? configuration.attributesKeys: null, Validators.required]
+      scopePattern: [configuration ? configuration.scopePattern: null, Validators.required],
+      keysPatterns: [configuration ? configuration.keysPatterns: null, Validators.required]
     });
-  }
-
-  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
-    if (!configuration?.scope) {
-      if (!configuration) {
-        configuration = {};
-      }
-      configuration.scope = AttributeScope.SERVER_SCOPE;
-    }
-    return configuration;
   }
 
   removeKey(key: string, keysField: string): void {
