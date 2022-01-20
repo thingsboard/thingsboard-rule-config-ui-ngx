@@ -1,8 +1,7 @@
-<section [formGroup]="deleteTimeseriesConfigForm" fxLayout="column" style="min-width: 760px">
-  <label translate class="tb-title no-padding">tb.rulenode.timeseries-keys</label>
+<section [formGroup]="deleteTimeseriesConfigForm" fxLayout="column">
   <mat-form-field floatLabel="always" class="mat-block" style="padding-bottom: 16px;">
-    <mat-label></mat-label>
-    <mat-chip-list #latestTimeseriesChipList>
+    <mat-label translate>tb.rulenode.timeseries-keys</mat-label>
+    <mat-chip-list #latestTimeseriesChipList required>
       <mat-chip
         *ngFor="let key of deleteTimeseriesConfigForm.get('keys').value;"
         (removed)="removeKey(key, 'keys')">
@@ -16,6 +15,9 @@
              (matChipInputTokenEnd)="addKey($event, 'keys')"
              [matChipInputAddOnBlur]="true">
     </mat-chip-list>
+    <mat-error *ngIf="deleteTimeseriesConfigForm.get('keys').hasError('required')">
+      {{ 'tb.rulenode.timeseries-keys-required' | translate }}
+    </mat-error>
     <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
   <mat-checkbox formControlName="deleteAllDataForKeys" style="padding-bottom: 8px;">

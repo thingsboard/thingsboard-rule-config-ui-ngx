@@ -38,7 +38,7 @@ export class DeleteTimeseriesConfigComponent extends RuleNodeConfigurationCompon
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.deleteTimeseriesConfigForm = this.fb.group({
-      keys: [configuration ? configuration.keys : null, []],
+      keys: [configuration ? configuration.keys : null, Validators.required],
       deleteAllDataForKeys: [configuration ? configuration.deleteAllDataForKeys : false, []],
       rewriteLatestIfDeleted: [configuration ? configuration.rewriteLatestIfDeleted : false, []],
       useMetadataIntervalPatterns: [configuration ? configuration.useMetadataIntervalPatterns : false, []],

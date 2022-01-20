@@ -7,10 +7,9 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <label translate class="tb-title no-padding">tb.rulenode.attribute-keys</label>
   <mat-form-field floatLabel="always" class="mat-block" style="padding-bottom: 16px;">
-    <mat-label></mat-label>
-    <mat-chip-list #attributesKeyChipList>
+    <mat-label translate>tb.rulenode.attribute-keys</mat-label>
+    <mat-chip-list #attributesKeyChipList required>
       <mat-chip
         *ngFor="let key of deleteAttributesConfigForm.get('attributesKeys').value;"
         (removed)="removeKey(key, 'attributesKeys')">
@@ -24,6 +23,9 @@
              (matChipInputTokenEnd)="addKey($event, 'attributesKeys')"
              [matChipInputAddOnBlur]="true">
     </mat-chip-list>
+    <mat-error *ngIf="deleteAttributesConfigForm.get('attributesKeys').hasError('required')">
+      {{ 'tb.rulenode.attribute-keys-required' | translate }}
+    </mat-error>
     <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
 </section>

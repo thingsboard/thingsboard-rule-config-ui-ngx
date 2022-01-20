@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import {
+  AttributeScope,
   RuleNodeConfiguration,
   RuleNodeConfigurationComponent,
-  AttributeScope, telemetryTypeTranslations
+  telemetryTypeTranslations,
+  toTelemetryType
 } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -34,9 +36,19 @@ export class DeleteAttributesConfigComponent extends RuleNodeConfigurationCompon
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.deleteAttributesConfigForm = this.fb.group({
-      scope: [configuration ? configuration.scope: null, [Validators.required]],
-      attributesKeys: [configuration ? configuration.attributesKeys: null]
+      scope: [configuration ? configuration.scope: AttributeScope.SERVER_SCOPE, Validators.required],
+      attributesKeys: [configuration ? configuration.attributesKeys: null, Validators.required]
     });
+  }
+
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    if (!configuration?.scope) {
+      if (!configuration) {
+        configuration = {};
+      }
+      configuration.scope = AttributeScope.SERVER_SCOPE;
+    }
+    return configuration;
   }
 
   removeKey(key: string, keysField: string): void {
