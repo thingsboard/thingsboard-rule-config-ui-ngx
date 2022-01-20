@@ -6,6 +6,8 @@ export * from './clear-alarm-config.component';
 export * from './create-alarm-config.component';
 export * from './create-relation-config.component';
 export * from './delete-relation-config.component';
+export * from './delete-attributes-config.component';
+export * from './delete-timeseries-config.component';
 export * from './device-profile-config.component';
 export * from './generator-config.component';
 export * from './gps-geo-action-config.component';

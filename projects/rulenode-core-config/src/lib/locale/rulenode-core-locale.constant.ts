@@ -59,6 +59,9 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'notify-device-hint': 'If the message arrives from the device, we will push it back to the device by default.',
           'latest-timeseries': 'Latest timeseries',
           'timeseries-key': 'Timeseries key',
+          'timeseries-keys': 'Timeseries keys',
+          'attribute-key': 'Attribute key',
+          'attribute-keys': 'Attribute keys',
           'data-keys': 'Message data',
           'metadata-keys': 'Message metadata',
           'relations-query': 'Relations query',
@@ -441,6 +444,8 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'kv-map-pattern-hint': 'Hint: use <code><span style="color: #000;">$&#123;</span>metadataKey<span style="color: #000;">&#125;</span></code> ' +
             'for value from metadata, <code><span style="color: #000;">$[</span>messageKey<span style="color: #000;">]</span></code> ' +
             'for value from message body to substitute "Source" and "Target" key names',
+          'delete-all-data-for-keys': 'Delete all data for keys',
+          'rewrite-latest-if-deleted': 'Rewrite latest if deleted'
         },
         'key-val': {
           key: 'Key',
