@@ -1,21 +1,21 @@
 <section [formGroup]="getOrCreateDeviceConfigForm" fxLayout="column">
   <mat-form-field fxFlex class="mat-block" >
     <mat-label translate>tb.rulenode.entity-name-pattern</mat-label>
-    <input required matInput formControlName="name">
-    <mat-error *ngIf="getOrCreateDeviceConfigForm.get('name').hasError('required') ||
-                      getOrCreateDeviceConfigForm.get('name').hasError('pattern')">
+    <input required matInput formControlName="namePattern">
+    <mat-error *ngIf="getOrCreateDeviceConfigForm.get('namePattern').hasError('required') ||
+                      getOrCreateDeviceConfigForm.get('namePattern').hasError('pattern')">
       {{ 'tb.rulenode.entity-name-pattern-required' | translate }}
     </mat-error>
     <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
   <mat-form-field fxFlex class="mat-block">
     <mat-label translate>tb.rulenode.entity-type-pattern</mat-label>
-    <input matInput formControlName="type">
+    <input matInput formControlName="typePattern">
     <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
   <mat-form-field fxFlex class="mat-block" style="padding-bottom: 16px;">
     <mat-label translate>tb.rulenode.entity-label-pattern</mat-label>
-    <input matInput formControlName="label">
+    <input matInput formControlName="labelPattern">
     <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
   <mat-checkbox formControlName="isGateway">
@@ -26,7 +26,7 @@
   </mat-checkbox>
   <mat-form-field fxFlex class="mat-block" >
     <mat-label translate>tb.rulenode.entity-description-pattern</mat-label>
-    <textarea matInput formControlName="description" rows="2"></textarea>
+    <textarea matInput formControlName="descriptionPattern" rows="2"></textarea>
     <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
 </section>

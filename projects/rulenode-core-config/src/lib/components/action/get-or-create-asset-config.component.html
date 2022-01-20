@@ -1,30 +1,30 @@
 <section [formGroup]="getOrCreateAssetConfigForm" fxLayout="column">
   <mat-form-field fxFlex class="mat-block" >
     <mat-label translate>tb.rulenode.entity-name-pattern</mat-label>
-    <input required matInput formControlName="name">
-    <mat-error *ngIf="getOrCreateAssetConfigForm.get('name').hasError('required') ||
-                      getOrCreateAssetConfigForm.get('name').hasError('pattern')">
+    <input required matInput formControlName="namePattern">
+    <mat-error *ngIf="getOrCreateAssetConfigForm.get('namePattern').hasError('required') ||
+                      getOrCreateAssetConfigForm.get('namePattern').hasError('pattern')">
       {{ 'tb.rulenode.entity-name-pattern-required' | translate }}
     </mat-error>
     <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
   <mat-form-field fxFlex class="mat-block">
     <mat-label translate>tb.rulenode.entity-type-pattern</mat-label>
-    <input required matInput formControlName="type">
-    <mat-error *ngIf="getOrCreateAssetConfigForm.get('name').hasError('required') ||
-                      getOrCreateAssetConfigForm.get('name').hasError('pattern')">
-      {{ 'tb.rulenode.entity-name-pattern-required' | translate }}
+    <input required matInput formControlName="typePattern">
+    <mat-error *ngIf="getOrCreateAssetConfigForm.get('typePattern').hasError('required') ||
+                      getOrCreateAssetConfigForm.get('typePattern').hasError('pattern')">
+      {{ 'tb.rulenode.entity-type-pattern-required' | translate }}
     </mat-error>
     <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
   <mat-form-field fxFlex class="mat-block" >
     <mat-label translate>tb.rulenode.entity-label-pattern</mat-label>
-    <input matInput formControlName="label">
+    <input matInput formControlName="labelPattern">
     <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
   <mat-form-field fxFlex class="mat-block" >
     <mat-label translate>tb.rulenode.entity-description-pattern</mat-label>
-    <textarea matInput formControlName="description" rows="2"></textarea>
+    <textarea matInput formControlName="descriptionPattern" rows="2"></textarea>
     <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
 </section>

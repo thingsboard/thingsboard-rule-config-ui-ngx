@@ -27,18 +27,18 @@ export class GetOrCreateAssetConfigComponent extends RuleNodeConfigurationCompon
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.getOrCreateAssetConfigForm = this.fb.group({
-      name: [configuration ? configuration.name : null, [Validators.required, Validators.pattern(/.*\S.*/)]],
-      type: [configuration ? configuration.type : null, [Validators.required, Validators.pattern(/.*\S.*/)]],
-      label: [configuration ? configuration.label : null, []],
-      description: [configuration ? configuration.description : null, []],
+      namePattern: [configuration ? configuration.namePattern : null, [Validators.required, Validators.pattern(/.*\S.*/)]],
+      typePattern: [configuration ? configuration.typePattern : null, [Validators.required, Validators.pattern(/.*\S.*/)]],
+      labelPattern: [configuration ? configuration.labelPattern : null, []],
+      descriptionPattern: [configuration ? configuration.descriptionPattern : null, []],
     });
   }
 
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
-    configuration.name = configuration.name ? configuration.name.trim() : null;
-    configuration.type = configuration.type ? configuration.type.trim() : null;
-    configuration.label = configuration.type ? configuration.label.trim() : null;
-    configuration.description = configuration.type ? configuration.description.trim() : null;
+    configuration.namePattern = configuration.namePattern ? configuration.namePattern.trim() : null;
+    configuration.typePattern = configuration.typePattern ? configuration.typePattern.trim() : null;
+    configuration.labelPattern = configuration.labelPattern ? configuration.labelPattern.trim() : null;
+    configuration.descriptionPattern = configuration.descriptionPattern ? configuration.descriptionPattern.trim() : null;
     return configuration;
   }
 }
