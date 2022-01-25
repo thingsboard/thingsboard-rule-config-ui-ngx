@@ -126,6 +126,9 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
   }
 
   protected onValidate() {
-    this.jsFuncComponent.validateOnSubmit();
+    const useMessageAlarmData: boolean = this.createAlarmConfigForm.get('useMessageAlarmData').value;
+    if (!useMessageAlarmData) {
+      this.jsFuncComponent.validateOnSubmit();
+    }
   }
 }

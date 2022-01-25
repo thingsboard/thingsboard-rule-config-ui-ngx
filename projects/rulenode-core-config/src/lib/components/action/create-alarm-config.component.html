@@ -2,7 +2,7 @@
   <mat-checkbox formControlName="useMessageAlarmData" style="padding-bottom: 16px;">
     {{ 'tb.rulenode.use-message-alarm-data' | translate }}
   </mat-checkbox>
-  <section fxLayout="column" *ngIf="createAlarmConfigForm.get('useMessageAlarmData').value === false">
+  <section fxLayout="column" [fxShow]="createAlarmConfigForm.get('useMessageAlarmData').value === false">
     <label translate class="tb-title no-padding">tb.rulenode.alarm-details-builder</label>
     <tb-js-func #jsFuncComponent
                 formControlName="alarmDetailsBuildJs"
