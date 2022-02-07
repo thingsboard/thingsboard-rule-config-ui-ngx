@@ -370,6 +370,8 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'latitude-key-name-required': 'Latitude key name is required.',
           'longitude-key-name-required': 'Longitude key name is required.',
           'fetch-perimeter-info-from-message-metadata': 'Fetch perimeter information from message metadata',
+          'perimeter-key-name': 'Perimeter key name',
+          'perimeter-key-name-required': 'Perimeter key name is required.',
           'perimeter-circle': 'Circle',
           'perimeter-polygon': 'Polygon',
           'perimeter-type': 'Perimeter type',

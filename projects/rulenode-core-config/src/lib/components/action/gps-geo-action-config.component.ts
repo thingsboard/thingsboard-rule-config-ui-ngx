@@ -44,8 +44,9 @@ export class GpsGeoActionConfigComponent extends RuleNodeConfigurationComponent 
     this.geoActionConfigForm = this.fb.group({
       latitudeKeyName: [configuration ? configuration.latitudeKeyName : null, [Validators.required]],
       longitudeKeyName: [configuration ? configuration.longitudeKeyName : null, [Validators.required]],
+      perimeterType: [configuration ? configuration.perimeterType : null, [Validators.required]],
       fetchPerimeterInfoFromMessageMetadata: [configuration ? configuration.fetchPerimeterInfoFromMessageMetadata : false, []],
-      perimeterType: [configuration ? configuration.perimeterType : null, []],
+      perimeterKeyName: [configuration ? configuration.perimeterKeyName : null, []],
       centerLatitude: [configuration ? configuration.centerLatitude : null, []],
       centerLongitude: [configuration ? configuration.centerLatitude : null, []],
       range: [configuration ? configuration.range : null, []],
@@ -68,9 +69,9 @@ export class GpsGeoActionConfigComponent extends RuleNodeConfigurationComponent 
     const fetchPerimeterInfoFromMessageMetadata: boolean = this.geoActionConfigForm.get('fetchPerimeterInfoFromMessageMetadata').value;
     const perimeterType: PerimeterType = this.geoActionConfigForm.get('perimeterType').value;
     if (fetchPerimeterInfoFromMessageMetadata) {
-      this.geoActionConfigForm.get('perimeterType').setValidators([]);
+      this.geoActionConfigForm.get('perimeterKeyName').setValidators([Validators.required]);
     } else {
-      this.geoActionConfigForm.get('perimeterType').setValidators([Validators.required]);
+      this.geoActionConfigForm.get('perimeterKeyName').setValidators([]);
     }
     if (!fetchPerimeterInfoFromMessageMetadata && perimeterType === PerimeterType.CIRCLE) {
       this.geoActionConfigForm.get('centerLatitude').setValidators([Validators.required,
@@ -90,7 +91,7 @@ export class GpsGeoActionConfigComponent extends RuleNodeConfigurationComponent 
     } else {
       this.geoActionConfigForm.get('polygonsDefinition').setValidators([]);
     }
-    this.geoActionConfigForm.get('perimeterType').updateValueAndValidity({emitEvent: false});
+    this.geoActionConfigForm.get('perimeterKeyName').updateValueAndValidity({emitEvent});
     this.geoActionConfigForm.get('centerLatitude').updateValueAndValidity({emitEvent});
     this.geoActionConfigForm.get('centerLongitude').updateValueAndValidity({emitEvent});
     this.geoActionConfigForm.get('range').updateValueAndValidity({emitEvent});

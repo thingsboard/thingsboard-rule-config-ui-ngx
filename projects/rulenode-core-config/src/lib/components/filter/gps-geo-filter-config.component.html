@@ -13,19 +13,24 @@
       {{ 'tb.rulenode.longitude-key-name-required' | translate }}
     </mat-error>
   </mat-form-field>
+  <mat-form-field fxFlex class="mat-block">
+    <mat-label translate>tb.rulenode.perimeter-type</mat-label>
+    <mat-select formControlName="perimeterType" required>
+      <mat-option *ngFor="let type of perimeterTypes" [value]="type">
+        {{ perimeterTypeTranslationMap.get(type) | translate }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
   <mat-checkbox fxFlex formControlName="fetchPerimeterInfoFromMessageMetadata" style="padding-bottom: 16px;">
     {{ 'tb.rulenode.fetch-perimeter-info-from-message-metadata' | translate }}
   </mat-checkbox>
-  <div fxLayout="row" *ngIf="!geoFilterConfigForm.get('fetchPerimeterInfoFromMessageMetadata').value">
-    <mat-form-field fxFlex class="mat-block">
-      <mat-label translate>tb.rulenode.perimeter-type</mat-label>
-      <mat-select formControlName="perimeterType" required>
-        <mat-option *ngFor="let type of perimeterTypes" [value]="type">
-          {{ perimeterTypeTranslationMap.get(type) | translate }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
+  <mat-form-field *ngIf="geoFilterConfigForm.get('fetchPerimeterInfoFromMessageMetadata').value" class="mat-block">
+    <mat-label translate>tb.rulenode.perimeter-key-name</mat-label>
+    <input matInput formControlName="perimeterKeyName" required>
+    <mat-error *ngIf="geoFilterConfigForm.get('perimeterKeyName').hasError('required')">
+      {{ 'tb.rulenode.perimeter-key-name-required' | translate }}
+    </mat-error>
+  </mat-form-field>
   <div fxLayout="column"
        *ngIf="geoFilterConfigForm.get('perimeterType').value === perimeterType.CIRCLE &&
        !geoFilterConfigForm.get('fetchPerimeterInfoFromMessageMetadata').value">
