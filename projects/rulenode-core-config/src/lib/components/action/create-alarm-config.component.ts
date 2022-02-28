@@ -43,6 +43,7 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
     this.createAlarmConfigForm = this.fb.group({
       alarmDetailsBuildJs: [configuration ? configuration.alarmDetailsBuildJs : null, [Validators.required]],
       useMessageAlarmData: [configuration ? configuration.useMessageAlarmData : false, []],
+      overwriteAlarmDetails: [configuration ? configuration.overwriteAlarmDetails : false, []],
       alarmType: [configuration ? configuration.alarmType : null, []],
       severity: [configuration ? configuration.severity : null, []],
       propagate: [configuration ? configuration.propagate : false, []],
@@ -127,7 +128,8 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
 
   protected onValidate() {
     const useMessageAlarmData: boolean = this.createAlarmConfigForm.get('useMessageAlarmData').value;
-    if (!useMessageAlarmData) {
+    const overwriteAlarmDetails: boolean = this.createAlarmConfigForm.get('overwriteAlarmDetails').value;
+    if (!useMessageAlarmData || overwriteAlarmDetails) {
       this.jsFuncComponent.validateOnSubmit();
     }
   }

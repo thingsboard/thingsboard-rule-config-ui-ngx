@@ -284,6 +284,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
             'If selected, rule node use start and end interval patterns from message metadata or data ' +
             'assuming that intervals are in the milliseconds.',
           'use-message-alarm-data': 'Use message alarm data',
+          'overwrite-alarm-details': 'Overwrite alarm details',
           'use-alarm-severity-pattern': 'Use alarm severity pattern',
           'check-all-keys': 'Check that all selected keys are present',
           'check-all-keys-hint': 'If selected, checks that all specified keys are present in the message data and metadata.',

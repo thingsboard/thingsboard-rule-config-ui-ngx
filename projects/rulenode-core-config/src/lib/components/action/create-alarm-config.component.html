@@ -2,7 +2,12 @@
   <mat-checkbox formControlName="useMessageAlarmData" style="padding-bottom: 16px;">
     {{ 'tb.rulenode.use-message-alarm-data' | translate }}
   </mat-checkbox>
-  <section fxLayout="column" [fxShow]="createAlarmConfigForm.get('useMessageAlarmData').value === false">
+  <mat-checkbox formControlName="overwriteAlarmDetails" [fxShow]="createAlarmConfigForm.get('useMessageAlarmData').value === true"
+                style="padding-bottom: 16px;">
+    {{ 'tb.rulenode.overwrite-alarm-details' | translate }}
+  </mat-checkbox>
+  <section fxLayout="column" [fxShow]="createAlarmConfigForm.get('useMessageAlarmData').value === false ||
+                                       createAlarmConfigForm.get('overwriteAlarmDetails').value === true">
     <label translate class="tb-title no-padding">tb.rulenode.alarm-details-builder</label>
     <tb-js-func #jsFuncComponent
                 formControlName="alarmDetailsBuildJs"
@@ -16,6 +21,8 @@
         {{ 'tb.rulenode.test-details-function' | translate }}
       </button>
     </div>
+  </section>
+  <section fxLayout="column" [fxShow]="createAlarmConfigForm.get('useMessageAlarmData').value === false">
     <mat-form-field fxFlex style="padding-bottom: 16px;">
       <mat-label translate>tb.rulenode.alarm-type</mat-label>
       <input required matInput formControlName="alarmType">
