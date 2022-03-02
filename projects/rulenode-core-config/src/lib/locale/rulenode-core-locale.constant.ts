@@ -430,7 +430,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'tell-failure-if-delta-is-negative': 'Tell Failure if delta is negative',
           'add-period-between-msgs': 'Add period between messages',
           'period-value-key': 'Period value key',
-          'period-key-required': 'Period value key is required.',
+          'period-value-key-required': 'Period value key is required.',
           'general-pattern-hint': 'Hint: use <code><span style="color: #000;">$&#123;</span>metadataKey<span style="color: #000;">&#125;</span></code> ' +
             'for value from metadata, <code><span style="color: #000;">$[</span>messageKey<span style="color: #000;">]</span></code> ' +
             'for value from message body',
