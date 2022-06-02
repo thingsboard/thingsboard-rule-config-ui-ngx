@@ -5710,9 +5710,9 @@ ngx-drag-drop@^2.0.0:
   dependencies:
     tslib "^1.9.0"
 
-"ngx-flowchart@git://github.com/thingsboard/ngx-flowchart.git#release/1.0.0":
+"ngx-flowchart@https://github.com/thingsboard/ngx-flowchart.git#release/1.0.0":
   version "0.0.1"
-  resolved "git://github.com/thingsboard/ngx-flowchart.git#aac96f7e0490a386d58864d7819873e7c63cbb48"
+  resolved "https://github.com/thingsboard/ngx-flowchart.git#aac96f7e0490a386d58864d7819873e7c63cbb48"
   dependencies:
     tslib "^2.2.0"
 
@@ -8141,9 +8141,9 @@ text-table@0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
-"thingsboard@https://github.com/thingsboard/thingsboard-ui-types.git#release/3.3.4":
+"thingsboard@https://github.com/thingsboard/thingsboard-ui-types.git#develop/3.4":
   version "3.3.4"
-  resolved "https://github.com/thingsboard/thingsboard-ui-types.git#07d7f904160f8b2907f388ef949920c46ed8a399"
+  resolved "https://github.com/thingsboard/thingsboard-ui-types.git#9a155321a32901ee3cacafa86d8d8ac1570d428b"
   dependencies:
     "@angular/animations" "^12.2.13"
     "@angular/cdk" "^12.2.13"
@@ -8177,7 +8177,7 @@ text-table@0.2.0:
     ngx-color-picker "^11.0.0"
     ngx-daterangepicker-material "^5.0.1"
     ngx-drag-drop "^2.0.0"
-    ngx-flowchart "git://github.com/thingsboard/ngx-flowchart.git#release/1.0.0"
+    ngx-flowchart "https://github.com/thingsboard/ngx-flowchart.git#release/1.0.0"
     ngx-hm-carousel "^2.0.1"
     ngx-markdown "^12.0.1"
     ngx-sharebuttons "^9.0.0"
