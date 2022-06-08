@@ -15,41 +15,25 @@
       style="padding-bottom: 15px;">
     </tb-relations-query-config>
   </section>
-  <section fxLayout="column"
-           *ngIf="changeOriginatorConfigForm.get('originatorSource').value === originatorSource.DEVICE ||
+    <div fxLayoutGap="8px" fxLayout="column" *ngIf="changeOriginatorConfigForm.get('originatorSource').value === originatorSource.DEVICE ||
            changeOriginatorConfigForm.get('originatorSource').value === originatorSource.ASSET">
-    <div fxLayoutGap="8px" fxLayout="column">
-      <mat-form-field fxFlex floatLabel="always" class="mat-block">
+      <mat-form-field class="mat-block">
         <mat-label translate>tb.rulenode.entity-name-pattern</mat-label>
-        <input matInput
-               type="text"
-               placeholder="{{ 'tb.rulenode.entity-name-pattern' | translate }}"
-               formControlName="entityNamePattern">
+        <input matInput formControlName="entityNamePattern" required>
         <mat-error *ngIf="changeOriginatorConfigForm.get('entityNamePattern').hasError('required')">
           {{ 'tb.rulenode.entity-name-pattern-required' | translate }}
         </mat-error>
+        <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
       </mat-form-field>
-      <mat-form-field fxFlex floatLabel="always" class="mat-block">
+      <mat-form-field class="mat-block">
         <mat-label translate>tb.rulenode.entity-type-pattern</mat-label>
-        <input matInput
-               type="text"
-               placeholder="{{ 'tb.rulenode.entity-type-pattern' | translate }}"
-               formControlName="entityTypePattern">
+        <input matInput formControlName="entityTypePattern" required>
+        <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
       </mat-form-field>
-      <mat-form-field fxFlex floatLabel="always" class="mat-block">
+      <mat-form-field class="mat-block">
         <mat-label translate>tb.rulenode.entity-label-pattern</mat-label>
-        <input matInput
-               type="text"
-               placeholder="{{ 'tb.rulenode.entity-label-pattern' | translate }}"
-               formControlName="entityLabelPattern">
-      </mat-form-field>
-      <mat-form-field fxFlex floatLabel="always" class="mat-block">
-        <mat-label translate>tb.rulenode.customer-name-pattern</mat-label>
-        <input matInput
-               type="text"
-               placeholder="{{ 'tb.rulenode.customer-name-pattern' | translate }}"
-               formControlName="customerNamePattern">
+        <input matInput formControlName="entityLabelPattern">
+        <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
       </mat-form-field>
     </div>
-  </section>
 </section>

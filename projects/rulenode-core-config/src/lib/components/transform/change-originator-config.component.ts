@@ -33,8 +33,7 @@ export class ChangeOriginatorConfigComponent extends RuleNodeConfigurationCompon
       relationsQuery: [configuration ? configuration.relationsQuery : null, []],
       entityNamePattern: [configuration ? configuration.entityNamePattern : null, []],
       entityTypePattern: [configuration ? configuration.entityTypePattern : null, []],
-      entityLabelPattern: [configuration ? configuration.entityLabelPattern : null, []],
-      customerNamePattern: [configuration ? configuration.customerNamePattern : null, []]
+      entityLabelPattern: [configuration ? configuration.entityLabelPattern : null, []]
     });
   }
 
@@ -47,14 +46,20 @@ export class ChangeOriginatorConfigComponent extends RuleNodeConfigurationCompon
     if (originatorSource && originatorSource === OriginatorSource.RELATED) {
       this.changeOriginatorConfigForm.get('relationsQuery').setValidators([Validators.required]);
       this.changeOriginatorConfigForm.get('entityNamePattern').setValidators([]);
+      this.changeOriginatorConfigForm.get('entityTypePattern').setValidators([]);
     } else if (originatorSource && (originatorSource === OriginatorSource.DEVICE || originatorSource === OriginatorSource.ASSET)) {
-      this.changeOriginatorConfigForm.get('entityNamePattern').setValidators([Validators.required]);
+      this.changeOriginatorConfigForm.get('entityNamePattern')
+        .setValidators([Validators.required, Validators.pattern('(.|\\s)*\\S(.|\\s)*'), Validators.maxLength(255)]);
+      this.changeOriginatorConfigForm.get('entityTypePattern')
+        .setValidators([Validators.required, Validators.pattern('(.|\\s)*\\S(.|\\s)*'), Validators.maxLength(255)]);
       this.changeOriginatorConfigForm.get('relationsQuery').setValidators([]);
     } else {
       this.changeOriginatorConfigForm.get('relationsQuery').setValidators([]);
       this.changeOriginatorConfigForm.get('entityNamePattern').setValidators([]);
+      this.changeOriginatorConfigForm.get('entityTypePattern').setValidators([]);
     }
     this.changeOriginatorConfigForm.get('relationsQuery').updateValueAndValidity({emitEvent});
     this.changeOriginatorConfigForm.get('entityNamePattern').updateValueAndValidity({emitEvent});
+    this.changeOriginatorConfigForm.get('entityTypePattern').updateValueAndValidity({emitEvent});
   }
 }
