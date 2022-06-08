@@ -30,7 +30,11 @@ export class ChangeOriginatorConfigComponent extends RuleNodeConfigurationCompon
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.changeOriginatorConfigForm = this.fb.group({
       originatorSource: [configuration ? configuration.originatorSource : null, [Validators.required]],
-      relationsQuery: [configuration ? configuration.relationsQuery : null, []]
+      relationsQuery: [configuration ? configuration.relationsQuery : null, []],
+      entityNamePattern: [configuration ? configuration.entityNamePattern : null, []],
+      entityTypePattern: [configuration ? configuration.entityTypePattern : null, []],
+      entityLabelPattern: [configuration ? configuration.entityLabelPattern : null, []],
+      customerNamePattern: [configuration ? configuration.customerNamePattern : null, []]
     });
   }
 
@@ -42,9 +46,15 @@ export class ChangeOriginatorConfigComponent extends RuleNodeConfigurationCompon
     const originatorSource: OriginatorSource = this.changeOriginatorConfigForm.get('originatorSource').value;
     if (originatorSource && originatorSource === OriginatorSource.RELATED) {
       this.changeOriginatorConfigForm.get('relationsQuery').setValidators([Validators.required]);
+      this.changeOriginatorConfigForm.get('entityNamePattern').setValidators([]);
+    } else if (originatorSource && (originatorSource === OriginatorSource.DEVICE || originatorSource === OriginatorSource.ASSET)) {
+      this.changeOriginatorConfigForm.get('entityNamePattern').setValidators([Validators.required]);
+      this.changeOriginatorConfigForm.get('relationsQuery').setValidators([]);
     } else {
       this.changeOriginatorConfigForm.get('relationsQuery').setValidators([]);
+      this.changeOriginatorConfigForm.get('entityNamePattern').setValidators([]);
     }
     this.changeOriginatorConfigForm.get('relationsQuery').updateValueAndValidity({emitEvent});
+    this.changeOriginatorConfigForm.get('entityNamePattern').updateValueAndValidity({emitEvent});
   }
 }

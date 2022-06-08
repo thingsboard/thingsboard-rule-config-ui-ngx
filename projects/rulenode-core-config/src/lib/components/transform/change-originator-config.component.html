@@ -15,4 +15,41 @@
       style="padding-bottom: 15px;">
     </tb-relations-query-config>
   </section>
+  <section fxLayout="column"
+           *ngIf="changeOriginatorConfigForm.get('originatorSource').value === originatorSource.DEVICE ||
+           changeOriginatorConfigForm.get('originatorSource').value === originatorSource.ASSET">
+    <div fxLayoutGap="8px" fxLayout="column">
+      <mat-form-field fxFlex floatLabel="always" class="mat-block">
+        <mat-label translate>tb.rulenode.entity-name-pattern</mat-label>
+        <input matInput
+               type="text"
+               placeholder="{{ 'tb.rulenode.entity-name-pattern' | translate }}"
+               formControlName="entityNamePattern">
+        <mat-error *ngIf="changeOriginatorConfigForm.get('entityNamePattern').hasError('required')">
+          {{ 'tb.rulenode.entity-name-pattern-required' | translate }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex floatLabel="always" class="mat-block">
+        <mat-label translate>tb.rulenode.entity-type-pattern</mat-label>
+        <input matInput
+               type="text"
+               placeholder="{{ 'tb.rulenode.entity-type-pattern' | translate }}"
+               formControlName="entityTypePattern">
+      </mat-form-field>
+      <mat-form-field fxFlex floatLabel="always" class="mat-block">
+        <mat-label translate>tb.rulenode.entity-label-pattern</mat-label>
+        <input matInput
+               type="text"
+               placeholder="{{ 'tb.rulenode.entity-label-pattern' | translate }}"
+               formControlName="entityLabelPattern">
+      </mat-form-field>
+      <mat-form-field fxFlex floatLabel="always" class="mat-block">
+        <mat-label translate>tb.rulenode.customer-name-pattern</mat-label>
+        <input matInput
+               type="text"
+               placeholder="{{ 'tb.rulenode.customer-name-pattern' | translate }}"
+               formControlName="customerNamePattern">
+      </mat-form-field>
+    </div>
+  </section>
 </section>
