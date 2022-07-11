@@ -26,7 +26,7 @@ export class CheckPointConfigComponent extends RuleNodeConfigurationComponent {
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.checkPointConfigForm = this.fb.group({
-      queueId: [configuration ? configuration.queueId : null, [Validators.required]]
+      queueName: [configuration ? configuration.queueName : null, [Validators.required]]
     });
   }
 
