@@ -444,6 +444,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'kv-map-pattern-hint': 'Hint: use <code><span style="color: #000;">$&#123;</span>metadataKey<span style="color: #000;">&#125;</span></code> ' +
             'for value from metadata, <code><span style="color: #000;">$[</span>messageKey<span style="color: #000;">]</span></code> ' +
             'for value from message body to substitute "Source" and "Target" key names',
+          'add-request-to-response-metadata': 'Add request to response metadata',
         },
         'key-val': {
           key: 'Key',
