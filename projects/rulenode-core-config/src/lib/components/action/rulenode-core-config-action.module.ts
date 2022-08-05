@@ -34,7 +34,6 @@ import { SendSmsConfigComponent } from './send-sms-config.component';
 import { PushToEdgeConfigComponent } from './push-to-edge-config.component';
 import { PushToCloudConfigComponent } from './push-to-cloud-config.component';
 import { DeleteAttributesConfigComponent } from './delete-attributes-config.component';
-import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -74,8 +73,7 @@ import { MatSliderModule } from '@angular/material/slider';
     CommonModule,
     SharedModule,
     HomeComponentsModule,
-    RulenodeCoreConfigCommonModule,
-    MatSliderModule
+    RulenodeCoreConfigCommonModule
   ],
   exports: [
     DeleteAttributesConfigComponent,
