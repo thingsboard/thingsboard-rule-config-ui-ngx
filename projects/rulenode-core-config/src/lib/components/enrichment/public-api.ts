@@ -9,5 +9,4 @@ export * from './related-attributes-config.component';
 export * from './tenant-attributes-config.component';
 export * from './fetch-device-credentials-config.component'
 
-
 export * from './rulenode-core-config-enrichment.module';

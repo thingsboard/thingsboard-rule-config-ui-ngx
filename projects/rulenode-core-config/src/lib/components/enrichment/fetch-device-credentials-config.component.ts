@@ -25,7 +25,6 @@ export class FetchDeviceCredentialsConfigComponent extends RuleNodeConfiguration
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.fetchDeviceCredentialsConfigForm = this.fb.group({
         fetchToMetadata: [configuration ? configuration.fetchToMetadata : null, []]
-      }
-    )
+    });
   }
 }
