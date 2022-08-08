@@ -56,6 +56,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'shared-attributes': 'Shared attributes',
           'server-attributes': 'Server attributes',
           'notify-device': 'Notify Device',
+          'fetch-to-metadata': 'Fetch to metadata',
           'notify-device-hint': 'If the message arrives from the device, we will push it back to the device by default.',
           'latest-timeseries': 'Latest timeseries',
           'timeseries-key': 'Timeseries key',

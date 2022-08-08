@@ -11,6 +11,7 @@ import { GetTelemetryFromDatabaseConfigComponent } from './get-telemetry-from-da
 import { RelatedAttributesConfigComponent } from './related-attributes-config.component';
 import { TenantAttributesConfigComponent } from './tenant-attributes-config.component';
 import { CalculateDeltaConfigComponent } from './calculate-delta-config.component';
+import { FetchDeviceCredentialsConfigComponent } from './fetch-device-credentials-config.component'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CalculateDeltaConfigComponent } from './calculate-delta-config.componen
     GetTelemetryFromDatabaseConfigComponent,
     RelatedAttributesConfigComponent,
     TenantAttributesConfigComponent,
-    CalculateDeltaConfigComponent
+    CalculateDeltaConfigComponent,
+    FetchDeviceCredentialsConfigComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,8 @@ import { CalculateDeltaConfigComponent } from './calculate-delta-config.componen
     GetTelemetryFromDatabaseConfigComponent,
     RelatedAttributesConfigComponent,
     TenantAttributesConfigComponent,
-    CalculateDeltaConfigComponent
+    CalculateDeltaConfigComponent,
+    FetchDeviceCredentialsConfigComponent
   ]
 })
 export class RulenodeCoreConfigEnrichmentModule {
