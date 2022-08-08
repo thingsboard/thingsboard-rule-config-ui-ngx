@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AppState } from '@core/public-api';
 import {
   AttributeScope,
@@ -7,7 +7,7 @@ import {
 } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatChipInputEvent } from '@angular/material/chips';
+import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 
 @Component({
@@ -16,6 +16,8 @@ import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
   styleUrls: []
 })
 export class DeleteAttributesConfigComponent extends RuleNodeConfigurationComponent {
+  @ViewChild('attributeChipList') attributeChipList: MatChipList;
+
   deleteAttributesConfigForm: FormGroup;
   attributeScopes = Object.keys(AttributeScope);
   telemetryTypeTranslationsMap = telemetryTypeTranslations;
@@ -32,14 +34,13 @@ export class DeleteAttributesConfigComponent extends RuleNodeConfigurationCompon
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.deleteAttributesConfigForm = this.fb.group({
-      useScopeAsPattern: [configuration ? configuration.key : null, []],
       scope: [configuration ? configuration.scope : null, [Validators.required]],
-      keys: [configuration ? configuration.key : null, []]
+      keys: [configuration ? configuration.key : null, [Validators.required]]
     });
-    this.deleteAttributesConfigForm.get('useScopeAsPattern').valueChanges.subscribe((value) => {
-      this.deleteAttributesConfigForm.get('scope').patchValue(value ? null : AttributeScope.SERVER_SCOPE, {emitEvent:false});
-      this.deleteAttributesConfigForm.get('scope').markAsUntouched();
-    })
+
+    this.deleteAttributesConfigForm.get('keys').statusChanges.subscribe((status) => {
+        this.attributeChipList.errorState = status === 'INVALID';
+    });
   }
 
   removeKey(key: string): void {
@@ -47,7 +48,7 @@ export class DeleteAttributesConfigComponent extends RuleNodeConfigurationCompon
     const index = keys.indexOf(key);
     if (index >= 0) {
       keys.splice(index, 1);
-      this.deleteAttributesConfigForm.get('keys').patchValue(keys, {emitEvent: false});
+      this.deleteAttributesConfigForm.get('keys').patchValue(keys, {emitEvent: true});
     }
   }
 
@@ -62,7 +63,7 @@ export class DeleteAttributesConfigComponent extends RuleNodeConfigurationCompon
           keys = [];
         }
         keys.push(value);
-        this.deleteAttributesConfigForm.get('keys').setValue(keys, {emitEvent: true});
+        this.deleteAttributesConfigForm.get('keys').patchValue(keys, {emitEvent: true});
       }
     }
     if (input) {

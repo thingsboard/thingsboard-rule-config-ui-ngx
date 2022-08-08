@@ -59,6 +59,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'server-attributes': 'Server attributes',
           'use-scope-as-pattern': 'Use scope as pattern',
           'attributes-keys': 'Attributes keys',
+          'attributes-keys-required': 'Attributes keys are required',
           'notify-device': 'Notify Device',
           'notify-device-hint': 'If the message arrives from the device, we will push it back to the device by default.',
           'latest-timeseries': 'Latest timeseries',
