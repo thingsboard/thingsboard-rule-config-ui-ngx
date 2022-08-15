@@ -1,0 +1,30 @@
+<section [formGroup]="copyKeysConfigForm" fxLayout="column">
+  <div class="mat-caption" style="margin-bottom: 8px">Copy strategy</div>
+  <mat-radio-group formControlName="fromMetadata" fxLayout="column" fxLayoutGap="16px">
+    <mat-radio-button [value]="false" color="primary" >
+      <span>{{'tb.rulenode.from-data-to-metadata' | translate}}</span>
+    </mat-radio-button>
+    <mat-radio-button [value]="true" color="primary">
+      <span>{{'tb.rulenode.from-metadata-to-data' | translate}}</span>
+    </mat-radio-button>
+  </mat-radio-group>
+  <mat-form-field floatLabel="always" class="mat-block" style="padding-bottom: 16px;">
+    <mat-label></mat-label>
+    <mat-chip-list #attributeChipList>
+      <mat-chip
+        *ngFor="let key of copyKeysConfigForm.get('keys').value;"
+        (removed)="removeKey(key)">
+        {{key}}
+        <mat-icon matChipRemove>close</mat-icon>
+      </mat-chip>
+      <input matInput type="text" placeholder="{{ 'tb.rulenode.keys' | translate }}"
+             style="max-width: 200px;"
+             [matChipInputFor]="attributeChipList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             (matChipInputTokenEnd)="addKey($event)"
+             [matChipInputAddOnBlur]="true">
+    </mat-chip-list>
+    <mat-error>{{ 'tb.rulenode.keys-required' | translate }}</mat-error>
+    <mat-hint [innerHTML]="'tb.rulenode.use-regular-expression-hint' | translate | safeHtml"></mat-hint>
+  </mat-form-field>
+</section>
