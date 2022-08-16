@@ -1,0 +1,21 @@
+<section [formGroup]="renameKeysConfigForm">
+  <div class="mat-caption" style="margin-bottom: 8px">{{ 'tb.rulenode.rename-keys-in' | translate }}</div>
+  <mat-radio-group formControlName="fromMetadata" fxLayout="row" fxLayoutGap="16px" style="margin-bottom: 16px;">
+    <mat-radio-button [value]="false" color="primary" >
+      <span>{{'tb.rulenode.data' | translate}}</span>
+    </mat-radio-button>
+    <mat-radio-button [value]="true" color="primary">
+      <span>{{'tb.rulenode.metadata' | translate}}</span>
+    </mat-radio-button>
+  </mat-radio-group>
+  <tb-kv-map-config
+    required
+    formControlName="renameKeysMapping"
+    requiredText="tb.rulenode.attr-mapping-required"
+    keyText="tb.rulenode.key-name"
+    keyRequiredText="tb.rulenode.key-name-required"
+    valText="tb.rulenode.new-key-name"
+    valRequiredText="tb.rulenode.new-key-name-required">
+  </tb-kv-map-config>
+  <mat-error *ngIf="renameKeysConfigForm.get('renameKeysMapping').hasError('sameKeyName')">{{'tb.rulenode.renamed-same-name' | translate}}</mat-error>
+</section>
