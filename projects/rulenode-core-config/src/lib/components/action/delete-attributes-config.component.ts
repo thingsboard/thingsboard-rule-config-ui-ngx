@@ -37,10 +37,6 @@ export class DeleteAttributesConfigComponent extends RuleNodeConfigurationCompon
       scope: [configuration ? configuration.scope : null, [Validators.required]],
       keys: [configuration ? configuration.key : null, [Validators.required]]
     });
-
-    this.deleteAttributesConfigForm.get('keys').statusChanges.subscribe((status) => {
-        this.attributeChipList.errorState = status === 'INVALID';
-    });
   }
 
   removeKey(key: string): void {
