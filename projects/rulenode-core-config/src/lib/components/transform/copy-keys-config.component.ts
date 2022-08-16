@@ -1,9 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/public-api';
-import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
+import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 
 @Component({
@@ -13,7 +13,6 @@ import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 })
 
 export class CopyKeysConfigComponent extends RuleNodeConfigurationComponent{
-  @ViewChild('attributeChipList') attributeChipList: MatChipList;
   copyKeysConfigForm: FormGroup;
   separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
 
@@ -26,10 +25,6 @@ export class CopyKeysConfigComponent extends RuleNodeConfigurationComponent{
     this.copyKeysConfigForm = this.fb.group({
       fromMetadata: [configuration ? configuration.fromMetadata : null, [Validators.required]],
       keys: [configuration ? configuration.keys : null, [Validators.required]]
-    });
-
-    this.copyKeysConfigForm.get('keys').statusChanges.subscribe((status) => {
-      this.attributeChipList.errorState = status === 'INVALID';
     });
   }
 

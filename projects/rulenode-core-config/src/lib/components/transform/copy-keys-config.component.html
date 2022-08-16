@@ -10,7 +10,7 @@
   </mat-radio-group>
   <mat-form-field floatLabel="always" class="mat-block" style="padding-bottom: 16px;">
     <mat-label></mat-label>
-    <mat-chip-list #attributeChipList>
+    <mat-chip-list formControlName="keys" #attributeChipList>
       <mat-chip
         *ngFor="let key of copyKeysConfigForm.get('keys').value;"
         (removed)="removeKey(key)">
@@ -24,7 +24,7 @@
              (matChipInputTokenEnd)="addKey($event)"
              [matChipInputAddOnBlur]="true">
     </mat-chip-list>
-    <mat-error>{{ 'tb.rulenode.keys-required' | translate }}</mat-error>
+    <mat-error *ngIf="copyKeysConfigForm.get('keys').hasError('required')">{{ 'tb.rulenode.keys-required' | translate }}</mat-error>
     <mat-hint [innerHTML]="'tb.rulenode.use-regular-expression-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
 </section>
