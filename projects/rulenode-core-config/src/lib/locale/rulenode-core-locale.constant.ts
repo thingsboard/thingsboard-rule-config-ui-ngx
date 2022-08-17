@@ -63,7 +63,6 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'rename-keys-in': 'Rename keys in',
           data: 'Data',
           metadata: 'Metadata',
-          'renamed-same-name': 'The key is renamed to the same name',
           'key-name': 'Key name',
           'key-name-required': 'Key name is required',
           'new-key-name': 'New key name',
