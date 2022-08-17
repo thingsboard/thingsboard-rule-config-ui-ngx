@@ -38,6 +38,9 @@
   </div>
   <tb-error [error]="ngControl.hasError('kvMapRequired')
                   ? translate.instant(requiredText) : ''"></tb-error>
+  <tb-error [error]="ngControl.hasError('uniqueKeyValuePair')
+                  ? translate.instant('tb.key-val.unique-key-value-pair-error', {keyText: translate.instant(keyText),
+                  valText:translate.instant(valText)}): ''"></tb-error>
   <div style="margin-top: 8px;">
     <button mat-button mat-raised-button color="primary"
             [fxShow]="!disabled"

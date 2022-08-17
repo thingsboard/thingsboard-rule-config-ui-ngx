@@ -11,11 +11,11 @@
   <tb-kv-map-config
     required
     formControlName="renameKeysMapping"
+    uniqueKeyValuePairValidator = "true"
     requiredText="tb.rulenode.attr-mapping-required"
     keyText="tb.rulenode.key-name"
     keyRequiredText="tb.rulenode.key-name-required"
     valText="tb.rulenode.new-key-name"
     valRequiredText="tb.rulenode.new-key-name-required">
   </tb-kv-map-config>
-  <mat-error *ngIf="renameKeysConfigForm.get('renameKeysMapping').hasError('sameKeyName')">{{'tb.rulenode.renamed-same-name' | translate}}</mat-error>
 </section>
