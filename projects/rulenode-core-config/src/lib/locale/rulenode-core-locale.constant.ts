@@ -61,6 +61,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'timeseries-key': 'Timeseries key',
           'data-keys': 'Message data',
           'metadata-keys': 'Message metadata',
+          'json-path-expression': 'JSON path expression',
           'relations-query': 'Relations query',
           'device-relations-query': 'Device relations query',
           'max-relation-level': 'Max relation level',
