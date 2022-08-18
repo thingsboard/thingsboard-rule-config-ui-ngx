@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 
 export class NodeJsonPathConfigComponent extends RuleNodeConfigurationComponent {
+
   jsonPathConfigForm: FormGroup;
 
   constructor(protected store: Store<AppState>,
