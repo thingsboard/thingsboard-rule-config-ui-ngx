@@ -63,7 +63,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'metadata-keys': 'Message metadata',
           'json-path-expression': 'JSON path expression',
           'json-path-expression-required': 'JSON path expression is required',
-          'json-path-expression-hint': 'JSONPath expression specifies a path to an element or a set of elements in a JSON structure. \'$\' represents the root object or array.',
+          'json-path-expression-hint': 'JSONPath specifies a path to an element or a set of elements in a JSON structure. \'$\' represents the root object or array.',
           'relations-query': 'Relations query',
           'device-relations-query': 'Device relations query',
           'max-relation-level': 'Max relation level',
