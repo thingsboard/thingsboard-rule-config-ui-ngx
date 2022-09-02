@@ -38,7 +38,8 @@ export class CheckRelationConfigComponent extends RuleNodeConfigurationComponent
         configuration && configuration.checkForSingleEntity ? [Validators.required] : []],
       entityId: [configuration ? configuration.entityId : null,
         configuration && configuration.checkForSingleEntity ? [Validators.required] : []],
-      relationType: [configuration ? configuration.relationType : null, [Validators.required]]
+      relationType: [configuration ? configuration.relationType : null, [Validators.required]],
+      relationsQuery: [configuration ? configuration.relationType : null, [Validators.required]],
     });
   }
 
@@ -48,10 +49,16 @@ export class CheckRelationConfigComponent extends RuleNodeConfigurationComponent
 
   protected updateValidators(emitEvent: boolean) {
     const checkForSingleEntity: boolean = this.checkRelationConfigForm.get('checkForSingleEntity').value;
+    this.checkRelationConfigForm.get('direction').setValidators(checkForSingleEntity ? [Validators.required] : []);
+    this.checkRelationConfigForm.get('direction').updateValueAndValidity({emitEvent});
     this.checkRelationConfigForm.get('entityType').setValidators(checkForSingleEntity ? [Validators.required] : []);
     this.checkRelationConfigForm.get('entityType').updateValueAndValidity({emitEvent});
     this.checkRelationConfigForm.get('entityId').setValidators(checkForSingleEntity ? [Validators.required] : []);
     this.checkRelationConfigForm.get('entityId').updateValueAndValidity({emitEvent});
+    this.checkRelationConfigForm.get('relationType').setValidators(checkForSingleEntity ? [Validators.required] : []);
+    this.checkRelationConfigForm.get('relationType').updateValueAndValidity({emitEvent});
+    this.checkRelationConfigForm.get('relationsQuery').setValidators(checkForSingleEntity ? [] : [Validators.required]);
+    this.checkRelationConfigForm.get('relationsQuery').updateValueAndValidity({emitEvent});
   }
 
 }
