@@ -88,6 +88,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'originator-tenant': 'Tenant',
           'originator-related': 'Related',
           'originator-alarm-originator': 'Alarm Originator',
+          'originator-entity': 'Entity',
           'clone-message': 'Clone message',
           transform: 'Transform',
           'default-ttl': 'Default TTL in seconds',
