@@ -457,7 +457,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           value: 'Value',
           'remove-entry': 'Remove entry',
           'add-entry': 'Add entry',
-          'unique-key-value-pair-error': '\'{{keyText}}\' and \'{{valText}}\' are not unique',
+          'unique-key-value-pair-error': '\'{{valText}}\' must be different from the current \'{{keyText}}\'',
         },
         'mail-body-type': {
           'plain-text': 'Plain Text',
