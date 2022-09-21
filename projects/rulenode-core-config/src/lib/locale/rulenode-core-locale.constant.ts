@@ -405,6 +405,8 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
             'If selected, latest telemetry values will be added to the outbound message metadata with timestamp, ' +
             'e.g: "temp": "&#123;"ts":1574329385897, "value":42&#125;"',
           'use-redis-queue': 'Use redis queue for message persistence',
+          'ignore-null-strings': 'Ignore null strings',
+          'ignore-null-strings-hint': 'If selected rule node will ignore entity fields with empty value.',
           'trim-redis-queue': 'Trim redis queue',
           'redis-queue-max-size': 'Redis queue max size',
           'add-metadata-key-values-as-kafka-headers': 'Add Message metadata key-value pairs to Kafka record headers',
