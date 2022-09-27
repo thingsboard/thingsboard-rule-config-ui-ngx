@@ -4,7 +4,8 @@ export enum OriginatorSource {
   CUSTOMER = 'CUSTOMER',
   TENANT = 'TENANT',
   RELATED = 'RELATED',
-  ALARM_ORIGINATOR = 'ALARM_ORIGINATOR'
+  ALARM_ORIGINATOR = 'ALARM_ORIGINATOR',
+  ENTITY = 'ENTITY'
 }
 
 export const originatorSourceTranslations = new Map<OriginatorSource, string>(
@@ -13,6 +14,7 @@ export const originatorSourceTranslations = new Map<OriginatorSource, string>(
     [OriginatorSource.TENANT, 'tb.rulenode.originator-tenant'],
     [OriginatorSource.RELATED, 'tb.rulenode.originator-related'],
     [OriginatorSource.ALARM_ORIGINATOR, 'tb.rulenode.originator-alarm-originator'],
+    [OriginatorSource.ENTITY, 'tb.rulenode.originator-entity'],
   ]
 );
 
