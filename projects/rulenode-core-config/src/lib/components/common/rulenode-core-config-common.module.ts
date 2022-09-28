@@ -8,6 +8,7 @@ import { RelationsQueryConfigComponent } from './relations-query-config.componen
 import { MessageTypesConfigComponent } from './message-types-config.component';
 import { CredentialsConfigComponent } from './credentials-config.component';
 import { SafeHtmlPipe } from './safe-html.pipe';
+import { ArgumentsMapConfigComponent } from './arguments-map-config.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SafeHtmlPipe } from './safe-html.pipe';
     RelationsQueryConfigComponent,
     MessageTypesConfigComponent,
     CredentialsConfigComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    ArgumentsMapConfigComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +31,8 @@ import { SafeHtmlPipe } from './safe-html.pipe';
     RelationsQueryConfigComponent,
     MessageTypesConfigComponent,
     CredentialsConfigComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    ArgumentsMapConfigComponent
   ]
 })
 export class RulenodeCoreConfigCommonModule {
