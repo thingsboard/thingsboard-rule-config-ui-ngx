@@ -119,6 +119,7 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
     const columnForm = columnsFormArray.at(event.previousIndex);
     columnsFormArray.removeAt(event.previousIndex);
     columnsFormArray.insert(event.currentIndex, columnForm);
+    this.updateArgumentNames();
   }
 
   argumentsFormArray(): FormArray {
@@ -185,10 +186,7 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
 
   public removeArgument(index: number) {
     (this.argumentsFormGroup.get('arguments') as FormArray).removeAt(index);
-    const argumentsFormArray = this.argumentsFormGroup.get('arguments') as FormArray;
-    argumentsFormArray.controls.forEach((argumentControl, argumentIndex) => {
-      argumentControl.get('name').setValue(ArgumentName[argumentIndex]);
-    });
+    this.updateArgumentNames();
   }
 
   public addArgument() {
@@ -220,6 +218,13 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
       };
     }
     return null;
+  }
+
+  private updateArgumentNames() {
+    const argumentsFormArray = this.argumentsFormGroup.get('arguments') as FormArray;
+    argumentsFormArray.controls.forEach((argumentControl, argumentIndex) => {
+      argumentControl.get('name').setValue(ArgumentName[argumentIndex]);
+    });
   }
 
   private updateModel() {

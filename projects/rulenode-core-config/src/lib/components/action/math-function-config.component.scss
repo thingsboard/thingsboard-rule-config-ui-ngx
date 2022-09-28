@@ -13,6 +13,9 @@
     legend + * {
       display: block;
       margin-top: 16px;
+      &.no-margin-top {
+        margin-top: 0;
+      }
     }
   }
 }

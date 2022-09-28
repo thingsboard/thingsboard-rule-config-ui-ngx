@@ -10,15 +10,16 @@
                              [function]="mathFunctionConfigForm.get('operation').value">
     </tb-arguments-map-config>
   </fieldset>
-  <mat-form-field fxFlex floatLabel="always" hideRequiredMarker class="cell mat-block"
-                  style="margin-top: 10px"
-                  *ngIf="mathFunctionConfigForm.get('operation').value === 'CUSTOM'">
-    <mat-label translate>tb.rulenode.custom-expression-field-input</mat-label>
-    <input matInput formControlName="customFunction" required/>
-    <mat-error *ngIf="mathFunctionConfigForm.get('customFunction').hasError('required')" translate>
-      tb.rulenode.custom-expression-field-input-required
-    </mat-error>
-  </mat-form-field>
+  <fieldset *ngIf="mathFunctionConfigForm.get('operation').value === MathFunction.CUSTOM"
+            class="fields-group" fxLayout="column" fxLayoutGap="8px">
+    <legend class="group-title">{{'tb.rulenode.custom-expression-field-input' | translate }} *</legend>
+    <mat-form-field fxFlex class="mat-block no-margin-top" >
+      <input matInput formControlName="customFunction" required/>
+      <mat-error *ngIf="mathFunctionConfigForm.get('customFunction').hasError('required')" translate>
+        tb.rulenode.custom-expression-field-input-required
+      </mat-error>
+    </mat-form-field>
+  </fieldset>
   <fieldset class="fields-group" fxLayout="column" fxLayoutGap="8px">
     <legend class="group-title" translate>tb.rulenode.result-title</legend>
     <div formGroupName="result">
@@ -42,7 +43,7 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field fxFlex floatLabel="always" hideRequiredMarker class="cell mat-block">
+        <mat-form-field fxFlex floatLabel="always" class="mat-block">
           <mat-label translate>tb.rulenode.key-field-input</mat-label>
           <input matInput formControlName="key" required/>
           <mat-error *ngIf="mathFunctionConfigForm.get('result.key').hasError('required')" translate>
@@ -51,7 +52,7 @@
         </mat-form-field>
       </div>
       <div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutGap.gt-xs="16px">
-        <mat-form-field fxFlex floatLabel="always" hideRequiredMarker class="cell mat-block">
+        <mat-form-field fxFlex floatLabel="always" class="mat-block">
           <mat-label translate>tb.rulenode.number-floating-point-field-input</mat-label>
           <input formControlName="resultValuePrecision"
                  matInput

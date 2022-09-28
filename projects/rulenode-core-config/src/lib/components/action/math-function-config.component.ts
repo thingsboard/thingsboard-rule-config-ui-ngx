@@ -20,6 +20,7 @@ export class MathFunctionConfigComponent extends RuleNodeConfigurationComponent 
 
   mathFunctionConfigForm: FormGroup;
 
+  MathFunction = MathFunction;
   ArgumentTypeResult = ArgumentTypeResult;
   argumentTypeResultMap = ArgumentTypeMap;
   attributeScopeMap = AttributeScopeMap;
