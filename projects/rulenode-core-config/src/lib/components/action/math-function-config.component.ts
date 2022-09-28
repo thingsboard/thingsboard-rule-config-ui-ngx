@@ -1,18 +1,15 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import {
   ArgumentTypeMap,
   ArgumentTypeResult,
   AttributeScopeMap,
   AttributeScopeResult,
-  MathFunctionMap
+  MathFunction
 } from '../../rulenode-core-config.models';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'tb-action-node-math-function-config',
@@ -21,42 +18,17 @@ import { map, startWith } from 'rxjs/operators';
 })
 export class MathFunctionConfigComponent extends RuleNodeConfigurationComponent {
 
-  @ViewChild('operationInput', {static: true}) operationInput: ElementRef;
-
   mathFunctionConfigForm: FormGroup;
 
-  separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
-
-
-  mathFunctionMap = MathFunctionMap;
+  ArgumentTypeResult = ArgumentTypeResult;
   argumentTypeResultMap = ArgumentTypeMap;
   attributeScopeMap = AttributeScopeMap;
-  mathOperation = [...this.mathFunctionMap.values()];
   argumentsResult = Object.values(ArgumentTypeResult);
   attributeScopeResult = Object.values(AttributeScopeResult);
-
-  searchText = '';
-
-  filteredOptions: Observable<any>;
 
   constructor(protected store: Store<AppState>,
               private fb: FormBuilder) {
     super(store);
-  }
-
-  displayFn = funcValue => {
-    if (funcValue) {
-      const funcData = this.mathFunctionMap.get(funcValue)
-      return funcData.value + ' | ' + funcData.name;
-    }
-    return '';
-  }
-
-  private _filter(searchText: string) {
-    const filterValue = searchText.toLowerCase();
-
-    return this.mathOperation.filter(option => option.name.toLowerCase().includes(filterValue)
-      || option.value.toLowerCase().includes(filterValue));
   }
 
   protected configForm(): FormGroup {
@@ -77,50 +49,26 @@ export class MathFunctionConfigComponent extends RuleNodeConfigurationComponent 
         addToMetadata: [configuration ? configuration.result.addToMetadata : false]
       })
     });
-
-    this.mathFunctionConfigForm.get('operation').valueChanges.subscribe(value => {
-      if (value === 'CUSTOM') {
-        this.mathFunctionConfigForm.get('customFunction').enable();
-      } else {
-        this.mathFunctionConfigForm.get('customFunction').disable();
-      }
-    });
-
-    this.mathFunctionConfigForm.get('result').get('type').valueChanges.subscribe(value => {
-      if (value === 'ATTRIBUTE') {
-        this.mathFunctionConfigForm.get('result').get('attributeScope').enable();
-      } else {
-        this.mathFunctionConfigForm.get('result').get('attributeScope').patchValue({value: null}, {emitEvent: false});
-        this.mathFunctionConfigForm.get('result').get('attributeScope').disable();
-      }
-    });
-
-    this.filteredOptions = this.mathFunctionConfigForm.get('operation').valueChanges.pipe(
-      startWith(''),
-      map(value => {
-        this.searchText = value;
-        return value ? this._filter(value) : this.mathOperation.slice();
-      }),
-    );
-  }
-
-  textIsNotEmpty(text: string): boolean {
-    return (text && text.length > 0);
-  }
-
-  clear() {
-    this.mathFunctionConfigForm.get('operation').patchValue('', {emitEvent: true});
-    setTimeout(() => {
-      this.operationInput.nativeElement.blur();
-      this.operationInput.nativeElement.focus();
-    }, 0);
   }
 
   protected updateValidators(emitEvent: boolean) {
-    this.mathFunctionConfigForm.updateValueAndValidity();
+    const operation: MathFunction = this.mathFunctionConfigForm.get('operation').value;
+    const resultType: ArgumentTypeResult = this.mathFunctionConfigForm.get('result').get('type').value;
+    if (operation === MathFunction.CUSTOM) {
+      this.mathFunctionConfigForm.get('customFunction').enable({emitEvent: false});
+    } else {
+      this.mathFunctionConfigForm.get('customFunction').disable({emitEvent: false});
+    }
+    if (resultType === ArgumentTypeResult.ATTRIBUTE) {
+      this.mathFunctionConfigForm.get('result').get('attributeScope').enable({emitEvent: false});
+    } else {
+      this.mathFunctionConfigForm.get('result').get('attributeScope').disable({emitEvent: false});
+    }
+    this.mathFunctionConfigForm.get('customFunction').updateValueAndValidity({emitEvent});
+    this.mathFunctionConfigForm.get('result').get('attributeScope').updateValueAndValidity({emitEvent});
   }
 
   protected validatorTriggers(): string[] {
-    return [];
+    return ['operation', 'result.type'];
   }
 }

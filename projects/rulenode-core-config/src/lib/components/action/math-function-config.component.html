@@ -1,37 +1,15 @@
 <section [formGroup]="mathFunctionConfigForm" fxLayout="column">
-  <mat-form-field fxFlex="30" fxFlex.md fxFlex.xs class="mat-block">
-    <mat-label translate>tb.rulenode.functions-field-input</mat-label>
-    <input type="text" #operationInput matInput formControlName="operation" [matAutocomplete]="auto">
-    <button *ngIf="mathFunctionConfigForm.get('operation').value"
-            type="button"
-            matSuffix mat-button mat-icon-button aria-label="Clear"
-            (click)="clear()">
-      <mat-icon class="material-icons">close</mat-icon>
-    </button>
-    <mat-autocomplete #auto="matAutocomplete" class="tb-autocomplete" [displayWith]="displayFn">
-      <mat-option *ngFor="let option of filteredOptions | async" [value]="option.value">
-        <span [innerHTML]="option.value + ' | ' + option.name | highlight:searchText"></span>
-        <small style="display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-          {{ option.description }}
-        </small>
-      </mat-option>
-      <mat-option *ngIf="!(filteredOptions | async)?.length" [value]="null" class="tb-not-found">
-        <div class="tb-not-found-content" (click)="$event.stopPropagation()">
-          <div *ngIf="!textIsNotEmpty(searchText)">
-            <span translate>tb.rulenode.no-option-found</span>
-          </div>
-        </div>
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-
+  <tb-math-function-autocomplete
+    fxFlex="30" fxFlex.md fxFlex.xs
+    required
+    formControlName="operation">
+  </tb-math-function-autocomplete>
   <fieldset class="fields-group" fxLayout="column" fxLayoutGap="8px">
     <legend class="group-title" translate>tb.rulenode.argument-tile</legend>
     <tb-arguments-map-config formControlName="arguments"
                              [function]="mathFunctionConfigForm.get('operation').value">
     </tb-arguments-map-config>
   </fieldset>
-
   <mat-form-field fxFlex floatLabel="always" hideRequiredMarker class="cell mat-block"
                   style="margin-top: 10px"
                   *ngIf="mathFunctionConfigForm.get('operation').value === 'CUSTOM'">
@@ -41,7 +19,6 @@
       tb.rulenode.custom-expression-field-input-required
     </mat-error>
   </mat-form-field>
-
   <fieldset class="fields-group" fxLayout="column" fxLayoutGap="8px">
     <legend class="group-title" translate>tb.rulenode.result-title</legend>
     <div formGroupName="result">
@@ -57,7 +34,7 @@
             tb.rulenode.type-field-input-required
           </mat-error>
         </mat-form-field>
-        <mat-form-field fxFlex class="mat-block" *ngIf="mathFunctionConfigForm.get('result').get('type').value === 'ATTRIBUTE'">
+        <mat-form-field fxFlex class="mat-block" *ngIf="mathFunctionConfigForm.get('result').get('type').value === ArgumentTypeResult.ATTRIBUTE">
           <mat-label translate>tb.rulenode.attribute-scope-field-input</mat-label>
           <mat-select formControlName="attributeScope">
             <mat-option *ngFor="let scope of attributeScopeResult" [value]="scope">
@@ -84,14 +61,13 @@
         <div fxFlex></div>
       </div>
       <div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap.gt-xs="16px">
-        <mat-checkbox formControlName="addToBody" style="padding-bottom: 16px;">
+        <mat-checkbox *ngIf="mathFunctionConfigForm.get('result').get('type').value !== ArgumentTypeResult.MESSAGE_BODY" formControlName="addToBody" style="padding-bottom: 16px;">
           {{'tb.rulenode.add-to-body-field-input' | translate }}
         </mat-checkbox>
-        <mat-checkbox formControlName="addToMetadata" style="padding-bottom: 16px;">
+        <mat-checkbox *ngIf="mathFunctionConfigForm.get('result').get('type').value !== ArgumentTypeResult.MESSAGE_METADATA" formControlName="addToMetadata" style="padding-bottom: 16px;">
           {{'tb.rulenode.add-to-metadata-field-input' | translate}}
         </mat-checkbox>
       </div>
     </div>
   </fieldset>
-
 </section>

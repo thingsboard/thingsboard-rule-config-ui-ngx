@@ -9,6 +9,7 @@ import { MessageTypesConfigComponent } from './message-types-config.component';
 import { CredentialsConfigComponent } from './credentials-config.component';
 import { SafeHtmlPipe } from './safe-html.pipe';
 import { ArgumentsMapConfigComponent } from './arguments-map-config.component';
+import { MathFunctionAutocompleteComponent } from './math-function-autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ArgumentsMapConfigComponent } from './arguments-map-config.component';
     MessageTypesConfigComponent,
     CredentialsConfigComponent,
     SafeHtmlPipe,
-    ArgumentsMapConfigComponent
+    ArgumentsMapConfigComponent,
+    MathFunctionAutocompleteComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { ArgumentsMapConfigComponent } from './arguments-map-config.component';
     MessageTypesConfigComponent,
     CredentialsConfigComponent,
     SafeHtmlPipe,
-    ArgumentsMapConfigComponent
+    ArgumentsMapConfigComponent,
+    MathFunctionAutocompleteComponent
   ]
 })
 export class RulenodeCoreConfigCommonModule {

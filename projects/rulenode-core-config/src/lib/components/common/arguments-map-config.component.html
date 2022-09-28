@@ -21,7 +21,8 @@
             <mat-icon>drag_handle</mat-icon>
           </button>
           <div fxFlex fxLAyout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
-            <span style="padding: 0 10px; min-width: 20px;">{{argumentControl.get('name').value}}.</span>
+            <span *ngIf="displayArgumentName"
+                  style="padding: 0 10px; min-width: 20px;">{{argumentControl.get('name').value}}.</span>
             <div fxFlex fxLayout="column">
               <div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutGap.gt-xs="16px">
                 <mat-form-field fxFlex class="mat-block">

@@ -60,9 +60,13 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
       if (this.argumentsFormGroup) {
         this.maxArgs = this.mathFunctionMap.get(funcName).maxArgs;
         this.minArgs = this.mathFunctionMap.get(funcName).minArgs;
+        this.displayArgumentName = this.functionValue === MathFunction.CUSTOM;
         this.argumentsFormGroup.get('arguments').setValidators([Validators.minLength(this.minArgs), Validators.maxLength(this.maxArgs)]);
         if (this.argumentsFormGroup.get('arguments').value.length > this.maxArgs) {
           (this.argumentsFormGroup.get('arguments') as FormArray).controls.length = this.maxArgs;
+        }
+        while (this.argumentsFormGroup.get('arguments').value.length < this.minArgs) {
+          this.addArgument();
         }
         this.argumentsFormGroup.get('arguments').updateValueAndValidity({emitEvent: true});
       }
@@ -71,6 +75,7 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
 
   maxArgs = 16;
   minArgs = 1;
+  displayArgumentName = false;
 
   mathFunctionMap = MathFunctionMap;
 
@@ -82,7 +87,6 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
   argumentTypeResultMap = ArgumentTypeMap;
   arguments = Object.values(ArgumentType);
   attributeScope = Object.values(AttributeScope);
-  argumentName = ArgumentName;
 
   private propagateChange = null;
 
@@ -143,23 +147,21 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
     }
   }
 
-  writeValue(argumentsMap): void {
+  writeValue(argumentsList): void {
     if (this.valueChangeSubscription.length) {
       this.valueChangeSubscription.forEach(sub => sub.unsubscribe());
     }
-    this.argumentName = ArgumentName;
     const argumentsControls: Array<AbstractControl> = [];
-    if (argumentsMap) {
-      for (const property of argumentsMap) {
+    if (argumentsList) {
+      argumentsList.forEach((property, index) => {
         argumentsControls.push(this.fb.group({
           type: [property.type, [Validators.required]],
           key: [property.key, [Validators.required]],
-          name: [property.name, [Validators.required]],
+          name: [ArgumentName[index], [Validators.required]],
           attributeScope: [property.attributeScope ? property.attributeScope : null],
           defaultValue: [property.defaultValue ? property.defaultValue : null]
         }));
-        this.removeItem(property.name);
-      }
+      });
     }
     argumentsControls.forEach(control => this.valueChangeSubscription.push(
       control.get('type').valueChanges.subscribe(argumentType => {
@@ -180,16 +182,13 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
     }));
   }
 
-  removeItem(value: string){
-    const index = this.argumentName.indexOf(value);
-    if (index > -1) {
-      this.argumentName.splice(index, 1);
-    }
-  }
 
   public removeArgument(index: number) {
-    this.argumentName.unshift(this.argumentsFormGroup.get('arguments').value[index].name);
     (this.argumentsFormGroup.get('arguments') as FormArray).removeAt(index);
+    const argumentsFormArray = this.argumentsFormGroup.get('arguments') as FormArray;
+    argumentsFormArray.controls.forEach((argumentControl, argumentIndex) => {
+      argumentControl.get('name').setValue(ArgumentName[argumentIndex]);
+    });
   }
 
   public addArgument() {
@@ -197,7 +196,7 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
     argumentsFormArray.push(this.fb.group({
       type: [null, [Validators.required]],
       key: [null, [Validators.required]],
-      name: [this.argumentName[0], [Validators.required]],
+      name: [ArgumentName[argumentsFormArray.length], [Validators.required]],
       attributeScope: [null],
       defaultValue: [null]
     }));
@@ -212,7 +211,6 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
         }
       })
     );
-    this.argumentName.splice(0, 1);
   }
 
   public validate(c: FormControl) {
