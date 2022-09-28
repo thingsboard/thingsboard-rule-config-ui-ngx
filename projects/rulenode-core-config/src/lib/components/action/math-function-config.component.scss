@@ -1,0 +1,18 @@
+:host ::ng-deep {
+  .fields-group {
+    padding: 0 16px 8px;
+    margin: 10px 0;
+    border: 1px groove rgba(0, 0, 0, .25);
+    border-radius: 4px;
+
+    legend {
+      color: rgba(0, 0, 0, .7);
+      width: fit-content;
+    }
+
+    legend + * {
+      display: block;
+      margin-top: 16px;
+    }
+  }
+}
