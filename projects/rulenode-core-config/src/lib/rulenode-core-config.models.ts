@@ -265,7 +265,7 @@ export const MathFunctionMap  = new Map<MathFunction, FunctionData>(
       {
         value: MathFunction.DIV,
         name: 'Division',
-        description: 'Rx / y',
+        description: 'x / y',
         minArgs: 2,
         maxArgs: 2
       }
