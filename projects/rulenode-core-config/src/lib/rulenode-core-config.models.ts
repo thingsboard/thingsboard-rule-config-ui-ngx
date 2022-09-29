@@ -225,7 +225,7 @@ export const MathFunctionMap  = new Map<MathFunction, FunctionData>(
       {
         value: MathFunction.CUSTOM,
         name: 'Custom Function',
-        description:'You can provide your custom function in your environment',
+        description:'Use this function to specify complex mathematical expression.',
         minArgs: 1,
         maxArgs: 16
       }
@@ -235,7 +235,7 @@ export const MathFunctionMap  = new Map<MathFunction, FunctionData>(
       {
         value: MathFunction.ADD,
         name: 'Addition',
-        description:'Returns the sum of its arguments',
+        description:'x + y',
         minArgs: 2,
         maxArgs: 2
       }
@@ -245,7 +245,7 @@ export const MathFunctionMap  = new Map<MathFunction, FunctionData>(
       {
         value: MathFunction.SUB,
         name: 'Subtraction',
-        description: 'Returns the difference of the arguments',
+        description: 'x - y',
         minArgs: 2,
         maxArgs: 2
       }
@@ -255,7 +255,7 @@ export const MathFunctionMap  = new Map<MathFunction, FunctionData>(
       {
         value: MathFunction.MULT,
         name: 'Multiplication',
-        description: 'Returns the product of the arguments',
+        description: 'x * y',
         minArgs: 2,
         maxArgs: 2
       }
@@ -265,7 +265,7 @@ export const MathFunctionMap  = new Map<MathFunction, FunctionData>(
       {
         value: MathFunction.DIV,
         name: 'Division',
-        description: 'Returns the quotient of the arguments',
+        description: 'Rx / y',
         minArgs: 2,
         maxArgs: 2
       }
@@ -275,7 +275,7 @@ export const MathFunctionMap  = new Map<MathFunction, FunctionData>(
       {
         value: MathFunction.SIN,
         name: 'Sine',
-        description: 'Returns the trigonometric sine of an argument',
+        description: 'Returns the trigonometric sine of an angle in radians.',
         minArgs: 1,
         maxArgs: 1
       }
@@ -285,7 +285,7 @@ export const MathFunctionMap  = new Map<MathFunction, FunctionData>(
       {
         value: MathFunction.SINH,
         name: 'Hyperbolic sine',
-        description: 'Returns the hyperbolic sine of an argument',
+        description: 'Returns the hyperbolic sine of an argument.',
         minArgs: 1,
         maxArgs: 1
       }
@@ -295,7 +295,7 @@ export const MathFunctionMap  = new Map<MathFunction, FunctionData>(
       {
         value: MathFunction.COS,
         name: 'Cosine',
-        description: 'Returns the trigonometric cosine of an argument',
+        description: 'Returns the trigonometric cosine of an angle in radians.',
         minArgs: 1,
         maxArgs: 1
       }
@@ -305,7 +305,7 @@ export const MathFunctionMap  = new Map<MathFunction, FunctionData>(
       {
         value: MathFunction.COSH,
         name: 'Hyperbolic cosine',
-        description: 'Returns the hyperbolic cosine of an argument',
+        description: 'Returns the hyperbolic cosine of an argument.',
         minArgs: 1,
         maxArgs: 1
       }
@@ -315,7 +315,7 @@ export const MathFunctionMap  = new Map<MathFunction, FunctionData>(
       {
         value: MathFunction.TAN,
         name: 'Tangent',
-        description: 'Returns the trigonometric tangent of an argument',
+        description: 'Returns the trigonometric tangent of an angle in radians',
         minArgs: 1,
         maxArgs: 1
       }
@@ -364,8 +364,8 @@ export const MathFunctionMap  = new Map<MathFunction, FunctionData>(
       MathFunction.ATAN2,
       {
         value: MathFunction.ATAN2,
-        name: 'Arc tangent in radian',
-        description: 'Returns the angle theta from the conversion of the arguments',
+        name: '2-argument arc tangent',
+        description: 'Returns the angle theta from the conversion of rectangular coordinates (x, y) to polar coordinates (r, theta)',
         minArgs: 2,
         maxArgs: 2
       }
@@ -385,7 +385,7 @@ export const MathFunctionMap  = new Map<MathFunction, FunctionData>(
       {
         value: MathFunction.EXPM1,
         name: 'Exponential minus one',
-        description: 'Returns e raised to the power of an argument',
+        description: 'Returns Euler\'s number e raised to the power of an argument minus one',
         minArgs: 1,
         maxArgs: 1
       }
