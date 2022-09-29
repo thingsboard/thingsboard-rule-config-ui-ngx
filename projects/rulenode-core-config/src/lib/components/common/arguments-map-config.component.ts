@@ -31,7 +31,7 @@ import {
 @Component({
   selector: 'tb-arguments-map-config',
   templateUrl: './arguments-map-config.component.html',
-  styleUrls: [],
+  styleUrls: ['./arguments-map-config.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -57,19 +57,7 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
   set function(funcName: MathFunction) {
     if (funcName && this.functionValue !== funcName) {
       this.functionValue = funcName;
-      if (this.argumentsFormGroup) {
-        this.maxArgs = this.mathFunctionMap.get(funcName).maxArgs;
-        this.minArgs = this.mathFunctionMap.get(funcName).minArgs;
-        this.displayArgumentName = this.functionValue === MathFunction.CUSTOM;
-        this.argumentsFormGroup.get('arguments').setValidators([Validators.minLength(this.minArgs), Validators.maxLength(this.maxArgs)]);
-        if (this.argumentsFormGroup.get('arguments').value.length > this.maxArgs) {
-          (this.argumentsFormGroup.get('arguments') as FormArray).controls.length = this.maxArgs;
-        }
-        while (this.argumentsFormGroup.get('arguments').value.length < this.minArgs) {
-          this.addArgument();
-        }
-        this.argumentsFormGroup.get('arguments').updateValueAndValidity({emitEvent: true});
-      }
+      this.setupArgumentsFormGroup();
     }
   }
 
@@ -78,6 +66,7 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
   displayArgumentName = false;
 
   mathFunctionMap = MathFunctionMap;
+  ArgumentType = ArgumentType;
 
   argumentsFormGroup: FormGroup;
 
@@ -108,10 +97,7 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
     this.argumentsFormGroup.addControl('arguments',
       this.fb.array([]));
 
-    if (this.function) {
-      this.maxArgs = this.mathFunctionMap.get(this.function).maxArgs;
-      this.minArgs = this.mathFunctionMap.get(this.function).minArgs;
-    }
+    this.setupArgumentsFormGroup();
   }
 
   public onDrop(event: CdkDragDrop<string[]>) {
@@ -155,29 +141,11 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
     const argumentsControls: Array<AbstractControl> = [];
     if (argumentsList) {
       argumentsList.forEach((property, index) => {
-        argumentsControls.push(this.fb.group({
-          type: [property.type, [Validators.required]],
-          key: [property.key, [Validators.required]],
-          name: [ArgumentName[index], [Validators.required]],
-          attributeScope: [property.attributeScope ? property.attributeScope : null],
-          defaultValue: [property.defaultValue ? property.defaultValue : null]
-        }));
+        argumentsControls.push(this.createArgumentControl(property, index));
       });
     }
-    argumentsControls.forEach(control => this.valueChangeSubscription.push(
-      control.get('type').valueChanges.subscribe(argumentType => {
-        if (argumentType === 'ATTRIBUTE') {
-          control.get('attributeScope').enable();
-          control.get('defaultValue').enable();
-        } else {
-          control.get('attributeScope').disable();
-          control.get('defaultValue').disable();
-        }
-      }))
-    );
     this.argumentsFormGroup.setControl('arguments', this.fb.array(argumentsControls));
-    this.argumentsFormGroup.get('arguments').setValidators([Validators.minLength(this.minArgs), Validators.maxLength(this.maxArgs)]);
-    this.argumentsFormGroup.get('arguments').updateValueAndValidity();
+    this.setupArgumentsFormGroup();
     this.valueChangeSubscription.push(this.argumentsFormGroup.valueChanges.subscribe(() => {
       this.updateModel();
     }));
@@ -191,24 +159,8 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
 
   public addArgument() {
     const argumentsFormArray = this.argumentsFormGroup.get('arguments') as FormArray;
-    argumentsFormArray.push(this.fb.group({
-      type: [null, [Validators.required]],
-      key: [null, [Validators.required]],
-      name: [ArgumentName[argumentsFormArray.length], [Validators.required]],
-      attributeScope: [null],
-      defaultValue: [null]
-    }));
-    this.valueChangeSubscription.push(
-      argumentsFormArray.controls[argumentsFormArray.length - 1].get('type').valueChanges.subscribe(argumentType => {
-        if (argumentType === 'ATTRIBUTE') {
-          argumentsFormArray.controls[argumentsFormArray.length - 1].get('attributeScope').enable();
-          argumentsFormArray.controls[argumentsFormArray.length - 1].get('defaultValue').enable();
-        } else {
-          argumentsFormArray.controls[argumentsFormArray.length - 1].get('attributeScope').disable();
-          argumentsFormArray.controls[argumentsFormArray.length - 1].get('defaultValue').disable();
-        }
-      })
-    );
+    const argumentControl = this.createArgumentControl(null, argumentsFormArray.length);
+    argumentsFormArray.push(argumentControl);
   }
 
   public validate(c: FormControl) {
@@ -218,6 +170,55 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
       };
     }
     return null;
+  }
+
+  private setupArgumentsFormGroup() {
+    if (this.function) {
+      this.maxArgs = this.mathFunctionMap.get(this.function).maxArgs;
+      this.minArgs = this.mathFunctionMap.get(this.function).minArgs;
+      this.displayArgumentName = this.function === MathFunction.CUSTOM;
+    }
+    if (this.argumentsFormGroup) {
+      this.argumentsFormGroup.get('arguments').setValidators([Validators.minLength(this.minArgs), Validators.maxLength(this.maxArgs)]);
+      if (this.argumentsFormGroup.get('arguments').value.length > this.maxArgs) {
+        (this.argumentsFormGroup.get('arguments') as FormArray).controls.length = this.maxArgs;
+      }
+      while (this.argumentsFormGroup.get('arguments').value.length < this.minArgs) {
+        this.addArgument();
+      }
+      this.argumentsFormGroup.get('arguments').updateValueAndValidity({emitEvent: false});
+    }
+  }
+
+  private createArgumentControl(property: any, index: number): AbstractControl {
+    const argumentControl = this.fb.group({
+      type: [property?.type, [Validators.required]],
+      key: [property?.key, [Validators.required]],
+      name: [ArgumentName[index], [Validators.required]],
+      attributeScope: [property?.attributeScope ? property?.attributeScope : null, [Validators.required]],
+      defaultValue: [property?.defaultValue ? property?.defaultValue : null]
+    });
+    this.updateArgumentControlValidators(argumentControl);
+    this.valueChangeSubscription.push(argumentControl.get('type').valueChanges.subscribe(() => {
+      this.updateArgumentControlValidators(argumentControl);
+      argumentControl.get('attributeScope').updateValueAndValidity({emitEvent: true});
+      argumentControl.get('defaultValue').updateValueAndValidity({emitEvent: true});
+    }));
+    return argumentControl;
+  }
+
+  private updateArgumentControlValidators(control: AbstractControl) {
+    const argumentType: ArgumentType = control.get('type').value;
+    if (argumentType === ArgumentType.ATTRIBUTE) {
+      control.get('attributeScope').enable();
+    } else {
+      control.get('attributeScope').disable();
+    }
+    if (argumentType && argumentType !== ArgumentType.CONSTANT) {
+      control.get('defaultValue').enable();
+    } else {
+      control.get('defaultValue').disable();
+    }
   }
 
   private updateArgumentNames() {

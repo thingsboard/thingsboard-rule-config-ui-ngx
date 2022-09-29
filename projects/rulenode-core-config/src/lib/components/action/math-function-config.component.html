@@ -37,7 +37,7 @@
         </mat-form-field>
         <mat-form-field fxFlex class="mat-block" *ngIf="mathFunctionConfigForm.get('result').get('type').value === ArgumentTypeResult.ATTRIBUTE">
           <mat-label translate>tb.rulenode.attribute-scope-field-input</mat-label>
-          <mat-select formControlName="attributeScope">
+          <mat-select required formControlName="attributeScope">
             <mat-option *ngFor="let scope of attributeScopeResult" [value]="scope">
               {{ attributeScopeMap.get(scope) | translate }}
             </mat-option>
@@ -61,11 +61,12 @@
         </mat-form-field>
         <div fxFlex></div>
       </div>
-      <div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap.gt-xs="16px">
-        <mat-checkbox *ngIf="mathFunctionConfigForm.get('result').get('type').value !== ArgumentTypeResult.MESSAGE_BODY" formControlName="addToBody" style="padding-bottom: 16px;">
+      <div *ngIf="[ArgumentTypeResult.ATTRIBUTE, ArgumentTypeResult.TIME_SERIES].includes(mathFunctionConfigForm.get('result').get('type').value)"
+           fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap.gt-xs="16px">
+        <mat-checkbox formControlName="addToBody" style="padding-bottom: 16px;">
           {{'tb.rulenode.add-to-body-field-input' | translate }}
         </mat-checkbox>
-        <mat-checkbox *ngIf="mathFunctionConfigForm.get('result').get('type').value !== ArgumentTypeResult.MESSAGE_METADATA" formControlName="addToMetadata" style="padding-bottom: 16px;">
+        <mat-checkbox formControlName="addToMetadata" style="padding-bottom: 16px;">
           {{'tb.rulenode.add-to-metadata-field-input' | translate}}
         </mat-checkbox>
       </div>

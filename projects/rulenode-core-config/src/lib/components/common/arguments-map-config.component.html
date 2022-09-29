@@ -1,6 +1,6 @@
 <section fxLayout="column">
 
-  <div class="tb-columns" [ngClass]="{'tb-readonly': disabled}"
+  <div [ngClass]="{'tb-readonly': disabled}"
        style="max-height: 500px; overflow: auto; padding-bottom: 15px;">
     <mat-list class="tb-drop-list" cdkDropList cdkDropListOrientation="vertical"
               [formGroup]="argumentsFormGroup"
@@ -8,7 +8,7 @@
               [cdkDropListDisabled]="disabled">
       <mat-list-item *ngFor="let argumentControl of argumentsFormArray().controls; let $index = index"
                      formArrayName="arguments"
-                     cdkDrag class="tb-entity-group-column tb-draggable"
+                     cdkDrag class="tb-argument tb-draggable"
                      [cdkDragDisabled]="disabled"
                      style="height: 100%">
         <div fxFlex fxLayout="row" fxLayoutAlign="start center">
@@ -25,7 +25,7 @@
                   style="padding: 0 10px; min-width: 20px;">{{argumentControl.get('name').value}}.</span>
             <div fxFlex fxLayout="column">
               <div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutGap.gt-xs="16px">
-                <mat-form-field fxFlex class="mat-block">
+                <mat-form-field fxFlex="50" class="mat-block">
                   <mat-label translate>tb.rulenode.argument-type-field-input</mat-label>
                   <mat-select [formControl]="argumentControl.get('type')" required>
                     <mat-option *ngFor="let argument of arguments" [value]="argument">
@@ -36,16 +36,16 @@
                     tb.rulenode.argument-type-field-input-required
                   </mat-error>
                 </mat-form-field>
-                <mat-form-field fxFlex floatLabel="always" hideRequiredMarker class="cell mat-block"
-                                [fxHide]="argumentControl.get('type').value === 'CONSTANT'">
+                <mat-form-field fxFlex="50" floatLabel="always" class="mat-block"
+                                *ngIf="argumentControl.get('type').value && argumentControl.get('type').value !== ArgumentType.CONSTANT">
                   <mat-label translate>tb.rulenode.argument-key-field-input</mat-label>
                   <input [formControl]="argumentControl.get('key')" matInput required/>
                   <mat-error *ngIf="argumentControl.get('key').hasError('required')" translate>
                     tb.rulenode.argument-key-field-input-required
                   </mat-error>
                 </mat-form-field>
-                <mat-form-field fxFlex floatLabel="always" hideRequiredMarker class="cell mat-block"
-                                [fxShow]="argumentControl.get('type').value === 'CONSTANT'">
+                <mat-form-field fxFlex="50" floatLabel="always" class="mat-block"
+                                *ngIf="argumentControl.get('type').value === ArgumentType.CONSTANT">
                   <mat-label translate>tb.rulenode.constant-value-field-input</mat-label>
                   <input [formControl]="argumentControl.get('key')"
                          matInput
@@ -57,21 +57,25 @@
                   </mat-error>
                 </mat-form-field>
               </div>
-              <div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutGap.gt-xs="16px"
-                 *ngIf="argumentControl.get('type').value === 'ATTRIBUTE'">
-              <mat-form-field fxFlex class="mat-block">
-                <mat-label translate>tb.rulenode.attribute-scope-field-input</mat-label>
-                <mat-select [formControl]="argumentControl.get('attributeScope')">
-                  <mat-option *ngFor="let scope of attributeScope" [value]="scope">
-                    {{ attributeScopeMap.get(scope) | translate }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-              <mat-form-field fxFlex floatLabel="always" hideRequiredMarker class="cell mat-block">
-                <mat-label translate>tb.rulenode.default-value-field-input</mat-label>
-                <input [formControl]="argumentControl.get('defaultValue')" matInput/>
-              </mat-form-field>
-            </div>
+              <div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutGap.gt-xs="16px">
+                  <mat-form-field *ngIf="argumentControl.get('type').value === ArgumentType.ATTRIBUTE"
+                                  fxFlex="50" class="mat-block">
+                    <mat-label translate>tb.rulenode.attribute-scope-field-input</mat-label>
+                    <mat-select required [formControl]="argumentControl.get('attributeScope')">
+                      <mat-option *ngFor="let scope of attributeScope" [value]="scope">
+                        {{ attributeScopeMap.get(scope) | translate }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="argumentControl.get('attributeScope').hasError('required')" translate>
+                      tb.rulenode.attribute-scope-field-input-required
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field *ngIf="argumentControl.get('type').value && argumentControl.get('type').value !== ArgumentType.CONSTANT"
+                                  fxFlex="50" floatLabel="always" class="mat-block">
+                    <mat-label translate>tb.rulenode.default-value-field-input</mat-label>
+                    <input [formControl]="argumentControl.get('defaultValue')" matInput/>
+                  </mat-form-field>
+              </div>
             </div>
             <button *ngIf="!disabled" mat-icon-button color="primary" style="min-width: 40px;"
                     (click)="removeArgument($index)"
@@ -84,7 +88,10 @@
       </mat-list-item>
     </mat-list>
   </div>
-
+  <div *ngIf="!argumentsFormArray().controls.length">
+      <span translate fxLayoutAlign="center center"
+            class="tb-prompt">tb.rulenode.no-arguments-prompt</span>
+  </div>
   <div style="margin-top: 8px;">
     <button mat-button mat-raised-button color="primary"
             [disabled]="argumentsFormArray().value.length >= maxArgs"
