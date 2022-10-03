@@ -67,6 +67,7 @@ export const rangeUnitTranslations = new Map<RangeUnit, string>(
 );
 
 export enum EntityDetailsField {
+  ID = 'ID',
   TITLE = 'TITLE',
   COUNTRY = 'COUNTRY',
   STATE = 'STATE',
