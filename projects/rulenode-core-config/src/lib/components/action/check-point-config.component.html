@@ -1,7 +1,7 @@
 <section [formGroup]="checkPointConfigForm" fxLayout="column">
-  <tb-queue-type-list
+  <tb-queue-autocomplete
     required
     [queueType]="serviceType"
     formControlName="queueName">
-  </tb-queue-type-list>
+  </tb-queue-autocomplete>
 </section>

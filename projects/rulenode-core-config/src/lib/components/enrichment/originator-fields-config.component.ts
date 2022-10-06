@@ -24,7 +24,8 @@ export class OriginatorFieldsConfigComponent extends RuleNodeConfigurationCompon
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.originatorFieldsConfigForm = this.fb.group({
-      fieldsMapping: [configuration ? configuration.fieldsMapping : null, [Validators.required]]
+      fieldsMapping: [configuration ? configuration.fieldsMapping : null, [Validators.required]],
+      ignoreNullStrings: [configuration ? configuration.ignoreNullStrings : null]
     });
   }
 }
