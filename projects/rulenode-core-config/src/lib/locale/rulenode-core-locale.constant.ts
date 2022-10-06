@@ -481,6 +481,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'custom-expression-field-input': 'Mathematical Expression',
           'custom-expression-field-input-required': 'Mathematical expression is required',
           'custom-expression-field-input-hint': 'Hint: specify a mathematical expression to evaluate. For example, transform Fahrenheit to Celsius using <i>(x - 32) / 1.8)</i>',
+          'add-request-to-response-metadata': 'Add request to response metadata'
         },
         'key-val': {
           key: 'Key',
