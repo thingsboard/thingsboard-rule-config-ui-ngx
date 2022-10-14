@@ -31,6 +31,7 @@ export class KafkaConfigComponent extends RuleNodeConfigurationComponent {
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.kafkaConfigForm = this.fb.group({
       topicPattern: [configuration ? configuration.topicPattern : null, [Validators.required]],
+      keyPattern: [configuration ? configuration.keyPattern : null],
       bootstrapServers: [configuration ? configuration.bootstrapServers : null, [Validators.required]],
       retries: [configuration ? configuration.retries : null, [Validators.min(0)]],
       batchSize: [configuration ? configuration.batchSize : null, [Validators.min(0)]],
