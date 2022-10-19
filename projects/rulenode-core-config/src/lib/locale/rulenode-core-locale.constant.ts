@@ -72,6 +72,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
             'alarms will be propagated without filtering by relation type.',
           'unlimited-level': 'Unlimited level',
           'latest-telemetry': 'Latest telemetry',
+          'fetch-into': 'Fetch into',
           data: 'Data',
           metadata: 'Metadata',
           'attr-mapping': 'Attributes mapping',
