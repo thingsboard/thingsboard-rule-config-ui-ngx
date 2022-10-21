@@ -29,5 +29,6 @@ export * from './sqs-config.component';
 export * from './timeseries-config.component';
 export * from './unassign-customer-config.component';
 export * from  './delete-attributes-config.component';
+export * from './math-function-config.component';
 
 export * from './rulenode-core-config-action.module';

@@ -7,6 +7,23 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <div *ngIf="changeOriginatorConfigForm.get('originatorSource').value === 'ENTITY'" fxLayout="row" fxLayoutGap="8px">
+    <tb-entity-type-select
+      showLabel
+      style="min-width: 100px;"
+      required
+      formControlName="entityType">
+    </tb-entity-type-select>
+    <mat-form-field *ngIf="changeOriginatorConfigForm.get('entityType').value" fxFlex class="mat-block" style="padding-bottom: 40px;">
+      <mat-label translate>tb.rulenode.entity-name-pattern</mat-label>
+      <input required matInput formControlName="entityNamePattern">
+      <mat-error *ngIf="changeOriginatorConfigForm.get('entityNamePattern').hasError('required') ||
+                        changeOriginatorConfigForm.get('entityNamePattern').hasError('pattern')">
+        {{ 'tb.rulenode.entity-name-pattern-required' | translate }}
+      </mat-error>
+      <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
+    </mat-form-field>
+  </div>
   <section fxLayout="column" *ngIf="changeOriginatorConfigForm.get('originatorSource').value === originatorSource.RELATED">
     <label translate class="tb-title tb-required">tb.rulenode.relations-query</label>
     <tb-relations-query-config
