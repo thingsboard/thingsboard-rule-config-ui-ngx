@@ -175,6 +175,10 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           value: 'Value',
           'value-required': 'Value is required',
           'topic-pattern': 'Topic pattern',
+          'key-pattern': 'Key pattern',
+          'key-pattern-hint': 'Hint: Optional. If a valid partition number is specified, it will be used when sending the record. ' +
+                              'If no partition is specified, the key will be used instead. '+
+                              'If neither is specified, a partition will be assigned in a round-robin fashion.',
           'topic-pattern-required': 'Topic pattern is required',
           topic: 'Topic',
           'topic-required': 'Topic is required',
