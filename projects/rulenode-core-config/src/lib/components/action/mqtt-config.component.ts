@@ -38,6 +38,7 @@ export class MqttConfigComponent extends RuleNodeConfigurationComponent implemen
         disabled: !(configuration && isNotEmptyStr(configuration.clientId))
       }, []],
       cleanSession: [configuration ? configuration.cleanSession : false, []],
+      retainedMessage: [configuration ? configuration.retainedMessage : false, []],
       ssl: [configuration ? configuration.ssl : false, []],
       credentials: [configuration ? configuration.credentials : null, []]
     });
