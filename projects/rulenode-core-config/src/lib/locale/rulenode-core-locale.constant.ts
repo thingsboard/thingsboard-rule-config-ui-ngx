@@ -61,6 +61,13 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'latest-timeseries': 'Latest timeseries',
           'timeseries-key': 'Timeseries key',
           'data-keys': 'Message data',
+          'rename-keys-in': 'Rename keys in',
+          data: 'Data',
+          metadata: 'Metadata',
+          'key-name': 'Key name',
+          'key-name-required': 'Key name is required',
+          'new-key-name': 'New key name',
+          'new-key-name-required': 'New key name is required',
           'metadata-keys': 'Message metadata',
           'json-path-expression': 'JSON path expression',
           'json-path-expression-required': 'JSON path expression is required',
@@ -503,7 +510,8 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           key: 'Key',
           value: 'Value',
           'remove-entry': 'Remove entry',
-          'add-entry': 'Add entry'
+          'add-entry': 'Add entry',
+          'unique-key-value-pair-error': '\'{{valText}}\' must be different from the current \'{{keyText}}\'',
         },
         'mail-body-type': {
           'plain-text': 'Plain Text',
