@@ -5,13 +5,12 @@ import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'tb-enrichment-node-originator-fields-config',
-  templateUrl: './originator-fields-config.component.html',
+  selector: 'tb-transformation-node-rename-keys-config',
+  templateUrl: './rename-keys-config.component.html',
   styleUrls: []
 })
-export class OriginatorFieldsConfigComponent extends RuleNodeConfigurationComponent {
-
-  originatorFieldsConfigForm: FormGroup;
+export class RenameKeysConfigComponent extends RuleNodeConfigurationComponent {
+  renameKeysConfigForm: FormGroup;
 
   constructor(protected store: Store<AppState>,
               private fb: FormBuilder) {
@@ -19,13 +18,13 @@ export class OriginatorFieldsConfigComponent extends RuleNodeConfigurationCompon
   }
 
   protected configForm(): FormGroup {
-    return this.originatorFieldsConfigForm;
+    return this.renameKeysConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
-    this.originatorFieldsConfigForm = this.fb.group({
-      fieldsMapping: [configuration ? configuration.fieldsMapping : null, [Validators.required]],
-      ignoreNullStrings: [configuration ? configuration.ignoreNullStrings : null]
+    this.renameKeysConfigForm = this.fb.group({
+      fromMetadata: [configuration ? configuration.fromMetadata : null, [Validators.required]],
+      renameKeysMapping: [configuration ? configuration.renameKeysMapping : null, [Validators.required]]
     });
   }
 }

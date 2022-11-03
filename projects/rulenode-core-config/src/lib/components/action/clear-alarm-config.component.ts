@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { AppState, NodeScriptTestService } from '@core/public-api';
-import { JsFuncComponent, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
+import { AppState, getCurrentAuthState, NodeScriptTestService } from '@core/public-api';
+import { JsFuncComponent, RuleNodeConfiguration, RuleNodeConfigurationComponent, ScriptLanguage } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -12,9 +12,14 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ClearAlarmConfigComponent extends RuleNodeConfigurationComponent {
 
-  @ViewChild('jsFuncComponent', {static: true}) jsFuncComponent: JsFuncComponent;
+  @ViewChild('jsFuncComponent', {static: false}) jsFuncComponent: JsFuncComponent;
+  @ViewChild('mvelFuncComponent', {static: false}) mvelFuncComponent: JsFuncComponent;
 
   clearAlarmConfigForm: FormGroup;
+
+  mvelEnabled = getCurrentAuthState(this.store).mvelEnabled;
+
+  scriptLanguage = ScriptLanguage;
 
   constructor(protected store: Store<AppState>,
               private fb: FormBuilder,
@@ -29,13 +34,43 @@ export class ClearAlarmConfigComponent extends RuleNodeConfigurationComponent {
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.clearAlarmConfigForm = this.fb.group({
-      alarmDetailsBuildJs: [configuration ? configuration.alarmDetailsBuildJs : null, [Validators.required]],
+      scriptLang: [configuration ? configuration.scriptLang : ScriptLanguage.JS, [Validators.required]],
+      alarmDetailsBuildJs: [configuration ? configuration.alarmDetailsBuildJs : null, []],
+      alarmDetailsBuildMvel: [configuration ? configuration.alarmDetailsBuildMvel : null, []],
       alarmType: [configuration ? configuration.alarmType : null, [Validators.required]]
     });
   }
 
+  protected validatorTriggers(): string[] {
+    return ['scriptLang'];
+  }
+
+  protected updateValidators(emitEvent: boolean) {
+    let scriptLang: ScriptLanguage = this.clearAlarmConfigForm.get('scriptLang').value;
+    if (scriptLang === ScriptLanguage.MVEL && !this.mvelEnabled) {
+      scriptLang = ScriptLanguage.JS;
+      this.clearAlarmConfigForm.get('scriptLang').patchValue(scriptLang, {emitEvent: false});
+      setTimeout(() => {this.clearAlarmConfigForm.updateValueAndValidity({emitEvent: true})});
+    }
+    this.clearAlarmConfigForm.get('alarmDetailsBuildJs').setValidators(scriptLang === ScriptLanguage.JS ? [Validators.required] : []);
+    this.clearAlarmConfigForm.get('alarmDetailsBuildJs').updateValueAndValidity({emitEvent});
+    this.clearAlarmConfigForm.get('alarmDetailsBuildMvel').setValidators(scriptLang === ScriptLanguage.MVEL ? [Validators.required] : []);
+    this.clearAlarmConfigForm.get('alarmDetailsBuildMvel').updateValueAndValidity({emitEvent});
+  }
+
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    if (configuration) {
+      if (!configuration.scriptLang) {
+        configuration.scriptLang = ScriptLanguage.JS;
+      }
+    }
+    return configuration;
+  }
+
   testScript() {
-    const script: string = this.clearAlarmConfigForm.get('alarmDetailsBuildJs').value;
+    const scriptLang: ScriptLanguage = this.clearAlarmConfigForm.get('scriptLang').value;
+    const scriptField = scriptLang === ScriptLanguage.JS ? 'alarmDetailsBuildJs' : 'alarmDetailsBuildMvel';
+    const script: string = this.clearAlarmConfigForm.get(scriptField).value;
     this.nodeScriptTestService.testNodeScript(
       script,
       'json',
@@ -43,15 +78,18 @@ export class ClearAlarmConfigComponent extends RuleNodeConfigurationComponent {
       'Details',
       ['msg', 'metadata', 'msgType'],
       this.ruleNodeId,
-      'rulenode/clear_alarm_node_script_fn'
+      'rulenode/clear_alarm_node_script_fn',
+      scriptLang
     ).subscribe((theScript) => {
       if (theScript) {
-        this.clearAlarmConfigForm.get('alarmDetailsBuildJs').setValue(theScript);
+        this.clearAlarmConfigForm.get(scriptField).setValue(theScript);
       }
     });
   }
 
   protected onValidate() {
-    this.jsFuncComponent.validateOnSubmit();
+    const scriptLang: ScriptLanguage = this.clearAlarmConfigForm.get('scriptLang').value;
+    const component = scriptLang === ScriptLanguage.JS ? this.jsFuncComponent : this.mvelFuncComponent;
+    component.validateOnSubmit();
   }
 }
