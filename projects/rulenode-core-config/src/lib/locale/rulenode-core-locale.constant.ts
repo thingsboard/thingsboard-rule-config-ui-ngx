@@ -91,14 +91,8 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'unlimited-level': 'Unlimited level',
           'latest-telemetry': 'Latest telemetry',
           'delete-from': 'Delete from',
-          data: 'Data',
-          metadata: 'Metadata',
-          keys: 'Keys',
           'use-regular-expression-delete-hint': 'Use regular expression to delete keys by pattern',
-          'keys-required': 'Keys are required',
           'fetch-into': 'Fetch into',
-          data: 'Data',
-          metadata: 'Metadata',
           'attr-mapping': 'Attributes mapping',
           'source-attribute': 'Source attribute',
           'source-attribute-required': 'Source attribute is required.',
@@ -512,7 +506,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'custom-expression-field-input': 'Mathematical Expression',
           'custom-expression-field-input-required': 'Mathematical expression is required',
           'custom-expression-field-input-hint': 'Hint: specify a mathematical expression to evaluate. For example, transform Fahrenheit to Celsius using <i>(x - 32) / 1.8)</i>',
-          "retained-message": "Retained",
+          'retained-message': 'Retained'
         },
         'key-val': {
           key: 'Key',
