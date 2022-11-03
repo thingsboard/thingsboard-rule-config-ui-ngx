@@ -55,6 +55,8 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'client-attributes': 'Client attributes',
           'shared-attributes': 'Shared attributes',
           'server-attributes': 'Server attributes',
+          'attributes-keys': 'Attributes keys',
+          'attributes-keys-required': 'Attributes keys are required',
           'notify-device': 'Notify Device',
           'fetch-credentials-to-metadata': 'Fetch credentials to metadata',
           'notify-device-hint': 'If the message arrives from the device, we will push it back to the device by default.',

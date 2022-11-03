@@ -33,10 +33,12 @@ import { DeviceProfileConfigComponent } from './device-profile-config.component'
 import { SendSmsConfigComponent } from './send-sms-config.component';
 import { PushToEdgeConfigComponent } from './push-to-edge-config.component';
 import { PushToCloudConfigComponent } from './push-to-cloud-config.component';
+import { DeleteAttributesConfigComponent } from './delete-attributes-config.component';
 import { MathFunctionConfigComponent } from './math-function-config.component';
 
 @NgModule({
   declarations: [
+    DeleteAttributesConfigComponent,
     AttributesConfigComponent,
     TimeseriesConfigComponent,
     RpcRequestConfigComponent,
@@ -76,6 +78,7 @@ import { MathFunctionConfigComponent } from './math-function-config.component';
     RulenodeCoreConfigCommonModule
   ],
   exports: [
+    DeleteAttributesConfigComponent,
     AttributesConfigComponent,
     TimeseriesConfigComponent,
     RpcRequestConfigComponent,
