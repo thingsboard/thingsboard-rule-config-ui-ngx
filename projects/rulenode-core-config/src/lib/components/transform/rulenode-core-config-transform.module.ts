@@ -6,13 +6,15 @@ import { RulenodeCoreConfigCommonModule } from '../common/rulenode-core-config-c
 import { TransformScriptConfigComponent } from './script-config.component';
 import { ToEmailConfigComponent } from './to-email-config.component';
 import { NodeJsonPathConfigComponent } from './node-json-path-config.component';
+import { DeleteKeysConfigComponent } from './delete-keys-config.component';
 
 @NgModule({
   declarations: [
     ChangeOriginatorConfigComponent,
     TransformScriptConfigComponent,
     ToEmailConfigComponent,
-    NodeJsonPathConfigComponent
+    NodeJsonPathConfigComponent,
+    DeleteKeysConfigComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { NodeJsonPathConfigComponent } from './node-json-path-config.component';
     ChangeOriginatorConfigComponent,
     TransformScriptConfigComponent,
     ToEmailConfigComponent,
-    NodeJsonPathConfigComponent
+    NodeJsonPathConfigComponent,
+    DeleteKeysConfigComponent
   ]
 })
 export class RulenodeCoreConfigTransformModule {

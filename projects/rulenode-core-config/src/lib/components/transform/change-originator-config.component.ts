@@ -30,6 +30,8 @@ export class ChangeOriginatorConfigComponent extends RuleNodeConfigurationCompon
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.changeOriginatorConfigForm = this.fb.group({
       originatorSource: [configuration ? configuration.originatorSource : null, [Validators.required]],
+      entityType: [configuration ? configuration.entityType : null, []],
+      entityNamePattern: [configuration ? configuration.entityNamePattern : null, []],
       relationsQuery: [configuration ? configuration.relationsQuery : null, []]
     });
   }
@@ -40,11 +42,22 @@ export class ChangeOriginatorConfigComponent extends RuleNodeConfigurationCompon
 
   protected updateValidators(emitEvent: boolean) {
     const originatorSource: OriginatorSource = this.changeOriginatorConfigForm.get('originatorSource').value;
-    if (originatorSource && originatorSource === OriginatorSource.RELATED) {
+    if (originatorSource === OriginatorSource.RELATED) {
       this.changeOriginatorConfigForm.get('relationsQuery').setValidators([Validators.required]);
     } else {
       this.changeOriginatorConfigForm.get('relationsQuery').setValidators([]);
     }
+    if (originatorSource === OriginatorSource.ENTITY) {
+      this.changeOriginatorConfigForm.get('entityType').setValidators([Validators.required]);
+      this.changeOriginatorConfigForm.get('entityNamePattern').setValidators([Validators.required, Validators.pattern(/.*\S.*/)]);
+    } else {
+      this.changeOriginatorConfigForm.get('entityType').patchValue(null, {emitEvent});
+      this.changeOriginatorConfigForm.get('entityNamePattern').patchValue(null, {emitEvent});
+      this.changeOriginatorConfigForm.get('entityType').setValidators([]);
+      this.changeOriginatorConfigForm.get('entityNamePattern').setValidators([]);
+    }
     this.changeOriginatorConfigForm.get('relationsQuery').updateValueAndValidity({emitEvent});
+    this.changeOriginatorConfigForm.get('entityType').updateValueAndValidity({emitEvent});
+    this.changeOriginatorConfigForm.get('entityNamePattern').updateValueAndValidity({emitEvent});
   }
 }

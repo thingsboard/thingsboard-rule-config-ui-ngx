@@ -2,17 +2,27 @@
   <mat-checkbox formControlName="useMessageAlarmData" style="padding-bottom: 16px;">
     {{ 'tb.rulenode.use-message-alarm-data' | translate }}
   </mat-checkbox>
-  <mat-checkbox formControlName="overwriteAlarmDetails" [fxShow]="createAlarmConfigForm.get('useMessageAlarmData').value === true"
+  <mat-checkbox formControlName="overwriteAlarmDetails" *ngIf="createAlarmConfigForm.get('useMessageAlarmData').value === true"
                 style="padding-bottom: 16px;">
     {{ 'tb.rulenode.overwrite-alarm-details' | translate }}
   </mat-checkbox>
-  <section fxLayout="column" [fxShow]="createAlarmConfigForm.get('useMessageAlarmData').value === false ||
-                                       createAlarmConfigForm.get('overwriteAlarmDetails').value === true">
-    <label translate class="tb-title no-padding">tb.rulenode.alarm-details-builder</label>
-    <tb-js-func #jsFuncComponent
+  <section fxLayout="column" *ngIf="createAlarmConfigForm.get('useMessageAlarmData').value === false ||
+                                    createAlarmConfigForm.get('overwriteAlarmDetails').value === true">
+    <tb-script-lang formControlName="scriptLang" *ngIf="mvelEnabled"></tb-script-lang>
+    <tb-js-func *ngIf="createAlarmConfigForm.get('scriptLang').value === scriptLanguage.JS"
+                #jsFuncComponent
                 formControlName="alarmDetailsBuildJs"
                 functionName="Details"
                 [functionArgs]="['msg', 'metadata', 'msgType']"
+                helpId="rulenode/create_alarm_node_script_fn"
+                noValidate="true">
+    </tb-js-func>
+    <tb-js-func *ngIf="createAlarmConfigForm.get('scriptLang').value === scriptLanguage.MVEL"
+                #mvelFuncComponent
+                formControlName="alarmDetailsBuildMvel"
+                functionName="Details"
+                [functionArgs]="['msg', 'metadata', 'msgType']"
+                [disableUndefinedCheck]="true"
                 helpId="rulenode/create_alarm_node_script_fn"
                 noValidate="true">
     </tb-js-func>
@@ -22,7 +32,7 @@
       </button>
     </div>
   </section>
-  <section fxLayout="column" [fxShow]="createAlarmConfigForm.get('useMessageAlarmData').value === false">
+  <section fxLayout="column" *ngIf="createAlarmConfigForm.get('useMessageAlarmData').value === false">
     <mat-form-field fxFlex style="padding-bottom: 16px;">
       <mat-label translate>tb.rulenode.alarm-type</mat-label>
       <input required matInput formControlName="alarmType">

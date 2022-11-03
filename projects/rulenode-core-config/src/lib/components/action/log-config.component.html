@@ -1,9 +1,19 @@
 <section [formGroup]="logConfigForm" fxLayout="column">
-  <label translate class="tb-title no-padding">tb.rulenode.to-string</label>
-  <tb-js-func #jsFuncComponent
+  <tb-script-lang formControlName="scriptLang" *ngIf="mvelEnabled"></tb-script-lang>
+  <tb-js-func *ngIf="logConfigForm.get('scriptLang').value === scriptLanguage.JS"
+              #jsFuncComponent
               formControlName="jsScript"
               functionName="ToString"
               [functionArgs]="['msg', 'metadata', 'msgType']"
+              helpId="rulenode/log_node_script_fn"
+              noValidate="true">
+  </tb-js-func>
+  <tb-js-func *ngIf="logConfigForm.get('scriptLang').value === scriptLanguage.MVEL"
+              #mvelFuncComponent
+              formControlName="mvelScript"
+              functionName="ToString"
+              [functionArgs]="['msg', 'metadata', 'msgType']"
+              [disableUndefinedCheck]="true"
               helpId="rulenode/log_node_script_fn"
               noValidate="true">
   </tb-js-func>
