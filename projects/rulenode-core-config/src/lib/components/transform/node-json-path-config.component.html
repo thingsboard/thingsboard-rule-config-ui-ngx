@@ -1,0 +1,9 @@
+<section [formGroup]="jsonPathConfigForm" fxLayout="column">
+  <mat-form-field>
+    <mat-label>{{ 'tb.rulenode.json-path-expression' | translate }}</mat-label>
+    <input matInput formControlName="jsonPath" required/>
+    <mat-hint>{{ 'tb.rulenode.json-path-expression-hint' | translate }}</mat-hint>
+    <mat-error *ngIf="jsonPathConfigForm.get('jsonPath').hasError('required')">{{ 'tb.rulenode.json-path-expression-required' | translate }}</mat-error>
+  </mat-form-field>
+</section>
+
