@@ -26,11 +26,21 @@
       formControlName="originator">
     </tb-entity-select>
   </div>
-  <label translate class="tb-title no-padding">tb.rulenode.generate</label>
-  <tb-js-func #jsFuncComponent
+  <tb-script-lang formControlName="scriptLang" *ngIf="mvelEnabled"></tb-script-lang>
+  <tb-js-func *ngIf="generatorConfigForm.get('scriptLang').value === scriptLanguage.JS"
+              #jsFuncComponent
               formControlName="jsScript"
               functionName="Generate"
               [functionArgs]="['prevMsg', 'prevMetadata', 'prevMsgType']"
+              helpId="rulenode/generator_node_script_fn"
+              noValidate="true">
+  </tb-js-func>
+  <tb-js-func *ngIf="generatorConfigForm.get('scriptLang').value === scriptLanguage.MVEL"
+              #mvelFuncComponent
+              formControlName="mvelScript"
+              functionName="Generate"
+              [functionArgs]="['prevMsg', 'prevMetadata', 'prevMsgType']"
+              [disableUndefinedCheck]="true"
               helpId="rulenode/generator_node_script_fn"
               noValidate="true">
   </tb-js-func>

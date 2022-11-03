@@ -1,10 +1,20 @@
 <section [formGroup]="scriptConfigForm" fxLayout="column">
-  <label translate class="tb-title no-padding">tb.rulenode.transform</label>
-  <tb-js-func #jsFuncComponent
+  <tb-script-lang formControlName="scriptLang" *ngIf="mvelEnabled"></tb-script-lang>
+  <tb-js-func *ngIf="scriptConfigForm.get('scriptLang').value === scriptLanguage.JS"
+              #jsFuncComponent
               formControlName="jsScript"
               functionName="Transform"
               helpId="rulenode/transformation_node_script_fn"
               [functionArgs]="['msg', 'metadata', 'msgType']"
+              noValidate="true">
+  </tb-js-func>
+  <tb-js-func *ngIf="scriptConfigForm.get('scriptLang').value === scriptLanguage.MVEL"
+              #mvelFuncComponent
+              formControlName="mvelScript"
+              functionName="Transform"
+              helpId="rulenode/transformation_node_script_fn"
+              [functionArgs]="['msg', 'metadata', 'msgType']"
+              [disableUndefinedCheck]="true"
               noValidate="true">
   </tb-js-func>
   <div fxLayout="row">

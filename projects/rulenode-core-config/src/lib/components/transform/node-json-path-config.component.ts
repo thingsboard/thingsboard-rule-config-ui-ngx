@@ -5,13 +5,14 @@ import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'tb-enrichment-node-originator-fields-config',
-  templateUrl: './originator-fields-config.component.html',
+  selector: 'tb-transformation-node-json-path-config',
+  templateUrl: './node-json-path-config.component.html',
   styleUrls: []
 })
-export class OriginatorFieldsConfigComponent extends RuleNodeConfigurationComponent {
 
-  originatorFieldsConfigForm: FormGroup;
+export class NodeJsonPathConfigComponent extends RuleNodeConfigurationComponent {
+
+  jsonPathConfigForm: FormGroup;
 
   constructor(protected store: Store<AppState>,
               private fb: FormBuilder) {
@@ -19,13 +20,12 @@ export class OriginatorFieldsConfigComponent extends RuleNodeConfigurationCompon
   }
 
   protected configForm(): FormGroup {
-    return this.originatorFieldsConfigForm;
+    return this.jsonPathConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
-    this.originatorFieldsConfigForm = this.fb.group({
-      fieldsMapping: [configuration ? configuration.fieldsMapping : null, [Validators.required]],
-      ignoreNullStrings: [configuration ? configuration.ignoreNullStrings : null]
+    this.jsonPathConfigForm = this.fb.group({
+      jsonPath: [configuration ? configuration.jsonPath : null, [Validators.required]],
     });
   }
 }

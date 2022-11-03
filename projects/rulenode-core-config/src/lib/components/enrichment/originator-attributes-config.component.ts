@@ -29,6 +29,7 @@ export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationCo
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.originatorAttributesConfigForm = this.fb.group({
       tellFailureIfAbsent: [configuration ? configuration.tellFailureIfAbsent : false, []],
+      fetchToData: [configuration ? configuration.fetchToData: false, []],
       clientAttributeNames: [configuration ? configuration.clientAttributeNames : null, []],
       sharedAttributeNames: [configuration ? configuration.sharedAttributeNames : null, []],
       serverAttributeNames: [configuration ? configuration.serverAttributeNames : null, []],
