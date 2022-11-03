@@ -7,6 +7,12 @@
     </mat-error>
     <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
+  <mat-form-field class="mat-block" style="padding-bottom: 8px;">
+    <mat-label translate>tb.rulenode.key-pattern</mat-label>
+    <input matInput formControlName="keyPattern">
+    <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
+  </mat-form-field>
+  <div class="tb-hint" translate>tb.rulenode.key-pattern-hint</div>
   <mat-form-field class="mat-block">
     <mat-label translate>tb.rulenode.bootstrap-servers</mat-label>
     <input required matInput formControlName="bootstrapServers">

@@ -1,9 +1,19 @@
 <section [formGroup]="clearAlarmConfigForm" fxLayout="column">
-  <label translate class="tb-title no-padding">tb.rulenode.alarm-details-builder</label>
-  <tb-js-func #jsFuncComponent
+  <tb-script-lang formControlName="scriptLang" *ngIf="mvelEnabled"></tb-script-lang>
+  <tb-js-func *ngIf="clearAlarmConfigForm.get('scriptLang').value === scriptLanguage.JS"
+              #jsFuncComponent
               formControlName="alarmDetailsBuildJs"
               functionName="Details"
               [functionArgs]="['msg', 'metadata', 'msgType']"
+              helpId="rulenode/clear_alarm_node_script_fn"
+              noValidate="true">
+  </tb-js-func>
+  <tb-js-func *ngIf="clearAlarmConfigForm.get('scriptLang').value === scriptLanguage.MVEL"
+              #mvelFuncComponent
+              formControlName="alarmDetailsBuildMvel"
+              functionName="Details"
+              [functionArgs]="['msg', 'metadata', 'msgType']"
+              [disableUndefinedCheck]="true"
               helpId="rulenode/clear_alarm_node_script_fn"
               noValidate="true">
   </tb-js-func>

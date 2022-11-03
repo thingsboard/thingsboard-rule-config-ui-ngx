@@ -9,6 +9,15 @@
     {{ 'tb.rulenode.tell-failure-if-absent' | translate }}
   </mat-checkbox>
   <div class="tb-hint" translate>tb.rulenode.tell-failure-if-absent-hint</div>
+  <div class="mat-caption" style="margin-bottom: 8px;">{{ 'tb.rulenode.fetch-into' | translate }}</div>
+  <mat-radio-group style="padding-bottom: 15px;" formControlName="fetchToData" fxLayout="row" fxLayoutGap="16px">
+    <mat-radio-button [value]="true" color="primary" >
+      <span>{{ 'tb.rulenode.data' | translate }}</span>
+    </mat-radio-button>
+    <mat-radio-button [value]="false" color="primary">
+      <span>{{ 'tb.rulenode.metadata' | translate }}</span>
+    </mat-radio-button>
+  </mat-radio-group>
   <label translate class="tb-title no-padding">tb.rulenode.client-attributes</label>
   <mat-form-field floatLabel="always" class="mat-block">
     <mat-label></mat-label>

@@ -1,11 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-import { AppState, NodeScriptTestService } from '@core/public-api';
+import { AppState, getCurrentAuthState, NodeScriptTestService } from '@core/public-api';
 import {
   AlarmSeverity,
   alarmSeverityTranslations,
   JsFuncComponent,
   RuleNodeConfiguration,
-  RuleNodeConfigurationComponent
+  RuleNodeConfigurationComponent, ScriptLanguage
 } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -20,13 +20,18 @@ import { MatChipInputEvent } from '@angular/material/chips';
 })
 export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
 
-  @ViewChild('jsFuncComponent', {static: true}) jsFuncComponent: JsFuncComponent;
+  @ViewChild('jsFuncComponent', {static: false}) jsFuncComponent: JsFuncComponent;
+  @ViewChild('mvelFuncComponent', {static: false}) mvelFuncComponent: JsFuncComponent;
 
   alarmSeverities = Object.keys(AlarmSeverity);
   alarmSeverityTranslationMap = alarmSeverityTranslations;
   createAlarmConfigForm: FormGroup;
 
   separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
+
+  mvelEnabled = getCurrentAuthState(this.store).mvelEnabled;
+
+  scriptLanguage = ScriptLanguage;
 
   constructor(protected store: Store<AppState>,
               private fb: FormBuilder,
@@ -41,7 +46,9 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.createAlarmConfigForm = this.fb.group({
-      alarmDetailsBuildJs: [configuration ? configuration.alarmDetailsBuildJs : null, [Validators.required]],
+      scriptLang: [configuration ? configuration.scriptLang : ScriptLanguage.JS, [Validators.required]],
+      alarmDetailsBuildJs: [configuration ? configuration.alarmDetailsBuildJs : null, []],
+      alarmDetailsBuildMvel: [configuration ? configuration.alarmDetailsBuildMvel : null, []],
       useMessageAlarmData: [configuration ? configuration.useMessageAlarmData : false, []],
       overwriteAlarmDetails: [configuration ? configuration.overwriteAlarmDetails : false, []],
       alarmType: [configuration ? configuration.alarmType : null, []],
@@ -65,11 +72,12 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
 
 
   protected validatorTriggers(): string[] {
-    return ['useMessageAlarmData'];
+    return ['useMessageAlarmData', 'overwriteAlarmDetails', 'scriptLang'];
   }
 
   protected updateValidators(emitEvent: boolean) {
     const useMessageAlarmData: boolean = this.createAlarmConfigForm.get('useMessageAlarmData').value;
+    const overwriteAlarmDetails: boolean = this.createAlarmConfigForm.get('overwriteAlarmDetails').value;
     if (useMessageAlarmData) {
       this.createAlarmConfigForm.get('alarmType').setValidators([]);
       this.createAlarmConfigForm.get('severity').setValidators([]);
@@ -79,10 +87,35 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
     }
     this.createAlarmConfigForm.get('alarmType').updateValueAndValidity({emitEvent});
     this.createAlarmConfigForm.get('severity').updateValueAndValidity({emitEvent});
+
+    let scriptLang: ScriptLanguage = this.createAlarmConfigForm.get('scriptLang').value;
+    if (scriptLang === ScriptLanguage.MVEL && !this.mvelEnabled) {
+      scriptLang = ScriptLanguage.JS;
+      this.createAlarmConfigForm.get('scriptLang').patchValue(scriptLang, {emitEvent: false});
+      setTimeout(() => {this.createAlarmConfigForm.updateValueAndValidity({emitEvent: true})});
+    }
+    const useAlarmDetailsBuildScript = useMessageAlarmData === false || overwriteAlarmDetails === true;
+    this.createAlarmConfigForm.get('alarmDetailsBuildJs')
+      .setValidators(useAlarmDetailsBuildScript && scriptLang === ScriptLanguage.JS ? [Validators.required] : []);
+    this.createAlarmConfigForm.get('alarmDetailsBuildMvel')
+      .setValidators(useAlarmDetailsBuildScript && scriptLang === ScriptLanguage.MVEL ? [Validators.required] : []);
+    this.createAlarmConfigForm.get('alarmDetailsBuildJs').updateValueAndValidity({emitEvent});
+    this.createAlarmConfigForm.get('alarmDetailsBuildMvel').updateValueAndValidity({emitEvent});
+  }
+
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    if (configuration) {
+      if (!configuration.scriptLang) {
+        configuration.scriptLang = ScriptLanguage.JS;
+      }
+    }
+    return configuration;
   }
 
   testScript() {
-    const script: string = this.createAlarmConfigForm.get('alarmDetailsBuildJs').value;
+    const scriptLang: ScriptLanguage = this.createAlarmConfigForm.get('scriptLang').value;
+    const scriptField = scriptLang === ScriptLanguage.JS ? 'alarmDetailsBuildJs' : 'alarmDetailsBuildMvel';
+    const script: string = this.createAlarmConfigForm.get(scriptField).value;
     this.nodeScriptTestService.testNodeScript(
       script,
       'json',
@@ -90,10 +123,11 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
       'Details',
       ['msg', 'metadata', 'msgType'],
       this.ruleNodeId,
-      'rulenode/create_alarm_node_script_fn'
+      'rulenode/create_alarm_node_script_fn',
+      scriptLang
     ).subscribe((theScript) => {
       if (theScript) {
-        this.createAlarmConfigForm.get('alarmDetailsBuildJs').setValue(theScript);
+        this.createAlarmConfigForm.get(scriptField).setValue(theScript);
       }
     });
   }
@@ -130,7 +164,9 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
     const useMessageAlarmData: boolean = this.createAlarmConfigForm.get('useMessageAlarmData').value;
     const overwriteAlarmDetails: boolean = this.createAlarmConfigForm.get('overwriteAlarmDetails').value;
     if (!useMessageAlarmData || overwriteAlarmDetails) {
-      this.jsFuncComponent.validateOnSubmit();
+      const scriptLang: ScriptLanguage = this.createAlarmConfigForm.get('scriptLang').value;
+      const component = scriptLang === ScriptLanguage.JS ? this.jsFuncComponent : this.mvelFuncComponent;
+      component.validateOnSubmit();
     }
   }
 }
