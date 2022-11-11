@@ -12,6 +12,7 @@
       showLabel
       style="min-width: 100px;"
       required
+      [allowedEntityTypes] = "allowedEntityTypes"
       formControlName="entityType">
     </tb-entity-type-select>
     <mat-form-field *ngIf="changeOriginatorConfigForm.get('entityType').value" fxFlex class="mat-block" style="padding-bottom: 40px;">
