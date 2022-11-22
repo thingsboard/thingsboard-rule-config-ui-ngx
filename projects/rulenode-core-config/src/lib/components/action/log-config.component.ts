@@ -13,11 +13,11 @@ import { TranslateService } from '@ngx-translate/core';
 export class LogConfigComponent extends RuleNodeConfigurationComponent {
 
   @ViewChild('jsFuncComponent', {static: false}) jsFuncComponent: JsFuncComponent;
-  @ViewChild('mvelFuncComponent', {static: false}) mvelFuncComponent: JsFuncComponent;
+  @ViewChild('tbelFuncComponent', {static: false}) tbelFuncComponent: JsFuncComponent;
 
   logConfigForm: FormGroup;
 
-  mvelEnabled = getCurrentAuthState(this.store).mvelEnabled;
+  tbelEnabled = getCurrentAuthState(this.store).tbelEnabled;
 
   scriptLanguage = ScriptLanguage;
 
@@ -36,7 +36,7 @@ export class LogConfigComponent extends RuleNodeConfigurationComponent {
     this.logConfigForm = this.fb.group({
       scriptLang: [configuration ? configuration.scriptLang : ScriptLanguage.JS, [Validators.required]],
       jsScript: [configuration ? configuration.jsScript : null, []],
-      mvelScript: [configuration ? configuration.mvelScript : null, []]
+      tbelScript: [configuration ? configuration.tbelScript : null, []]
     });
   }
 
@@ -46,15 +46,15 @@ export class LogConfigComponent extends RuleNodeConfigurationComponent {
 
   protected updateValidators(emitEvent: boolean) {
     let scriptLang: ScriptLanguage = this.logConfigForm.get('scriptLang').value;
-    if (scriptLang === ScriptLanguage.MVEL && !this.mvelEnabled) {
+    if (scriptLang === ScriptLanguage.TBEL && !this.tbelEnabled) {
       scriptLang = ScriptLanguage.JS;
       this.logConfigForm.get('scriptLang').patchValue(scriptLang, {emitEvent: false});
       setTimeout(() => {this.logConfigForm.updateValueAndValidity({emitEvent: true})});
     }
     this.logConfigForm.get('jsScript').setValidators(scriptLang === ScriptLanguage.JS ? [Validators.required] : []);
     this.logConfigForm.get('jsScript').updateValueAndValidity({emitEvent});
-    this.logConfigForm.get('mvelScript').setValidators(scriptLang === ScriptLanguage.MVEL ? [Validators.required] : []);
-    this.logConfigForm.get('mvelScript').updateValueAndValidity({emitEvent});
+    this.logConfigForm.get('tbelScript').setValidators(scriptLang === ScriptLanguage.TBEL ? [Validators.required] : []);
+    this.logConfigForm.get('tbelScript').updateValueAndValidity({emitEvent});
   }
 
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
@@ -68,7 +68,7 @@ export class LogConfigComponent extends RuleNodeConfigurationComponent {
 
   testScript() {
     const scriptLang: ScriptLanguage = this.logConfigForm.get('scriptLang').value;
-    const scriptField = scriptLang === ScriptLanguage.JS ? 'jsScript' : 'mvelScript';
+    const scriptField = scriptLang === ScriptLanguage.JS ? 'jsScript' : 'tbelScript';
     const script: string = this.logConfigForm.get(scriptField).value;
     this.nodeScriptTestService.testNodeScript(
       script,
@@ -88,7 +88,7 @@ export class LogConfigComponent extends RuleNodeConfigurationComponent {
 
   protected onValidate() {
     const scriptLang: ScriptLanguage = this.logConfigForm.get('scriptLang').value;
-    const component = scriptLang === ScriptLanguage.JS ? this.jsFuncComponent : this.mvelFuncComponent;
+    const component = scriptLang === ScriptLanguage.JS ? this.jsFuncComponent : this.tbelFuncComponent;
     component.validateOnSubmit();
   }
 }

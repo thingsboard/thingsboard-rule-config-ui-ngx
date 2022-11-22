@@ -21,7 +21,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
 
   @ViewChild('jsFuncComponent', {static: false}) jsFuncComponent: JsFuncComponent;
-  @ViewChild('mvelFuncComponent', {static: false}) mvelFuncComponent: JsFuncComponent;
+  @ViewChild('tbelFuncComponent', {static: false}) tbelFuncComponent: JsFuncComponent;
 
   alarmSeverities = Object.keys(AlarmSeverity);
   alarmSeverityTranslationMap = alarmSeverityTranslations;
@@ -29,7 +29,7 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
 
   separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
 
-  mvelEnabled = getCurrentAuthState(this.store).mvelEnabled;
+  tbelEnabled = getCurrentAuthState(this.store).tbelEnabled;
 
   scriptLanguage = ScriptLanguage;
 
@@ -48,7 +48,7 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
     this.createAlarmConfigForm = this.fb.group({
       scriptLang: [configuration ? configuration.scriptLang : ScriptLanguage.JS, [Validators.required]],
       alarmDetailsBuildJs: [configuration ? configuration.alarmDetailsBuildJs : null, []],
-      alarmDetailsBuildMvel: [configuration ? configuration.alarmDetailsBuildMvel : null, []],
+      alarmDetailsBuildTbel: [configuration ? configuration.alarmDetailsBuildTbel : null, []],
       useMessageAlarmData: [configuration ? configuration.useMessageAlarmData : false, []],
       overwriteAlarmDetails: [configuration ? configuration.overwriteAlarmDetails : false, []],
       alarmType: [configuration ? configuration.alarmType : null, []],
@@ -89,7 +89,7 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
     this.createAlarmConfigForm.get('severity').updateValueAndValidity({emitEvent});
 
     let scriptLang: ScriptLanguage = this.createAlarmConfigForm.get('scriptLang').value;
-    if (scriptLang === ScriptLanguage.MVEL && !this.mvelEnabled) {
+    if (scriptLang === ScriptLanguage.TBEL && !this.tbelEnabled) {
       scriptLang = ScriptLanguage.JS;
       this.createAlarmConfigForm.get('scriptLang').patchValue(scriptLang, {emitEvent: false});
       setTimeout(() => {this.createAlarmConfigForm.updateValueAndValidity({emitEvent: true})});
@@ -97,10 +97,10 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
     const useAlarmDetailsBuildScript = useMessageAlarmData === false || overwriteAlarmDetails === true;
     this.createAlarmConfigForm.get('alarmDetailsBuildJs')
       .setValidators(useAlarmDetailsBuildScript && scriptLang === ScriptLanguage.JS ? [Validators.required] : []);
-    this.createAlarmConfigForm.get('alarmDetailsBuildMvel')
-      .setValidators(useAlarmDetailsBuildScript && scriptLang === ScriptLanguage.MVEL ? [Validators.required] : []);
+    this.createAlarmConfigForm.get('alarmDetailsBuildTbel')
+      .setValidators(useAlarmDetailsBuildScript && scriptLang === ScriptLanguage.TBEL ? [Validators.required] : []);
     this.createAlarmConfigForm.get('alarmDetailsBuildJs').updateValueAndValidity({emitEvent});
-    this.createAlarmConfigForm.get('alarmDetailsBuildMvel').updateValueAndValidity({emitEvent});
+    this.createAlarmConfigForm.get('alarmDetailsBuildTbel').updateValueAndValidity({emitEvent});
   }
 
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
@@ -114,7 +114,7 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
 
   testScript() {
     const scriptLang: ScriptLanguage = this.createAlarmConfigForm.get('scriptLang').value;
-    const scriptField = scriptLang === ScriptLanguage.JS ? 'alarmDetailsBuildJs' : 'alarmDetailsBuildMvel';
+    const scriptField = scriptLang === ScriptLanguage.JS ? 'alarmDetailsBuildJs' : 'alarmDetailsBuildTbel';
     const script: string = this.createAlarmConfigForm.get(scriptField).value;
     this.nodeScriptTestService.testNodeScript(
       script,
@@ -165,7 +165,7 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
     const overwriteAlarmDetails: boolean = this.createAlarmConfigForm.get('overwriteAlarmDetails').value;
     if (!useMessageAlarmData || overwriteAlarmDetails) {
       const scriptLang: ScriptLanguage = this.createAlarmConfigForm.get('scriptLang').value;
-      const component = scriptLang === ScriptLanguage.JS ? this.jsFuncComponent : this.mvelFuncComponent;
+      const component = scriptLang === ScriptLanguage.JS ? this.jsFuncComponent : this.tbelFuncComponent;
       component.validateOnSubmit();
     }
   }

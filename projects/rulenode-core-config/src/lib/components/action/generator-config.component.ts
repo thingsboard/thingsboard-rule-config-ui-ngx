@@ -13,11 +13,11 @@ import { TranslateService } from '@ngx-translate/core';
 export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
 
   @ViewChild('jsFuncComponent', {static: false}) jsFuncComponent: JsFuncComponent;
-  @ViewChild('mvelFuncComponent', {static: false}) mvelFuncComponent: JsFuncComponent;
+  @ViewChild('tbelFuncComponent', {static: false}) tbelFuncComponent: JsFuncComponent;
 
   generatorConfigForm: FormGroup;
 
-  mvelEnabled = getCurrentAuthState(this.store).mvelEnabled;
+  tbelEnabled = getCurrentAuthState(this.store).tbelEnabled;
 
   scriptLanguage = ScriptLanguage;
 
@@ -39,7 +39,7 @@ export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
       originator: [configuration ? configuration.originator : null, []],
       scriptLang: [configuration ? configuration.scriptLang : ScriptLanguage.JS, [Validators.required]],
       jsScript: [configuration ? configuration.jsScript : null, []],
-      mvelScript: [configuration ? configuration.mvelScript : null, []]
+      tbelScript: [configuration ? configuration.tbelScript : null, []]
     });
   }
 
@@ -49,15 +49,15 @@ export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
 
   protected updateValidators(emitEvent: boolean) {
     let scriptLang: ScriptLanguage = this.generatorConfigForm.get('scriptLang').value;
-    if (scriptLang === ScriptLanguage.MVEL && !this.mvelEnabled) {
+    if (scriptLang === ScriptLanguage.TBEL && !this.tbelEnabled) {
       scriptLang = ScriptLanguage.JS;
       this.generatorConfigForm.get('scriptLang').patchValue(scriptLang, {emitEvent: false});
       setTimeout(() => {this.generatorConfigForm.updateValueAndValidity({emitEvent: true})});
     }
     this.generatorConfigForm.get('jsScript').setValidators(scriptLang === ScriptLanguage.JS ? [Validators.required] : []);
     this.generatorConfigForm.get('jsScript').updateValueAndValidity({emitEvent});
-    this.generatorConfigForm.get('mvelScript').setValidators(scriptLang === ScriptLanguage.MVEL ? [Validators.required] : []);
-    this.generatorConfigForm.get('mvelScript').updateValueAndValidity({emitEvent});
+    this.generatorConfigForm.get('tbelScript').setValidators(scriptLang === ScriptLanguage.TBEL ? [Validators.required] : []);
+    this.generatorConfigForm.get('tbelScript').updateValueAndValidity({emitEvent});
   }
 
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
@@ -92,7 +92,7 @@ export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
 
   testScript() {
     const scriptLang: ScriptLanguage = this.generatorConfigForm.get('scriptLang').value;
-    const scriptField = scriptLang === ScriptLanguage.JS ? 'jsScript' : 'mvelScript';
+    const scriptField = scriptLang === ScriptLanguage.JS ? 'jsScript' : 'tbelScript';
     const script: string = this.generatorConfigForm.get(scriptField).value;
     this.nodeScriptTestService.testNodeScript(
       script,
@@ -112,7 +112,7 @@ export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
 
   protected onValidate() {
     const scriptLang: ScriptLanguage = this.generatorConfigForm.get('scriptLang').value;
-    const component = scriptLang === ScriptLanguage.JS ? this.jsFuncComponent : this.mvelFuncComponent;
+    const component = scriptLang === ScriptLanguage.JS ? this.jsFuncComponent : this.tbelFuncComponent;
     component.validateOnSubmit();
   }
 }

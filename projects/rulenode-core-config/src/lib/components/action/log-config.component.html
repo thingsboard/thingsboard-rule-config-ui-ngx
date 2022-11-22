@@ -1,5 +1,5 @@
 <section [formGroup]="logConfigForm" fxLayout="column">
-  <tb-script-lang formControlName="scriptLang" *ngIf="mvelEnabled"></tb-script-lang>
+  <tb-script-lang formControlName="scriptLang" *ngIf="tbelEnabled"></tb-script-lang>
   <tb-js-func *ngIf="logConfigForm.get('scriptLang').value === scriptLanguage.JS"
               #jsFuncComponent
               formControlName="jsScript"
@@ -8,9 +8,9 @@
               helpId="rulenode/log_node_script_fn"
               noValidate="true">
   </tb-js-func>
-  <tb-js-func *ngIf="logConfigForm.get('scriptLang').value === scriptLanguage.MVEL"
-              #mvelFuncComponent
-              formControlName="mvelScript"
+  <tb-js-func *ngIf="logConfigForm.get('scriptLang').value === scriptLanguage.TBEL"
+              #tbelFuncComponent
+              formControlName="tbelScript"
               functionName="ToString"
               [functionArgs]="['msg', 'metadata', 'msgType']"
               [disableUndefinedCheck]="true"

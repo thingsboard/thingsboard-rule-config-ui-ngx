@@ -8,7 +8,7 @@
   </mat-checkbox>
   <section fxLayout="column" *ngIf="createAlarmConfigForm.get('useMessageAlarmData').value === false ||
                                     createAlarmConfigForm.get('overwriteAlarmDetails').value === true">
-    <tb-script-lang formControlName="scriptLang" *ngIf="mvelEnabled"></tb-script-lang>
+    <tb-script-lang formControlName="scriptLang" *ngIf="tbelEnabled"></tb-script-lang>
     <tb-js-func *ngIf="createAlarmConfigForm.get('scriptLang').value === scriptLanguage.JS"
                 #jsFuncComponent
                 formControlName="alarmDetailsBuildJs"
@@ -17,9 +17,9 @@
                 helpId="rulenode/create_alarm_node_script_fn"
                 noValidate="true">
     </tb-js-func>
-    <tb-js-func *ngIf="createAlarmConfigForm.get('scriptLang').value === scriptLanguage.MVEL"
-                #mvelFuncComponent
-                formControlName="alarmDetailsBuildMvel"
+    <tb-js-func *ngIf="createAlarmConfigForm.get('scriptLang').value === scriptLanguage.TBEL"
+                #tbelFuncComponent
+                formControlName="alarmDetailsBuildTbel"
                 functionName="Details"
                 [functionArgs]="['msg', 'metadata', 'msgType']"
                 [disableUndefinedCheck]="true"
