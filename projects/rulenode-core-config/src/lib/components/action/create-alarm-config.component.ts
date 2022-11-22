@@ -115,6 +115,7 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
   testScript() {
     const scriptLang: ScriptLanguage = this.createAlarmConfigForm.get('scriptLang').value;
     const scriptField = scriptLang === ScriptLanguage.JS ? 'alarmDetailsBuildJs' : 'alarmDetailsBuildTbel';
+    const helpId = scriptLang === ScriptLanguage.JS ? 'rulenode/create_alarm_node_script_fn' : 'rulenode/tbel/create_alarm_node_script_fn';
     const script: string = this.createAlarmConfigForm.get(scriptField).value;
     this.nodeScriptTestService.testNodeScript(
       script,
@@ -123,7 +124,7 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
       'Details',
       ['msg', 'metadata', 'msgType'],
       this.ruleNodeId,
-      'rulenode/create_alarm_node_script_fn',
+      helpId,
       scriptLang
     ).subscribe((theScript) => {
       if (theScript) {

@@ -93,6 +93,7 @@ export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
   testScript() {
     const scriptLang: ScriptLanguage = this.generatorConfigForm.get('scriptLang').value;
     const scriptField = scriptLang === ScriptLanguage.JS ? 'jsScript' : 'tbelScript';
+    const helpId = scriptLang === ScriptLanguage.JS ? 'rulenode/generator_node_script_fn' : 'rulenode/tbel/generator_node_script_fn';
     const script: string = this.generatorConfigForm.get(scriptField).value;
     this.nodeScriptTestService.testNodeScript(
       script,
@@ -101,7 +102,7 @@ export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
       'Generate',
       ['prevMsg', 'prevMetadata', 'prevMsgType'],
       this.ruleNodeId,
-      'rulenode/generator_node_script_fn',
+      helpId,
       scriptLang
     ).subscribe((theScript) => {
       if (theScript) {

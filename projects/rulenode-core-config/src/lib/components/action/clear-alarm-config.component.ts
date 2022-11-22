@@ -70,6 +70,7 @@ export class ClearAlarmConfigComponent extends RuleNodeConfigurationComponent {
   testScript() {
     const scriptLang: ScriptLanguage = this.clearAlarmConfigForm.get('scriptLang').value;
     const scriptField = scriptLang === ScriptLanguage.JS ? 'alarmDetailsBuildJs' : 'alarmDetailsBuildTbel';
+    const helpId = scriptLang === ScriptLanguage.JS ? 'rulenode/clear_alarm_node_script_fn' : 'rulenode/tbel/clear_alarm_node_script_fn';
     const script: string = this.clearAlarmConfigForm.get(scriptField).value;
     this.nodeScriptTestService.testNodeScript(
       script,
@@ -78,7 +79,7 @@ export class ClearAlarmConfigComponent extends RuleNodeConfigurationComponent {
       'Details',
       ['msg', 'metadata', 'msgType'],
       this.ruleNodeId,
-      'rulenode/clear_alarm_node_script_fn',
+      helpId,
       scriptLang
     ).subscribe((theScript) => {
       if (theScript) {

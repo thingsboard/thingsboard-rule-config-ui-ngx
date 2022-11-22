@@ -69,6 +69,7 @@ export class TransformScriptConfigComponent extends RuleNodeConfigurationCompone
   testScript() {
     const scriptLang: ScriptLanguage = this.scriptConfigForm.get('scriptLang').value;
     const scriptField = scriptLang === ScriptLanguage.JS ? 'jsScript' : 'tbelScript';
+    const helpId = scriptLang === ScriptLanguage.JS ? 'rulenode/transformation_node_script_fn' : 'rulenode/tbel/transformation_node_script_fn';
     const script: string = this.scriptConfigForm.get(scriptField).value;
     this.nodeScriptTestService.testNodeScript(
       script,
@@ -77,7 +78,7 @@ export class TransformScriptConfigComponent extends RuleNodeConfigurationCompone
       'Transform',
       ['msg', 'metadata', 'msgType'],
       this.ruleNodeId,
-      'rulenode/transformation_node_script_fn',
+      helpId,
       scriptLang
     ).subscribe((theScript) => {
       if (theScript) {

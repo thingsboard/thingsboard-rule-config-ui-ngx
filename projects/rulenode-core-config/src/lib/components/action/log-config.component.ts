@@ -69,6 +69,7 @@ export class LogConfigComponent extends RuleNodeConfigurationComponent {
   testScript() {
     const scriptLang: ScriptLanguage = this.logConfigForm.get('scriptLang').value;
     const scriptField = scriptLang === ScriptLanguage.JS ? 'jsScript' : 'tbelScript';
+    const helpId = scriptLang === ScriptLanguage.JS ? 'rulenode/log_node_script_fn' : 'rulenode/tbel/log_node_script_fn';
     const script: string = this.logConfigForm.get(scriptField).value;
     this.nodeScriptTestService.testNodeScript(
       script,
@@ -77,7 +78,7 @@ export class LogConfigComponent extends RuleNodeConfigurationComponent {
       'ToString',
       ['msg', 'metadata', 'msgType'],
       this.ruleNodeId,
-      'rulenode/log_node_script_fn',
+      helpId,
       scriptLang
     ).subscribe((theScript) => {
       if (theScript) {

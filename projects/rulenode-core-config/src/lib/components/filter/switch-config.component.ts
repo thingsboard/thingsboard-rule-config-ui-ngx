@@ -69,6 +69,7 @@ export class SwitchConfigComponent extends RuleNodeConfigurationComponent {
   testScript() {
     const scriptLang: ScriptLanguage = this.switchConfigForm.get('scriptLang').value;
     const scriptField = scriptLang === ScriptLanguage.JS ? 'jsScript' : 'tbelScript';
+    const helpId = scriptLang === ScriptLanguage.JS ? 'rulenode/switch_node_script_fn' : 'rulenode/tbel/switch_node_script_fn';
     const script: string = this.switchConfigForm.get(scriptField).value;
     this.nodeScriptTestService.testNodeScript(
       script,
@@ -77,7 +78,7 @@ export class SwitchConfigComponent extends RuleNodeConfigurationComponent {
       'Switch',
       ['msg', 'metadata', 'msgType'],
       this.ruleNodeId,
-      'rulenode/switch_node_script_fn',
+      helpId,
       scriptLang
     ).subscribe((theScript) => {
       if (theScript) {
