@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AttributesConfigComponent extends RuleNodeConfigurationComponent {
 
+  attributeScopeMap = AttributeScope;
   attributeScopes = Object.keys(AttributeScope);
   telemetryTypeTranslationsMap = telemetryTypeTranslations;
 
