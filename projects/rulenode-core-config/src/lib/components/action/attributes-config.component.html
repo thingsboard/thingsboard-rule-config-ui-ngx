@@ -13,8 +13,10 @@
     </mat-checkbox>
     <div class="tb-hint" style="padding-bottom: 16px;" translate>tb.rulenode.notify-device-hint</div>
   </div>
-  <mat-checkbox formControlName="sendAttributesUpdatedNotification" style="padding-bottom: 8px;">
-    {{ 'tb.rulenode.send-attributes-updated-notification' | translate }}
-  </mat-checkbox>
-  <div class="tb-hint" [innerHTML]="'tb.rulenode.send-attributes-updated-notification-hint' | translate | safeHtml"></div>
+  <div *ngIf="attributesConfigForm.get('scope').value !== 'CLIENT_SCOPE'">
+    <mat-checkbox formControlName="sendAttributesUpdatedNotification" style="padding-bottom: 8px;">
+      {{ 'tb.rulenode.send-attributes-updated-notification' | translate }}
+    </mat-checkbox>
+    <div class="tb-hint" [innerHTML]="'tb.rulenode.send-attributes-updated-notification-hint' | translate | safeHtml"></div>
+  </div>
 </section>
