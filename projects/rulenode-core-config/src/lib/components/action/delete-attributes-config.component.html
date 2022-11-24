@@ -27,4 +27,8 @@
     <mat-error *ngIf="deleteAttributesConfigForm.get('keys').hasError('required')">{{ 'tb.rulenode.attributes-keys-required' | translate }}</mat-error>
     <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
+  <mat-checkbox formControlName="sendAttributesDeletedNotification" style="padding-bottom: 8px;">
+    {{ 'tb.rulenode.send-attributes-deleted-notification' | translate }}
+  </mat-checkbox>
+  <div class="tb-hint" [innerHTML]="'tb.rulenode.send-attributes-deleted-notification-hint' | translate | safeHtml"></div>
 </section>
