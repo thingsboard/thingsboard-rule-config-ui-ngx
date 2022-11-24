@@ -31,6 +31,11 @@ export class AttributesConfigComponent extends RuleNodeConfigurationComponent {
       notifyDevice: [configuration ? configuration.notifyDevice : true, []],
       sendAttributesUpdatedNotification: [configuration ? configuration.sendAttributesUpdatedNotification : false, []]
     });
+    this.attributesConfigForm.get('scope').valueChanges.subscribe((value) => {
+      if (value === 'CLIENT_SCOPE') {
+        this.attributesConfigForm.get('sendAttributesUpdatedNotification').patchValue(false, {emitEvent: false});
+      }
+    });
   }
 
 }
