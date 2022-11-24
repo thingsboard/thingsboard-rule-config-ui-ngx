@@ -35,7 +35,7 @@ export class AttributesConfigComponent extends RuleNodeConfigurationComponent {
       if (value === 'CLIENT_SCOPE') {
         this.attributesConfigForm.get('sendAttributesUpdatedNotification').patchValue(false, {emitEvent: false});
       }
-    })
+    });
   }
 
 }
