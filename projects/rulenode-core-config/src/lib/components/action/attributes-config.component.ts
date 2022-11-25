@@ -35,7 +35,7 @@ export class AttributesConfigComponent extends RuleNodeConfigurationComponent {
 
     this.attributesConfigForm.get('scope').valueChanges.subscribe((value) => {
       if (value !== AttributeScope.SHARED_SCOPE) {
-        this.attributesConfigForm.get('notifyDevice').patchValue(true, {emitEvent: false});
+        this.attributesConfigForm.get('notifyDevice').patchValue(false, {emitEvent: false});
       }
       if (value === AttributeScope.CLIENT_SCOPE) {
         this.attributesConfigForm.get('sendAttributesUpdatedNotification').patchValue(false, {emitEvent: false});

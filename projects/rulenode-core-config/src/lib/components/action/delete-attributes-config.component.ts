@@ -38,12 +38,12 @@ export class DeleteAttributesConfigComponent extends RuleNodeConfigurationCompon
       scope: [configuration ? configuration.scope : null, [Validators.required]],
       keys: [configuration ? configuration.keys : null, [Validators.required]],
       sendAttributesDeletedNotification: [configuration ? configuration.sendAttributesDeletedNotification : false, []],
-      notifyDevice: [configuration ? configuration.notifyDevice : true, []]
+      notifyDevice: [configuration ? configuration.notifyDevice : false, []]
     });
 
     this.deleteAttributesConfigForm.get('scope').valueChanges.subscribe((value) => {
       if (value !== AttributeScope.SHARED_SCOPE) {
-        this.deleteAttributesConfigForm.get('notifyDevice').patchValue(true, {emitEvent: false});
+        this.deleteAttributesConfigForm.get('notifyDevice').patchValue(false, {emitEvent: false});
       }
     });
   }
