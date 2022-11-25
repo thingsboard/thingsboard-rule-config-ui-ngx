@@ -27,10 +27,10 @@
     <mat-error *ngIf="deleteAttributesConfigForm.get('keys').hasError('required')">{{ 'tb.rulenode.attributes-keys-required' | translate }}</mat-error>
     <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
-  <mat-checkbox formControlName="sendAttributesDeletedNotification" style="padding-bottom: 8px;">
+  <mat-checkbox formControlName="sendAttributesDeletedNotification">
     {{ 'tb.rulenode.send-attributes-deleted-notification' | translate }}
   </mat-checkbox>
-  <div class="tb-hint" [innerHTML]="'tb.rulenode.send-attributes-deleted-notification-hint' | translate | safeHtml"></div>
+  <div class="tb-hint" style="padding-bottom: 16px;" translate>tb.rulenode.send-attributes-deleted-notification-hint</div>
   <div *ngIf="deleteAttributesConfigForm.get('scope').value === attributeScopeMap.SHARED_SCOPE">
     <mat-checkbox formControlName="notifyDevice">
       {{ 'tb.rulenode.notify-device' | translate }}
