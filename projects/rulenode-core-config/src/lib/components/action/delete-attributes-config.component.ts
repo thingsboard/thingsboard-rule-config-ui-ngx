@@ -38,7 +38,7 @@ export class DeleteAttributesConfigComponent extends RuleNodeConfigurationCompon
       scope: [configuration ? configuration.scope : null, [Validators.required]],
       keys: [configuration ? configuration.keys : null, [Validators.required]],
       sendAttributesDeletedNotification: [configuration ? configuration.sendAttributesDeletedNotification : false, []],
-      notifyDevice: [configuration ? configuration.sendAttributesDeletedNotification : true, []]
+      notifyDevice: [configuration ? configuration.notifyDevice : true, []]
     });
 
     this.deleteAttributesConfigForm.get('scope').valueChanges.subscribe((value) => {
