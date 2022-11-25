@@ -31,4 +31,10 @@
     {{ 'tb.rulenode.send-attributes-deleted-notification' | translate }}
   </mat-checkbox>
   <div class="tb-hint" [innerHTML]="'tb.rulenode.send-attributes-deleted-notification-hint' | translate | safeHtml"></div>
+  <div *ngIf="deleteAttributesConfigForm.get('scope').value === attributeScopeMap.SHARED_SCOPE">
+    <mat-checkbox formControlName="notifyDevice">
+      {{ 'tb.rulenode.notify-device' | translate }}
+    </mat-checkbox>
+    <div class="tb-hint" style="padding-bottom: 16px;" translate>tb.rulenode.notify-device-delete-hint</div>
+  </div>
 </section>
