@@ -64,7 +64,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'send-attributes-deleted-notification-hint': 'Send notification about deleted attributes as a separate message to the rule engine queue.',
           'fetch-credentials-to-metadata': 'Fetch credentials to metadata',
           'notify-device-hint': 'If the message arrives from the device, we will push it back to the device by default.',
-          'notify-device-delete-hint': 'Send deleted attributes notification to device.',
+          'notify-device-delete-hint': 'Send notification about deleted attributes to device.',
           'latest-timeseries': 'Latest timeseries',
           'timeseries-key': 'Timeseries key',
           'data-keys': 'Message data',
