@@ -14,9 +14,9 @@
     <div class="tb-hint" style="padding-bottom: 16px;" translate>tb.rulenode.notify-device-hint</div>
   </div>
   <div *ngIf="attributesConfigForm.get('scope').value !== attributeScopeMap.CLIENT_SCOPE">
-    <mat-checkbox formControlName="sendAttributesUpdatedNotification" style="padding-bottom: 8px;">
+    <mat-checkbox formControlName="sendAttributesUpdatedNotification">
       {{ 'tb.rulenode.send-attributes-updated-notification' | translate }}
     </mat-checkbox>
-    <div class="tb-hint" [innerHTML]="'tb.rulenode.send-attributes-updated-notification-hint' | translate | safeHtml"></div>
+    <div class="tb-hint" style="padding-bottom: 16px;" translate>tb.rulenode.send-attributes-updated-notification-hint</div>
   </div>
 </section>

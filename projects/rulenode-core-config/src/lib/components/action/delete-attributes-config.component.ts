@@ -19,6 +19,7 @@ export class DeleteAttributesConfigComponent extends RuleNodeConfigurationCompon
   @ViewChild('attributeChipList') attributeChipList: MatChipList;
 
   deleteAttributesConfigForm: FormGroup;
+  attributeScopeMap = AttributeScope;
   attributeScopes = Object.keys(AttributeScope);
   telemetryTypeTranslationsMap = telemetryTypeTranslations;
   separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
@@ -36,7 +37,14 @@ export class DeleteAttributesConfigComponent extends RuleNodeConfigurationCompon
     this.deleteAttributesConfigForm = this.fb.group({
       scope: [configuration ? configuration.scope : null, [Validators.required]],
       keys: [configuration ? configuration.keys : null, [Validators.required]],
-      sendAttributesDeletedNotification: [configuration ? configuration.sendAttributesDeletedNotification : false, []]
+      sendAttributesDeletedNotification: [configuration ? configuration.sendAttributesDeletedNotification : false, []],
+      notifyDevice: [configuration ? configuration.notifyDevice : false, []]
+    });
+
+    this.deleteAttributesConfigForm.get('scope').valueChanges.subscribe((value) => {
+      if (value !== AttributeScope.SHARED_SCOPE) {
+        this.deleteAttributesConfigForm.get('notifyDevice').patchValue(false, {emitEvent: false});
+      }
     });
   }
 
