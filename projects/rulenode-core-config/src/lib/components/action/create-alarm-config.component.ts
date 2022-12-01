@@ -166,8 +166,9 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
     const overwriteAlarmDetails: boolean = this.createAlarmConfigForm.get('overwriteAlarmDetails').value;
     if (!useMessageAlarmData || overwriteAlarmDetails) {
       const scriptLang: ScriptLanguage = this.createAlarmConfigForm.get('scriptLang').value;
-      const component = scriptLang === ScriptLanguage.JS ? this.jsFuncComponent : this.tbelFuncComponent;
-      component.validateOnSubmit();
+      if (scriptLang === ScriptLanguage.JS) {
+        this.jsFuncComponent.validateOnSubmit();
+      }
     }
   }
 }

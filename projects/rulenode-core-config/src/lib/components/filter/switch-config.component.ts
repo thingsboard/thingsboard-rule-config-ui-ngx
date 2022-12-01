@@ -89,7 +89,8 @@ export class SwitchConfigComponent extends RuleNodeConfigurationComponent {
 
   protected onValidate() {
     const scriptLang: ScriptLanguage = this.switchConfigForm.get('scriptLang').value;
-    const component = scriptLang === ScriptLanguage.JS ? this.jsFuncComponent : this.tbelFuncComponent;
-    component.validateOnSubmit();
+    if (scriptLang === ScriptLanguage.JS) {
+      this.jsFuncComponent.validateOnSubmit();
+    }
   }
 }
