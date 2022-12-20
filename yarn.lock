@@ -8316,9 +8316,9 @@ text-table@0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==
 
-"thingsboard@https://github.com/thingsboard/thingsboard-ui-types.git#release/3.4.2":
-  version "3.4.2"
-  resolved "https://github.com/thingsboard/thingsboard-ui-types.git#5692560e2f03d448b0ec998f14e5aa6680d6376f"
+"thingsboard@https://github.com/thingsboard/thingsboard-ui-types.git#release/3.4.3":
+  version "3.4.3"
+  resolved "https://github.com/thingsboard/thingsboard-ui-types.git#1a38aba5f3641902fb478a6a5249c8a678aae20e"
   dependencies:
     "@angular/animations" "^12.2.16"
     "@angular/cdk" "^12.2.13"
