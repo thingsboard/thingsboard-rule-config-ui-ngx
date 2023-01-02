@@ -189,7 +189,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'use-simple-client-http-factory': 'Use simple client HTTP factory',
           'ignore-request-body': 'Without request body',
           'trim-double-quotes': 'Message without quotes',
-          'trim-double-quotes-hint': 'If selected request body message payload will be send without double quotes, e.g. msg = message body',
+          'trim-double-quotes-hint': 'If selected, request body message payload will be sent without double quotes, i.e. msg = message body',
           'read-timeout': 'Read timeout in millis',
           'read-timeout-hint': 'The value of 0 means an infinite timeout',
           'max-parallel-requests-count': 'Max number of parallel requests',
