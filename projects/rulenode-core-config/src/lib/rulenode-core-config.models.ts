@@ -82,6 +82,7 @@ export enum EntityDetailsField {
 
 export const entityDetailsTranslations = new Map<EntityDetailsField, string>(
   [
+    [EntityDetailsField.ID, 'tb.rulenode.entity-details-id'],
     [EntityDetailsField.TITLE, 'tb.rulenode.entity-details-title'],
     [EntityDetailsField.COUNTRY, 'tb.rulenode.entity-details-country'],
     [EntityDetailsField.STATE, 'tb.rulenode.entity-details-state'],

@@ -377,6 +377,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'output-timeseries-key-prefix-required': 'Output timeseries key prefix required.',
           'separator-hint': 'You should press "enter" to complete field input.',
           'entity-details': 'Select entity details:',
+          'entity-details-id': 'ID',
           'entity-details-title': 'Title',
           'entity-details-country': 'Country',
           'entity-details-state': 'State',
