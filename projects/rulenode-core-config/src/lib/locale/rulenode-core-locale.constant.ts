@@ -479,7 +479,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
             'for value from metadata, <code><span style="color: #000;">$[</span>messageKey<span style="color: #000;">]</span></code> ' +
             'for value from message body to substitute "Source" and "Target" key names',
           'shared-scope': 'Shared scope',
-          'transfer-msg-to-originator': 'Transfer message to originator',
+          'forward-msg-to-root-rule-chain': 'Forward message to originator root rule chain',
           'server-scope': 'Server scope',
           'client-scope': 'Client scope',
           'attribute-type': 'Attribute',

@@ -30,11 +30,11 @@ export class RuleChainInputComponent extends RuleNodeConfigurationComponent impl
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.ruleChainInputConfigForm = this.fb.group({
-      transferMsgToOriginatorRootRuleChain: [configuration ? configuration.transferMsgToOriginatorRootRuleChain : null,[]],
+      forwardMsgToRootRuleChain: [configuration ? configuration.forwardMsgToRootRuleChain : null,[]],
       ruleChainId: [configuration ? configuration.ruleChainId : false, [Validators.required]]
     });
 
-    this.ruleChainInputConfigForm.get('transferMsgToOriginatorRootRuleChain').valueChanges.pipe(
+    this.ruleChainInputConfigForm.get('forwardMsgToRootRuleChain').valueChanges.pipe(
       takeUntil(this.destroy$)
     ).subscribe((value) => {
       if (value) {

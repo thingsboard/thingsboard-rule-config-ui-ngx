@@ -1,7 +1,7 @@
 <section [formGroup]="ruleChainInputConfigForm" fxLayout="column">
-  <mat-checkbox formControlName="transferMsgToOriginatorRootRuleChain"
-                style="padding-bottom: 16px;">{{'tb.rulenode.transfer-msg-to-originator' | translate}}</mat-checkbox>
-  <tb-entity-autocomplete *ngIf = "!ruleChainInputConfigForm.get('transferMsgToOriginatorRootRuleChain').value"
+  <mat-checkbox formControlName="forwardMsgToRootRuleChain"
+                style="padding-bottom: 16px;">{{'tb.rulenode.forward-msg-to-root-rule-chain' | translate}}</mat-checkbox>
+  <tb-entity-autocomplete *ngIf = "!ruleChainInputConfigForm.get('forwardMsgToRootRuleChain').value"
                           required
                           [excludeEntityIds]="[ruleChainId]"
                           [entityType]="entityType.RULE_CHAIN"
