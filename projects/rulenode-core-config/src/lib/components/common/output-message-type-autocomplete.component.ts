@@ -8,7 +8,7 @@ import { AppState } from '@app/core/core.state';
 @Component({
   selector: 'tb-output-message-type-autocomplete',
   templateUrl: './output-message-type-autocomplete.component.html',
-  styleUrls: ['output-message-type-autocomplete.component.scss'],
+  styleUrls: ['./output-message-type-autocomplete.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => OutputMessageTypeAutocompleteComponent),
