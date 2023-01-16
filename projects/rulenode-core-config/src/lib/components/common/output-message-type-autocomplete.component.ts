@@ -8,7 +8,7 @@ import { AppState } from '@app/core/core.state';
 @Component({
   selector: 'tb-output-message-type-autocomplete',
   templateUrl: './output-message-type-autocomplete.component.html',
-  styleUrls: [],
+  styleUrls: ['output-message-type-autocomplete.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => OutputMessageTypeAutocompleteComponent),
@@ -20,19 +20,12 @@ export class OutputMessageTypeAutocompleteComponent implements  OnInit {
 
   @ViewChild('messageTypeInput', {static: true}) messageTypeInput: ElementRef;
 
-  @Input()
-  set autocompleteHint(value) {
-    this.hint = value;
-  }
-  get autocompleteHint () {
-    return this.hint;
-  }
+  @Input() autocompleteHint: string;
 
   messageTypeFormGroup: FormGroup;
   outputMessageTypes: Observable<Array<string>>;
   private modelValue: string | null;
   private searchText = '';
-  private hint: string;
   private dirty = false;
   private messageTypes = ['POST_ATTRIBUTES_REQUEST', 'POST_TELEMETRY_REQUEST'];
 
