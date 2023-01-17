@@ -35,6 +35,7 @@ import { PushToEdgeConfigComponent } from './push-to-edge-config.component';
 import { PushToCloudConfigComponent } from './push-to-cloud-config.component';
 import { DeleteAttributesConfigComponent } from './delete-attributes-config.component';
 import { MathFunctionConfigComponent } from './math-function-config.component';
+import { DeviceStateConfigComponent } from './device-state-config.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { MathFunctionConfigComponent } from './math-function-config.component';
     SendSmsConfigComponent,
     PushToEdgeConfigComponent,
     PushToCloudConfigComponent,
-    MathFunctionConfigComponent
+    MathFunctionConfigComponent,
+    DeviceStateConfigComponent
   ],
   imports: [
     CommonModule,
@@ -109,7 +111,8 @@ import { MathFunctionConfigComponent } from './math-function-config.component';
     SendSmsConfigComponent,
     PushToEdgeConfigComponent,
     PushToCloudConfigComponent,
-    MathFunctionConfigComponent
+    MathFunctionConfigComponent,
+    DeviceStateConfigComponent
   ]
 })
 export class RuleNodeCoreConfigActionModule {

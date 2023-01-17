@@ -1,0 +1,11 @@
+<section [formGroup]="deviceState" fxLayout="column">
+  <mat-form-field>
+    <mat-label>{{ 'tb.rulenode.event' | translate }}</mat-label>
+    <mat-select formControlName="event" required>
+      <mat-option *ngFor="let event of events" [value]="event.value">
+        {{event.name}}
+      </mat-option>
+    </mat-select>
+    <mat-hint>{{ 'tb.rulenode.event-hint' | translate }}</mat-hint>
+  </mat-form-field>
+</section>
