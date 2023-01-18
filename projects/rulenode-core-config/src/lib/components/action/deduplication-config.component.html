@@ -36,7 +36,21 @@
       {{'tb.rulenode.strategy-required' | translate}}
     </mat-error>
   </mat-form-field>
-  <mat-expansion-panel [expanded]="deduplicationConfigForm.get('strategy').value === 'ALL'" class="advanced-settings">
+  <div *ngIf="deduplicationConfigForm.get('strategy').value === 'ALL'">
+    <tb-output-message-type-autocomplete
+      style="margin-bottom: 16px; display: block;"
+      formControlName="outMsgType"
+      autocompleteHint="tb.rulenode.output-msg-type-hint">
+    </tb-output-message-type-autocomplete>
+    <tb-queue-autocomplete
+      required
+      style="margin-bottom: 16px; display: block;"
+      [queueType]="serviceType"
+      formControlName="queueName"
+      autocompleteHint="tb.rulenode.queue-name-hint">
+    </tb-queue-autocomplete>
+  </div>
+  <mat-expansion-panel class="advanced-settings">
     <mat-expansion-panel-header style="height: 48px;">
       <mat-panel-title>
         <div fxFlex fxLayout="row" fxLayoutAlign="end center">
@@ -59,20 +73,6 @@
           {{'tb.rulenode.max-pending-msgs-min-error' | translate}}
         </mat-error>
       </mat-form-field>
-      <div *ngIf="deduplicationConfigForm.get('strategy').value === 'ALL'">
-        <tb-output-message-type-autocomplete
-          style="margin-bottom: 16px; display: block;"
-          formControlName="outMsgType"
-          autocompleteHint="tb.rulenode.output-msg-type-hint">
-        </tb-output-message-type-autocomplete>
-        <tb-queue-autocomplete
-          required
-          style="margin-bottom: 16px; display: block;"
-          [queueType]="serviceType"
-          formControlName="queueName"
-          autocompleteHint="tb.rulenode.queue-name-hint">
-        </tb-queue-autocomplete>
-      </div>
       <mat-form-field class="mat-block" style="padding-bottom: 16px">
         <mat-label>{{'tb.rulenode.max-retries' | translate}}</mat-label>
         <input type = 'number' required matInput formControlName="maxRetries">
