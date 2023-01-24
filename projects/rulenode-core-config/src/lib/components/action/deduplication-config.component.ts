@@ -43,11 +43,11 @@ export class DeduplicationConfigComponent extends RuleNodeConfigurationComponent
         Validators.min(1)]],
       id: [configuration ? configuration.id : null, [Validators.required]],
       strategy: [configuration ? configuration.strategy : null, [Validators.required]],
+      outMsgType: [configuration ? configuration.outMsgType : null, []],
       maxPendingMsgs: [configuration ? configuration.maxPendingMsgs : null, [Validators.required,
         Validators.min(1), Validators.max(1000)]],
-      outMsgType: [configuration ? configuration.outMsgType : null, []],
-      queueName: [configuration ? configuration.queueName : null, []],
-      maxRetries: [configuration ? configuration.maxRetries : null, [Validators.required, Validators.min(0), Validators.max(100)]]
+      maxRetries: [configuration ? configuration.maxRetries : null, [Validators.required, Validators.min(0), Validators.max(100)]],
+      queueName: [configuration ? configuration.queueName : null, [Validators.required]]
     });
 
     this.deduplicationConfigForm.get('strategy').valueChanges.pipe(
@@ -56,15 +56,10 @@ export class DeduplicationConfigComponent extends RuleNodeConfigurationComponent
       if (value === 'ALL') {
         this.deduplicationConfigForm.get('outMsgType').setValidators([Validators.required]);
         this.deduplicationConfigForm.get('outMsgType').updateValueAndValidity({emitEvent: false});
-        this.deduplicationConfigForm.get('queueName').setValidators([Validators.required]);
-        this.deduplicationConfigForm.get('queueName').updateValueAndValidity({emitEvent: false});
       } else {
         this.deduplicationConfigForm.get('outMsgType').patchValue('', {emitEvent: false})
         this.deduplicationConfigForm.get('outMsgType').clearValidators();
         this.deduplicationConfigForm.get('outMsgType').updateValueAndValidity({emitEvent: false});
-        this.deduplicationConfigForm.get('queueName').patchValue('', {emitEvent: false})
-        this.deduplicationConfigForm.get('queueName').clearValidators();
-        this.deduplicationConfigForm.get('queueName').updateValueAndValidity({emitEvent: false});
       }
     })
   }
