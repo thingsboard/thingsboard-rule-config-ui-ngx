@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { AppState } from '@core/public-api';
+import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent, ServiceType } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -39,15 +39,15 @@ export class DeduplicationConfigComponent extends RuleNodeConfigurationComponent
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.deduplicationConfigForm = this.fb.group({
-      interval: [configuration ? configuration.interval : null, [Validators.required,
+      interval: [isDefinedAndNotNull(configuration?.interval) ? configuration.interval : null, [Validators.required,
         Validators.min(1)]],
-      id: [configuration ? configuration.id : null, [Validators.required]],
-      strategy: [configuration ? configuration.strategy : null, [Validators.required]],
-      outMsgType: [configuration ? configuration.outMsgType : null, []],
-      maxPendingMsgs: [configuration ? configuration.maxPendingMsgs : null, [Validators.required,
+      strategy: [isDefinedAndNotNull(configuration?.strategy) ? configuration.strategy : null, [Validators.required]],
+      outMsgType: [isDefinedAndNotNull(configuration?.outMsgType) ? configuration.outMsgType : null, []],
+      queueName: [isDefinedAndNotNull(configuration?.queueName) ? configuration.queueName : null, []],
+      maxPendingMsgs: [isDefinedAndNotNull(configuration?.maxPendingMsgs) ? configuration.maxPendingMsgs : null, [Validators.required,
         Validators.min(1), Validators.max(1000)]],
-      maxRetries: [configuration ? configuration.maxRetries : null, [Validators.required, Validators.min(0), Validators.max(100)]],
-      queueName: [configuration ? configuration.queueName : null, [Validators.required]]
+      maxRetries: [isDefinedAndNotNull(configuration?.maxRetries) ? configuration.maxRetries : null,
+        [Validators.required, Validators.min(0), Validators.max(100)]]
     });
 
     this.deduplicationConfigForm.get('strategy').valueChanges.pipe(
@@ -56,10 +56,15 @@ export class DeduplicationConfigComponent extends RuleNodeConfigurationComponent
       if (value === 'ALL') {
         this.deduplicationConfigForm.get('outMsgType').setValidators([Validators.required]);
         this.deduplicationConfigForm.get('outMsgType').updateValueAndValidity({emitEvent: false});
+        this.deduplicationConfigForm.get('queueName').setValidators([Validators.required]);
+        this.deduplicationConfigForm.get('queueName').updateValueAndValidity({emitEvent: false});
       } else {
         this.deduplicationConfigForm.get('outMsgType').patchValue('', {emitEvent: false})
         this.deduplicationConfigForm.get('outMsgType').clearValidators();
         this.deduplicationConfigForm.get('outMsgType').updateValueAndValidity({emitEvent: false});
+        this.deduplicationConfigForm.get('queueName').patchValue('', {emitEvent: false})
+        this.deduplicationConfigForm.get('queueName').clearValidators();
+        this.deduplicationConfigForm.get('queueName').updateValueAndValidity({emitEvent: false});
       }
     })
   }
