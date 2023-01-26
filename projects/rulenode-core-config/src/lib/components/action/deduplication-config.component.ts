@@ -22,11 +22,6 @@ export class DeduplicationConfigComponent extends RuleNodeConfigurationComponent
     {name: 'Last Message', value: 'LAST'},
     {name: ' All Messages', value: 'ALL'}
   ]
-  public deduplicationIds = [
-    {name: 'Originator', value: 'ORIGINATOR'},
-    {name: 'Customer', value: 'CUSTOMER'},
-    {name: 'Tenant', value: 'TENANT'}
-  ]
 
   constructor(protected store: Store<AppState>,
               private fb: FormBuilder) {
