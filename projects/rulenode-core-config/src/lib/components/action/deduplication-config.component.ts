@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { AppState } from '@core/public-api';
+import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent, ServiceType } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -22,11 +22,6 @@ export class DeduplicationConfigComponent extends RuleNodeConfigurationComponent
     {name: 'Last Message', value: 'LAST'},
     {name: ' All Messages', value: 'ALL'}
   ]
-  public deduplicationIds = [
-    {name: 'Originator', value: 'ORIGINATOR'},
-    {name: 'Customer', value: 'CUSTOMER'},
-    {name: 'Tenant', value: 'TENANT'}
-  ]
 
   constructor(protected store: Store<AppState>,
               private fb: FormBuilder) {
@@ -39,15 +34,15 @@ export class DeduplicationConfigComponent extends RuleNodeConfigurationComponent
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.deduplicationConfigForm = this.fb.group({
-      interval: [configuration ? configuration.interval : null, [Validators.required,
+      interval: [isDefinedAndNotNull(configuration?.interval) ? configuration.interval : null, [Validators.required,
         Validators.min(1)]],
-      id: [configuration ? configuration.id : null, [Validators.required]],
-      strategy: [configuration ? configuration.strategy : null, [Validators.required]],
-      maxPendingMsgs: [configuration ? configuration.maxPendingMsgs : null, [Validators.required,
+      strategy: [isDefinedAndNotNull(configuration?.strategy) ? configuration.strategy : null, [Validators.required]],
+      outMsgType: [isDefinedAndNotNull(configuration?.outMsgType) ? configuration.outMsgType : null, []],
+      queueName: [isDefinedAndNotNull(configuration?.queueName) ? configuration.queueName : null, []],
+      maxPendingMsgs: [isDefinedAndNotNull(configuration?.maxPendingMsgs) ? configuration.maxPendingMsgs : null, [Validators.required,
         Validators.min(1), Validators.max(1000)]],
-      outMsgType: [configuration ? configuration.outMsgType : null, []],
-      queueName: [configuration ? configuration.queueName : null, []],
-      maxRetries: [configuration ? configuration.maxRetries : null, [Validators.required, Validators.min(0), Validators.max(100)]]
+      maxRetries: [isDefinedAndNotNull(configuration?.maxRetries) ? configuration.maxRetries : null,
+        [Validators.required, Validators.min(0), Validators.max(100)]]
     });
 
     this.deduplicationConfigForm.get('strategy').valueChanges.pipe(
