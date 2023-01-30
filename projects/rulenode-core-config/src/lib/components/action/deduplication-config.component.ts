@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { FetchMode, deduplicationStrategiesTranslations } from '../../rulenode-core-config.models';
 
 @Component({
   selector: 'tb-action-node-msg-deduplication-config',
@@ -17,11 +18,9 @@ export class DeduplicationConfigComponent extends RuleNodeConfigurationComponent
 
   public serviceType = ServiceType.TB_RULE_ENGINE;
   public deduplicationConfigForm: FormGroup;
-  public deduplicationStrategies = [
-    {name: 'First Message', value: 'FIRST'},
-    {name: 'Last Message', value: 'LAST'},
-    {name: ' All Messages', value: 'ALL'}
-  ]
+  public deduplicationStrategie = FetchMode;
+  public deduplicationStrategies = Object.keys(this.deduplicationStrategie);
+  public deduplicationStrategiesTranslations = deduplicationStrategiesTranslations;
 
   constructor(protected store: Store<AppState>,
               private fb: FormBuilder) {
@@ -37,8 +36,8 @@ export class DeduplicationConfigComponent extends RuleNodeConfigurationComponent
       interval: [isDefinedAndNotNull(configuration?.interval) ? configuration.interval : null, [Validators.required,
         Validators.min(1)]],
       strategy: [isDefinedAndNotNull(configuration?.strategy) ? configuration.strategy : null, [Validators.required]],
-      outMsgType: [isDefinedAndNotNull(configuration?.outMsgType) ? configuration.outMsgType : null, []],
-      queueName: [isDefinedAndNotNull(configuration?.queueName) ? configuration.queueName : null, []],
+      outMsgType: [isDefinedAndNotNull(configuration?.outMsgType) ? configuration.outMsgType : null, [Validators.required]],
+      queueName: [isDefinedAndNotNull(configuration?.queueName) ? configuration.queueName : null, [Validators.required]],
       maxPendingMsgs: [isDefinedAndNotNull(configuration?.maxPendingMsgs) ? configuration.maxPendingMsgs : null, [Validators.required,
         Validators.min(1), Validators.max(1000)]],
       maxRetries: [isDefinedAndNotNull(configuration?.maxRetries) ? configuration.maxRetries : null,
@@ -48,20 +47,26 @@ export class DeduplicationConfigComponent extends RuleNodeConfigurationComponent
     this.deduplicationConfigForm.get('strategy').valueChanges.pipe(
       takeUntil(this.destroy$)
     ).subscribe((value) => {
-      if (value === 'ALL') {
-        this.deduplicationConfigForm.get('outMsgType').setValidators([Validators.required]);
-        this.deduplicationConfigForm.get('outMsgType').updateValueAndValidity({emitEvent: false});
-        this.deduplicationConfigForm.get('queueName').setValidators([Validators.required]);
-        this.deduplicationConfigForm.get('queueName').updateValueAndValidity({emitEvent: false});
-      } else {
-        this.deduplicationConfigForm.get('outMsgType').patchValue('', {emitEvent: false})
-        this.deduplicationConfigForm.get('outMsgType').clearValidators();
-        this.deduplicationConfigForm.get('outMsgType').updateValueAndValidity({emitEvent: false});
-        this.deduplicationConfigForm.get('queueName').patchValue('', {emitEvent: false})
-        this.deduplicationConfigForm.get('queueName').clearValidators();
-        this.deduplicationConfigForm.get('queueName').updateValueAndValidity({emitEvent: false});
-      }
+      this.enableControl(value);
     })
+  }
+
+  protected updateValidators(emitEvent: boolean) {
+    this.enableControl(this.deduplicationConfigForm.get('strategy').value);
+  }
+
+  protected validatorTriggers(): string[] {
+    return ['strategy'];
+  }
+
+  private enableControl(strategy) {
+    if (strategy === this.deduplicationStrategie.ALL) {
+      this.deduplicationConfigForm.get('outMsgType').enable({emitEvent: false});
+      this.deduplicationConfigForm.get('queueName').enable({emitEvent: false});
+    } else {
+      this.deduplicationConfigForm.get('outMsgType').disable({emitEvent: false});
+      this.deduplicationConfigForm.get('queueName').disable({emitEvent: false});
+    }
   }
 
   ngOnDestroy() {

@@ -13,8 +13,8 @@
   <mat-form-field class="mat-block" style="padding-bottom: 16px;">
     <mat-label>{{'tb.rulenode.strategy' | translate}}</mat-label>
     <mat-select formControlName="strategy" required>
-      <mat-option *ngFor="let strategy of deduplicationStrategies" [value]="strategy.value">
-        {{strategy.name}}
+      <mat-option *ngFor="let strategy of deduplicationStrategies" [value]="strategy">
+        {{ deduplicationStrategiesTranslations.get(strategy) | translate }}
       </mat-option>
     </mat-select>
     <mat-hint *ngIf="deduplicationConfigForm.get('strategy').value === 'ALL'" innerHTML="{{'tb.rulenode.strategy-all-hint' | translate}}"></mat-hint>
@@ -24,7 +24,7 @@
       {{'tb.rulenode.strategy-required' | translate}}
     </mat-error>
   </mat-form-field>
-  <div  *ngIf="deduplicationConfigForm.get('strategy').value === 'ALL'">
+  <div  *ngIf="deduplicationConfigForm.get('strategy').value === deduplicationStrategie.ALL">
     <tb-output-message-type-autocomplete
       style="margin-bottom: 16px; display: block;"
       formControlName="outMsgType"
