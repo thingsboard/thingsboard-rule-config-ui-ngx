@@ -10,31 +10,48 @@
       ],
       "parserOptions": {
         "project": [
-          "tsconfig.json"
+          "tsconfig.json",
+          "e2e/tsconfig.json"
         ],
         "createDefaultProgram": true
       },
       "extends": [
-        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/ng-cli-compat",
+        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
-        "@angular-eslint/directive-selector": [
-          "error",
+        "@typescript-eslint/explicit-member-accessibility": [
+          "off",
           {
-            "type": "attribute",
-            "prefix": "tb",
-            "style": "camelCase"
+            "accessibility": "explicit"
           }
+        ],
+        "arrow-parens": [
+          "off",
+          "always"
         ],
         "@angular-eslint/component-selector": [
           "error",
           {
-            "type": "element",
-            "prefix": "tb",
-            "style": "kebab-case"
+            "prefix": [ "tb" ]
           }
-        ]
+        ],
+        "id-blacklist": [
+          "error",
+          "any",
+          "Number",
+          "String",
+          "string",
+          "Boolean",
+          "boolean",
+          "Undefined",
+          "undefined"
+        ],
+        "import/order": "off",
+        "@typescript-eslint/member-ordering": "off",
+        "no-underscore-dangle": "off",
+        "@typescript-eslint/naming-convention": "off"
       }
     },
     {
