@@ -14,7 +14,7 @@ import { FetchMode, deduplicationStrategiesTranslations } from '../../rulenode-c
 })
 
 export class DeduplicationConfigComponent extends RuleNodeConfigurationComponent implements OnDestroy{
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
 
   public serviceType = ServiceType.TB_RULE_ENGINE;
   public deduplicationConfigForm: UntypedFormGroup;
@@ -48,7 +48,7 @@ export class DeduplicationConfigComponent extends RuleNodeConfigurationComponent
       takeUntil(this.destroy$)
     ).subscribe((value) => {
       this.enableControl(value);
-    })
+    });
   }
 
   protected updateValidators(emitEvent: boolean) {
