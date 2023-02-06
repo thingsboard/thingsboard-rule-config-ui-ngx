@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 import { aggregationTranslations, AggregationType, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { MatChipInputEvent } from '@angular/material/chips';
@@ -14,7 +14,7 @@ import { FetchMode, SamplingOrder, TimeUnit, timeUnitTranslations } from '../../
 })
 export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurationComponent {
 
-  getTelemetryFromDatabaseConfigForm: FormGroup;
+  getTelemetryFromDatabaseConfigForm: UntypedFormGroup;
 
   separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
 
@@ -31,11 +31,11 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
   timeUnitsTranslationMap = timeUnitTranslations;
 
   constructor(protected store: Store<AppState>,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     super(store);
   }
 
-  protected configForm(): FormGroup {
+  protected configForm(): UntypedFormGroup {
     return this.getTelemetryFromDatabaseConfigForm;
   }
 

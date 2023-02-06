@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'tb-action-node-rabbit-mq-config',
@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RabbitMqConfigComponent extends RuleNodeConfigurationComponent {
 
-  rabbitMqConfigForm: FormGroup;
+  rabbitMqConfigForm: UntypedFormGroup;
 
   messageProperties: string[] = [
     null,
@@ -24,11 +24,11 @@ export class RabbitMqConfigComponent extends RuleNodeConfigurationComponent {
   ];
 
   constructor(protected store: Store<AppState>,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     super(store);
   }
 
-  protected configForm(): FormGroup {
+  protected configForm(): UntypedFormGroup {
     return this.rabbitMqConfigForm;
   }
 

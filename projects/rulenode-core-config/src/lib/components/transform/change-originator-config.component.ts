@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { EntityType, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { OriginatorSource, originatorSourceTranslations } from '../../rulenode-core-config.models';
 
 @Component({
@@ -16,16 +16,16 @@ export class ChangeOriginatorConfigComponent extends RuleNodeConfigurationCompon
   originatorSources = Object.keys(OriginatorSource);
   originatorSourceTranslationMap = originatorSourceTranslations;
 
-  changeOriginatorConfigForm: FormGroup;
+  changeOriginatorConfigForm: UntypedFormGroup;
 
   allowedEntityTypes = [EntityType.DEVICE, EntityType.ASSET, EntityType.ENTITY_VIEW, EntityType.USER, EntityType.EDGE];
 
   constructor(protected store: Store<AppState>,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     super(store);
   }
 
-  protected configForm(): FormGroup {
+  protected configForm(): UntypedFormGroup {
     return this.changeOriginatorConfigForm;
   }
 

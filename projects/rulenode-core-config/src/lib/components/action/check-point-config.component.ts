@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent, ServiceType } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'tb-action-node-check-point-config',
@@ -11,16 +11,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CheckPointConfigComponent extends RuleNodeConfigurationComponent {
 
-  checkPointConfigForm: FormGroup;
+  checkPointConfigForm: UntypedFormGroup;
 
   serviceType = ServiceType.TB_RULE_ENGINE;
 
   constructor(protected store: Store<AppState>,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     super(store);
   }
 
-  protected configForm(): FormGroup {
+  protected configForm(): UntypedFormGroup {
     return this.checkPointConfigForm;
   }
 

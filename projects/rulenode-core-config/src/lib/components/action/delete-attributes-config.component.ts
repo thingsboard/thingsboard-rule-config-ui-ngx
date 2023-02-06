@@ -6,7 +6,7 @@ import {
   RuleNodeConfigurationComponent, telemetryTypeTranslations
 } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 
@@ -18,18 +18,18 @@ import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 export class DeleteAttributesConfigComponent extends RuleNodeConfigurationComponent {
   @ViewChild('attributeChipList') attributeChipList: MatChipList;
 
-  deleteAttributesConfigForm: FormGroup;
+  deleteAttributesConfigForm: UntypedFormGroup;
   attributeScopeMap = AttributeScope;
   attributeScopes = Object.keys(AttributeScope);
   telemetryTypeTranslationsMap = telemetryTypeTranslations;
   separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
 
   constructor(protected store: Store<AppState>,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     super(store);
   }
 
-  protected configForm(): FormGroup {
+  protected configForm(): UntypedFormGroup {
     return this.deleteAttributesConfigForm;
   }
 

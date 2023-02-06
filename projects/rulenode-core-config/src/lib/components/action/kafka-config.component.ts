@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ToByteStandartCharsetTypes, ToByteStandartCharsetTypeTranslations } from '../../rulenode-core-config.models';
 
 @Component({
@@ -12,7 +12,7 @@ import { ToByteStandartCharsetTypes, ToByteStandartCharsetTypeTranslations } fro
 })
 export class KafkaConfigComponent extends RuleNodeConfigurationComponent {
 
-  kafkaConfigForm: FormGroup;
+  kafkaConfigForm: UntypedFormGroup;
 
   ackValues: string[] = ['all', '-1', '0', '1'];
 
@@ -20,11 +20,11 @@ export class KafkaConfigComponent extends RuleNodeConfigurationComponent {
   ToByteStandartCharsetTypeTranslationMap = ToByteStandartCharsetTypeTranslations;
 
   constructor(protected store: Store<AppState>,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     super(store);
   }
 
-  protected configForm(): FormGroup {
+  protected configForm(): UntypedFormGroup {
     return this.kafkaConfigForm;
   }
 

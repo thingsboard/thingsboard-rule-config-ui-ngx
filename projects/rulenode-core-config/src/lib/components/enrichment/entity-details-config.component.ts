@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { EntityDetailsField, entityDetailsTranslations } from '../../rulenode-core-config.models';
 import { Observable, of } from 'rxjs';
 import { map, mergeMap, share, startWith } from 'rxjs/operators';
@@ -18,8 +18,8 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
 
   @ViewChild('detailsInput', {static: false}) detailsInput: ElementRef<HTMLInputElement>;
 
-  entityDetailsConfigForm: FormGroup;
-  detailsFormControl: FormControl;
+  entityDetailsConfigForm: UntypedFormGroup;
+  detailsFormControl: UntypedFormControl;
 
   entityDetailsTranslationsMap = entityDetailsTranslations;
 
@@ -33,12 +33,12 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
 
   constructor(protected store: Store<AppState>,
               public translate: TranslateService,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     super(store);
     for (const field of Object.keys(EntityDetailsField)) {
       this.entityDetailsList.push(EntityDetailsField[field]);
     }
-    this.detailsFormControl = new FormControl('');
+    this.detailsFormControl = new UntypedFormControl('');
     this.filteredEntityDetails = this.detailsFormControl.valueChanges
       .pipe(
         startWith(''),
@@ -52,7 +52,7 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
     super.ngOnInit();
   }
 
-  protected configForm(): FormGroup {
+  protected configForm(): UntypedFormGroup {
     return this.entityDetailsConfigForm;
   }
 

@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import {
   PerimeterType,
@@ -19,7 +19,7 @@ import {
 })
 export class GpsGeoActionConfigComponent extends RuleNodeConfigurationComponent {
 
-  geoActionConfigForm: FormGroup;
+  geoActionConfigForm: UntypedFormGroup;
 
   perimeterType = PerimeterType;
   perimeterTypes = Object.keys(PerimeterType);
@@ -32,11 +32,11 @@ export class GpsGeoActionConfigComponent extends RuleNodeConfigurationComponent 
   timeUnitsTranslationMap = timeUnitTranslations;
 
   constructor(protected store: Store<AppState>,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     super(store);
   }
 
-  protected configForm(): FormGroup {
+  protected configForm(): UntypedFormGroup {
     return this.geoActionConfigForm;
   }
 

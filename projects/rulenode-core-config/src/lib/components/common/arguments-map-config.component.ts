@@ -2,10 +2,10 @@ import { Component, forwardRef, Injector, Input, OnDestroy, OnInit } from '@angu
 import {
   AbstractControl,
   ControlValueAccessor,
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   NgControl,
@@ -68,7 +68,7 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
   mathFunctionMap = MathFunctionMap;
   ArgumentType = ArgumentType;
 
-  argumentsFormGroup: FormGroup;
+  argumentsFormGroup: UntypedFormGroup;
 
   ngControl: NgControl;
 
@@ -84,7 +84,7 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
   constructor(protected store: Store<AppState>,
               public translate: TranslateService,
               public injector: Injector,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     super(store);
   }
 
@@ -108,8 +108,8 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
     this.updateArgumentNames();
   }
 
-  argumentsFormArray(): FormArray {
-    return this.argumentsFormGroup.get('arguments') as FormArray;
+  argumentsFormArray(): UntypedFormArray {
+    return this.argumentsFormGroup.get('arguments') as UntypedFormArray;
   }
 
   registerOnChange(fn: any): void {
@@ -153,17 +153,17 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
 
 
   public removeArgument(index: number) {
-    (this.argumentsFormGroup.get('arguments') as FormArray).removeAt(index);
+    (this.argumentsFormGroup.get('arguments') as UntypedFormArray).removeAt(index);
     this.updateArgumentNames();
   }
 
   public addArgument() {
-    const argumentsFormArray = this.argumentsFormGroup.get('arguments') as FormArray;
+    const argumentsFormArray = this.argumentsFormGroup.get('arguments') as UntypedFormArray;
     const argumentControl = this.createArgumentControl(null, argumentsFormArray.length);
     argumentsFormArray.push(argumentControl);
   }
 
-  public validate(c: FormControl) {
+  public validate(c: UntypedFormControl) {
     if (!this.argumentsFormGroup.valid) {
       return {
         argumentsRequired: true
@@ -181,7 +181,7 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
     if (this.argumentsFormGroup) {
       this.argumentsFormGroup.get('arguments').setValidators([Validators.minLength(this.minArgs), Validators.maxLength(this.maxArgs)]);
       if (this.argumentsFormGroup.get('arguments').value.length > this.maxArgs) {
-        (this.argumentsFormGroup.get('arguments') as FormArray).controls.length = this.maxArgs;
+        (this.argumentsFormGroup.get('arguments') as UntypedFormArray).controls.length = this.maxArgs;
       }
       while (this.argumentsFormGroup.get('arguments').value.length < this.minArgs) {
         this.addArgument();
@@ -222,7 +222,7 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
   }
 
   private updateArgumentNames() {
-    const argumentsFormArray = this.argumentsFormGroup.get('arguments') as FormArray;
+    const argumentsFormArray = this.argumentsFormGroup.get('arguments') as UntypedFormArray;
     argumentsFormArray.controls.forEach((argumentControl, argumentIndex) => {
       argumentControl.get('name').setValue(ArgumentName[argumentIndex]);
     });

@@ -1,5 +1,5 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
-import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { ControlValueAccessor, UntypedFormBuilder, UntypedFormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { EntitySearchDirection, entitySearchDirectionTranslations, EntityType, PageComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/public-api';
@@ -43,12 +43,12 @@ export class DeviceRelationsQueryConfigComponent extends PageComponent implement
 
   entityType = EntityType;
 
-  deviceRelationsQueryFormGroup: FormGroup;
+  deviceRelationsQueryFormGroup: UntypedFormGroup;
 
   private propagateChange = null;
 
   constructor(protected store: Store<AppState>,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     super(store);
   }
 
