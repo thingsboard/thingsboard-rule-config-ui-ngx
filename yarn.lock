@@ -1581,13 +1581,6 @@
   dependencies:
     tslib "^2.4.0"
 
-"@ngrx/store@^13.2.0":
-  version "13.2.0"
-  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-13.2.0.tgz#43d4e9bf064808dd546ef1edbbcd08c2a8e0871a"
-  integrity sha512-3wlGMkfe0EXsiS6E6W0wCksuGapa5Z6JVFvKQMHFpXZ3XeixXKlULnemlcdMT7Yrnry+CGOtRHqkmKxLoQzhTw==
-  dependencies:
-    tslib "^2.0.0"
-
 "@ngrx/store@^14.3.3":
   version "14.3.3"
   resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-14.3.3.tgz#397d7fe54fb6c580282240c149f76f6f48ebf2a3"

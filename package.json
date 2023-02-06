@@ -27,7 +27,7 @@
     "@angular/platform-browser": "^14.2.12",
     "@angular/platform-browser-dynamic": "^14.2.12",
     "@angular/router": "^14.2.12",
-    "@ngrx/store": "^13.2.0",
+    "@ngrx/store": "^14.3.3",
     "@ngx-translate/core": "~13.0.0",
     "@tb/custom-builder": "file:./builders",
     "codelyzer": "^6.0.2",
