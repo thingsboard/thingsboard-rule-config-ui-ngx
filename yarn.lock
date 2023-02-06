@@ -1654,10 +1654,10 @@
   dependencies:
     tslib "^2.4.0"
 
-"@ngrx/store@^12.5.1":
-  version "12.5.1"
-  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-12.5.1.tgz#a7c21d7df1d017d2cb7e77804b210cc14bcf8786"
-  integrity sha512-NLVkHLVeZc7IboXSDZlFoq1QrupmwYTYKRHS6se7ZasAv/lrIjHWsVVdICKSVRBsHZYu3+dmCXmu+YgulP7iHw==
+"@ngrx/store@^13.2.0":
+  version "13.2.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-13.2.0.tgz#43d4e9bf064808dd546ef1edbbcd08c2a8e0871a"
+  integrity sha512-3wlGMkfe0EXsiS6E6W0wCksuGapa5Z6JVFvKQMHFpXZ3XeixXKlULnemlcdMT7Yrnry+CGOtRHqkmKxLoQzhTw==
   dependencies:
     tslib "^2.0.0"
 
