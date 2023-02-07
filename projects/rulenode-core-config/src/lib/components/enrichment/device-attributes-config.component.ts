@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppState } from '@core/public-api';
+import { AppState, isObject, isUndefinedOrNull } from '@core/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
@@ -65,5 +65,12 @@ export class DeviceAttributesConfigComponent extends RuleNodeConfigurationCompon
     if (input) {
       input.value = '';
     }
+  }
+
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    if (isObject(configuration) && isUndefinedOrNull(configuration?.fetchToData)) {
+      configuration.fetchToData = false;
+    }
+    return configuration;
   }
 }
