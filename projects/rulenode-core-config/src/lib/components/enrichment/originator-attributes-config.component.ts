@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppState, isDefinedAndNotNull } from '@core/public-api';
+import { AppState, isDefinedAndNotNull, isObject, isUndefinedOrNull } from '@core/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
@@ -64,5 +64,12 @@ export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationCo
     if (input) {
       input.value = '';
     }
+  }
+
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    if (isObject(configuration) && isUndefinedOrNull(configuration?.fetchToData)) {
+      configuration.fetchToData = false;
+    }
+    return configuration;
   }
 }
