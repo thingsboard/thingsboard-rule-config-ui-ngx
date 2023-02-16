@@ -1,7 +1,6 @@
 <section [formGroup]="checkMessageConfigForm" fxLayout="column">
-  <label translate class="tb-title no-padding tb-required">tb.rulenode.data-keys</label>
-  <mat-form-field floatLabel="always" class="mat-block">
-    <mat-label></mat-label>
+  <mat-form-field class="mat-block" style="margin-bottom: 16px">
+    <mat-label translate>tb.rulenode.data-keys</mat-label>
     <mat-chip-list #messageNamesChipList>
       <mat-chip
         *ngFor="let messageName of checkMessageConfigForm.get('messageNames').value;"
@@ -9,18 +8,17 @@
         {{messageName}}
         <mat-icon matChipRemove>close</mat-icon>
       </mat-chip>
-      <input matInput type="text" placeholder="{{'tb.rulenode.data-keys' | translate}}"
+      <input matInput type="text"
              style="max-width: 200px;"
              [matChipInputFor]="messageNamesChipList"
              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
              (matChipInputTokenEnd)="addMessageName($event)"
              [matChipInputAddOnBlur]="true">
     </mat-chip-list>
+    <mat-hint translate>tb.rulenode.separator-hint</mat-hint>
   </mat-form-field>
-  <div class="tb-hint" translate>tb.rulenode.separator-hint</div>
-  <label translate class="tb-title no-padding tb-required">tb.rulenode.metadata-keys</label>
-  <mat-form-field floatLabel="always" class="mat-block">
-    <mat-label></mat-label>
+  <mat-form-field class="mat-block" style="margin-bottom: 16px">
+    <mat-label translate>tb.rulenode.metadata-keys</mat-label>
     <mat-chip-list #metadataNamesChipList>
       <mat-chip
         *ngFor="let metadataName of checkMessageConfigForm.get('metadataNames').value;"
@@ -28,16 +26,16 @@
         {{metadataName}}
         <mat-icon matChipRemove>close</mat-icon>
       </mat-chip>
-      <input matInput type="text" placeholder="{{'tb.rulenode.metadata-keys' | translate}}"
+      <input matInput type="text"
              style="max-width: 200px;"
              [matChipInputFor]="metadataNamesChipList"
              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
              (matChipInputTokenEnd)="addMetadataName($event)"
              [matChipInputAddOnBlur]="true">
     </mat-chip-list>
+    <mat-hint translate>tb.rulenode.separator-hint</mat-hint>
   </mat-form-field>
-  <div class="tb-hint" translate>tb.rulenode.separator-hint</div>
-  <mat-checkbox fxFlex formControlName="checkAllKeys" style="padding-bottom: 16px;">
+  <mat-checkbox fxFlex formControlName="checkAllKeys" style="padding-bottom: 8px;">
     {{ 'tb.rulenode.check-all-keys' | translate }}
   </mat-checkbox>
   <div class="tb-hint" translate>tb.rulenode.check-all-keys-hint</div>
