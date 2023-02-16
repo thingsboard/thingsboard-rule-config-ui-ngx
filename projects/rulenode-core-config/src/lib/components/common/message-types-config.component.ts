@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, forwardRef, Input, OnInit, ViewCh
 import { AppState } from '@core/public-api';
 import { LinkLabel, MessageType, messageTypeNames, PageComponent, TruncatePipe } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, UntypedFormBuilder, UntypedFormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
@@ -25,7 +25,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 })
 export class MessageTypesConfigComponent extends PageComponent implements ControlValueAccessor, OnInit, AfterViewInit {
 
-  messageTypeConfigForm: FormGroup;
+  messageTypeConfigForm: UntypedFormGroup;
 
   private requiredValue: boolean;
   get required(): boolean {
@@ -64,7 +64,7 @@ export class MessageTypesConfigComponent extends PageComponent implements Contro
   constructor(protected store: Store<AppState>,
               public translate: TranslateService,
               public truncate: TruncatePipe,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     super(store);
     this.messageTypeConfigForm = this.fb.group({
       messageType: [null]

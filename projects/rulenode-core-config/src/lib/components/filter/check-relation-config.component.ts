@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import {
   EntitySearchDirection,
   entitySearchDirectionTranslations,
@@ -16,17 +16,17 @@ import {
 })
 export class CheckRelationConfigComponent extends RuleNodeConfigurationComponent {
 
-  checkRelationConfigForm: FormGroup;
+  checkRelationConfigForm: UntypedFormGroup;
 
   entitySearchDirection = Object.keys(EntitySearchDirection);
   entitySearchDirectionTranslationsMap = entitySearchDirectionTranslations;
 
   constructor(protected store: Store<AppState>,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     super(store);
   }
 
-  protected configForm(): FormGroup {
+  protected configForm(): UntypedFormGroup {
     return this.checkRelationConfigForm;
   }
 

@@ -37,12 +37,24 @@
             "project": "projects/rulenode-core-config/ng-package.json",
             "staticServeConfig": "static.serve.conf.js"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/rulenode-core-config/**/*.ts",
+              "projects/rulenode-core-config/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "rulenode-core-config",
   "cli": {
-    "analytics": "b87d6eec-2350-470c-8b85-c50dd4e38123"
+    "packageManager": "yarn",
+    "analytics": false,
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AppState } from '@core/public-api';
+import { AppState, isObject, isUndefinedOrNull } from '@core/public-api';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { MatChipInputEvent } from '@angular/material/chips';
@@ -13,16 +13,16 @@ import { MatChipInputEvent } from '@angular/material/chips';
 })
 export class DeviceAttributesConfigComponent extends RuleNodeConfigurationComponent {
 
-  deviceAttributesConfigForm: FormGroup;
+  deviceAttributesConfigForm: UntypedFormGroup;
 
   separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
 
   constructor(protected store: Store<AppState>,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     super(store);
   }
 
-  protected configForm(): FormGroup {
+  protected configForm(): UntypedFormGroup {
     return this.deviceAttributesConfigForm;
   }
 
@@ -65,5 +65,12 @@ export class DeviceAttributesConfigComponent extends RuleNodeConfigurationCompon
     if (input) {
       input.value = '';
     }
+  }
+
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    if (isObject(configuration) && isUndefinedOrNull(configuration?.fetchToData)) {
+      configuration.fetchToData = false;
+    }
+    return configuration;
   }
 }

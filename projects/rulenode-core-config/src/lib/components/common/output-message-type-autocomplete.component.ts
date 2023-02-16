@@ -1,5 +1,5 @@
 import { Component, ElementRef, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { map, mergeMap, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
@@ -22,7 +22,7 @@ export class OutputMessageTypeAutocompleteComponent implements  OnInit {
 
   @Input() autocompleteHint: string;
 
-  messageTypeFormGroup: FormGroup;
+  messageTypeFormGroup: UntypedFormGroup;
   outputMessageTypes: Observable<Array<string>>;
   private modelValue: string | null;
   private searchText = '';
@@ -30,7 +30,7 @@ export class OutputMessageTypeAutocompleteComponent implements  OnInit {
   private messageTypes = ['POST_ATTRIBUTES_REQUEST', 'POST_TELEMETRY_REQUEST'];
 
   constructor(private store: Store<AppState>,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     this.messageTypeFormGroup = this.fb.group({
       messageType: [null,  [Validators.required, Validators.maxLength(255)]]
     });

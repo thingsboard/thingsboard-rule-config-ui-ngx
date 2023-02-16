@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { AttributeScope, RuleNodeConfiguration, RuleNodeConfigurationComponent, telemetryTypeTranslations } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'tb-action-node-push-to-cloud-config',
@@ -14,14 +14,14 @@ export class PushToCloudConfigComponent extends RuleNodeConfigurationComponent {
   attributeScopes = Object.keys(AttributeScope);
   telemetryTypeTranslationsMap = telemetryTypeTranslations;
 
-  pushToCloudConfigForm: FormGroup;
+  pushToCloudConfigForm: UntypedFormGroup;
 
   constructor(protected store: Store<AppState>,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     super(store);
   }
 
-  protected configForm(): FormGroup {
+  protected configForm(): UntypedFormGroup {
     return this.pushToCloudConfigForm;
   }
 

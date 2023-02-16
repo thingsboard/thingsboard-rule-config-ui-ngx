@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { HttpRequestType } from '../../rulenode-core-config.models';
 
 @Component({
@@ -12,18 +12,18 @@ import { HttpRequestType } from '../../rulenode-core-config.models';
 })
 export class RestApiCallConfigComponent extends RuleNodeConfigurationComponent {
 
-  restApiCallConfigForm: FormGroup;
+  restApiCallConfigForm: UntypedFormGroup;
 
   proxySchemes: string[] = ['http', 'https'];
 
   httpRequestTypes = Object.keys(HttpRequestType);
 
   constructor(protected store: Store<AppState>,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     super(store);
   }
 
-  protected configForm(): FormGroup {
+  protected configForm(): UntypedFormGroup {
     return this.restApiCallConfigForm;
   }
 

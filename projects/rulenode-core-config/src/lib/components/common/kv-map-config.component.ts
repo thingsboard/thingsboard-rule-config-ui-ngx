@@ -1,9 +1,9 @@
 import { Component, forwardRef, Injector, Input, OnInit } from '@angular/core';
 import {
   AbstractControl,
-  ControlValueAccessor, FormArray,
-  FormBuilder, FormControl,
-  FormGroup, NG_VALIDATORS,
+  ControlValueAccessor, UntypedFormArray,
+  UntypedFormBuilder, UntypedFormControl,
+  UntypedFormGroup, NG_VALIDATORS,
   NG_VALUE_ACCESSOR, NgControl, Validator,
   Validators
 } from '@angular/forms';
@@ -58,7 +58,7 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
     this.requiredValue = coerceBooleanProperty(value);
   }
 
-  kvListFormGroup: FormGroup;
+  kvListFormGroup: UntypedFormGroup;
 
   ngControl: NgControl;
 
@@ -69,7 +69,7 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
   constructor(protected store: Store<AppState>,
               public translate: TranslateService,
               public injector: Injector,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     super(store);
   }
 
@@ -83,8 +83,8 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
       this.fb.array([]));
   }
 
-  keyValsFormArray(): FormArray {
-    return this.kvListFormGroup.get('keyVals') as FormArray;
+  keyValsFormArray(): UntypedFormArray {
+    return this.kvListFormGroup.get('keyVals') as UntypedFormArray;
   }
 
   registerOnChange(fn: any): void {
@@ -125,18 +125,18 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
   }
 
   public removeKeyVal(index: number) {
-    (this.kvListFormGroup.get('keyVals') as FormArray).removeAt(index);
+    (this.kvListFormGroup.get('keyVals') as UntypedFormArray).removeAt(index);
   }
 
   public addKeyVal() {
-    const keyValsFormArray = this.kvListFormGroup.get('keyVals') as FormArray;
+    const keyValsFormArray = this.kvListFormGroup.get('keyVals') as UntypedFormArray;
     keyValsFormArray.push(this.fb.group({
       key: ['', [Validators.required]],
       value: ['', [Validators.required]]
     }));
   }
 
-  public validate(c: FormControl) {
+  public validate(c: UntypedFormControl) {
     const kvList: {key: string; value: string}[] = this.kvListFormGroup.get('keyVals').value;
     if (!kvList.length && this.required) {
       return {

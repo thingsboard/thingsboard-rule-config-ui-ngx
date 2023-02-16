@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import {
   ArgumentTypeMap,
@@ -18,7 +18,7 @@ import {
 })
 export class MathFunctionConfigComponent extends RuleNodeConfigurationComponent {
 
-  mathFunctionConfigForm: FormGroup;
+  mathFunctionConfigForm: UntypedFormGroup;
 
   MathFunction = MathFunction;
   ArgumentTypeResult = ArgumentTypeResult;
@@ -28,11 +28,11 @@ export class MathFunctionConfigComponent extends RuleNodeConfigurationComponent 
   attributeScopeResult = Object.values(AttributeScopeResult);
 
   constructor(protected store: Store<AppState>,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     super(store);
   }
 
-  protected configForm(): FormGroup {
+  protected configForm(): UntypedFormGroup {
     return this.mathFunctionConfigForm;
   }
 

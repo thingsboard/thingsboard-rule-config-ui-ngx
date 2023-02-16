@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 
@@ -12,16 +12,16 @@ import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/p
 })
 export class CalculateDeltaConfigComponent extends RuleNodeConfigurationComponent {
 
-  calculateDeltaConfigForm: FormGroup;
+  calculateDeltaConfigForm: UntypedFormGroup;
 
   separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
 
   constructor(protected store: Store<AppState>,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     super(store);
   }
 
-  protected configForm(): FormGroup {
+  protected configForm(): UntypedFormGroup {
     return this.calculateDeltaConfigForm;
   }
 

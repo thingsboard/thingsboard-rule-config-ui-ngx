@@ -1,8 +1,8 @@
 import { Component, forwardRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import {
   ControlValueAccessor,
-  FormBuilder, FormControl,
-  FormGroup,
+  UntypedFormBuilder, UntypedFormControl,
+  UntypedFormGroup,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors, Validator,
@@ -49,7 +49,7 @@ interface CredentialsConfig {
 })
 export class CredentialsConfigComponent extends PageComponent implements ControlValueAccessor, OnInit, Validator, OnDestroy, OnChanges {
 
-  credentialsConfigFormGroup: FormGroup;
+  credentialsConfigFormGroup: UntypedFormGroup;
 
   subscriptions: Subscription[] = [];
 
@@ -74,7 +74,7 @@ export class CredentialsConfigComponent extends PageComponent implements Control
   private propagateChange = null;
 
   constructor(protected store: Store<AppState>,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     super(store);
   }
 
@@ -170,7 +170,7 @@ export class CredentialsConfigComponent extends PageComponent implements Control
   registerOnTouched(fn: any): void {
   }
 
-  public validate(c: FormControl) {
+  public validate(c: UntypedFormControl) {
     return this.credentialsConfigFormGroup.valid ? null : {
       credentialsConfig: {
         valid: false,
@@ -221,7 +221,7 @@ export class CredentialsConfigComponent extends PageComponent implements Control
 
   private requiredFilesSelected(validator: ValidatorFn,
                                 requiredFieldsSet: string[][] = null) {
-    return (group: FormGroup): ValidationErrors | null => {
+    return (group: UntypedFormGroup): ValidationErrors | null => {
       if (!requiredFieldsSet) {
         requiredFieldsSet = [Object.keys(group.controls)];
       }

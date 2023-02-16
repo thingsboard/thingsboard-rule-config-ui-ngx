@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { AppState, isNotEmptyStr } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -12,16 +12,16 @@ import { Subscription } from 'rxjs';
 })
 export class MqttConfigComponent extends RuleNodeConfigurationComponent implements OnDestroy {
 
-  mqttConfigForm: FormGroup;
+  mqttConfigForm: UntypedFormGroup;
 
   private subscriptions: Subscription[] = [];
 
   constructor(protected store: Store<AppState>,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     super(store);
   }
 
-  protected configForm(): FormGroup {
+  protected configForm(): UntypedFormGroup {
     return this.mqttConfigForm;
   }
 

@@ -8,7 +8,7 @@ import {
   RuleNodeConfigurationComponent, ScriptLanguage
 } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
@@ -25,7 +25,7 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
 
   alarmSeverities = Object.keys(AlarmSeverity);
   alarmSeverityTranslationMap = alarmSeverityTranslations;
-  createAlarmConfigForm: FormGroup;
+  createAlarmConfigForm: UntypedFormGroup;
 
   separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
 
@@ -34,13 +34,13 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
   scriptLanguage = ScriptLanguage;
 
   constructor(protected store: Store<AppState>,
-              private fb: FormBuilder,
+              private fb: UntypedFormBuilder,
               private nodeScriptTestService: NodeScriptTestService,
               private translate: TranslateService) {
     super(store);
   }
 
-  protected configForm(): FormGroup {
+  protected configForm(): UntypedFormGroup {
     return this.createAlarmConfigForm;
   }
 

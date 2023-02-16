@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { AlarmStatus, alarmStatusTranslations, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { map, mergeMap, share, startWith } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
@@ -18,8 +18,8 @@ export class CheckAlarmStatusComponent extends RuleNodeConfigurationComponent im
   @ViewChild('alarmStatusInput', {static: false}) alarmStatusInput: ElementRef<HTMLInputElement>;
 
 
-  alarmStatusConfigForm: FormGroup;
-  statusFormControl: FormControl;
+  alarmStatusConfigForm: UntypedFormGroup;
+  statusFormControl: UntypedFormControl;
 
   alarmStatusTranslationsMap = alarmStatusTranslations;
 
@@ -33,12 +33,12 @@ export class CheckAlarmStatusComponent extends RuleNodeConfigurationComponent im
 
   constructor(protected store: Store<AppState>,
               public translate: TranslateService,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     super(store);
     for (const field of Object.keys(AlarmStatus)) {
       this.alarmStatusList.push(AlarmStatus[field]);
     }
-    this.statusFormControl = new FormControl('');
+    this.statusFormControl = new UntypedFormControl('');
     this.filteredAlarmStatus = this.statusFormControl.valueChanges
       .pipe(
         startWith(''),
@@ -52,7 +52,7 @@ export class CheckAlarmStatusComponent extends RuleNodeConfigurationComponent im
     super.ngOnInit();
   }
 
-  protected configForm(): FormGroup {
+  protected configForm(): UntypedFormGroup {
     return this.alarmStatusConfigForm;
   }
 

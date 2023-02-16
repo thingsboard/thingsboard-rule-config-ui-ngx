@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { startWith } from 'rxjs/operators';
 
 @Component({
@@ -12,7 +12,7 @@ import { startWith } from 'rxjs/operators';
 })
 export class ToEmailConfigComponent extends RuleNodeConfigurationComponent {
 
-  toEmailConfigForm: FormGroup;
+  toEmailConfigForm: UntypedFormGroup;
   mailBodyTypes = [
     {name: 'tb.mail-body-type.plain-text', value: 'false'},
     {name: 'tb.mail-body-type.html', value: 'true'},
@@ -20,11 +20,11 @@ export class ToEmailConfigComponent extends RuleNodeConfigurationComponent {
   ];
 
   constructor(protected store: Store<AppState>,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     super(store);
   }
 
-  protected configForm(): FormGroup {
+  protected configForm(): UntypedFormGroup {
     return this.toEmailConfigForm;
   }
 

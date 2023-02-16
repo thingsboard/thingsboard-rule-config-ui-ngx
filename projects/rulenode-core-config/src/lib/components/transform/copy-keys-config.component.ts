@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/public-api';
 import { MatChipInputEvent } from '@angular/material/chips';
@@ -13,11 +13,11 @@ import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 })
 
 export class CopyKeysConfigComponent extends RuleNodeConfigurationComponent{
-  copyKeysConfigForm: FormGroup;
+  copyKeysConfigForm: UntypedFormGroup;
   separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
 
   constructor(protected store: Store<AppState>,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     super(store);
   }
 
@@ -28,7 +28,7 @@ export class CopyKeysConfigComponent extends RuleNodeConfigurationComponent{
     });
   }
 
-  protected configForm(): FormGroup {
+  protected configForm(): UntypedFormGroup {
     return this.copyKeysConfigForm;
   }
 
