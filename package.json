@@ -26,7 +26,7 @@
     "@angular/compiler": "^14.2.12",
     "@angular/compiler-cli": "^14.2.12",
     "@angular/core": "^14.2.12",
-    "@angular/flex-layout": "^14.0.0-beta.41",
+    "@angular/flex-layout": "^15.0.0-beta.42",
     "@angular/forms": "^14.2.12",
     "@angular/language-service": "^14.2.12",
     "@angular/material": "^14.2.7",
