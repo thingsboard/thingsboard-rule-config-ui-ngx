@@ -101,6 +101,14 @@ export enum FetchMode {
   ALL = 'ALL'
 }
 
+export const deduplicationStrategiesTranslations = new Map<FetchMode, string>(
+  [
+    [FetchMode.FIRST, 'tb.rulenode.first-message'],
+    [FetchMode.LAST, 'tb.rulenode.last-message'],
+    [FetchMode.ALL, 'tb.rulenode.all-messages']
+  ]
+);
+
 export enum SamplingOrder {
   ASC = 'ASC',
   DESC = 'DESC'

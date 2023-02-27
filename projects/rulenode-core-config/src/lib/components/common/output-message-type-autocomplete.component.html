@@ -1,0 +1,29 @@
+<mat-form-field [formGroup]="messageTypeFormGroup" class="mat-block">
+  <input matInput type="text" placeholder="{{'tb.rulenode.output-message-type' | translate}}"
+         #messageTypeInput
+         formControlName="messageType"
+         (focusin)="onFocus()"
+         required
+         [matAutocomplete]="messageTypeAutocomplete">
+  <button *ngIf="messageTypeFormGroup.get('messageType').value"
+          type="button"
+          matSuffix mat-icon-button aria-label="Clear"
+          (click)="clear()">
+    <mat-icon class="material-icons">close</mat-icon>
+  </button>
+  <mat-autocomplete
+    class="tb-autocomplete"
+    #messageTypeAutocomplete="matAutocomplete"
+    [displayWith]="displayMessageTypeFn">
+    <mat-option *ngFor="let msgType of outputMessageTypes | async" [value]="msgType">
+      <span>{{msgType}}</span>
+    </mat-option>
+  </mat-autocomplete>
+  <mat-hint *ngIf="autocompleteHint">{{autocompleteHint | translate}}</mat-hint>
+  <mat-error *ngIf="messageTypeFormGroup.get('messageType').hasError('required')">
+    {{ 'tb.rulenode.output-message-type-required' | translate }}
+  </mat-error>
+  <mat-error *ngIf="messageTypeFormGroup.get('messageType').hasError('maxlength')">
+    {{ 'tb.rulenode.output-message-type-max-length' | translate }}
+  </mat-error>
+</mat-form-field>

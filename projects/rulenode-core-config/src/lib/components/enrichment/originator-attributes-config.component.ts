@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppState } from '@core/public-api';
+import { AppState, isDefinedAndNotNull, isObject, isUndefinedOrNull } from '@core/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
@@ -29,7 +29,7 @@ export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationCo
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.originatorAttributesConfigForm = this.fb.group({
       tellFailureIfAbsent: [configuration ? configuration.tellFailureIfAbsent : false, []],
-      fetchToData: [configuration ? configuration.fetchToData: false, []],
+      fetchToData: [isDefinedAndNotNull(configuration?.fetchToData) ? configuration.fetchToData : false, []],
       clientAttributeNames: [configuration ? configuration.clientAttributeNames : null, []],
       sharedAttributeNames: [configuration ? configuration.sharedAttributeNames : null, []],
       serverAttributeNames: [configuration ? configuration.serverAttributeNames : null, []],
@@ -64,5 +64,12 @@ export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationCo
     if (input) {
       input.value = '';
     }
+  }
+
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    if (isObject(configuration) && isUndefinedOrNull(configuration?.fetchToData)) {
+      configuration.fetchToData = false;
+    }
+    return configuration;
   }
 }
