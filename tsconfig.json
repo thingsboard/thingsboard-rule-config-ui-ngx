@@ -12,7 +12,7 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "skipLibCheck": true,
-    "target": "es2020",
+    "target": "ES2022",
     "module": "es2020",
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
@@ -33,12 +33,23 @@
       "rulenode-core-config/*": [
         "dist/rulenode-core-config/*"
       ],
-      "@app/*": ["node_modules/thingsboard/src/app/*"],
-      "@core/*": ["node_modules/thingsboard/src/app/core/*"],
-      "@shared/*": ["node_modules/thingsboard/src/app/shared/*"],
-      "@modules/*": ["node_modules/thingsboard/src/app/modules/*"],
-      "@home/*": ["node_modules/thingsboard/src/app/modules/home/*"]
-    }
+      "@app/*": [
+        "node_modules/thingsboard/src/app/*"
+      ],
+      "@core/*": [
+        "node_modules/thingsboard/src/app/core/*"
+      ],
+      "@shared/*": [
+        "node_modules/thingsboard/src/app/shared/*"
+      ],
+      "@modules/*": [
+        "node_modules/thingsboard/src/app/modules/*"
+      ],
+      "@home/*": [
+        "node_modules/thingsboard/src/app/modules/home/*"
+      ]
+    },
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
