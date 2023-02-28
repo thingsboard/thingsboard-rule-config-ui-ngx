@@ -1,5 +1,5 @@
 <section [formGroup]="sendEmailConfigForm" fxLayout="column">
-  <mat-checkbox formControlName="useSystemSmtpSettings" style="padding-bottom: 16px;">
+  <mat-checkbox formControlName="useSystemSmtpSettings">
     {{ 'tb.rulenode.use-system-smtp-settings' | translate }}
   </mat-checkbox>
   <section fxLayout="column" *ngIf="sendEmailConfigForm.get('useSystemSmtpSettings').value === false">
@@ -43,7 +43,7 @@
         {{ 'tb.rulenode.min-timeout-msec-message' | translate }}
       </mat-error>
     </mat-form-field>
-    <mat-checkbox formControlName="enableTls" style="padding-bottom: 16px;">
+    <mat-checkbox formControlName="enableTls">
       {{ 'tb.rulenode.enable-tls' | translate }}
     </mat-checkbox>
     <mat-form-field class="mat-block" *ngIf="sendEmailConfigForm.get('enableTls').value === true">
@@ -54,7 +54,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <tb-checkbox formControlName="enableProxy" style="display: block; padding-bottom: 16px;">
+    <tb-checkbox formControlName="enableProxy">
       {{ 'tb.rulenode.enable-proxy' | translate }}
     </tb-checkbox>
     <div *ngIf="sendEmailConfigForm.get('enableProxy').value">

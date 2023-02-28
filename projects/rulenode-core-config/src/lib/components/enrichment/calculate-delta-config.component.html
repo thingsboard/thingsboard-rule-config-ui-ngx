@@ -25,13 +25,13 @@
       </mat-error>
     </mat-form-field>
   </div>
-  <mat-checkbox formControlName="useCache" style="padding-bottom: 16px;">
+  <mat-checkbox formControlName="useCache">
     {{ 'tb.rulenode.use-cache' | translate }}
   </mat-checkbox>
-  <mat-checkbox formControlName="tellFailureIfDeltaIsNegative" style="padding-bottom: 16px;">
+  <mat-checkbox formControlName="tellFailureIfDeltaIsNegative">
     {{ 'tb.rulenode.tell-failure-if-delta-is-negative' | translate }}
   </mat-checkbox>
-  <mat-checkbox formControlName="addPeriodBetweenMsgs" style="padding-bottom: 16px;">
+  <mat-checkbox formControlName="addPeriodBetweenMsgs">
     {{ 'tb.rulenode.add-period-between-msgs' | translate }}
   </mat-checkbox>
   <mat-form-field class="mat-block" *ngIf="calculateDeltaConfigForm.get('addPeriodBetweenMsgs').value">

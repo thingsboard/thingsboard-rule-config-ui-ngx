@@ -1,15 +1,15 @@
 <section [formGroup]="alarmStatusConfigForm" fxLayout="column">
   <mat-form-field class="mat-block" class="alarm-status-list">
   <mat-label translate>tb.rulenode.alarm-status-filter</mat-label>
-  <mat-chip-list #alarmStatusChipList required>
-    <mat-chip
+  <mat-chip-grid #alarmStatusChipList required>
+    <mat-chip-row
       *ngFor="let alarmStatus of alarmStatusConfigForm.get('alarmStatusList').value;"
       (removed)="removeAlarmStatus(alarmStatus)">
         <span>
           <strong>{{alarmStatusTranslationsMap.get(alarmStatus) | translate}}</strong>
         </span>
       <mat-icon matChipRemove>close</mat-icon>
-    </mat-chip>
+    </mat-chip-row>
     <input matInput type="text"
            style="max-width: 200px;"
            #alarmStatusInput
@@ -20,7 +20,7 @@
            [matAutocompleteConnectedTo]="origin"
            [matAutocomplete]="alarmStatusAutocomplete"
            [matChipInputFor]="alarmStatusChipList">
-  </mat-chip-list>
+  </mat-chip-grid>
   <mat-autocomplete #alarmStatusAutocomplete="matAutocomplete"
                     class="tb-autocomplete"
                     (optionSelected)="alarmStatusSelected($event)"

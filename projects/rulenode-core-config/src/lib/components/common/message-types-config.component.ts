@@ -3,7 +3,7 @@ import { AppState } from '@core/public-api';
 import { LinkLabel, MessageType, messageTypeNames, PageComponent, TruncatePipe } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { ControlValueAccessor, UntypedFormBuilder, UntypedFormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
+import { MatChipInputEvent, MatChipGrid } from '@angular/material/chips';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 import { Observable, of } from 'rxjs';
@@ -45,7 +45,7 @@ export class MessageTypesConfigComponent extends PageComponent implements Contro
   @Input()
   disabled: boolean;
 
-  @ViewChild('chipList', {static: false}) chipList: MatChipList;
+  @ViewChild('chipList', {static: false}) chipList: MatChipGrid;
   @ViewChild('messageTypeAutocomplete', {static: false}) matAutocomplete: MatAutocomplete;
   @ViewChild('messageTypeInput', {static: false}) messageTypeInput: ElementRef<HTMLInputElement>;
 

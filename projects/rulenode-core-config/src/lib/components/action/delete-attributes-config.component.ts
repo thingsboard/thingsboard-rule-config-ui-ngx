@@ -7,7 +7,7 @@ import {
 } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
+import { MatChipInputEvent, MatChipGrid } from '@angular/material/chips';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 
 @Component({
@@ -16,7 +16,7 @@ import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
   styleUrls: []
 })
 export class DeleteAttributesConfigComponent extends RuleNodeConfigurationComponent {
-  @ViewChild('attributeChipList') attributeChipList: MatChipList;
+  @ViewChild('attributeChipList') attributeChipList: MatChipGrid;
 
   deleteAttributesConfigForm: UntypedFormGroup;
   attributeScopeMap = AttributeScope;

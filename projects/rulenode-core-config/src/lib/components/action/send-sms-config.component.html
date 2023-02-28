@@ -1,5 +1,5 @@
 <section [formGroup]="sendSmsConfigForm" fxLayout="column">
-  <mat-form-field class="mat-block" style="padding-bottom: 24px;">
+  <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.numbers-to-template</mat-label>
     <input required matInput formControlName="numbersToTemplate">
     <mat-error *ngIf="sendSmsConfigForm.get('numbersToTemplate').hasError('required')">
@@ -7,7 +7,7 @@
     </mat-error>
     <mat-hint [innerHTML]="'tb.rulenode.numbers-to-template-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
-  <mat-form-field class="mat-block" style="padding-bottom: 8px;">
+  <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.sms-message-template</mat-label>
     <textarea required matInput formControlName="smsMessageTemplate" rows="6"></textarea>
     <mat-error *ngIf="sendSmsConfigForm.get('smsMessageTemplate').hasError('required')">
@@ -15,7 +15,7 @@
     </mat-error>
     <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
-  <mat-checkbox formControlName="useSystemSmsSettings" style="padding-bottom: 16px;">
+  <mat-checkbox formControlName="useSystemSmsSettings">
     {{ 'tb.rulenode.use-system-sms-settings' | translate }}
   </mat-checkbox>
   <tb-sms-provider-configuration

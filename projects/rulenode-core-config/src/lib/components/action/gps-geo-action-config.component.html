@@ -21,7 +21,7 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-checkbox fxFlex formControlName="fetchPerimeterInfoFromMessageMetadata" style="padding-bottom: 16px;">
+  <mat-checkbox fxFlex formControlName="fetchPerimeterInfoFromMessageMetadata">
     {{ 'tb.rulenode.fetch-perimeter-info-from-message-metadata' | translate }}
   </mat-checkbox>
   <mat-form-field *ngIf="geoActionConfigForm.get('fetchPerimeterInfoFromMessageMetadata').value" class="mat-block">
@@ -70,7 +70,7 @@
   </div>
   <div fxLayout="column" *ngIf="geoActionConfigForm.get('perimeterType').value === perimeterType.POLYGON &&
                              !geoActionConfigForm.get('fetchPerimeterInfoFromMessageMetadata').value">
-    <mat-form-field class="mat-block" hintLabel="{{'tb.rulenode.polygon-definition-hint' | translate}}" style="padding-bottom: 16px;">
+    <mat-form-field class="mat-block" hintLabel="{{'tb.rulenode.polygon-definition-hint' | translate}}" subscriptSizing="dynamic">
       <mat-label translate>tb.rulenode.polygon-definition</mat-label>
       <input matInput formControlName="polygonsDefinition" required>
       <mat-error *ngIf="geoActionConfigForm.get('polygonsDefinition').hasError('required')">

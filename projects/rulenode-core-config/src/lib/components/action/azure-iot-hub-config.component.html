@@ -1,5 +1,5 @@
 <section [formGroup]="azureIotHubConfigForm" fxLayout="column">
-  <mat-form-field class="mat-block" style="padding-bottom: 16px;">
+  <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.topic</mat-label>
     <input required matInput formControlName="topicPattern">
     <mat-error *ngIf="azureIotHubConfigForm.get('topicPattern').hasError('required')">
@@ -21,7 +21,7 @@
       {{ 'tb.rulenode.device-id-required' | translate }}
     </mat-error>
   </mat-form-field>
-  <mat-accordion multi>
+  <mat-accordion>
     <mat-expansion-panel class="tb-mqtt-credentials-panel-group">
       <mat-expansion-panel-header>
         <mat-panel-title translate>tb.rulenode.credentials</mat-panel-title>
@@ -101,5 +101,5 @@
         </section>
       </section>
     </mat-expansion-panel>
-    </mat-accordion>
+  </mat-accordion>
 </section>

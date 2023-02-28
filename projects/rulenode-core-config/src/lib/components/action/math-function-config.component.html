@@ -13,7 +13,7 @@
   <fieldset *ngIf="mathFunctionConfigForm.get('operation').value === MathFunction.CUSTOM"
             class="fields-group" fxLayout="column" fxLayoutGap="8px">
     <legend class="group-title">{{'tb.rulenode.custom-expression-field-input' | translate }} *</legend>
-    <mat-form-field fxFlex class="mat-block no-margin-top" style="padding-bottom: 16px;">
+    <mat-form-field fxFlex class="mat-block no-margin-top" subscriptSizing="dynamic">
       <input matInput formControlName="customFunction" required/>
       <mat-error *ngIf="mathFunctionConfigForm.get('customFunction').hasError('required')" translate>
         tb.rulenode.custom-expression-field-input-required
@@ -53,7 +53,7 @@
         </mat-form-field>
       </div>
       <div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutGap.gt-xs="16px">
-        <mat-form-field fxFlex floatLabel="always" class="mat-block">
+        <mat-form-field fxFlex floatLabel="always" class="mat-block" subscriptSizing="dynamic">
           <mat-label translate>tb.rulenode.number-floating-point-field-input</mat-label>
           <input formControlName="resultValuePrecision"
                  matInput
@@ -65,10 +65,10 @@
       </div>
       <div *ngIf="[ArgumentTypeResult.ATTRIBUTE, ArgumentTypeResult.TIME_SERIES].includes(mathFunctionConfigForm.get('result').get('type').value)"
            fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap.gt-xs="16px" style="padding-top: 16px;">
-        <mat-checkbox formControlName="addToBody" style="padding-bottom: 16px;">
+        <mat-checkbox formControlName="addToBody">
           {{'tb.rulenode.add-to-body-field-input' | translate }}
         </mat-checkbox>
-        <mat-checkbox formControlName="addToMetadata" style="padding-bottom: 16px;">
+        <mat-checkbox formControlName="addToMetadata">
           {{'tb.rulenode.add-to-metadata-field-input' | translate}}
         </mat-checkbox>
       </div>

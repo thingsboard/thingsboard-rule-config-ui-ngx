@@ -1,5 +1,5 @@
 <section [formGroup]="restApiCallConfigForm" fxLayout="column">
-  <mat-form-field class="mat-block" style="padding-bottom: 16px;">
+  <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.endpoint-url-pattern</mat-label>
     <input required matInput formControlName="restEndpointUrlPattern">
     <mat-error *ngIf="restApiCallConfigForm.get('restEndpointUrlPattern').hasError('required')">
@@ -15,17 +15,17 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-checkbox formControlName="enableProxy" style="padding-bottom: 16px;">
+  <mat-checkbox formControlName="enableProxy">
     {{ 'tb.rulenode.enable-proxy' | translate }}
   </mat-checkbox>
-  <mat-checkbox *ngIf="!restApiCallConfigForm.get('enableProxy').value" formControlName="useSimpleClientHttpFactory" style="padding-bottom: 16px;">
+  <mat-checkbox *ngIf="!restApiCallConfigForm.get('enableProxy').value" formControlName="useSimpleClientHttpFactory">
     {{ 'tb.rulenode.use-simple-client-http-factory' | translate }}
   </mat-checkbox>
-  <mat-checkbox formControlName="ignoreRequestBody" style="padding-bottom: 16px;">
+  <mat-checkbox formControlName="ignoreRequestBody">
     {{ 'tb.rulenode.ignore-request-body' | translate }}
   </mat-checkbox>
   <div *ngIf="restApiCallConfigForm.get('enableProxy').value">
-    <mat-checkbox formControlName="useSystemProxyProperties" style="padding-bottom: 16px;">
+    <mat-checkbox formControlName="useSystemProxyProperties">
       {{ 'tb.rulenode.use-system-proxy-properties' | translate }}
     </mat-checkbox>
     <div *ngIf="!restApiCallConfigForm.get('useSystemProxyProperties').value">
@@ -68,12 +68,12 @@
     </div>
   </div>
   <mat-form-field *ngIf="!restApiCallConfigForm.get('useSimpleClientHttpFactory').value || restApiCallConfigForm.get('enableProxy').value" class="mat-block"
-                  style="padding-bottom: 16px;">
+                  subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.read-timeout</mat-label>
     <input type="number" step="1" min="0" matInput formControlName="readTimeoutMs">
     <mat-hint translate>tb.rulenode.read-timeout-hint</mat-hint>
   </mat-form-field>
-  <mat-form-field class="mat-block" style="padding-bottom: 16px;">
+  <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.max-parallel-requests-count</mat-label>
     <input type="number" step="1" min="0" matInput formControlName="maxParallelRequestsCount">
     <mat-hint translate>tb.rulenode.max-parallel-requests-count-hint</mat-hint>
@@ -88,11 +88,11 @@
     valText="tb.rulenode.value"
     valRequiredText="tb.rulenode.value-required">
   </tb-kv-map-config>
-  <mat-checkbox formControlName="useRedisQueueForMsgPersistence" style="padding-bottom: 16px;">
+  <mat-checkbox formControlName="useRedisQueueForMsgPersistence">
     {{ 'tb.rulenode.use-redis-queue' | translate }}
   </mat-checkbox>
   <div fxLayout="column" *ngIf="restApiCallConfigForm.get('useRedisQueueForMsgPersistence').value === true">
-    <mat-checkbox formControlName="trimQueue" style="padding-bottom: 16px;">
+    <mat-checkbox formControlName="trimQueue">
       {{ 'tb.rulenode.trim-redis-queue' | translate }}
     </mat-checkbox>
     <mat-form-field class="mat-block">

@@ -1,6 +1,6 @@
 <section [formGroup]="customerAttributesConfigForm" fxLayout="column">
   <label translate class="tb-title tb-required">tb.rulenode.attr-mapping</label>
-  <mat-checkbox fxFlex formControlName="telemetry" style="padding-bottom: 16px;">
+  <mat-checkbox fxFlex formControlName="telemetry">
     {{ 'tb.rulenode.latest-telemetry' | translate }}
   </mat-checkbox>
   <tb-kv-map-config

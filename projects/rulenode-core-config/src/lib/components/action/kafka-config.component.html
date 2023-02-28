@@ -1,5 +1,5 @@
 <section [formGroup]="kafkaConfigForm" fxLayout="column">
-  <mat-form-field class="mat-block" style="padding-bottom: 8px;">
+  <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.topic-pattern</mat-label>
     <input required matInput formControlName="topicPattern">
     <mat-error *ngIf="kafkaConfigForm.get('topicPattern').hasError('required')">
@@ -7,7 +7,7 @@
     </mat-error>
     <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>
-  <mat-form-field class="mat-block" style="padding-bottom: 8px;">
+  <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.key-pattern</mat-label>
     <input matInput formControlName="keyPattern">
     <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
@@ -79,7 +79,7 @@
     valText="tb.rulenode.value"
     valRequiredText="tb.rulenode.value-required">
   </tb-kv-map-config>
-  <mat-checkbox fxFlex formControlName="addMetadataKeyValuesAsKafkaHeaders" style="padding-top: 16px;">
+  <mat-checkbox fxFlex formControlName="addMetadataKeyValuesAsKafkaHeaders">
     {{ 'tb.rulenode.add-metadata-key-values-as-kafka-headers' | translate }}
   </mat-checkbox>
   <div class="tb-hint" translate>tb.rulenode.add-metadata-key-values-as-kafka-headers-hint</div>

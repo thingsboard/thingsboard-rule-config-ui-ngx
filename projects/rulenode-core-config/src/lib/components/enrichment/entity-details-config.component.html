@@ -1,15 +1,15 @@
 <section [formGroup]="entityDetailsConfigForm" fxLayout="column">
   <mat-form-field class="mat-block" class="entity-fields-list">
     <mat-label translate>tb.rulenode.entity-details</mat-label>
-    <mat-chip-list #detailsChipList required>
-      <mat-chip
-        *ngFor="let details of entityDetailsConfigForm.get('detailsList').value;"
+    <mat-chip-grid #detailsChipList formControlName="detailsList">
+      <mat-chip-row
+        *ngFor="let details of detailsList;"
         (removed)="removeDetailsField(details)">
         <span>
           <strong>{{entityDetailsTranslationsMap.get(details) | translate}}</strong>
         </span>
         <mat-icon matChipRemove>close</mat-icon>
-      </mat-chip>
+      </mat-chip-row>
       <input matInput type="text"
              style="max-width: 200px;"
              #detailsInput
@@ -20,7 +20,7 @@
              [matAutocompleteConnectedTo]="origin"
              [matAutocomplete]="detailsAutocomplete"
              [matChipInputFor]="detailsChipList">
-    </mat-chip-list>
+    </mat-chip-grid>
     <mat-autocomplete #detailsAutocomplete="matAutocomplete"
                       class="tb-autocomplete"
                       (optionSelected)="detailsFieldSelected($event)"
@@ -36,11 +36,9 @@
         </div>
       </mat-option>
     </mat-autocomplete>
+    <mat-error *ngIf="entityDetailsConfigForm.get('detailsList').hasError('required')">{{ 'tb.rulenode.entity-details-list-empty' | translate }}</mat-error>
   </mat-form-field>
-  <tb-error [error]="(detailsFormControl.touched &&
-                     entityDetailsConfigForm.get('detailsList').hasError('required'))
-                  ? translate.instant('tb.rulenode.entity-details-list-empty') : ''"></tb-error>
-  <mat-checkbox fxFlex formControlName="addToMetadata" style="padding-bottom: 16px;">
+  <mat-checkbox fxFlex formControlName="addToMetadata">
     {{ 'tb.rulenode.add-to-metadata' | translate }}
   </mat-checkbox>
   <div class="tb-hint" translate>tb.rulenode.add-to-metadata-hint</div>

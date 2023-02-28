@@ -1,9 +1,8 @@
 <section [formGroup]="createAlarmConfigForm" fxLayout="column">
-  <mat-checkbox formControlName="useMessageAlarmData" style="padding-bottom: 16px;">
+  <mat-checkbox formControlName="useMessageAlarmData">
     {{ 'tb.rulenode.use-message-alarm-data' | translate }}
   </mat-checkbox>
-  <mat-checkbox formControlName="overwriteAlarmDetails" *ngIf="createAlarmConfigForm.get('useMessageAlarmData').value === true"
-                style="padding-bottom: 16px;">
+  <mat-checkbox formControlName="overwriteAlarmDetails" *ngIf="createAlarmConfigForm.get('useMessageAlarmData').value === true">
     {{ 'tb.rulenode.overwrite-alarm-details' | translate }}
   </mat-checkbox>
   <section fxLayout="column" *ngIf="createAlarmConfigForm.get('useMessageAlarmData').value === false ||
@@ -33,7 +32,7 @@
     </div>
   </section>
   <section fxLayout="column" *ngIf="createAlarmConfigForm.get('useMessageAlarmData').value === false">
-    <mat-form-field fxFlex style="padding-bottom: 16px;">
+    <mat-form-field fxFlex subscriptSizing="dynamic">
       <mat-label translate>tb.rulenode.alarm-type</mat-label>
       <input required matInput formControlName="alarmType">
       <mat-error *ngIf="createAlarmConfigForm.get('alarmType').hasError('required')">
@@ -41,7 +40,7 @@
       </mat-error>
       <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
     </mat-form-field>
-    <mat-checkbox formControlName="dynamicSeverity" style="padding-bottom: 16px;">
+    <mat-checkbox formControlName="dynamicSeverity">
       {{ 'tb.rulenode.use-alarm-severity-pattern' | translate }}
     </mat-checkbox>
     <mat-form-field fxFlex *ngIf="!createAlarmConfigForm.get('dynamicSeverity').value">
@@ -55,7 +54,7 @@
         {{ 'tb.rulenode.alarm-severity-required' | translate }}
       </mat-error>
     </mat-form-field>
-    <mat-form-field fxFlex *ngIf="createAlarmConfigForm.get('dynamicSeverity').value" style="padding-bottom: 32px;">
+    <mat-form-field fxFlex *ngIf="createAlarmConfigForm.get('dynamicSeverity').value" subscriptSizing="dynamic">
       <mat-label translate>tb.rulenode.alarm-severity-pattern</mat-label>
       <input matInput formControlName="severity" required>
       <mat-error *ngIf="createAlarmConfigForm.get('severity').hasError('required')">
@@ -63,11 +62,11 @@
       </mat-error>
       <mat-hint [innerHTML]="'tb.rulenode.alarm-severity-pattern-hint' | translate | safeHtml"></mat-hint>
     </mat-form-field>
-    <mat-checkbox formControlName="propagate" style="padding-bottom: 16px;">
+    <mat-checkbox formControlName="propagate">
       {{ 'tb.rulenode.propagate' | translate }}
     </mat-checkbox>
     <section *ngIf="createAlarmConfigForm.get('propagate').value === true">
-      <mat-form-field floatLabel="always" class="mat-block" style="padding-bottom: 16px;">
+      <mat-form-field floatLabel="always" class="mat-block" subscriptSizing="dynamic">
         <mat-label translate>tb.rulenode.relation-types-list</mat-label>
         <mat-chip-list #relationTypesChipList>
           <mat-chip
@@ -86,10 +85,10 @@
         <mat-hint translate>tb.rulenode.relation-types-list-hint</mat-hint>
       </mat-form-field>
     </section>
-    <mat-checkbox formControlName="propagateToOwner" style="padding-bottom: 16px;">
+    <mat-checkbox formControlName="propagateToOwner">
       {{ 'tb.rulenode.propagate-to-owner' | translate }}
     </mat-checkbox>
-    <mat-checkbox formControlName="propagateToTenant" style="padding-bottom: 16px;">
+    <mat-checkbox formControlName="propagateToTenant">
       {{ 'tb.rulenode.propagate-to-tenant' | translate }}
     </mat-checkbox>
   </section>

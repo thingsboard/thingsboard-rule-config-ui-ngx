@@ -1,41 +1,41 @@
 <section [formGroup]="checkMessageConfigForm" fxLayout="column">
-  <mat-form-field class="mat-block" style="margin-bottom: 16px">
+  <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.data-keys</mat-label>
-    <mat-chip-list #messageNamesChipList>
-      <mat-chip
+    <mat-chip-grid #messageNamesChipList>
+      <mat-chip-row
         *ngFor="let messageName of checkMessageConfigForm.get('messageNames').value;"
         (removed)="removeMessageName(messageName)">
         {{messageName}}
         <mat-icon matChipRemove>close</mat-icon>
-      </mat-chip>
+      </mat-chip-row>
       <input matInput type="text"
              style="max-width: 200px;"
              [matChipInputFor]="messageNamesChipList"
              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
              (matChipInputTokenEnd)="addMessageName($event)"
              [matChipInputAddOnBlur]="true">
-    </mat-chip-list>
+    </mat-chip-grid>
     <mat-hint translate>tb.rulenode.separator-hint</mat-hint>
   </mat-form-field>
-  <mat-form-field class="mat-block" style="margin-bottom: 16px">
+  <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.metadata-keys</mat-label>
-    <mat-chip-list #metadataNamesChipList>
-      <mat-chip
+    <mat-chip-grid #metadataNamesChipList>
+      <mat-chip-row
         *ngFor="let metadataName of checkMessageConfigForm.get('metadataNames').value;"
         (removed)="removeMetadataName(metadataName)">
         {{metadataName}}
         <mat-icon matChipRemove>close</mat-icon>
-      </mat-chip>
+      </mat-chip-row>
       <input matInput type="text"
              style="max-width: 200px;"
              [matChipInputFor]="metadataNamesChipList"
              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
              (matChipInputTokenEnd)="addMetadataName($event)"
              [matChipInputAddOnBlur]="true">
-    </mat-chip-list>
+    </mat-chip-grid>
     <mat-hint translate>tb.rulenode.separator-hint</mat-hint>
   </mat-form-field>
-  <mat-checkbox fxFlex formControlName="checkAllKeys" style="padding-bottom: 8px;">
+  <mat-checkbox fxFlex formControlName="checkAllKeys">
     {{ 'tb.rulenode.check-all-keys' | translate }}
   </mat-checkbox>
   <div class="tb-hint" translate>tb.rulenode.check-all-keys-hint</div>

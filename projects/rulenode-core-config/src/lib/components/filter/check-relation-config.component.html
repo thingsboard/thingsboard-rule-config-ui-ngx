@@ -1,5 +1,5 @@
 <section [formGroup]="checkRelationConfigForm" fxLayout="column">
-  <mat-checkbox fxFlex formControlName="checkForSingleEntity" style="padding-bottom: 16px;">
+  <mat-checkbox fxFlex formControlName="checkForSingleEntity">
     {{ 'tb.rulenode.check-relation-to-specific-entity' | translate }}
   </mat-checkbox>
   <div class="tb-hint" translate>tb.rulenode.check-relation-hint</div>
@@ -11,9 +11,9 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <div fxLayout="row" *ngIf="checkRelationConfigForm.get('checkForSingleEntity').value" style="padding-top: 20px">
+  <div fxLayout="row" fxLayoutGap="8px" *ngIf="checkRelationConfigForm.get('checkForSingleEntity').value">
     <tb-entity-type-select
-      style="min-width: 100px; padding-bottom: 20px; padding-right: 8px;"
+      style="min-width: 100px;"
       showLabel
       required
       formControlName="entityType">

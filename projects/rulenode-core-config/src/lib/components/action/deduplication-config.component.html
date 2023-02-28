@@ -1,5 +1,5 @@
 <section [formGroup]="deduplicationConfigForm" fxLayout="column">
-  <mat-form-field class="mat-block"  style="padding-bottom: 16px;">
+  <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label>{{'tb.rulenode.interval' | translate}}</mat-label>
     <input type = 'number' required matInput formControlName="interval">
     <mat-hint>{{'tb.rulenode.interval-hint' | translate}}</mat-hint>
@@ -10,7 +10,7 @@
       {{'tb.rulenode.interval-min-error' | translate}}
     </mat-error>
   </mat-form-field>
-  <mat-form-field class="mat-block" style="padding-bottom: 16px;">
+  <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label>{{'tb.rulenode.strategy' | translate}}</mat-label>
     <mat-select formControlName="strategy" required>
       <mat-option *ngFor="let strategy of deduplicationStrategies" [value]="strategy">
@@ -26,16 +26,16 @@
   </mat-form-field>
   <div  *ngIf="deduplicationConfigForm.get('strategy').value === deduplicationStrategie.ALL">
     <tb-output-message-type-autocomplete
-      style="margin-bottom: 16px; display: block;"
       formControlName="outMsgType"
-      autocompleteHint="tb.rulenode.output-msg-type-hint">
+      autocompleteHint="tb.rulenode.output-msg-type-hint"
+      subscriptSizing="dynamic">
     </tb-output-message-type-autocomplete>
     <tb-queue-autocomplete
       required
-      style="margin-bottom: 16px; display: block;"
       [queueType]="serviceType"
       formControlName="queueName"
-      autocompleteHint="tb.rulenode.queue-name-hint">
+      autocompleteHint="tb.rulenode.queue-name-hint"
+      subscriptSizing="dynamic">
     </tb-queue-autocomplete>
   </div>
   <mat-expansion-panel class="advanced-settings">
@@ -47,7 +47,7 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <ng-template matExpansionPanelContent>
-      <mat-form-field class="mat-block" style="padding-bottom: 16px;">
+      <mat-form-field class="mat-block" subscriptSizing="dynamic">
         <mat-label>{{'tb.rulenode.max-pending-msgs' | translate}}</mat-label>
         <input type = 'number' required matInput formControlName="maxPendingMsgs">
         <mat-hint>{{'tb.rulenode.max-pending-msgs-hint' | translate}}</mat-hint>
@@ -61,7 +61,7 @@
           {{'tb.rulenode.max-pending-msgs-min-error' | translate}}
         </mat-error>
       </mat-form-field>
-      <mat-form-field class="mat-block" style="padding-bottom: 16px">
+      <mat-form-field class="mat-block" subscriptSizing="dynamic">
         <mat-label>{{'tb.rulenode.max-retries' | translate}}</mat-label>
         <input type = 'number' required matInput formControlName="maxRetries">
         <mat-hint>{{'tb.rulenode.max-retries-hint' | translate}}</mat-hint>

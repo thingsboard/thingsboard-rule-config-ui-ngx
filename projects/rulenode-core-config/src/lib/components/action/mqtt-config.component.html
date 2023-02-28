@@ -1,5 +1,5 @@
 <section [formGroup]="mqttConfigForm" fxLayout="column">
-  <mat-form-field class="mat-block" style="padding-bottom: 16px;">
+  <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.topic-pattern</mat-label>
     <input required matInput formControlName="topicPattern">
     <mat-error *ngIf="mqttConfigForm.get('topicPattern').hasError('required')">
@@ -42,15 +42,15 @@
       </mat-error>
     </mat-form-field>
   </div>
-  <mat-form-field class="mat-block">
+  <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.client-id</mat-label>
     <input matInput formControlName="clientId">
+    <mat-hint>{{'tb.rulenode.client-id-hint' | translate}}</mat-hint>
   </mat-form-field>
-  <div class="tb-hint client-id" translate>tb.rulenode.client-id-hint</div>
   <mat-checkbox formControlName="appendClientIdSuffix">
     {{ 'tb.rulenode.append-client-id-suffix' | translate }}
   </mat-checkbox>
-  <div class="tb-hint client-id">{{ "tb.rulenode.client-id-suffix-hint" | translate }}</div>
+  <div class="tb-hint">{{ "tb.rulenode.client-id-suffix-hint" | translate }}</div>
   <mat-checkbox formControlName="cleanSession">
     {{ 'tb.rulenode.clean-session' | translate }}
   </mat-checkbox>

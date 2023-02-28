@@ -2,7 +2,7 @@
   <mat-checkbox formControlName="useMetadataPeriodInSecondsPatterns">
     {{ 'tb.rulenode.use-metadata-period-in-seconds-patterns' | translate }}
   </mat-checkbox>
-  <div class="tb-hint" style="padding-bottom: 16px;" translate>tb.rulenode.use-metadata-period-in-seconds-patterns-hint</div>
+  <div class="tb-hint" translate>tb.rulenode.use-metadata-period-in-seconds-patterns-hint</div>
   <mat-form-field *ngIf="msgDelayConfigForm.get('useMetadataPeriodInSecondsPatterns').value !== true; else periodInSecondsPattern"
                   class="mat-block">
     <mat-label translate>tb.rulenode.period-seconds</mat-label>
@@ -15,7 +15,7 @@
     </mat-error>
   </mat-form-field>
   <ng-template #periodInSecondsPattern>
-    <mat-form-field class="mat-block" style="padding-bottom: 16px;">
+    <mat-form-field class="mat-block" subscriptSizing="dynamic">
       <mat-label translate>tb.rulenode.period-in-seconds-pattern</mat-label>
       <input required matInput formControlName="periodInSecondsPattern">
       <mat-error *ngIf="msgDelayConfigForm.get('periodInSecondsPattern').hasError('required')">

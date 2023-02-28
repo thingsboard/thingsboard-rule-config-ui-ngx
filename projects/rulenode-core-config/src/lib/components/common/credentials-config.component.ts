@@ -71,7 +71,7 @@ export class CredentialsConfigComponent extends PageComponent implements Control
   allCredentialsTypes = credentialsTypes;
   credentialsTypeTranslationsMap = credentialsTypeTranslations;
 
-  private propagateChange = null;
+  private propagateChange = (_: any) => {};
 
   constructor(protected store: Store<AppState>,
               private fb: UntypedFormBuilder) {
@@ -229,6 +229,6 @@ export class CredentialsConfigComponent extends PageComponent implements Control
         requiredFieldsSet.some(arrFields => arrFields.every(k => !validator(group.controls[k])));
 
       return allRequiredFilesSelected ? null : {notAllRequiredFilesSelected: true};
-    }
+    };
   }
 }

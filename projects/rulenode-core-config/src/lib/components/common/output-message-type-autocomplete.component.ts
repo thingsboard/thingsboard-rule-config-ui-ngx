@@ -4,11 +4,12 @@ import { Observable, of } from 'rxjs';
 import { map, mergeMap, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/core/core.state';
+import { SubscriptSizing } from '@angular/material/form-field';
 
 @Component({
   selector: 'tb-output-message-type-autocomplete',
   templateUrl: './output-message-type-autocomplete.component.html',
-  styleUrls: ['./output-message-type-autocomplete.component.scss'],
+  styleUrls: [],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => OutputMessageTypeAutocompleteComponent),
@@ -21,6 +22,9 @@ export class OutputMessageTypeAutocompleteComponent implements  OnInit {
   @ViewChild('messageTypeInput', {static: true}) messageTypeInput: ElementRef;
 
   @Input() autocompleteHint: string;
+
+  @Input()
+  subscriptSizing: SubscriptSizing = 'fixed';
 
   messageTypeFormGroup: UntypedFormGroup;
   outputMessageTypes: Observable<Array<string>>;

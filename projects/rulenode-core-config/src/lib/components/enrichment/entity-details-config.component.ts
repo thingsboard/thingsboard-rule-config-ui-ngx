@@ -12,7 +12,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 @Component({
   selector: 'tb-enrichment-node-entity-details-config',
   templateUrl: './entity-details-config.component.html',
-  styleUrls: ['./entity-details-config.component.scss']
+  styleUrls: []
 })
 export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent implements OnInit {
 
@@ -24,6 +24,7 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
   entityDetailsTranslationsMap = entityDetailsTranslations;
 
   filteredEntityDetails: Observable<Array<EntityDetailsField>>;
+  detailsList: Array<EntityDetailsField>;
 
   private entityDetailsList: EntityDetailsField[] = [];
 
@@ -59,6 +60,12 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
     this.searchText = '';
     this.detailsFormControl.patchValue('', {emitEvent: true});
+    this.detailsList = configuration ? configuration.detailsList : [];
+    return configuration;
+  }
+
+  protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    configuration.detailsList = this.detailsList;
     return configuration;
   }
 
@@ -67,6 +74,7 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
       detailsList: [configuration ? configuration.detailsList : null, [Validators.required]],
       addToMetadata: [configuration ? configuration.addToMetadata : false, []]
     });
+    this.detailsList = configuration ? configuration.detailsList : [];
   }
 
   displayDetails(details?: EntityDetailsField): string | undefined {
@@ -90,25 +98,21 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
   }
 
   removeDetailsField(details: EntityDetailsField) {
-    const detailsList: EntityDetailsField[] = this.entityDetailsConfigForm.get('detailsList').value;
-    if (detailsList) {
-      const index = detailsList.indexOf(details);
-      if (index >= 0) {
-        detailsList.splice(index, 1);
-        this.entityDetailsConfigForm.get('detailsList').setValue(detailsList);
-      }
+    const index = this.detailsList.indexOf(details);
+    if (index >= 0) {
+      this.detailsList.splice(index, 1);
+      this.entityDetailsConfigForm.get('detailsList').setValue(this.detailsList);
     }
   }
 
   addDetailsField(details: EntityDetailsField): void {
-    let detailsList: EntityDetailsField[] = this.entityDetailsConfigForm.get('detailsList').value;
-    if (!detailsList) {
-      detailsList = [];
+    if (!this.detailsList) {
+      this.detailsList = [];
     }
-    const index = detailsList.indexOf(details);
+    const index = this.detailsList.indexOf(details);
     if (index === -1) {
-      detailsList.push(details);
-      this.entityDetailsConfigForm.get('detailsList').setValue(detailsList);
+      this.detailsList.push(details);
+      this.entityDetailsConfigForm.get('detailsList').setValue(this.detailsList);
     }
   }
 

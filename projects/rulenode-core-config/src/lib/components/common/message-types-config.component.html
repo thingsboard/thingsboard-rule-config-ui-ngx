@@ -1,14 +1,13 @@
 <mat-form-field [formGroup]="messageTypeConfigForm" style="width: 100%;">
   <mat-label *ngIf="label" translate>{{ label }}</mat-label>
-  <mat-chip-list #chipList [required]="required">
-    <mat-chip
+  <mat-chip-grid #chipList [required]="required">
+    <mat-chip-row
       *ngFor="let messageType of messageTypes"
-      [selectable]="true"
       [removable]="true"
       (removed)="remove(messageType)">
       {{messageType.name}}
       <mat-icon matChipRemove>close</mat-icon>
-    </mat-chip>
+    </mat-chip-row>
     <input matInput type="text" placeholder="{{ placeholder | translate }}"
            style="max-width: 200px;"
            #messageTypeInput
@@ -21,7 +20,7 @@
            [matChipInputFor]="chipList"
            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
            (matChipInputTokenEnd)="add($event)">
-  </mat-chip-list>
+  </mat-chip-grid>
   <mat-autocomplete #messageTypeAutocomplete="matAutocomplete"
                     class="tb-autocomplete"
                     (optionSelected)="selected($event)"

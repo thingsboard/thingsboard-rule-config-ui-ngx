@@ -22,7 +22,7 @@
       {{ 'tb.rulenode.test-details-function' | translate }}
     </button>
   </div>
-  <mat-form-field class="mat-block" style="padding-bottom: 16px;">
+  <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.alarm-type</mat-label>
     <input required matInput formControlName="alarmType">
     <mat-error *ngIf="clearAlarmConfigForm.get('alarmType').hasError('required')">

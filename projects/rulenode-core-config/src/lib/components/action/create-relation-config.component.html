@@ -14,7 +14,7 @@
       required
       formControlName="entityType">
     </tb-entity-type-select>
-    <mat-form-field *ngIf="createRelationConfigForm.get('entityType').value" fxFlex class="mat-block" style="padding-bottom: 40px;">
+    <mat-form-field *ngIf="createRelationConfigForm.get('entityType').value" fxFlex class="mat-block" subscriptSizing="dynamic">
       <mat-label translate>tb.rulenode.entity-name-pattern</mat-label>
       <input required matInput formControlName="entityNamePattern">
       <mat-error *ngIf="createRelationConfigForm.get('entityNamePattern').hasError('required') ||
@@ -25,7 +25,7 @@
     </mat-form-field>
     <mat-form-field *ngIf="createRelationConfigForm.get('entityType').value === entityType.DEVICE ||
                            createRelationConfigForm.get('entityType').value === entityType.ASSET"
-                    fxFlex class="mat-block" style="padding-bottom: 40px;">
+                    fxFlex class="mat-block" subscriptSizing="dynamic">
       <mat-label translate>tb.rulenode.entity-type-pattern</mat-label>
       <input required matInput formControlName="entityTypePattern">
       <mat-error *ngIf="createRelationConfigForm.get('entityTypePattern').hasError('required') ||
@@ -35,7 +35,7 @@
       <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
     </mat-form-field>
   </div>
-  <mat-form-field class="mat-block" style="padding-bottom: 16px;">
+  <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.relation-type-pattern</mat-label>
     <input required matInput formControlName="relationType">
     <mat-error *ngIf="createRelationConfigForm.get('relationType').hasError('required')">
@@ -49,17 +49,17 @@
     <mat-checkbox formControlName="createEntityIfNotExists">
       {{ 'tb.rulenode.create-entity-if-not-exists' | translate }}
     </mat-checkbox>
-    <div class="tb-hint" style="padding-bottom: 16px;" translate>tb.rulenode.create-entity-if-not-exists-hint</div>
+    <div class="tb-hint" translate>tb.rulenode.create-entity-if-not-exists-hint</div>
   </section>
   <mat-checkbox formControlName="removeCurrentRelations">
     {{ 'tb.rulenode.remove-current-relations' | translate }}
   </mat-checkbox>
-  <div class="tb-hint" style="padding-bottom: 16px;" translate>tb.rulenode.remove-current-relations-hint</div>
+  <div class="tb-hint" translate>tb.rulenode.remove-current-relations-hint</div>
   <mat-checkbox formControlName="changeOriginatorToRelatedEntity">
     {{ 'tb.rulenode.change-originator-to-related-entity' | translate }}
   </mat-checkbox>
-  <div class="tb-hint" style="padding-bottom: 16px;" translate>tb.rulenode.change-originator-to-related-entity-hint</div>
-  <mat-form-field class="mat-block" style="padding-bottom: 16px;">
+  <div class="tb-hint" translate>tb.rulenode.change-originator-to-related-entity-hint</div>
+  <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.entity-cache-expiration</mat-label>
     <input required type="number" min="0" step="1" matInput formControlName="entityCacheExpiration">
     <mat-error *ngIf="createRelationConfigForm.get('entityCacheExpiration').hasError('required')">

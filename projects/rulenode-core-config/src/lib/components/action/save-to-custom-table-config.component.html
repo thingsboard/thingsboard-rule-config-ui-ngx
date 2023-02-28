@@ -1,5 +1,5 @@
 <section [formGroup]="saveToCustomTableConfigForm" fxLayout="column">
-  <mat-form-field class="mat-block" style="padding-bottom: 16px;">
+  <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.custom-table-name</mat-label>
     <input required matInput formControlName="tableName">
     <mat-error *ngIf="saveToCustomTableConfigForm.get('tableName').hasError('required') ||

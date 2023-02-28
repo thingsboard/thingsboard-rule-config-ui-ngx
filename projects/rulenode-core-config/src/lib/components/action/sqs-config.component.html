@@ -7,7 +7,7 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field class="mat-block" style="padding-bottom: 8px;">
+  <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.queue-url-pattern</mat-label>
     <input required matInput formControlName="queueUrlPattern">
     <mat-error *ngIf="sqsConfigForm.get('queueUrlPattern').hasError('required')">

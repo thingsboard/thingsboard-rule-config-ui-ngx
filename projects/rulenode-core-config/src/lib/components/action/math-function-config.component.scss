@@ -5,6 +5,12 @@
     border: 1px groove rgba(0, 0, 0, .25);
     border-radius: 4px;
 
+    .mat-mdc-form-field {
+      .mat-mdc-form-field-infix {
+        width: 100%;
+      }
+    }
+
     legend {
       color: rgba(0, 0, 0, .7);
       width: fit-content;

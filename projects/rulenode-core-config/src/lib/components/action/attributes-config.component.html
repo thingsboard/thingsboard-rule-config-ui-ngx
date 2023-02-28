@@ -11,12 +11,12 @@
     <mat-checkbox formControlName="notifyDevice">
       {{ 'tb.rulenode.notify-device' | translate }}
     </mat-checkbox>
-    <div class="tb-hint" style="padding-bottom: 16px;" translate>tb.rulenode.notify-device-hint</div>
+    <div class="tb-hint" translate>tb.rulenode.notify-device-hint</div>
   </div>
   <div *ngIf="attributesConfigForm.get('scope').value !== attributeScopeMap.CLIENT_SCOPE">
     <mat-checkbox formControlName="sendAttributesUpdatedNotification">
       {{ 'tb.rulenode.send-attributes-updated-notification' | translate }}
     </mat-checkbox>
-    <div class="tb-hint" style="padding-bottom: 16px;" translate>tb.rulenode.send-attributes-updated-notification-hint</div>
+    <div class="tb-hint" translate>tb.rulenode.send-attributes-updated-notification-hint</div>
   </div>
 </section>

@@ -8,22 +8,21 @@
       <span>{{'tb.rulenode.metadata' | translate}}</span>
     </mat-radio-button>
   </mat-radio-group>
-  <mat-form-field floatLabel="always" class="mat-block" style="padding-bottom: 16px;">
-    <mat-label></mat-label>
-    <mat-chip-list formControlName="keys" #attributeChipList>
-      <mat-chip
+  <mat-form-field class="mat-block" subscriptSizing="dynamic">
+    <mat-chip-grid formControlName="keys" #attributeChipList>
+      <mat-chip-row
         *ngFor="let key of deleteKeysConfigForm.get('keys').value;"
         (removed)="removeKey(key)">
         {{key}}
         <mat-icon matChipRemove>close</mat-icon>
-      </mat-chip>
+      </mat-chip-row>
       <input matInput type="text" placeholder="{{ 'tb.rulenode.keys' | translate }}"
              style="max-width: 200px;"
              [matChipInputFor]="attributeChipList"
              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
              (matChipInputTokenEnd)="addKey($event)"
              [matChipInputAddOnBlur]="true">
-    </mat-chip-list>
+    </mat-chip-grid>
     <mat-error *ngIf="deleteKeysConfigForm.get('keys').hasError('required')">{{ 'tb.rulenode.keys-required' | translate }}</mat-error>
     <mat-hint [innerHTML]="'tb.rulenode.use-regular-expression-delete-hint' | translate | safeHtml"></mat-hint>
   </mat-form-field>

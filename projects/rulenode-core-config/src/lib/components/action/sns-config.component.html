@@ -1,5 +1,5 @@
 <section [formGroup]="snsConfigForm" fxLayout="column">
-  <mat-form-field class="mat-block" style="padding-bottom: 8px;">
+  <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.topic-arn-pattern</mat-label>
     <input required matInput formControlName="topicArnPattern">
     <mat-error *ngIf="snsConfigForm.get('topicArnPattern').hasError('required')">
