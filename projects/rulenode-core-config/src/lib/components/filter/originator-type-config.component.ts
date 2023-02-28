@@ -7,7 +7,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 @Component({
   selector: 'tb-filter-node-originator-type-config',
   templateUrl: './originator-type-config.component.html',
-  styleUrls: ['./originator-type-config.component.scss']
+  styleUrls: []
 })
 export class OriginatorTypeConfigComponent extends RuleNodeConfigurationComponent {
 

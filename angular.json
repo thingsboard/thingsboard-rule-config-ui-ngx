@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
+            "tsConfig": "projects/rulenode-core-config/tsconfig.lib.json",
             "project": "projects/rulenode-core-config/ng-package.json"
           },
           "configurations": {

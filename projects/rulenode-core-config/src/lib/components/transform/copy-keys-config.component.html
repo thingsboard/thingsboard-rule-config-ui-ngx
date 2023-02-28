@@ -17,7 +17,6 @@
         <mat-icon matChipRemove>close</mat-icon>
       </mat-chip-row>
       <input matInput type="text" placeholder="{{ 'tb.rulenode.keys' | translate }}"
-             style="max-width: 200px;"
              [matChipInputFor]="attributeChipList"
              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
              (matChipInputTokenEnd)="addKey($event)"

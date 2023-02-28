@@ -68,20 +68,19 @@
     <section *ngIf="createAlarmConfigForm.get('propagate').value === true">
       <mat-form-field floatLabel="always" class="mat-block" subscriptSizing="dynamic">
         <mat-label translate>tb.rulenode.relation-types-list</mat-label>
-        <mat-chip-list #relationTypesChipList>
-          <mat-chip
+        <mat-chip-grid #relationTypesChipList>
+          <mat-chip-row
             *ngFor="let key of createAlarmConfigForm.get('relationTypes').value;"
             (removed)="removeKey(key, 'relationTypes')">
             {{key}}
             <mat-icon matChipRemove>close</mat-icon>
-          </mat-chip>
+          </mat-chip-row>
           <input matInput type="text" placeholder="{{'tb.rulenode.relation-types-list' | translate}}"
-                 style="max-width: 200px;"
                  [matChipInputFor]="relationTypesChipList"
                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                  (matChipInputTokenEnd)="addKey($event, 'relationTypes')"
                  [matChipInputAddOnBlur]="true">
-        </mat-chip-list>
+        </mat-chip-grid>
         <mat-hint translate>tb.rulenode.relation-types-list-hint</mat-hint>
       </mat-form-field>
     </section>
