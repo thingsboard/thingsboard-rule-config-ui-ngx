@@ -8,7 +8,7 @@ import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/p
 @Component({
   selector: 'tb-enrichment-node-calculate-delta-config',
   templateUrl: './calculate-delta-config.component.html',
-  styleUrls: []
+  styleUrls: ['./calcaulate-delta-config.component.scss']
 })
 export class CalculateDeltaConfigComponent extends RuleNodeConfigurationComponent {
 
