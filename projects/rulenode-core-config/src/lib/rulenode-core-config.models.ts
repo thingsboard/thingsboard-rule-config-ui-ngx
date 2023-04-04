@@ -597,6 +597,11 @@ export enum ArgumentTypeResult {
   MESSAGE_METADATA = 'MESSAGE_METADATA'
 }
 
+export enum FetchTo {
+  DATA = 'DATA',
+  METADATA = 'METADATA'
+}
+
 export const ArgumentTypeMap  = new Map<ArgumentType, string>([
   [ArgumentType.ATTRIBUTE, 'tb.rulenode.attribute-type'],
   [ArgumentType.TIME_SERIES, 'tb.rulenode.time-series-type'],

@@ -1,16 +1,31 @@
 <section [formGroup]="customerAttributesConfigForm" fxLayout="column">
-  <label translate class="tb-title tb-required">tb.rulenode.attr-mapping</label>
-  <mat-checkbox fxFlex formControlName="telemetry">
-    {{ 'tb.rulenode.latest-telemetry' | translate }}
-  </mat-checkbox>
-  <tb-kv-map-config
-    required
-    formControlName="attrMapping"
-    requiredText="tb.rulenode.attr-mapping-required"
-    keyText="{{ customerAttributesConfigForm.get('telemetry').value ? 'tb.rulenode.source-telemetry' : 'tb.rulenode.source-attribute' }}"
-    keyRequiredText="{{ customerAttributesConfigForm.get('telemetry').value ? 'tb.rulenode.source-telemetry-required' : 'tb.rulenode.source-attribute-required' }}"
-    valText="tb.rulenode.target-attribute"
-    valRequiredText="tb.rulenode.target-attribute-required"
-    hintText="tb.rulenode.kv-map-pattern-hint">
-  </tb-kv-map-config>
+  <fieldset class="fields-group" fxLayout="column" >
+    <legend class="group-title" translate>tb.rulenode.attr-mapping</legend>
+    <section class="fieldset-content" fxLayout="column">
+      <mat-button-toggle-group class="tb-script-lang-toggle-group"
+                               style="width: 430px;"
+                               formControlName="telemetry" aria-label="Script language">
+        <mat-button-toggle fxFlex [value]="false">Attributes</mat-button-toggle>
+        <mat-button-toggle fxFlex [value]="true">Latest telemetry</mat-button-toggle>
+      </mat-button-toggle-group>
+      <tb-kv-map-config
+        required
+        formControlName="attrMapping"
+        requiredText="tb.rulenode.attr-mapping-required"
+        labelText = "{{customerAttributesConfigForm.get('telemetry').value ? 'tb.rulenode.latest-telemetry-mapping' : 'tb.rulenode.attributes-mapping'}}"
+        keyText="{{ customerAttributesConfigForm.get('telemetry').value ? 'tb.rulenode.source-telemetry' : 'tb.rulenode.source-attribute' }}"
+        keyRequiredText="{{ customerAttributesConfigForm.get('telemetry').value ? 'tb.rulenode.source-telemetry-required' : 'tb.rulenode.source-attribute-required' }}"
+        valText="tb.rulenode.target-key"
+        valRequiredText="tb.rulenode.target-key-required"
+        hintText="tb.rulenode.kv-map-pattern-hint">
+      </tb-kv-map-config>
+      <div fxLayout="column" class="map-block">
+        <label> {{ customerAttributesConfigForm.get('telemetry').value ? ('tb.rulenode.add-mapped-latest-telemetry-to' | translate) : ('tb.rulenode.add-mapped-attribute-to' | translate) }}</label>
+        <mat-chip-listbox aria-label="Fish selection" formControlName="fetchTo">
+          <mat-chip-option color="primary" [value]="fetchTo.DATA">Message</mat-chip-option>
+          <mat-chip-option color="primary" [value]="fetchTo.METADATA">Metadata</mat-chip-option>
+        </mat-chip-listbox>
+      </div>
+    </section>
+  </fieldset>
 </section>

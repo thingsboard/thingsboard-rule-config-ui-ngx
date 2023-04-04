@@ -3,15 +3,17 @@ import { AppState } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FetchTo } from "../../rulenode-core-config.models";
 
 @Component({
   selector: 'tb-enrichment-node-customer-attributes-config',
   templateUrl: './customer-attributes-config.component.html',
-  styleUrls: []
+  styleUrls: ['./customer-attributes-config.component.scss']
 })
 export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComponent {
 
   customerAttributesConfigForm: UntypedFormGroup;
+  fetchTo = FetchTo;
 
   constructor(protected store: Store<AppState>,
               private fb: UntypedFormBuilder) {
@@ -25,8 +27,8 @@ export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComp
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.customerAttributesConfigForm = this.fb.group({
       telemetry: [configuration ? configuration.telemetry : false, []],
-      attrMapping: [configuration ? configuration.attrMapping : null, [Validators.required]]
+      attrMapping: [configuration ? configuration.attrMapping : null, [Validators.required]],
+      fetchTo: [configuration ? configuration.fetchTo : false]
     });
   }
-
 }

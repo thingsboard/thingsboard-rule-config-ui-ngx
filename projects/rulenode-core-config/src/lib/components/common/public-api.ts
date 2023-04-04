@@ -7,5 +7,6 @@ export * from './safe-html.pipe';
 export * from './arguments-map-config.component';
 export * from './math-function-autocomplete.component';
 export * from './output-message-type-autocomplete.component';
+export * from './kv-map-config-old.component';
 
 export * from './rulenode-core-config-common.module';

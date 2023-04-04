@@ -15,29 +15,27 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'tb-kv-map-config',
-  templateUrl: './kv-map-config.component.html',
-  styleUrls: ['./kv-map-config.component.scss'],
+  selector: 'tb-kv-map-config-old',
+  templateUrl: './kv-map-config-old.component.html',
+  styleUrls: ['./kv-map-config-old.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => KvMapConfigComponent),
+      useExisting: forwardRef(() => KvMapConfigOldComponent),
       multi: true
     },
     {
       provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => KvMapConfigComponent),
+      useExisting: forwardRef(() => KvMapConfigOldComponent),
       multi: true,
     }
   ]
 })
-export class KvMapConfigComponent extends PageComponent implements ControlValueAccessor, OnInit, Validator {
+export class KvMapConfigOldComponent extends PageComponent implements ControlValueAccessor, OnInit, Validator {
 
   @Input() disabled: boolean;
 
   @Input() uniqueKeyValuePairValidator: boolean;
-
-  @Input() labelText: string;
 
   @Input() requiredText: string;
 
