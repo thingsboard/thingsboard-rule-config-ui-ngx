@@ -6,7 +6,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { SqsQueueType, sqsQueueTypeTranslations } from '../../rulenode-core-config.models';
 
 @Component({
-  selector: 'tb-action-node-sqs-config',
+  selector: 'tb-external-node-sqs-config',
   templateUrl: './sqs-config.component.html',
   styleUrls: []
 })

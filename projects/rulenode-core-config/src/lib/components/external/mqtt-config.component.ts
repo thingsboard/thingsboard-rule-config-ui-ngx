@@ -6,7 +6,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'tb-action-node-mqtt-config',
+  selector: 'tb-external-node-mqtt-config',
   templateUrl: './mqtt-config.component.html',
   styleUrls: ['./mqtt-config.component.scss']
 })

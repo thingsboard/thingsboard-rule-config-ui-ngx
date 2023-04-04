@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'tb-action-node-pub-sub-config',
+  selector: 'tb-external-node-pub-sub-config',
   templateUrl: './pubsub-config.component.html',
   styleUrls: []
 })

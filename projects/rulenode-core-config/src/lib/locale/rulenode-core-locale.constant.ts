@@ -539,7 +539,12 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'custom-expression-field-input': 'Mathematical Expression',
           'custom-expression-field-input-required': 'Mathematical expression is required',
           'custom-expression-field-input-hint': 'Hint: specify a mathematical expression to evaluate. For example, transform Fahrenheit to Celsius using <i>(x - 32) / 1.8)</i>',
-          'retained-message': 'Retained'
+          'retained-message': 'Retained',
+          'message-template': 'Message template',
+          'message-template-required': 'Message template is required',
+          'use-system-slack-settings': 'Use system slack settings',
+          'slack-api-token': 'Slack API token',
+          'slack-api-token-required': 'Slack API token is required'
         },
         'key-val': {
           key: 'Key',

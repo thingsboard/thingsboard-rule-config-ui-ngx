@@ -6,7 +6,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { AzureIotHubCredentialsType, azureIotHubCredentialsTypes, azureIotHubCredentialsTypeTranslations } from '../../rulenode-core-config.models';
 
 @Component({
-  selector: 'tb-action-node-azure-iot-hub-config',
+  selector: 'tb-external-node-azure-iot-hub-config',
   templateUrl: './azure-iot-hub-config.component.html',
   styleUrls: ['./mqtt-config.component.scss']
 })
