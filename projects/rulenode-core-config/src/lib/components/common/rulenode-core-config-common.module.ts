@@ -11,7 +11,8 @@ import { SafeHtmlPipe } from './safe-html.pipe';
 import { ArgumentsMapConfigComponent } from './arguments-map-config.component';
 import { MathFunctionAutocompleteComponent } from './math-function-autocomplete.component';
 import { OutputMessageTypeAutocompleteComponent } from './output-message-type-autocomplete.component';
-import { KvMapConfigOldComponent } from "./kv-map-config-old.component";
+import { KvMapConfigOldComponent } from './kv-map-config-old.component';
+import { MsgMetadataChipComponent } from './msg-metadata-chip.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { KvMapConfigOldComponent } from "./kv-map-config-old.component";
     ArgumentsMapConfigComponent,
     MathFunctionAutocompleteComponent,
     OutputMessageTypeAutocompleteComponent,
-    KvMapConfigOldComponent
+    KvMapConfigOldComponent,
+    MsgMetadataChipComponent
   ],
   imports: [
     CommonModule,
@@ -41,8 +43,10 @@ import { KvMapConfigOldComponent } from "./kv-map-config-old.component";
     ArgumentsMapConfigComponent,
     MathFunctionAutocompleteComponent,
     OutputMessageTypeAutocompleteComponent,
-    KvMapConfigOldComponent
+    KvMapConfigOldComponent,
+    MsgMetadataChipComponent
   ]
 })
+
 export class RulenodeCoreConfigCommonModule {
 }

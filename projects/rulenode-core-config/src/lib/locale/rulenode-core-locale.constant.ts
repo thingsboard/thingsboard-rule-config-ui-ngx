@@ -415,8 +415,6 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'entity-details-additional_info': 'Additional Info',
           'entity-details-phone': 'Phone',
           'entity-details-email': 'Email',
-          'add-to-metadata': 'Add selected details to message metadata',
-          'add-to-metadata-hint': 'If selected, adds the selected details keys to the message metadata instead of message data.',
           'entity-details-list-empty': 'No entity details selected.',
           'no-entity-details-matching': 'No entity details matching were found.',
           'custom-table-name': 'Custom table name',
@@ -544,7 +542,8 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'attributes-mapping': 'Attributes mapping',
           'latest-telemetry-mapping': 'Latest telemetry mapping',
           'add-mapped-attribute-to': 'Add mapped attributes to:',
-          'add-mapped-latest-telemetry-to': 'Add mapped latest telemetry to:'
+          'add-mapped-latest-telemetry-to': 'Add mapped latest telemetry to:',
+          'add-selected-details-to': 'Add selected details to:'
         },
         'key-val': {
           key: 'Key',

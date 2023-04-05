@@ -7,18 +7,6 @@
 
     .fieldset-content {
       align-items: center;
-
-      .map-block {
-        flex-direction: column;
-        box-sizing: border-box;
-        display: flex;
-        width: 100%;
-
-        label {
-          font-weight: 400;
-          font-size: 12px;
-        }
-      }
     }
 
     .mat-mdc-form-field {

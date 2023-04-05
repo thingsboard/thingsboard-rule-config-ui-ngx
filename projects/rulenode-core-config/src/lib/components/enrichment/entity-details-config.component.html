@@ -37,8 +37,8 @@
     </mat-autocomplete>
     <mat-error *ngIf="entityDetailsConfigForm.get('detailsList').hasError('required')">{{ 'tb.rulenode.entity-details-list-empty' | translate }}</mat-error>
   </mat-form-field>
-  <mat-checkbox fxFlex formControlName="addToMetadata">
-    {{ 'tb.rulenode.add-to-metadata' | translate }}
-  </mat-checkbox>
-  <div class="tb-hint" translate>tb.rulenode.add-to-metadata-hint</div>
+  <tb-msg-metadata-chip
+    labelText="tb.rulenode.add-mapped-attribute-to"
+    formControlName="fetchTo"
+  ></tb-msg-metadata-chip>
 </section>

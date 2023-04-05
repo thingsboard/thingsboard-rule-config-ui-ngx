@@ -1,0 +1,7 @@
+<div fxLayout="column" [formGroup]="chipControlGroup">
+  <label style="font-size: 12px;">{{ labelText | translate }}</label>
+  <mat-chip-listbox aria-label="Fish selection" formControlName="chipControl">
+    <mat-chip-option color="primary" [value]="fetchTo.DATA">Message</mat-chip-option>
+    <mat-chip-option color="primary" [value]="fetchTo.METADATA">Metadata</mat-chip-option>
+  </mat-chip-listbox>
+</div>

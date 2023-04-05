@@ -19,13 +19,10 @@
         valRequiredText="tb.rulenode.target-key-required"
         hintText="tb.rulenode.kv-map-pattern-hint">
       </tb-kv-map-config>
-      <div fxLayout="column" class="map-block">
-        <label> {{ customerAttributesConfigForm.get('telemetry').value ? ('tb.rulenode.add-mapped-latest-telemetry-to' | translate) : ('tb.rulenode.add-mapped-attribute-to' | translate) }}</label>
-        <mat-chip-listbox aria-label="Fish selection" formControlName="fetchTo">
-          <mat-chip-option color="primary" [value]="fetchTo.DATA">Message</mat-chip-option>
-          <mat-chip-option color="primary" [value]="fetchTo.METADATA">Metadata</mat-chip-option>
-        </mat-chip-listbox>
-      </div>
+      <tb-msg-metadata-chip
+        labelText="{{ customerAttributesConfigForm.get('telemetry').value ? 'tb.rulenode.add-mapped-latest-telemetry-to' : 'tb.rulenode.add-mapped-attribute-to' }}"
+        formControlName="fetchTo"
+      ></tb-msg-metadata-chip>
     </section>
   </fieldset>
 </section>

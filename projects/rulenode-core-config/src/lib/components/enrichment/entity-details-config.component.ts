@@ -72,7 +72,7 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.entityDetailsConfigForm = this.fb.group({
       detailsList: [configuration ? configuration.detailsList : null, [Validators.required]],
-      addToMetadata: [configuration ? configuration.addToMetadata : false, []]
+      fetchTo: [configuration ? configuration.fetchTo : null]
     });
     this.detailsList = configuration ? configuration.detailsList : [];
   }
