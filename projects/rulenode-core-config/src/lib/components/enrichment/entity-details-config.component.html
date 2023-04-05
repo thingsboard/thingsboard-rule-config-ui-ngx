@@ -20,6 +20,13 @@
              [matAutocomplete]="detailsAutocomplete"
              [matChipInputFor]="detailsChipList">
     </mat-chip-grid>
+    <button *ngIf="entityDetailsConfigForm.get('detailsList').value?.length > 0"
+            type="button"
+            matTooltip="{{'tb.rulenode.clear-selected-details' | translate}}"
+            matSuffix mat-icon-button
+            (click)="clearChipGrid()">
+      <mat-icon class="material-icons">close</mat-icon>
+    </button>
     <mat-autocomplete #detailsAutocomplete="matAutocomplete"
                       class="tb-autocomplete"
                       (optionSelected)="detailsFieldSelected($event)"

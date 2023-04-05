@@ -120,6 +120,15 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
     this.detailsFormControl.updateValueAndValidity({onlySelf: true, emitEvent: true});
   }
 
+  clearChipGrid() {
+    this.detailsList = [];
+    this.entityDetailsConfigForm.get('detailsList').patchValue([], {emitEvent: true});
+    setTimeout(() => {
+      this.detailsInput.nativeElement.blur();
+      this.detailsInput.nativeElement.focus();
+    }, 0);
+  }
+
   clear(value: string = '') {
     this.detailsInput.nativeElement.value = value;
     this.detailsFormControl.patchValue(null, {emitEvent: true});

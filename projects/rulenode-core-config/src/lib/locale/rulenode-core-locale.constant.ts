@@ -127,7 +127,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'fetch-into': 'Fetch into',
           'attr-mapping': 'Attributes mapping:',
           'source-attribute': 'Source attribute key',
-          'source-attribute-required': 'Source attribute key is required.',
+          'source-attribute-required': 'Source attribute key is required!',
           'source-telemetry': 'Source telemetry key',
           'source-telemetry-required': 'Source telemetry key is required!',
           'target-key': 'Target key',
@@ -415,7 +415,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'entity-details-additional_info': 'Additional Info',
           'entity-details-phone': 'Phone',
           'entity-details-email': 'Email',
-          'entity-details-list-empty': 'No entity details selected.',
+          'entity-details-list-empty': 'No entity details selected!',
           'no-entity-details-matching': 'No entity details matching were found.',
           'custom-table-name': 'Custom table name',
           'custom-table-name-required': 'Table Name is required',
@@ -485,7 +485,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'output-value-key': 'Output value key',
           'output-value-key-required': 'Output value key is required!',
           'number-of-digits-after-floating-point': 'Number of digits after floating point',
-          'number-of-digits-after-floating-point-range': 'Number of digits after floating point should be in a range from 0 to 15.',
+          'number-of-digits-after-floating-point-range': 'Number of digits after floating point should be in a range from 0 to 15!',
           'failure-if-delta-negative': 'Tell Failure if delta is negative',
           'failure-if-delta-negative-tooltip': 'Rule node forces failure of message processing if delta value is negative.',
           'use-cashing': 'Use cashing',
@@ -543,7 +543,8 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'latest-telemetry-mapping': 'Latest telemetry mapping',
           'add-mapped-attribute-to': 'Add mapped attributes to:',
           'add-mapped-latest-telemetry-to': 'Add mapped latest telemetry to:',
-          'add-selected-details-to': 'Add selected details to:'
+          'add-selected-details-to': 'Add selected details to:',
+          'clear-selected-details': 'Clear selected details'
         },
         'key-val': {
           key: 'Key',
