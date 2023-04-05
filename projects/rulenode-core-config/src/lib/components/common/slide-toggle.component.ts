@@ -2,51 +2,48 @@ import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
-import { FetchTo } from '../../rulenode-core-config.models';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'tb-msg-metadata-chip',
-  templateUrl: './msg-metadata-chip.component.html',
-  styleUrls: ['./msg-metadata-chip.component.scss'],
+  selector: 'tb-slide-toggle',
+  templateUrl: './slide-toggle.component.html',
+  styleUrls: ['./slide-toggle.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => MsgMetadataChipComponent),
+    useExisting: forwardRef(() => SlideToggleComponent),
     multi: true
   }]
 })
 
-export class MsgMetadataChipComponent implements  OnInit, ControlValueAccessor, OnDestroy {
+export class SlideToggleComponent implements  OnInit, ControlValueAccessor, OnDestroy {
 
-  @Input() labelText: string;
+  @Input() slideToggleName: string;
+  @Input() slideToggleTooltip: string;
 
   private propagateChange;
   private destroy$ = new Subject();
 
-  public chipControlGroup: FormGroup;
-  public fetchTo = FetchTo;
+  public slideToggleControlGroup: FormGroup;
 
   constructor(private store: Store<AppState>,
               private fb: UntypedFormBuilder) {}
 
   ngOnInit(): void {
-    this.chipControlGroup = this.fb.group({
-      chipControl: [null,  [Validators.required, Validators.maxLength(255)]]
+    this.slideToggleControlGroup = this.fb.group({
+      slideToggleControl: [null,  [Validators.required, Validators.maxLength(255)]]
     });
 
-    this.chipControlGroup.get('chipControl').valueChanges.pipe(
+    this.slideToggleControlGroup.get('slideToggleControl').valueChanges.pipe(
       takeUntil(this.destroy$)
     ).subscribe((value) => {
-        if (value) {
-          this.propagateChange(value);
-        }
+        this.propagateChange(value);
       }
     );
   }
 
   writeValue(value: string | null): void {
-    this.chipControlGroup.get('chipControl').patchValue(value, {emitEvent: false});
+    this.slideToggleControlGroup.get('slideToggleControl').patchValue(value, {emitEvent: false});
   }
 
   registerOnChange(fn: any): void {

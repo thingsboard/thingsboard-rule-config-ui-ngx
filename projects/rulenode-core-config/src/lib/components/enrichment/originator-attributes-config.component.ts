@@ -29,7 +29,7 @@ export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationCo
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.originatorAttributesConfigForm = this.fb.group({
       tellFailureIfAbsent: [configuration ? configuration.tellFailureIfAbsent : false, []],
-      fetchToData: [isDefinedAndNotNull(configuration?.fetchToData) ? configuration.fetchToData : false, []],
+      fetchTo: [isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : false, []],
       clientAttributeNames: [configuration ? configuration.clientAttributeNames : null, []],
       sharedAttributeNames: [configuration ? configuration.sharedAttributeNames : null, []],
       serverAttributeNames: [configuration ? configuration.serverAttributeNames : null, []],
@@ -66,9 +66,13 @@ export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationCo
     }
   }
 
+  clearChipGrid(keysField) {
+    this.originatorAttributesConfigForm.get(keysField).patchValue([], {emitEvent: true});
+  }
+
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
-    if (isObject(configuration) && isUndefinedOrNull(configuration?.fetchToData)) {
-      configuration.fetchToData = false;
+    if (isObject(configuration) && isUndefinedOrNull(configuration?.fetchTo)) {
+      configuration.fetchTo = false;
     }
     return configuration;
   }

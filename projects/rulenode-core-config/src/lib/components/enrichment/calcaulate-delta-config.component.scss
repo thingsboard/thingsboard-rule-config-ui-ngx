@@ -1,23 +1,6 @@
 :host {
-  .slide-toggle-container{
-    align-items: center;
+  .slide-toggle {
     margin-top: 13px;
     margin-bottom: 13px;
-
-    .slide-toggle {
-      margin-right: 8px;
-    }
-
-    .tooltip-icon {
-      width: 18px;
-      height: 18px;
-      line-height:18px;
-      font-size: 18px;
-      color: #E0E0E0;
-    }
-
-    .tooltip-icon:hover {
-      color: #9E9E9E;
-    }
   }
 }

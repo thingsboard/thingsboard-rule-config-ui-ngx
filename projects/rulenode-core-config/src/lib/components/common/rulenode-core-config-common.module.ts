@@ -13,6 +13,7 @@ import { MathFunctionAutocompleteComponent } from './math-function-autocomplete.
 import { OutputMessageTypeAutocompleteComponent } from './output-message-type-autocomplete.component';
 import { KvMapConfigOldComponent } from './kv-map-config-old.component';
 import { MsgMetadataChipComponent } from './msg-metadata-chip.component';
+import { SlideToggleComponent } from './slide-toggle.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MsgMetadataChipComponent } from './msg-metadata-chip.component';
     MathFunctionAutocompleteComponent,
     OutputMessageTypeAutocompleteComponent,
     KvMapConfigOldComponent,
-    MsgMetadataChipComponent
+    MsgMetadataChipComponent,
+    SlideToggleComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +46,8 @@ import { MsgMetadataChipComponent } from './msg-metadata-chip.component';
     MathFunctionAutocompleteComponent,
     OutputMessageTypeAutocompleteComponent,
     KvMapConfigOldComponent,
-    MsgMetadataChipComponent
+    MsgMetadataChipComponent,
+    SlideToggleComponent
   ]
 })
 

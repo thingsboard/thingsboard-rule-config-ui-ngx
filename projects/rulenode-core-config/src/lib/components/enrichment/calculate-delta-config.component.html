@@ -2,14 +2,14 @@
   <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="8px">
     <mat-form-field class="mat-block" fxFlex="100">
       <mat-label translate>tb.rulenode.input-value-key</mat-label>
-      <input required matInput formControlName="inputValueKey">
+      <input matInput formControlName="inputValueKey">
       <mat-error *ngIf="calculateDeltaConfigForm.get('inputValueKey').hasError('required')">
         {{ 'tb.rulenode.input-value-key-required' | translate }}
       </mat-error>
     </mat-form-field>
     <mat-form-field class="mat-block" fxFlex="100">
       <mat-label translate>tb.rulenode.output-value-key</mat-label>
-      <input required matInput formControlName="outputValueKey">
+      <input matInput formControlName="outputValueKey">
       <mat-error *ngIf="calculateDeltaConfigForm.get('outputValueKey').hasError('required')">
         {{ 'tb.rulenode.output-value-key-required' | translate }}
       </mat-error>
@@ -25,30 +25,18 @@
       {{ 'tb.rulenode.number-of-digits-after-floating-point-range' | translate }}
     </mat-error>
   </mat-form-field>
-  <div  fxLayout="row" class="slide-toggle-container">
-    <mat-slide-toggle class="slide-toggle" formControlName="useCache">
-      {{ 'tb.rulenode.failure-if-delta-negative' | translate }}
-    </mat-slide-toggle>
-    <mat-icon class="material-icons tooltip-icon"
-              matTooltip="{{'tb.rulenode.failure-if-delta-negative-tooltip' | translate}}"
-              matTooltipPosition="right">info</mat-icon>
-  </div>
-  <div  fxLayout="row" class="slide-toggle-container">
-    <mat-slide-toggle class="slide-toggle" formControlName="tellFailureIfDeltaIsNegative">
-      {{ 'tb.rulenode.use-cashing' | translate }}
-    </mat-slide-toggle>
-    <mat-icon class="material-icons tooltip-icon"
-              matTooltip="{{'tb.rulenode.use-cashing-tooltip' | translate}}"
-              matTooltipPosition="right">info</mat-icon>
-  </div>
-  <div  fxLayout="row" class="slide-toggle-container">
-    <mat-slide-toggle class="slide-toggle" formControlName="addPeriodBetweenMsgs">
-      {{ 'tb.rulenode.add-time-difference-between-readings' | translate }}
-    </mat-slide-toggle>
-    <mat-icon class="material-icons tooltip-icon"
-              matTooltip="{{'tb.rulenode.add-time-difference-between-readings-tooltip' | translate}}"
-              matTooltipPosition="right">info</mat-icon>
-  </div>
+  <tb-slide-toggle class="slide-toggle" formControlName="useCache"
+                   slideToggleName="tb.rulenode.failure-if-delta-negative"
+                   slideToggleTooltip="tb.rulenode.failure-if-delta-negative-tooltip">
+  </tb-slide-toggle>
+  <tb-slide-toggle class="slide-toggle" formControlName="tellFailureIfDeltaIsNegative"
+                   slideToggleName="tb.rulenode.use-cashing"
+                   slideToggleTooltip="tb.rulenode.use-cashing-tooltip">
+  </tb-slide-toggle>
+  <tb-slide-toggle class="slide-toggle" formControlName="addPeriodBetweenMsgs"
+                   slideToggleName="tb.rulenode.add-time-difference-between-readings"
+                   slideToggleTooltip="tb.rulenode.add-time-difference-between-readings-tooltip">
+  </tb-slide-toggle>
   <mat-form-field class="mat-block" style="margin-top: 23px;" *ngIf="calculateDeltaConfigForm.get('addPeriodBetweenMsgs').value">
     <mat-label translate>tb.rulenode.period-value-key</mat-label>
     <input required matInput formControlName="periodValueKey">

@@ -1,7 +1,11 @@
 <div fxLayout="column" [formGroup]="chipControlGroup">
   <label style="font-size: 12px;">{{ labelText | translate }}</label>
   <mat-chip-listbox aria-label="Fish selection" formControlName="chipControl">
-    <mat-chip-option color="primary" [value]="fetchTo.DATA">Message</mat-chip-option>
-    <mat-chip-option color="primary" [value]="fetchTo.METADATA">Metadata</mat-chip-option>
+    <mat-chip-option selectable="{{ chipControlGroup.get('chipControl').value !== fetchTo.DATA }}" color="primary"
+                     disableRipple="{{ chipControlGroup.get('chipControl').value === fetchTo.DATA }}"
+                     [value]="fetchTo.DATA">Message</mat-chip-option>
+    <mat-chip-option selectable="{{ chipControlGroup.get('chipControl').value !== fetchTo.METADATA }}" color="primary"
+                     disableRipple="{{ chipControlGroup.get('chipControl').value === fetchTo.METADATA }}"
+                     [value]="fetchTo.METADATA">Metadata</mat-chip-option>
   </mat-chip-listbox>
 </div>

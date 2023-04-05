@@ -3,7 +3,6 @@ import { AppState } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { FetchTo } from "../../rulenode-core-config.models";
 
 @Component({
   selector: 'tb-enrichment-node-customer-attributes-config',
@@ -13,7 +12,6 @@ import { FetchTo } from "../../rulenode-core-config.models";
 export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComponent {
 
   customerAttributesConfigForm: UntypedFormGroup;
-  fetchTo = FetchTo;
 
   constructor(protected store: Store<AppState>,
               private fb: UntypedFormBuilder) {
