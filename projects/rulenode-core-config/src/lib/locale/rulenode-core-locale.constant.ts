@@ -544,7 +544,8 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'add-mapped-attribute-to': 'Add mapped attributes to:',
           'add-mapped-latest-telemetry-to': 'Add mapped latest telemetry to:',
           'add-selected-details-to': 'Add selected details to:',
-          'clear-selected-details': 'Clear selected details'
+          'clear-selected-details': 'Clear selected details',
+          'fetch-credentials-to': 'Fetch credentials to:'
         },
         'key-val': {
           key: 'Key',
