@@ -8851,7 +8851,7 @@ text-table@0.2.0, text-table@^0.2.0:
 
 "thingsboard@https://github.com/thingsboard/thingsboard-ui-types.git#develop/3.5":
   version "3.5.0"
-  resolved "https://github.com/thingsboard/thingsboard-ui-types.git#bbd326d9b144d08e0d58818cf9afb2b16047b812"
+  resolved "https://github.com/thingsboard/thingsboard-ui-types.git#46187256374c1971d39b5a08af4c8f9d34a64fb5"
   dependencies:
     "@angular/animations" "^15.2.5"
     "@angular/cdk" "^15.2.5"
