@@ -1,7 +1,6 @@
 <section [formGroup]="customerAttributesConfigForm" fxLayout="column">
-  <fieldset class="fields-group" fxLayout="column" >
-    <legend class="group-title" translate>tb.rulenode.attr-mapping</legend>
-    <section class="fieldset-content" fxLayout="column">
+  <tb-fieldset-component label="tb.rulenode.attr-mapping">
+    <ng-template tbAppWidgetContentTemplate>
       <mat-button-toggle-group class="tb-script-lang-toggle-group"
                                style="width: 430px;"
                                formControlName="telemetry" aria-label="Script language">
@@ -23,6 +22,6 @@
         labelText="{{ customerAttributesConfigForm.get('telemetry').value ? 'tb.rulenode.add-mapped-latest-telemetry-to' : 'tb.rulenode.add-mapped-attribute-to' }}"
         formControlName="fetchTo"
       ></tb-msg-metadata-chip>
-    </section>
-  </fieldset>
+    </ng-template>
+  </tb-fieldset-component>
 </section>

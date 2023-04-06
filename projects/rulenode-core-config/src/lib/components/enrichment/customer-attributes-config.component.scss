@@ -1,34 +1,4 @@
 :host ::ng-deep {
-  .fields-group {
-    padding: 0 16px 8px;
-    margin: 10px 0;
-    border: 1px solid #E0E0E0;
-    border-radius: 4px;
-
-    .fieldset-content {
-      align-items: center;
-    }
-
-    .mat-mdc-form-field {
-      .mat-mdc-form-field-infix {
-        width: 100%;
-      }
-    }
-
-    legend {
-      color: rgba(0, 0, 0, .7);
-      width: fit-content;
-      margin-bottom: 4px;
-    }
-
-    legend + * {
-      display: block;
-      &.no-margin-top {
-        margin-top: 0;
-      }
-    }
-  }
-
   .mat-button-toggle-group.tb-script-lang-toggle-group {
     &.mat-button-toggle-group-appearance-standard {
       border: none;

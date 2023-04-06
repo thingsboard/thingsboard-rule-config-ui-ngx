@@ -1,7 +1,6 @@
 <section [formGroup]="originatorAttributesConfigForm" fxLayout="column">
-  <fieldset class="fields-group" fxLayout="column" >
-    <legend class="group-title" translate>tb.rulenode.originator-attributes</legend>
-    <section class="fieldset-content" fxLayout="column">
+  <tb-fieldset-component label="tb.rulenode.originator-attributes">
+    <ng-template tbAppWidgetContentTemplate>
       <mat-form-field class="mat-block chip-grid" subscriptSizing="dynamic">
         <mat-label translate>tb.rulenode.client-attributes</mat-label>
         <mat-chip-grid #clientAttributesChipList>
@@ -111,8 +110,8 @@
                        slideToggleName="tb.rulenode.fetch-latest-telemetry-with-timestamp"
                        slideToggleTooltip="tb.rulenode.fetch-latest-telemetry-with-timestamp-tooltip">
       </tb-slide-toggle>
-    </section>
-  </fieldset>
+    </ng-template>
+  </tb-fieldset-component>
   <tb-slide-toggle class="failure-slide-toggle" formControlName="tellFailureIfAbsent"
                    slideToggleName="tb.rulenode.tell-failure"
                    slideToggleTooltip="tb.rulenode.tell-failure-tooltip">

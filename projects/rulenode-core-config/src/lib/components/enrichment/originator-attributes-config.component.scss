@@ -7,52 +7,22 @@
     margin: 16px 0px 16px 0px;
   }
 
-  .fields-group {
-    padding: 0 16px 8px;
-    margin: 10px 0;
-    border: 1px solid #E0E0E0;
-    border-radius: 4px;
+  .chip-grid {
+    width: 100%;
+    margin-bottom: 16px;
+  }
 
-    .fieldset-content {
-      align-items: center;
+  .fetch-slide-toggle {
+    width: 100%;
+    margin-bottom: 12px
+  }
 
-      .chip-grid {
-        width: 100%;
-        margin-bottom: 16px;
-      }
-
-      .fetch-slide-toggle {
-        width: 100%;
-        margin-bottom: 12px
-      }
-
-      .examples-popup .mat-icon {
-        width: 12px!important;
-        min-width: 12px!important;
-        height: 12px!important;
-        min-height: 12px!important;
-        font-size: 12px!important;
-        line-height: 12px!important;
-      }
-    }
-
-    .mat-mdc-form-field {
-      .mat-mdc-form-field-infix {
-        width: 100%;
-      }
-    }
-
-    legend {
-      color: rgba(0, 0, 0, .7);
-      width: fit-content;
-      margin-bottom: 4px;
-    }
-
-    legend + * {
-      display: block;
-      &.no-margin-top {
-        margin-top: 0;
-      }
-    }
+  .examples-popup .mat-icon {
+    width: 12px!important;
+    min-width: 12px!important;
+    height: 12px!important;
+    min-height: 12px!important;
+    font-size: 12px!important;
+    line-height: 12px!important;
   }
 }

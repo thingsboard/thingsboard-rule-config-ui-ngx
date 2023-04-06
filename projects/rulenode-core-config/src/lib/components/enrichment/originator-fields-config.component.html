@@ -1,7 +1,6 @@
 <section [formGroup]="originatorFieldsConfigForm" fxLayout="column">
-  <fieldset class="fields-group" fxLayout="column" >
-    <legend class="group-title" translate>tb.rulenode.originator-fields-mapping</legend>
-    <section class="fieldset-content" fxLayout="column">
+  <tb-fieldset-component label="tb.rulenode.originator-fields-mapping">
+    <ng-template tbAppWidgetContentTemplate>
       <tb-sv-map-config
         required
         [selectOptions]="originatorFields"
@@ -17,7 +16,7 @@
         labelText="tb.rulenode.add-mapped-originator-fields-to"
         formControlName="fetchTo"
       ></tb-msg-metadata-chip>
-    </section>
-  </fieldset>
+    </ng-template>
+  </tb-fieldset-component>
   <tb-slide-toggle class="skip-slide-toggle" slideToggleName="tb.rulenode.skip-empty-fields" slideToggleTooltip="tb.rulenode.skip-empty-fields-tooltip"></tb-slide-toggle>
 </section>

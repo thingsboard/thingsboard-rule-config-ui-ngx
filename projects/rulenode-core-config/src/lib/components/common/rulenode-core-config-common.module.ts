@@ -14,7 +14,9 @@ import { OutputMessageTypeAutocompleteComponent } from './output-message-type-au
 import { KvMapConfigOldComponent } from './kv-map-config-old.component';
 import { MsgMetadataChipComponent } from './msg-metadata-chip.component';
 import { SlideToggleComponent } from './slide-toggle.component';
-import { SvMapConfigComponent } from "./sv-map-config.component";
+import { SvMapConfigComponent } from './sv-map-config.component';
+import { WidgetContentTemplateDirective } from './widget-content-tempate.directive';
+import { FieldsetComponent } from './fieldset.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { SvMapConfigComponent } from "./sv-map-config.component";
     KvMapConfigOldComponent,
     MsgMetadataChipComponent,
     SlideToggleComponent,
-    SvMapConfigComponent
+    SvMapConfigComponent,
+    WidgetContentTemplateDirective,
+    FieldsetComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +54,9 @@ import { SvMapConfigComponent } from "./sv-map-config.component";
     KvMapConfigOldComponent,
     MsgMetadataChipComponent,
     SlideToggleComponent,
-    SvMapConfigComponent
+    SvMapConfigComponent,
+    WidgetContentTemplateDirective,
+    FieldsetComponent
   ]
 })
 
