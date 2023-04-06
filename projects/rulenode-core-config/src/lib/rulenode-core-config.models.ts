@@ -80,6 +80,45 @@ export enum EntityDetailsField {
   ADDITIONAL_INFO = 'ADDITIONAL_INFO'
 }
 
+export enum OriginatorFields {
+  NAME = 'name',
+  CREATED_TIME = 'createdTime',
+  TYPE = 'type',
+  FIRST_NAME = 'firstName',
+  LAST_NAME = 'lastName',
+  EMAIL = 'email',
+  TITLE = 'title',
+  COUNTRY = 'county',
+  STATE = 'state',
+  CITY = 'city',
+  ADDRESS = 'address',
+  ADDRESS2 = 'address2',
+  ZIP = 'zip',
+  PHONE = 'phone',
+  LABEL = 'label'
+}
+
+export const originatorFieldsTranslations = new Map<OriginatorFields, string>(
+  [
+    [OriginatorFields.NAME, 'tb.rulenode.name'],
+    [OriginatorFields.CREATED_TIME, 'tb.rulenode.created-time'],
+    [OriginatorFields.TYPE, 'tb.rulenode.type'],
+    [OriginatorFields.FIRST_NAME, 'tb.rulenode.first-name'],
+    [OriginatorFields.LAST_NAME, 'tb.rulenode.last-name'],
+    [OriginatorFields.EMAIL, 'tb.rulenode.entity-details-email'],
+    [OriginatorFields.TITLE, 'tb.rulenode.entity-details-title'],
+    [OriginatorFields.COUNTRY, 'tb.rulenode.entity-details-country'],
+    [OriginatorFields.STATE, 'tb.rulenode.entity-details-state'],
+    [OriginatorFields.CITY, 'tb.rulenode.entity-details-city'],
+    [OriginatorFields.ADDRESS, 'tb.rulenode.entity-details-address'],
+    [OriginatorFields.ADDRESS2, 'tb.rulenode.entity-details-address2'],
+    [OriginatorFields.ZIP, 'tb.rulenode.entity-details-zip'],
+    [OriginatorFields.PHONE, 'tb.rulenode.entity-details-phone'],
+    [OriginatorFields.LABEL, 'tb.rulenode.label']
+  ]
+);
+
+
 export const entityDetailsTranslations = new Map<EntityDetailsField, string>(
   [
     [EntityDetailsField.ID, 'tb.rulenode.entity-details-id'],

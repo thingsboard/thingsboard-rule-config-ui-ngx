@@ -14,6 +14,7 @@ import { OutputMessageTypeAutocompleteComponent } from './output-message-type-au
 import { KvMapConfigOldComponent } from './kv-map-config-old.component';
 import { MsgMetadataChipComponent } from './msg-metadata-chip.component';
 import { SlideToggleComponent } from './slide-toggle.component';
+import { SvMapConfigComponent } from "./sv-map-config.component";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SlideToggleComponent } from './slide-toggle.component';
     OutputMessageTypeAutocompleteComponent,
     KvMapConfigOldComponent,
     MsgMetadataChipComponent,
-    SlideToggleComponent
+    SlideToggleComponent,
+    SvMapConfigComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +49,8 @@ import { SlideToggleComponent } from './slide-toggle.component';
     OutputMessageTypeAutocompleteComponent,
     KvMapConfigOldComponent,
     MsgMetadataChipComponent,
-    SlideToggleComponent
+    SlideToggleComponent,
+    SvMapConfigComponent
   ]
 })
 

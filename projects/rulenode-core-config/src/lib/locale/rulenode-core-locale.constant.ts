@@ -551,7 +551,16 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'fetch-latest-telemetry-with-timestamp': 'Fetch latest telemetry with timestamp',
           'fetch-latest-telemetry-with-timestamp-tooltip': 'If selected, latest telemetry values will be added to the outbound message metadata with timestamp, e.g: "temperature": "{"ts":1574329385897, "value":42}"',
           'tell-failure': 'Tell Failure',
-          'tell-failure-tooltip': 'If at least one selected key doesn\'t exist the outbound message will report "Failure".'
+          'tell-failure-tooltip': 'If at least one selected key doesn\'t exist the outbound message will report "Failure".',
+          'created-time': 'Created time',
+          type: 'Type',
+          'first-name': 'First name',
+          'last-name': 'Last name',
+          label: 'Label',
+          'originator-fields-mapping': 'Originator fields mapping',
+          'add-mapped-originator-fields-to': 'Add mapped originator fields to:',
+          'skip-empty-fields': 'Skip empty fields',
+          'skip-empty-fields-tooltip': 'Fields with empty values will not be added to the output message/output message metadata.'
         },
         'key-val': {
           key: 'Key',

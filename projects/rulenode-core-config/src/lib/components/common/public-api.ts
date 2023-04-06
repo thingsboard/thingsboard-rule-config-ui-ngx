@@ -10,5 +10,6 @@ export * from './output-message-type-autocomplete.component';
 export * from './kv-map-config-old.component';
 export * from './msg-metadata-chip.component';
 export * from './slide-toggle.component';
+export * from './sv-map-config.component';
 
 export * from './rulenode-core-config-common.module';

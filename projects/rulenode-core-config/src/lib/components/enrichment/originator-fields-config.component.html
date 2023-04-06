@@ -1,14 +1,23 @@
 <section [formGroup]="originatorFieldsConfigForm" fxLayout="column">
-  <label translate class="tb-title tb-required">tb.rulenode.fields-mapping</label>
-  <tb-kv-map-config-old
-    required
-    formControlName="fieldsMapping"
-    requiredText="tb.rulenode.fields-mapping-required"
-    keyText="tb.rulenode.source-field"
-    keyRequiredText="tb.rulenode.source-field-required"
-    valText="tb.rulenode.target-attribute"
-    valRequiredText="tb.rulenode.target-attribute-required">
-  </tb-kv-map-config-old>
-  <mat-checkbox formControlName="ignoreNullStrings">{{ "tb.rulenode.ignore-null-strings" | translate }}</mat-checkbox>
-  <div class="tb-hint">{{ "tb.rulenode.ignore-null-strings-hint" | translate }}</div>
+  <fieldset class="fields-group" fxLayout="column" >
+    <legend class="group-title" translate>tb.rulenode.originator-fields-mapping</legend>
+    <section class="fieldset-content" fxLayout="column">
+      <tb-sv-map-config
+        required
+        [selectOptions]="originatorFields"
+        [selectOptionsTranslate]="originatorFieldsTranslations"
+        formControlName="fieldsMapping"
+        requiredText="tb.rulenode.fields-mapping-required"
+        selectText="tb.rulenode.source-field"
+        selectRequiredText="tb.rulenode.source-field-required"
+        valText="tb.rulenode.target-key"
+        valRequiredText="tb.rulenode.target-key-required">
+      </tb-sv-map-config>
+      <tb-msg-metadata-chip
+        labelText="tb.rulenode.add-mapped-originator-fields-to"
+        formControlName="fetchTo"
+      ></tb-msg-metadata-chip>
+    </section>
+  </fieldset>
+  <tb-slide-toggle class="skip-slide-toggle" slideToggleName="tb.rulenode.skip-empty-fields" slideToggleTooltip="tb.rulenode.skip-empty-fields-tooltip"></tb-slide-toggle>
 </section>

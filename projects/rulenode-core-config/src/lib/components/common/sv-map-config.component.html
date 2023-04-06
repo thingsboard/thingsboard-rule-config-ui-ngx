@@ -1,0 +1,57 @@
+<section fxLayout="column" class="tb-kv-map-config" [formGroup]="kvListFormGroup">
+  <div *ngIf="!(ngControl.hasError('kvMapRequired') || ngControl.hasError('uniqueKeyValuePair') ?
+                     (ngControl.hasError('kvMapRequired') ? translate.instant(requiredText) :
+                     translate.instant('tb.key-val.unique-key-value-pair-error', {selectText: translate.instant(selectText),
+                     valText: translate.instant(valText)})) : false)">
+    <label *ngIf="labelText" class="map-label">{{ labelText | translate }}</label>
+    <div class="body">
+      <div class="row" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px"
+           formArrayName="keyVals"
+           *ngFor="let keyValControl of keyValsFormArray().controls; let $index = index">
+        <div fxLayout="row" class="inputs-block">
+          <mat-form-field fxFlex class="mat-block">
+            <mat-label>{{ selectText | translate }}</mat-label>
+            <mat-select [formControl]="keyValControl.get('key')" required>
+              <mat-option *ngFor="let option of selectOptions" [value]="option">
+                {{selectOptionsTranslate.get(option) | translate}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="keyValControl.get('key').hasError('required')">
+              {{ selectRequiredText | translate }}
+            </mat-error>
+          </mat-form-field>
+          <mat-icon class="material-icons arrow-icon">arrow_forward</mat-icon>
+          <mat-form-field fxFlex class="mat-block">
+            <mat-label>{{ valText | translate }}</mat-label>
+            <input [formControl]="keyValControl.get('value')" matInput/>
+            <mat-error *ngIf="keyValControl.get('value').hasError('required')">
+              {{ valRequiredText | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <button mat-icon-button color="primary"
+                [fxShow]="!disabled"
+                type="button"
+                (click)="removeKeyVal($index)"
+                [disabled]="isLoading$ | async"
+                matTooltip="{{ 'tb.key-val.remove-mapping-entry' | translate }}"
+                matTooltipPosition="above">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <tb-error [error]="ngControl.hasError('kvMapRequired') || ngControl.hasError('uniqueKeyValuePair') ?
+                       (ngControl.hasError('kvMapRequired') ? translate.instant(requiredText) :
+                       translate.instant('tb.key-val.unique-key-value-pair-error', {selectText: translate.instant(selectText),
+                       valText: translate.instant(valText)})) : ''"></tb-error>
+  <div style="margin-top: 16px;">
+    <button mat-stroked-button class="add-button" color="primary"
+            [fxShow]="!disabled"
+            [disabled]="isLoading$ | async"
+            (click)="addKeyVal()"
+            type="button">
+      {{ 'tb.key-val.add-mapping-entry' | translate }}
+    </button>
+  </div>
+</section>
