@@ -1,6 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { AppState, getCurrentAuthState, NodeScriptTestService } from '@core/public-api';
-import { JsFuncComponent, RuleNodeConfiguration, RuleNodeConfigurationComponent, ScriptLanguage } from '@shared/public-api';
+import {
+  JsFuncComponent,
+  RuleNodeConfiguration,
+  RuleNodeConfigurationComponent,
+  ScriptLanguage,
+  ServiceType
+} from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -21,6 +27,8 @@ export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
 
   scriptLanguage = ScriptLanguage;
 
+  serviceType = ServiceType.TB_RULE_ENGINE;
+
   constructor(protected store: Store<AppState>,
               private fb: UntypedFormBuilder,
               private nodeScriptTestService: NodeScriptTestService,
@@ -39,7 +47,8 @@ export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
       originator: [configuration ? configuration.originator : null, []],
       scriptLang: [configuration ? configuration.scriptLang : ScriptLanguage.JS, [Validators.required]],
       jsScript: [configuration ? configuration.jsScript : null, []],
-      tbelScript: [configuration ? configuration.tbelScript : null, []]
+      tbelScript: [configuration ? configuration.tbelScript : null, []],
+      queueName: [configuration ? configuration.queueName : null, []]
     });
   }
 
