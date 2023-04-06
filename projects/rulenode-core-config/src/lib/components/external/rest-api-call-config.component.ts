@@ -6,7 +6,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { HttpRequestType } from '../../rulenode-core-config.models';
 
 @Component({
-  selector: 'tb-action-node-rest-api-call-config',
+  selector: 'tb-external-node-rest-api-call-config',
   templateUrl: './rest-api-call-config.component.html',
   styleUrls: []
 })

@@ -19,18 +19,8 @@ import { RpcReplyConfigComponent } from './rpc-reply-config.component';
 import { SaveToCustomTableConfigComponent } from './save-to-custom-table-config.component';
 import { RulenodeCoreConfigCommonModule } from '../common/rulenode-core-config-common.module';
 import { UnassignCustomerConfigComponent } from './unassign-customer-config.component';
-import { SnsConfigComponent } from './sns-config.component';
-import { SqsConfigComponent } from './sqs-config.component';
-import { PubSubConfigComponent } from './pubsub-config.component';
-import { KafkaConfigComponent } from './kafka-config.component';
-import { MqttConfigComponent } from './mqtt-config.component';
-import { RabbitMqConfigComponent } from './rabbit-mq-config.component';
-import { RestApiCallConfigComponent } from './rest-api-call-config.component';
-import { SendEmailConfigComponent } from './send-email-config.component';
 import { CheckPointConfigComponent } from './check-point-config.component';
-import { AzureIotHubConfigComponent } from './azure-iot-hub-config.component';
 import { DeviceProfileConfigComponent } from './device-profile-config.component';
-import { SendSmsConfigComponent } from './send-sms-config.component';
 import { PushToEdgeConfigComponent } from './push-to-edge-config.component';
 import { PushToCloudConfigComponent } from './push-to-cloud-config.component';
 import { DeleteAttributesConfigComponent } from './delete-attributes-config.component';
@@ -56,18 +46,8 @@ import { DeduplicationConfigComponent } from './deduplication-config.component';
     RpcReplyConfigComponent,
     SaveToCustomTableConfigComponent,
     UnassignCustomerConfigComponent,
-    SnsConfigComponent,
-    SqsConfigComponent,
-    PubSubConfigComponent,
-    KafkaConfigComponent,
-    MqttConfigComponent,
-    RabbitMqConfigComponent,
-    RestApiCallConfigComponent,
-    SendEmailConfigComponent,
     CheckPointConfigComponent,
-    AzureIotHubConfigComponent,
     DeviceProfileConfigComponent,
-    SendSmsConfigComponent,
     PushToEdgeConfigComponent,
     PushToCloudConfigComponent,
     MathFunctionConfigComponent,
@@ -97,18 +77,8 @@ import { DeduplicationConfigComponent } from './deduplication-config.component';
     RpcReplyConfigComponent,
     SaveToCustomTableConfigComponent,
     UnassignCustomerConfigComponent,
-    SnsConfigComponent,
-    SqsConfigComponent,
-    PubSubConfigComponent,
-    KafkaConfigComponent,
-    MqttConfigComponent,
-    RabbitMqConfigComponent,
-    RestApiCallConfigComponent,
-    SendEmailConfigComponent,
     CheckPointConfigComponent,
-    AzureIotHubConfigComponent,
     DeviceProfileConfigComponent,
-    SendSmsConfigComponent,
     PushToEdgeConfigComponent,
     PushToCloudConfigComponent,
     MathFunctionConfigComponent,
