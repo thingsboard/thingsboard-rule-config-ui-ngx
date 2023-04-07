@@ -1,5 +1,6 @@
 import { Component, Input, TemplateRef, ContentChild } from '@angular/core';
 import { WidgetContentTemplateDirective } from './widget-content-tempate.directive';
+import { coerceBooleanProperty } from "@angular/cdk/coercion";
 
 @Component({
   selector: 'tb-fieldset-component',
@@ -8,8 +9,19 @@ import { WidgetContentTemplateDirective } from './widget-content-tempate.directi
 })
 export class FieldsetComponent {
   private widgetContentTemplate: TemplateRef<any>;
+  private requiredValue: boolean;
 
   @Input() label;
+
+  @Input()
+  set required(value: boolean | string) {
+    this.requiredValue = coerceBooleanProperty(value);
+  };
+
+  get required() {
+    return this.requiredValue;
+  }
+
 
   @ContentChild(WidgetContentTemplateDirective, { read: TemplateRef })
   set WidgetContentTemplate(value: TemplateRef<any>) {
@@ -19,4 +31,6 @@ export class FieldsetComponent {
   get WidgetContentTemplate(): TemplateRef<any> {
     return this.widgetContentTemplate;
   }
+
+  protected readonly requestAnimationFrame = requestAnimationFrame;
 }

@@ -1,4 +1,5 @@
 import { EntitySearchDirection, EntityTypeFilter } from '@shared/public-api';
+import { AggregationType } from "@shared/models/time/time.models";
 
 export enum OriginatorSource {
   CUSTOMER = 'CUSTOMER',
@@ -143,9 +144,9 @@ export enum FetchMode {
 
 export const deduplicationStrategiesTranslations = new Map<FetchMode, string>(
   [
-    [FetchMode.FIRST, 'tb.rulenode.first-message'],
-    [FetchMode.LAST, 'tb.rulenode.last-message'],
-    [FetchMode.ALL, 'tb.rulenode.all-messages']
+    [FetchMode.FIRST, 'tb.rulenode.first'],
+    [FetchMode.LAST, 'tb.rulenode.last'],
+    [FetchMode.ALL, 'tb.rulenode.all']
   ]
 );
 
@@ -153,6 +154,13 @@ export enum SamplingOrder {
   ASC = 'ASC',
   DESC = 'DESC'
 }
+
+export const samplingOrderTranslations = new Map<SamplingOrder, string>(
+  [
+    [SamplingOrder.ASC, 'tb.rulenode.ascending'],
+    [SamplingOrder.DESC, 'tb.rulenode.descending']
+  ]
+);
 
 export enum SqsQueueType {
   STANDARD = 'STANDARD',

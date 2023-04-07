@@ -1,5 +1,76 @@
-:host {
+:host ::ng-deep{
   label.tb-title {
     margin-bottom: -10px;
   }
+
+  .interval-slide-toggle {
+    width: 100%;
+    margin: 8px 0px 8px 0px;
+  }
+
+  .interval-block {
+    margin-top: 12px;
+  }
+
+  .interval-description {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .examples-popup .mat-icon {
+    width: 12px!important;
+    min-width: 12px!important;
+    height: 12px!important;
+    min-height: 12px!important;
+    font-size: 12px!important;
+    line-height: 12px!important;
+  }
+
+  .mat-button-toggle-group.tb-script-lang-toggle-group {
+    &.mat-button-toggle-group-appearance-standard {
+      border: none;
+      border-radius: 18px;
+      .mat-button-toggle+.mat-button-toggle {
+        border-left: none;
+      }
+    }
+    .mat-button-toggle {
+      background: rgba(0, 0, 0, 0.06);
+      height: 32px;
+      align-items: center;
+      display: flex;
+      .mat-button-toggle-ripple {
+        top: 2px;
+        left: 2px;
+        right: 2px;
+        bottom: 2px;
+        border-radius: 16px;
+      }
+    }
+    .mat-button-toggle-button {
+      height: 32px;
+      color: #959595;
+    }
+    .mat-button-toggle-focus-overlay {
+      border-radius: 16px;
+      margin: 2px;
+    }
+    .mat-button-toggle-checked .mat-button-toggle-button {
+      background-color: #305680;
+      color: #fff;
+      border-radius: 16px;
+      margin-left: 2px;
+      margin-right: 2px;
+    }
+    .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+      line-height: 16px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .mat-button-toggle-checked.mat-button-toggle-appearance-standard:not(.mat-button-toggle-disabled):hover .mat-button-toggle-focus-overlay {
+      opacity: .01;
+    }
+  }
+
 }

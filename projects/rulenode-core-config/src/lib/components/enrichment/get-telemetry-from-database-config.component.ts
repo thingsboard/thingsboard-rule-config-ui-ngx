@@ -5,7 +5,15 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 import { aggregationTranslations, AggregationType, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { FetchMode, SamplingOrder, TimeUnit, timeUnitTranslations } from '../../rulenode-core-config.models';
+import {
+  deduplicationStrategiesTranslations,
+  FetchMode,
+  SamplingOrder,
+  samplingOrderTranslations,
+  TimeUnit,
+  timeUnitTranslations
+} from '../../rulenode-core-config.models';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'tb-enrichment-node-get-telemetry-from-database',
@@ -24,13 +32,16 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
 
   fetchMode = FetchMode;
   fetchModes = Object.keys(FetchMode);
+  deduplicationStrategiesTranslations = deduplicationStrategiesTranslations;
 
   samplingOrders = Object.keys(SamplingOrder);
+  samplingOrdersTranslate = samplingOrderTranslations;
 
   timeUnits = Object.values(TimeUnit);
   timeUnitsTranslationMap = timeUnitTranslations;
 
   constructor(protected store: Store<AppState>,
+              public translate: TranslateService,
               private fb: UntypedFormBuilder) {
     super(store);
   }
@@ -107,6 +118,22 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
       keys.splice(index, 1);
       this.getTelemetryFromDatabaseConfigForm.get(keysField).setValue(keys, {emitEvent: true});
     }
+  }
+
+  fetchModeHintSelector() {
+    let hint;
+    switch (this.getTelemetryFromDatabaseConfigForm.get('fetchMode').value) {
+      case FetchMode.ALL:
+        hint = 'tb.rulenode.all-mode-hint';
+        break;
+      case FetchMode.LAST:
+        hint = 'tb.rulenode.last-mode-hint';
+        break;
+      case FetchMode.FIRST:
+        hint = 'tb.rulenode.first-mode-hint';
+        break;
+    }
+    return hint;
   }
 
   addKey(event: MatChipInputEvent, keysField: string): void {
