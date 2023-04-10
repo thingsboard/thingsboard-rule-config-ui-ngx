@@ -580,7 +580,8 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           attributes: 'Attributes',
           'related-device-attributes': 'Related device attributes',
           'add-selected-attributes-to': 'Add selected attributes to:',
-          'device-profiles': 'Device profiles'
+          'device-profiles': 'Device profiles',
+          'mapping-of-tenant':'Mapping of tenant\'s:'
         },
         'key-val': {
           key: 'Key',
