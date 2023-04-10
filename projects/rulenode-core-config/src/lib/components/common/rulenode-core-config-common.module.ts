@@ -17,6 +17,8 @@ import { SlideToggleComponent } from './slide-toggle.component';
 import { SvMapConfigComponent } from './sv-map-config.component';
 import { WidgetContentTemplateDirective } from './widget-content-tempate.directive';
 import { FieldsetComponent } from './fieldset.component';
+import { RelationsQueryConfigOldComponent } from './relations-query-config-old.component';
+import { AttributeTelemetryToggleComponent } from './attribute-telemetry-toggle.component'
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { FieldsetComponent } from './fieldset.component';
     SlideToggleComponent,
     SvMapConfigComponent,
     WidgetContentTemplateDirective,
-    FieldsetComponent
+    FieldsetComponent,
+    RelationsQueryConfigOldComponent,
+    AttributeTelemetryToggleComponent
   ],
   imports: [
     CommonModule,
@@ -56,7 +60,9 @@ import { FieldsetComponent } from './fieldset.component';
     SlideToggleComponent,
     SvMapConfigComponent,
     WidgetContentTemplateDirective,
-    FieldsetComponent
+    FieldsetComponent,
+    RelationsQueryConfigOldComponent,
+    AttributeTelemetryToggleComponent
   ]
 })
 

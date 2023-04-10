@@ -26,7 +26,8 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
     this.relatedAttributesConfigForm = this.fb.group({
       relationsQuery: [configuration ? configuration.relationsQuery : null, [Validators.required]],
       telemetry: [configuration ? configuration.telemetry : false, []],
-      attrMapping: [configuration ? configuration.attrMapping : null, [Validators.required]]
+      attrMapping: [configuration ? configuration.attrMapping : null, [Validators.required]],
+      fetchTo: [configuration ? configuration.fetchTo : null]
     });
   }
 }

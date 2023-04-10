@@ -1,12 +1,7 @@
 <section [formGroup]="customerAttributesConfigForm" fxLayout="column">
-  <tb-fieldset-component label="tb.rulenode.attr-mapping" required="true">
+  <tb-fieldset-component label="tb.rulenode.mapping-of-customers">
     <ng-template tbAppWidgetContentTemplate>
-      <mat-button-toggle-group class="tb-script-lang-toggle-group"
-                               style="width: 430px;"
-                               formControlName="telemetry" aria-label="Script language">
-        <mat-button-toggle fxFlex [value]="false">Attributes</mat-button-toggle>
-        <mat-button-toggle fxFlex [value]="true">Latest telemetry</mat-button-toggle>
-      </mat-button-toggle-group>
+      <tb-attribute-telemetry-toggle formControlName="telemetry"></tb-attribute-telemetry-toggle>
       <tb-kv-map-config
         required
         formControlName="attrMapping"

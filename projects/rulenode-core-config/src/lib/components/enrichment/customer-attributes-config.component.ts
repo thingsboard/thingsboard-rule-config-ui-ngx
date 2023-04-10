@@ -7,7 +7,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 @Component({
   selector: 'tb-enrichment-node-customer-attributes-config',
   templateUrl: './customer-attributes-config.component.html',
-  styleUrls: ['./customer-attributes-config.component.scss']
+  styleUrls: []
 })
 export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComponent {
 

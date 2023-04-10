@@ -120,6 +120,10 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
     }
   }
 
+  clearChipGrid() {
+    this.getTelemetryFromDatabaseConfigForm.get('latestTsKeyNames').patchValue([], {emitEvent: true});
+  }
+
   fetchModeHintSelector() {
     let hint;
     switch (this.getTelemetryFromDatabaseConfigForm.get('fetchMode').value) {

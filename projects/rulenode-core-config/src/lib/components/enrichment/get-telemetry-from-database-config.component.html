@@ -14,6 +14,14 @@
              (matChipInputTokenEnd)="addKey($event, 'latestTsKeyNames')"
              [matChipInputAddOnBlur]="true">
     </mat-chip-grid>
+    <button *ngIf="getTelemetryFromDatabaseConfigForm.get('latestTsKeyNames').value?.length > 1"
+            type="button"
+            style="margin-right: 3px"
+            matTooltip="{{'tb.rulenode.clear-selected-keys' | translate}}"
+            matSuffix mat-icon-button
+            (click)="clearChipGrid()">
+      <mat-icon color="primary" class="material-icons">close</mat-icon>
+    </button>
     <mat-hint>
       <span style="vertical-align: middle">  {{ "tb.rulenode.general-pattern-hint" | translate }}</span>
       <span tb-help-popup="{{'rulenode/customer_attributes_node_fn'}}"

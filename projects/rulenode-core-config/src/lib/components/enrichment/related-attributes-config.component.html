@@ -1,22 +1,23 @@
 <section [formGroup]="relatedAttributesConfigForm" fxLayout="column">
-  <label translate class="tb-title tb-required">tb.rulenode.relations-query</label>
   <tb-relations-query-config
     required
     formControlName="relationsQuery"
     style="padding-bottom: 15px;">
   </tb-relations-query-config>
-  <label translate class="tb-title tb-required">tb.rulenode.attr-mapping</label>
-  <mat-checkbox fxFlex formControlName="telemetry">
-    {{ 'tb.rulenode.latest-telemetry' | translate }}
-  </mat-checkbox>
-  <tb-kv-map-config-old
-    required
-    formControlName="attrMapping"
-    requiredText="tb.rulenode.attr-mapping-required"
-    keyText="{{ relatedAttributesConfigForm.get('telemetry').value ? 'tb.rulenode.source-telemetry' : 'tb.rulenode.source-attribute' }}"
-    keyRequiredText="{{ relatedAttributesConfigForm.get('telemetry').value ? 'tb.rulenode.source-telemetry-required' : 'tb.rulenode.source-attribute-required' }}"
-    valText="tb.rulenode.target-attribute"
-    valRequiredText="tb.rulenode.target-attribute-required"
-    hintText="tb.rulenode.kv-map-pattern-hint">
-  </tb-kv-map-config-old>
+  <tb-fieldset-component label="tb.rulenode.data-to-fetch">
+    <ng-template tbAppWidgetContentTemplate>
+      <tb-attribute-telemetry-toggle formControlName="telemetry"></tb-attribute-telemetry-toggle>
+      <tb-kv-map-config
+        required
+        formControlName="attrMapping"
+        requiredText="tb.rulenode.attr-mapping-required"
+        keyText="{{ relatedAttributesConfigForm.get('telemetry').value ? 'tb.rulenode.source-telemetry' : 'tb.rulenode.source-attribute' }}"
+        keyRequiredText="{{ relatedAttributesConfigForm.get('telemetry').value ? 'tb.rulenode.source-telemetry-required' : 'tb.rulenode.source-attribute-required' }}"
+        valText="tb.rulenode.target-key"
+        valRequiredText="tb.rulenode.target-key-required"
+        hintText="tb.rulenode.kv-map-pattern-hint">
+      </tb-kv-map-config>
+      <tb-msg-metadata-chip formControlName="fetchTo" labelText="tb.rulenode.add-mapped-latest-telemetry-to"></tb-msg-metadata-chip>
+    </ng-template>
+  </tb-fieldset-component>
 </section>

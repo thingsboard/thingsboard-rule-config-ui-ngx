@@ -539,6 +539,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'add-mapped-latest-telemetry-to': 'Add mapped latest telemetry to:',
           'add-selected-details-to': 'Add selected details to:',
           'clear-selected-details': 'Clear selected details',
+          'clear-selected-keys': 'Clear selected keys',
           'fetch-credentials-to': 'Fetch credentials to:',
           'add-originator-attributes-to': 'Add originator attributes to:',
           'originator-attributes': 'Originator attributes',
@@ -570,7 +571,11 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           average: 'Average',
           sum: 'Sum',
           count: 'Count',
-          none: 'None'
+          none: 'None',
+          'last-level-relation-tooltip': 'If selected, the rule node will search related entities only on the level set in the max relation level.',
+          'data-to-fetch': 'Data to fetch:',
+          'mapping-of-customers':'Mapping of customer\'s:',
+          attributes: 'Attributes'
         },
         'key-val': {
           key: 'Key',

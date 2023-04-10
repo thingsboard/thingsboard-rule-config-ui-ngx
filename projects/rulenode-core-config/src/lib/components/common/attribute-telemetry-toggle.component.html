@@ -1,0 +1,8 @@
+<div [formGroup]="toggleControlGroup">
+  <mat-button-toggle-group class="tb-script-lang-toggle-group"
+                           style="width: 430px;"
+                           formControlName="toggleControl" aria-label="Script language">
+    <mat-button-toggle fxFlex [value]="false">{{ 'tb.rulenode.attributes' | translate }}</mat-button-toggle>
+    <mat-button-toggle fxFlex [value]="true">{{ 'tb.rulenode.latest-telemetry' | translate }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
