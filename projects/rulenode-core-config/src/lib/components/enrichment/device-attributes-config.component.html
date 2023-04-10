@@ -1,89 +1,99 @@
 <section [formGroup]="deviceAttributesConfigForm" fxLayout="column">
-  <label translate class="tb-title tb-required">tb.rulenode.device-relations-query</label>
-  <tb-device-relations-query-config
-    required
-    formControlName="deviceRelationsQuery"
-    style="padding-bottom: 15px;">
-  </tb-device-relations-query-config>
-  <mat-checkbox fxFlex formControlName="tellFailureIfAbsent">
-    {{ 'tb.rulenode.tell-failure-if-absent' | translate }}
-  </mat-checkbox>
-  <div class="tb-hint" translate>tb.rulenode.tell-failure-if-absent-hint</div>
-  <div class="mat-caption" style="margin-bottom: 8px;">{{ 'tb.rulenode.fetch-into' | translate }}</div>
-  <mat-radio-group style="padding-bottom: 15px;" formControlName="fetchToData" fxLayout="row" fxLayoutGap="16px">
-    <mat-radio-button [value]="true" color="primary" >
-      <span>{{ 'tb.rulenode.data' | translate }}</span>
-    </mat-radio-button>
-    <mat-radio-button [value]="false" color="primary">
-      <span>{{ 'tb.rulenode.metadata' | translate }}</span>
-    </mat-radio-button>
-  </mat-radio-group>
-  <mat-form-field class="mat-block">
-    <mat-label translate>tb.rulenode.client-attributes</mat-label>
-    <mat-chip-grid #clientAttributesChipList>
-      <mat-chip-row
-        *ngFor="let key of deviceAttributesConfigForm.get('clientAttributeNames').value;"
-        (removed)="removeKey(key, 'clientAttributeNames')">
-        {{key}}
-        <mat-icon matChipRemove>close</mat-icon>
-      </mat-chip-row>
-      <input matInput type="text" placeholder="{{'tb.rulenode.client-attributes' | translate}}"
-             [matChipInputFor]="clientAttributesChipList"
-             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-             (matChipInputTokenEnd)="addKey($event, 'clientAttributeNames')"
-             [matChipInputAddOnBlur]="true">
-    </mat-chip-grid>
-  </mat-form-field>
-  <mat-form-field class="mat-block">
-    <mat-label translate>tb.rulenode.shared-attributes</mat-label>
-    <mat-chip-grid #sharedAttributesChipList>
-      <mat-chip-row
-        *ngFor="let key of deviceAttributesConfigForm.get('sharedAttributeNames').value;"
-        (removed)="removeKey(key, 'sharedAttributeNames')">
-        {{key}}
-        <mat-icon matChipRemove>close</mat-icon>
-      </mat-chip-row>
-      <input matInput type="text" placeholder="{{'tb.rulenode.shared-attributes' | translate}}"
-             [matChipInputFor]="sharedAttributesChipList"
-             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-             (matChipInputTokenEnd)="addKey($event, 'sharedAttributeNames')"
-             [matChipInputAddOnBlur]="true">
-    </mat-chip-grid>
-  </mat-form-field>
-  <mat-form-field class="mat-block">
-    <mat-label translate>tb.rulenode.server-attributes</mat-label>
-    <mat-chip-grid #serverAttributesChipList>
-      <mat-chip-row
-        *ngFor="let key of deviceAttributesConfigForm.get('serverAttributeNames').value;"
-        (removed)="removeKey(key, 'serverAttributeNames')">
-        {{key}}
-        <mat-icon matChipRemove>close</mat-icon>
-      </mat-chip-row>
-      <input matInput type="text" placeholder="{{'tb.rulenode.server-attributes' | translate}}"
-             [matChipInputFor]="serverAttributesChipList"
-             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-             (matChipInputTokenEnd)="addKey($event, 'serverAttributeNames')"
-             [matChipInputAddOnBlur]="true">
-    </mat-chip-grid>
-  </mat-form-field>
-  <mat-form-field class="mat-block">
-    <mat-label translate>tb.rulenode.latest-timeseries</mat-label>
-    <mat-chip-grid #latestTimeseriesChipList>
-      <mat-chip-row
-        *ngFor="let key of deviceAttributesConfigForm.get('latestTsKeyNames').value;"
-        (removed)="removeKey(key, 'latestTsKeyNames')">
-        {{key}}
-        <mat-icon matChipRemove>close</mat-icon>
-      </mat-chip-row>
-      <input matInput type="text" placeholder="{{'tb.rulenode.latest-timeseries' | translate}}"
-             [matChipInputFor]="latestTimeseriesChipList"
-             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-             (matChipInputTokenEnd)="addKey($event, 'latestTsKeyNames')"
-             [matChipInputAddOnBlur]="true">
-    </mat-chip-grid>
-  </mat-form-field>
-  <mat-checkbox formControlName="getLatestValueWithTs">
-    {{ 'tb.rulenode.get-latest-value-with-ts' | translate }}
-  </mat-checkbox>
-  <div class="tb-hint" [innerHTML]="'tb.rulenode.get-latest-value-with-ts-hint' | translate | safeHtml"></div>
+  <tb-fieldset-component label="tb.rulenode.device-relations-query" required="true">
+    <ng-template tbAppWidgetContentTemplate>
+      <tb-device-relations-query-config
+        required
+        formControlName="deviceRelationsQuery"
+        style="width: 100%">
+      </tb-device-relations-query-config>
+    </ng-template>
+  </tb-fieldset-component>
+  <tb-fieldset-component label="tb.rulenode.related-device-attributes" required="true">
+    <ng-template tbAppWidgetContentTemplate>
+      <div style="width: 100%; margin-bottom: 14px;">
+        <mat-form-field class="mat-block">
+          <mat-label translate>tb.rulenode.client-attributes</mat-label>
+          <mat-chip-grid #clientAttributesChipList>
+            <mat-chip-row
+              *ngFor="let key of deviceAttributesConfigForm.get('clientAttributeNames').value;"
+              (removed)="removeKey(key, 'clientAttributeNames')">
+              {{key}}
+              <mat-icon matChipRemove>close</mat-icon>
+            </mat-chip-row>
+            <input matInput type="text" placeholder="{{'tb.rulenode.client-attributes' | translate}}"
+                   [matChipInputFor]="clientAttributesChipList"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   (matChipInputTokenEnd)="addKey($event, 'clientAttributeNames')"
+                   [matChipInputAddOnBlur]="true">
+          </mat-chip-grid>
+        </mat-form-field>
+        <mat-form-field class="mat-block">
+          <mat-label translate>tb.rulenode.shared-attributes</mat-label>
+          <mat-chip-grid #sharedAttributesChipList>
+            <mat-chip-row
+              *ngFor="let key of deviceAttributesConfigForm.get('sharedAttributeNames').value;"
+              (removed)="removeKey(key, 'sharedAttributeNames')">
+              {{key}}
+              <mat-icon matChipRemove>close</mat-icon>
+            </mat-chip-row>
+            <input matInput type="text" placeholder="{{'tb.rulenode.shared-attributes' | translate}}"
+                   [matChipInputFor]="sharedAttributesChipList"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   (matChipInputTokenEnd)="addKey($event, 'sharedAttributeNames')"
+                   [matChipInputAddOnBlur]="true">
+          </mat-chip-grid>
+        </mat-form-field>
+        <mat-form-field class="mat-block">
+          <mat-label translate>tb.rulenode.server-attributes</mat-label>
+          <mat-chip-grid #serverAttributesChipList>
+            <mat-chip-row
+              *ngFor="let key of deviceAttributesConfigForm.get('serverAttributeNames').value;"
+              (removed)="removeKey(key, 'serverAttributeNames')">
+              {{key}}
+              <mat-icon matChipRemove>close</mat-icon>
+            </mat-chip-row>
+            <input matInput type="text" placeholder="{{'tb.rulenode.server-attributes' | translate}}"
+                   [matChipInputFor]="serverAttributesChipList"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   (matChipInputTokenEnd)="addKey($event, 'serverAttributeNames')"
+                   [matChipInputAddOnBlur]="true">
+          </mat-chip-grid>
+        </mat-form-field>
+        <mat-form-field class="mat-block">
+          <mat-label translate>tb.rulenode.latest-timeseries</mat-label>
+          <mat-chip-grid #latestTimeseriesChipList>
+            <mat-chip-row
+              *ngFor="let key of deviceAttributesConfigForm.get('latestTsKeyNames').value;"
+              (removed)="removeKey(key, 'latestTsKeyNames')">
+              {{key}}
+              <mat-icon matChipRemove>close</mat-icon>
+            </mat-chip-row>
+            <input matInput type="text" placeholder="{{'tb.rulenode.latest-telemetry' | translate}}"
+                   [matChipInputFor]="latestTimeseriesChipList"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   (matChipInputTokenEnd)="addKey($event, 'latestTsKeyNames')"
+                   [matChipInputAddOnBlur]="true">
+          </mat-chip-grid>
+        </mat-form-field>
+        <div class="tb-hint">
+          <span style="vertical-align: middle">{{ 'tb.rulenode.kv-map-pattern-hint' | translate }}</span>
+          <span tb-help-popup="{{'rulenode/customer_attributes_node_fn'}}"
+                tb-help-popup-placement="right"  class="examples-popup"
+                trigger-style="letter-spacing:0.25px; font-size:12px"
+                [tb-help-popup-style]="{maxWidth: '820px'}"
+                trigger-text="{{ 'tb.key-val.see-examples' | translate }}"></span>
+        </div>
+        <tb-slide-toggle formControlName="getLatestValueWithTs"
+                         slideToggleName="tb.rulenode.fetch-latest-telemetry-with-timestamp"
+                         slideToggleTooltip="tb.rulenode.fetch-latest-telemetry-with-timestamp-tooltip">
+        </tb-slide-toggle>
+      </div>
+    </ng-template>
+  </tb-fieldset-component>
+  <tb-slide-toggle style="margin: 20px 0px 20px 0px;"
+                   formControlName="tellFailureIfAbsent"
+                   slideToggleName="tb.rulenode.tell-failure"
+                   slideToggleTooltip="tb.rulenode.tell-failure-tooltip">
+  </tb-slide-toggle>
+  <tb-msg-metadata-chip formControlName="fetchTo" labelText="tb.rulenode.add-selected-attributes-to"></tb-msg-metadata-chip>
 </section>
