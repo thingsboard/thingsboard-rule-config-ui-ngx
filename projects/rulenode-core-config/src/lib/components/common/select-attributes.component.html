@@ -105,8 +105,8 @@
   </div>
   <tb-slide-toggle *ngIf="attributeControlGroup.get('latestTsKeyNames').value?.length > 0"
                    class="fetch-slide-toggle" formControlName="getLatestValueWithTs"
-                   slideToggleName="{{ 'tb.rulenode.fetch-latest-telemetry-with-timestamp' | translate }}"
-                   slideToggleTooltip="  {{ translate.get('tb.rulenode.fetch-latest-telemetry-with-timestamp-tooltip',
-                         { latestTsKeyName:  attributeControlGroup.get('latestTsKeyNames').value[0] }) | async }}">
+                   [slideToggleName]="'tb.rulenode.fetch-latest-telemetry-with-timestamp' | translate"
+                   [slideToggleTooltip]="translate.get('tb.rulenode.fetch-latest-telemetry-with-timestamp-tooltip',
+                         { latestTsKeyName:  attributeControlGroup.get('latestTsKeyNames').value[0] }) | async">
   </tb-slide-toggle>
 </div>

@@ -1,5 +1,5 @@
 <section [formGroup]="deviceAttributesConfigForm" fxLayout="column">
-  <tb-fieldset-component label="tb.rulenode.device-relations-query" required="true">
+  <tb-fieldset-component [label]="'tb.rulenode.device-relations-query' | translate" required="true">
     <ng-template tbAppWidgetContentTemplate>
       <tb-device-relations-query-config
         required
@@ -8,15 +8,15 @@
       </tb-device-relations-query-config>
     </ng-template>
   </tb-fieldset-component>
-  <tb-fieldset-component label="tb.rulenode.related-device-attributes" required="true">
+  <tb-fieldset-component [label]="'tb.rulenode.related-device-attributes' | translate" required="true">
     <ng-template tbAppWidgetContentTemplate>
       <tb-select-attributes formControlName="attributesControl"></tb-select-attributes>
     </ng-template>
   </tb-fieldset-component>
   <tb-slide-toggle style="margin: 20px 0px;"
                    formControlName="tellFailureIfAbsent"
-                   slideToggleName="{{ 'tb.rulenode.tell-failure' | translate }}"
-                   slideToggleTooltip="{{ 'tb.rulenode.tell-failure-tooltip' | translate }}">
+                   [slideToggleName]="'tb.rulenode.tell-failure' | translate"
+                   [slideToggleTooltip]="'tb.rulenode.tell-failure-tooltip' | translate">
   </tb-slide-toggle>
-  <tb-msg-metadata-chip formControlName="fetchTo" labelText="tb.rulenode.add-selected-attributes-to"></tb-msg-metadata-chip>
+  <tb-msg-metadata-chip formControlName="fetchTo" [labelText]="'tb.rulenode.add-selected-attributes-to' | translate"></tb-msg-metadata-chip>
 </section>

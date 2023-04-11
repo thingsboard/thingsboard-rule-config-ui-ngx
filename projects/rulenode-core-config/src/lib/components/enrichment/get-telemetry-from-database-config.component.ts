@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AppState } from '@core/public-api';
+import { AppState, isObject } from '@core/public-api';
 import { Store } from '@ngrx/store';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 import { aggregationTranslations, AggregationType, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { MatChipInputEvent } from '@angular/material/chips';
@@ -40,6 +40,13 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
   timeUnits = Object.values(TimeUnit);
   timeUnitsTranslationMap = timeUnitTranslations;
 
+  timeUnitMap = {
+    [TimeUnit.MILLISECONDS]: 1,
+    [TimeUnit.SECONDS]: 1000,
+    [TimeUnit.MINUTES]: 60000,
+    [TimeUnit.HOURS]: 3600000,
+    [TimeUnit.DAYS]: 86400000,
+  };
   constructor(protected store: Store<AppState>,
               public translate: TranslateService,
               private fb: UntypedFormBuilder) {
@@ -58,17 +65,51 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
       orderBy: [configuration ? configuration.orderBy : null, []],
       limit: [configuration ? configuration.limit : null, []],
       useMetadataIntervalPatterns: [configuration ? configuration.useMetadataIntervalPatterns : false, []],
-      startInterval: [configuration ? configuration.startInterval : null, []],
-      startIntervalTimeUnit: [configuration ? configuration.startIntervalTimeUnit : null, []],
-      endInterval: [configuration ? configuration.endInterval : null, []],
-      endIntervalTimeUnit: [configuration ? configuration.endIntervalTimeUnit : null, []],
+      interval: this.fb.group({
+        startInterval: [configuration?.interval ? configuration.interval.startInterval : null, []],
+        startIntervalTimeUnit: [configuration?.interval ? configuration.interval.startIntervalTimeUnit : null, []],
+        endInterval: [configuration?.interval ? configuration.interval.endInterval : null, []],
+        endIntervalTimeUnit: [configuration?.interval ? configuration.interval.endIntervalTimeUnit : null, []],
+      }),
       startIntervalPattern: [configuration ? configuration.startIntervalPattern : null, []],
       endIntervalPattern: [configuration ? configuration.endIntervalPattern : null, []],
     });
   }
 
+
+  private intervalValidator = () => (control: AbstractControl): ValidationErrors | null => {
+      if (control.get('startInterval').value * this.timeUnitMap[control.get('startIntervalTimeUnit').value] <=
+        control.get('endInterval').value * this.timeUnitMap[control.get('endIntervalTimeUnit').value]) {
+        return {intervalError: true};
+      } else {
+        return null;
+      }
+  };
+
+
   protected validatorTriggers(): string[] {
     return ['fetchMode', 'useMetadataIntervalPatterns'];
+  }
+
+  protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    configuration.startInterval = configuration.interval.startInterval;
+    configuration.startInterval = configuration.interval.startIntervalTimeUnit;
+    configuration.startInterval = configuration.interval.endInterval;
+    configuration.startInterval = configuration.interval.endIntervalTimeUnit;
+    delete configuration.interval;
+    return configuration;
+  }
+
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    if (isObject(configuration)) {
+      configuration.interval = {
+        startInterval: configuration.startInterval,
+        startIntervalTimeUnit: configuration.startIntervalTimeUnit,
+        endInterval: configuration.endInterval,
+        endIntervalTimeUnit: configuration.endIntervalTimeUnit
+      };
+    }
+    return configuration;
   }
 
   protected updateValidators(emitEvent: boolean) {
@@ -84,29 +125,32 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
       this.getTelemetryFromDatabaseConfigForm.get('limit').setValidators([]);
     }
     if (useMetadataIntervalPatterns) {
-      this.getTelemetryFromDatabaseConfigForm.get('startInterval').setValidators([]);
-      this.getTelemetryFromDatabaseConfigForm.get('startIntervalTimeUnit').setValidators([]);
-      this.getTelemetryFromDatabaseConfigForm.get('endInterval').setValidators([]);
-      this.getTelemetryFromDatabaseConfigForm.get('endIntervalTimeUnit').setValidators([]);
+      this.getTelemetryFromDatabaseConfigForm.get('interval.startInterval').setValidators([]);
+      this.getTelemetryFromDatabaseConfigForm.get('interval.startIntervalTimeUnit').setValidators([]);
+      this.getTelemetryFromDatabaseConfigForm.get('interval.endInterval').setValidators([]);
+      this.getTelemetryFromDatabaseConfigForm.get('interval.endIntervalTimeUnit').setValidators([]);
+      this.getTelemetryFromDatabaseConfigForm.get('interval').setValidators([]);
       this.getTelemetryFromDatabaseConfigForm.get('startIntervalPattern').setValidators([Validators.required]);
       this.getTelemetryFromDatabaseConfigForm.get('endIntervalPattern').setValidators([Validators.required]);
     } else {
-      this.getTelemetryFromDatabaseConfigForm.get('startInterval').setValidators([Validators.required,
+      this.getTelemetryFromDatabaseConfigForm.get('interval.startInterval').setValidators([Validators.required,
         Validators.min(1), Validators.max(2147483647)]);
-      this.getTelemetryFromDatabaseConfigForm.get('startIntervalTimeUnit').setValidators([Validators.required]);
-      this.getTelemetryFromDatabaseConfigForm.get('endInterval').setValidators([Validators.required,
+      this.getTelemetryFromDatabaseConfigForm.get('interval.startIntervalTimeUnit').setValidators([Validators.required]);
+      this.getTelemetryFromDatabaseConfigForm.get('interval.endInterval').setValidators([Validators.required,
         Validators.min(1), Validators.max(2147483647)]);
-      this.getTelemetryFromDatabaseConfigForm.get('endIntervalTimeUnit').setValidators([Validators.required]);
+      this.getTelemetryFromDatabaseConfigForm.get('interval.endIntervalTimeUnit').setValidators([Validators.required]);
+      this.getTelemetryFromDatabaseConfigForm.get('interval').setValidators([this.intervalValidator()]);
       this.getTelemetryFromDatabaseConfigForm.get('startIntervalPattern').setValidators([]);
       this.getTelemetryFromDatabaseConfigForm.get('endIntervalPattern').setValidators([]);
     }
     this.getTelemetryFromDatabaseConfigForm.get('aggregation').updateValueAndValidity({emitEvent});
     this.getTelemetryFromDatabaseConfigForm.get('orderBy').updateValueAndValidity({emitEvent});
     this.getTelemetryFromDatabaseConfigForm.get('limit').updateValueAndValidity({emitEvent});
-    this.getTelemetryFromDatabaseConfigForm.get('startInterval').updateValueAndValidity({emitEvent});
-    this.getTelemetryFromDatabaseConfigForm.get('startIntervalTimeUnit').updateValueAndValidity({emitEvent});
-    this.getTelemetryFromDatabaseConfigForm.get('endInterval').updateValueAndValidity({emitEvent});
-    this.getTelemetryFromDatabaseConfigForm.get('endIntervalTimeUnit').updateValueAndValidity({emitEvent});
+    this.getTelemetryFromDatabaseConfigForm.get('interval.startInterval').updateValueAndValidity({emitEvent});
+    this.getTelemetryFromDatabaseConfigForm.get('interval.startIntervalTimeUnit').updateValueAndValidity({emitEvent});
+    this.getTelemetryFromDatabaseConfigForm.get('interval.endInterval').updateValueAndValidity({emitEvent});
+    this.getTelemetryFromDatabaseConfigForm.get('interval.endIntervalTimeUnit').updateValueAndValidity({emitEvent});
+    this.getTelemetryFromDatabaseConfigForm.get('interval').updateValueAndValidity({emitEvent});
     this.getTelemetryFromDatabaseConfigForm.get('startIntervalPattern').updateValueAndValidity({emitEvent});
     this.getTelemetryFromDatabaseConfigForm.get('endIntervalPattern').updateValueAndValidity({emitEvent});
   }

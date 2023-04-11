@@ -1,5 +1,5 @@
 <div fxLayout="column" [formGroup]="chipControlGroup">
-  <label style="font-size: 12px;">{{ labelText | translate }}</label>
+  <label style="font-size: 12px;">{{ labelText }}</label>
   <mat-chip-listbox aria-label="Fish selection" formControlName="chipControl">
     <mat-chip-option selectable="{{ chipControlGroup.get('chipControl').value !== fetchTo.DATA }}" color="primary"
                      disableRipple="{{ chipControlGroup.get('chipControl').value === fetchTo.DATA }}"

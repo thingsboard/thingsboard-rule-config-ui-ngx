@@ -1,5 +1,5 @@
 <section fxLayout="column" [formGroup]="relationsQueryFormGroup">
-  <tb-fieldset-component label="tb.rulenode.relations-query" required="true">
+  <tb-fieldset-component [label]="'tb.rulenode.relations-query' | translate" required="true">
     <ng-template tbAppWidgetContentTemplate>
       <div style="width: 100%;">
         <div fxLayoutGap="8px" fxLayout="row">
@@ -25,8 +25,8 @@
                          style="margin: 2px 0px 18px 0px;
                                 display: inline-block;"
                          formControlName="fetchLastLevelOnly"
-                         slideToggleName="{{ 'alias.last-level-relation' | translate }}"
-                         slideToggleTooltip="{{ 'tb.rulenode.last-level-relation-tooltip' | translate }}">
+                         [slideToggleName]="'alias.last-level-relation' | translate"
+                         [slideToggleTooltip]="'tb.rulenode.last-level-relation-tooltip' | translate">
         </tb-slide-toggle>
         <div class="mat-caption" style="color: rgba(0,0,0,0.57);" translate>relation.relation-filters</div>
         <tb-relation-filters

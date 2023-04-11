@@ -1,5 +1,5 @@
 <fieldset class="fields-group" fxLayout="column" >
-  <legend class="group-title">{{ label | translate}}{{required ? '*' : ''}}</legend>
+  <legend class="group-title">{{ label }}{{ required ? '*' : '' }}</legend>
   <section class="fieldset-content" fxLayout="column">
     <ng-container *ngTemplateOutlet="WidgetContentTemplate">
     </ng-container>

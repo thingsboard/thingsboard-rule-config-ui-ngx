@@ -1,25 +1,25 @@
 <section [formGroup]="originatorFieldsConfigForm" fxLayout="column">
-  <tb-fieldset-component label="tb.rulenode.originator-fields-mapping" required="true">
+  <tb-fieldset-component [label]="'tb.rulenode.originator-fields-mapping' | translate" required="true">
     <ng-template tbAppWidgetContentTemplate>
       <tb-sv-map-config
         required
         [selectOptions]="originatorFields"
         [selectOptionsTranslate]="originatorFieldsTranslations"
         formControlName="fieldsMapping"
-        requiredText="tb.rulenode.fields-mapping-required"
-        selectText="tb.rulenode.source-field"
-        selectRequiredText="tb.rulenode.source-field-required"
-        valText="tb.rulenode.target-key"
-        valRequiredText="tb.rulenode.target-key-required">
+        [requiredText]="'tb.rulenode.fields-mapping-required' | translate"
+        [selectText]="'tb.rulenode.source-field' | translate"
+        [selectRequiredText]="'tb.rulenode.source-field-required' | translate"
+        [valText]="'tb.rulenode.target-key' | translate"
+        [valRequiredText]="'tb.rulenode.target-key-required' | translate">
       </tb-sv-map-config>
       <tb-msg-metadata-chip
-        labelText="tb.rulenode.add-mapped-originator-fields-to"
+        [labelText]="'tb.rulenode.add-mapped-originator-fields-to' | translate"
         formControlName="fetchTo"
       ></tb-msg-metadata-chip>
     </ng-template>
   </tb-fieldset-component>
   <tb-slide-toggle class="skip-slide-toggle"
-                   slideToggleName="{{ 'tb.rulenode.skip-empty-fields' | translate }}"
-                   slideToggleTooltip="{{ 'tb.rulenode.skip-empty-fields-tooltip' | translate}}">
+                   [slideToggleName]="'tb.rulenode.skip-empty-fields' | translate"
+                   [slideToggleTooltip]="'tb.rulenode.skip-empty-fields-tooltip' | translate">
   </tb-slide-toggle>
 </section>

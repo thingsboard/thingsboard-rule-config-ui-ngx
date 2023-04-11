@@ -4,22 +4,25 @@
     formControlName="relationsQuery"
     style="padding-bottom: 15px;">
   </tb-relations-query-config>
-  <tb-fieldset-component label="tb.rulenode.data-to-fetch">
+  <tb-fieldset-component [label]="'tb.rulenode.data-to-fetch' | translate">
     <ng-template tbAppWidgetContentTemplate>
       <tb-attribute-telemetry-toggle formControlName="telemetry"></tb-attribute-telemetry-toggle>
       <tb-kv-map-config
         required
         formControlName="attrMapping"
-        requiredText="tb.rulenode.attr-mapping-required"
-        labelText = "{{relatedAttributesConfigForm.get('telemetry').value ? 'tb.rulenode.latest-telemetry-mapping' : 'tb.rulenode.attributes-mapping'}}"
-        keyText="{{ relatedAttributesConfigForm.get('telemetry').value ? 'tb.rulenode.source-telemetry' : 'tb.rulenode.source-attribute' }}"
-        keyRequiredText="{{ relatedAttributesConfigForm.get('telemetry').value ? 'tb.rulenode.source-telemetry-required' : 'tb.rulenode.source-attribute-required' }}"
-        valText="tb.rulenode.target-key"
-        valRequiredText="tb.rulenode.target-key-required"
-        hintText="tb.rulenode.kv-map-pattern-hint">
+        [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
+        [labelText]="relatedAttributesConfigForm.get('telemetry').value ? ('tb.rulenode.latest-telemetry-mapping' | translate) :
+        ('tb.rulenode.attributes-mapping' | translate)"
+        [keyText]="relatedAttributesConfigForm.get('telemetry').value ? ('tb.rulenode.source-telemetry' | translate) :
+        ('tb.rulenode.source-attribute' | translate)"
+        [keyRequiredText]="relatedAttributesConfigForm.get('telemetry').value ?
+        ('tb.rulenode.source-telemetry-required' | translate) : ('tb.rulenode.source-attribute-required' | translate)"
+        [valText]="'tb.rulenode.target-key' | translate"
+        [valRequiredText]="'tb.rulenode.target-key-required' | translate"
+        [hintText]="'tb.rulenode.kv-map-pattern-hint' | translate">
       </tb-kv-map-config>
-      <tb-msg-metadata-chip formControlName="fetchTo" labelText="{{ relatedAttributesConfigForm.get('telemetry').value ?
-        'tb.rulenode.add-mapped-latest-telemetry-to' : 'tb.rulenode.add-mapped-attribute-to' }}">
+      <tb-msg-metadata-chip formControlName="fetchTo" [labelText]="relatedAttributesConfigForm.get('telemetry').value ?
+        ('tb.rulenode.add-mapped-latest-telemetry-to' | translate) : ('tb.rulenode.add-mapped-attribute-to' | translate)">
       </tb-msg-metadata-chip>
     </ng-template>
   </tb-fieldset-component>
