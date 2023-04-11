@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'tb-action-node-send-email-config',
+  selector: 'tb-external-node-send-email-config',
   templateUrl: './send-email-config.component.html',
   styleUrls: []
 })

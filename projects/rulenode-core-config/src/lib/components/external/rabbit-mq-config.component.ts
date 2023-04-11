@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'tb-action-node-rabbit-mq-config',
+  selector: 'tb-external-node-rabbit-mq-config',
   templateUrl: './rabbit-mq-config.component.html',
   styleUrls: []
 })

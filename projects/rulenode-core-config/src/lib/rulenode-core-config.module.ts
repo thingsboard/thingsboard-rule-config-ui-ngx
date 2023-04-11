@@ -9,6 +9,7 @@ import { SharedModule } from '@shared/public-api';
 import { RuleNodeCoreConfigActionModule } from './components/action/rulenode-core-config-action.module';
 import { RuleNodeCoreConfigFilterModule } from './components/filter/rulenode-core-config-filter.module';
 import { RulenodeCoreConfigEnrichmentModule } from './components/enrichment/rulenode-core-config-enrichment.module';
+import { RulenodeCoreConfigExternalModule } from './components/external/rulenode-core-config-external.module';
 import { RulenodeCoreConfigTransformModule } from './components/transform/rulenode-core-config-transform.module';
 import { RuleNodeCoreConfigFlowModule } from './components/flow/rulenode-core-config-flow.module';
 
@@ -24,6 +25,7 @@ import { RuleNodeCoreConfigFlowModule } from './components/flow/rulenode-core-co
     RuleNodeCoreConfigActionModule,
     RuleNodeCoreConfigFilterModule,
     RulenodeCoreConfigEnrichmentModule,
+    RulenodeCoreConfigExternalModule,
     RulenodeCoreConfigTransformModule,
     RuleNodeCoreConfigFlowModule,
     EmptyConfigComponent

@@ -216,6 +216,8 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'request-method': 'Request method',
           'use-simple-client-http-factory': 'Use simple client HTTP factory',
           'ignore-request-body': 'Without request body',
+          'trim-double-quotes': 'Message without quotes',
+          'trim-double-quotes-hint': 'If selected, request body message payload will be sent without double quotes, i.e. msg = message body',
           'read-timeout': 'Read timeout in millis',
           'read-timeout-hint': 'The value of 0 means an infinite timeout',
           'max-parallel-requests-count': 'Max number of parallel requests',
@@ -587,7 +589,11 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'device-profiles': 'Device profiles',
           'mapping-of-tenant':'Mapping of tenant\'s:',
           'add-attribute-key': 'Add attribute key',
-
+          'message-template': 'Message template',
+          'message-template-required': 'Message template is required',
+          'use-system-slack-settings': 'Use system slack settings',
+          'slack-api-token': 'Slack API token',
+          'slack-api-token-required': 'Slack API token is required'
         },
         'key-val': {
           key: 'Key',

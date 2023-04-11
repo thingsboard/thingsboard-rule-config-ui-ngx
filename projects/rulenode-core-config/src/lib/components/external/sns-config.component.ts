@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'tb-action-node-sns-config',
+  selector: 'tb-external-node-sns-config',
   templateUrl: './sns-config.component.html',
   styleUrls: []
 })

@@ -6,7 +6,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { ToByteStandartCharsetTypes, ToByteStandartCharsetTypeTranslations } from '../../rulenode-core-config.models';
 
 @Component({
-  selector: 'tb-action-node-kafka-config',
+  selector: 'tb-external-node-kafka-config',
   templateUrl: './kafka-config.component.html',
   styleUrls: []
 })
