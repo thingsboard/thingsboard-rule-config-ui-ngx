@@ -20,11 +20,11 @@
   </div>
   <tb-slide-toggle *ngIf="deviceRelationsQueryFormGroup.get('maxLevel').value > 1"
                    style="margin-bottom: 24px"
-                   slideToggleName="alias.last-level-relation"
-                   slideToggleTooltip="tb.rulenode.last-level-device-relation-tooltip">
+                   slideToggleName="{{ 'alias.last-level-relation' | translate }}"
+                   slideToggleTooltip="{{ 'tb.rulenode.last-level-device-relation-tooltip' | translate }}">
   </tb-slide-toggle>
   <tb-relation-type-autocomplete
-    label="tb.rulenode.relation-type"
+    label="tb.rulenode.type"
     fxFlex
     formControlName="relationType">
   </tb-relation-type-autocomplete>

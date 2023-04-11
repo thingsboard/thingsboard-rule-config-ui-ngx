@@ -5,6 +5,7 @@ import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'tb-enrichment-node-originator-attributes-config',
@@ -18,6 +19,7 @@ export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationCo
   separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
 
   constructor(protected store: Store<AppState>,
+              public translate: TranslateService,
               private fb: UntypedFormBuilder) {
     super(store);
   }

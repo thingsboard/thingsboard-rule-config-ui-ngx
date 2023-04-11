@@ -5,6 +5,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'tb-enrichment-node-device-attributes-config',
@@ -18,6 +19,7 @@ export class DeviceAttributesConfigComponent extends RuleNodeConfigurationCompon
   separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
 
   constructor(protected store: Store<AppState>,
+              public translate: TranslateService,
               private fb: UntypedFormBuilder) {
     super(store);
   }
@@ -37,6 +39,10 @@ export class DeviceAttributesConfigComponent extends RuleNodeConfigurationCompon
       latestTsKeyNames: [configuration ? configuration.latestTsKeyNames : null, []],
       getLatestValueWithTs: [configuration ? configuration.getLatestValueWithTs : false, []]
     });
+  }
+
+  clearChipGrid(keysField) {
+    this.deviceAttributesConfigForm.get(keysField).patchValue([], {emitEvent: true});
   }
 
   removeKey(key: string, keysField: string): void {

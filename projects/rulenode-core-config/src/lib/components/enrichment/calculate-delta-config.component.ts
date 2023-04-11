@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'tb-enrichment-node-calculate-delta-config',
@@ -17,6 +18,7 @@ export class CalculateDeltaConfigComponent extends RuleNodeConfigurationComponen
   separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
 
   constructor(protected store: Store<AppState>,
+              public translate: TranslateService,
               private fb: UntypedFormBuilder) {
     super(store);
   }

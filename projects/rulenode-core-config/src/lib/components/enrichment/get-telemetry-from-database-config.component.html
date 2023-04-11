@@ -8,7 +8,7 @@
         {{key}}
         <mat-icon matChipRemove>close</mat-icon>
       </mat-chip-row>
-      <input matInput type="text" placeholder="{{'tb.rulenode.timeseries-key' | translate}}"
+      <input matInput type="text" placeholder="{{'tb.rulenode.add-timeseries-key' | translate}}"
              [matChipInputFor]="latestTimeseriesChipList"
              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
              (matChipInputTokenEnd)="addKey($event, 'latestTsKeyNames')"
@@ -33,8 +33,10 @@
   </mat-form-field>
   <tb-fieldset-component label="tb.rulenode.fetch-interval" required="true">
     <ng-template tbAppWidgetContentTemplate>
-      <tb-slide-toggle class="interval-slide-toggle" formControlName="useMetadataIntervalPatterns" slideToggleName="tb.rulenode.use-metadata-interval-patterns"
-                       slideToggleTooltip="tb.rulenode.use-metadata-interval-patterns-tooltip"></tb-slide-toggle>
+      <tb-slide-toggle class="interval-slide-toggle" formControlName="useMetadataIntervalPatterns"
+                       slideToggleName="{{ 'tb.rulenode.use-metadata-interval-patterns' | translate }}"
+                       slideToggleTooltip="{{ 'tb.rulenode.use-metadata-interval-patterns-tooltip' | translate }}">
+      </tb-slide-toggle>
       <div style="width: 100%" fxLayout="column" *ngIf="getTelemetryFromDatabaseConfigForm.get('useMetadataIntervalPatterns').value === false; else intervalPattern">
         <div class="interval-block" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="8px">
           <mat-form-field fxFlex class="mat-block">

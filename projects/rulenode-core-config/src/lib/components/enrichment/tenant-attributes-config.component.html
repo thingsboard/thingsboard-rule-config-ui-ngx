@@ -7,6 +7,7 @@
         required
         formControlName="attrMapping"
         requiredText="tb.rulenode.attr-mapping-required"
+        labelText = "{{ tenantAttributesConfigForm.get('telemetry').value ? 'tb.rulenode.latest-telemetry-mapping' : 'tb.rulenode.attributes-mapping' }}"
         keyText="{{ tenantAttributesConfigForm.get('telemetry').value ? 'tb.rulenode.source-telemetry' : 'tb.rulenode.source-attribute' }}"
         keyRequiredText="{{ tenantAttributesConfigForm.get('telemetry').value ? 'tb.rulenode.source-telemetry-required' : 'tb.rulenode.source-attribute-required' }}"
         valText="tb.rulenode.target-key"

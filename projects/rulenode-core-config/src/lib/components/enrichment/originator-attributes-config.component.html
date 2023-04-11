@@ -10,7 +10,7 @@
             {{key}}
             <mat-icon matChipRemove>close</mat-icon>
           </mat-chip-row>
-          <input matInput type="text" placeholder="{{'tb.rulenode.client-attributes' | translate}}"
+          <input matInput type="text" placeholder="{{'tb.rulenode.add-attribute-key' | translate}}"
                  [matChipInputFor]="clientAttributesChipList"
                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                  (matChipInputTokenEnd)="addKey($event, 'clientAttributeNames')"
@@ -34,7 +34,7 @@
             {{key}}
             <mat-icon matChipRemove>close</mat-icon>
           </mat-chip-row>
-          <input matInput type="text" placeholder="{{'tb.rulenode.shared-attributes' | translate}}"
+          <input matInput type="text" placeholder="{{'tb.rulenode.add-attribute-key' | translate}}"
                  [matChipInputFor]="sharedAttributesChipList"
                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                  (matChipInputTokenEnd)="addKey($event, 'sharedAttributeNames')"
@@ -58,7 +58,7 @@
             {{key}}
             <mat-icon matChipRemove>close</mat-icon>
           </mat-chip-row>
-          <input matInput type="text" placeholder="{{'tb.rulenode.server-attributes' | translate}}"
+          <input matInput type="text" placeholder="{{'tb.rulenode.add-attribute-key' | translate}}"
                  [matChipInputFor]="serverAttributesChipList"
                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                  (matChipInputTokenEnd)="addKey($event, 'serverAttributeNames')"
@@ -74,7 +74,7 @@
         <mat-icon color="primary" class="material-icons">close</mat-icon>
       </button>
       <mat-form-field class="mat-block chip-grid" subscriptSizing="dynamic">
-        <mat-label translate>tb.rulenode.latest-timeseries</mat-label>
+        <mat-label translate>tb.rulenode.latest-telemetry</mat-label>
         <mat-chip-grid #latestTimeseriesChipList>
           <mat-chip-row
             *ngFor="let key of originatorAttributesConfigForm.get('latestTsKeyNames').value;"
@@ -82,7 +82,7 @@
             {{key}}
             <mat-icon matChipRemove>close</mat-icon>
           </mat-chip-row>
-          <input matInput type="text" placeholder="{{'tb.rulenode.latest-timeseries' | translate}}"
+          <input matInput type="text" placeholder="{{'tb.rulenode.add-telemetry-key' | translate}}"
                  [matChipInputFor]="latestTimeseriesChipList"
                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                  (matChipInputTokenEnd)="addKey($event, 'latestTsKeyNames')"
@@ -107,14 +107,15 @@
       </div>
       <tb-slide-toggle *ngIf="originatorAttributesConfigForm.get('latestTsKeyNames').value?.length > 0"
                        class="fetch-slide-toggle" formControlName="getLatestValueWithTs"
-                       slideToggleName="tb.rulenode.fetch-latest-telemetry-with-timestamp"
-                       slideToggleTooltip="tb.rulenode.fetch-latest-telemetry-with-timestamp-tooltip">
+                       slideToggleName="{{ 'tb.rulenode.fetch-latest-telemetry-with-timestamp' | translate }}"
+                       slideToggleTooltip="  {{ translate.get('tb.rulenode.fetch-latest-telemetry-with-timestamp-tooltip',
+                         { latestTsKeyName:  originatorAttributesConfigForm.get('latestTsKeyNames').value[0] }) | async }}">
       </tb-slide-toggle>
     </ng-template>
   </tb-fieldset-component>
   <tb-slide-toggle class="failure-slide-toggle" formControlName="tellFailureIfAbsent"
-                   slideToggleName="tb.rulenode.tell-failure"
-                   slideToggleTooltip="tb.rulenode.tell-failure-tooltip">
+                   slideToggleName="{{ 'tb.rulenode.tell-failure' | translate }}"
+                   slideToggleTooltip="{{ 'tb.rulenode.tell-failure-tooltip' | translate }}">
   </tb-slide-toggle>
   <tb-msg-metadata-chip
     labelText="tb.rulenode.add-originator-attributes-to"
