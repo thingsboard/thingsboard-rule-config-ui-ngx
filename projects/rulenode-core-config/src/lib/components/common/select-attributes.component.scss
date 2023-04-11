@@ -1,0 +1,21 @@
+:host ::ng-deep {
+  .chip-grid {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .fetch-slide-toggle {
+    width: 100%;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .examples-popup .mat-icon {
+    width: 12px !important;
+    min-width: 12px !important;
+    height: 12px !important;
+    min-height: 12px !important;
+    font-size: 12px !important;
+    line-height: 12px !important;
+  }
+}

@@ -33,9 +33,5 @@ export class OriginatorFieldsConfigComponent extends RuleNodeConfigurationCompon
       ignoreNullStrings: [configuration ? configuration.ignoreNullStrings : null],
       fetchTo: [configuration ? configuration.fetchTo : null]
     });
-
-    this.originatorFieldsConfigForm.valueChanges.subscribe((value) => {
-      console.log(value);
-    });
   }
 }

@@ -1,0 +1,112 @@
+<div  [formGroup]="attributeControlGroup">
+  <mat-form-field class="mat-block chip-grid" subscriptSizing="dynamic">
+    <mat-label translate>tb.rulenode.client-attributes</mat-label>
+    <mat-chip-grid #clientAttributesChipList>
+      <mat-chip-row
+        *ngFor="let key of attributeControlGroup.get('clientAttributeNames').value;"
+        (removed)="removeKey(key, 'clientAttributeNames')">
+        {{key}}
+        <mat-icon matChipRemove>close</mat-icon>
+      </mat-chip-row>
+      <input matInput type="text" placeholder="{{'tb.rulenode.add-attribute-key' | translate}}"
+             [matChipInputFor]="clientAttributesChipList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             (matChipInputTokenEnd)="addKey($event, 'clientAttributeNames')"
+             [matChipInputAddOnBlur]="true">
+    </mat-chip-grid>
+    <button *ngIf="attributeControlGroup.get('clientAttributeNames').value?.length > 1"
+            type="button"
+            style="margin-right: 3px"
+            matTooltip="{{'tb.rulenode.clear-selected-details' | translate}}"
+            matSuffix mat-icon-button
+            (click)="clearChipGrid('clientAttributeNames')">
+      <mat-icon color="primary" class="material-icons">close</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field class="mat-block chip-grid" subscriptSizing="dynamic">
+    <mat-label translate>tb.rulenode.shared-attributes</mat-label>
+    <mat-chip-grid #sharedAttributesChipList>
+      <mat-chip-row
+        *ngFor="let key of attributeControlGroup.get('sharedAttributeNames').value;"
+        (removed)="removeKey(key, 'sharedAttributeNames')">
+        {{key}}
+        <mat-icon matChipRemove>close</mat-icon>
+      </mat-chip-row>
+      <input matInput type="text" placeholder="{{'tb.rulenode.add-attribute-key' | translate}}"
+             [matChipInputFor]="sharedAttributesChipList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             (matChipInputTokenEnd)="addKey($event, 'sharedAttributeNames')"
+             [matChipInputAddOnBlur]="true">
+    </mat-chip-grid>
+    <button *ngIf="attributeControlGroup.get('sharedAttributeNames').value?.length > 1"
+            type="button"
+            style="margin-right: 3px"
+            matTooltip="{{'tb.rulenode.clear-selected-details' | translate}}"
+            matSuffix mat-icon-button
+            (click)="clearChipGrid('sharedAttributeNames')">
+      <mat-icon color="primary" class="material-icons">close</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field class="mat-block chip-grid" subscriptSizing="dynamic">
+    <mat-label translate>tb.rulenode.server-attributes</mat-label>
+    <mat-chip-grid #serverAttributesChipList>
+      <mat-chip-row
+        *ngFor="let key of attributeControlGroup.get('serverAttributeNames').value;"
+        (removed)="removeKey(key, 'serverAttributeNames')">
+        {{key}}
+        <mat-icon matChipRemove>close</mat-icon>
+      </mat-chip-row>
+      <input matInput type="text" placeholder="{{'tb.rulenode.add-attribute-key' | translate}}"
+             [matChipInputFor]="serverAttributesChipList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             (matChipInputTokenEnd)="addKey($event, 'serverAttributeNames')"
+             [matChipInputAddOnBlur]="true">
+    </mat-chip-grid>
+    <button *ngIf="attributeControlGroup.get('serverAttributeNames').value?.length > 1"
+            type="button"
+            style="margin-right: 3px"
+            matTooltip="{{'tb.rulenode.clear-selected-details' | translate}}"
+            matSuffix mat-icon-button
+            (click)="clearChipGrid('serverAttributeNames')">
+      <mat-icon color="primary" class="material-icons">close</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field class="mat-block chip-grid" subscriptSizing="dynamic">
+    <mat-label translate>tb.rulenode.latest-telemetry</mat-label>
+    <mat-chip-grid #latestTimeseriesChipList>
+      <mat-chip-row
+        *ngFor="let key of attributeControlGroup.get('latestTsKeyNames').value;"
+        (removed)="removeKey(key, 'latestTsKeyNames')">
+        {{key}}
+        <mat-icon matChipRemove>close</mat-icon>
+      </mat-chip-row>
+      <input matInput type="text" placeholder="{{'tb.rulenode.add-telemetry-key' | translate}}"
+             [matChipInputFor]="latestTimeseriesChipList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             (matChipInputTokenEnd)="addKey($event, 'latestTsKeyNames')"
+             [matChipInputAddOnBlur]="true">
+    </mat-chip-grid>
+    <button *ngIf="attributeControlGroup.get('latestTsKeyNames').value?.length > 1"
+            type="button"
+            style="margin-right: 3px"
+            matTooltip="{{'tb.rulenode.clear-selected-details' | translate}}"
+            matSuffix mat-icon-button
+            (click)="clearChipGrid('latestTsKeyNames')">
+      <mat-icon color="primary" class="material-icons">close</mat-icon>
+    </button>
+  </mat-form-field>
+  <div class="tb-hint">
+    <span style="vertical-align: middle">{{ 'tb.rulenode.kv-map-pattern-hint' | translate }}</span>
+    <span tb-help-popup="{{'rulenode/customer_attributes_node_fn'}}"
+          tb-help-popup-placement="right"  class="examples-popup"
+          trigger-style="letter-spacing:0.25px; font-size:12px"
+          [tb-help-popup-style]="{maxWidth: '820px'}"
+          trigger-text="{{ 'tb.key-val.see-examples' | translate }}"></span>
+  </div>
+  <tb-slide-toggle *ngIf="attributeControlGroup.get('latestTsKeyNames').value?.length > 0"
+                   class="fetch-slide-toggle" formControlName="getLatestValueWithTs"
+                   slideToggleName="{{ 'tb.rulenode.fetch-latest-telemetry-with-timestamp' | translate }}"
+                   slideToggleTooltip="  {{ translate.get('tb.rulenode.fetch-latest-telemetry-with-timestamp-tooltip',
+                         { latestTsKeyName:  attributeControlGroup.get('latestTsKeyNames').value[0] }) | async }}">
+  </tb-slide-toggle>
+</div>

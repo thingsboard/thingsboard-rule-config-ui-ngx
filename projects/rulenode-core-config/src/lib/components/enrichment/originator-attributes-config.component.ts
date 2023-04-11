@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 import { AppState, isDefinedAndNotNull, isObject, isUndefinedOrNull } from '@core/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
-import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
-import { MatChipInputEvent } from '@angular/material/chips';
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
@@ -15,8 +13,6 @@ import { TranslateService } from "@ngx-translate/core";
 export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationComponent {
 
   originatorAttributesConfigForm: UntypedFormGroup;
-
-  separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
 
   constructor(protected store: Store<AppState>,
               public translate: TranslateService,
@@ -32,50 +28,37 @@ export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationCo
     this.originatorAttributesConfigForm = this.fb.group({
       tellFailureIfAbsent: [configuration ? configuration.tellFailureIfAbsent : false, []],
       fetchTo: [isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : false, []],
-      clientAttributeNames: [configuration ? configuration.clientAttributeNames : null, []],
-      sharedAttributeNames: [configuration ? configuration.sharedAttributeNames : null, []],
-      serverAttributeNames: [configuration ? configuration.serverAttributeNames : null, []],
-      latestTsKeyNames: [configuration ? configuration.latestTsKeyNames : null, []],
-      getLatestValueWithTs: [configuration ? configuration.getLatestValueWithTs : false, []]
+      attributesControl: [configuration ? configuration.attributesControl : null, []]
     });
   }
 
-  removeKey(key: string, keysField: string): void {
-    const keys: string[] = this.originatorAttributesConfigForm.get(keysField).value;
-    const index = keys.indexOf(key);
-    if (index >= 0) {
-      keys.splice(index, 1);
-      this.originatorAttributesConfigForm.get(keysField).setValue(keys, {emitEvent: true});
-    }
-  }
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    if (isObject(configuration)) {
+      configuration.attributesControl = {
+        clientAttributeNames: configuration.clientAttributeNames,
+        latestTsKeyNames: configuration.latestTsKeyNames,
+        serverAttributeNames: configuration.serverAttributeNames,
+        sharedAttributeNames: configuration.sharedAttributeNames,
+        getLatestValueWithTs: configuration.getLatestValueWithTs
+      };
+      delete configuration.clientAttributeNames;
+      delete configuration.latestTsKeyNames;
+      delete configuration.serverAttributeNames;
+      delete configuration.sharedAttributeNames;
+      delete configuration.getLatestValueWithTs;
 
-  addKey(event: MatChipInputEvent, keysField: string): void {
-    const input = event.input;
-    let value = event.value;
-    if ((value || '').trim()) {
-      value = value.trim();
-      let keys: string[] = this.originatorAttributesConfigForm.get(keysField).value;
-      if (!keys || keys.indexOf(value) === -1) {
-        if (!keys) {
-          keys = [];
-        }
-        keys.push(value);
-        this.originatorAttributesConfigForm.get(keysField).setValue(keys, {emitEvent: true});
+      if (isUndefinedOrNull(configuration?.fetchTo)) {
+        configuration.fetchTo = false;
       }
     }
-    if (input) {
-      input.value = '';
-    }
+    return configuration;
   }
 
-  clearChipGrid(keysField) {
-    this.originatorAttributesConfigForm.get(keysField).patchValue([], {emitEvent: true});
-  }
-
-  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
-    if (isObject(configuration) && isUndefinedOrNull(configuration?.fetchTo)) {
-      configuration.fetchTo = false;
+  protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    for (const key of Object.keys(configuration.attributesControl)) {
+      configuration[key] = configuration.attributesControl[key];
     }
+    delete configuration.attributesControl;
     return configuration;
   }
 }

@@ -1,28 +1,9 @@
-:host ::ng-deep {
+:host {
   label.tb-title {
     margin-bottom: -10px;
   }
 
   .failure-slide-toggle {
-    margin: 16px 0px 16px 0px;
-  }
-
-  .chip-grid {
-    width: 100%;
-    margin-bottom: 16px;
-  }
-
-  .fetch-slide-toggle {
-    width: 100%;
-    margin-bottom: 12px
-  }
-
-  .examples-popup .mat-icon {
-    width: 12px!important;
-    min-width: 12px!important;
-    height: 12px!important;
-    min-height: 12px!important;
-    font-size: 12px!important;
-    line-height: 12px!important;
+    margin: 16px 0;
   }
 }

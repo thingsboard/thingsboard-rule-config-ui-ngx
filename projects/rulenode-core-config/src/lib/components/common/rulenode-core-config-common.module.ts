@@ -18,7 +18,9 @@ import { SvMapConfigComponent } from './sv-map-config.component';
 import { WidgetContentTemplateDirective } from './widget-content-tempate.directive';
 import { FieldsetComponent } from './fieldset.component';
 import { RelationsQueryConfigOldComponent } from './relations-query-config-old.component';
-import { AttributeTelemetryToggleComponent } from './attribute-telemetry-toggle.component'
+import { AttributeTelemetryToggleComponent } from './attribute-telemetry-toggle.component';
+import { SelectAttributesComponent } from './select-attributes.component';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { AttributeTelemetryToggleComponent } from './attribute-telemetry-toggle.
     WidgetContentTemplateDirective,
     FieldsetComponent,
     RelationsQueryConfigOldComponent,
-    AttributeTelemetryToggleComponent
+    AttributeTelemetryToggleComponent,
+    SelectAttributesComponent
   ],
   imports: [
     CommonModule,
@@ -62,7 +65,8 @@ import { AttributeTelemetryToggleComponent } from './attribute-telemetry-toggle.
     WidgetContentTemplateDirective,
     FieldsetComponent,
     RelationsQueryConfigOldComponent,
-    AttributeTelemetryToggleComponent
+    AttributeTelemetryToggleComponent,
+    SelectAttributesComponent
   ]
 })
 
