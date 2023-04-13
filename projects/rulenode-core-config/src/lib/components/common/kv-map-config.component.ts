@@ -155,7 +155,7 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
         if (kv.key === kv.value) {
           return {
             uniqueKeyValuePair: true
-          }
+          };
         }
       }
     }

@@ -39,8 +39,6 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
 
   @Input() disabled: boolean;
 
-  @Input() uniqueKeyValuePairValidator: boolean;
-
   @Input() labelText: string;
 
   @Input() requiredText: string;
@@ -152,15 +150,6 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
       return {
         kvFieldsRequired: true
       };
-    }
-    if (this.uniqueKeyValuePairValidator) {
-      for (const kv of kvList) {
-        if (kv.key === kv.value) {
-          return {
-            uniqueKeyValuePair: true
-          };
-        }
-      }
     }
     return null;
   }

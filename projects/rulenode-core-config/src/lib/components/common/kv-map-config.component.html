@@ -45,11 +45,11 @@
       </div>
     </div>
   </div>
-  <tb-error [error]="ngControl.hasError('kvMapRequired') || ngControl.hasError('uniqueKeyValuePair') ?
-                       (ngControl.hasError('kvMapRequired') ? translate.instant(requiredText) :
-                       translate.instant('tb.key-val.unique-key-value-pair-error', {keyText: translate.instant(keyText),
-                       valText: translate.instant(valText)})) : ''"></tb-error>
-  <div style="margin-top: 16px;">
+  <tb-error *ngIf="uniqueKeyValuePairValidator || ngControl.hasError('kvMapRequired')" style="margin-bottom: 8px" [error]="ngControl.hasError('kvMapRequired') || ngControl.hasError('uniqueKeyValuePair') ?
+                       (ngControl.hasError('kvMapRequired') ? requiredText :
+                       translate.instant('tb.key-val.unique-key-value-pair-error', {keyText: keyText,
+                       valText: valText})) : ''"></tb-error>
+  <div style="margin-top: 8px" >
     <button mat-stroked-button class="add-button" color="primary"
             [fxShow]="!disabled"
             [disabled]="isLoading$ | async"
