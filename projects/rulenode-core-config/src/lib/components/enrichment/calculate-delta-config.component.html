@@ -3,14 +3,16 @@
     <mat-form-field class="mat-block" fxFlex="100">
       <mat-label>{{ 'tb.rulenode.input-value-key' | translate }}</mat-label>
       <input matInput formControlName="inputValueKey">
-      <mat-error *ngIf="calculateDeltaConfigForm.get('inputValueKey').hasError('required')">
+      <mat-error *ngIf="calculateDeltaConfigForm.get('inputValueKey').hasError('required') ||
+      calculateDeltaConfigForm.get('inputValueKey').hasError('pattern')">
         {{ 'tb.rulenode.input-value-key-required' | translate }}
       </mat-error>
     </mat-form-field>
     <mat-form-field class="mat-block" fxFlex="100">
       <mat-label>{{ 'tb.rulenode.output-value-key' | translate }}</mat-label>
       <input matInput formControlName="outputValueKey">
-      <mat-error *ngIf="calculateDeltaConfigForm.get('outputValueKey').hasError('required')">
+      <mat-error *ngIf="calculateDeltaConfigForm.get('outputValueKey').hasError('required') ||
+      calculateDeltaConfigForm.get('inputValueKey').hasError('pattern')">
         {{ 'tb.rulenode.output-value-key-required' | translate }}
       </mat-error>
     </mat-form-field>

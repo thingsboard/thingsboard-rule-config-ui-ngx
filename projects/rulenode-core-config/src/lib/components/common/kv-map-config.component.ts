@@ -114,8 +114,8 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
       for (const property of Object.keys(keyValMap)) {
         if (Object.prototype.hasOwnProperty.call(keyValMap, property)) {
           keyValsControls.push(this.fb.group({
-            key: [property, [Validators.required]],
-            value: [keyValMap[property], [Validators.required]]
+            key: [property, [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]],
+            value: [keyValMap[property], [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]]
           }));
         }
       }
@@ -133,8 +133,8 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
   public addKeyVal() {
     const keyValsFormArray = this.kvListFormGroup.get('keyVals') as UntypedFormArray;
     keyValsFormArray.push(this.fb.group({
-      key: ['', [Validators.required]],
-      value: ['', [Validators.required]]
+      key: ['', [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]],
+      value: ['', [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]]
     }));
   }
 

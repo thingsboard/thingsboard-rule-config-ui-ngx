@@ -24,7 +24,7 @@
           <mat-form-field fxFlex class="mat-block">
             <mat-label>{{ valText }}</mat-label>
             <input [formControl]="keyValControl.get('value')" matInput/>
-            <mat-error *ngIf="keyValControl.get('value').hasError('required')">
+            <mat-error *ngIf="keyValControl.get('value').hasError('required') || keyValControl.get('value').hasError('pattern')">
               {{ valRequiredText }}
             </mat-error>
           </mat-form-field>

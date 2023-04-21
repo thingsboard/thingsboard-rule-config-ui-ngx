@@ -100,14 +100,16 @@
         <mat-form-field style="width: 100%" class="mat-block interval-block" >
           <mat-label>{{ 'tb.rulenode.start-interval-pattern' | translate }}</mat-label>
           <input matInput formControlName="startIntervalPattern" required>
-          <mat-error *ngIf="getTelemetryFromDatabaseConfigForm.get('startIntervalPattern').hasError('required')">
+          <mat-error *ngIf="getTelemetryFromDatabaseConfigForm.get('startIntervalPattern').hasError('required') ||
+            getTelemetryFromDatabaseConfigForm.get('startIntervalPattern').hasError('pattern')">
             {{ 'tb.rulenode.start-interval-pattern-required' | translate }}
           </mat-error>
         </mat-form-field>
         <mat-form-field style="width: 100%" class="mat-block interval-block" >
           <mat-label>{{ 'tb.rulenode.end-interval-pattern' | translate }}</mat-label>
           <input matInput formControlName="endIntervalPattern" required>
-          <mat-error *ngIf="getTelemetryFromDatabaseConfigForm.get('endIntervalPattern').hasError('required')">
+          <mat-error *ngIf="getTelemetryFromDatabaseConfigForm.get('endIntervalPattern').hasError('required') ||
+          getTelemetryFromDatabaseConfigForm.get('endIntervalPattern').hasError('pattern')">
             {{ 'tb.rulenode.end-interval-pattern-required' | translate }}
           </mat-error>
         </mat-form-field>

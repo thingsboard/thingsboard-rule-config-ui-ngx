@@ -21,6 +21,14 @@ export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComp
   protected configForm(): UntypedFormGroup {
     return this.customerAttributesConfigForm;
   }
+  protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    const filteAttrMapping = {};
+    for (const key of Object.keys(configuration.attrMapping)) {
+      filteAttrMapping[key.trim()] = configuration.attrMapping[key].trim();
+    }
+    configuration.attrMapping = filteAttrMapping;
+    return configuration;
+  }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.customerAttributesConfigForm = this.fb.group({

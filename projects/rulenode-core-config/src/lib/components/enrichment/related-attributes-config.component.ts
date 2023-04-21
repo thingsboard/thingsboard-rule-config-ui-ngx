@@ -22,6 +22,15 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
     return this.relatedAttributesConfigForm;
   }
 
+  protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    const filteAttrMapping = {};
+    for (const key of Object.keys(configuration.attrMapping)) {
+      filteAttrMapping[key.trim()] = configuration.attrMapping[key].trim();
+    }
+    configuration.attrMapping = filteAttrMapping;
+    return configuration;
+  }
+
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.relatedAttributesConfigForm = this.fb.group({
       relationsQuery: [configuration ? configuration.relationsQuery : null, [Validators.required]],

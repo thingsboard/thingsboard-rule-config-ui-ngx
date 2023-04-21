@@ -12,7 +12,7 @@
           <mat-form-field fxFlex class="mat-block">
             <mat-label>{{ keyText }}</mat-label>
             <input [formControl]="keyValControl.get('key')" matInput/>
-            <mat-error *ngIf="keyValControl.get('key').hasError('required')">
+            <mat-error *ngIf="keyValControl.get('key').hasError('required') || keyValControl.get('key').hasError('pattern')">
               {{ keyRequiredText }}
             </mat-error>
           </mat-form-field>
@@ -20,7 +20,7 @@
           <mat-form-field fxFlex class="mat-block">
             <mat-label>{{ valText }}</mat-label>
             <input [formControl]="keyValControl.get('value')" matInput/>
-            <mat-error *ngIf="keyValControl.get('value').hasError('required')">
+            <mat-error *ngIf="keyValControl.get('value').hasError('required') || keyValControl.get('key').hasError('pattern')">
               {{ valRequiredText }}
             </mat-error>
           </mat-form-field>

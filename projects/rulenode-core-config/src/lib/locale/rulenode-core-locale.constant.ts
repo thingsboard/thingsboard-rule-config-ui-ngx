@@ -132,7 +132,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'source-telemetry': 'Source telemetry key',
           'source-telemetry-required': 'Source telemetry key is required!',
           'target-key': 'Target key',
-          'target-key-required': 'Target keu is required!',
+          'target-key-required': 'Target key is required!',
           'attr-mapping-required': 'At least one attribute mapping entry should be specified!',
           'fields-mapping': 'Fields mapping',
           'fields-mapping-required': 'At least one field mapping should be specified.',

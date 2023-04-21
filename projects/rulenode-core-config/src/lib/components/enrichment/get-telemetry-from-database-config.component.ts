@@ -96,6 +96,8 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
     configuration.startInterval = configuration.interval.startIntervalTimeUnit;
     configuration.startInterval = configuration.interval.endInterval;
     configuration.startInterval = configuration.interval.endIntervalTimeUnit;
+    configuration.startIntervalPattern =  configuration.startIntervalPattern.trim();
+    configuration.endIntervalPattern =  configuration.endIntervalPattern.trim();
     delete configuration.interval;
     return configuration;
   }
@@ -130,8 +132,10 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
       this.getTelemetryFromDatabaseConfigForm.get('interval.endInterval').setValidators([]);
       this.getTelemetryFromDatabaseConfigForm.get('interval.endIntervalTimeUnit').setValidators([]);
       this.getTelemetryFromDatabaseConfigForm.get('interval').setValidators([]);
-      this.getTelemetryFromDatabaseConfigForm.get('startIntervalPattern').setValidators([Validators.required]);
-      this.getTelemetryFromDatabaseConfigForm.get('endIntervalPattern').setValidators([Validators.required]);
+      this.getTelemetryFromDatabaseConfigForm.get('startIntervalPattern').setValidators([Validators.required,
+        Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]);
+      this.getTelemetryFromDatabaseConfigForm.get('endIntervalPattern').setValidators([Validators.required,
+        Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]);
     } else {
       this.getTelemetryFromDatabaseConfigForm.get('interval.startInterval').setValidators([Validators.required,
         Validators.min(1), Validators.max(2147483647)]);
