@@ -3,7 +3,7 @@
     required
     allowCreate
     formControlName="templateId"
-    [notificationTypes]="notificationType.RULE_ENGINE">
+    [notificationTypes]="notificationType.RULE_NODE">
   </tb-template-autocomplete>
   <tb-entity-list
     required
@@ -12,6 +12,6 @@
     placeholderText="{{ 'notification.recipient' | translate }}"
     requiredText="{{ 'notification.recipients-required' | translate }}"
     entityType="{{ entityType.NOTIFICATION_TARGET }}"
-    subType="{{ notificationType.RULE_ENGINE }}">
+    subType="{{ notificationType.RULE_NODE }}">
   </tb-entity-list>
 </section>
