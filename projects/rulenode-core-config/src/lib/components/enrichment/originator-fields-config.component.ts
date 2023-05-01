@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { AppState } from '@core/public-api';
+import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
-import { OriginatorFields, originatorFieldsTranslations } from '../../rulenode-core-config.models';
+import { FetchTo, OriginatorFields, originatorFieldsTranslations } from '../../rulenode-core-config.models';
 
 @Component({
   selector: 'tb-enrichment-node-originator-fields-config',
@@ -36,9 +36,9 @@ export class OriginatorFieldsConfigComponent extends RuleNodeConfigurationCompon
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.originatorFieldsConfigForm = this.fb.group({
-      fieldsMapping: [configuration ? configuration.fieldsMapping : null, [Validators.required]],
-      ignoreNullStrings: [configuration ? configuration.ignoreNullStrings : null],
-      fetchTo: [configuration ? configuration.fetchTo : null]
+      fieldsMapping: [isDefinedAndNotNull(configuration?.fieldsMapping) ? configuration.fieldsMapping : null, [Validators.required]],
+      ignoreNullStrings: [isDefinedAndNotNull(configuration?.ignoreNullStrings) ? configuration.ignoreNullStrings : null],
+      fetchTo: [isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA]
     });
   }
 }

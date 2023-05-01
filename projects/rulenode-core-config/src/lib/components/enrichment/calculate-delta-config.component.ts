@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { AppState } from '@core/public-api';
+import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
-import { TranslateService } from "@ngx-translate/core";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'tb-enrichment-node-calculate-delta-config',
@@ -28,15 +28,16 @@ export class CalculateDeltaConfigComponent extends RuleNodeConfigurationComponen
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.calculateDeltaConfigForm = this.fb.group({
-      inputValueKey: [configuration ? configuration.inputValueKey : null, [Validators.required,
+      inputValueKey: [isDefinedAndNotNull(configuration?.inputValueKey) ? configuration.inputValueKey : null, [Validators.required,
         Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]],
-      outputValueKey: [configuration ? configuration.outputValueKey : null, [Validators.required,
+      outputValueKey: [isDefinedAndNotNull(configuration?.outputValueKey) ? configuration.outputValueKey : null, [Validators.required,
         Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]],
-      useCache: [configuration ? configuration.useCache : null, []],
-      addPeriodBetweenMsgs: [configuration ? configuration.addPeriodBetweenMsgs : false, []],
-      periodValueKey: [configuration ? configuration.periodValueKey : null, []],
-      round: [configuration ? configuration.round : null, [Validators.min(0), Validators.max(15)]],
-      tellFailureIfDeltaIsNegative: [configuration ? configuration.tellFailureIfDeltaIsNegative : null, []]
+      useCache: [isDefinedAndNotNull(configuration?.useCache) ? configuration.useCache : true, []],
+      addPeriodBetweenMsgs: [isDefinedAndNotNull(configuration?.addPeriodBetweenMsgs) ? configuration.addPeriodBetweenMsgs : false, []],
+      periodValueKey: [isDefinedAndNotNull(configuration?.periodValueKey) ? configuration.periodValueKey : null, []],
+      round: [isDefinedAndNotNull(configuration?.round) ? configuration.round : null, [Validators.min(0), Validators.max(15)]],
+      tellFailureIfDeltaIsNegative: [isDefinedAndNotNull(configuration?.tellFailureIfDeltaIsNegative) ?
+        configuration.tellFailureIfDeltaIsNegative : true, []]
     });
   }
 

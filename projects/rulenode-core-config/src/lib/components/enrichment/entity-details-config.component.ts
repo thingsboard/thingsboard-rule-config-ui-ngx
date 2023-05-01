@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AppState } from '@core/public-api';
+import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { EntityDetailsField, entityDetailsTranslations } from '../../rulenode-core-config.models';
+import { EntityDetailsField, entityDetailsTranslations, FetchTo } from '../../rulenode-core-config.models';
 import { Observable, of } from 'rxjs';
 import { map, mergeMap, share, startWith } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
@@ -71,8 +71,9 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.entityDetailsConfigForm = this.fb.group({
-      detailsList: [configuration ? configuration.detailsList : null, [Validators.required]],
-      fetchTo: [configuration ? configuration.fetchTo : null]
+      detailsList: [isDefinedAndNotNull(configuration?.detailsList) ? configuration.detailsList : null, [Validators.required]],
+      fetchTo:  [isDefinedAndNotNull(configuration?.addToMetadata) ? configuration.addToMetadata ? FetchTo.METADATA : FetchTo.DATA :
+        isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.DATA]
     });
     this.detailsList = configuration ? configuration.detailsList : [];
   }

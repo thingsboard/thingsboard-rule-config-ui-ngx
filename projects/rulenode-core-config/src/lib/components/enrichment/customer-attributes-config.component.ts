@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { AppState } from '@core/public-api';
+import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FetchTo } from '../../rulenode-core-config.models';
 
 @Component({
   selector: 'tb-enrichment-node-customer-attributes-config',
@@ -32,9 +33,9 @@ export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComp
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.customerAttributesConfigForm = this.fb.group({
-      telemetry: [configuration ? configuration.telemetry : false, []],
-      attrMapping: [configuration ? configuration.attrMapping : null, [Validators.required]],
-      fetchTo: [configuration ? configuration.fetchTo : false]
+      telemetry: [isDefinedAndNotNull(configuration?.telemetry) ? configuration.telemetry : false, []],
+      attrMapping: [isDefinedAndNotNull(configuration?.attrMapping) ? configuration.attrMapping : null, [Validators.required]],
+      fetchTo: [isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA]
     });
   }
 }

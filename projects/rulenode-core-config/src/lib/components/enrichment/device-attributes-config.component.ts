@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { AppState, isObject, isUndefinedOrNull } from '@core/public-api';
+import { AppState, isDefinedAndNotNull, isObject, isUndefinedOrNull } from '@core/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
-import { TranslateService } from "@ngx-translate/core";
+import { TranslateService } from '@ngx-translate/core';
+import { FetchTo } from '../../rulenode-core-config.models';
 
 @Component({
   selector: 'tb-enrichment-node-device-attributes-config',
@@ -26,9 +27,10 @@ export class DeviceAttributesConfigComponent extends RuleNodeConfigurationCompon
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.deviceAttributesConfigForm = this.fb.group({
-      deviceRelationsQuery: [configuration ? configuration.deviceRelationsQuery : null, [Validators.required]],
-      tellFailureIfAbsent: [configuration ? configuration.tellFailureIfAbsent : false, []],
-      fetchTo: [configuration ? configuration.fetchTo: false, []],
+      deviceRelationsQuery: [isDefinedAndNotNull(configuration?.deviceRelationsQuery) ?
+        configuration.deviceRelationsQuery : null, [Validators.required]],
+      tellFailureIfAbsent: [isDefinedAndNotNull(configuration?.tellFailureIfAbsent) ? configuration.tellFailureIfAbsent : true, []],
+      fetchTo: [isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA, []],
       attributesControl: [configuration ? configuration.attributesControl : null, []]
     });
   }
@@ -36,11 +38,11 @@ export class DeviceAttributesConfigComponent extends RuleNodeConfigurationCompon
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
     if (isObject(configuration)) {
       configuration.attributesControl = {
-        clientAttributeNames: configuration.clientAttributeNames,
-        latestTsKeyNames: configuration.latestTsKeyNames,
-        serverAttributeNames: configuration.serverAttributeNames,
-        sharedAttributeNames: configuration.sharedAttributeNames,
-        getLatestValueWithTs: configuration.getLatestValueWithTs
+        clientAttributeNames:  isDefinedAndNotNull(configuration?.clientAttributeNames) ? configuration.clientAttributeNames : null,
+        latestTsKeyNames: isDefinedAndNotNull(configuration?.latestTsKeyNames) ? configuration.latestTsKeyNames : null,
+        serverAttributeNames: isDefinedAndNotNull(configuration?.serverAttributeNames) ? configuration.serverAttributeNames : null,
+        sharedAttributeNames: isDefinedAndNotNull(configuration?.sharedAttributeNames) ? configuration.sharedAttributeNames : null,
+        getLatestValueWithTs: isDefinedAndNotNull(configuration?.getLatestValueWithTs) ? configuration.getLatestValueWithTs : false,
       };
       delete configuration.clientAttributeNames;
       delete configuration.latestTsKeyNames;

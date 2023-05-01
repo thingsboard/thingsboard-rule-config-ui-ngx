@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppState, isObject } from '@core/public-api';
+import { AppState, isDefinedAndNotNull, isObject } from '@core/public-api';
 import { Store } from '@ngrx/store';
 import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
@@ -59,20 +59,24 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.getTelemetryFromDatabaseConfigForm = this.fb.group({
-      latestTsKeyNames: [configuration ? configuration.latestTsKeyNames : null, []],
-      aggregation: [configuration ? configuration.aggregation : null, [Validators.required]],
-      fetchMode: [configuration ? configuration.fetchMode : null, [Validators.required]],
-      orderBy: [configuration ? configuration.orderBy : null, []],
-      limit: [configuration ? configuration.limit : null, []],
-      useMetadataIntervalPatterns: [configuration ? configuration.useMetadataIntervalPatterns : false, []],
+      latestTsKeyNames: [isDefinedAndNotNull(configuration?.latestTsKeyNames) ? configuration.latestTsKeyNames : null, []],
+      aggregation: [isDefinedAndNotNull(configuration?.aggregation) ? configuration.aggregation :
+        AggregationType.NONE, [Validators.required]],
+      fetchMode: [isDefinedAndNotNull(configuration?.fetchMode) ? configuration.fetchMode : FetchMode.FIRST, [Validators.required]],
+      orderBy: [isDefinedAndNotNull(configuration?.orderBy) ? configuration.orderBy : SamplingOrder.ASC, []],
+      limit: [isDefinedAndNotNull(configuration?.limit) ? configuration.limit : 1000, []],
+      useMetadataIntervalPatterns: [isDefinedAndNotNull(configuration?.useMetadataIntervalPatterns) ?
+        configuration.useMetadataIntervalPatterns : false, []],
       interval: this.fb.group({
-        startInterval: [configuration?.interval ? configuration.interval.startInterval : null, []],
-        startIntervalTimeUnit: [configuration?.interval ? configuration.interval.startIntervalTimeUnit : null, []],
-        endInterval: [configuration?.interval ? configuration.interval.endInterval : null, []],
-        endIntervalTimeUnit: [configuration?.interval ? configuration.interval.endIntervalTimeUnit : null, []],
+        startInterval: [isDefinedAndNotNull(configuration?.interval?.startInterval) ? configuration.interval.startInterval : 2, []],
+        startIntervalTimeUnit: [isDefinedAndNotNull(configuration?.interval?.startIntervalTimeUnit) ?
+          configuration.interval.startIntervalTimeUnit : TimeUnit.MINUTES, []],
+        endInterval: [isDefinedAndNotNull(configuration?.interval?.endInterval) ? configuration.interval.endInterval : 1, []],
+        endIntervalTimeUnit: [isDefinedAndNotNull(configuration?.interval?.endIntervalTimeUnit) ?
+          configuration.interval.endIntervalTimeUnit : TimeUnit.MINUTES, []],
       }),
-      startIntervalPattern: [configuration ? configuration.startIntervalPattern : null, []],
-      endIntervalPattern: [configuration ? configuration.endIntervalPattern : null, []],
+      startIntervalPattern: [isDefinedAndNotNull(configuration?.startIntervalPattern) ? configuration.startIntervalPattern : null, []],
+      endIntervalPattern: [isDefinedAndNotNull(configuration?.endIntervalPattern) ? configuration.endIntervalPattern : null, []],
     });
   }
 

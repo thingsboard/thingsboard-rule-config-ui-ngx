@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from '@core/public-api';
+import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
+import { FetchTo } from '../../rulenode-core-config.models';
 
 @Component({
   selector: './tb-enrichment-node-fetch-device-credentials-config',
@@ -24,7 +25,7 @@ export class FetchDeviceCredentialsConfigComponent extends RuleNodeConfiguration
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.fetchDeviceCredentialsConfigForm = this.fb.group({
-      fetchTo: [configuration ? configuration.fetchTo : null, []]
+      fetchTo: [isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA, []]
     });
   }
 }
