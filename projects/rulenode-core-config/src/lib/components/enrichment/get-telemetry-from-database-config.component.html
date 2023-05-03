@@ -34,8 +34,8 @@
   <tb-fieldset-component [label]="'tb.rulenode.fetch-interval' | translate" required="true">
     <ng-template tbAppWidgetContentTemplate>
       <tb-slide-toggle class="interval-slide-toggle" formControlName="useMetadataIntervalPatterns"
-                       [slideToggleName]="'tb.rulenode.use-metadata-interval-patterns' | translate"
-                       [slideToggleTooltip]="'tb.rulenode.use-metadata-interval-patterns-tooltip' | translate">
+                       [slideToggleName]="'tb.rulenode.use-metadata-dynamic-interval' | translate"
+                       [slideToggleTooltip]="'tb.rulenode.use-metadata-dynamic-interval-tooltip' | translate">
       </tb-slide-toggle>
       <div style="width: 100%" formGroupName="interval" fxLayout="column" *ngIf="getTelemetryFromDatabaseConfigForm.get('useMetadataIntervalPatterns').value === false; else intervalPattern">
         <div class="interval-block" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="8px">
@@ -98,23 +98,23 @@
       </div>
       <ng-template #intervalPattern>
         <mat-form-field style="width: 100%" class="mat-block interval-block" >
-          <mat-label>{{ 'tb.rulenode.start-interval-pattern' | translate }}</mat-label>
+          <mat-label>{{ 'tb.rulenode.start-interval' | translate }}</mat-label>
           <input matInput formControlName="startIntervalPattern" required>
           <mat-error *ngIf="getTelemetryFromDatabaseConfigForm.get('startIntervalPattern').hasError('required') ||
             getTelemetryFromDatabaseConfigForm.get('startIntervalPattern').hasError('pattern')">
-            {{ 'tb.rulenode.start-interval-pattern-required' | translate }}
+            {{ 'tb.rulenode.start-interval-required' | translate }}
           </mat-error>
         </mat-form-field>
         <mat-form-field style="width: 100%" class="mat-block interval-block" >
-          <mat-label>{{ 'tb.rulenode.end-interval-pattern' | translate }}</mat-label>
+          <mat-label>{{ 'tb.rulenode.end-interval' | translate }}</mat-label>
           <input matInput formControlName="endIntervalPattern" required>
           <mat-error *ngIf="getTelemetryFromDatabaseConfigForm.get('endIntervalPattern').hasError('required') ||
           getTelemetryFromDatabaseConfigForm.get('endIntervalPattern').hasError('pattern')">
-            {{ 'tb.rulenode.end-interval-pattern-required' | translate }}
+            {{ 'tb.rulenode.end-interval-required' | translate }}
           </mat-error>
         </mat-form-field>
         <div class="tb-hint">
-          <span style="vertical-align: middle">{{ 'tb.rulenode.kv-map-pattern-hint' | translate }}</span>
+          <span style="vertical-align: middle">{{ 'tb.rulenode.metadata-dynamic-interval-hint' | translate }}</span>
           <span tb-help-popup="{{'rulenode/msg_and_metadata_key_patterns_fn'}}"
                 tb-help-popup-placement="right"  class="examples-popup"
                 trigger-style="letter-spacing:0.25px; font-size:12px"

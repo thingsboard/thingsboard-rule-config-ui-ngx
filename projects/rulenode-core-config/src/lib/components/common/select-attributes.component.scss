@@ -10,12 +10,18 @@
     display: block;
   }
 
-  .examples-popup .mat-icon {
-    width: 12px !important;
-    min-width: 12px !important;
-    height: 12px !important;
-    min-height: 12px !important;
-    font-size: 12px !important;
-    line-height: 12px !important;
+  .examples-popup {
+    .mat-icon {
+      width: 12px !important;
+      min-width: 12px !important;
+      height: 12px !important;
+      min-height: 12px !important;
+      font-size: 12px !important;
+      line-height: 12px !important;
+    }
+
+    button {
+      height: 21px !important;
+    }
   }
 }
