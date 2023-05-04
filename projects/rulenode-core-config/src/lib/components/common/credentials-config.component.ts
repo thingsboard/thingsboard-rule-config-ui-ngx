@@ -1,22 +1,22 @@
 import { Component, forwardRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import {
   ControlValueAccessor,
-  UntypedFormBuilder, UntypedFormControl,
-  UntypedFormGroup,
+  FormBuilder,
+  FormControl,
+  FormGroup,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
-  ValidationErrors, Validator,
+  ValidationErrors,
+  Validator,
   ValidatorFn,
   Validators
 } from '@angular/forms';
-import { isDefinedAndNotNull } from '@core/public-api';
+import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { PageComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { AppState } from '@core/public-api';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { credentialsType, credentialsTypes, credentialsTypeTranslations } from '../../rulenode-core-config.models';
 import { Subscription } from 'rxjs';
-import { distinctUntilChanged } from 'rxjs/operators';
 
 interface CredentialsConfig {
   type: credentialsType;
@@ -49,7 +49,7 @@ interface CredentialsConfig {
 })
 export class CredentialsConfigComponent extends PageComponent implements ControlValueAccessor, OnInit, Validator, OnDestroy, OnChanges {
 
-  credentialsConfigFormGroup: UntypedFormGroup;
+  credentialsConfigFormGroup: FormGroup;
 
   subscriptions: Subscription[] = [];
 
@@ -66,7 +66,7 @@ export class CredentialsConfigComponent extends PageComponent implements Control
   disableCertPemCredentials = false;
 
   @Input()
-  passwordFieldRquired = true;
+  passwordFieldRequired = true;
 
   allCredentialsTypes = credentialsTypes;
   credentialsTypeTranslationsMap = credentialsTypeTranslations;
@@ -74,7 +74,7 @@ export class CredentialsConfigComponent extends PageComponent implements Control
   private propagateChange = (_: any) => {};
 
   constructor(protected store: Store<AppState>,
-              private fb: UntypedFormBuilder) {
+              private fb: FormBuilder) {
     super(store);
   }
 
@@ -93,7 +93,7 @@ export class CredentialsConfigComponent extends PageComponent implements Control
       }
     );
     this.subscriptions.push(
-      this.credentialsConfigFormGroup.valueChanges.pipe(distinctUntilChanged()).subscribe(() => {
+      this.credentialsConfigFormGroup.valueChanges.subscribe(() => {
         this.updateView();
       })
     );
@@ -127,15 +127,15 @@ export class CredentialsConfigComponent extends PageComponent implements Control
   writeValue(credentials: CredentialsConfig | null): void {
     if (isDefinedAndNotNull(credentials)) {
       this.credentialsConfigFormGroup.reset(credentials, {emitEvent: false});
-      this.updateValidators(false);
+      this.updateValidators();
     }
   }
 
   setDisabledState(isDisabled: boolean): void {
     if (isDisabled) {
-      this.credentialsConfigFormGroup.disable();
+      this.credentialsConfigFormGroup.disable({emitEvent: false});
     } else {
-      this.credentialsConfigFormGroup.enable();
+      this.credentialsConfigFormGroup.enable({emitEvent: false});
       this.updateValidators();
     }
   }
@@ -170,7 +170,7 @@ export class CredentialsConfigComponent extends PageComponent implements Control
   registerOnTouched(fn: any): void {
   }
 
-  public validate(c: UntypedFormControl) {
+  public validate(c: FormControl) {
     return this.credentialsConfigFormGroup.valid ? null : {
       credentialsConfig: {
         valid: false,
@@ -205,7 +205,7 @@ export class CredentialsConfigComponent extends PageComponent implements Control
         break;
       case 'basic':
         this.credentialsConfigFormGroup.get('username').setValidators([Validators.required]);
-        this.credentialsConfigFormGroup.get('password').setValidators(this.passwordFieldRquired ? [Validators.required] : []);
+        this.credentialsConfigFormGroup.get('password').setValidators(this.passwordFieldRequired ? [Validators.required] : []);
         break;
       case 'cert.PEM':
         this.credentialsConfigFormGroup.setValidators([this.requiredFilesSelected(
@@ -221,7 +221,7 @@ export class CredentialsConfigComponent extends PageComponent implements Control
 
   private requiredFilesSelected(validator: ValidatorFn,
                                 requiredFieldsSet: string[][] = null) {
-    return (group: UntypedFormGroup): ValidationErrors | null => {
+    return (group: FormGroup): ValidationErrors | null => {
       if (!requiredFieldsSet) {
         requiredFieldsSet = [Object.keys(group.controls)];
       }
