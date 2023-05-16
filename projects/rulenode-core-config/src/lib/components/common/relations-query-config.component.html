@@ -19,6 +19,9 @@
                    step="1"
                    placeholder="{{ 'tb.rulenode.unlimited-level' | translate }}"
                    formControlName="maxLevel">
+            <mat-error *ngIf="relationsQueryFormGroup.get('maxLevel').hasError('min')">
+              {{ 'tb.rulenode.max-relation-level-error' | translate }}
+            </mat-error>
           </mat-form-field>
         </div>
         <tb-slide-toggle *ngIf="relationsQueryFormGroup.get('maxLevel').value > 1"

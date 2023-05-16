@@ -56,7 +56,7 @@ export class DeviceRelationsQueryConfigComponent extends PageComponent implement
     this.deviceRelationsQueryFormGroup = this.fb.group({
       fetchLastLevelOnly: [false, []],
       direction: [null, [Validators.required]],
-      maxLevel: [null, []],
+      maxLevel: [null, [Validators.min(1)]],
       relationType: [null],
       deviceTypes: [null, [Validators.required]]
     });

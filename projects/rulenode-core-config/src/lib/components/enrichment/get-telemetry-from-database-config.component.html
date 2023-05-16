@@ -1,6 +1,6 @@
 <section [formGroup]="getTelemetryFromDatabaseConfigForm" fxLayout="column">
   <mat-form-field class="mat-block" subscriptSizing="dynamic">
-    <mat-label>{{'tb.rulenode.timeseries-key' | translate}}</mat-label>
+    <mat-label>{{'tb.rulenode.timeseries-keys' | translate}}</mat-label>
     <mat-chip-grid #latestTimeseriesChipList>
       <mat-chip-row
         *ngFor="let key of getTelemetryFromDatabaseConfigForm.get('latestTsKeyNames').value;"

@@ -28,17 +28,27 @@ export class CalculateDeltaConfigComponent extends RuleNodeConfigurationComponen
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.calculateDeltaConfigForm = this.fb.group({
-      inputValueKey: [isDefinedAndNotNull(configuration?.inputValueKey) ? configuration.inputValueKey : null, [Validators.required,
-        Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]],
-      outputValueKey: [isDefinedAndNotNull(configuration?.outputValueKey) ? configuration.outputValueKey : null, [Validators.required,
-        Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]],
-      useCache: [isDefinedAndNotNull(configuration?.useCache) ? configuration.useCache : true, []],
-      addPeriodBetweenMsgs: [isDefinedAndNotNull(configuration?.addPeriodBetweenMsgs) ? configuration.addPeriodBetweenMsgs : false, []],
-      periodValueKey: [isDefinedAndNotNull(configuration?.periodValueKey) ? configuration.periodValueKey : null, []],
-      round: [isDefinedAndNotNull(configuration?.round) ? configuration.round : null, [Validators.min(0), Validators.max(15)]],
-      tellFailureIfDeltaIsNegative: [isDefinedAndNotNull(configuration?.tellFailureIfDeltaIsNegative) ?
-        configuration.tellFailureIfDeltaIsNegative : true, []]
+      inputValueKey: [configuration.inputValueKey, [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]],
+      outputValueKey: [configuration.outputValueKey, [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]],
+      useCache: [configuration.useCache, []],
+      addPeriodBetweenMsgs: [configuration.addPeriodBetweenMsgs, []],
+      periodValueKey: [configuration.periodValueKey, []],
+      round: [configuration.round, [Validators.min(0), Validators.max(15)]],
+      tellFailureIfDeltaIsNegative: [configuration.tellFailureIfDeltaIsNegative, []]
     });
+  }
+
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    return {
+      inputValueKey: isDefinedAndNotNull(configuration?.inputValueKey) ? configuration.inputValueKey : null,
+      outputValueKey: isDefinedAndNotNull(configuration?.outputValueKey) ? configuration.outputValueKey : null,
+      useCache: isDefinedAndNotNull(configuration?.useCache) ? configuration.useCache : true,
+      addPeriodBetweenMsgs: isDefinedAndNotNull(configuration?.addPeriodBetweenMsgs) ? configuration.addPeriodBetweenMsgs : false,
+      periodValueKey: isDefinedAndNotNull(configuration?.periodValueKey) ? configuration.periodValueKey : null,
+      round: isDefinedAndNotNull(configuration?.round) ? configuration.round : null,
+      tellFailureIfDeltaIsNegative: isDefinedAndNotNull(configuration?.tellFailureIfDeltaIsNegative) ?
+        configuration.tellFailureIfDeltaIsNegative : true
+    };
   }
 
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {

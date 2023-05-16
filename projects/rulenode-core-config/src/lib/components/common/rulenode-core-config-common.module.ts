@@ -18,7 +18,7 @@ import { SvMapConfigComponent } from './sv-map-config.component';
 import { WidgetContentTemplateDirective } from './widget-content-tempate.directive';
 import { FieldsetComponent } from './fieldset.component';
 import { RelationsQueryConfigOldComponent } from './relations-query-config-old.component';
-import { AttributeTelemetryToggleComponent } from './attribute-telemetry-toggle.component';
+import { FetchToDataToggleComponent } from './fetch-to-data-toggle.component';
 import { SelectAttributesComponent } from './select-attributes.component';
 
 
@@ -40,7 +40,7 @@ import { SelectAttributesComponent } from './select-attributes.component';
     WidgetContentTemplateDirective,
     FieldsetComponent,
     RelationsQueryConfigOldComponent,
-    AttributeTelemetryToggleComponent,
+    FetchToDataToggleComponent,
     SelectAttributesComponent
   ],
   imports: [
@@ -65,7 +65,7 @@ import { SelectAttributesComponent } from './select-attributes.component';
     WidgetContentTemplateDirective,
     FieldsetComponent,
     RelationsQueryConfigOldComponent,
-    AttributeTelemetryToggleComponent,
+    FetchToDataToggleComponent,
     SelectAttributesComponent
   ]
 })

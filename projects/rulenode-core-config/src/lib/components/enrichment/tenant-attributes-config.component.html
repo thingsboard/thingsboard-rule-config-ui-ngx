@@ -1,23 +1,23 @@
 <section [formGroup]="tenantAttributesConfigForm" fxLayout="column">
   <tb-fieldset-component [label]="'tb.rulenode.mapping-of-tenant' | translate">
     <ng-template tbAppWidgetContentTemplate>
-      <tb-attribute-telemetry-toggle formControlName="telemetry"></tb-attribute-telemetry-toggle>
+      <tb-fetch-to-data-toggle formControlName="dataToFetch"></tb-fetch-to-data-toggle>
       <tb-kv-map-config
         required
         formControlName="attrMapping"
         [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
-        [labelText]="tenantAttributesConfigForm.get('telemetry').value ? ('tb.rulenode.latest-telemetry-mapping' | translate) :
-        ('tb.rulenode.attributes-mapping' | translate) "
-        [keyText]="tenantAttributesConfigForm.get('telemetry').value ? ('tb.rulenode.source-telemetry' | translate) :
-        ('tb.rulenode.source-attribute' | translate)"
-        [keyRequiredText]="tenantAttributesConfigForm.get('telemetry').value ? ('tb.rulenode.source-telemetry-required' | translate) :
-        ('tb.rulenode.source-attribute-required' | translate)"
+        [labelText]="tenantAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY ?
+        ('tb.rulenode.latest-telemetry-mapping' | translate) : ('tb.rulenode.attributes-mapping' | translate) "
+        [keyText]="tenantAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY ?
+        ('tb.rulenode.source-telemetry' | translate) : ('tb.rulenode.source-attribute' | translate)"
+        [keyRequiredText]="tenantAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY ?
+        ('tb.rulenode.source-telemetry-required' | translate) : ('tb.rulenode.source-attribute-required' | translate)"
         [valText]="'tb.rulenode.target-key' | translate"
         [valRequiredText]="'tb.rulenode.target-key-required' | translate"
         [hintText]="'tb.rulenode.kv-map-pattern-hint' | translate">
       </tb-kv-map-config>
       <tb-msg-metadata-chip formControlName="fetchTo"
-                            [labelText]="tenantAttributesConfigForm.get('telemetry').value ?
+                            [labelText]="tenantAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY ?
                             ('tb.rulenode.add-mapped-latest-telemetry-to' | translate) : ('tb.rulenode.add-mapped-attribute-to' | translate)">
       </tb-msg-metadata-chip>
     </ng-template>

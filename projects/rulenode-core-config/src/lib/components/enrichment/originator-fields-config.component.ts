@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FetchTo, OriginatorFields, originatorFieldsTranslations } from '../../rulenode-core-config.models';
 
 @Component({
@@ -16,7 +16,7 @@ export class OriginatorFieldsConfigComponent extends RuleNodeConfigurationCompon
   public originatorFields: OriginatorFields[] = [];
   public originatorFieldsTranslations = originatorFieldsTranslations;
   constructor(protected store: Store<AppState>,
-              private fb: UntypedFormBuilder) {
+              private fb: FormBuilder) {
     super(store);
     for (const field of Object.keys(OriginatorFields)) {
       this.originatorFields.push(OriginatorFields[field]);
@@ -34,11 +34,20 @@ export class OriginatorFieldsConfigComponent extends RuleNodeConfigurationCompon
     return configuration;
   }
 
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    return {
+      fieldsMapping: isDefinedAndNotNull(configuration?.fieldsMapping) ? configuration.fieldsMapping : null,
+      ignoreNullStrings: isDefinedAndNotNull(configuration?.ignoreNullStrings) ? configuration.ignoreNullStrings : null,
+      fetchTo: isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA
+    };
+  }
+
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.originatorFieldsConfigForm = this.fb.group({
-      fieldsMapping: [isDefinedAndNotNull(configuration?.fieldsMapping) ? configuration.fieldsMapping : null, [Validators.required]],
-      ignoreNullStrings: [isDefinedAndNotNull(configuration?.ignoreNullStrings) ? configuration.ignoreNullStrings : null],
-      fetchTo: [isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA]
+      fieldsMapping: [configuration.fieldsMapping, [Validators.required]],
+      ignoreNullStrings: [configuration.ignoreNullStrings, []],
+      fetchTo: [configuration.fetchTo, []]
     });
+    console.log(this.originatorFieldsConfigForm);
   }
 }

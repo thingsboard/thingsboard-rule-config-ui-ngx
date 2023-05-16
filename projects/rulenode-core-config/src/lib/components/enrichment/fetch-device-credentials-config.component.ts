@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState, isDefinedAndNotNull } from '@core/public-api';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { FetchTo } from '../../rulenode-core-config.models';
 
@@ -12,20 +12,26 @@ import { FetchTo } from '../../rulenode-core-config.models';
 
 export class FetchDeviceCredentialsConfigComponent extends RuleNodeConfigurationComponent {
 
-  fetchDeviceCredentialsConfigForm: UntypedFormGroup;
+  fetchDeviceCredentialsConfigForm: FormGroup;
 
   constructor(protected store: Store<AppState>,
-              private fb: UntypedFormBuilder) {
+              private fb: FormBuilder) {
     super(store);
   }
 
-  protected configForm(): UntypedFormGroup {
+  protected configForm(): FormGroup {
     return this.fetchDeviceCredentialsConfigForm;
+  }
+
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    return {
+      fetchTo: isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA
+    };
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.fetchDeviceCredentialsConfigForm = this.fb.group({
-      fetchTo: [isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA, []]
+      fetchTo: [configuration.fetchTo, []]
     });
   }
 }

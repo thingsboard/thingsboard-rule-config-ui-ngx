@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AppState, isDefinedAndNotNull, isObject, isUndefinedOrNull } from '@core/public-api';
+import { AppState, isDefinedAndNotNull, isObject, } from '@core/public-api';
 import { Store } from '@ngrx/store';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { UntypedFormBuilder, FormGroup } from '@angular/forms';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { TranslateService } from '@ngx-translate/core';
 import { FetchTo } from '../../rulenode-core-config.models';
@@ -13,7 +13,7 @@ import { FetchTo } from '../../rulenode-core-config.models';
 })
 export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationComponent {
 
-  originatorAttributesConfigForm: UntypedFormGroup;
+  originatorAttributesConfigForm: FormGroup;
 
   constructor(protected store: Store<AppState>,
               public translate: TranslateService,
@@ -21,15 +21,15 @@ export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationCo
     super(store);
   }
 
-  protected configForm(): UntypedFormGroup {
+  protected configForm(): FormGroup {
     return this.originatorAttributesConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.originatorAttributesConfigForm = this.fb.group({
-      tellFailureIfAbsent: [isDefinedAndNotNull(configuration?.tellFailureIfAbsent) ? configuration.tellFailureIfAbsent : false, []],
-      fetchTo: [isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA, []],
-      attributesControl: [configuration ? configuration.attributesControl : null, []]
+      tellFailureIfAbsent: [configuration.tellFailureIfAbsent, []],
+      fetchTo: [configuration.fetchTo, []],
+      attributesControl: [configuration.attributesControl, []]
     });
   }
 
@@ -42,17 +42,13 @@ export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationCo
         sharedAttributeNames: isDefinedAndNotNull(configuration?.sharedAttributeNames) ? configuration.sharedAttributeNames : null,
         getLatestValueWithTs: isDefinedAndNotNull(configuration?.getLatestValueWithTs) ? configuration.getLatestValueWithTs : false
       };
-      delete configuration.clientAttributeNames;
-      delete configuration.latestTsKeyNames;
-      delete configuration.serverAttributeNames;
-      delete configuration.sharedAttributeNames;
-      delete configuration.getLatestValueWithTs;
-
-      if (isUndefinedOrNull(configuration?.fetchTo)) {
-        configuration.fetchTo = false;
-      }
     }
-    return configuration;
+
+    return {
+      fetchTo: isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA,
+      tellFailureIfAbsent: isDefinedAndNotNull(configuration?.tellFailureIfAbsent) ? configuration.tellFailureIfAbsent : false,
+      attributesControl : isDefinedAndNotNull(configuration?.attributesControl) ? configuration.attributesControl : null
+    };
   }
 
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {

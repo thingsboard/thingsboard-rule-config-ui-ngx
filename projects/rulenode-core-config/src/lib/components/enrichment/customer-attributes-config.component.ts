@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { FetchTo } from '../../rulenode-core-config.models';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { DataToFetch, FetchTo } from '../../rulenode-core-config.models';
 
 @Component({
   selector: 'tb-enrichment-node-customer-attributes-config',
@@ -12,14 +12,14 @@ import { FetchTo } from '../../rulenode-core-config.models';
 })
 export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComponent {
 
-  customerAttributesConfigForm: UntypedFormGroup;
+  customerAttributesConfigForm: FormGroup;
 
   constructor(protected store: Store<AppState>,
-              private fb: UntypedFormBuilder) {
+              private fb: FormBuilder) {
     super(store);
   }
 
-  protected configForm(): UntypedFormGroup {
+  protected configForm(): FormGroup {
     return this.customerAttributesConfigForm;
   }
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
@@ -31,11 +31,21 @@ export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComp
     return configuration;
   }
 
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    return {
+      dataToFetch: isDefinedAndNotNull(configuration?.dataToFetch) ? configuration.dataToFetch : DataToFetch.ATTRIBUTES,
+      attrMapping: isDefinedAndNotNull(configuration?.attrMapping) ? configuration.attrMapping : null,
+      fetchTo: isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA
+    };
+  }
+
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.customerAttributesConfigForm = this.fb.group({
-      telemetry: [isDefinedAndNotNull(configuration?.telemetry) ? configuration.telemetry : false, []],
-      attrMapping: [isDefinedAndNotNull(configuration?.attrMapping) ? configuration.attrMapping : null, [Validators.required]],
-      fetchTo: [isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA]
+      dataToFetch: [configuration.dataToFetch, []],
+      attrMapping: [configuration.attrMapping, [Validators.required]],
+      fetchTo: [configuration.fetchTo]
     });
   }
+
+  protected readonly DataToFetch = DataToFetch;
 }

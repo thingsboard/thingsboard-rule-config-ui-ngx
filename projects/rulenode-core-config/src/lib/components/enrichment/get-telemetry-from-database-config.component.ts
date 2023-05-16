@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
 import { AppState, isDefinedAndNotNull, isObject } from '@core/public-api';
 import { Store } from '@ngrx/store';
-import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, ValidationErrors, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+  FormBuilder
+} from '@angular/forms';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 import { aggregationTranslations, AggregationType, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { MatChipInputEvent } from '@angular/material/chips';
@@ -22,7 +28,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurationComponent {
 
-  getTelemetryFromDatabaseConfigForm: UntypedFormGroup;
+  getTelemetryFromDatabaseConfigForm: FormGroup;
 
   separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
 
@@ -49,34 +55,30 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
   };
   constructor(protected store: Store<AppState>,
               public translate: TranslateService,
-              private fb: UntypedFormBuilder) {
+              private fb: FormBuilder) {
     super(store);
   }
 
-  protected configForm(): UntypedFormGroup {
+  protected configForm(): FormGroup {
     return this.getTelemetryFromDatabaseConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.getTelemetryFromDatabaseConfigForm = this.fb.group({
-      latestTsKeyNames: [isDefinedAndNotNull(configuration?.latestTsKeyNames) ? configuration.latestTsKeyNames : null, []],
-      aggregation: [isDefinedAndNotNull(configuration?.aggregation) ? configuration.aggregation :
-        AggregationType.NONE, [Validators.required]],
-      fetchMode: [isDefinedAndNotNull(configuration?.fetchMode) ? configuration.fetchMode : FetchMode.FIRST, [Validators.required]],
-      orderBy: [isDefinedAndNotNull(configuration?.orderBy) ? configuration.orderBy : SamplingOrder.ASC, []],
-      limit: [isDefinedAndNotNull(configuration?.limit) ? configuration.limit : 1000, []],
-      useMetadataIntervalPatterns: [isDefinedAndNotNull(configuration?.useMetadataIntervalPatterns) ?
-        configuration.useMetadataIntervalPatterns : false, []],
+      latestTsKeyNames: [configuration.latestTsKeyNames, []],
+      aggregation: [configuration.aggregation, [Validators.required]],
+      fetchMode: [configuration.fetchMode, [Validators.required]],
+      orderBy: [configuration.orderBy, []],
+      limit: [configuration.limit, []],
+      useMetadataIntervalPatterns: [configuration.useMetadataIntervalPatterns, []],
       interval: this.fb.group({
-        startInterval: [isDefinedAndNotNull(configuration?.interval?.startInterval) ? configuration.interval.startInterval : 2, []],
-        startIntervalTimeUnit: [isDefinedAndNotNull(configuration?.interval?.startIntervalTimeUnit) ?
-          configuration.interval.startIntervalTimeUnit : TimeUnit.MINUTES, []],
-        endInterval: [isDefinedAndNotNull(configuration?.interval?.endInterval) ? configuration.interval.endInterval : 1, []],
-        endIntervalTimeUnit: [isDefinedAndNotNull(configuration?.interval?.endIntervalTimeUnit) ?
-          configuration.interval.endIntervalTimeUnit : TimeUnit.MINUTES, []],
+        startInterval: [configuration.interval.startInterval, []],
+        startIntervalTimeUnit: [configuration.interval.startIntervalTimeUnit, []],
+        endInterval: [configuration.interval.endInterval, []],
+        endIntervalTimeUnit: [configuration.interval.endIntervalTimeUnit, []],
       }),
-      startIntervalPattern: [isDefinedAndNotNull(configuration?.startIntervalPattern) ? configuration.startIntervalPattern : null, []],
-      endIntervalPattern: [isDefinedAndNotNull(configuration?.endIntervalPattern) ? configuration.endIntervalPattern : null, []],
+      startIntervalPattern: [configuration.startIntervalPattern, []],
+      endIntervalPattern: [configuration.endIntervalPattern, []],
     });
   }
 
@@ -115,7 +117,26 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
         endIntervalTimeUnit: configuration.endIntervalTimeUnit
       };
     }
-    return configuration;
+
+    return {
+      latestTsKeyNames: isDefinedAndNotNull(configuration?.latestTsKeyNames) ? configuration.latestTsKeyNames : null,
+      aggregation: isDefinedAndNotNull(configuration?.aggregation) ? configuration.aggregation : AggregationType.NONE,
+      fetchMode: isDefinedAndNotNull(configuration?.fetchMode) ? configuration.fetchMode : FetchMode.FIRST,
+      orderBy: isDefinedAndNotNull(configuration?.orderBy) ? configuration.orderBy : SamplingOrder.ASC,
+      limit: isDefinedAndNotNull(configuration?.limit) ? configuration.limit : 1000,
+      useMetadataIntervalPatterns: isDefinedAndNotNull(configuration?.useMetadataIntervalPatterns) ?
+        configuration.useMetadataIntervalPatterns : false,
+      interval: {
+        startInterval: isDefinedAndNotNull(configuration?.interval?.startInterval) ? configuration.interval.startInterval : 2,
+        startIntervalTimeUnit: isDefinedAndNotNull(configuration?.interval?.startIntervalTimeUnit) ?
+          configuration.interval.startIntervalTimeUnit : TimeUnit.MINUTES,
+        endInterval: isDefinedAndNotNull(configuration?.interval?.endInterval) ? configuration.interval.endInterval : 1,
+        endIntervalTimeUnit: isDefinedAndNotNull(configuration?.interval?.endIntervalTimeUnit) ?
+          configuration.interval.endIntervalTimeUnit : TimeUnit.MINUTES,
+      },
+      startIntervalPattern: isDefinedAndNotNull(configuration?.startIntervalPattern) ? configuration.startIntervalPattern : null,
+      endIntervalPattern: isDefinedAndNotNull(configuration?.endIntervalPattern) ? configuration.endIntervalPattern : null
+    };
   }
 
   protected updateValidators(emitEvent: boolean) {

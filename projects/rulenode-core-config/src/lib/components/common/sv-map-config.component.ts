@@ -1,18 +1,19 @@
-import { Component, forwardRef, Injector, Input, OnInit } from '@angular/core';
+import { Component, forwardRef, Injector, Input, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
-  ControlValueAccessor, UntypedFormArray,
+  ControlValueAccessor,
   UntypedFormBuilder, UntypedFormControl,
   UntypedFormGroup, NG_VALIDATORS,
   NG_VALUE_ACCESSOR, NgControl, Validator,
-  Validators
+  Validators, FormArray
 } from '@angular/forms';
 import { PageComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { AppState } from '@core/public-api';
-import { Subscription } from 'rxjs';
+import { AppState, isDefinedAndNotNull } from '@core/public-api';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { TranslateService } from '@ngx-translate/core';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'tb-sv-map-config',
@@ -31,7 +32,7 @@ import { TranslateService } from '@ngx-translate/core';
     }
   ]
 })
-export class SvMapConfigComponent extends PageComponent implements ControlValueAccessor, OnInit, Validator {
+export class SvMapConfigComponent extends PageComponent implements ControlValueAccessor, OnInit, Validator, OnDestroy {
 
   @Input() selectOptions: string[];
 
@@ -43,6 +44,8 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
 
   @Input() requiredText: string;
 
+  @Input() targetKeyPrefix: string;
+
   @Input() selectText: string;
 
   @Input() selectRequiredText: string;
@@ -51,8 +54,11 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
 
   @Input() valRequiredText: string;
 
+  @Input() hintText: string;
 
+  private destroy$ = new Subject<void>();
   private requiredValue: boolean;
+  private sourceFieldSubcritption: Subscription[] = [];
   get required(): boolean {
     return this.requiredValue;
   }
@@ -86,8 +92,13 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
       this.fb.array([]));
   }
 
-  keyValsFormArray(): UntypedFormArray {
-    return this.kvListFormGroup.get('keyVals') as UntypedFormArray;
+  keyValsFormArray(): FormArray {
+    return this.kvListFormGroup.get('keyVals') as FormArray;
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   registerOnChange(fn: any): void {
@@ -122,20 +133,52 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
       }
     }
     this.kvListFormGroup.setControl('keyVals', this.fb.array(keyValsControls));
-    this.valueChangeSubscription = this.kvListFormGroup.valueChanges.subscribe(() => {
+    for (const formGroup of this.keyValsFormArray().controls) {
+      this.keyChangeSubscribe(formGroup);
+    }
+    this.valueChangeSubscription = this.kvListFormGroup.valueChanges.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe((value) => {
       this.updateModel();
     });
   }
 
+  public filterSelectOptions(keyValControl?) {
+      const deleteIndexArray = [];
+      for (const fieldMap of this.kvListFormGroup.get('keyVals').value) {
+        deleteIndexArray.push(this.selectOptions.findIndex((selectElement) => selectElement === fieldMap.key));
+      }
+      const filterSelectOptions = [];
+      for (let i = 0; i < this.selectOptions.length; i++) {
+        if (!isDefinedAndNotNull(deleteIndexArray.find((deleteElement) => deleteElement === i)) ||
+          this.selectOptions[i] === keyValControl?.get('key').value) {
+          filterSelectOptions.push(this.selectOptions[i]);
+        }
+      }
+
+      return filterSelectOptions;
+  }
+
   public removeKeyVal(index: number) {
-    (this.kvListFormGroup.get('keyVals') as UntypedFormArray).removeAt(index);
+    (this.kvListFormGroup.get('keyVals') as FormArray).removeAt(index);
+    this.sourceFieldSubcritption[index].unsubscribe();
+    this.sourceFieldSubcritption.splice(index, 1);
   }
 
   public addKeyVal() {
-    const keyValsFormArray = this.kvListFormGroup.get('keyVals') as UntypedFormArray;
+    const keyValsFormArray = this.kvListFormGroup.get('keyVals') as FormArray;
     keyValsFormArray.push(this.fb.group({
       key: ['', [Validators.required]],
       value: ['', [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]]
+    }));
+    this.keyChangeSubscribe(keyValsFormArray.controls[keyValsFormArray.length - 1]);
+  }
+
+  private keyChangeSubscribe(formGroup) {
+    this.sourceFieldSubcritption.push(formGroup.get('key').valueChanges.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe((value) => {
+      formGroup.get('value').patchValue(this.targetKeyPrefix + value[0].toUpperCase() + value.slice(1));
     }));
   }
 

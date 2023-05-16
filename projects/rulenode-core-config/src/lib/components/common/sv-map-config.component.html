@@ -12,7 +12,7 @@
           <mat-form-field fxFlex class="mat-block">
             <mat-label>{{ selectText }}</mat-label>
             <mat-select [formControl]="keyValControl.get('key')" required>
-              <mat-option *ngFor="let option of selectOptions" [value]="option">
+              <mat-option *ngFor="let option of filterSelectOptions(keyValControl)" [value]="option">
                 {{selectOptionsTranslate.get(option) | translate}}
               </mat-option>
             </mat-select>
@@ -33,11 +33,19 @@
                 [fxShow]="!disabled"
                 type="button"
                 (click)="removeKeyVal($index)"
-                [disabled]="isLoading$ | async"
+                [disabled]="(isLoading$ | async)"
                 matTooltip="{{ 'tb.key-val.remove-mapping-entry' | translate }}"
                 matTooltipPosition="above">
           <mat-icon>close</mat-icon>
         </button>
+      </div>
+      <div *ngIf="hintText" class="tb-hint">
+        <span style="vertical-align: middle">{{ hintText }}</span>
+        <span tb-help-popup="{{'rulenode/msg_and_metadata_key_patterns_fn'}}"
+              tb-help-popup-placement="right"  class="examples-popup"
+              trigger-style="letter-spacing:0.25px; font-size:12px"
+              [tb-help-popup-style]="{maxWidth: '820px'}"
+              trigger-text="{{ 'tb.key-val.see-examples' | translate }}"></span>
       </div>
     </div>
   </div>
@@ -48,7 +56,7 @@
   <div style="margin-top: 8px;">
     <button mat-stroked-button class="add-button" color="primary"
             [fxShow]="!disabled"
-            [disabled]="isLoading$ | async"
+            [disabled]="(isLoading$ | async) || keyValsFormArray().length >= selectOptions.length"
             (click)="addKeyVal()"
             type="button">
       {{ 'tb.key-val.add-mapping-entry' | translate }}

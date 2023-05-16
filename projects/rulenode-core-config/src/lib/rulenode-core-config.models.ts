@@ -155,6 +155,11 @@ export enum SamplingOrder {
   DESC = 'DESC'
 }
 
+export enum DataToFetch {
+  ATTRIBUTES = 'ATTRIBUTES',
+  LATEST_TELEMETRY = 'LATEST_TELEMETRY',
+  FIELDS = 'FIELDS'
+}
 export const samplingOrderTranslations = new Map<SamplingOrder, string>(
   [
     [SamplingOrder.ASC, 'tb.rulenode.ascending'],

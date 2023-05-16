@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AppState, isDefinedAndNotNull, isObject, isUndefinedOrNull } from '@core/public-api';
+import { AppState, isDefinedAndNotNull, isObject } from '@core/public-api';
 import { Store } from '@ngrx/store';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { TranslateService } from '@ngx-translate/core';
 import { FetchTo } from '../../rulenode-core-config.models';
@@ -13,25 +13,24 @@ import { FetchTo } from '../../rulenode-core-config.models';
 })
 export class DeviceAttributesConfigComponent extends RuleNodeConfigurationComponent {
 
-  deviceAttributesConfigForm: UntypedFormGroup;
+  deviceAttributesConfigForm: FormGroup;
 
   constructor(protected store: Store<AppState>,
               public translate: TranslateService,
-              private fb: UntypedFormBuilder) {
+              private fb: FormBuilder) {
     super(store);
   }
 
-  protected configForm(): UntypedFormGroup {
+  protected configForm(): FormGroup {
     return this.deviceAttributesConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.deviceAttributesConfigForm = this.fb.group({
-      deviceRelationsQuery: [isDefinedAndNotNull(configuration?.deviceRelationsQuery) ?
-        configuration.deviceRelationsQuery : null, [Validators.required]],
-      tellFailureIfAbsent: [isDefinedAndNotNull(configuration?.tellFailureIfAbsent) ? configuration.tellFailureIfAbsent : true, []],
-      fetchTo: [isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA, []],
-      attributesControl: [configuration ? configuration.attributesControl : null, []]
+      deviceRelationsQuery: [configuration.deviceRelationsQuery, [Validators.required]],
+      tellFailureIfAbsent: [configuration.tellFailureIfAbsent, []],
+      fetchTo: [configuration.fetchTo, []],
+      attributesControl: [configuration.attributesControl, []]
     });
   }
 
@@ -44,17 +43,14 @@ export class DeviceAttributesConfigComponent extends RuleNodeConfigurationCompon
         sharedAttributeNames: isDefinedAndNotNull(configuration?.sharedAttributeNames) ? configuration.sharedAttributeNames : null,
         getLatestValueWithTs: isDefinedAndNotNull(configuration?.getLatestValueWithTs) ? configuration.getLatestValueWithTs : false,
       };
-      delete configuration.clientAttributeNames;
-      delete configuration.latestTsKeyNames;
-      delete configuration.serverAttributeNames;
-      delete configuration.sharedAttributeNames;
-      delete configuration.getLatestValueWithTs;
-
-      if (isUndefinedOrNull(configuration?.fetchTo)) {
-        configuration.fetchTo = false;
-      }
     }
-    return configuration;
+
+    return {
+      deviceRelationsQuery: isDefinedAndNotNull(configuration?.deviceRelationsQuery) ? configuration.deviceRelationsQuery : null,
+      tellFailureIfAbsent: isDefinedAndNotNull(configuration?.tellFailureIfAbsent) ? configuration.tellFailureIfAbsent : true,
+      fetchTo: isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA,
+      attributesControl: configuration ? configuration.attributesControl : null
+    };
   }
 
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {

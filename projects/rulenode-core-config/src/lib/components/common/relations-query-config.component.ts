@@ -47,7 +47,7 @@ export class RelationsQueryConfigComponent extends PageComponent implements Cont
     this.relationsQueryFormGroup = this.fb.group({
       fetchLastLevelOnly: [false, []],
       direction: [null, [Validators.required]],
-      maxLevel: [null, []],
+      maxLevel: [null, [Validators.min(1)]],
       filters: [null]
     });
     this.relationsQueryFormGroup.valueChanges.subscribe((query: RelationsQuery) => {

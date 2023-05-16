@@ -1,34 +1,37 @@
-import { Component, forwardRef, OnDestroy, OnInit } from '@angular/core';
+import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { DataToFetch } from '../../rulenode-core-config.models';
 
 @Component({
-  selector: 'tb-attribute-telemetry-toggle',
-  templateUrl: './attribute-telemetry-toggle.component.html',
-  styleUrls: ['./attribute-telemetry-toggle.component.scss'],
+  selector: 'tb-fetch-to-data-toggle',
+  templateUrl: './fetch-to-data-toggle.component.html',
+  styleUrls: ['./fetch-to-data-toggle.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => AttributeTelemetryToggleComponent),
+    useExisting: forwardRef(() => FetchToDataToggleComponent),
     multi: true
   }]
 })
 
-export class AttributeTelemetryToggleComponent implements  OnInit, ControlValueAccessor, OnDestroy {
+export class FetchToDataToggleComponent implements  OnInit, ControlValueAccessor, OnDestroy {
 
   private propagateChange;
   private destroy$ = new Subject();
 
   public toggleControlGroup: FormGroup;
 
+  @Input() enableFieldToggle: boolean;
+
   constructor(private store: Store<AppState>,
               private fb: UntypedFormBuilder) {}
 
   ngOnInit(): void {
     this.toggleControlGroup = this.fb.group({
-      toggleControl: [null,  [Validators.required, Validators.maxLength(255)]]
+      toggleControl: [null,  []]
     });
 
     this.toggleControlGroup.get('toggleControl').valueChanges.pipe(
@@ -55,4 +58,6 @@ export class AttributeTelemetryToggleComponent implements  OnInit, ControlValueA
     this.destroy$.next(null);
     this.destroy$.complete();
   }
+
+  protected readonly DataToFetch = DataToFetch;
 }
