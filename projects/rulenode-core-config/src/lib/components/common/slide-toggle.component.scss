@@ -1,9 +1,11 @@
 :host {
   .slide-toggle-container{
     align-items: center;
-
     .slide-toggle {
       margin-right: 8px;
+      label {
+        padding-left: 12px!important;
+      }
     }
 
     .tooltip-icon {

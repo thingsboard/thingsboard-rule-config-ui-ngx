@@ -1,5 +1,5 @@
 <section [formGroup]="calculateDeltaConfigForm" fxLayout="column">
-  <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="8px">
+  <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="18px" style="margin-top: 2px;">
     <mat-form-field class="mat-block" fxFlex="100">
       <mat-label>{{ 'tb.rulenode.input-value-key' | translate }}</mat-label>
       <input matInput formControlName="inputValueKey">
@@ -17,7 +17,7 @@
       </mat-error>
     </mat-form-field>
   </div>
-  <mat-form-field class="mat-block" fxFlex="100">
+  <mat-form-field class="mat-block" style="margin-top: 2px;" fxFlex="100">
     <mat-label>{{ 'tb.rulenode.number-of-digits-after-floating-point' | translate }}</mat-label>
     <input type="number" min="0" max="15" step="1" matInput formControlName="round">
     <mat-error *ngIf="calculateDeltaConfigForm.get('round').hasError('min')">

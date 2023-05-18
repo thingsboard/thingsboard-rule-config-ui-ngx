@@ -2,8 +2,8 @@
   <tb-fieldset-component [label]="'tb.rulenode.relations-query' | translate" required="true">
     <ng-template tbAppWidgetContentTemplate>
       <div style="width: 100%;">
-        <div fxLayoutGap="8px" fxLayout="row">
-          <mat-form-field class="mat-block" style="min-width: 100px;">
+        <div fxLayoutGap="28px" fxLayout="row">
+          <mat-form-field fxFlex="40" class="mat-block" style="min-width: 100px;">
             <mat-label translate>relation.direction</mat-label>
             <mat-select required matInput formControlName="direction">
               <mat-option *ngFor="let type of directionTypes" [value]="type">
@@ -11,7 +11,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field fxFlex floatLabel="always" class="mat-block">
+          <mat-form-field fxFlex="60"  floatLabel="always" class="mat-block">
             <mat-label translate>tb.rulenode.max-relation-level</mat-label>
             <input matInput
                    type="number"
@@ -24,14 +24,16 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <tb-slide-toggle *ngIf="relationsQueryFormGroup.get('maxLevel').value > 1"
-                         style="margin: 2px 0px 18px 0px;
-                                display: inline-block;"
-                         formControlName="fetchLastLevelOnly"
-                         [slideToggleName]="'alias.last-level-relation' | translate"
-                         [slideToggleTooltip]="'tb.rulenode.last-level-relation-tooltip' | translate">
-        </tb-slide-toggle>
-        <div class="mat-caption" style="color: rgba(0,0,0,0.57);" translate>relation.relation-filters</div>
+        <div fxLayout="column">
+          <tb-slide-toggle *ngIf="relationsQueryFormGroup.get('maxLevel').value > 1"
+                           style="margin: 6px 0px 24px 0px;
+                                  display: inline-block;"
+                           formControlName="fetchLastLevelOnly"
+                           [slideToggleName]="'alias.last-level-relation' | translate"
+                           [slideToggleTooltip]="'tb.rulenode.last-level-relation-tooltip' | translate">
+          </tb-slide-toggle>
+          <label class="map-label">{{ 'relation.relation-filters' | translate}}</label>
+        </div>
         <tb-relation-filters
           formControlName="filters"
         ></tb-relation-filters>

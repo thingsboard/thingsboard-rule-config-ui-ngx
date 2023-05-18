@@ -1,6 +1,6 @@
 <section fxLayout="column" [formGroup]="deviceRelationsQueryFormGroup">
-  <div fxLayoutGap="8px" fxLayout="row">
-    <mat-form-field class="mat-block" style="min-width: 100px;">
+  <div fxLayoutGap="24px" fxLayout="row">
+    <mat-form-field class="mat-block" fxFlex="50" style="min-width: 100px;">
       <mat-label translate>relation.direction</mat-label>
       <mat-select required matInput formControlName="direction">
         <mat-option *ngFor="let type of directionTypes" [value]="type">
@@ -8,7 +8,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field fxFlex floatLabel="always" class="mat-block">
+    <mat-form-field fxFlex="50" floatLabel="always" class="mat-block">
       <mat-label translate>tb.rulenode.max-relation-level</mat-label>
       <input matInput
              type="number"
@@ -22,7 +22,7 @@
     </mat-form-field>
   </div>
   <tb-slide-toggle *ngIf="deviceRelationsQueryFormGroup.get('maxLevel').value > 1"
-                   style="margin-bottom: 24px"
+                   style="margin: 2px 0px 26px"
                    [slideToggleName]="'alias.last-level-relation' | translate"
                    [slideToggleTooltip]="'tb.rulenode.last-level-device-relation-tooltip' | translate">
   </tb-slide-toggle>

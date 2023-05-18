@@ -1,10 +1,8 @@
 :host {
-  width: 100%;
-
-  .chip-label {
+  .map-label {
     font-weight: 400;
     font-size: 12px;
-    letter-spacing: 0.25px;
     color: rgba(0, 0, 0, 0.76);
+    letter-spacing: 0.25px;
   }
 }

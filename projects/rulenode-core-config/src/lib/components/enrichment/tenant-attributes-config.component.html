@@ -16,7 +16,7 @@
         [valRequiredText]="'tb.rulenode.target-key-required' | translate"
         [hintText]="'tb.rulenode.kv-map-pattern-hint' | translate">
       </tb-kv-map-config>
-      <tb-msg-metadata-chip formControlName="fetchTo"
+      <tb-msg-metadata-chip formControlName="fetchTo" style="margin-bottom: 12px;"
                             [labelText]="tenantAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY ?
                             ('tb.rulenode.add-mapped-latest-telemetry-to' | translate) : ('tb.rulenode.add-mapped-attribute-to' | translate)">
       </tb-msg-metadata-chip>

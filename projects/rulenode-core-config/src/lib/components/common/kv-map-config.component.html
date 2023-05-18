@@ -5,7 +5,7 @@
                      valText: translate.instant(valText)})) : false)">
     <label class="map-label">{{ labelText }}</label>
     <div class="body">
-      <div class="row" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px"
+      <div class="row" fxLayout="row" style="margin-bottom: 15px;" fxLayoutAlign="start center" fxLayoutGap="8px"
            formArrayName="keyVals"
            *ngFor="let keyValControl of keyValsFormArray().controls; let $index = index">
         <div fxLayout="row" class="inputs-block">
@@ -49,7 +49,7 @@
                        (ngControl.hasError('kvMapRequired') ? requiredText :
                        translate.instant('tb.key-val.unique-key-value-pair-error', {keyText: keyText,
                        valText: valText})) : ''"></tb-error>
-  <div style="margin-top: 8px" >
+  <div>
     <button mat-stroked-button class="add-button" color="primary"
             [fxShow]="!disabled"
             [disabled]="isLoading$ | async"

@@ -8,12 +8,12 @@
       </tb-device-relations-query-config>
     </ng-template>
   </tb-fieldset-component>
-  <tb-fieldset-component [label]="'tb.rulenode.related-device-attributes' | translate" required="true">
+  <tb-fieldset-component [label]="'tb.rulenode.related-device-attributes' | translate" style="margin-top: 12px" required="true">
     <ng-template tbAppWidgetContentTemplate>
       <tb-select-attributes style="margin-bottom: 8px" formControlName="attributesControl"></tb-select-attributes>
     </ng-template>
   </tb-fieldset-component>
-  <tb-slide-toggle style="margin: 20px 0px;"
+  <tb-slide-toggle style="margin: 30px 0px 25px;"
                    formControlName="tellFailureIfAbsent"
                    [slideToggleName]="'tb.rulenode.tell-failure' | translate"
                    [slideToggleTooltip]="'tb.rulenode.tell-failure-tooltip' | translate">

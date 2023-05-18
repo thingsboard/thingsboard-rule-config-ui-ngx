@@ -1,11 +1,11 @@
-<section fxLayout="column" class="tb-kv-map-config" [formGroup]="kvListFormGroup">
+<section fxLayout="column" class="tb-sv-map-config" [formGroup]="kvListFormGroup">
   <div *ngIf="!(ngControl.hasError('kvMapRequired') || ngControl.hasError('uniqueKeyValuePair') ?
                      (ngControl.hasError('kvMapRequired') ? translate.instant(requiredText) :
                      translate.instant('tb.key-val.unique-key-value-pair-error', {selectText: translate.instant(selectText),
                      valText: translate.instant(valText)})) : false)">
     <label *ngIf="labelText" class="map-label">{{ labelText }}</label>
     <div class="body">
-      <div class="row" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px"
+      <div class="row" style="margin-bottom: 15px;" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px"
            formArrayName="keyVals"
            *ngFor="let keyValControl of keyValsFormArray().controls; let $index = index">
         <div fxLayout="row" class="inputs-block">
@@ -53,7 +53,7 @@
             [error]="ngControl.hasError('kvMapRequired') ? translate.instant(requiredText) : ''"
             style="margin-bottom: 8px">
   </tb-error>
-  <div style="margin-top: 8px;">
+  <div>
     <button mat-stroked-button class="add-button" color="primary"
             [fxShow]="!disabled"
             [disabled]="(isLoading$ | async) || keyValsFormArray().length >= selectOptions.length"

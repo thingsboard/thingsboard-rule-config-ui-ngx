@@ -1,5 +1,5 @@
 <section [formGroup]="getTelemetryFromDatabaseConfigForm" fxLayout="column">
-  <mat-form-field class="mat-block" subscriptSizing="dynamic">
+  <mat-form-field class="mat-block" style="margin-top: 2px" subscriptSizing="dynamic">
     <mat-label>{{'tb.rulenode.timeseries-keys' | translate}}</mat-label>
     <mat-chip-grid #latestTimeseriesChipList>
       <mat-chip-row
@@ -31,15 +31,15 @@
             trigger-text="{{ 'tb.key-val.see-examples' | translate }}"></span>
     </mat-hint>
   </mat-form-field>
-  <tb-fieldset-component [label]="'tb.rulenode.fetch-interval' | translate" required="true">
+  <tb-fieldset-component style="margin-top: 12px;" [label]="'tb.rulenode.fetch-interval' | translate" required="true">
     <ng-template tbAppWidgetContentTemplate>
       <tb-slide-toggle class="interval-slide-toggle" formControlName="useMetadataIntervalPatterns"
                        [slideToggleName]="'tb.rulenode.use-metadata-dynamic-interval' | translate"
                        [slideToggleTooltip]="'tb.rulenode.use-metadata-dynamic-interval-tooltip' | translate">
       </tb-slide-toggle>
       <div style="width: 100%" formGroupName="interval" fxLayout="column" *ngIf="getTelemetryFromDatabaseConfigForm.get('useMetadataIntervalPatterns').value === false; else intervalPattern">
-        <div class="interval-block" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="8px">
-          <mat-form-field fxFlex="60" class="mat-block">
+        <div class="interval-block" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+          <mat-form-field fxFlex="50" class="mat-block">
             <mat-label>{{ 'tb.rulenode.interval-start' | translate }}</mat-label>
             <input type="number" step="1" min="1" max="2147483647" matInput formControlName="startInterval" required>
             <mat-error *ngIf="getTelemetryFromDatabaseConfigForm.get('interval.startInterval').hasError('required')">
@@ -52,7 +52,7 @@
               {{ 'tb.rulenode.time-value-range' | translate }}
             </mat-error>
           </mat-form-field>
-          <mat-form-field fxFlex="40" class="mat-block">
+          <mat-form-field fxFlex="50" class="mat-block">
             <mat-label>{{ 'tb.rulenode.time-unit' | translate }}</mat-label>
             <mat-select formControlName="startIntervalTimeUnit" required>
               <mat-option *ngFor="let timeUnit of timeUnits" [value]="timeUnit">
@@ -61,8 +61,8 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="interval-block" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="8px">
-          <mat-form-field fxFlex="60" class="mat-block">
+        <div class="interval-block" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+          <mat-form-field fxFlex="50" class="mat-block">
             <mat-label>{{ 'tb.rulenode.interval-end' | translate }}</mat-label>
             <input type="number" step="1" min="1" max="2147483647" matInput formControlName="endInterval" required>
             <mat-error *ngIf="getTelemetryFromDatabaseConfigForm.get('interval.endInterval').hasError('required')">
@@ -75,7 +75,7 @@
               {{ 'tb.rulenode.time-value-range' | translate }}
             </mat-error>
           </mat-form-field>
-          <mat-form-field fxFlex="40" class="mat-block">
+          <mat-form-field fxFlex="50" class="mat-block">
             <mat-label>{{ 'tb.rulenode.time-unit' | translate }}</mat-label>
             <mat-select formControlName="endIntervalTimeUnit" required>
               <mat-option *ngFor="let timeUnit of timeUnits" [value]="timeUnit">
@@ -84,7 +84,7 @@
             </mat-select>
           </mat-form-field>
         </div>
-          <div *ngIf="getTelemetryFromDatabaseConfigForm.get('interval').valid" style="color: black" class="interval-description">
+          <div *ngIf="getTelemetryFromDatabaseConfigForm.get('interval').valid" class="interval-description">
             {{ translate.get('tb.rulenode.fetch-timeseries-from-to',
             {
               startInterval: getTelemetryFromDatabaseConfigForm.get('interval.startInterval').value,
@@ -124,9 +124,9 @@
       </ng-template>
     </ng-template>
   </tb-fieldset-component>
-  <tb-fieldset-component [label]="'tb.rulenode.fetch-strategy' | translate" required="true">
+  <tb-fieldset-component [label]="'tb.rulenode.fetch-strategy' | translate" style="margin-top: 12px;" required="true">
     <ng-template tbAppWidgetContentTemplate>
-      <div fxLayout="column" style="width: 100%;">
+      <div fxLayout="column" style="width: 100%; margin-top: 8px">
         <mat-button-toggle-group formControlName="fetchMode" class="tb-script-lang-toggle-group"
                                  style="margin-bottom: 12px;" aria-label="Script language">
           <mat-button-toggle fxFlex *ngFor="let fetchMode of fetchModes" [value]="fetchMode">{{ deduplicationStrategiesTranslations.get(fetchMode) | translate}}</mat-button-toggle>
@@ -144,7 +144,7 @@
             </mat-select>
           </mat-form-field>
           <div *ngIf="getTelemetryFromDatabaseConfigForm.get('aggregation').value === aggregationTypes.NONE">
-            <mat-form-field class="mat-block">
+            <mat-form-field class="mat-block"  style="margin-top: 2px">
               <mat-label> {{ "tb.rulenode.order-by-timestamp" | translate }} </mat-label>
               <mat-select formControlName="orderBy" required>
                 <mat-option *ngFor="let order of samplingOrders" [value]="order">
@@ -152,7 +152,7 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-form-field class="mat-block" subscriptSizing="dynamic">
+            <mat-form-field class="mat-block" subscriptSizing="dynamic"  style="margin-top: 2px">
               <mat-label>{{ "tb.rulenode.limit" | translate }}</mat-label>
               <input type="number" min="2" max="1000" step="1" matInput formControlName="limit" required>
               <mat-hint>{{ "tb.rulenode.limit-hint" | translate }}</mat-hint>
