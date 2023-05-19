@@ -1,6 +1,6 @@
 <section fxLayout="column" [formGroup]="deviceRelationsQueryFormGroup">
-  <div fxLayoutGap="24px" fxLayout="row">
-    <mat-form-field class="mat-block" fxFlex="50" style="min-width: 100px;">
+  <div fxLayoutGap="24px" fxLayout="row" style="margin-bottom: 15px">
+    <mat-form-field class="mat-block" subscriptSizing="dynamic" fxFlex="50" style="min-width: 100px;">
       <mat-label translate>relation.direction</mat-label>
       <mat-select required matInput formControlName="direction">
         <mat-option *ngFor="let type of directionTypes" [value]="type">
@@ -8,7 +8,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field fxFlex="50" floatLabel="always" class="mat-block">
+    <mat-form-field fxFlex="50" floatLabel="always" subscriptSizing="dynamic" class="mat-block">
       <mat-label translate>tb.rulenode.max-relation-level</mat-label>
       <input matInput
              type="number"
@@ -22,12 +22,14 @@
     </mat-form-field>
   </div>
   <tb-slide-toggle *ngIf="deviceRelationsQueryFormGroup.get('maxLevel').value > 1"
-                   style="margin: 2px 0px 26px"
+                   style="margin: 10px 0px 28px;"
                    [slideToggleName]="'alias.last-level-relation' | translate"
                    [slideToggleTooltip]="'tb.rulenode.last-level-device-relation-tooltip' | translate">
   </tb-slide-toggle>
   <tb-relation-type-autocomplete
     label="tb.rulenode.type"
+    subscriptSizing="dynamic"
+    style="margin-bottom: 15px"
     fxFlex
     formControlName="relationType">
   </tb-relation-type-autocomplete>

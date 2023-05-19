@@ -39,14 +39,6 @@
           <mat-icon>close</mat-icon>
         </button>
       </div>
-      <div *ngIf="hintText" class="tb-hint">
-        <span style="vertical-align: middle">{{ hintText }}</span>
-        <span tb-help-popup="{{'rulenode/msg_and_metadata_key_patterns_fn'}}"
-              tb-help-popup-placement="right"  class="examples-popup"
-              trigger-style="letter-spacing:0.25px; font-size:12px"
-              [tb-help-popup-style]="{maxWidth: '820px'}"
-              trigger-text="{{ 'tb.key-val.see-examples' | translate }}"></span>
-      </div>
     </div>
   </div>
   <tb-error *ngIf="ngControl.hasError('kvMapRequired')"
@@ -54,6 +46,14 @@
             style="margin-bottom: 8px">
   </tb-error>
   <div>
+    <div *ngIf="hintText" class="tb-hint">
+      <span style="vertical-align: middle">{{ hintText }}</span>
+      <span tb-help-popup="{{'rulenode/msg_and_metadata_key_patterns_fn'}}"
+            tb-help-popup-placement="right"  class="examples-popup"
+            trigger-style="letter-spacing:0.25px; font-size:12px"
+            [tb-help-popup-style]="{maxWidth: '820px'}"
+            trigger-text="{{ 'tb.key-val.see-examples' | translate }}"></span>
+    </div>
     <button mat-stroked-button class="add-button" color="primary"
             [fxShow]="!disabled"
             [disabled]="(isLoading$ | async) || keyValsFormArray().length >= selectOptions.length"

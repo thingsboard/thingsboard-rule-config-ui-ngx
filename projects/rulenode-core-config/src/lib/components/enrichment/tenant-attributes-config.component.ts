@@ -26,7 +26,7 @@ export class TenantAttributesConfigComponent extends RuleNodeConfigurationCompon
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
     return {
       dataToFetch: isDefinedAndNotNull(configuration?.dataToFetch) ? configuration.dataToFetch : DataToFetch.ATTRIBUTES,
-      attrMapping: isDefinedAndNotNull(configuration?.attrMapping)  ? configuration.attrMapping : null,
+      dataMapping: isDefinedAndNotNull(configuration?.dataMapping)  ? configuration.dataMapping : null,
       fetchTo: isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA
     };
   }
@@ -34,7 +34,7 @@ export class TenantAttributesConfigComponent extends RuleNodeConfigurationCompon
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.tenantAttributesConfigForm = this.fb.group({
       dataToFetch: [configuration.dataToFetch, []],
-      attrMapping: [configuration.attrMapping, [Validators.required]],
+      dataMapping: [configuration.dataMapping, [Validators.required]],
       fetchTo: [configuration.fetchTo, []]
     });
   }

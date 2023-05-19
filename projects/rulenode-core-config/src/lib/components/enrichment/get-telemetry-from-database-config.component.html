@@ -1,4 +1,4 @@
-<section [formGroup]="getTelemetryFromDatabaseConfigForm" fxLayout="column">
+<section [formGroup]="getTelemetryFromDatabaseConfigForm" fxLayout="column" style="margin-bottom: 22px">
   <mat-form-field class="mat-block" style="margin-top: 2px" subscriptSizing="dynamic">
     <mat-label>{{'tb.rulenode.timeseries-keys' | translate}}</mat-label>
     <mat-chip-grid #latestTimeseriesChipList>
@@ -126,16 +126,16 @@
   </tb-fieldset-component>
   <tb-fieldset-component [label]="'tb.rulenode.fetch-strategy' | translate" style="margin-top: 12px;" required="true">
     <ng-template tbAppWidgetContentTemplate>
-      <div fxLayout="column" style="width: 100%; margin-top: 8px">
+<!--      <div fxLayout="column" style="width: 100%; margin-top: 8px">-->
         <mat-button-toggle-group formControlName="fetchMode" class="tb-script-lang-toggle-group"
                                  style="margin-bottom: 12px;" aria-label="Script language">
-          <mat-button-toggle fxFlex *ngFor="let fetchMode of fetchModes" [value]="fetchMode">{{ deduplicationStrategiesTranslations.get(fetchMode) | translate}}</mat-button-toggle>
+          <mat-button-toggle  style="width: 215px;" fxFlex *ngFor="let fetchMode of fetchModes" [value]="fetchMode">{{ deduplicationStrategiesTranslations.get(fetchMode) | translate}}</mat-button-toggle>
         </mat-button-toggle-group>
         <div  class="tb-hint">
           {{ fetchModeHintSelector() | translate }}
         </div>
-        <div fxLayout="column" *ngIf="getTelemetryFromDatabaseConfigForm.get('fetchMode').value === fetchMode.ALL">
-          <mat-form-field>
+        <div fxLayout="column" style="width: 100%" *ngIf="getTelemetryFromDatabaseConfigForm.get('fetchMode').value === fetchMode.ALL">
+          <mat-form-field subscriptSizing="dynamic" style="margin-bottom: 16px;">
             <mat-label>{{ 'aggregation.function' | translate }}</mat-label>
             <mat-select formControlName="aggregation" required>
               <mat-option *ngFor="let aggregation of aggregations" [value]="aggregation">
@@ -143,8 +143,8 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <div *ngIf="getTelemetryFromDatabaseConfigForm.get('aggregation').value === aggregationTypes.NONE">
-            <mat-form-field class="mat-block"  style="margin-top: 2px">
+          <div *ngIf="getTelemetryFromDatabaseConfigForm.get('aggregation').value === aggregationTypes.NONE" style="margin: 8px 0px 16px">
+            <mat-form-field class="mat-block">
               <mat-label> {{ "tb.rulenode.order-by-timestamp" | translate }} </mat-label>
               <mat-select formControlName="orderBy" required>
                 <mat-option *ngFor="let order of samplingOrders" [value]="order">
@@ -168,7 +168,7 @@
             </mat-form-field>
           </div>
         </div>
-      </div>
+<!--      </div>-->
     </ng-template>
   </tb-fieldset-component>
 </section>

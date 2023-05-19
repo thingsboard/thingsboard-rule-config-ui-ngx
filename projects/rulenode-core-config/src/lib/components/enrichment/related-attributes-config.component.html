@@ -1,4 +1,4 @@
-<section [formGroup]="relatedAttributesConfigForm" fxLayout="column">
+<section [formGroup]="relatedAttributesConfigForm" fxLayout="column" style="margin-bottom: 22px">
   <tb-relations-query-config
     required
     formControlName="relationsQuery"
@@ -10,7 +10,7 @@
       <tb-kv-map-config
         *ngIf="relatedAttributesConfigForm.get('dataToFetch').value !== DataToFetch.FIELDS"
         required
-        formControlName="attrMapping"
+        formControlName="dataMapping"
         [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
         [labelText]="relatedAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY ?
         ('tb.rulenode.latest-telemetry-mapping' | translate) : ('tb.rulenode.attributes-mapping' | translate)"
@@ -29,7 +29,7 @@
         targetKeyPrefix="relatedEntity"
         [selectOptions]="originatorFields"
         [selectOptionsTranslate]="originatorFieldsTranslations"
-        formControlName="attrMapping"
+        formControlName="dataMapping"
         [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
         [selectText]="'tb.rulenode.source-field' | translate"
         [selectRequiredText]="'tb.rulenode.source-field-required' | translate"
@@ -38,7 +38,7 @@
         [hintText]="'tb.rulenode.sv-map-hint' | translate"
       >
       </tb-sv-map-config>
-      <tb-msg-metadata-chip formControlName="fetchTo" style="margin-bottom: 5px;" [labelText]="msgMetadataChipLabel() | translate">
+      <tb-msg-metadata-chip formControlName="fetchTo" style="margin-bottom: 11px;" [labelText]="msgMetadataChipLabel() | translate">
       </tb-msg-metadata-chip>
     </ng-template>
   </tb-fieldset-component>

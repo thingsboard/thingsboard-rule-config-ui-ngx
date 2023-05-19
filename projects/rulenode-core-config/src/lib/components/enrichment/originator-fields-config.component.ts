@@ -28,15 +28,15 @@ export class OriginatorFieldsConfigComponent extends RuleNodeConfigurationCompon
   }
 
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
-    for (const key of Object.keys(configuration.fieldsMapping)) {
-      configuration.fieldsMapping[key] = configuration.fieldsMapping[key].trim();
+    for (const key of Object.keys(configuration.dataMapping)) {
+      configuration.dataMapping[key] = configuration.dataMapping[key].trim();
     }
     return configuration;
   }
 
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
     return {
-      fieldsMapping: isDefinedAndNotNull(configuration?.fieldsMapping) ? configuration.fieldsMapping : null,
+      dataMapping: isDefinedAndNotNull(configuration?.dataMapping) ? configuration.dataMapping : null,
       ignoreNullStrings: isDefinedAndNotNull(configuration?.ignoreNullStrings) ? configuration.ignoreNullStrings : null,
       fetchTo: isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA
     };
@@ -44,7 +44,7 @@ export class OriginatorFieldsConfigComponent extends RuleNodeConfigurationCompon
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.originatorFieldsConfigForm = this.fb.group({
-      fieldsMapping: [configuration.fieldsMapping, [Validators.required]],
+      dataMapping: [configuration.dataMapping, [Validators.required]],
       ignoreNullStrings: [configuration.ignoreNullStrings, []],
       fetchTo: [configuration.fetchTo, []]
     });

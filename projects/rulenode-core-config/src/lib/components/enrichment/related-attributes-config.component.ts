@@ -50,11 +50,11 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
   }
 
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
-    const filteAttrMapping = {};
-    for (const key of Object.keys(configuration.attrMapping)) {
-      filteAttrMapping[key.trim()] = configuration.attrMapping[key].trim();
+    const filteDataMapping = {};
+    for (const key of Object.keys(configuration.dataMapping)) {
+      filteDataMapping[key.trim()] = configuration.dataMapping[key].trim();
     }
-    configuration.attrMapping = filteAttrMapping;
+    configuration.dataMapping = filteDataMapping;
     return configuration;
   }
 
@@ -63,7 +63,7 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
     return {
       relationsQuery: isDefinedAndNotNull(configuration?.relationsQuery) ? configuration.relationsQuery : null,
       dataToFetch: this.dataToFetchPrevValue,
-      attrMapping: isDefinedAndNotNull(configuration?.attrMapping) ? configuration.attrMapping : null,
+      dataMapping: isDefinedAndNotNull(configuration?.dataMapping) ? configuration.dataMapping : null,
       fetchTo: isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA
     };
   }
@@ -72,7 +72,7 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
     this.relatedAttributesConfigForm = this.fb.group({
       relationsQuery: [configuration.relationsQuery, [Validators.required]],
       dataToFetch: [configuration.dataToFetch, []],
-      attrMapping: [configuration.attrMapping, [Validators.required]],
+      dataMapping: [configuration.dataMapping, [Validators.required]],
       fetchTo: [configuration.fetchTo, []]
     });
 
@@ -80,10 +80,10 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
       takeUntil(this.destroy$)
     ).subscribe((value) => {
       if (value === DataToFetch.FIELDS) {
-        this.relatedAttributesConfigForm.get('attrMapping').patchValue(this.defaultSvMap, {emitEvent: false});
+        this.relatedAttributesConfigForm.get('dataMapping').patchValue(this.defaultSvMap, {emitEvent: false});
       }
       if (value !== DataToFetch.FIELDS && this.dataToFetchPrevValue === DataToFetch.FIELDS) {
-        this.relatedAttributesConfigForm.get('attrMapping').patchValue(this.defaultKvMap, {emitEvent: false});
+        this.relatedAttributesConfigForm.get('dataMapping').patchValue(this.defaultKvMap, {emitEvent: false});
       }
       this.dataToFetchPrevValue = value;
     });

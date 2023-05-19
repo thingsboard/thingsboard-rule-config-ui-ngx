@@ -6,14 +6,15 @@
         [selectOptions]="originatorFields"
         [selectOptionsTranslate]="originatorFieldsTranslations"
         targetKeyPrefix="originator"
-        formControlName="fieldsMapping"
+        formControlName="dataMapping"
         [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
         [selectText]="'tb.rulenode.source-field' | translate"
         [selectRequiredText]="'tb.rulenode.source-field-required' | translate"
         [valText]="'tb.rulenode.target-key' | translate"
-        [valRequiredText]="'tb.rulenode.target-key-required' | translate">
+        [valRequiredText]="'tb.rulenode.target-key-required' | translate"
+        [hintText] = "'tb.rulenode.originator-fields-sv-map-hint' | translate">
       </tb-sv-map-config>
-      <tb-msg-metadata-chip
+      <tb-msg-metadata-chip style="margin-bottom: 11px;"
         [labelText]="'tb.rulenode.add-mapped-originator-fields-to' | translate"
         formControlName="fetchTo"
       ></tb-msg-metadata-chip>

@@ -1,10 +1,10 @@
-<section [formGroup]="tenantAttributesConfigForm" fxLayout="column">
+<section [formGroup]="tenantAttributesConfigForm" fxLayout="column" style="margin-bottom: 24px">
   <tb-fieldset-component [label]="'tb.rulenode.mapping-of-tenant' | translate">
     <ng-template tbAppWidgetContentTemplate>
       <tb-fetch-to-data-toggle formControlName="dataToFetch"></tb-fetch-to-data-toggle>
       <tb-kv-map-config
         required
-        formControlName="attrMapping"
+        formControlName="dataMapping"
         [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
         [labelText]="tenantAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY ?
         ('tb.rulenode.latest-telemetry-mapping' | translate) : ('tb.rulenode.attributes-mapping' | translate) "

@@ -23,18 +23,18 @@ export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComp
     return this.customerAttributesConfigForm;
   }
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
-    const filteAttrMapping = {};
-    for (const key of Object.keys(configuration.attrMapping)) {
-      filteAttrMapping[key.trim()] = configuration.attrMapping[key].trim();
+    const filteDataMapping = {};
+    for (const key of Object.keys(configuration.dataMapping)) {
+      filteDataMapping[key.trim()] = configuration.dataMapping[key].trim();
     }
-    configuration.attrMapping = filteAttrMapping;
+    configuration.dataMapping = filteDataMapping;
     return configuration;
   }
 
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
     return {
       dataToFetch: isDefinedAndNotNull(configuration?.dataToFetch) ? configuration.dataToFetch : DataToFetch.ATTRIBUTES,
-      attrMapping: isDefinedAndNotNull(configuration?.attrMapping) ? configuration.attrMapping : null,
+      dataMapping: isDefinedAndNotNull(configuration?.dataMapping) ? configuration.dataMapping : null,
       fetchTo: isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA
     };
   }
@@ -42,7 +42,7 @@ export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComp
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.customerAttributesConfigForm = this.fb.group({
       dataToFetch: [configuration.dataToFetch, []],
-      attrMapping: [configuration.attrMapping, [Validators.required]],
+      dataMapping: [configuration.dataMapping, [Validators.required]],
       fetchTo: [configuration.fetchTo]
     });
   }

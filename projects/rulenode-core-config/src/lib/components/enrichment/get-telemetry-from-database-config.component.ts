@@ -99,9 +99,9 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
 
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
     configuration.startInterval = configuration.interval.startInterval;
-    configuration.startInterval = configuration.interval.startIntervalTimeUnit;
-    configuration.startInterval = configuration.interval.endInterval;
-    configuration.startInterval = configuration.interval.endIntervalTimeUnit;
+    configuration.startIntervalTimeUnit = configuration.interval.startIntervalTimeUnit;
+    configuration.endInterval = configuration.interval.endInterval;
+    configuration.endIntervalTimeUnit = configuration.interval.endIntervalTimeUnit;
     configuration.startIntervalPattern =  configuration.startIntervalPattern.trim();
     configuration.endIntervalPattern =  configuration.endIntervalPattern.trim();
     delete configuration.interval;

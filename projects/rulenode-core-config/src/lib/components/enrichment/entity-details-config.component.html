@@ -1,5 +1,5 @@
-<section [formGroup]="entityDetailsConfigForm" fxLayout="column">
-  <mat-form-field class="mat-block entity-fields-list" style="margin-top: 2px">
+<section [formGroup]="entityDetailsConfigForm" fxLayout="column" style="margin: 2px 0px 20px;">
+  <mat-form-field class="mat-block entity-fields-list">
     <mat-label>{{ 'tb.rulenode.entity-details' | translate }}</mat-label>
     <mat-chip-grid #detailsChipList formControlName="detailsList">
       <mat-chip-row
