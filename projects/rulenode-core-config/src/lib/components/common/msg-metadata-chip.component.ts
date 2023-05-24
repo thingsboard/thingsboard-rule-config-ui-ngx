@@ -32,7 +32,7 @@ export class MsgMetadataChipComponent implements  OnInit, ControlValueAccessor, 
 
   ngOnInit(): void {
     this.chipControlGroup = this.fb.group({
-      chipControl: [null,  [Validators.required, Validators.maxLength(255)]]
+      chipControl: [null,  []]
     });
 
     this.chipControlGroup.get('chipControl').valueChanges.pipe(

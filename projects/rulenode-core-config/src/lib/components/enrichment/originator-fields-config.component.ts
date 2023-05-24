@@ -8,7 +8,7 @@ import { FetchTo, OriginatorFields, originatorFieldsTranslations } from '../../r
 @Component({
   selector: 'tb-enrichment-node-originator-fields-config',
   templateUrl: './originator-fields-config.component.html',
-  styleUrls: ['./originatot-fields-config.component.scss']
+  styleUrls: ['./originator-fields-config.component.scss']
 })
 export class OriginatorFieldsConfigComponent extends RuleNodeConfigurationComponent {
 
@@ -48,6 +48,5 @@ export class OriginatorFieldsConfigComponent extends RuleNodeConfigurationCompon
       ignoreNullStrings: [configuration.ignoreNullStrings, []],
       fetchTo: [configuration.fetchTo, []]
     });
-    console.log(this.originatorFieldsConfigForm);
   }
 }
