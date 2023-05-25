@@ -102,6 +102,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'keys-required': 'Keys are required',
           'rename-keys-in': 'Rename keys in',
           data: 'Data',
+          message: 'Message',
           metadata: 'Metadata',
           'key-name': 'Key name',
           'key-name-required': 'Key name is required',

@@ -1,10 +1,10 @@
-:host {
+:host ::ng-deep {
   .slide-toggle-container{
     align-items: center;
     .slide-toggle {
       margin-right: 8px;
       label {
-        padding-left: 12px!important;
+        padding-left: 12px;
       }
     }
 

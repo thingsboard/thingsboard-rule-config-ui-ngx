@@ -21,7 +21,6 @@ import { RelationsQueryConfigOldComponent } from './relations-query-config-old.c
 import { FetchToDataToggleComponent } from './fetch-to-data-toggle.component';
 import { SelectAttributesComponent } from './select-attributes.component';
 
-
 @NgModule({
   declarations: [
     KvMapConfigComponent,

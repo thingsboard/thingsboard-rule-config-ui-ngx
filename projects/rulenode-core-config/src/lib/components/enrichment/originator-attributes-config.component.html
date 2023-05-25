@@ -1,8 +1,6 @@
 <section [formGroup]="originatorAttributesConfigForm" fxLayout="column" style="margin-bottom: 20px;">
   <tb-fieldset-component [label]="'tb.rulenode.originator-attributes' | translate" required="true">
-    <ng-template tbAppWidgetContentTemplate>
-      <tb-select-attributes style="margin-bottom: 8px" formControlName="attributesControl"></tb-select-attributes>
-    </ng-template>
+    <tb-select-attributes style="margin-bottom: 8px" formControlName="attributesControl"></tb-select-attributes>
   </tb-fieldset-component>
   <tb-slide-toggle style="margin: 27px 0px 25px;"
                    formControlName="tellFailureIfAbsent"

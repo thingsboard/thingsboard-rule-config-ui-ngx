@@ -1,17 +1,13 @@
 <section [formGroup]="deviceAttributesConfigForm" fxLayout="column" style="margin-bottom: 20px">
   <tb-fieldset-component [label]="'tb.rulenode.device-relations-query' | translate" required="true">
-    <ng-template tbAppWidgetContentTemplate>
-      <tb-device-relations-query-config
-        required
-        formControlName="deviceRelationsQuery"
-        style="width: 100%">
-      </tb-device-relations-query-config>
-    </ng-template>
+    <tb-device-relations-query-config
+      required
+      formControlName="deviceRelationsQuery"
+      style="width: 100%">
+    </tb-device-relations-query-config>
   </tb-fieldset-component>
   <tb-fieldset-component [label]="'tb.rulenode.related-device-attributes' | translate" style="margin-top: 12px" required="true">
-    <ng-template tbAppWidgetContentTemplate>
-      <tb-select-attributes style="margin-bottom: 8px" formControlName="attributesControl"></tb-select-attributes>
-    </ng-template>
+    <tb-select-attributes style="margin-bottom: 8px" formControlName="attributesControl"></tb-select-attributes>
   </tb-fieldset-component>
   <tb-slide-toggle style="margin: 26px 0px 25px;"
                    formControlName="tellFailureIfAbsent"

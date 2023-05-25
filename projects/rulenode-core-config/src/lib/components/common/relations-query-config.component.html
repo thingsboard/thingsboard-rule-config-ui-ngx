@@ -1,6 +1,5 @@
 <section fxLayout="column" [formGroup]="relationsQueryFormGroup">
   <tb-fieldset-component [label]="'tb.rulenode.relations-query' | translate" required="true">
-    <ng-template tbAppWidgetContentTemplate>
       <div style="width: 100%;">
         <div fxLayoutGap="28px" fxLayout="row">
           <mat-form-field fxFlex="50" class="mat-block" style="min-width: 100px;">
@@ -38,6 +37,5 @@
           formControlName="filters"
         ></tb-relation-filters>
       </div>
-    </ng-template>
   </tb-fieldset-component>
 </section>

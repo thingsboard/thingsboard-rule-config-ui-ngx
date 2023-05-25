@@ -5,41 +5,39 @@
     style="padding-bottom: 15px;">
   </tb-relations-query-config>
   <tb-fieldset-component [label]="'tb.rulenode.data-to-fetch' | translate">
-    <ng-template tbAppWidgetContentTemplate>
-      <tb-fetch-to-data-toggle formControlName="dataToFetch" [enableFieldToggle]="true"></tb-fetch-to-data-toggle>
-      <tb-kv-map-config
-        *ngIf="relatedAttributesConfigForm.get('dataToFetch').value !== DataToFetch.FIELDS"
-        required
-        formControlName="dataMapping"
-        [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
-        [labelText]="relatedAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY ?
-        ('tb.rulenode.latest-telemetry-mapping' | translate) : ('tb.rulenode.attributes-mapping' | translate)"
-        [keyText]="relatedAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY ?
-        ('tb.rulenode.source-telemetry' | translate) : ('tb.rulenode.source-attribute' | translate)"
-        [keyRequiredText]="relatedAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY ?
-        ('tb.rulenode.source-telemetry-required' | translate) : ('tb.rulenode.source-attribute-required' | translate)"
-        [valText]="'tb.rulenode.target-key' | translate"
-        [valRequiredText]="'tb.rulenode.target-key-required' | translate"
-        [hintText]="'tb.rulenode.kv-map-pattern-hint' | translate">
-      </tb-kv-map-config>
-      <tb-sv-map-config
-        *ngIf="relatedAttributesConfigForm.get('dataToFetch').value === DataToFetch.FIELDS"
-        required
-        [labelText]="'tb.rulenode.fields-mapping' | translate"
-        targetKeyPrefix="relatedEntity"
-        [selectOptions]="originatorFields"
-        [selectOptionsTranslate]="originatorFieldsTranslations"
-        formControlName="dataMapping"
-        [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
-        [selectText]="'tb.rulenode.source-field' | translate"
-        [selectRequiredText]="'tb.rulenode.source-field-required' | translate"
-        [valText]="'tb.rulenode.target-key' | translate"
-        [valRequiredText]="'tb.rulenode.target-key-required' | translate"
-        [hintText]="'tb.rulenode.sv-map-hint' | translate"
-      >
-      </tb-sv-map-config>
-      <tb-msg-metadata-chip formControlName="fetchTo" style="margin-bottom: 11px;" [labelText]="msgMetadataChipLabel() | translate">
+    <tb-fetch-to-data-toggle formControlName="dataToFetch" [enableFieldToggle]="true"></tb-fetch-to-data-toggle>
+    <tb-kv-map-config
+      *ngIf="relatedAttributesConfigForm.get('dataToFetch').value !== DataToFetch.FIELDS"
+      required
+      formControlName="dataMapping"
+      [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
+      [labelText]="relatedAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY ?
+      ('tb.rulenode.latest-telemetry-mapping' | translate) : ('tb.rulenode.attributes-mapping' | translate)"
+      [keyText]="relatedAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY ?
+      ('tb.rulenode.source-telemetry' | translate) : ('tb.rulenode.source-attribute' | translate)"
+      [keyRequiredText]="relatedAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY ?
+      ('tb.rulenode.source-telemetry-required' | translate) : ('tb.rulenode.source-attribute-required' | translate)"
+      [valText]="'tb.rulenode.target-key' | translate"
+      [valRequiredText]="'tb.rulenode.target-key-required' | translate"
+      [hintText]="'tb.rulenode.kv-map-pattern-hint' | translate">
+    </tb-kv-map-config>
+    <tb-sv-map-config
+      *ngIf="relatedAttributesConfigForm.get('dataToFetch').value === DataToFetch.FIELDS"
+      required
+      [labelText]="'tb.rulenode.fields-mapping' | translate"
+      targetKeyPrefix="relatedEntity"
+      [selectOptions]="originatorFields"
+      [selectOptionsTranslate]="originatorFieldsTranslations"
+      formControlName="dataMapping"
+      [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
+      [selectText]="'tb.rulenode.source-field' | translate"
+      [selectRequiredText]="'tb.rulenode.source-field-required' | translate"
+      [valText]="'tb.rulenode.target-key' | translate"
+      [valRequiredText]="'tb.rulenode.target-key-required' | translate"
+      [hintText]="'tb.rulenode.sv-map-hint' | translate"
+    >
+    </tb-sv-map-config>
+    <tb-msg-metadata-chip formControlName="fetchTo" style="margin-bottom: 11px;" [labelText]="msgMetadataChipLabel() | translate">
       </tb-msg-metadata-chip>
-    </ng-template>
   </tb-fieldset-component>
 </section>

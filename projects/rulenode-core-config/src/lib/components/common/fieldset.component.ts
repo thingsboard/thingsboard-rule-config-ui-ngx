@@ -1,6 +1,5 @@
-import { Component, Input, TemplateRef, ContentChild } from '@angular/core';
-import { WidgetContentTemplateDirective } from './widget-content-tempate.directive';
-import { coerceBooleanProperty } from "@angular/cdk/coercion";
+import { Component, Input, TemplateRef } from '@angular/core';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Component({
   selector: 'tb-fieldset-component',
@@ -22,15 +21,7 @@ export class FieldsetComponent {
     return this.requiredValue;
   }
 
-
-  @ContentChild(WidgetContentTemplateDirective, { read: TemplateRef })
-  set WidgetContentTemplate(value: TemplateRef<any>) {
-    this.widgetContentTemplate = value;
-  }
-
   get WidgetContentTemplate(): TemplateRef<any> {
     return this.widgetContentTemplate;
   }
-
-  protected readonly requestAnimationFrame = requestAnimationFrame;
 }

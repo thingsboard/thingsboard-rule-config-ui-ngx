@@ -1,8 +1,5 @@
 <section fxLayout="column" class="tb-sv-map-config" [formGroup]="kvListFormGroup">
-  <div *ngIf="!(ngControl.hasError('kvMapRequired') || ngControl.hasError('uniqueKeyValuePair') ?
-                     (ngControl.hasError('kvMapRequired') ? translate.instant(requiredText) :
-                     translate.instant('tb.key-val.unique-key-value-pair-error', {selectText: translate.instant(selectText),
-                     valText: translate.instant(valText)})) : false)">
+  <div *ngIf="!ngControl.hasError('kvMapRequired')">
     <label *ngIf="labelText" class="map-label">{{ labelText }}</label>
     <div class="body">
       <div class="row" style="margin-bottom: 15px;" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px"
@@ -42,7 +39,7 @@
     </div>
   </div>
   <tb-error *ngIf="ngControl.hasError('kvMapRequired')"
-            [error]="ngControl.hasError('kvMapRequired') ? translate.instant(requiredText) : ''"
+            [error]="translate.instant(requiredText)"
             style="margin-bottom: 8px">
   </tb-error>
   <div>

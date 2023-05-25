@@ -1,7 +1,6 @@
 <fieldset class="fields-group" fxLayout="column" >
   <legend class="group-title">{{ label }}{{ required ? '*' : '' }}</legend>
   <section class="fieldset-content" fxLayout="column">
-    <ng-container *ngTemplateOutlet="WidgetContentTemplate">
-    </ng-container>
+    <ng-content></ng-content>
   </section>
 </fieldset>
