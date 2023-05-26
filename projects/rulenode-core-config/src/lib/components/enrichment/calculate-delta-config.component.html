@@ -1,4 +1,4 @@
-<section [formGroup]="calculateDeltaConfigForm" fxLayout="column" style="margin: 2px 0 25px;">
+<section [formGroup]="calculateDeltaConfigForm" fxLayout="column">
   <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
     <mat-form-field class="mat-block" fxFlex="100">
       <mat-label>{{ 'tb.rulenode.input-value-key' | translate }}</mat-label>
@@ -37,7 +37,7 @@
             { inputValueKey: calculateDeltaConfigForm.get('inputValueKey').valid ?
             calculateDeltaConfigForm.get('inputValueKey').value : 'tb.rulenode.input-value-key' | translate }) | async">
   </tb-slide-toggle>
-  <tb-slide-toggle class="slide-toggle" formControlName="addPeriodBetweenMsgs"
+  <tb-slide-toggle class="slide-toggle" style="margin-bottom: 6px" formControlName="addPeriodBetweenMsgs"
                    [slideToggleName]="translate.get('tb.rulenode.add-time-difference-between-readings',
             { inputValueKey:  calculateDeltaConfigForm.get('inputValueKey').valid ?
             calculateDeltaConfigForm.get('inputValueKey').value : 'tb.rulenode.input-value-key' | translate }) | async"

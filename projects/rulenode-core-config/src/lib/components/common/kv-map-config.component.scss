@@ -12,26 +12,26 @@
       letter-spacing: 0.25px;
     }
 
+    .examples-popup {
+      .mat-icon {
+        width: 12px !important;
+        min-width: 12px !important;
+        height: 12px !important;
+        min-height: 12px !important;
+        font-size: 12px !important;
+        line-height: 12px !important;
+      }
+
+      button {
+        line-height: 21px !important;
+      }
+    }
+
     .body {
       margin-top: 7px;
       padding-bottom: 0;
       max-height: 363px;
       overflow: auto;
-
-      .examples-popup {
-        .mat-icon {
-          width: 12px !important;
-          min-width: 12px !important;
-          height: 12px !important;
-          min-height: 12px !important;
-          font-size: 12px !important;
-          line-height: 12px !important;
-        }
-
-        button {
-          height: 21px !important;
-        }
-      }
 
       .inputs-block {
         border: 1px solid #E0E0E0;

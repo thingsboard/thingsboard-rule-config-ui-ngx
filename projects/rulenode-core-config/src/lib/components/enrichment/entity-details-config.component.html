@@ -1,4 +1,4 @@
-<section [formGroup]="entityDetailsConfigForm" fxLayout="column" style="margin: 2px 0px 20px;">
+<section [formGroup]="entityDetailsConfigForm" fxLayout="column">
   <mat-form-field class="mat-block entity-fields-list">
     <mat-label>{{ 'tb.rulenode.entity-details' | translate }}</mat-label>
     <mat-chip-grid #detailsChipList formControlName="detailsList">
@@ -22,7 +22,6 @@
     </mat-chip-grid>
     <button *ngIf="entityDetailsConfigForm.get('detailsList').value?.length > 1"
             type="button"
-            style="margin-right: 3px"
             matTooltip="{{'tb.rulenode.clear-selected-details' | translate}}"
             matSuffix mat-icon-button
             (click)="clearChipGrid()">

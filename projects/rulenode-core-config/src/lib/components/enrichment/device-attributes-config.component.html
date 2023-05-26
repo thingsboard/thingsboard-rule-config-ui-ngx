@@ -1,4 +1,4 @@
-<section [formGroup]="deviceAttributesConfigForm" fxLayout="column" style="margin-bottom: 20px">
+<section [formGroup]="deviceAttributesConfigForm" fxLayout="column">
   <tb-fieldset-component [label]="'tb.rulenode.device-relations-query' | translate" required="true">
     <tb-device-relations-query-config
       required
@@ -6,10 +6,10 @@
       style="width: 100%">
     </tb-device-relations-query-config>
   </tb-fieldset-component>
-  <tb-fieldset-component [label]="'tb.rulenode.related-device-attributes' | translate" style="margin-top: 12px" required="true">
-    <tb-select-attributes style="margin-bottom: 8px" formControlName="attributesControl"></tb-select-attributes>
+  <tb-fieldset-component [label]="'tb.rulenode.related-device-attributes' | translate" class="device-attribute" required="true">
+    <tb-select-attributes formControlName="attributesControl"></tb-select-attributes>
   </tb-fieldset-component>
-  <tb-slide-toggle style="margin: 26px 0px 25px;"
+  <tb-slide-toggle class='failure-toggle'
                    formControlName="tellFailureIfAbsent"
                    [slideToggleName]="'tb.rulenode.tell-failure' | translate"
                    [slideToggleTooltip]="'tb.rulenode.tell-failure-tooltip' | translate">
