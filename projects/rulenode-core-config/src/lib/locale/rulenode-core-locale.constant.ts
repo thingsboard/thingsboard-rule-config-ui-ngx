@@ -138,8 +138,8 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'attr-mapping-required': 'At least one mapping entry should be specified!',
           'fields-mapping': 'Fields mapping*',
           'fields-mapping-required': 'At least one field mapping should be specified.',
-          'originator-fields-sv-map-hint': 'Target key fields support templatization. Use ${messageKey} to extract value from the message body and ${metadataKey} to extract value from the message metadata.',
-          'sv-map-hint': 'Only target key fields support templatization. Use ${messageKey} to extract value from the message body and ${metadataKey} to extract value from the message metadata.',
+          'originator-fields-sv-map-hint': 'Target key fields support templatization. Use $[messageKey] to extract value from the message body and ${metadataKey} to extract value from the message metadata.',
+          'sv-map-hint': 'Only target key fields support templatization. Use $[messageKey] to extract value from the message body and ${metadataKey} to extract value from the message metadata.',
           'source-field': 'Source field',
           'source-field-required': 'Source field is required!',
           'originator-source': 'Originator source',
@@ -346,7 +346,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'private-key-password': 'Private key password',
           'use-system-smtp-settings': 'Use system SMTP settings',
           'use-metadata-dynamic-interval': 'Use dynamic interval',
-          'metadata-dynamic-interval-hint': 'Interval start and end input fields support templatization. Note that the substituted template value should be set in milliseconds. Use ${messageKey} to extract value from the message body and ${metadataKey} to extract value from the message metadata.',
+          'metadata-dynamic-interval-hint': 'Interval start and end input fields support templatization. Note that the substituted template value should be set in milliseconds. Use $[messageKey] to extract value from the message body and ${metadataKey} to extract value from the message metadata.',
           'use-metadata-interval-patterns-hint':
             'If selected, rule node use start and end interval patterns from message metadata or data ' +
             'assuming that intervals are in the milliseconds.',
@@ -510,7 +510,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'skip-latest-persistence': 'Skip latest persistence',
           'use-server-ts': 'Use server ts',
           'use-server-ts-hint': 'Enable this setting to use the timestamp of the message processing instead of the timestamp from the message. Useful for all sorts of sequential processing if you merge messages from multiple sources (devices, assets, etc).',
-          'kv-map-pattern-hint': 'All input fields support templatization. Use ${messageKey} to extract value from the message body and ${metadataKey} to extract value from the message metadata.',
+          'kv-map-pattern-hint': 'All input fields support templatization. Use $[messageKey] to extract value from the message body and ${metadataKey} to extract value from the message metadata.',
           'shared-scope': 'Shared scope',
           'server-scope': 'Server scope',
           'client-scope': 'Client scope',

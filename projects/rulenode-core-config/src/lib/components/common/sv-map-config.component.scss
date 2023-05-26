@@ -16,26 +16,31 @@
       max-height: 363px;
       overflow: auto;
 
-      .inputs-block {
-        border: 1px solid #E0E0E0;
-        width: 100%;
-        border-radius: 6px;
-        padding: 24px 24px 2px 24px;
-        align-items: center;
+      .mapping-block {
+        margin-bottom: 15px;
 
-        .arrow-icon {
-          width: 24px;
-          height: 24px;
-          line-height: 24px;
-          font-size: 24px;
-          margin: 0px 2px 24px;
-          color: #9E9E9E;
+        .inputs-block {
+          border: 1px solid #E0E0E0;
+          width: 100%;
+          border-radius: 6px;
+          padding: 24px 24px 2px 24px;
+          align-items: center;
+
+          .arrow-icon {
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            font-size: 24px;
+            margin: 0px 2px 24px;
+            color: #9E9E9E;
+          }
         }
       }
     }
     tb-error {
       display: block;
       margin-top: -12px;
+      margin-bottom: 8px;
     }
   }
 }

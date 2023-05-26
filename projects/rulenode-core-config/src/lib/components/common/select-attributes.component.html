@@ -16,7 +16,6 @@
     </mat-chip-grid>
     <button *ngIf="attributeControlGroup.get('clientAttributeNames').value?.length > 1"
             type="button"
-            style="margin-right: 3px"
             matTooltip="{{'tb.rulenode.clear-selected-details' | translate}}"
             matSuffix mat-icon-button
             (click)="clearChipGrid('clientAttributeNames')">
@@ -40,7 +39,6 @@
     </mat-chip-grid>
     <button *ngIf="attributeControlGroup.get('sharedAttributeNames').value?.length > 1"
             type="button"
-            style="margin-right: 3px"
             matTooltip="{{'tb.rulenode.clear-selected-details' | translate}}"
             matSuffix mat-icon-button
             (click)="clearChipGrid('sharedAttributeNames')">
@@ -64,7 +62,6 @@
     </mat-chip-grid>
     <button *ngIf="attributeControlGroup.get('serverAttributeNames').value?.length > 1"
             type="button"
-            style="margin-right: 3px"
             matTooltip="{{'tb.rulenode.clear-selected-details' | translate}}"
             matSuffix mat-icon-button
             (click)="clearChipGrid('serverAttributeNames')">
@@ -88,7 +85,6 @@
     </mat-chip-grid>
     <button *ngIf="attributeControlGroup.get('latestTsKeyNames').value?.length > 1"
             type="button"
-            style="margin-right: 3px"
             matTooltip="{{'tb.rulenode.clear-selected-details' | translate}}"
             matSuffix mat-icon-button
             (click)="clearChipGrid('latestTsKeyNames')">
@@ -97,7 +93,7 @@
   </mat-form-field>
   <div class="tb-hint">
     <span style="vertical-align: middle">{{ 'tb.rulenode.kv-map-pattern-hint' | translate }}</span>
-    <span tb-help-popup="{{'rulenode/msg_and_metadata_key_patterns_fn'}}"
+    <span tb-help-popup="{{'rulenode/configuration_fields_templatization'}}"
           tb-help-popup-placement="right"  class="examples-popup"
           trigger-style="letter-spacing:0.25px; font-size:12px"
           [tb-help-popup-style]="{maxWidth: '820px'}"
