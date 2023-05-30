@@ -5,15 +5,13 @@
       required
       formControlName="dataMapping"
       [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
-      [labelText]="tenantAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY ?
-      ('tb.rulenode.latest-telemetry-mapping' | translate) : ('tb.rulenode.attributes-mapping' | translate) "
-      [keyText]="tenantAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY ?
-      ('tb.rulenode.source-telemetry' | translate) : ('tb.rulenode.source-attribute' | translate)"
-      [keyRequiredText]="tenantAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY ?
-      ('tb.rulenode.source-telemetry-required' | translate) : ('tb.rulenode.source-attribute-required' | translate)"
+      [labelText]="selectTranslation('tb.rulenode.latest-telemetry-mapping', 'tb.rulenode.attributes-mapping') | translate"
+      [keyText]="selectTranslation('tb.rulenode.source-telemetry', 'tb.rulenode.source-attribute') | translate"
+      [keyRequiredText]="selectTranslation('tb.rulenode.source-telemetry-required', 'tb.rulenode.source-attribute-required') | translate"
       [valText]="'tb.rulenode.target-key' | translate"
       [valRequiredText]="'tb.rulenode.target-key-required' | translate"
-      [hintText]="'tb.rulenode.kv-map-pattern-hint' | translate">
+      [hintText]="'tb.rulenode.kv-map-pattern-hint' | translate"
+      popupHelpLink="rulenode/tenant_attributes_node_fields_templatization">
     </tb-kv-map-config>
     <tb-msg-metadata-chip formControlName="fetchTo" style="margin-bottom: 12px;"
                           [labelText]="tenantAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY ?

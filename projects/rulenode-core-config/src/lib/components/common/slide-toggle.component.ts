@@ -1,5 +1,5 @@
 import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
-import { ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR, UntypedFormBuilder, Validators } from '@angular/forms';
+import { ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR, FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
 import { takeUntil } from 'rxjs/operators';
@@ -27,11 +27,11 @@ export class SlideToggleComponent implements  OnInit, ControlValueAccessor, OnDe
   public slideToggleControlGroup: FormGroup;
 
   constructor(private store: Store<AppState>,
-              private fb: UntypedFormBuilder) {}
+              private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.slideToggleControlGroup = this.fb.group({
-      slideToggleControl: [null,  [Validators.required, Validators.maxLength(255)]]
+      slideToggleControl: [null,  []]
     });
 
     this.slideToggleControlGroup.get('slideToggleControl').valueChanges.pipe(

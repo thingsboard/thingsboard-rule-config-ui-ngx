@@ -1,4 +1,4 @@
-<section [formGroup]="getTelemetryFromDatabaseConfigForm" xmlns="http://www.w3.org/1999/html" fxLayout="column">
+<section [formGroup]="getTelemetryFromDatabaseConfigForm" fxLayout="column">
   <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label>{{'tb.rulenode.timeseries-keys' | translate}}</mat-label>
     <mat-chip-grid #latestTimeseriesChipList>
@@ -23,7 +23,7 @@
     </button>
     <mat-hint>
       <span style="vertical-align: middle">  {{ "tb.rulenode.general-pattern-hint" | translate }}</span>
-      <span tb-help-popup="{{'rulenode/configuration_fields_templatization'}}"
+      <span tb-help-popup="{{'rulenode/originator_telemetry_node_fields_templatization'}}"
             tb-help-popup-placement="right"  class="examples-popup"
             trigger-style="letter-spacing:0.25px; font-size:12px"
             [tb-help-popup-style]="{maxWidth: '820px'}"
@@ -83,12 +83,12 @@
         </mat-form-field>
       </div>
         <div *ngIf="getTelemetryFromDatabaseConfigForm.get('interval').valid" class="interval-description">
-          {{ translate.get('tb.rulenode.fetch-timeseries-from-to',
+          {{ 'tb.rulenode.fetch-timeseries-from-to' | translate:
           {
             startInterval: getTelemetryFromDatabaseConfigForm.get('interval.startInterval').value,
             endInterval: getTelemetryFromDatabaseConfigForm.get('interval.endInterval').value,
             startIntervalTimeUnit: getTelemetryFromDatabaseConfigForm.get('interval.startIntervalTimeUnit').value.toLowerCase(),
-            endIntervalTimeUnit: getTelemetryFromDatabaseConfigForm.get('interval.endIntervalTimeUnit').value.toLowerCase()}) | async }}
+            endIntervalTimeUnit: getTelemetryFromDatabaseConfigForm.get('interval.endIntervalTimeUnit').value.toLowerCase()} }}
         </div>
         <div *ngIf="getTelemetryFromDatabaseConfigForm.get('interval').invalid" style="color: red" class="interval-description">
           {{ "tb.rulenode.fetch-timeseries-from-to-invalid" | translate }}
@@ -125,7 +125,7 @@
   </tb-fieldset-component>
   <tb-fieldset-component [label]="'tb.rulenode.fetch-strategy' | translate" class="fetch-strategy-fieldset" required="true">
     <div fxLayout="column" class="fetch-strategy-block">
-      <mat-button-toggle-group formControlName="fetchMode" class="tb-script-lang-toggle-group fetch-mod-toggle" aria-label="Script language">
+      <mat-button-toggle-group formControlName="fetchMode" class="tb-script-lang-toggle-group fetch-mod-toggle">
         <mat-button-toggle *ngFor="let fetchMode of fetchModes" [value]="fetchMode">{{ deduplicationStrategiesTranslations.get(fetchMode) | translate}}</mat-button-toggle>
       </mat-button-toggle-group>
       <div  class="tb-hint">

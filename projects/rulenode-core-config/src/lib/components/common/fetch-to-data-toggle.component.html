@@ -1,8 +1,8 @@
 <div [formGroup]="toggleControlGroup">
   <mat-button-toggle-group class="tb-script-lang-toggle-group"
-                           formControlName="toggleControl" aria-label="Script language">
+                           formControlName="toggleControl">
     <mat-button-toggle [value]="DataToFetch.ATTRIBUTES">{{ 'tb.rulenode.attributes' | translate }}</mat-button-toggle>
     <mat-button-toggle [value]="DataToFetch.LATEST_TELEMETRY">{{ 'tb.rulenode.latest-telemetry' | translate }}</mat-button-toggle>
-    <mat-button-toggle *ngIf="enableFieldToggle" fxFlex [value]="DataToFetch.FIELDS">{{ 'tb.rulenode.fields' | translate }}</mat-button-toggle>
+    <mat-button-toggle *ngIf="enableFieldToggle" [value]="DataToFetch.FIELDS">{{ 'tb.rulenode.fields' | translate }}</mat-button-toggle>
   </mat-button-toggle-group>
 </div>

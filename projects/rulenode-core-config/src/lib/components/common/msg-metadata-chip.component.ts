@@ -1,5 +1,5 @@
 import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
-import { ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR, UntypedFormBuilder, Validators } from '@angular/forms';
+import { ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR, FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
 import { FetchTo } from '../../rulenode-core-config.models';
@@ -22,13 +22,13 @@ export class MsgMetadataChipComponent implements  OnInit, ControlValueAccessor, 
   @Input() labelText: string;
 
   private propagateChange;
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
 
   public chipControlGroup: FormGroup;
   public fetchTo = FetchTo;
 
   constructor(private store: Store<AppState>,
-              private fb: UntypedFormBuilder) {}
+              private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.chipControlGroup = this.fb.group({
@@ -58,7 +58,7 @@ export class MsgMetadataChipComponent implements  OnInit, ControlValueAccessor, 
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next(null);
+    this.destroy$.next();
     this.destroy$.complete();
   }
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AppState, isDefinedAndNotNull, isObject, } from '@core/public-api';
 import { Store } from '@ngrx/store';
-import { UntypedFormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { TranslateService } from '@ngx-translate/core';
 import { FetchTo } from '../../rulenode-core-config.models';
@@ -17,7 +17,7 @@ export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationCo
 
   constructor(protected store: Store<AppState>,
               public translate: TranslateService,
-              private fb: UntypedFormBuilder) {
+              private fb: FormBuilder) {
     super(store);
   }
 

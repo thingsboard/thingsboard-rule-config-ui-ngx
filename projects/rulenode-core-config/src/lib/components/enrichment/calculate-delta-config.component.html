@@ -1,6 +1,6 @@
 <section [formGroup]="calculateDeltaConfigForm" fxLayout="column">
   <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
-    <mat-form-field class="mat-block" fxFlex="100">
+    <mat-form-field class="mat-block" fxFlex>
       <mat-label>{{ 'tb.rulenode.input-value-key' | translate }}</mat-label>
       <input matInput formControlName="inputValueKey">
       <mat-error *ngIf="calculateDeltaConfigForm.get('inputValueKey').hasError('required') ||
@@ -8,7 +8,7 @@
         {{ 'tb.rulenode.input-value-key-required' | translate }}
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="mat-block" fxFlex="100">
+    <mat-form-field class="mat-block" fxFlex>
       <mat-label>{{ 'tb.rulenode.output-value-key' | translate }}</mat-label>
       <input matInput formControlName="outputValueKey">
       <mat-error *ngIf="calculateDeltaConfigForm.get('outputValueKey').hasError('required') ||
@@ -17,7 +17,7 @@
       </mat-error>
     </mat-form-field>
   </div>
-  <mat-form-field class="mat-block" style="margin-top: 2px;" fxFlex="100">
+  <mat-form-field class="mat-block" style="margin-top: 2px;" fxFlex>
     <mat-label>{{ 'tb.rulenode.number-of-digits-after-floating-point' | translate }}</mat-label>
     <input type="number" min="0" max="15" step="1" matInput formControlName="round">
     <mat-error *ngIf="calculateDeltaConfigForm.get('round').hasError('min')">
@@ -34,18 +34,18 @@
     </tb-slide-toggle>
     <tb-slide-toggle class="slide-toggle" formControlName="tellFailureIfDeltaIsNegative"
                      [slideToggleName]="'tb.rulenode.use-cashing' | translate"
-                     [slideToggleTooltip]="translate.get('tb.rulenode.use-cashing-tooltip',
-              { inputValueKey: calculateDeltaConfigForm.get('inputValueKey').valid ?
-              calculateDeltaConfigForm.get('inputValueKey').value : 'tb.rulenode.input-value-key' | translate }) | async">
+                     [slideToggleTooltip]="'tb.rulenode.use-cashing-tooltip' | translate:
+                     { inputValueKey: calculateDeltaConfigForm.get('inputValueKey').valid ?
+                     calculateDeltaConfigForm.get('inputValueKey').value : 'tb.rulenode.input-value-key' | translate }">
     </tb-slide-toggle>
     <tb-slide-toggle class="slide-toggle" formControlName="addPeriodBetweenMsgs"
-                     [slideToggleName]="translate.get('tb.rulenode.add-time-difference-between-readings',
-              { inputValueKey:  calculateDeltaConfigForm.get('inputValueKey').valid ?
-              calculateDeltaConfigForm.get('inputValueKey').value : 'tb.rulenode.input-value-key' | translate }) | async"
-                     [slideToggleTooltip]="translate.get('tb.rulenode.add-time-difference-between-readings-tooltip',
-              { periodValueKey: (calculateDeltaConfigForm.get('periodValueKey').valid &&
-              calculateDeltaConfigForm.get('addPeriodBetweenMsgs').value) ? calculateDeltaConfigForm.get('periodValueKey').value :
-              'periodInMs' }) | async">
+                     [slideToggleName]="'tb.rulenode.add-time-difference-between-readings' | translate:
+                     { inputValueKey:  calculateDeltaConfigForm.get('inputValueKey').valid ?
+                     calculateDeltaConfigForm.get('inputValueKey').value : 'tb.rulenode.input-value-key' | translate }"
+                     [slideToggleTooltip]="'tb.rulenode.add-time-difference-between-readings-tooltip' | translate:
+                     { periodValueKey: (calculateDeltaConfigForm.get('periodValueKey').valid &&
+                     calculateDeltaConfigForm.get('addPeriodBetweenMsgs').value) ? calculateDeltaConfigForm.get('periodValueKey').value :
+                     'periodInMs' }">
     </tb-slide-toggle>
   </div>
   <mat-form-field class="mat-block period-input" *ngIf="calculateDeltaConfigForm.get('addPeriodBetweenMsgs').value">

@@ -1,8 +1,8 @@
 <section fxLayout="column" class="tb-kv-map-config" [formGroup]="kvListFormGroup">
-  <div *ngIf="!ngControl.hasError('kvMapRequired')">
+  <div *ngIf="kvListFormGroup.get('keyVals').value.length > 0">
     <label class="map-label">{{ labelText }}</label>
     <div class="body">
-      <div class="row mapping-block" fxLayout="row" fxLayoutAlign="start center" formArrayName="keyVals"
+      <div class="row mapping-block" fxLayout="row" fxLayoutAlign="start center" formArrayName="keyVals" fxLayoutGap="8px"
            *ngFor="let keyValControl of keyValsFormArray().controls; let $index = index">
         <div fxLayout="row" class="inputs-block">
           <mat-form-field fxFlex class="mat-block">
@@ -35,12 +35,12 @@
   </div>
   <tb-error *ngIf="ngControl.hasError('kvMapRequired')" [error]="requiredText"></tb-error>
   <tb-error *ngIf="ngControl.hasError('uniqueKeyValuePair')" [error]="
-        translate.instant('tb.key-val.unique-key-value-pair-error', {keyText: keyText, valText: valText})">
+        'tb.key-val.unique-key-value-pair-error' | translate: {keyText: keyText, valText: valText}">
   </tb-error>
   <div>
     <div *ngIf="hintText" class="tb-hint">
       <span style="vertical-align: middle">{{ hintText }}</span>
-      <span tb-help-popup="{{'rulenode/configuration_fields_templatization'}}"
+      <span *ngIf="popupHelpLink"  tb-help-popup="{{ popupHelpLink }}"
             tb-help-popup-placement="right"  class="examples-popup"
             trigger-style="letter-spacing:0.25px; font-size:12px"
             [tb-help-popup-style]="{maxWidth: '820px'}"

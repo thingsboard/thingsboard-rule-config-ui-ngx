@@ -12,7 +12,6 @@ export * from './msg-metadata-chip.component';
 export * from './slide-toggle.component';
 export * from './sv-map-config.component';
 export * from './fieldset.component';
-export * from './widget-content-tempate.directive';
 export * from './relations-query-config-old.component';
 export * from './fetch-to-data-toggle.component';
 export * from './select-attributes.component';

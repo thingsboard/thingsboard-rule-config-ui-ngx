@@ -2,7 +2,7 @@
   width: 100%;
 
   .tb-sv-map-config {
-    margin-bottom: 11px;
+    margin-bottom: 12px;
 
     .map-label {
       font-weight: 400;
@@ -11,10 +11,26 @@
       letter-spacing: 0.25px;
     }
 
+    .examples-popup {
+      .mat-icon {
+        width: 12px!important;
+        min-width: 12px!important;
+        height: 12px!important;
+        min-height: 12px!important;
+        font-size: 12px!important;
+        line-height: 12px!important;
+      }
+
+      button {
+        height: 22px !important;
+      }
+    }
+
     .body {
       padding-bottom: 0;
       max-height: 363px;
       overflow: auto;
+      margin-top: 7px;
 
       .mapping-block {
         margin-bottom: 15px;

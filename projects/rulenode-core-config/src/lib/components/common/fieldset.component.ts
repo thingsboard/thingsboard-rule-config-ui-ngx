@@ -1,4 +1,4 @@
-import { Component, Input, TemplateRef } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Component({
@@ -7,7 +7,6 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
   styleUrls: [ './fieldset.component.scss' ]
 })
 export class FieldsetComponent {
-  private widgetContentTemplate: TemplateRef<any>;
   private requiredValue: boolean;
 
   @Input() label;
@@ -19,9 +18,5 @@ export class FieldsetComponent {
 
   get required() {
     return this.requiredValue;
-  }
-
-  get WidgetContentTemplate(): TemplateRef<any> {
-    return this.widgetContentTemplate;
   }
 }

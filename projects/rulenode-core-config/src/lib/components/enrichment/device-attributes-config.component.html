@@ -7,7 +7,8 @@
     </tb-device-relations-query-config>
   </tb-fieldset-component>
   <tb-fieldset-component [label]="'tb.rulenode.related-device-attributes' | translate" class="device-attribute" required="true">
-    <tb-select-attributes formControlName="attributesControl"></tb-select-attributes>
+    <tb-select-attributes formControlName="attributesControl"
+                          popupHelpLink="rulenode/related_device_attributes_node_fields_templatization"></tb-select-attributes>
   </tb-fieldset-component>
   <tb-slide-toggle class='failure-toggle'
                    formControlName="tellFailureIfAbsent"

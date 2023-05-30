@@ -61,10 +61,25 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
     this.searchText = '';
     this.detailsFormControl.patchValue('', {emitEvent: true});
     this.detailsList = configuration ? configuration.detailsList : [];
+
+    let fetchTo;
+    if (isDefinedAndNotNull(configuration?.addToMetadata)) {
+      if (configuration.addToMetadata) {
+        fetchTo = FetchTo.METADATA;
+      } else {
+        fetchTo = FetchTo.DATA;
+      }
+    } else {
+      if (configuration?.fetchTo) {
+        fetchTo = configuration.fetchTo;
+      } else {
+        fetchTo = FetchTo.DATA;
+      }
+    }
+
     return {
       detailsList: isDefinedAndNotNull(configuration?.detailsList) ? configuration.detailsList : null,
-      fetchTo:  isDefinedAndNotNull(configuration?.addToMetadata) ? configuration.addToMetadata ? FetchTo.METADATA : FetchTo.DATA :
-        isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.DATA
+      fetchTo
     };
   }
 

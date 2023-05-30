@@ -93,7 +93,7 @@
   </mat-form-field>
   <div class="tb-hint">
     <span style="vertical-align: middle">{{ 'tb.rulenode.kv-map-pattern-hint' | translate }}</span>
-    <span tb-help-popup="{{'rulenode/configuration_fields_templatization'}}"
+    <span *ngIf="popupHelpLink" tb-help-popup="{{ popupHelpLink }}"
           tb-help-popup-placement="right"  class="examples-popup"
           trigger-style="letter-spacing:0.25px; font-size:12px"
           [tb-help-popup-style]="{maxWidth: '820px'}"
@@ -102,7 +102,7 @@
   <tb-slide-toggle *ngIf="attributeControlGroup.get('latestTsKeyNames').value?.length > 0"
                    class="fetch-slide-toggle" formControlName="getLatestValueWithTs"
                    [slideToggleName]="'tb.rulenode.fetch-latest-telemetry-with-timestamp' | translate"
-                   [slideToggleTooltip]="translate.get('tb.rulenode.fetch-latest-telemetry-with-timestamp-tooltip',
-                         { latestTsKeyName:  attributeControlGroup.get('latestTsKeyNames').value[0] }) | async">
+                   [slideToggleTooltip]="'tb.rulenode.fetch-latest-telemetry-with-timestamp-tooltip' | translate:
+                         { latestTsKeyName:  attributeControlGroup.get('latestTsKeyNames').value[0]}">
   </tb-slide-toggle>
 </div>

@@ -1,6 +1,7 @@
 <section [formGroup]="originatorAttributesConfigForm" fxLayout="column">
   <tb-fieldset-component [label]="'tb.rulenode.originator-attributes' | translate" required="true">
-    <tb-select-attributes class ='select-attributes' formControlName="attributesControl"></tb-select-attributes>
+    <tb-select-attributes class ='select-attributes' formControlName="attributesControl"
+                          popupHelpLink="rulenode/originator_attributes_node_fields_templatization"></tb-select-attributes>
   </tb-fieldset-component>
   <tb-slide-toggle class="failure-slide-toggle"
                    formControlName="tellFailureIfAbsent"

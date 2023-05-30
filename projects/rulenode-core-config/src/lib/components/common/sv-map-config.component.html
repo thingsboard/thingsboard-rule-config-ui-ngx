@@ -1,5 +1,5 @@
-<section fxLayout="column" class="tb-sv-map-config" [formGroup]="kvListFormGroup">
-  <div *ngIf="!ngControl.hasError('kvMapRequired')">
+<section fxLayout="column" class="tb-sv-map-config" [formGroup]="svListFormGroup">
+  <div *ngIf="svListFormGroup.get('keyVals').value.length > 0">
     <label *ngIf="labelText" class="map-label">{{ labelText }}</label>
     <div class="body">
       <div class="row mapping-block" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px"
@@ -39,12 +39,12 @@
     </div>
   </div>
   <tb-error *ngIf="ngControl.hasError('kvMapRequired')"
-            [error]="translate.instant(requiredText)">
+            [error]="requiredText | translate">
   </tb-error>
   <div>
     <div *ngIf="hintText" class="tb-hint">
       <span style="vertical-align: middle">{{ hintText }}</span>
-      <span tb-help-popup="{{'rulenode/configuration_fields_templatization'}}"
+      <span *ngIf="popupHelpLink" tb-help-popup="{{ popupHelpLink }}"
             tb-help-popup-placement="right"  class="examples-popup"
             trigger-style="letter-spacing:0.25px; font-size:12px"
             [tb-help-popup-style]="{maxWidth: '820px'}"

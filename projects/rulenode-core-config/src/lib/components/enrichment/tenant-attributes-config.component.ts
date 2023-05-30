@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataToFetch, FetchTo } from '../../rulenode-core-config.models';
 
 @Component({
@@ -15,7 +15,7 @@ export class TenantAttributesConfigComponent extends RuleNodeConfigurationCompon
   tenantAttributesConfigForm: FormGroup;
 
   constructor(protected store: Store<AppState>,
-              private fb: UntypedFormBuilder) {
+              private fb: FormBuilder) {
     super(store);
   }
 
@@ -30,6 +30,15 @@ export class TenantAttributesConfigComponent extends RuleNodeConfigurationCompon
       fetchTo: isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA
     };
   }
+
+  public selectTranslation(latestTelemetryTranslation, attributesTranslation) {
+    if (this.tenantAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY) {
+      return latestTelemetryTranslation;
+    } else {
+      return attributesTranslation;
+    }
+  }
+
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.tenantAttributesConfigForm = this.fb.group({

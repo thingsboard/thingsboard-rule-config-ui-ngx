@@ -1,10 +1,11 @@
 import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
-import { ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR, UntypedFormBuilder, Validators } from '@angular/forms';
+import { ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR, FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { DataToFetch } from '../../rulenode-core-config.models';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Component({
   selector: 'tb-fetch-to-data-toggle',
@@ -21,13 +22,21 @@ export class FetchToDataToggleComponent implements  OnInit, ControlValueAccessor
 
   private propagateChange;
   private destroy$ = new Subject();
+  private _enableFieldToggle: boolean;
 
   public toggleControlGroup: FormGroup;
 
-  @Input() enableFieldToggle: boolean;
+  @Input()
+  set enableFieldToggle(value) {
+    this._enableFieldToggle = coerceBooleanProperty(value);
+  }
+
+  get enableFieldToggle() {
+    return this._enableFieldToggle;
+  }
 
   constructor(private store: Store<AppState>,
-              private fb: UntypedFormBuilder) {}
+              private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.toggleControlGroup = this.fb.group({

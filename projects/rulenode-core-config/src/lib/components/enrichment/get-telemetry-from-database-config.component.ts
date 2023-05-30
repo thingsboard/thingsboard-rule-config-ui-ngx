@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
 import { AppState, isDefinedAndNotNull, isObject } from '@core/public-api';
 import { Store } from '@ngrx/store';
-import {
-  AbstractControl,
-  FormGroup,
-  ValidationErrors,
-  Validators,
-  FormBuilder
-} from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
-import { aggregationTranslations, AggregationType, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
+import {
+  aggregationTranslations,
+  AggregationType,
+  RuleNodeConfiguration,
+  RuleNodeConfigurationComponent
+} from '@shared/public-api';
 import { MatChipInputEvent } from '@angular/material/chips';
 import {
   deduplicationStrategiesTranslations,
