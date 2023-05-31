@@ -95,6 +95,7 @@
     <span style="vertical-align: middle">{{ 'tb.rulenode.kv-map-pattern-hint' | translate }}</span>
     <span *ngIf="popupHelpLink" tb-help-popup="{{ popupHelpLink }}"
           tb-help-popup-placement="right"  class="examples-popup"
+          hintMode
           trigger-style="letter-spacing:0.25px; font-size:12px"
           [tb-help-popup-style]="{maxWidth: '820px'}"
           trigger-text="{{ 'tb.key-val.see-examples' | translate }}"></span>

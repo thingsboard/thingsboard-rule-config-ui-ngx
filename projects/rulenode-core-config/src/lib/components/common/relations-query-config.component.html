@@ -25,8 +25,7 @@
         </div>
         <div fxLayout="column">
           <tb-slide-toggle *ngIf="relationsQueryFormGroup.get('maxLevel').value > 1"
-                           style="margin: 6px 0px 24px 0px;
-                                  display: inline-block;"
+                           class="last-level-slide-toggle"
                            formControlName="fetchLastLevelOnly"
                            [slideToggleName]="'alias.last-level-relation' | translate"
                            [slideToggleTooltip]="'tb.rulenode.last-level-relation-tooltip' | translate">

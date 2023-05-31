@@ -17,7 +17,7 @@
       </mat-error>
     </mat-form-field>
   </div>
-  <mat-form-field class="mat-block" style="margin-top: 2px;" fxFlex>
+  <mat-form-field class="mat-block" fxFlex>
     <mat-label>{{ 'tb.rulenode.number-of-digits-after-floating-point' | translate }}</mat-label>
     <input type="number" min="0" max="15" step="1" matInput formControlName="round">
     <mat-error *ngIf="calculateDeltaConfigForm.get('round').hasError('min')">

@@ -12,11 +12,10 @@ import {
   Validator,
   Validators
 } from '@angular/forms';
-import { PageComponent } from '@shared/public-api';
+import { coerceBoolean, PageComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { Subject, Subscription } from 'rxjs';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { TranslateService } from '@ngx-translate/core';
 import { takeUntil } from 'rxjs/operators';
 import { OriginatorFields } from '../../rulenode-core-config.models';
@@ -40,9 +39,7 @@ import { OriginatorFields } from '../../rulenode-core-config.models';
 })
 export class SvMapConfigComponent extends PageComponent implements ControlValueAccessor, OnInit, Validator, OnDestroy {
 
-  private _disabled: boolean;
   private destroy$ = new Subject<void>();
-  private requiredValue: boolean;
   private sourceFieldSubcritption: Subscription[] = [];
   private propagateChange = null;
   private valueChangeSubscription: Subscription = null;
@@ -55,12 +52,8 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
   @Input() selectOptionsTranslate: Map<OriginatorFields, string>;
 
   @Input()
-  set disabled(value) {
-    this._disabled = coerceBooleanProperty(value);
-  }
-  get disabled() {
-    return this._disabled;
-  }
+  @coerceBoolean()
+  disabled = false;
 
   @Input() labelText: string;
 
@@ -80,13 +73,9 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
 
   @Input() popupHelpLink: string;
 
-  get required(): boolean {
-    return this.requiredValue;
-  }
   @Input()
-  set required(value: boolean) {
-    this.requiredValue = coerceBooleanProperty(value);
-  }
+  @coerceBoolean()
+  required = false;
 
   constructor(protected store: Store<AppState>,
               public translate: TranslateService,

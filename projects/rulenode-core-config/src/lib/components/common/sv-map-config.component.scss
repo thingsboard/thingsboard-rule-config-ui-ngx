@@ -11,23 +11,7 @@
       letter-spacing: 0.25px;
     }
 
-    .examples-popup {
-      .mat-icon {
-        width: 12px!important;
-        min-width: 12px!important;
-        height: 12px!important;
-        min-height: 12px!important;
-        font-size: 12px!important;
-        line-height: 12px!important;
-      }
-
-      button {
-        height: 22px !important;
-      }
-    }
-
     .body {
-      padding-bottom: 0;
       max-height: 363px;
       overflow: auto;
       margin-top: 7px;
@@ -39,7 +23,7 @@
           border: 1px solid #E0E0E0;
           width: 100%;
           border-radius: 6px;
-          padding: 24px 24px 2px 24px;
+          padding: 22px 22px 0;
           align-items: center;
 
           .arrow-icon {
@@ -47,7 +31,7 @@
             height: 24px;
             line-height: 24px;
             font-size: 24px;
-            margin: 0px 2px 24px;
+            margin: 0px 2px 22px;
             color: #9E9E9E;
           }
         }

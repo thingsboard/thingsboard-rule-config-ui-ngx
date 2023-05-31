@@ -24,9 +24,23 @@ export class TenantAttributesConfigComponent extends RuleNodeConfigurationCompon
   }
 
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    let dataToFetch;
+    if (isDefinedAndNotNull(configuration?.telemetry)) {
+      dataToFetch = configuration.telemetry ? DataToFetch.LATEST_TELEMETRY : DataToFetch.ATTRIBUTES;
+    } else {
+      dataToFetch = isDefinedAndNotNull(configuration?.dataToFetch) ? configuration.dataToFetch : DataToFetch.ATTRIBUTES;
+    }
+
+    let dataMapping;
+    if (isDefinedAndNotNull(configuration?.attrMapping)) {
+      dataMapping = configuration.attrMapping;
+    } else {
+      dataMapping = isDefinedAndNotNull(configuration?.dataMapping) ? configuration.dataMapping : null;
+    }
+
     return {
-      dataToFetch: isDefinedAndNotNull(configuration?.dataToFetch) ? configuration.dataToFetch : DataToFetch.ATTRIBUTES,
-      dataMapping: isDefinedAndNotNull(configuration?.dataMapping)  ? configuration.dataMapping : null,
+      dataToFetch,
+      dataMapping,
       fetchTo: isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA
     };
   }

@@ -25,12 +25,14 @@
       <span style="vertical-align: middle">  {{ "tb.rulenode.general-pattern-hint" | translate }}</span>
       <span tb-help-popup="{{'rulenode/originator_telemetry_node_fields_templatization'}}"
             tb-help-popup-placement="right"  class="examples-popup"
+            hintMode
             trigger-style="letter-spacing:0.25px; font-size:12px"
             [tb-help-popup-style]="{maxWidth: '820px'}"
             trigger-text="{{ 'tb.key-val.see-examples' | translate }}"></span>
     </mat-hint>
   </mat-form-field>
   <tb-fieldset-component class="fetch-interval" [label]="'tb.rulenode.fetch-interval' | translate" required="true">
+
     <tb-slide-toggle class="interval-slide-toggle" formControlName="useMetadataIntervalPatterns"
                      [slideToggleName]="'tb.rulenode.use-metadata-dynamic-interval' | translate"
                      [slideToggleTooltip]="'tb.rulenode.use-metadata-dynamic-interval-tooltip' | translate">
@@ -95,8 +97,8 @@
         </div>
     </div>
     <ng-template #intervalPattern>
-      <div class="input-block">
-        <mat-form-field class="mat-block interval-block" >
+      <div fxLayout="column" class="input-block">
+        <mat-form-field fxFlex class="mat-block interval-block" >
           <mat-label>{{ 'tb.rulenode.start-interval' | translate }}</mat-label>
           <input matInput formControlName="startIntervalPattern" required>
           <mat-error *ngIf="getTelemetryFromDatabaseConfigForm.get('startIntervalPattern').hasError('required') ||
@@ -104,7 +106,7 @@
             {{ 'tb.rulenode.start-interval-required' | translate }}
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="mat-block interval-block" >
+        <mat-form-field fxFlex class="mat-block interval-block" >
           <mat-label>{{ 'tb.rulenode.end-interval' | translate }}</mat-label>
           <input matInput formControlName="endIntervalPattern" required>
           <mat-error *ngIf="getTelemetryFromDatabaseConfigForm.get('endIntervalPattern').hasError('required') ||
@@ -116,6 +118,7 @@
           <span style="vertical-align: middle">{{ 'tb.rulenode.metadata-dynamic-interval-hint' | translate }}</span>
           <span tb-help-popup="{{'rulenode/configuration_fields_templatization'}}"
                 tb-help-popup-placement="right"  class="examples-popup"
+                hintMode
                 trigger-style="letter-spacing:0.25px; font-size:12px"
                 [tb-help-popup-style]="{maxWidth: '820px'}"
                 trigger-text="{{ 'tb.key-val.see-examples' | translate }}"></span>
@@ -131,8 +134,8 @@
       <div  class="tb-hint">
         {{ fetchModeHintSelector() | translate }}
       </div>
-      <div fxLayout="column" class="fetch-inputs" *ngIf="getTelemetryFromDatabaseConfigForm.get('fetchMode').value === fetchMode.ALL">
-        <mat-form-field subscriptSizing="dynamic" class="aggregation-selector" class="aggregation-selector">
+      <div fxLayout="column" *ngIf="getTelemetryFromDatabaseConfigForm.get('fetchMode').value === fetchMode.ALL">
+        <mat-form-field fxFlex>
           <mat-label>{{ 'aggregation.function' | translate }}</mat-label>
           <mat-select formControlName="aggregation" required>
             <mat-option *ngFor="let aggregation of aggregations" [value]="aggregation">
@@ -140,7 +143,7 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <div *ngIf="getTelemetryFromDatabaseConfigForm.get('aggregation').value === aggregationTypes.NONE" class="additional-inputs-block">
+        <div *ngIf="getTelemetryFromDatabaseConfigForm.get('aggregation').value === aggregationTypes.NONE" class="additional-inputs" fxLayout="column">
           <mat-form-field class="mat-block">
             <mat-label> {{ "tb.rulenode.order-by-timestamp" | translate }} </mat-label>
             <mat-select formControlName="orderBy" required>
@@ -149,7 +152,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field class="mat-block" subscriptSizing="dynamic"  style="margin-top: 2px">
+          <mat-form-field class="mat-block">
             <mat-label>{{ "tb.rulenode.limit" | translate }}</mat-label>
             <input type="number" min="2" max="1000" step="1" matInput formControlName="limit" required>
             <mat-hint>{{ "tb.rulenode.limit-hint" | translate }}</mat-hint>

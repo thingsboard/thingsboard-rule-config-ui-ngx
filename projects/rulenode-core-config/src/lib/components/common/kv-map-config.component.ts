@@ -12,11 +12,10 @@ import {
   Validator,
   Validators
 } from '@angular/forms';
-import { PageComponent } from '@shared/public-api';
+import { coerceBoolean, PageComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/public-api';
 import { Subscription } from 'rxjs';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -38,8 +37,6 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class KvMapConfigComponent extends PageComponent implements ControlValueAccessor, OnInit, Validator {
 
-  private _disabled: boolean;
-  private requiredValue: boolean;
   private propagateChange = null;
   private valueChangeSubscription: Subscription = null;
 
@@ -47,14 +44,12 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
   ngControl: NgControl;
 
   @Input()
-  set disabled(value) {
-    this._disabled = coerceBooleanProperty(value);
-  }
-  get disabled() {
-    return this._disabled;
-  }
+  @coerceBoolean()
+  disabled = false;
 
-  @Input() uniqueKeyValuePairValidator: boolean;
+  @Input()
+  @coerceBoolean()
+  uniqueKeyValuePairValidator = false;
 
   @Input() labelText: string;
 
@@ -72,13 +67,9 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
 
   @Input() popupHelpLink: string;
 
-  get required(): boolean {
-    return this.requiredValue;
-  }
   @Input()
-  set required(value: boolean) {
-    this.requiredValue = coerceBooleanProperty(value);
-  }
+  @coerceBoolean()
+  required = false;
 
   constructor(protected store: Store<AppState>,
               public translate: TranslateService,

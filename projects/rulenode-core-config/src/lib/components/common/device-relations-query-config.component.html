@@ -1,5 +1,5 @@
 <section fxLayout="column" [formGroup]="deviceRelationsQueryFormGroup">
-  <div fxLayoutGap="24px" fxLayout="row" style="margin-bottom: 15px">
+  <div fxLayoutGap="24px" fxLayout="row" class="relation-level">
     <mat-form-field class="mat-block" subscriptSizing="dynamic" fxFlex="50" style="min-width: 100px;">
       <mat-label translate>relation.direction</mat-label>
       <mat-select required matInput formControlName="direction">
@@ -22,7 +22,7 @@
     </mat-form-field>
   </div>
   <tb-slide-toggle *ngIf="deviceRelationsQueryFormGroup.get('maxLevel').value > 1"
-                   style="margin: 10px 0px 28px;"
+                   class="last-level-slide-toggle"
                    [slideToggleName]="'alias.last-level-relation' | translate"
                    [slideToggleTooltip]="'tb.rulenode.last-level-device-relation-tooltip' | translate">
   </tb-slide-toggle>
@@ -30,7 +30,7 @@
     [label]="'tb.rulenode.type' | translate"
     floatLabel="always"
     subscriptSizing="dynamic"
-    style="margin-bottom: 15px"
+    class="relation-type-autocomplete"
     fxFlex
     formControlName="relationType">
   </tb-relation-type-autocomplete>

@@ -16,7 +16,7 @@ interface DeviceRelationsQuery {
 @Component({
   selector: 'tb-device-relations-query-config',
   templateUrl: './device-relations-query-config.component.html',
-  styleUrls: [],
+  styleUrls: ['./device-relations-query-config.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

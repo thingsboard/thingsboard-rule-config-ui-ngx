@@ -7,17 +7,12 @@
 
     .interval-slide-toggle {
       width: 100%;
-      margin: 12px 0px 20px;
+      margin: 4px 0 16px;
     }
     .input-block {
       width: 100%;
-
-      //.interval-block {
-      //  margin-top: 2px;
-      //}
     }
   }
-
 
   .interval-description {
     text-align: center;
@@ -26,11 +21,11 @@
     margin-bottom: 9px;
     font-weight: 500;
   }
+
   .fetch-strategy-fieldset {
     margin-top: 12px;
 
     .fetch-strategy-block {
-      width: 100%;
       margin-top: 8px;
 
       .fetch-mod-toggle {
@@ -41,34 +36,9 @@
         }
       }
 
-      .fetch-inputs {
-        width: 100%;
-
-        .aggregation-selector {
-          margin-bottom: 16px;
-        }
-
-        .additional-inputs-block {
-          margin: 8px 0px 16px;
-
-
-        }
+      .additional-inputs {
+        margin-bottom: 16px;
       }
-    }
-  }
-
-  .examples-popup {
-    .mat-icon {
-      width: 12px!important;
-      min-width: 12px!important;
-      height: 12px!important;
-      min-height: 12px!important;
-      font-size: 12px!important;
-      line-height: 12px!important;
-    }
-
-    button {
-      height: 22px !important;
     }
   }
 
@@ -109,9 +79,9 @@
       margin-right: 2px;
     }
     .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
-      line-height: 16px;
-      font-size: 13px;
-      font-weight: 600;
+      line-height: 20px;
+      font-size: 14px;
+      font-weight: 500;
     }
     .mat-button-toggle-checked.mat-button-toggle-appearance-standard:not(.mat-button-toggle-disabled):hover .mat-button-toggle-focus-overlay {
       opacity: .01;

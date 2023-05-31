@@ -59,11 +59,24 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
   }
 
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
-    this.dataToFetchPrevValue = isDefinedAndNotNull(configuration?.dataToFetch) ? configuration.dataToFetch : DataToFetch.ATTRIBUTES;
+
+    if (isDefinedAndNotNull(configuration?.telemetry)) {
+      this.dataToFetchPrevValue = configuration.telemetry ? DataToFetch.LATEST_TELEMETRY : DataToFetch.ATTRIBUTES;
+    } else {
+      this.dataToFetchPrevValue = isDefinedAndNotNull(configuration?.dataToFetch) ? configuration.dataToFetch : DataToFetch.ATTRIBUTES;
+    }
+
+    let dataMapping;
+    if (isDefinedAndNotNull(configuration?.attrMapping)) {
+      dataMapping = configuration.attrMapping;
+    } else {
+      dataMapping = isDefinedAndNotNull(configuration?.dataMapping) ? configuration.dataMapping : null;
+    }
+
     return {
       relationsQuery: isDefinedAndNotNull(configuration?.relationsQuery) ? configuration.relationsQuery : null,
       dataToFetch: this.dataToFetchPrevValue,
-      dataMapping: isDefinedAndNotNull(configuration?.dataMapping) ? configuration.dataMapping : null,
+      dataMapping,
       fetchTo: isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA
     };
   }
