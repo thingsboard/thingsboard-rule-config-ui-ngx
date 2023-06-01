@@ -186,27 +186,27 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
   }
 
   public validate(c: FormControl) {
-    const kvList: {key: string; value: string}[] = this.svListFormGroup.get('keyVals').value;
-    if (!kvList.length && this.required) {
+    const svList: {key: string; value: string}[] = this.svListFormGroup.get('keyVals').value;
+    if (!svList.length && this.required) {
       return {
-        kvMapRequired: true
+        svMapRequired: true
       };
     }
     if (!this.svListFormGroup.valid) {
       return {
-        kvFieldsRequired: true
+        svFieldsRequired: true
       };
     }
     return null;
   }
 
   private updateModel() {
-    const kvList: {key: string; value: string}[] = this.svListFormGroup.get('keyVals').value;
-    if (this.required && !kvList.length || !this.svListFormGroup.valid) {
+    const svList: {key: string; value: string}[] = this.svListFormGroup.get('keyVals').value;
+    if (this.required && !svList.length || !this.svListFormGroup.valid) {
       this.propagateChange(null);
     } else {
       const keyValMap: { [key: string]: string } = {};
-      kvList.forEach((entry) => {
+      svList.forEach((entry) => {
         keyValMap[entry.key] = entry.value;
       });
       this.propagateChange(keyValMap);

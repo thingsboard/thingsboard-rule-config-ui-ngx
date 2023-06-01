@@ -31,8 +31,7 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
     serialNumber: 'sn'
   };
   private defaultSvMap = {
-    name: 'relatedEntityName',
-    type: 'relatedEntityType'
+    name: 'relatedEntityName'
   };
 
   private dataToFetchPrevValue = '';
