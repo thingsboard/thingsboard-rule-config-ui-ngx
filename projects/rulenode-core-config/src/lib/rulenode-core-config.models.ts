@@ -1,6 +1,4 @@
 import { EntitySearchDirection, EntityTypeFilter } from '@shared/public-api';
-import { AggregationType } from "@shared/models/time/time.models";
-import { TranslateService } from '@ngx-translate/core';
 
 export enum OriginatorSource {
   CUSTOMER = 'CUSTOMER',
