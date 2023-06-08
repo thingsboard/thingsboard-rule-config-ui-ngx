@@ -43,7 +43,7 @@ export class MathFunctionConfigComponent extends RuleNodeConfigurationComponent 
       customFunction: [configuration ? configuration.customFunction : '', [Validators.required]],
       result: this.fb.group({
         type: [configuration ? configuration.result.type: null, [Validators.required]],
-        attributeScope: [configuration ? configuration.result.attributeScope : null],
+        attributeScope: [configuration ? configuration.result.attributeScope : null, [Validators.required]],
         key: [configuration ? configuration.result.key : '', [Validators.required]],
         resultValuePrecision: [configuration ? configuration.result.resultValuePrecision : 0],
         addToBody: [configuration ? configuration.result.addToBody : false],
@@ -54,19 +54,19 @@ export class MathFunctionConfigComponent extends RuleNodeConfigurationComponent 
 
   protected updateValidators(emitEvent: boolean) {
     const operation: MathFunction = this.mathFunctionConfigForm.get('operation').value;
-    const resultType: ArgumentTypeResult = this.mathFunctionConfigForm.get('result').get('type').value;
+    const resultType: ArgumentTypeResult = this.mathFunctionConfigForm.get('result.type').value;
     if (operation === MathFunction.CUSTOM) {
       this.mathFunctionConfigForm.get('customFunction').enable({emitEvent: false});
     } else {
       this.mathFunctionConfigForm.get('customFunction').disable({emitEvent: false});
     }
     if (resultType === ArgumentTypeResult.ATTRIBUTE) {
-      this.mathFunctionConfigForm.get('result').get('attributeScope').enable({emitEvent: false});
+      this.mathFunctionConfigForm.get('result.attributeScope').enable({emitEvent: false});
     } else {
-      this.mathFunctionConfigForm.get('result').get('attributeScope').disable({emitEvent: false});
+      this.mathFunctionConfigForm.get('result.attributeScope').disable({emitEvent: false});
     }
     this.mathFunctionConfigForm.get('customFunction').updateValueAndValidity({emitEvent});
-    this.mathFunctionConfigForm.get('result').get('attributeScope').updateValueAndValidity({emitEvent});
+    this.mathFunctionConfigForm.get('result.attributeScope').updateValueAndValidity({emitEvent});
   }
 
   protected validatorTriggers(): string[] {

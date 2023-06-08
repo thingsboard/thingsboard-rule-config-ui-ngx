@@ -1,11 +1,10 @@
 import { Component, forwardRef, Injector, Input, OnDestroy, OnInit } from '@angular/core';
 import {
-  AbstractControl,
   ControlValueAccessor,
-  UntypedFormArray,
-  UntypedFormBuilder,
-  UntypedFormControl,
-  UntypedFormGroup,
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   NgControl,
@@ -57,7 +56,7 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
   set function(funcName: MathFunction) {
     if (funcName && this.functionValue !== funcName) {
       this.functionValue = funcName;
-      this.setupArgumentsFormGroup();
+      this.setupArgumentsFormGroup(true);
     }
   }
 
@@ -68,7 +67,7 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
   mathFunctionMap = MathFunctionMap;
   ArgumentType = ArgumentType;
 
-  argumentsFormGroup: UntypedFormGroup;
+  argumentsFormGroup: FormGroup;
 
   ngControl: NgControl;
 
@@ -84,7 +83,7 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
   constructor(protected store: Store<AppState>,
               public translate: TranslateService,
               public injector: Injector,
-              private fb: UntypedFormBuilder) {
+              private fb: FormBuilder) {
     super(store);
   }
 
@@ -93,9 +92,13 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
     if (this.ngControl != null) {
       this.ngControl.valueAccessor = this;
     }
-    this.argumentsFormGroup = this.fb.group({});
-    this.argumentsFormGroup.addControl('arguments',
-      this.fb.array([]));
+    this.argumentsFormGroup = this.fb.group({
+      arguments: this.fb.array([])
+    });
+
+    this.valueChangeSubscription.push(this.argumentsFormGroup.valueChanges.subscribe(() => {
+      this.updateModel();
+    }));
 
     this.setupArgumentsFormGroup();
   }
@@ -108,8 +111,8 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
     this.updateArgumentNames();
   }
 
-  argumentsFormArray(): UntypedFormArray {
-    return this.argumentsFormGroup.get('arguments') as UntypedFormArray;
+  argumentsFormArray(): FormArray {
+    return this.argumentsFormGroup.get('arguments') as FormArray;
   }
 
   registerOnChange(fn: any): void {
@@ -119,12 +122,14 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
   registerOnTouched(fn: any): void {
   }
 
-  setDisabledState?(isDisabled: boolean): void {
+  setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
     if (this.disabled) {
       this.argumentsFormGroup.disable({emitEvent: false});
     } else {
       this.argumentsFormGroup.enable({emitEvent: false});
+      (this.argumentsFormGroup.get('arguments') as FormArray).controls
+        .forEach((control: FormGroup) => this.updateArgumentControlValidators(control));
     }
   }
 
@@ -135,35 +140,29 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
   }
 
   writeValue(argumentsList): void {
-    if (this.valueChangeSubscription.length) {
-      this.valueChangeSubscription.forEach(sub => sub.unsubscribe());
-    }
-    const argumentsControls: Array<AbstractControl> = [];
+    const argumentsControls: Array<FormGroup> = [];
     if (argumentsList) {
       argumentsList.forEach((property, index) => {
         argumentsControls.push(this.createArgumentControl(property, index));
       });
     }
-    this.argumentsFormGroup.setControl('arguments', this.fb.array(argumentsControls));
+    this.argumentsFormGroup.setControl('arguments', this.fb.array(argumentsControls), {emitEvent: false});
     this.setupArgumentsFormGroup();
-    this.valueChangeSubscription.push(this.argumentsFormGroup.valueChanges.subscribe(() => {
-      this.updateModel();
-    }));
   }
 
 
   public removeArgument(index: number) {
-    (this.argumentsFormGroup.get('arguments') as UntypedFormArray).removeAt(index);
+    (this.argumentsFormGroup.get('arguments') as FormArray).removeAt(index);
     this.updateArgumentNames();
   }
 
-  public addArgument() {
-    const argumentsFormArray = this.argumentsFormGroup.get('arguments') as UntypedFormArray;
+  public addArgument(emitEvent = true) {
+    const argumentsFormArray = this.argumentsFormGroup.get('arguments') as FormArray;
     const argumentControl = this.createArgumentControl(null, argumentsFormArray.length);
-    argumentsFormArray.push(argumentControl);
+    argumentsFormArray.push(argumentControl, {emitEvent});
   }
 
-  public validate(c: UntypedFormControl) {
+  public validate(c: FormControl) {
     if (!this.argumentsFormGroup.valid) {
       return {
         argumentsRequired: true
@@ -172,7 +171,7 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
     return null;
   }
 
-  private setupArgumentsFormGroup() {
+  private setupArgumentsFormGroup(emitEvent = false) {
     if (this.function) {
       this.maxArgs = this.mathFunctionMap.get(this.function).maxArgs;
       this.minArgs = this.mathFunctionMap.get(this.function).minArgs;
@@ -181,48 +180,48 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
     if (this.argumentsFormGroup) {
       this.argumentsFormGroup.get('arguments').setValidators([Validators.minLength(this.minArgs), Validators.maxLength(this.maxArgs)]);
       if (this.argumentsFormGroup.get('arguments').value.length > this.maxArgs) {
-        (this.argumentsFormGroup.get('arguments') as UntypedFormArray).controls.length = this.maxArgs;
+        (this.argumentsFormGroup.get('arguments') as FormArray).controls.length = this.maxArgs;
       }
       while (this.argumentsFormGroup.get('arguments').value.length < this.minArgs) {
-        this.addArgument();
+        this.addArgument(emitEvent);
       }
       this.argumentsFormGroup.get('arguments').updateValueAndValidity({emitEvent: false});
     }
   }
 
-  private createArgumentControl(property: any, index: number): AbstractControl {
+  private createArgumentControl(property: any, index: number): FormGroup {
     const argumentControl = this.fb.group({
       type: [property?.type, [Validators.required]],
       key: [property?.key, [Validators.required]],
       name: [ArgumentName[index], [Validators.required]],
-      attributeScope: [property?.attributeScope ? property?.attributeScope : null, [Validators.required]],
+      attributeScope: [property?.attributeScope ?? AttributeScope.SERVER_SCOPE, [Validators.required]],
       defaultValue: [property?.defaultValue ? property?.defaultValue : null]
     });
     this.updateArgumentControlValidators(argumentControl);
     this.valueChangeSubscription.push(argumentControl.get('type').valueChanges.subscribe(() => {
       this.updateArgumentControlValidators(argumentControl);
-      argumentControl.get('attributeScope').updateValueAndValidity({emitEvent: true});
-      argumentControl.get('defaultValue').updateValueAndValidity({emitEvent: true});
+      argumentControl.get('attributeScope').updateValueAndValidity({emitEvent: false});
+      argumentControl.get('defaultValue').updateValueAndValidity({emitEvent: false});
     }));
     return argumentControl;
   }
 
-  private updateArgumentControlValidators(control: AbstractControl) {
+  private updateArgumentControlValidators(control: FormGroup) {
     const argumentType: ArgumentType = control.get('type').value;
     if (argumentType === ArgumentType.ATTRIBUTE) {
-      control.get('attributeScope').enable();
+      control.get('attributeScope').enable({emitEvent: false});
     } else {
-      control.get('attributeScope').disable();
+      control.get('attributeScope').disable({emitEvent: false});
     }
     if (argumentType && argumentType !== ArgumentType.CONSTANT) {
-      control.get('defaultValue').enable();
+      control.get('defaultValue').enable({emitEvent: false});
     } else {
-      control.get('defaultValue').disable();
+      control.get('defaultValue').disable({emitEvent: false});
     }
   }
 
   private updateArgumentNames() {
-    const argumentsFormArray = this.argumentsFormGroup.get('arguments') as UntypedFormArray;
+    const argumentsFormArray = this.argumentsFormGroup.get('arguments') as FormArray;
     argumentsFormArray.controls.forEach((argumentControl, argumentIndex) => {
       argumentControl.get('name').setValue(ArgumentName[argumentIndex]);
     });
