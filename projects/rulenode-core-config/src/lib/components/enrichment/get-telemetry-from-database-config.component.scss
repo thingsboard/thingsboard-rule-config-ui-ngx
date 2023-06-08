@@ -25,19 +25,23 @@
   .fetch-strategy-fieldset {
     margin-top: 12px;
 
+
     .fetch-strategy-block {
       margin-top: 8px;
+      align-items: center;
+      width: 100%;
 
       .fetch-mod-toggle {
         margin-bottom: 12px;
-
-        mat-button-toggle {
-          width: 215px;
-        }
+        width: 630px;
       }
 
-      .additional-inputs {
-        margin-bottom: 16px;
+      .input-block {
+        width: 100%;
+        
+        .additional-inputs {
+          margin-bottom: 16px;
+        }
       }
     }
   }

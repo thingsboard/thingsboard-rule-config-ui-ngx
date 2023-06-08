@@ -13,7 +13,6 @@ export * from './slide-toggle.component';
 export * from './sv-map-config.component';
 export * from './fieldset.component';
 export * from './relations-query-config-old.component';
-export * from './fetch-to-data-toggle.component';
 export * from './select-attributes.component';
 
 export * from './rulenode-core-config-common.module';

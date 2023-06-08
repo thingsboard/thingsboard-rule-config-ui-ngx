@@ -33,7 +33,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'fetch-mode': 'Fetch mode',
           'order-by-timestamp': 'Order by timestamp',
           limit: 'Limit',
-          'limit-hint': 'Min limit value is 2, max - 1000. In case you want to fetch a single entry, select fetch mode \'First\' or \'Last\'.',
+          'limit-hint': 'Min limit value is 2, max - 1000. If you want to fetch a single entry, select fetch mode \'First\' or \'Last\'.',
           'limit-required': 'Limit is required!',
           'limit-range': 'Limit should be in a range from 2 to 1000!',
           'time-unit-milliseconds': 'Milliseconds',

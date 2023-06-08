@@ -1,40 +1,42 @@
 <section fxLayout="column" class="tb-sv-map-config" [formGroup]="svListFormGroup">
   <div>
     <label *ngIf="labelText" class="map-label">{{ labelText }}</label>
-    <div class="body" *ngIf="svListFormGroup.get('keyVals').value.length > 0">
-      <div class="row mapping-block" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px"
-           formArrayName="keyVals"
-           *ngFor="let keyValControl of keyValsFormArray().controls; let $index = index">
-        <div fxLayout="row" class="inputs-block">
-          <mat-form-field fxFlex class="mat-block">
-            <mat-label>{{ selectText }}</mat-label>
-            <mat-select [formControl]="keyValControl.get('key')" required>
-              <mat-option *ngFor="let option of filterSelectOptions(keyValControl)" [value]="option">
-                {{selectOptionsTranslate.get(option) | translate}}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="keyValControl.get('key').hasError('required')">
-              {{ selectRequiredText }}
-            </mat-error>
-          </mat-form-field>
-          <mat-icon class="material-icons arrow-icon">arrow_forward</mat-icon>
-          <mat-form-field fxFlex class="mat-block">
-            <mat-label>{{ valText }}</mat-label>
-            <input [formControl]="keyValControl.get('value')" matInput/>
-            <mat-error *ngIf="keyValControl.get('value').hasError('required') || keyValControl.get('value').hasError('pattern')">
-              {{ valRequiredText }}
-            </mat-error>
-          </mat-form-field>
+    <div *ngIf="svListFormGroup.get('keyVals').value.length > 0">
+      <div class="body">
+        <div class="row mapping-block" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px"
+             formArrayName="keyVals"
+             *ngFor="let keyValControl of keyValsFormArray().controls; let $index = index">
+          <div fxLayout="row" class="inputs-block">
+            <mat-form-field fxFlex class="mat-block">
+              <mat-label>{{ selectText }}</mat-label>
+              <mat-select [formControl]="keyValControl.get('key')" required>
+                <mat-option *ngFor="let option of filterSelectOptions(keyValControl)" [value]="option">
+                  {{selectOptionsTranslate.get(option) | translate}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="keyValControl.get('key').hasError('required')">
+                {{ selectRequiredText }}
+              </mat-error>
+            </mat-form-field>
+            <mat-icon class="material-icons arrow-icon">arrow_forward</mat-icon>
+            <mat-form-field fxFlex class="mat-block">
+              <mat-label>{{ valText }}</mat-label>
+              <input [formControl]="keyValControl.get('value')" matInput/>
+              <mat-error *ngIf="keyValControl.get('value').hasError('required') || keyValControl.get('value').hasError('pattern')">
+                {{ valRequiredText }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <button mat-icon-button color="primary"
+                  [fxShow]="!disabled"
+                  type="button"
+                  (click)="removeKeyVal($index)"
+                  [disabled]="(isLoading$ | async)"
+                  matTooltip="{{ 'tb.key-val.remove-mapping-entry' | translate }}"
+                  matTooltipPosition="above">
+            <mat-icon>close</mat-icon>
+          </button>
         </div>
-        <button mat-icon-button color="primary"
-                [fxShow]="!disabled"
-                type="button"
-                (click)="removeKeyVal($index)"
-                [disabled]="(isLoading$ | async)"
-                matTooltip="{{ 'tb.key-val.remove-mapping-entry' | translate }}"
-                matTooltipPosition="above">
-          <mat-icon>close</mat-icon>
-        </button>
       </div>
       <div *ngIf="hintText" class="tb-hint">
         <span style="vertical-align: middle">{{ hintText }}</span>

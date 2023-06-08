@@ -11,11 +11,12 @@ import {
 } from '../../rulenode-core-config.models';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'tb-enrichment-node-related-attributes-config',
   templateUrl: './related-attributes-config.component.html',
-  styleUrls: []
+  styleUrls: ['./related-attributes-config.component.scss']
 })
 export class RelatedAttributesConfigComponent extends RuleNodeConfigurationComponent implements OnDestroy {
 
@@ -25,6 +26,20 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
   protected readonly originatorFieldsTranslations = originatorFieldsTranslations;
 
   public originatorFields: OriginatorFields[] = [];
+  public fetchToData = [
+    {
+      name: this.translate.instant('tb.rulenode.attributes'),
+      value: DataToFetch.ATTRIBUTES
+    },
+    {
+      name: this.translate.instant('tb.rulenode.latest-telemetry'),
+      value: DataToFetch.LATEST_TELEMETRY
+    },
+    {
+      name: this.translate.instant('tb.rulenode.fields'),
+      value: DataToFetch.FIELDS
+    }
+  ];
 
   private destroy$ = new Subject<void>();
   private defaultKvMap = {
@@ -37,12 +52,18 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
   private dataToFetchPrevValue = '';
 
   constructor(protected store: Store<AppState>,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private translate: TranslateService) {
     super(store);
     for (const field of Object.keys(OriginatorFields)) {
       this.originatorFields.push(OriginatorFields[field]);
     }
   }
+
+  public toggleChange(value) {
+    this.relatedAttributesConfigForm.get('dataToFetch').patchValue(value, {emitEvent: true});
+  }
+
 
   protected configForm(): FormGroup {
     return this.relatedAttributesConfigForm;

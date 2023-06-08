@@ -17,7 +17,6 @@ import { SlideToggleComponent } from './slide-toggle.component';
 import { SvMapConfigComponent } from './sv-map-config.component';
 import { FieldsetComponent } from './fieldset.component';
 import { RelationsQueryConfigOldComponent } from './relations-query-config-old.component';
-import { FetchToDataToggleComponent } from './fetch-to-data-toggle.component';
 import { SelectAttributesComponent } from './select-attributes.component';
 
 @NgModule({
@@ -37,7 +36,6 @@ import { SelectAttributesComponent } from './select-attributes.component';
     SvMapConfigComponent,
     FieldsetComponent,
     RelationsQueryConfigOldComponent,
-    FetchToDataToggleComponent,
     SelectAttributesComponent
   ],
   imports: [
@@ -61,7 +59,6 @@ import { SelectAttributesComponent } from './select-attributes.component';
     SvMapConfigComponent,
     FieldsetComponent,
     RelationsQueryConfigOldComponent,
-    FetchToDataToggleComponent,
     SelectAttributesComponent
   ]
 })

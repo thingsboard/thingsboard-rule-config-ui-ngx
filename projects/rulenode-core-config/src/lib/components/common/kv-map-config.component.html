@@ -1,38 +1,40 @@
 <section fxLayout="column" class="tb-kv-map-config" [formGroup]="kvListFormGroup">
   <div>
     <label class="map-label">{{ labelText }}</label>
-    <div class="body" *ngIf="kvListFormGroup.get('keyVals').value.length > 0">
-      <div class="row mapping-block" fxLayout="row" fxLayoutAlign="start center" formArrayName="keyVals" fxLayoutGap="8px"
-           *ngFor="let keyValControl of keyValsFormArray().controls; let $index = index">
-        <div fxLayout="row" class="inputs-block">
-          <mat-form-field fxFlex class="mat-block">
-            <mat-label>{{ keyText }}</mat-label>
-            <input [formControl]="keyValControl.get('key')" matInput/>
-            <mat-error *ngIf="keyValControl.get('key').hasError('required') || keyValControl.get('key').hasError('pattern')">
-              {{ keyRequiredText }}
-            </mat-error>
-          </mat-form-field>
-          <mat-icon class="material-icons arrow-icon">arrow_forward</mat-icon>
-          <mat-form-field fxFlex class="mat-block">
-            <mat-label>{{ valText }}</mat-label>
-            <input [formControl]="keyValControl.get('value')" matInput/>
-            <mat-error *ngIf="keyValControl.get('value').hasError('required') || keyValControl.get('key').hasError('pattern')">
-              {{ valRequiredText }}
-            </mat-error>
-          </mat-form-field>
+    <div *ngIf="kvListFormGroup.get('keyVals').value.length > 0">
+      <div class="body">
+        <div class="row mapping-block" fxLayout="row" fxLayoutAlign="start center" formArrayName="keyVals" fxLayoutGap="8px"
+             *ngFor="let keyValControl of keyValsFormArray().controls; let $index = index">
+          <div fxLayout="row" class="inputs-block">
+            <mat-form-field fxFlex class="mat-block">
+              <mat-label>{{ keyText }}</mat-label>
+              <input [formControl]="keyValControl.get('key')" matInput/>
+              <mat-error *ngIf="keyValControl.get('key').hasError('required') || keyValControl.get('key').hasError('pattern')">
+                {{ keyRequiredText }}
+              </mat-error>
+            </mat-form-field>
+            <mat-icon class="material-icons arrow-icon">arrow_forward</mat-icon>
+            <mat-form-field fxFlex class="mat-block">
+              <mat-label>{{ valText }}</mat-label>
+              <input [formControl]="keyValControl.get('value')" matInput/>
+              <mat-error *ngIf="keyValControl.get('value').hasError('required') || keyValControl.get('key').hasError('pattern')">
+                {{ valRequiredText }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <button mat-icon-button color="primary"
+                  [fxShow]="!disabled"
+                  type="button"
+                  (click)="removeKeyVal($index)"
+                  [disabled]="isLoading$ | async"
+                  matTooltip="{{ 'tb.key-val.remove-mapping-entry' | translate }}"
+                  matTooltipPosition="above">
+            <mat-icon>close</mat-icon>
+          </button>
         </div>
-        <button mat-icon-button color="primary"
-                [fxShow]="!disabled"
-                type="button"
-                (click)="removeKeyVal($index)"
-                [disabled]="isLoading$ | async"
-                matTooltip="{{ 'tb.key-val.remove-mapping-entry' | translate }}"
-                matTooltipPosition="above">
-          <mat-icon>close</mat-icon>
-        </button>
       </div>
       <div *ngIf="hintText" class="tb-hint">
-        <span style="vertical-align: middle">{{ hintText }}</span>
+        <span style="vertical-align: middle">{{ 'tb.rulenode.kv-map-pattern-hint' | translate }}</span>
         <span *ngIf="popupHelpLink" tb-help-popup="{{ popupHelpLink }}"
               hintMode
               tb-help-popup-placement="right"

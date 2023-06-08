@@ -4,23 +4,39 @@ import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/p
 import { Store } from '@ngrx/store';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataToFetch, FetchTo } from '../../rulenode-core-config.models';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'tb-enrichment-node-tenant-attributes-config',
   templateUrl: './tenant-attributes-config.component.html',
-  styleUrls: []
+  styleUrls: ['./tenant-attributes-config.component.scss']
 })
 export class TenantAttributesConfigComponent extends RuleNodeConfigurationComponent {
 
   tenantAttributesConfigForm: FormGroup;
+  public fetchToData = [
+    {
+      name: this.translate.instant('tb.rulenode.attributes'),
+      value: DataToFetch.ATTRIBUTES
+    },
+    {
+      name: this.translate.instant('tb.rulenode.latest-telemetry'),
+      value: DataToFetch.LATEST_TELEMETRY
+    }
+  ];
 
   constructor(protected store: Store<AppState>,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private translate: TranslateService) {
     super(store);
   }
 
   protected configForm(): FormGroup {
     return this.tenantAttributesConfigForm;
+  }
+
+  public toggleChange(value) {
+    this.tenantAttributesConfigForm.get('dataToFetch').patchValue(value, {emitEvent: true});
   }
 
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {

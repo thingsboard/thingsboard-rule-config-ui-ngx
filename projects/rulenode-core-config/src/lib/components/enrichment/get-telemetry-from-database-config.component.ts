@@ -36,14 +36,24 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
   aggregationTypesTranslations = aggregationTranslations;
 
   fetchMode = FetchMode;
-  fetchModes = Object.keys(FetchMode);
-  deduplicationStrategiesTranslations = deduplicationStrategiesTranslations;
 
   samplingOrders = Object.keys(SamplingOrder);
   samplingOrdersTranslate = samplingOrderTranslations;
 
   timeUnits = Object.values(TimeUnit);
   timeUnitsTranslationMap = timeUnitTranslations;
+
+  public headerOptions = [{
+    name: this.translate.instant(deduplicationStrategiesTranslations.get(FetchMode.FIRST)),
+    value:FetchMode.FIRST
+  }, {
+    name: this.translate.instant(deduplicationStrategiesTranslations.get(FetchMode.LAST)),
+    value:FetchMode.LAST
+  }, {
+    name: this.translate.instant(deduplicationStrategiesTranslations.get(FetchMode.ALL)),
+    value:FetchMode.ALL
+  }];
+
 
   timeUnitMap = {
     [TimeUnit.MILLISECONDS]: 1,
@@ -94,6 +104,10 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
 
   protected validatorTriggers(): string[] {
     return ['fetchMode', 'useMetadataIntervalPatterns'];
+  }
+
+  public toggleChange(event) {
+    this.getTelemetryFromDatabaseConfigForm.get('fetchMode').patchValue(event, {emitEvent: true});
   }
 
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {

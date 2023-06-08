@@ -128,13 +128,14 @@
   </tb-fieldset-component>
   <tb-fieldset-component [label]="'tb.rulenode.fetch-strategy' | translate" class="fetch-strategy-fieldset" required="true">
     <div fxLayout="column" class="fetch-strategy-block">
-      <mat-button-toggle-group formControlName="fetchMode" class="tb-script-lang-toggle-group fetch-mod-toggle">
-        <mat-button-toggle *ngFor="let fetchMode of fetchModes" [value]="fetchMode">{{ deduplicationStrategiesTranslations.get(fetchMode) | translate}}</mat-button-toggle>
-      </mat-button-toggle-group>
+        <tb-toggle-header class="fetch-mod-toggle" ignoreMdLgSize="true" (valueChange)="toggleChange($event)"
+                          appearance="fill" [options]="headerOptions" name="widgetConfigHeader" useSelectOnMdLg="false"
+                          [value]="getTelemetryFromDatabaseConfigForm.get('fetchMode').value">
+        </tb-toggle-header>
       <div  class="tb-hint">
         {{ fetchModeHintSelector() | translate }}
       </div>
-      <div fxLayout="column" *ngIf="getTelemetryFromDatabaseConfigForm.get('fetchMode').value === fetchMode.ALL">
+      <div fxLayout="column" class="input-block" *ngIf="getTelemetryFromDatabaseConfigForm.get('fetchMode').value === fetchMode.ALL">
         <mat-form-field fxFlex>
           <mat-label>{{ 'aggregation.function' | translate }}</mat-label>
           <mat-select formControlName="aggregation" required>

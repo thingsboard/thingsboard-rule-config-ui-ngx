@@ -1,6 +1,10 @@
 <section [formGroup]="tenantAttributesConfigForm" fxLayout="column">
   <tb-fieldset-component [label]="'tb.rulenode.mapping-of-tenant' | translate">
-    <tb-fetch-to-data-toggle formControlName="dataToFetch"></tb-fetch-to-data-toggle>
+    <tb-toggle-header class="fetch-to-data-toggle" ignoreMdLgSize="true" (valueChange)="toggleChange($event)"
+    appearance="fill" [options]="fetchToData" name="widgetConfigHeader" useSelectOnMdLg="false"
+    [value]="tenantAttributesConfigForm.get('dataToFetch').value"
+    >
+    </tb-toggle-header>
     <tb-kv-map-config
       required
       formControlName="dataMapping"
@@ -13,7 +17,7 @@
       [hintText]="'tb.rulenode.kv-map-pattern-hint' | translate"
       popupHelpLink="rulenode/tenant_attributes_node_fields_templatization">
     </tb-kv-map-config>
-    <tb-msg-metadata-chip formControlName="fetchTo" style="margin-bottom: 12px;"
+    <tb-msg-metadata-chip formControlName="fetchTo" class="msg-metadata-chip"
                           [labelText]="tenantAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY ?
                           ('tb.rulenode.add-mapped-latest-telemetry-to' | translate) : ('tb.rulenode.add-mapped-attribute-to' | translate)">
     </tb-msg-metadata-chip>

@@ -4,18 +4,31 @@ import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/p
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataToFetch, FetchTo } from '../../rulenode-core-config.models';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'tb-enrichment-node-customer-attributes-config',
   templateUrl: './customer-attributes-config.component.html',
-  styleUrls: []
+  styleUrls: ['./customer-attributes-config.component.scss']
 })
 export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComponent {
 
   customerAttributesConfigForm: FormGroup;
 
+  public fetchToData = [
+    {
+      name: this.translate.instant('tb.rulenode.attributes'),
+      value: DataToFetch.ATTRIBUTES
+    },
+    {
+      name: this.translate.instant('tb.rulenode.latest-telemetry'),
+      value: DataToFetch.LATEST_TELEMETRY
+    }
+  ];
+
   constructor(protected store: Store<AppState>,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private translate: TranslateService) {
     super(store);
   }
 
@@ -29,6 +42,10 @@ export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComp
     }
     configuration.dataMapping = filteDataMapping;
     return configuration;
+  }
+
+  public toggleChange(value) {
+    this.customerAttributesConfigForm.get('dataToFetch').patchValue(value, {emitEvent: true});
   }
 
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {

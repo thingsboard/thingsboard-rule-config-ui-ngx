@@ -3,8 +3,12 @@
     required
     formControlName="relationsQuery">
   </tb-relations-query-config>
-  <tb-fieldset-component style="margin-top: 12px" [label]="'tb.rulenode.data-to-fetch' | translate">
-    <tb-fetch-to-data-toggle formControlName="dataToFetch" enableFieldToggle="true"></tb-fetch-to-data-toggle>
+  <tb-fieldset-component class="fetch-data-block" [label]="'tb.rulenode.data-to-fetch' | translate">
+    <tb-toggle-header class="fetch-to-data-toggle" ignoreMdLgSize="true" (valueChange)="toggleChange($event)"
+                      appearance="fill" [options]="fetchToData" name="widgetConfigHeader" useSelectOnMdLg="false"
+                      [value]="relatedAttributesConfigForm.get('dataToFetch').value"
+    >
+    </tb-toggle-header>
     <tb-kv-map-config
       *ngIf="relatedAttributesConfigForm.get('dataToFetch').value !== DataToFetch.FIELDS; else fields"
       required
@@ -36,7 +40,7 @@
         popupHelpLink="rulenode/related_entity_data_node_fields_templatization">
       </tb-sv-map-config>
     </ng-template>
-    <tb-msg-metadata-chip formControlName="fetchTo" style="margin-bottom: 12px;" [labelText]="msgMetadataChipLabel() | translate">
+    <tb-msg-metadata-chip formControlName="fetchTo" class="msg-metadata-chip" [labelText]="msgMetadataChipLabel() | translate">
       </tb-msg-metadata-chip>
   </tb-fieldset-component>
 </section>

@@ -1,5 +1,6 @@
 import { EntitySearchDirection, EntityTypeFilter } from '@shared/public-api';
 import { AggregationType } from "@shared/models/time/time.models";
+import { TranslateService } from '@ngx-translate/core';
 
 export enum OriginatorSource {
   CUSTOMER = 'CUSTOMER',
@@ -141,7 +142,6 @@ export enum FetchMode {
   LAST = 'LAST',
   ALL = 'ALL'
 }
-
 export const deduplicationStrategiesTranslations = new Map<FetchMode, string>(
   [
     [FetchMode.FIRST, 'tb.rulenode.first'],
@@ -160,6 +160,7 @@ export enum DataToFetch {
   LATEST_TELEMETRY = 'LATEST_TELEMETRY',
   FIELDS = 'FIELDS'
 }
+
 export const samplingOrderTranslations = new Map<SamplingOrder, string>(
   [
     [SamplingOrder.ASC, 'tb.rulenode.ascending'],

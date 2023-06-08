@@ -1,6 +1,10 @@
 <section [formGroup]="customerAttributesConfigForm" fxLayout="column">
   <tb-fieldset-component [label]="'tb.rulenode.mapping-of-customers' | translate">
-    <tb-fetch-to-data-toggle formControlName="dataToFetch"></tb-fetch-to-data-toggle>
+    <tb-toggle-header class="fetch-to-data-toggle" ignoreMdLgSize="true" (valueChange)="toggleChange($event)"
+                      appearance="fill" [options]="fetchToData" name="widgetConfigHeader" useSelectOnMdLg="false"
+                      [value]="customerAttributesConfigForm.get('dataToFetch').value"
+    >
+    </tb-toggle-header>
     <tb-kv-map-config
       required
       formControlName="dataMapping"
