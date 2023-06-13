@@ -1,5 +1,5 @@
 import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
-import { ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR, FormBuilder } from '@angular/forms';
+import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
 import { takeUntil } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 import { TranslateService } from '@ngx-translate/core';
+import { deepTrim } from '@core/public-api';
 
 @Component({
   selector: 'tb-select-attributes',
@@ -59,7 +60,12 @@ export class SelectAttributesComponent implements  OnInit, ControlValueAccessor,
   }
   registerOnTouched(fn: any): void {
   }
-  setDisabledState?(isDisabled: boolean): void {
+  setDisabledState(isDisabled: boolean): void {
+    if (isDisabled) {
+      this.attributeControlGroup.disable({emitEvent: false});
+    } else {
+      this.attributeControlGroup.enable({emitEvent: false});
+    }
   }
 
   ngOnDestroy(): void {
@@ -79,8 +85,8 @@ export class SelectAttributesComponent implements  OnInit, ControlValueAccessor,
   addKey(event: MatChipInputEvent, keysField: string): void {
     const input = event.input;
     let value = event.value;
-    if ((value || '').trim()) {
-      value = value.trim();
+    if (deepTrim((value || ''))) {
+      value = deepTrim(value);
       let keys: string[] = this.attributeControlGroup.get(keysField).value;
       if (!keys || keys.indexOf(value) === -1) {
         if (!keys) {

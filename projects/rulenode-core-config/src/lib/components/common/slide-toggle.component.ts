@@ -1,5 +1,5 @@
 import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
-import { ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR, FormBuilder } from '@angular/forms';
+import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
 import { takeUntil } from 'rxjs/operators';
@@ -51,7 +51,12 @@ export class SlideToggleComponent implements  OnInit, ControlValueAccessor, OnDe
   }
   registerOnTouched(fn: any): void {
   }
-  setDisabledState?(isDisabled: boolean): void {
+  setDisabledState(isDisabled: boolean): void {
+    if (isDisabled) {
+      this.slideToggleControlGroup.disable({emitEvent: false});
+    } else {
+      this.slideToggleControlGroup.enable({emitEvent: false});
+    }
   }
 
   ngOnDestroy(): void {

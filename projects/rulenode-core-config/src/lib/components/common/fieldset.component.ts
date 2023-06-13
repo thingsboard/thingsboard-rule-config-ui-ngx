@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { coerceBoolean } from '@shared/public-api';
 
 @Component({
   selector: 'tb-fieldset-component',
@@ -7,16 +7,10 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
   styleUrls: [ './fieldset.component.scss' ]
 })
 export class FieldsetComponent {
-  private requiredValue: boolean;
-
   @Input() label;
 
   @Input()
-  set required(value: boolean | string) {
-    this.requiredValue = coerceBooleanProperty(value);
-  };
+  @coerceBoolean()
+  required = false;
 
-  get required() {
-    return this.requiredValue;
-  }
 }

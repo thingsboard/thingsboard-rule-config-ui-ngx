@@ -133,7 +133,7 @@
                           [value]="getTelemetryFromDatabaseConfigForm.get('fetchMode').value">
         </tb-toggle-header>
       <div  class="tb-hint">
-        {{ fetchModeHintSelector() | translate }}
+        {{ deduplicationStrategiesHintTranslations.get(getTelemetryFromDatabaseConfigForm.get('fetchMode').value) | translate }}
       </div>
       <div fxLayout="column" class="input-block" *ngIf="getTelemetryFromDatabaseConfigForm.get('fetchMode').value === fetchMode.ALL">
         <mat-form-field fxFlex>

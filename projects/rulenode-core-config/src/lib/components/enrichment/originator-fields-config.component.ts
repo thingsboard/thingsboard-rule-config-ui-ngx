@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { AppState, isDefinedAndNotNull } from '@core/public-api';
-import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
+import { AppState, deepTrim, isDefinedAndNotNull } from '@core/public-api';
+import { entityFields, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FetchTo, OriginatorFields, originatorFieldsTranslations } from '../../rulenode-core-config.models';
+import { FetchTo, SvMapOption } from '../../rulenode-core-config.models';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'tb-enrichment-node-originator-fields-config',
@@ -13,13 +14,16 @@ import { FetchTo, OriginatorFields, originatorFieldsTranslations } from '../../r
 export class OriginatorFieldsConfigComponent extends RuleNodeConfigurationComponent {
 
   originatorFieldsConfigForm: FormGroup;
-  public originatorFields: OriginatorFields[] = [];
-  public originatorFieldsTranslations = originatorFieldsTranslations;
+  public originatorFields: SvMapOption[] = [];
   constructor(protected store: Store<AppState>,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private translate: TranslateService) {
     super(store);
-    for (const field of Object.keys(OriginatorFields)) {
-      this.originatorFields.push(OriginatorFields[field]);
+    for (const field of Object.keys(entityFields)) {
+      this.originatorFields.push({
+        value: entityFields[field].value,
+        name: this.translate.instant(entityFields[field].name)
+      });
     }
   }
 
@@ -29,7 +33,7 @@ export class OriginatorFieldsConfigComponent extends RuleNodeConfigurationCompon
 
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
     for (const key of Object.keys(configuration.dataMapping)) {
-      configuration.dataMapping[key] = configuration.dataMapping[key].trim();
+      configuration.dataMapping[key] = deepTrim(configuration.dataMapping[key]);
     }
     return configuration;
   }

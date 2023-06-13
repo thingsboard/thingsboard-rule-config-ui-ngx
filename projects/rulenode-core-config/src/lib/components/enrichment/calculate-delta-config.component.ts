@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppState, isDefinedAndNotNull } from '@core/public-api';
+import { AppState, deepTrim, isDefinedAndNotNull } from '@core/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
@@ -52,8 +52,8 @@ export class CalculateDeltaConfigComponent extends RuleNodeConfigurationComponen
   }
 
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
-    configuration.inputValueKey =  configuration.inputValueKey.trim();
-    configuration.outputValueKey =  configuration.outputValueKey.trim();
+    configuration.inputValueKey =  deepTrim(configuration.inputValueKey);
+    configuration.outputValueKey =  deepTrim(configuration.outputValueKey);
     return configuration;
   }
 

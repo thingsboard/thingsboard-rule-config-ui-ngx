@@ -1,5 +1,5 @@
 import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
-import { ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR, FormBuilder } from '@angular/forms';
+import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
 import { FetchTo } from '../../rulenode-core-config.models';
@@ -54,7 +54,12 @@ export class MsgMetadataChipComponent implements  OnInit, ControlValueAccessor, 
   }
   registerOnTouched(fn: any): void {
   }
-  setDisabledState?(isDisabled: boolean): void {
+  setDisabledState(isDisabled: boolean): void {
+    if (isDisabled) {
+      this.chipControlGroup.disable({emitEvent: false});
+    } else {
+      this.chipControlGroup.enable({emitEvent: false});
+    }
   }
 
   ngOnDestroy(): void {

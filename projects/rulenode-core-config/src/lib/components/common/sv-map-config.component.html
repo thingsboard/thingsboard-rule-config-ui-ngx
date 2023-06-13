@@ -1,5 +1,5 @@
-<section fxLayout="column" class="tb-sv-map-config" [formGroup]="svListFormGroup">
-  <div>
+<section class="tb-sv-map-config" [formGroup]="svListFormGroup">
+  <div fxLayout="column">
     <label *ngIf="labelText" class="map-label">{{ labelText }}</label>
     <div *ngIf="svListFormGroup.get('keyVals').value.length > 0">
       <div class="body">
@@ -10,8 +10,8 @@
             <mat-form-field fxFlex class="mat-block">
               <mat-label>{{ selectText }}</mat-label>
               <mat-select [formControl]="keyValControl.get('key')" required>
-                <mat-option *ngFor="let option of filterSelectOptions(keyValControl)" [value]="option">
-                  {{selectOptionsTranslate.get(option) | translate}}
+                <mat-option *ngFor="let option of filterSelectOptions(keyValControl)" [value]="option.value">
+                  {{option.name}}
                 </mat-option>
               </mat-select>
               <mat-error *ngIf="keyValControl.get('key').hasError('required')">
@@ -48,17 +48,15 @@
               trigger-text="{{ 'tb.key-val.see-examples' | translate }}"></span>
       </div>
     </div>
+    <tb-error *ngIf="ngControl.hasError('svMapRequired')"
+              [error]="requiredText">
+    </tb-error>
   </div>
-  <tb-error *ngIf="ngControl.hasError('svMapRequired')"
-            [error]="requiredText | translate">
-  </tb-error>
-  <div>
-    <button mat-stroked-button class="add-button" color="primary"
-            [fxShow]="!disabled"
-            [disabled]="(isLoading$ | async) || keyValsFormArray().length >= selectOptions.length"
-            (click)="addKeyVal()"
-            type="button">
-      {{ 'tb.key-val.add-mapping-entry' | translate }}
-    </button>
-  </div>
+  <button mat-stroked-button class="add-button" color="primary"
+          [fxShow]="!disabled"
+          [disabled]="(isLoading$ | async) || keyValsFormArray().length >= selectOptions.length"
+          (click)="addKeyVal()"
+          type="button">
+    {{ 'tb.key-val.add-mapping-entry' | translate }}
+  </button>
 </section>

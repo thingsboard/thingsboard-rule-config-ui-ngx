@@ -1,13 +1,14 @@
 import { Component, OnDestroy } from '@angular/core';
-import { AppState, isDefinedAndNotNull } from '@core/public-api';
-import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
+import { AppState, deepTrim, isDefinedAndNotNull } from '@core/public-api';
+import { entityFields, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   DataToFetch,
+  dataToFetchTranslations,
   FetchTo,
-  OriginatorFields,
-  originatorFieldsTranslations
+  msgMetadataLabelTranslations,
+  SvMapOption
 } from '../../rulenode-core-config.models';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -23,30 +24,17 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
   relatedAttributesConfigForm: FormGroup;
 
   protected readonly DataToFetch = DataToFetch;
-  protected readonly originatorFieldsTranslations = originatorFieldsTranslations;
 
-  public originatorFields: OriginatorFields[] = [];
-  public fetchToData = [
-    {
-      name: this.translate.instant('tb.rulenode.attributes'),
-      value: DataToFetch.ATTRIBUTES
-    },
-    {
-      name: this.translate.instant('tb.rulenode.latest-telemetry'),
-      value: DataToFetch.LATEST_TELEMETRY
-    },
-    {
-      name: this.translate.instant('tb.rulenode.fields'),
-      value: DataToFetch.FIELDS
-    }
-  ];
+  public msgMetadataLabelTranslations = msgMetadataLabelTranslations;
+  public originatorFields: SvMapOption[] = [];
+  public fetchToData = [];
 
   private destroy$ = new Subject<void>();
   private defaultKvMap = {
     serialNumber: 'sn'
   };
   private defaultSvMap = {
-    name: 'relatedEntityName'
+    [entityFields.name.value]: `relatedEntity${this.translate.instant(entityFields.name.name)}`
   };
 
   private dataToFetchPrevValue = '';
@@ -55,8 +43,17 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
               private fb: FormBuilder,
               private translate: TranslateService) {
     super(store);
-    for (const field of Object.keys(OriginatorFields)) {
-      this.originatorFields.push(OriginatorFields[field]);
+    for (const field of Object.keys(entityFields)) {
+      this.originatorFields.push({
+        value: entityFields[field].value,
+        name: this.translate.instant(entityFields[field].name)
+      });
+    }
+    for (const key of dataToFetchTranslations.keys()) {
+      this.fetchToData.push({
+        value: key,
+        name: this.translate.instant(dataToFetchTranslations.get(key as DataToFetch))
+      });
     }
   }
 
@@ -72,7 +69,7 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
     const filteDataMapping = {};
     for (const key of Object.keys(configuration.dataMapping)) {
-      filteDataMapping[key.trim()] = configuration.dataMapping[key].trim();
+      filteDataMapping[deepTrim(key)] = deepTrim(configuration.dataMapping[key]);
     }
     configuration.dataMapping = filteDataMapping;
     return configuration;
@@ -128,17 +125,6 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
       }
       this.dataToFetchPrevValue = value;
     });
-  }
-
-  public msgMetadataChipLabel(): string {
-    switch (this.relatedAttributesConfigForm.get('dataToFetch').value) {
-      case DataToFetch.ATTRIBUTES:
-        return 'tb.rulenode.add-mapped-attribute-to';
-      case DataToFetch.LATEST_TELEMETRY:
-        return 'tb.rulenode.add-mapped-latest-telemetry-to';
-      case DataToFetch.FIELDS:
-        return 'tb.rulenode.add-mapped-fields-to';
-    }
   }
 
   ngOnDestroy() {

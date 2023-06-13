@@ -34,8 +34,9 @@
         </div>
         <ng-template #searchNotEmpty>
                 <span>
-                  {{ translate.get('tb.rulenode.no-message-type-matching',
-                  {messageType: truncate.transform(searchText, true, 6, &apos;...&apos;)}) }}
+                  {{ 'tb.rulenode.no-message-type-matching' | translate :
+                        { messageType: truncate.transform(searchText, true, 6, &apos;...&apos;)}
+                  }}
                 </span>
         </ng-template>
         <span>

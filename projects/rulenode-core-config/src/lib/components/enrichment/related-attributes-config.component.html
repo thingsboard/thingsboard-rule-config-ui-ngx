@@ -29,7 +29,6 @@
         [labelText]="'tb.rulenode.fields-mapping' | translate"
         targetKeyPrefix="relatedEntity"
         [selectOptions]="originatorFields"
-        [selectOptionsTranslate]="originatorFieldsTranslations"
         formControlName="dataMapping"
         [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
         [selectText]="'tb.rulenode.source-field' | translate"
@@ -40,7 +39,8 @@
         popupHelpLink="rulenode/related_entity_data_node_fields_templatization">
       </tb-sv-map-config>
     </ng-template>
-    <tb-msg-metadata-chip formControlName="fetchTo" class="msg-metadata-chip" [labelText]="msgMetadataChipLabel() | translate">
+    <tb-msg-metadata-chip formControlName="fetchTo" class="msg-metadata-chip"
+                          [labelText]="msgMetadataLabelTranslations.get(relatedAttributesConfigForm.get('dataToFetch').value) | translate">
       </tb-msg-metadata-chip>
   </tb-fieldset-component>
 </section>

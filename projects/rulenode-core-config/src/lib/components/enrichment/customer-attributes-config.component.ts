@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { AppState, isDefinedAndNotNull } from '@core/public-api';
+import { AppState, deepTrim, isDefinedAndNotNull } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DataToFetch, FetchTo } from '../../rulenode-core-config.models';
+import { DataToFetch, dataToFetchTranslations, FetchTo } from '../../rulenode-core-config.models';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -15,21 +15,20 @@ export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComp
 
   customerAttributesConfigForm: FormGroup;
 
-  public fetchToData = [
-    {
-      name: this.translate.instant('tb.rulenode.attributes'),
-      value: DataToFetch.ATTRIBUTES
-    },
-    {
-      name: this.translate.instant('tb.rulenode.latest-telemetry'),
-      value: DataToFetch.LATEST_TELEMETRY
-    }
-  ];
+  public fetchToData = [];
 
   constructor(protected store: Store<AppState>,
               private fb: FormBuilder,
               private translate: TranslateService) {
     super(store);
+    for (const key of dataToFetchTranslations.keys()) {
+      if(key !== DataToFetch.FIELDS) {
+        this.fetchToData.push({
+          value: key,
+          name: this.translate.instant(dataToFetchTranslations.get(key as DataToFetch))
+        });
+      }
+    }
   }
 
   protected configForm(): FormGroup {
@@ -38,7 +37,7 @@ export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComp
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
     const filteDataMapping = {};
     for (const key of Object.keys(configuration.dataMapping)) {
-      filteDataMapping[key.trim()] = configuration.dataMapping[key].trim();
+      filteDataMapping[deepTrim(key)] = deepTrim(configuration.dataMapping[key]);
     }
     configuration.dataMapping = filteDataMapping;
     return configuration;

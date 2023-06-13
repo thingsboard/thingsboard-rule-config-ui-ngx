@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppState, isDefinedAndNotNull, isObject } from '@core/public-api';
+import { AppState, deepTrim, isDefinedAndNotNull, isObject } from '@core/public-api';
 import { Store } from '@ngrx/store';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
@@ -11,6 +11,7 @@ import {
 } from '@shared/public-api';
 import { MatChipInputEvent } from '@angular/material/chips';
 import {
+  deduplicationStrategiesHintTranslations,
   deduplicationStrategiesTranslations,
   FetchMode,
   SamplingOrder,
@@ -43,7 +44,9 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
   timeUnits = Object.values(TimeUnit);
   timeUnitsTranslationMap = timeUnitTranslations;
 
-  public headerOptions = [{
+  public deduplicationStrategiesHintTranslations = deduplicationStrategiesHintTranslations;
+
+  headerOptions = [{
     name: this.translate.instant(deduplicationStrategiesTranslations.get(FetchMode.FIRST)),
     value:FetchMode.FIRST
   }, {
@@ -115,8 +118,8 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
     configuration.startIntervalTimeUnit = configuration.interval.startIntervalTimeUnit;
     configuration.endInterval = configuration.interval.endInterval;
     configuration.endIntervalTimeUnit = configuration.interval.endIntervalTimeUnit;
-    configuration.startIntervalPattern =  configuration.startIntervalPattern.trim();
-    configuration.endIntervalPattern =  configuration.endIntervalPattern.trim();
+    configuration.startIntervalPattern =  deepTrim(configuration.startIntervalPattern);
+    configuration.endIntervalPattern =  deepTrim(configuration.endIntervalPattern);
     delete configuration.interval;
     return configuration;
   }
@@ -208,22 +211,6 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
 
   clearChipGrid() {
     this.getTelemetryFromDatabaseConfigForm.get('latestTsKeyNames').patchValue([], {emitEvent: true});
-  }
-
-  fetchModeHintSelector() {
-    let hint;
-    switch (this.getTelemetryFromDatabaseConfigForm.get('fetchMode').value) {
-      case FetchMode.ALL:
-        hint = 'tb.rulenode.all-mode-hint';
-        break;
-      case FetchMode.LAST:
-        hint = 'tb.rulenode.last-mode-hint';
-        break;
-      case FetchMode.FIRST:
-        hint = 'tb.rulenode.first-mode-hint';
-        break;
-    }
-    return hint;
   }
 
   addKey(event: MatChipInputEvent, keysField: string): void {

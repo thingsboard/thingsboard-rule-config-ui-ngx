@@ -3,12 +3,12 @@ import {
   AbstractControl,
   ControlValueAccessor,
   FormArray,
-  NG_VALIDATORS,
-  NG_VALUE_ACCESSOR,
-  NgControl,
   FormBuilder,
   FormControl,
   FormGroup,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  NgControl,
   Validator,
   Validators
 } from '@angular/forms';
@@ -18,7 +18,7 @@ import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { Subject, Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { takeUntil } from 'rxjs/operators';
-import { OriginatorFields } from '../../rulenode-core-config.models';
+import { SvMapOption } from '../../rulenode-core-config.models';
 
 @Component({
   selector: 'tb-sv-map-config',
@@ -47,9 +47,7 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
   svListFormGroup: FormGroup;
   ngControl: NgControl;
 
-  @Input() selectOptions: string[];
-
-  @Input() selectOptionsTranslate: Map<OriginatorFields, string>;
+  @Input() selectOptions: SvMapOption[];
 
   @Input()
   @coerceBoolean()
@@ -148,13 +146,16 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
   public filterSelectOptions(keyValControl?) {
     const deleteValueArray = [];
     for (const fieldMap of this.svListFormGroup.get('keyVals').value) {
-      deleteValueArray.push(this.selectOptions.find((value) => value === fieldMap.key));
+      const findDeleteField = this.selectOptions.find((field) => field.value === fieldMap.key);
+      if (findDeleteField) {
+       deleteValueArray.push(findDeleteField);
+      }
     }
 
     const filterSelectOptions = [];
     for (const selectOption of this.selectOptions) {
-      if (!isDefinedAndNotNull(deleteValueArray.find((deleteValue) => deleteValue === selectOption)) ||
-        selectOption === keyValControl?.get('key').value) {
+      if (!isDefinedAndNotNull(deleteValueArray.find((deleteValue) => deleteValue.value === selectOption.value)) ||
+        selectOption.value === keyValControl?.get('key').value) {
         filterSelectOptions.push(selectOption);
       }
     }
