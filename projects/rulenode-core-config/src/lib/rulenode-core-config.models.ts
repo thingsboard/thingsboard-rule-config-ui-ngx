@@ -149,7 +149,7 @@ export const msgMetadataLabelTranslations = new Map<DataToFetch, string>(
         [DataToFetch.LATEST_TELEMETRY, 'tb.rulenode.add-mapped-latest-telemetry-to'],
         [DataToFetch.FIELDS,  'tb.rulenode.add-mapped-fields-to']
     ]
-)
+);
 
 export const samplingOrderTranslations = new Map<SamplingOrder, string>(
   [
@@ -644,6 +644,11 @@ export enum FetchTo {
   DATA = 'DATA',
   METADATA = 'METADATA'
 }
+
+export const FetchToTranslation = new Map<FetchTo, string>([
+    [FetchTo.DATA, 'tb.rulenode.message'],
+    [FetchTo.METADATA, 'tb.rulenode.metadata'],
+]);
 
 export const ArgumentTypeMap  = new Map<ArgumentType, string>([
   [ArgumentType.ATTRIBUTE, 'tb.rulenode.attribute-type'],

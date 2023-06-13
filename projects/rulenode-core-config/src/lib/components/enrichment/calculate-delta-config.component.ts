@@ -52,9 +52,7 @@ export class CalculateDeltaConfigComponent extends RuleNodeConfigurationComponen
   }
 
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
-    configuration.inputValueKey =  deepTrim(configuration.inputValueKey);
-    configuration.outputValueKey =  deepTrim(configuration.outputValueKey);
-    return configuration;
+    return deepTrim(configuration);
   }
 
   protected updateValidators(emitEvent: boolean) {

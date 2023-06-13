@@ -11,6 +11,7 @@ import {
 } from '@shared/public-api';
 import { MatChipInputEvent } from '@angular/material/chips';
 import {
+  dataToFetchTranslations,
   deduplicationStrategiesHintTranslations,
   deduplicationStrategiesTranslations,
   FetchMode,
@@ -46,16 +47,7 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
 
   public deduplicationStrategiesHintTranslations = deduplicationStrategiesHintTranslations;
 
-  headerOptions = [{
-    name: this.translate.instant(deduplicationStrategiesTranslations.get(FetchMode.FIRST)),
-    value:FetchMode.FIRST
-  }, {
-    name: this.translate.instant(deduplicationStrategiesTranslations.get(FetchMode.LAST)),
-    value:FetchMode.LAST
-  }, {
-    name: this.translate.instant(deduplicationStrategiesTranslations.get(FetchMode.ALL)),
-    value:FetchMode.ALL
-  }];
+  headerOptions = [];
 
 
   timeUnitMap = {
@@ -69,6 +61,12 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
               public translate: TranslateService,
               private fb: FormBuilder) {
     super(store);
+    for (const key of deduplicationStrategiesTranslations.keys()) {
+      this.headerOptions.push({
+        value: key,
+        name:  this.translate.instant(deduplicationStrategiesTranslations.get(key))
+      });
+    }
   }
 
   protected configForm(): FormGroup {
@@ -118,10 +116,8 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
     configuration.startIntervalTimeUnit = configuration.interval.startIntervalTimeUnit;
     configuration.endInterval = configuration.interval.endInterval;
     configuration.endIntervalTimeUnit = configuration.interval.endIntervalTimeUnit;
-    configuration.startIntervalPattern =  deepTrim(configuration.startIntervalPattern);
-    configuration.endIntervalPattern =  deepTrim(configuration.endIntervalPattern);
     delete configuration.interval;
-    return configuration;
+    return deepTrim(configuration);
   }
 
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {

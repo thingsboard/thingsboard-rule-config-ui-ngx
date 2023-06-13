@@ -2,7 +2,7 @@ import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
-import { FetchTo } from '../../rulenode-core-config.models';
+import { FetchToTranslation } from '../../rulenode-core-config.models';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
@@ -25,7 +25,7 @@ export class MsgMetadataChipComponent implements  OnInit, ControlValueAccessor, 
   private destroy$ = new Subject<void>();
 
   public chipControlGroup: FormGroup;
-  public fetchTo = FetchTo;
+  public fetchToTranslation = FetchToTranslation;
 
   constructor(private store: Store<AppState>,
               private fb: FormBuilder) {}

@@ -37,10 +37,10 @@ export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComp
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
     const filteDataMapping = {};
     for (const key of Object.keys(configuration.dataMapping)) {
-      filteDataMapping[deepTrim(key)] = deepTrim(configuration.dataMapping[key]);
+      filteDataMapping[key.trim()] = configuration.dataMapping[key];
     }
     configuration.dataMapping = filteDataMapping;
-    return configuration;
+    return deepTrim(configuration);
   }
 
   public toggleChange(value) {

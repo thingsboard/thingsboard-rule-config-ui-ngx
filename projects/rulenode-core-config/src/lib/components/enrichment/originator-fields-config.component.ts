@@ -32,10 +32,7 @@ export class OriginatorFieldsConfigComponent extends RuleNodeConfigurationCompon
   }
 
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
-    for (const key of Object.keys(configuration.dataMapping)) {
-      configuration.dataMapping[key] = deepTrim(configuration.dataMapping[key]);
-    }
-    return configuration;
+    return deepTrim(configuration);
   }
 
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {

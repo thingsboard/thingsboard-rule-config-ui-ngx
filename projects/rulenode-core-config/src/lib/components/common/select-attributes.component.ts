@@ -7,7 +7,6 @@ import { Subject } from 'rxjs';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 import { TranslateService } from '@ngx-translate/core';
-import { deepTrim } from '@core/public-api';
 
 @Component({
   selector: 'tb-select-attributes',
@@ -85,8 +84,8 @@ export class SelectAttributesComponent implements  OnInit, ControlValueAccessor,
   addKey(event: MatChipInputEvent, keysField: string): void {
     const input = event.input;
     let value = event.value;
-    if (deepTrim((value || ''))) {
-      value = deepTrim(value);
+    if ((value || '').trim()) {
+      value = value.trim();
       let keys: string[] = this.attributeControlGroup.get(keysField).value;
       if (!keys || keys.indexOf(value) === -1) {
         if (!keys) {
