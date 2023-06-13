@@ -144,17 +144,17 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
   }
 
   public filterSelectOptions(keyValControl?) {
-    const deleteValueArray = [];
+    const deleteFieldsArray = [];
     for (const fieldMap of this.svListFormGroup.get('keyVals').value) {
       const findDeleteField = this.selectOptions.find((field) => field.value === fieldMap.key);
       if (findDeleteField) {
-       deleteValueArray.push(findDeleteField);
+        deleteFieldsArray.push(findDeleteField);
       }
     }
 
     const filterSelectOptions = [];
     for (const selectOption of this.selectOptions) {
-      if (!isDefinedAndNotNull(deleteValueArray.find((deleteValue) => deleteValue.value === selectOption.value)) ||
+      if (!isDefinedAndNotNull(deleteFieldsArray.find((deleteField) => deleteField.value === selectOption.value)) ||
         selectOption.value === keyValControl?.get('key').value) {
         filterSelectOptions.push(selectOption);
       }
