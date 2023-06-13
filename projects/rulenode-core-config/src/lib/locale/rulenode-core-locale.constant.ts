@@ -48,6 +48,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'end-interval-value-required': 'End interval value is required.',
           filter: 'Filter',
           switch: 'Switch',
+          'math-templatization-tooltip': 'This field support templatization. Use $[messageKey] to extract value from the message body and ${metadataKey} to extract value from the message metadata.',
           'message-type': 'Message type',
           'message-type-required': 'Message type is required.',
           'message-types-filter': 'Message types filter',

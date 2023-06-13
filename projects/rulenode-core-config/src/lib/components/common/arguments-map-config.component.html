@@ -1,8 +1,8 @@
 <section fxLayout="column">
 
   <div [ngClass]="{'tb-readonly': disabled}"
-       style="max-height: 500px; overflow: auto; padding-bottom: 15px;">
-    <mat-list class="tb-drop-list" cdkDropList cdkDropListOrientation="vertical"
+       style="max-height: 500px; overflow: auto;">
+    <mat-list class="tb-drop-list arguments-list" cdkDropList cdkDropListOrientation="vertical"
               [formGroup]="argumentsFormGroup"
               (cdkDropListDropped)="onDrop($event)"
               [cdkDropListDisabled]="disabled">
@@ -40,6 +40,8 @@
                                 *ngIf="argumentControl.get('type').value && argumentControl.get('type').value !== ArgumentType.CONSTANT">
                   <mat-label translate>tb.rulenode.argument-key-field-input</mat-label>
                   <input [formControl]="argumentControl.get('key')" matInput required/>
+                  <mat-icon class="mat-primary" aria-hidden="false" aria-label="help-icon" matSuffix style="cursor:pointer;"
+                            matTooltip="{{ 'tb.rulenode.math-templatization-tooltip' | translate }}">help</mat-icon>
                   <mat-error *ngIf="argumentControl.get('key').hasError('required')" translate>
                     tb.rulenode.argument-key-field-input-required
                   </mat-error>
@@ -92,14 +94,12 @@
       <span translate fxLayoutAlign="center center"
             class="tb-prompt">tb.rulenode.no-arguments-prompt</span>
   </div>
-  <div style="margin-top: 8px;">
-    <button mat-button mat-raised-button color="primary"
-            [disabled]="argumentsFormArray().value.length >= maxArgs"
-            (click)="addArgument()"
-            type="button"
-            matTooltipPosition="above">
-      <mat-icon>add</mat-icon>
-      {{ 'action.add' | translate }}
-    </button>
-  </div>
+  <button mat-button mat-raised-button color="primary"
+          [disabled]="argumentsFormArray().value.length >= maxArgs"
+          (click)="addArgument()"
+          type="button"
+          matTooltipPosition="above">
+    <mat-icon>add</mat-icon>
+    {{ 'action.add' | translate }}
+  </button>
 </section>
