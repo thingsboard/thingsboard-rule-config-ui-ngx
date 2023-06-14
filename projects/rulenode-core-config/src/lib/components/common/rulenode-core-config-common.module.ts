@@ -11,6 +11,13 @@ import { SafeHtmlPipe } from './safe-html.pipe';
 import { ArgumentsMapConfigComponent } from './arguments-map-config.component';
 import { MathFunctionAutocompleteComponent } from './math-function-autocomplete.component';
 import { OutputMessageTypeAutocompleteComponent } from './output-message-type-autocomplete.component';
+import { KvMapConfigOldComponent } from './kv-map-config-old.component';
+import { MsgMetadataChipComponent } from './msg-metadata-chip.component';
+import { SlideToggleComponent } from './slide-toggle.component';
+import { SvMapConfigComponent } from './sv-map-config.component';
+import { FieldsetComponent } from './fieldset.component';
+import { RelationsQueryConfigOldComponent } from './relations-query-config-old.component';
+import { SelectAttributesComponent } from './select-attributes.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +29,14 @@ import { OutputMessageTypeAutocompleteComponent } from './output-message-type-au
     SafeHtmlPipe,
     ArgumentsMapConfigComponent,
     MathFunctionAutocompleteComponent,
-    OutputMessageTypeAutocompleteComponent
+    OutputMessageTypeAutocompleteComponent,
+    KvMapConfigOldComponent,
+    MsgMetadataChipComponent,
+    SlideToggleComponent,
+    SvMapConfigComponent,
+    FieldsetComponent,
+    RelationsQueryConfigOldComponent,
+    SelectAttributesComponent
   ],
   imports: [
     CommonModule,
@@ -38,8 +52,16 @@ import { OutputMessageTypeAutocompleteComponent } from './output-message-type-au
     SafeHtmlPipe,
     ArgumentsMapConfigComponent,
     MathFunctionAutocompleteComponent,
-    OutputMessageTypeAutocompleteComponent
+    OutputMessageTypeAutocompleteComponent,
+    KvMapConfigOldComponent,
+    MsgMetadataChipComponent,
+    SlideToggleComponent,
+    SvMapConfigComponent,
+    FieldsetComponent,
+    RelationsQueryConfigOldComponent,
+    SelectAttributesComponent
   ]
 })
+
 export class RulenodeCoreConfigCommonModule {
 }

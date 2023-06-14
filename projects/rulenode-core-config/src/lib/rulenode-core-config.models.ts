@@ -80,6 +80,11 @@ export enum EntityDetailsField {
   ADDITIONAL_INFO = 'ADDITIONAL_INFO'
 }
 
+export interface SvMapOption {
+    name: string;
+    value: any;
+}
+
 export const entityDetailsTranslations = new Map<EntityDetailsField, string>(
   [
     [EntityDetailsField.ID, 'tb.rulenode.entity-details-id'],
@@ -101,19 +106,57 @@ export enum FetchMode {
   LAST = 'LAST',
   ALL = 'ALL'
 }
-
 export const deduplicationStrategiesTranslations = new Map<FetchMode, string>(
   [
-    [FetchMode.FIRST, 'tb.rulenode.first-message'],
-    [FetchMode.LAST, 'tb.rulenode.last-message'],
-    [FetchMode.ALL, 'tb.rulenode.all-messages']
+    [FetchMode.FIRST, 'tb.rulenode.first'],
+    [FetchMode.LAST, 'tb.rulenode.last'],
+    [FetchMode.ALL, 'tb.rulenode.all']
   ]
 );
+
+export const deduplicationStrategiesHintTranslations = new Map<FetchMode, string>(
+    [
+        [FetchMode.FIRST, 'tb.rulenode.first-mode-hint'],
+        [FetchMode.LAST, 'tb.rulenode.last-mode-hint'],
+        [FetchMode.ALL, 'tb.rulenode.all-mode-hint']
+    ]
+);
+
+
 
 export enum SamplingOrder {
   ASC = 'ASC',
   DESC = 'DESC'
 }
+
+export enum DataToFetch {
+  ATTRIBUTES = 'ATTRIBUTES',
+  LATEST_TELEMETRY = 'LATEST_TELEMETRY',
+  FIELDS = 'FIELDS'
+}
+
+export const dataToFetchTranslations = new Map<DataToFetch, string>(
+    [
+        [DataToFetch.ATTRIBUTES, 'tb.rulenode.attributes'],
+        [DataToFetch.LATEST_TELEMETRY, 'tb.rulenode.latest-telemetry'],
+        [DataToFetch.FIELDS,  'tb.rulenode.fields']
+    ]
+);
+
+export const msgMetadataLabelTranslations = new Map<DataToFetch, string>(
+    [
+        [DataToFetch.ATTRIBUTES, 'tb.rulenode.add-mapped-attribute-to'],
+        [DataToFetch.LATEST_TELEMETRY, 'tb.rulenode.add-mapped-latest-telemetry-to'],
+        [DataToFetch.FIELDS,  'tb.rulenode.add-mapped-fields-to']
+    ]
+);
+
+export const samplingOrderTranslations = new Map<SamplingOrder, string>(
+  [
+    [SamplingOrder.ASC, 'tb.rulenode.ascending'],
+    [SamplingOrder.DESC, 'tb.rulenode.descending']
+  ]
+);
 
 export enum SqsQueueType {
   STANDARD = 'STANDARD',
@@ -596,6 +639,16 @@ export enum ArgumentTypeResult {
   MESSAGE_BODY = 'MESSAGE_BODY',
   MESSAGE_METADATA = 'MESSAGE_METADATA'
 }
+
+export enum FetchTo {
+  DATA = 'DATA',
+  METADATA = 'METADATA'
+}
+
+export const FetchToTranslation = new Map<FetchTo, string>([
+    [FetchTo.DATA, 'tb.rulenode.message'],
+    [FetchTo.METADATA, 'tb.rulenode.metadata'],
+]);
 
 export const ArgumentTypeMap  = new Map<ArgumentType, string>([
   [ArgumentType.ATTRIBUTE, 'tb.rulenode.attribute-type'],

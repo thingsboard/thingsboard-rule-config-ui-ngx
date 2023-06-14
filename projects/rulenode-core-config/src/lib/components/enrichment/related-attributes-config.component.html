@@ -1,22 +1,46 @@
 <section [formGroup]="relatedAttributesConfigForm" fxLayout="column">
-  <label translate class="tb-title tb-required">tb.rulenode.relations-query</label>
   <tb-relations-query-config
     required
-    formControlName="relationsQuery"
-    style="padding-bottom: 15px;">
+    formControlName="relationsQuery">
   </tb-relations-query-config>
-  <label translate class="tb-title tb-required">tb.rulenode.attr-mapping</label>
-  <mat-checkbox fxFlex formControlName="telemetry">
-    {{ 'tb.rulenode.latest-telemetry' | translate }}
-  </mat-checkbox>
-  <tb-kv-map-config
-    required
-    formControlName="attrMapping"
-    requiredText="tb.rulenode.attr-mapping-required"
-    keyText="{{ relatedAttributesConfigForm.get('telemetry').value ? 'tb.rulenode.source-telemetry' : 'tb.rulenode.source-attribute' }}"
-    keyRequiredText="{{ relatedAttributesConfigForm.get('telemetry').value ? 'tb.rulenode.source-telemetry-required' : 'tb.rulenode.source-attribute-required' }}"
-    valText="tb.rulenode.target-attribute"
-    valRequiredText="tb.rulenode.target-attribute-required"
-    hintText="tb.rulenode.kv-map-pattern-hint">
-  </tb-kv-map-config>
+  <tb-fieldset-component class="fetch-data-block" [label]="'tb.rulenode.data-to-fetch' | translate">
+    <tb-toggle-header class="fetch-to-data-toggle" ignoreMdLgSize="true" (valueChange)="toggleChange($event)"
+                      appearance="fill" [options]="fetchToData" name="widgetConfigHeader" useSelectOnMdLg="false"
+                      [value]="relatedAttributesConfigForm.get('dataToFetch').value"
+    >
+    </tb-toggle-header>
+    <tb-kv-map-config
+      *ngIf="relatedAttributesConfigForm.get('dataToFetch').value !== DataToFetch.FIELDS; else fields"
+      required
+      formControlName="dataMapping"
+      [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
+      [labelText] = "selectTranslation('tb.rulenode.latest-telemetry-mapping','tb.rulenode.attributes-mapping') | translate"
+      [keyText]="selectTranslation('tb.rulenode.source-telemetry','tb.rulenode.source-attribute') | translate"
+      [keyRequiredText]="selectTranslation('tb.rulenode.source-telemetry-required','tb.rulenode.source-attribute-required') | translate"
+      [valText]="'tb.rulenode.target-key' | translate"
+      [valRequiredText]="'tb.rulenode.target-key-required' | translate"
+      [hintText]="'tb.rulenode.kv-map-pattern-hint' | translate"
+      popupHelpLink="rulenode/related_entity_data_node_fields_templatization">
+    </tb-kv-map-config>
+    <ng-template #fields>
+      <tb-sv-map-config
+        *ngIf="relatedAttributesConfigForm.get('dataToFetch').value === DataToFetch.FIELDS"
+        required
+        [labelText]="'tb.rulenode.fields-mapping' | translate"
+        targetKeyPrefix="relatedEntity"
+        [selectOptions]="originatorFields"
+        formControlName="dataMapping"
+        [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
+        [selectText]="'tb.rulenode.source-field' | translate"
+        [selectRequiredText]="'tb.rulenode.source-field-required' | translate"
+        [valText]="'tb.rulenode.target-key' | translate"
+        [valRequiredText]="'tb.rulenode.target-key-required' | translate"
+        [hintText]="'tb.rulenode.sv-map-hint' | translate"
+        popupHelpLink="rulenode/related_entity_data_node_fields_templatization">
+      </tb-sv-map-config>
+    </ng-template>
+    <tb-msg-metadata-chip formControlName="fetchTo" class="msg-metadata-chip"
+                          [labelText]="msgMetadataLabelTranslations.get(relatedAttributesConfigForm.get('dataToFetch').value) | translate">
+      </tb-msg-metadata-chip>
+  </tb-fieldset-component>
 </section>

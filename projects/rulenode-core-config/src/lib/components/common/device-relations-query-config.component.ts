@@ -16,7 +16,7 @@ interface DeviceRelationsQuery {
 @Component({
   selector: 'tb-device-relations-query-config',
   templateUrl: './device-relations-query-config.component.html',
-  styleUrls: [],
+  styleUrls: ['./device-relations-query-config.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -56,7 +56,7 @@ export class DeviceRelationsQueryConfigComponent extends PageComponent implement
     this.deviceRelationsQueryFormGroup = this.fb.group({
       fetchLastLevelOnly: [false, []],
       direction: [null, [Validators.required]],
-      maxLevel: [null, []],
+      maxLevel: [null, [Validators.min(1)]],
       relationType: [null],
       deviceTypes: [null, [Validators.required]]
     });

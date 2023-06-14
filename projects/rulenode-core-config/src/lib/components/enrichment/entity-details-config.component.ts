@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AppState } from '@core/public-api';
+import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { EntityDetailsField, entityDetailsTranslations } from '../../rulenode-core-config.models';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { EntityDetailsField, entityDetailsTranslations, FetchTo } from '../../rulenode-core-config.models';
 import { Observable, of } from 'rxjs';
 import { map, mergeMap, share, startWith } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
@@ -18,8 +18,8 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
 
   @ViewChild('detailsInput', {static: false}) detailsInput: ElementRef<HTMLInputElement>;
 
-  entityDetailsConfigForm: UntypedFormGroup;
-  detailsFormControl: UntypedFormControl;
+  entityDetailsConfigForm: FormGroup;
+  detailsFormControl: FormControl;
 
   entityDetailsTranslationsMap = entityDetailsTranslations;
 
@@ -34,17 +34,17 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
 
   constructor(protected store: Store<AppState>,
               public translate: TranslateService,
-              private fb: UntypedFormBuilder) {
+              private fb: FormBuilder) {
     super(store);
     for (const field of Object.keys(EntityDetailsField)) {
       this.entityDetailsList.push(EntityDetailsField[field]);
     }
-    this.detailsFormControl = new UntypedFormControl('');
+    this.detailsFormControl = new FormControl('');
     this.filteredEntityDetails = this.detailsFormControl.valueChanges
       .pipe(
         startWith(''),
         map((value) => value ? value : ''),
-        mergeMap(name => this.fetchEntityDetails(name) ),
+        mergeMap(name => this.fetchEntityDetails(name)),
         share()
       );
   }
@@ -53,7 +53,7 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
     super.ngOnInit();
   }
 
-  protected configForm(): UntypedFormGroup {
+  protected configForm(): FormGroup {
     return this.entityDetailsConfigForm;
   }
 
@@ -61,7 +61,26 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
     this.searchText = '';
     this.detailsFormControl.patchValue('', {emitEvent: true});
     this.detailsList = configuration ? configuration.detailsList : [];
-    return configuration;
+
+    let fetchTo;
+    if (isDefinedAndNotNull(configuration?.addToMetadata)) {
+      if (configuration.addToMetadata) {
+        fetchTo = FetchTo.METADATA;
+      } else {
+        fetchTo = FetchTo.DATA;
+      }
+    } else {
+      if (configuration?.fetchTo) {
+        fetchTo = configuration.fetchTo;
+      } else {
+        fetchTo = FetchTo.DATA;
+      }
+    }
+
+    return {
+      detailsList: isDefinedAndNotNull(configuration?.detailsList) ? configuration.detailsList : null,
+      fetchTo
+    };
   }
 
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
@@ -71,8 +90,8 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.entityDetailsConfigForm = this.fb.group({
-      detailsList: [configuration ? configuration.detailsList : null, [Validators.required]],
-      addToMetadata: [configuration ? configuration.addToMetadata : false, []]
+      detailsList: [configuration.detailsList, [Validators.required]],
+      fetchTo:  [configuration.fetchTo, []]
     });
     this.detailsList = configuration ? configuration.detailsList : [];
   }
@@ -86,7 +105,7 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
     if (this.searchText && this.searchText.length) {
       const search = this.searchText.toUpperCase();
       return of(this.entityDetailsList.filter(field =>
-        this.translate.instant(entityDetailsTranslations.get(EntityDetailsField[field])).toUpperCase().includes(search)));
+        this.translate.instant(entityDetailsTranslations.get(EntityDetailsField[field])).toUpperCase().includes(search) ));
     } else {
       return of(this.entityDetailsList);
     }
@@ -118,6 +137,15 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
 
   onEntityDetailsInputFocus() {
     this.detailsFormControl.updateValueAndValidity({onlySelf: true, emitEvent: true});
+  }
+
+  clearChipGrid() {
+    this.detailsList = [];
+    this.entityDetailsConfigForm.get('detailsList').patchValue([], {emitEvent: true});
+    setTimeout(() => {
+      this.detailsInput.nativeElement.blur();
+      this.detailsInput.nativeElement.focus();
+    }, 0);
   }
 
   clear(value: string = '') {

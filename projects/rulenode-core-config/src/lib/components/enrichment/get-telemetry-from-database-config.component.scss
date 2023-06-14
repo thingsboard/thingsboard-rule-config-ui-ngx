@@ -1,5 +1,48 @@
-:host {
+:host ::ng-deep{
   label.tb-title {
     margin-bottom: -10px;
+  }
+  .fetch-interval {
+    margin-top: 12px;
+
+    .interval-slide-toggle {
+      width: 100%;
+      margin: 4px 0 16px;
+    }
+    .input-block {
+      width: 100%;
+    }
+  }
+
+  .interval-description {
+    text-align: center;
+    font-size: 12px;
+    color: #3d3d3d;
+    margin-bottom: 9px;
+    font-weight: 500;
+  }
+
+  .fetch-strategy-fieldset {
+    margin-top: 12px;
+
+
+    .fetch-strategy-block {
+      margin-top: 8px;
+      align-items: center;
+      width: 100%;
+
+      .fetch-mod-toggle {
+        margin-bottom: 12px;
+        width: 630px;
+      }
+
+      .input-block {
+        width: 100%;
+        
+        .additional-inputs {
+          margin-bottom: 16px;
+        }
+      }
+    }
   }
 }

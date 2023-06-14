@@ -1,0 +1,28 @@
+<section fxLayout="column" [formGroup]="relationsQueryFormGroup">
+  <mat-checkbox formControlName="fetchLastLevelOnly">
+    {{ 'alias.last-level-relation' | translate }}
+  </mat-checkbox>
+  <div fxLayoutGap="8px" fxLayout="row">
+    <mat-form-field class="mat-block" style="min-width: 100px;">
+      <mat-label translate>relation.direction</mat-label>
+      <mat-select required matInput formControlName="direction">
+        <mat-option *ngFor="let type of directionTypes" [value]="type">
+          {{ directionTypeTranslations.get(type) | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field fxFlex floatLabel="always" class="mat-block">
+      <mat-label translate>tb.rulenode.max-relation-level</mat-label>
+      <input matInput
+             type="number"
+             min="1"
+             step="1"
+             placeholder="{{ 'tb.rulenode.unlimited-level' | translate }}"
+             formControlName="maxLevel">
+    </mat-form-field>
+  </div>
+  <div class="mat-caption" style="color: #6e6e6e;" translate>relation.relation-filters</div>
+  <tb-relation-filters
+    formControlName="filters"
+  ></tb-relation-filters>
+</section>

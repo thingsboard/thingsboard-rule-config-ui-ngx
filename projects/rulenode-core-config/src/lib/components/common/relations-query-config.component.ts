@@ -9,7 +9,7 @@ import { RelationsQuery } from '../../rulenode-core-config.models';
 @Component({
   selector: 'tb-relations-query-config',
   templateUrl: './relations-query-config.component.html',
-  styleUrls: [],
+  styleUrls: ['relations-query-config.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -47,7 +47,7 @@ export class RelationsQueryConfigComponent extends PageComponent implements Cont
     this.relationsQueryFormGroup = this.fb.group({
       fetchLastLevelOnly: [false, []],
       direction: [null, [Validators.required]],
-      maxLevel: [null, []],
+      maxLevel: [null, [Validators.min(1)]],
       filters: [null]
     });
     this.relationsQueryFormGroup.valueChanges.subscribe((query: RelationsQuery) => {

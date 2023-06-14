@@ -1,0 +1,46 @@
+:host ::ng-deep {
+  width: 100%;
+
+  .tb-sv-map-config {
+    margin-bottom: 12px;
+
+    .map-label {
+      font-weight: 400;
+      font-size: 12px;
+      color: #3d3d3d;
+      letter-spacing: 0.25px;
+    }
+
+    .body {
+      max-height: 363px;
+      overflow: auto;
+      margin-top: 7px;
+
+      .mapping-block {
+        margin-bottom: 15px;
+
+        .inputs-block {
+          border: 1px solid #E0E0E0;
+          width: 100%;
+          border-radius: 6px;
+          padding: 22px 22px 0;
+          align-items: center;
+
+          .arrow-icon {
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            font-size: 24px;
+            margin: 0px 2px 22px;
+            color: #9E9E9E;
+          }
+        }
+      }
+    }
+    tb-error {
+      display: block;
+      margin-top: -12px;
+      margin-bottom: 8px;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 <section [formGroup]="entityDetailsConfigForm" fxLayout="column">
-  <mat-form-field class="mat-block" class="entity-fields-list">
-    <mat-label translate>tb.rulenode.entity-details</mat-label>
+  <mat-form-field class="mat-block entity-fields-list">
+    <mat-label>{{ 'tb.rulenode.entity-details' | translate }}</mat-label>
     <mat-chip-grid #detailsChipList formControlName="detailsList">
       <mat-chip-row
         *ngFor="let details of detailsList;"
@@ -20,6 +20,13 @@
              [matAutocomplete]="detailsAutocomplete"
              [matChipInputFor]="detailsChipList">
     </mat-chip-grid>
+    <button *ngIf="entityDetailsConfigForm.get('detailsList').value?.length > 1"
+            type="button"
+            matTooltip="{{'tb.rulenode.clear-selected-details' | translate}}"
+            matSuffix mat-icon-button
+            (click)="clearChipGrid()">
+      <mat-icon color="primary" class="material-icons">close</mat-icon>
+    </button>
     <mat-autocomplete #detailsAutocomplete="matAutocomplete"
                       class="tb-autocomplete"
                       (optionSelected)="detailsFieldSelected($event)"
@@ -30,15 +37,15 @@
       <mat-option *ngIf="(filteredEntityDetails | async)?.length === 0" [value]="null" class="tb-not-found">
         <div class="tb-not-found-content" (click)="$event.stopPropagation()">
           <div>
-            <span translate>tb.rulenode.no-entity-details-matching</span>
+            <span>{{ 'tb.rulenode.no-entity-details-matching' | translate }}</span>
           </div>
         </div>
       </mat-option>
     </mat-autocomplete>
     <mat-error *ngIf="entityDetailsConfigForm.get('detailsList').hasError('required')">{{ 'tb.rulenode.entity-details-list-empty' | translate }}</mat-error>
   </mat-form-field>
-  <mat-checkbox fxFlex formControlName="addToMetadata">
-    {{ 'tb.rulenode.add-to-metadata' | translate }}
-  </mat-checkbox>
-  <div class="tb-hint" translate>tb.rulenode.add-to-metadata-hint</div>
+  <tb-msg-metadata-chip
+    [labelText]="'tb.rulenode.add-selected-details-to' | translate"
+    formControlName="fetchTo"
+  ></tb-msg-metadata-chip>
 </section>

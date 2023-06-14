@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { AppState, isDefinedAndNotNull, isObject, isUndefinedOrNull } from '@core/public-api';
+import { AppState, isDefinedAndNotNull, isObject, } from '@core/public-api';
 import { Store } from '@ngrx/store';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
-import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
-import { MatChipInputEvent } from '@angular/material/chips';
+import { TranslateService } from '@ngx-translate/core';
+import { FetchTo } from '../../rulenode-core-config.models';
 
 @Component({
   selector: 'tb-enrichment-node-originator-attributes-config',
@@ -13,63 +13,49 @@ import { MatChipInputEvent } from '@angular/material/chips';
 })
 export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationComponent {
 
-  originatorAttributesConfigForm: UntypedFormGroup;
-
-  separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
+  originatorAttributesConfigForm: FormGroup;
 
   constructor(protected store: Store<AppState>,
-              private fb: UntypedFormBuilder) {
+              public translate: TranslateService,
+              private fb: FormBuilder) {
     super(store);
   }
 
-  protected configForm(): UntypedFormGroup {
+  protected configForm(): FormGroup {
     return this.originatorAttributesConfigForm;
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.originatorAttributesConfigForm = this.fb.group({
-      tellFailureIfAbsent: [configuration ? configuration.tellFailureIfAbsent : false, []],
-      fetchToData: [isDefinedAndNotNull(configuration?.fetchToData) ? configuration.fetchToData : false, []],
-      clientAttributeNames: [configuration ? configuration.clientAttributeNames : null, []],
-      sharedAttributeNames: [configuration ? configuration.sharedAttributeNames : null, []],
-      serverAttributeNames: [configuration ? configuration.serverAttributeNames : null, []],
-      latestTsKeyNames: [configuration ? configuration.latestTsKeyNames : null, []],
-      getLatestValueWithTs: [configuration ? configuration.getLatestValueWithTs : false, []]
+      tellFailureIfAbsent: [configuration.tellFailureIfAbsent, []],
+      fetchTo: [configuration.fetchTo, []],
+      attributesControl: [configuration.attributesControl, []]
     });
   }
 
-  removeKey(key: string, keysField: string): void {
-    const keys: string[] = this.originatorAttributesConfigForm.get(keysField).value;
-    const index = keys.indexOf(key);
-    if (index >= 0) {
-      keys.splice(index, 1);
-      this.originatorAttributesConfigForm.get(keysField).setValue(keys, {emitEvent: true});
-    }
-  }
-
-  addKey(event: MatChipInputEvent, keysField: string): void {
-    const input = event.input;
-    let value = event.value;
-    if ((value || '').trim()) {
-      value = value.trim();
-      let keys: string[] = this.originatorAttributesConfigForm.get(keysField).value;
-      if (!keys || keys.indexOf(value) === -1) {
-        if (!keys) {
-          keys = [];
-        }
-        keys.push(value);
-        this.originatorAttributesConfigForm.get(keysField).setValue(keys, {emitEvent: true});
-      }
-    }
-    if (input) {
-      input.value = '';
-    }
-  }
-
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
-    if (isObject(configuration) && isUndefinedOrNull(configuration?.fetchToData)) {
-      configuration.fetchToData = false;
+    if (isObject(configuration)) {
+      configuration.attributesControl = {
+        clientAttributeNames:  isDefinedAndNotNull(configuration?.clientAttributeNames) ? configuration.clientAttributeNames : null,
+        latestTsKeyNames: isDefinedAndNotNull(configuration?.latestTsKeyNames) ? configuration.latestTsKeyNames : null,
+        serverAttributeNames: isDefinedAndNotNull(configuration?.serverAttributeNames) ? configuration.serverAttributeNames : null,
+        sharedAttributeNames: isDefinedAndNotNull(configuration?.sharedAttributeNames) ? configuration.sharedAttributeNames : null,
+        getLatestValueWithTs: isDefinedAndNotNull(configuration?.getLatestValueWithTs) ? configuration.getLatestValueWithTs : false
+      };
     }
+
+    return {
+      fetchTo: isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA,
+      tellFailureIfAbsent: isDefinedAndNotNull(configuration?.tellFailureIfAbsent) ? configuration.tellFailureIfAbsent : false,
+      attributesControl : isDefinedAndNotNull(configuration?.attributesControl) ? configuration.attributesControl : null
+    };
+  }
+
+  protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    for (const key of Object.keys(configuration.attributesControl)) {
+      configuration[key] = configuration.attributesControl[key];
+    }
+    delete configuration.attributesControl;
     return configuration;
   }
 }
