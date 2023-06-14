@@ -5,6 +5,7 @@ import { AppState } from '@core/core.state';
 import { FetchToTranslation } from '../../rulenode-core-config.models';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'tb-msg-metadata-chip',
@@ -25,10 +26,18 @@ export class MsgMetadataChipComponent implements  OnInit, ControlValueAccessor, 
   private destroy$ = new Subject<void>();
 
   public chipControlGroup: FormGroup;
-  public fetchToTranslation = FetchToTranslation;
+  public selectOptions = [];
 
   constructor(private store: Store<AppState>,
-              private fb: FormBuilder) {}
+              private fb: FormBuilder,
+              private translate: TranslateService) {
+     for (const key of FetchToTranslation.keys()) {
+       this.selectOptions.push({
+         value: key,
+         name: this.translate.instant(FetchToTranslation.get(key))
+       });
+     }
+  }
 
   ngOnInit(): void {
     this.chipControlGroup = this.fb.group({
