@@ -1,7 +1,7 @@
 <div fxLayout="column" [formGroup]="chipControlGroup">
   <label class="chip-label">{{ labelText }}</label>
   <mat-chip-listbox formControlName="chipControl">
-    <mat-chip-option *ngFor="let value of fetchToTranslation.keys()" selectable="{{ chipControlGroup.get('chipControl').value !== value }}" color="primary"
-    [value]="value">{{ fetchToTranslation.get(value) | translate }}</mat-chip-option>
+    <mat-chip-option *ngFor="let option of selectOptions" selectable="{{ chipControlGroup.get('chipControl').value !== option.value }}" color="primary"
+    [value]="option.value">{{ option.name }}</mat-chip-option>
   </mat-chip-listbox>
 </div>
