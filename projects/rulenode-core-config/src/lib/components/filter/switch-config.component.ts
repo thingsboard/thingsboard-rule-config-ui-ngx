@@ -1,6 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { AppState, getCurrentAuthState, NodeScriptTestService } from '@core/public-api';
-import { RuleNodeConfiguration, RuleNodeConfigurationComponent, JsFuncComponent, ScriptLanguage } from '@shared/public-api';
+import {
+  RuleNodeConfiguration,
+  RuleNodeConfigurationComponent,
+  JsFuncComponent,
+  ScriptLanguage,
+  DebugRuleNodeEventBody
+} from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -66,7 +72,7 @@ export class SwitchConfigComponent extends RuleNodeConfigurationComponent {
     return configuration;
   }
 
-  testScript() {
+  testScript(debugEventBody?: DebugRuleNodeEventBody) {
     const scriptLang: ScriptLanguage = this.switchConfigForm.get('scriptLang').value;
     const scriptField = scriptLang === ScriptLanguage.JS ? 'jsScript' : 'tbelScript';
     const helpId = scriptLang === ScriptLanguage.JS ? 'rulenode/switch_node_script_fn' : 'rulenode/tbel/switch_node_script_fn';
@@ -79,7 +85,8 @@ export class SwitchConfigComponent extends RuleNodeConfigurationComponent {
       ['msg', 'metadata', 'msgType'],
       this.ruleNodeId,
       helpId,
-      scriptLang
+      scriptLang,
+      debugEventBody
     ).subscribe((theScript) => {
       if (theScript) {
         this.switchConfigForm.get(scriptField).setValue(theScript);

@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { AppState, getCurrentAuthState, NodeScriptTestService } from '@core/public-api';
 import {
+  DebugRuleNodeEventBody,
   JsFuncComponent,
   RuleNodeConfiguration,
   RuleNodeConfigurationComponent,
@@ -99,7 +100,7 @@ export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
     return configuration;
   }
 
-  testScript() {
+  testScript(debugEventBody?: DebugRuleNodeEventBody) {
     const scriptLang: ScriptLanguage = this.generatorConfigForm.get('scriptLang').value;
     const scriptField = scriptLang === ScriptLanguage.JS ? 'jsScript' : 'tbelScript';
     const helpId = scriptLang === ScriptLanguage.JS ? 'rulenode/generator_node_script_fn' : 'rulenode/tbel/generator_node_script_fn';
@@ -112,7 +113,8 @@ export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
       ['prevMsg', 'prevMetadata', 'prevMsgType'],
       this.ruleNodeId,
       helpId,
-      scriptLang
+      scriptLang,
+      debugEventBody
     ).subscribe((theScript) => {
       if (theScript) {
         this.generatorConfigForm.get(scriptField).setValue(theScript);

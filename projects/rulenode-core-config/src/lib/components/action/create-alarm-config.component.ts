@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { AppState, getCurrentAuthState, NodeScriptTestService } from '@core/public-api';
 import {
   AlarmSeverity,
-  alarmSeverityTranslations,
+  alarmSeverityTranslations, DebugRuleNodeEventBody,
   JsFuncComponent,
   RuleNodeConfiguration,
   RuleNodeConfigurationComponent, ScriptLanguage
@@ -112,7 +112,7 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
     return configuration;
   }
 
-  testScript() {
+  testScript(debugEventBody?: DebugRuleNodeEventBody) {
     const scriptLang: ScriptLanguage = this.createAlarmConfigForm.get('scriptLang').value;
     const scriptField = scriptLang === ScriptLanguage.JS ? 'alarmDetailsBuildJs' : 'alarmDetailsBuildTbel';
     const helpId = scriptLang === ScriptLanguage.JS ? 'rulenode/create_alarm_node_script_fn' : 'rulenode/tbel/create_alarm_node_script_fn';
@@ -125,7 +125,8 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
       ['msg', 'metadata', 'msgType'],
       this.ruleNodeId,
       helpId,
-      scriptLang
+      scriptLang,
+      debugEventBody
     ).subscribe((theScript) => {
       if (theScript) {
         this.createAlarmConfigForm.get(scriptField).setValue(theScript);
