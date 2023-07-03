@@ -10,6 +10,8 @@ import {
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'tb-action-node-log-config',
@@ -72,12 +74,12 @@ export class LogConfigComponent extends RuleNodeConfigurationComponent {
     return configuration;
   }
 
-  testScript(debugEventBody?: DebugRuleNodeEventBody) {
+  protected testScript$(debugEventBody?: DebugRuleNodeEventBody): Observable<string> {
     const scriptLang: ScriptLanguage = this.logConfigForm.get('scriptLang').value;
     const scriptField = scriptLang === ScriptLanguage.JS ? 'jsScript' : 'tbelScript';
     const helpId = scriptLang === ScriptLanguage.JS ? 'rulenode/log_node_script_fn' : 'rulenode/tbel/log_node_script_fn';
     const script: string = this.logConfigForm.get(scriptField).value;
-    this.nodeScriptTestService.testNodeScript(
+    return this.nodeScriptTestService.testNodeScript(
       script,
       'string',
       this.translate.instant('tb.rulenode.to-string'),
@@ -87,11 +89,24 @@ export class LogConfigComponent extends RuleNodeConfigurationComponent {
       helpId,
       scriptLang,
       debugEventBody
-    ).subscribe((theScript) => {
-      if (theScript) {
-        this.logConfigForm.get(scriptField).setValue(theScript);
-      }
-    });
+    ).pipe(
+      tap((theScript) => {
+        if (theScript) {
+          this.logConfigForm.get(scriptField).setValue(theScript);
+        }
+      }));
+  }
+
+  testScript() {
+    this.testScript$().subscribe();
+  }
+
+  getSupportTestFunction() {
+    return true;
+  }
+
+  getTestButtonLabel() {
+    return this.translate.instant('tb.rulenode.test-to-string-function');
   }
 
   protected onValidate() {

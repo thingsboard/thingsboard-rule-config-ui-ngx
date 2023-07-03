@@ -10,6 +10,8 @@ import {
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'tb-filter-node-script-config',
@@ -72,12 +74,12 @@ export class ScriptConfigComponent extends RuleNodeConfigurationComponent {
     return configuration;
   }
 
-  testScript(debugEventBody?: DebugRuleNodeEventBody) {
+  protected testScript$(debugEventBody?: DebugRuleNodeEventBody): Observable<string> {
     const scriptLang: ScriptLanguage = this.scriptConfigForm.get('scriptLang').value;
     const scriptField = scriptLang === ScriptLanguage.JS ? 'jsScript' : 'tbelScript';
     const helpId = scriptLang === ScriptLanguage.JS ? 'rulenode/filter_node_script_fn' : 'rulenode/tbel/filter_node_script_fn';
     const script: string = this.scriptConfigForm.get(scriptField).value;
-    this.nodeScriptTestService.testNodeScript(
+    return this.nodeScriptTestService.testNodeScript(
       script,
       'filter',
       this.translate.instant('tb.rulenode.filter'),
@@ -87,11 +89,24 @@ export class ScriptConfigComponent extends RuleNodeConfigurationComponent {
       helpId,
       scriptLang,
       debugEventBody
-    ).subscribe((theScript) => {
-      if (theScript) {
-        this.scriptConfigForm.get(scriptField).setValue(theScript);
-      }
-    });
+    ).pipe(
+      tap((theScript) => {
+        if (theScript) {
+          this.scriptConfigForm.get(scriptField).setValue(theScript);
+        }
+      }))
+  }
+
+  testScript() {
+    this.testScript$().subscribe();
+  }
+
+  getSupportTestFunction() {
+    return true;
+  }
+
+  getTestButtonLabel() {
+    return this.translate.instant('tb.rulenode.test-filter-function');
   }
 
   protected onValidate() {

@@ -10,6 +10,8 @@ import {
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'tb-action-node-clear-alarm-config',
@@ -73,12 +75,12 @@ export class ClearAlarmConfigComponent extends RuleNodeConfigurationComponent {
     return configuration;
   }
 
-  testScript(debugEventBody?: DebugRuleNodeEventBody) {
+  protected testScript$(debugEventBody?: DebugRuleNodeEventBody): Observable<string> {
     const scriptLang: ScriptLanguage = this.clearAlarmConfigForm.get('scriptLang').value;
     const scriptField = scriptLang === ScriptLanguage.JS ? 'alarmDetailsBuildJs' : 'alarmDetailsBuildTbel';
     const helpId = scriptLang === ScriptLanguage.JS ? 'rulenode/clear_alarm_node_script_fn' : 'rulenode/tbel/clear_alarm_node_script_fn';
     const script: string = this.clearAlarmConfigForm.get(scriptField).value;
-    this.nodeScriptTestService.testNodeScript(
+    return this.nodeScriptTestService.testNodeScript(
       script,
       'json',
       this.translate.instant('tb.rulenode.details'),
@@ -88,11 +90,24 @@ export class ClearAlarmConfigComponent extends RuleNodeConfigurationComponent {
       helpId,
       scriptLang,
       debugEventBody
-    ).subscribe((theScript) => {
-      if (theScript) {
-        this.clearAlarmConfigForm.get(scriptField).setValue(theScript);
-      }
-    });
+    ).pipe(
+      tap((theScript) => {
+        if (theScript) {
+          this.clearAlarmConfigForm.get(scriptField).setValue(theScript);
+        }
+      }))
+  }
+
+  testScript() {
+    this.testScript$().subscribe()
+  }
+
+  getSupportTestFunction() {
+    return true;
+  }
+
+  getTestButtonLabel() {
+    return this.translate.instant('tb.rulenode.test-details-function');
   }
 
   protected onValidate() {

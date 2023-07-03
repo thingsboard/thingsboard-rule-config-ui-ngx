@@ -11,6 +11,8 @@ import {
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'tb-action-node-generator-config',
@@ -100,12 +102,12 @@ export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
     return configuration;
   }
 
-  testScript(debugEventBody?: DebugRuleNodeEventBody) {
+  protected testScript$(debugEventBody?: DebugRuleNodeEventBody): Observable<string> {
     const scriptLang: ScriptLanguage = this.generatorConfigForm.get('scriptLang').value;
     const scriptField = scriptLang === ScriptLanguage.JS ? 'jsScript' : 'tbelScript';
     const helpId = scriptLang === ScriptLanguage.JS ? 'rulenode/generator_node_script_fn' : 'rulenode/tbel/generator_node_script_fn';
     const script: string = this.generatorConfigForm.get(scriptField).value;
-    this.nodeScriptTestService.testNodeScript(
+    return this.nodeScriptTestService.testNodeScript(
       script,
       'generate',
       this.translate.instant('tb.rulenode.generator'),
@@ -115,11 +117,24 @@ export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
       helpId,
       scriptLang,
       debugEventBody
-    ).subscribe((theScript) => {
-      if (theScript) {
-        this.generatorConfigForm.get(scriptField).setValue(theScript);
-      }
-    });
+    ).pipe(
+      tap((theScript) => {
+        if (theScript) {
+          this.generatorConfigForm.get(scriptField).setValue(theScript);
+        }
+      }))
+  }
+
+  testScript() {
+    this.testScript$().subscribe();
+  }
+
+  getSupportTestFunction() {
+    return true;
+  }
+
+  getTestButtonLabel() {
+    return this.translate.instant('tb.rulenode.test-generator-function');
   }
 
   protected onValidate() {
