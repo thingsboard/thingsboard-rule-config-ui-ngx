@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, EventEmitter, ViewChild } from '@angular/core';
 import { AppState, getCurrentAuthState, NodeScriptTestService } from '@core/public-api';
 import {
   RuleNodeConfiguration,
@@ -10,8 +10,6 @@ import {
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'tb-filter-node-switch-config',
@@ -28,6 +26,12 @@ export class SwitchConfigComponent extends RuleNodeConfigurationComponent {
   tbelEnabled = getCurrentAuthState(this.store).tbelEnabled;
 
   scriptLanguage = ScriptLanguage;
+
+  changeScript: EventEmitter<void> = new EventEmitter<void>();
+
+  readonly hasScript = true;
+
+  readonly testScriptLabel = 'tb.rulenode.test-switch-function';
 
   constructor(protected store: Store<AppState>,
               private fb: UntypedFormBuilder,
@@ -74,12 +78,12 @@ export class SwitchConfigComponent extends RuleNodeConfigurationComponent {
     return configuration;
   }
 
-  protected testScript$(debugEventBody?: DebugRuleNodeEventBody): Observable<string> {
+  testScript(debugEventBody?: DebugRuleNodeEventBody) {
     const scriptLang: ScriptLanguage = this.switchConfigForm.get('scriptLang').value;
     const scriptField = scriptLang === ScriptLanguage.JS ? 'jsScript' : 'tbelScript';
     const helpId = scriptLang === ScriptLanguage.JS ? 'rulenode/switch_node_script_fn' : 'rulenode/tbel/switch_node_script_fn';
     const script: string = this.switchConfigForm.get(scriptField).value;
-    return this.nodeScriptTestService.testNodeScript(
+    this.nodeScriptTestService.testNodeScript(
       script,
       'switch',
       this.translate.instant('tb.rulenode.switch'),
@@ -89,24 +93,12 @@ export class SwitchConfigComponent extends RuleNodeConfigurationComponent {
       helpId,
       scriptLang,
       debugEventBody
-    ).pipe(
-      tap((theScript) => {
-        if (theScript) {
-          this.switchConfigForm.get(scriptField).setValue(theScript);
-        }
-      }))
-  }
-
-  testScript() {
-    this.testScript$().subscribe();
-  }
-
-  getSupportTestFunction() {
-    return true;
-  }
-
-  getTestButtonLabel() {
-    return this.translate.instant('tb.rulenode.test-switch-function');
+    ).subscribe((theScript) => {
+      if (theScript) {
+        this.switchConfigForm.get(scriptField).setValue(theScript);
+        this.changeScript.emit();
+      }
+    })
   }
 
   protected onValidate() {

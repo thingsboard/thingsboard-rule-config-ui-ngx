@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, EventEmitter, ViewChild } from '@angular/core';
 import { AppState, getCurrentAuthState, NodeScriptTestService } from '@core/public-api';
 import {
   DebugRuleNodeEventBody,
@@ -11,8 +11,6 @@ import {
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'tb-action-node-generator-config',
@@ -29,6 +27,12 @@ export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
   tbelEnabled = getCurrentAuthState(this.store).tbelEnabled;
 
   scriptLanguage = ScriptLanguage;
+
+  changeScript: EventEmitter<void> = new EventEmitter<void>();
+
+  readonly hasScript = true;
+
+  readonly testScriptLabel = 'tb.rulenode.test-generator-function';
 
   serviceType = ServiceType.TB_RULE_ENGINE;
 
@@ -102,12 +106,12 @@ export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
     return configuration;
   }
 
-  protected testScript$(debugEventBody?: DebugRuleNodeEventBody): Observable<string> {
+  testScript(debugEventBody?: DebugRuleNodeEventBody) {
     const scriptLang: ScriptLanguage = this.generatorConfigForm.get('scriptLang').value;
     const scriptField = scriptLang === ScriptLanguage.JS ? 'jsScript' : 'tbelScript';
     const helpId = scriptLang === ScriptLanguage.JS ? 'rulenode/generator_node_script_fn' : 'rulenode/tbel/generator_node_script_fn';
     const script: string = this.generatorConfigForm.get(scriptField).value;
-    return this.nodeScriptTestService.testNodeScript(
+    this.nodeScriptTestService.testNodeScript(
       script,
       'generate',
       this.translate.instant('tb.rulenode.generator'),
@@ -117,24 +121,12 @@ export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
       helpId,
       scriptLang,
       debugEventBody
-    ).pipe(
-      tap((theScript) => {
-        if (theScript) {
-          this.generatorConfigForm.get(scriptField).setValue(theScript);
-        }
-      }))
-  }
-
-  testScript() {
-    this.testScript$().subscribe();
-  }
-
-  getSupportTestFunction() {
-    return true;
-  }
-
-  getTestButtonLabel() {
-    return this.translate.instant('tb.rulenode.test-generator-function');
+    ).subscribe((theScript) => {
+      if (theScript) {
+        this.generatorConfigForm.get(scriptField).setValue(theScript);
+        this.changeScript.emit();
+      }
+    })
   }
 
   protected onValidate() {

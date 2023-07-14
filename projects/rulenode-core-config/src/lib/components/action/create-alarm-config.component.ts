@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, EventEmitter, ViewChild } from '@angular/core';
 import { AppState, getCurrentAuthState, NodeScriptTestService } from '@core/public-api';
 import {
   AlarmSeverity,
@@ -12,8 +12,6 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { TranslateService } from '@ngx-translate/core';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'tb-action-node-create-alarm-config',
@@ -34,6 +32,12 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
   tbelEnabled = getCurrentAuthState(this.store).tbelEnabled;
 
   scriptLanguage = ScriptLanguage;
+
+  changeScript: EventEmitter<void> = new EventEmitter<void>();
+
+  readonly hasScript = true;
+
+  readonly testScriptLabel = 'tb.rulenode.test-details-function';
 
   constructor(protected store: Store<AppState>,
               private fb: UntypedFormBuilder,
@@ -114,12 +118,12 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
     return configuration;
   }
 
-  protected testScript$(debugEventBody?: DebugRuleNodeEventBody): Observable<string> {
+  testScript(debugEventBody?: DebugRuleNodeEventBody) {
     const scriptLang: ScriptLanguage = this.createAlarmConfigForm.get('scriptLang').value;
     const scriptField = scriptLang === ScriptLanguage.JS ? 'alarmDetailsBuildJs' : 'alarmDetailsBuildTbel';
     const helpId = scriptLang === ScriptLanguage.JS ? 'rulenode/create_alarm_node_script_fn' : 'rulenode/tbel/create_alarm_node_script_fn';
     const script: string = this.createAlarmConfigForm.get(scriptField).value;
-    return this.nodeScriptTestService.testNodeScript(
+    this.nodeScriptTestService.testNodeScript(
       script,
       'json',
       this.translate.instant('tb.rulenode.details'),
@@ -129,24 +133,12 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
       helpId,
       scriptLang,
       debugEventBody
-    ).pipe(
-      tap((theScript) => {
-        if (theScript) {
-          this.createAlarmConfigForm.get(scriptField).setValue(theScript);
-        }
-      }))
-  }
-
-  testScript() {
-    this.testScript$().subscribe()
-  }
-
-  getSupportTestFunction() {
-    return true;
-  }
-
-  getTestButtonLabel() {
-    return this.translate.instant('tb.rulenode.test-details-function');
+    ).subscribe((theScript) => {
+      if (theScript) {
+        this.createAlarmConfigForm.get(scriptField).setValue(theScript);
+        this.changeScript.emit();
+      }
+    })
   }
 
   removeKey(key: string, keysField: string): void {
