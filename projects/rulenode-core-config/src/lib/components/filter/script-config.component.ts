@@ -1,6 +1,12 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, EventEmitter, ViewChild } from '@angular/core';
 import { AppState, NodeScriptTestService, getCurrentAuthState } from '@core/public-api';
-import { JsFuncComponent, RuleNodeConfiguration, RuleNodeConfigurationComponent, ScriptLanguage } from '@shared/public-api';
+import {
+  DebugRuleNodeEventBody,
+  JsFuncComponent,
+  RuleNodeConfiguration,
+  RuleNodeConfigurationComponent,
+  ScriptLanguage
+} from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -20,6 +26,12 @@ export class ScriptConfigComponent extends RuleNodeConfigurationComponent {
   tbelEnabled = getCurrentAuthState(this.store).tbelEnabled;
 
   scriptLanguage = ScriptLanguage;
+
+  changeScript: EventEmitter<void> = new EventEmitter<void>();
+
+  readonly hasScript = true;
+
+  readonly testScriptLabel = 'tb.rulenode.test-filter-function';
 
   constructor(protected store: Store<AppState>,
               private fb: UntypedFormBuilder,
@@ -66,7 +78,7 @@ export class ScriptConfigComponent extends RuleNodeConfigurationComponent {
     return configuration;
   }
 
-  testScript() {
+  testScript(debugEventBody?: DebugRuleNodeEventBody) {
     const scriptLang: ScriptLanguage = this.scriptConfigForm.get('scriptLang').value;
     const scriptField = scriptLang === ScriptLanguage.JS ? 'jsScript' : 'tbelScript';
     const helpId = scriptLang === ScriptLanguage.JS ? 'rulenode/filter_node_script_fn' : 'rulenode/tbel/filter_node_script_fn';
@@ -79,12 +91,14 @@ export class ScriptConfigComponent extends RuleNodeConfigurationComponent {
       ['msg', 'metadata', 'msgType'],
       this.ruleNodeId,
       helpId,
-      scriptLang
+      scriptLang,
+      debugEventBody
     ).subscribe((theScript) => {
       if (theScript) {
         this.scriptConfigForm.get(scriptField).setValue(theScript);
+        this.changeScript.emit();
       }
-    });
+    })
   }
 
   protected onValidate() {
