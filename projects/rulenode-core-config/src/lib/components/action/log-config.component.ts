@@ -83,7 +83,7 @@ export class LogConfigComponent extends RuleNodeConfigurationComponent {
     const scriptField = scriptLang === ScriptLanguage.JS ? 'jsScript' : 'tbelScript';
     const helpId = scriptLang === ScriptLanguage.JS ? 'rulenode/log_node_script_fn' : 'rulenode/tbel/log_node_script_fn';
     const script: string = this.logConfigForm.get(scriptField).value;
-    return this.nodeScriptTestService.testNodeScript(
+    this.nodeScriptTestService.testNodeScript(
       script,
       'string',
       this.translate.instant('tb.rulenode.to-string'),
