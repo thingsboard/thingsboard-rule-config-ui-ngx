@@ -61,7 +61,7 @@ export class LogConfigComponent extends RuleNodeConfigurationComponent {
     if (scriptLang === ScriptLanguage.TBEL && !this.tbelEnabled) {
       scriptLang = ScriptLanguage.JS;
       this.logConfigForm.get('scriptLang').patchValue(scriptLang, {emitEvent: false});
-      setTimeout(() => {this.logConfigForm.updateValueAndValidity({emitEvent: true})});
+      setTimeout(() => {this.logConfigForm.updateValueAndValidity({emitEvent: true});});
     }
     this.logConfigForm.get('jsScript').setValidators(scriptLang === ScriptLanguage.JS ? [Validators.required] : []);
     this.logConfigForm.get('jsScript').updateValueAndValidity({emitEvent});
@@ -98,7 +98,7 @@ export class LogConfigComponent extends RuleNodeConfigurationComponent {
         this.logConfigForm.get(scriptField).setValue(theScript);
         this.changeScript.emit();
       }
-    })
+    });
   }
 
   protected onValidate() {

@@ -61,7 +61,7 @@ export class TransformScriptConfigComponent extends RuleNodeConfigurationCompone
     if (scriptLang === ScriptLanguage.TBEL && !this.tbelEnabled) {
       scriptLang = ScriptLanguage.JS;
       this.scriptConfigForm.get('scriptLang').patchValue(scriptLang, {emitEvent: false});
-      setTimeout(() => {this.scriptConfigForm.updateValueAndValidity({emitEvent: true})});
+      setTimeout(() => {this.scriptConfigForm.updateValueAndValidity({emitEvent: true});});
     }
     this.scriptConfigForm.get('jsScript').setValidators(scriptLang === ScriptLanguage.JS ? [Validators.required] : []);
     this.scriptConfigForm.get('jsScript').updateValueAndValidity({emitEvent});
@@ -81,7 +81,9 @@ export class TransformScriptConfigComponent extends RuleNodeConfigurationCompone
   testScript(debugEventBody?: DebugRuleNodeEventBody) {
     const scriptLang: ScriptLanguage = this.scriptConfigForm.get('scriptLang').value;
     const scriptField = scriptLang === ScriptLanguage.JS ? 'jsScript' : 'tbelScript';
-    const helpId = scriptLang === ScriptLanguage.JS ? 'rulenode/transformation_node_script_fn' : 'rulenode/tbel/transformation_node_script_fn';
+    const helpId = scriptLang === ScriptLanguage.JS
+      ? 'rulenode/transformation_node_script_fn'
+      : 'rulenode/tbel/transformation_node_script_fn';
     const script: string = this.scriptConfigForm.get(scriptField).value;
     this.nodeScriptTestService.testNodeScript(
       script,
@@ -98,7 +100,7 @@ export class TransformScriptConfigComponent extends RuleNodeConfigurationCompone
         this.scriptConfigForm.get(scriptField).setValue(theScript);
         this.changeScript.emit();
       }
-    })
+    });
   }
 
   protected onValidate() {

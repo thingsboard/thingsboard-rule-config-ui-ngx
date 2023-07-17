@@ -72,7 +72,7 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
       } else {
         this.createAlarmConfigForm.get('severity').patchValue(this.alarmSeverities[0],{emitEvent:false});
       }
-    })
+    });
 
   }
 
@@ -98,7 +98,7 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
     if (scriptLang === ScriptLanguage.TBEL && !this.tbelEnabled) {
       scriptLang = ScriptLanguage.JS;
       this.createAlarmConfigForm.get('scriptLang').patchValue(scriptLang, {emitEvent: false});
-      setTimeout(() => {this.createAlarmConfigForm.updateValueAndValidity({emitEvent: true})});
+      setTimeout(() => {this.createAlarmConfigForm.updateValueAndValidity({emitEvent: true});});
     }
     const useAlarmDetailsBuildScript = useMessageAlarmData === false || overwriteAlarmDetails === true;
     this.createAlarmConfigForm.get('alarmDetailsBuildJs')
@@ -138,7 +138,7 @@ export class CreateAlarmConfigComponent extends RuleNodeConfigurationComponent {
         this.createAlarmConfigForm.get(scriptField).setValue(theScript);
         this.changeScript.emit();
       }
-    })
+    });
   }
 
   removeKey(key: string, keysField: string): void {

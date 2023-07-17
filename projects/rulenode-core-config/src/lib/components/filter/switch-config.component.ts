@@ -61,7 +61,7 @@ export class SwitchConfigComponent extends RuleNodeConfigurationComponent {
     if (scriptLang === ScriptLanguage.TBEL && !this.tbelEnabled) {
       scriptLang = ScriptLanguage.JS;
       this.switchConfigForm.get('scriptLang').patchValue(scriptLang, {emitEvent: false});
-      setTimeout(() => {this.switchConfigForm.updateValueAndValidity({emitEvent: true})});
+      setTimeout(() => {this.switchConfigForm.updateValueAndValidity({emitEvent: true});});
     }
     this.switchConfigForm.get('jsScript').setValidators(scriptLang === ScriptLanguage.JS ? [Validators.required] : []);
     this.switchConfigForm.get('jsScript').updateValueAndValidity({emitEvent});
@@ -98,7 +98,7 @@ export class SwitchConfigComponent extends RuleNodeConfigurationComponent {
         this.switchConfigForm.get(scriptField).setValue(theScript);
         this.changeScript.emit();
       }
-    })
+    });
   }
 
   protected onValidate() {

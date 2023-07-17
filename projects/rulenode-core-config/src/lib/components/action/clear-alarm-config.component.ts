@@ -62,7 +62,7 @@ export class ClearAlarmConfigComponent extends RuleNodeConfigurationComponent {
     if (scriptLang === ScriptLanguage.TBEL && !this.tbelEnabled) {
       scriptLang = ScriptLanguage.JS;
       this.clearAlarmConfigForm.get('scriptLang').patchValue(scriptLang, {emitEvent: false});
-      setTimeout(() => {this.clearAlarmConfigForm.updateValueAndValidity({emitEvent: true})});
+      setTimeout(() => {this.clearAlarmConfigForm.updateValueAndValidity({emitEvent: true});});
     }
     this.clearAlarmConfigForm.get('alarmDetailsBuildJs').setValidators(scriptLang === ScriptLanguage.JS ? [Validators.required] : []);
     this.clearAlarmConfigForm.get('alarmDetailsBuildJs').updateValueAndValidity({emitEvent});
@@ -99,7 +99,7 @@ export class ClearAlarmConfigComponent extends RuleNodeConfigurationComponent {
         this.clearAlarmConfigForm.get(scriptField).setValue(theScript);
         this.changeScript.emit();
       }
-    })
+    });
   }
 
   protected onValidate() {
