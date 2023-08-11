@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'tb-enrichment-node-originator-fields-config',
   templateUrl: './originator-fields-config.component.html',
-  styleUrls: ['./originator-fields-config.component.scss']
+  styleUrls: ['../../../../style.scss']
 })
 export class OriginatorFieldsConfigComponent extends RuleNodeConfigurationComponent {
 

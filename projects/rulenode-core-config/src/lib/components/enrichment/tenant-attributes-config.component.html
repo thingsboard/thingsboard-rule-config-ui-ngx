@@ -1,25 +1,31 @@
 <section [formGroup]="tenantAttributesConfigForm" fxLayout="column">
   <tb-fieldset-component [label]="'tb.rulenode.mapping-of-tenant' | translate">
-    <tb-toggle-header class="fetch-to-data-toggle" ignoreMdLgSize="true" (valueChange)="toggleChange($event)"
-    appearance="fill" [options]="fetchToData" name="widgetConfigHeader" useSelectOnMdLg="false"
-    [value]="tenantAttributesConfigForm.get('dataToFetch').value"
-    >
-    </tb-toggle-header>
-    <tb-kv-map-config
-      required
-      formControlName="dataMapping"
-      [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
-      [labelText]="selectTranslation('tb.rulenode.latest-telemetry-mapping', 'tb.rulenode.attributes-mapping') | translate"
-      [keyText]="selectTranslation('tb.rulenode.source-telemetry', 'tb.rulenode.source-attribute') | translate"
-      [keyRequiredText]="selectTranslation('tb.rulenode.source-telemetry-required', 'tb.rulenode.source-attribute-required') | translate"
-      [valText]="'tb.rulenode.target-key' | translate"
-      [valRequiredText]="'tb.rulenode.target-key-required' | translate"
-      [hintText]="'tb.rulenode.kv-map-pattern-hint' | translate"
-      popupHelpLink="rulenode/tenant_attributes_node_fields_templatization">
-    </tb-kv-map-config>
-    <tb-msg-metadata-chip formControlName="fetchTo" class="msg-metadata-chip"
-                          [labelText]="tenantAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY ?
-                          ('tb.rulenode.add-mapped-latest-telemetry-to' | translate) : ('tb.rulenode.add-mapped-attribute-to' | translate)">
-    </tb-msg-metadata-chip>
+    <div class="flex column gap-12">
+      <div  fxFlex fxLayoutAlign="center center">
+        <div class="fetch-to-data-toggle">
+          <tb-toggle-select class="fetch-to-data-toggle"  formControlName="dataToFetch" appearance="fill">
+            <tb-toggle-option *ngFor="let data of fetchToData" [value]="data.value">
+              {{ data.name }}
+            </tb-toggle-option>
+          </tb-toggle-select>
+        </div>
+      </div>
+      <tb-kv-map-config
+        required
+        formControlName="dataMapping"
+        [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
+        [labelText]="selectTranslation('tb.rulenode.latest-telemetry-mapping', 'tb.rulenode.attributes-mapping') | translate"
+        [keyText]="selectTranslation('tb.rulenode.source-telemetry', 'tb.rulenode.source-attribute') | translate"
+        [keyRequiredText]="selectTranslation('tb.rulenode.source-telemetry-required', 'tb.rulenode.source-attribute-required') | translate"
+        [valText]="'tb.rulenode.target-key' | translate"
+        [valRequiredText]="'tb.rulenode.target-key-required' | translate"
+        [hintText]="'tb.rulenode.kv-map-pattern-hint' | translate"
+        popupHelpLink="rulenode/tenant_attributes_node_fields_templatization">
+      </tb-kv-map-config>
+      <tb-msg-metadata-chip formControlName="fetchTo" class="msg-metadata-chip"
+                            [labelText]="tenantAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY ?
+                            ('tb.rulenode.add-mapped-latest-telemetry-to' | translate) : ('tb.rulenode.add-mapped-attribute-to' | translate)">
+      </tb-msg-metadata-chip>
+    </div>
   </tb-fieldset-component>
 </section>

@@ -1,19 +1,27 @@
 <section [formGroup]="deviceAttributesConfigForm" fxLayout="column">
-  <tb-fieldset-component [label]="'tb.rulenode.device-relations-query' | translate" required="true">
-    <tb-device-relations-query-config
-      required
-      class="device-relations"
-      formControlName="deviceRelationsQuery">
-    </tb-device-relations-query-config>
-  </tb-fieldset-component>
-  <tb-fieldset-component [label]="'tb.rulenode.related-device-attributes' | translate" class="device-attribute" required="true">
-    <tb-select-attributes formControlName="attributesControl"
-                          popupHelpLink="rulenode/related_device_attributes_node_fields_templatization"></tb-select-attributes>
-  </tb-fieldset-component>
-  <tb-slide-toggle class='failure-toggle'
-                   formControlName="tellFailureIfAbsent"
-                   [slideToggleName]="'tb.rulenode.tell-failure' | translate"
-                   [slideToggleTooltip]="'tb.rulenode.tell-failure-tooltip' | translate">
-  </tb-slide-toggle>
-  <tb-msg-metadata-chip formControlName="fetchTo" [labelText]="'tb.rulenode.add-selected-attributes-to' | translate"></tb-msg-metadata-chip>
+  <div class="flex column gap-12">
+    <tb-fieldset-component defaultBottomPadding='false' [label]="'tb.rulenode.device-relations-query' | translate" required="true">
+      <tb-device-relations-query-config
+        required
+        class="device-relations"
+        formControlName="deviceRelationsQuery">
+      </tb-device-relations-query-config>
+    </tb-fieldset-component>
+    <tb-fieldset-component [errorEnable]="deviceAttributesConfigForm.get('attributesControl').touched &&
+         deviceAttributesConfigForm.get('attributesControl').hasError('atLeastOneRequired')"
+                           [errorText]="'tb.rulenode.at-least-one-field-required' | translate"
+                           [label]="'tb.rulenode.related-device-attributes' | translate" class="device-attribute" required="true">
+      <div class="flex column gap-22">
+        <tb-select-attributes (focusout)="touched()"
+                              formControlName="attributesControl"
+                              popupHelpLink="rulenode/related_device_attributes_node_fields_templatization"></tb-select-attributes>
+        <tb-msg-metadata-chip formControlName="fetchTo" [labelText]="'tb.rulenode.add-selected-attributes-to' | translate"></tb-msg-metadata-chip>
+      </div>
+    </tb-fieldset-component>
+    <tb-slide-toggle class='failure-toggle'
+                     formControlName="tellFailureIfAbsent"
+                     [slideToggleName]="'tb.rulenode.tell-failure' | translate"
+                     [slideToggleTooltip]="'tb.rulenode.tell-failure-tooltip' | translate">
+    </tb-slide-toggle>
+  </div>
 </section>

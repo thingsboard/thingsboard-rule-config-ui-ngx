@@ -1,12 +1,7 @@
-:host ::ng-deep {
+:host {
   .slide-toggle-container{
     align-items: center;
-    .slide-toggle {
-      margin-right: 8px;
-      label {
-        padding-left: 12px;
-      }
-    }
+    gap: 8px;
 
     .tooltip-icon {
       width: 18px;
@@ -20,4 +15,16 @@
       color: #9E9E9E;
     }
   }
+
+  .default-padding {
+    padding: 16px;
+  }
 }
+
+:host ::ng-deep {
+  .slide-toggle label {
+    font-size: 16px;
+    padding-left: 12px;
+  }
+}
+

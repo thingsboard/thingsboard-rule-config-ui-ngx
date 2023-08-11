@@ -1,5 +1,5 @@
 import { Component, EventEmitter, ViewChild } from '@angular/core';
-import { AppState, NodeScriptTestService, getCurrentAuthState } from '@core/public-api';
+import { AppState, NodeScriptTestService, getCurrentAuthState, isDefinedAndNotNull } from '@core/public-api';
 import {
   DebugRuleNodeEventBody,
   JsFuncComponent,
@@ -46,9 +46,9 @@ export class ScriptConfigComponent extends RuleNodeConfigurationComponent {
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.scriptConfigForm = this.fb.group({
-      scriptLang: [configuration ? configuration.scriptLang : ScriptLanguage.JS, [Validators.required]],
-      jsScript: [configuration ? configuration.jsScript : null, []],
-      tbelScript: [configuration ? configuration.tbelScript : null, []]
+      scriptLang: [configuration.scriptLang, [Validators.required]],
+      jsScript: [configuration.jsScript, []],
+      tbelScript: [configuration.tbelScript, []]
     });
   }
 
@@ -75,7 +75,11 @@ export class ScriptConfigComponent extends RuleNodeConfigurationComponent {
         configuration.scriptLang = ScriptLanguage.JS;
       }
     }
-    return configuration;
+    return {
+      scriptLang: isDefinedAndNotNull(configuration?.scriptLang) ? configuration.scriptLang : ScriptLanguage.JS,
+      jsScript: isDefinedAndNotNull(configuration?.jsScript) ? configuration.jsScript : null,
+      tbelScript: isDefinedAndNotNull(configuration?.tbelScript) ? configuration.tbelScript : null
+    };
   }
 
   testScript(debugEventBody?: DebugRuleNodeEventBody) {

@@ -21,7 +21,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'tb-kv-map-config',
   templateUrl: './kv-map-config.component.html',
-  styleUrls: ['./kv-map-config.component.scss'],
+  styleUrls: ['./kv-map-config.component.scss', '../../../../style.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -90,6 +90,18 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
 
   keyValsFormArray(): FormArray {
     return this.kvListFormGroup.get('keyVals') as FormArray;
+  }
+
+  public errorTrigger() {
+    const keyVals = this.keyValsFormArray();
+    for (const keyVal of keyVals.controls) {
+      for (const controlName of Object.keys(keyVal.value)) {
+        if (keyVal.get(controlName).touched && keyVal.get(controlName).invalid) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   registerOnChange(fn: any): void {

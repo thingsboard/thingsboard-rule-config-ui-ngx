@@ -40,7 +40,7 @@ export class MessageTypesConfigComponent extends PageComponent implements Contro
   label: string;
 
   @Input()
-  placeholder = 'tb.rulenode.message-type';
+  placeholder = 'tb.rulenode.add-message-type';
 
   @Input()
   disabled: boolean;

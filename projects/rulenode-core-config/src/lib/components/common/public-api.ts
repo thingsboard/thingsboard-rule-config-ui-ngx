@@ -14,5 +14,7 @@ export * from './sv-map-config.component';
 export * from './fieldset.component';
 export * from './relations-query-config-old.component';
 export * from './select-attributes.component';
+export * from './alarm-status-select.component';
+export * from './example-hint.component';
 
 export * from './rulenode-core-config-common.module';

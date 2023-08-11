@@ -9,7 +9,7 @@ import { FetchTo } from '../../rulenode-core-config.models';
 @Component({
   selector: 'tb-enrichment-node-originator-attributes-config',
   templateUrl: './originator-attributes-config.component.html',
-  styleUrls: ['./originator-attributes-config.component.scss']
+  styleUrls: ['../../../../style.scss']
 })
 export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationComponent {
 
@@ -25,6 +25,10 @@ export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationCo
     return this.originatorAttributesConfigForm;
   }
 
+  public touched() {
+    this.originatorAttributesConfigForm.get('attributesControl').markAsTouched();
+  }
+
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.originatorAttributesConfigForm = this.fb.group({
       tellFailureIfAbsent: [configuration.tellFailureIfAbsent, []],
@@ -36,7 +40,7 @@ export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationCo
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
     if (isObject(configuration)) {
       configuration.attributesControl = {
-        clientAttributeNames:  isDefinedAndNotNull(configuration?.clientAttributeNames) ? configuration.clientAttributeNames : null,
+        clientAttributeNames: isDefinedAndNotNull(configuration?.clientAttributeNames) ? configuration.clientAttributeNames : null,
         latestTsKeyNames: isDefinedAndNotNull(configuration?.latestTsKeyNames) ? configuration.latestTsKeyNames : null,
         serverAttributeNames: isDefinedAndNotNull(configuration?.serverAttributeNames) ? configuration.serverAttributeNames : null,
         sharedAttributeNames: isDefinedAndNotNull(configuration?.sharedAttributeNames) ? configuration.sharedAttributeNames : null,

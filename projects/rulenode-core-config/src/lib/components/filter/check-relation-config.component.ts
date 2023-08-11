@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppState } from '@core/public-api';
+import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import {
@@ -12,7 +12,7 @@ import {
 @Component({
   selector: 'tb-filter-node-check-relation-config',
   templateUrl: './check-relation-config.component.html',
-  styleUrls: []
+  styleUrls: ['./check-relation-config.component.scss']
 })
 export class CheckRelationConfigComponent extends RuleNodeConfigurationComponent {
 
@@ -30,15 +30,25 @@ export class CheckRelationConfigComponent extends RuleNodeConfigurationComponent
     return this.checkRelationConfigForm;
   }
 
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    return {
+      checkForSingleEntity: isDefinedAndNotNull(configuration?.checkForSingleEntity) ? configuration.checkForSingleEntity : false,
+      direction: isDefinedAndNotNull(configuration?.direction) ? configuration.direction : null,
+      entityType: isDefinedAndNotNull(configuration?.entityType) ? configuration.entityType : null,
+      entityId: isDefinedAndNotNull(configuration?.entityId) ? configuration.entityId : null,
+      relationType: isDefinedAndNotNull(configuration?.relationType) ? configuration.relationType : null
+    };
+  }
+
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.checkRelationConfigForm = this.fb.group({
-      checkForSingleEntity: [configuration ? configuration.checkForSingleEntity : false, []],
-      direction: [configuration ? configuration.direction : null, []],
-      entityType: [configuration ? configuration.entityType : null,
+      checkForSingleEntity: [configuration.checkForSingleEntity, []],
+      direction: [configuration.direction, []],
+      entityType: [configuration.entityType,
         configuration && configuration.checkForSingleEntity ? [Validators.required] : []],
-      entityId: [configuration ? configuration.entityId : null,
+      entityId: [configuration.entityId,
         configuration && configuration.checkForSingleEntity ? [Validators.required] : []],
-      relationType: [configuration ? configuration.relationType : null, [Validators.required]]
+      relationType: [configuration.relationType, [Validators.required]]
     });
   }
 

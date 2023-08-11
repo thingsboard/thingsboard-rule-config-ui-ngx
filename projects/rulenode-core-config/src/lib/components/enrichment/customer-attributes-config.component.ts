@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'tb-enrichment-node-customer-attributes-config',
   templateUrl: './customer-attributes-config.component.html',
-  styleUrls: ['./customer-attributes-config.component.scss']
+  styleUrls: ['./customer-attributes-config.component.scss', '../../../../style.scss']
 })
 export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComponent {
 
@@ -41,10 +41,6 @@ export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComp
     }
     configuration.dataMapping = filteDataMapping;
     return deepTrim(configuration);
-  }
-
-  public toggleChange(value) {
-    this.customerAttributesConfigForm.get('dataToFetch').patchValue(value, {emitEvent: true});
   }
 
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {

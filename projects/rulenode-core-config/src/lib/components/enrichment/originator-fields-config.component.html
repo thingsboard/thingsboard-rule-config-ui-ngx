@@ -1,24 +1,22 @@
-<section [formGroup]="originatorFieldsConfigForm" fxLayout="column">
-  <tb-fieldset-component [label]="'tb.rulenode.originator-fields-mapping' | translate" required="true">
-    <tb-sv-map-config
-      required
-      [selectOptions]="originatorFields"
-      targetKeyPrefix="originator"
-      formControlName="dataMapping"
-      [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
-      [selectText]="'tb.rulenode.source-field' | translate"
-      [selectRequiredText]="'tb.rulenode.source-field-required' | translate"
-      [valText]="'tb.rulenode.target-key' | translate"
-      [valRequiredText]="'tb.rulenode.target-key-required' | translate"
-      [hintText] = "'tb.rulenode.originator-fields-sv-map-hint' | translate"
-      popupHelpLink="rulenode/originator_fields_node_fields_templatization">
-    </tb-sv-map-config>
-    <tb-msg-metadata-chip class="msg-metadata-chip"
-      [labelText]="'tb.rulenode.add-mapped-originator-fields-to' | translate"
-      formControlName="fetchTo"
-    ></tb-msg-metadata-chip>
-  </tb-fieldset-component>
-  <tb-slide-toggle class="skip-slide-toggle"
+<section [formGroup]="originatorFieldsConfigForm" class="flex column gap-12" fxLayout="column">
+  <tb-sv-map-config
+    required
+    [selectOptions]="originatorFields"
+    targetKeyPrefix="originator"
+    formControlName="dataMapping"
+    [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
+    [selectText]="'tb.rulenode.source-field' | translate"
+    [selectRequiredText]="'tb.rulenode.source-field-required' | translate"
+    [valText]="'tb.rulenode.target-key' | translate"
+    [valRequiredText]="'tb.rulenode.target-key-required' | translate"
+    [hintText] = "'tb.rulenode.originator-fields-sv-map-hint' | translate"
+    popupHelpLink="rulenode/originator_fields_node_fields_templatization">
+  </tb-sv-map-config>
+  <tb-msg-metadata-chip class="msg-metadata-chip"
+    [labelText]="'tb.rulenode.add-mapped-originator-fields-to' | translate"
+    formControlName="fetchTo">
+  </tb-msg-metadata-chip>
+  <tb-slide-toggle class="tb-form-row no-padding"
                    formControlName="ignoreNullStrings"
                    [slideToggleName]="'tb.rulenode.skip-empty-fields' | translate"
                    [slideToggleTooltip]="'tb.rulenode.skip-empty-fields-tooltip' | translate">

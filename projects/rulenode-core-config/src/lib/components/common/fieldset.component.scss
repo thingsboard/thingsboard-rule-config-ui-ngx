@@ -1,29 +1,25 @@
-.fields-group {
-  padding: 0 16px;
-  margin: 0px;
-  border: 1px solid #E0E0E0;
-  border-radius: 4px;
+:host {
+  .fields-group {
+    padding: 0 16px;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
 
-  .fieldset-content {
-    align-items: center;
-  }
+    .group-title {
+      font-weight: 500;
+      color: #000000DD;
+      margin: 12px 0;
+    }
 
-  .mat-mdc-form-field {
-    .mat-mdc-form-field-infix {
-      width: 100%;
+    .error {
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0.25px;
+      color: var(--mdc-theme-error, #f44336);
+      //color: #D12730;
     }
   }
 
-  legend {
-    color: #757575;
-    width: fit-content;
-    margin-bottom: 4px;
-  }
-
-  legend + * {
-    display: block;
-    &.no-margin-top {
-      margin-top: 0;
-    }
+  .default-bottom-padding {
+    padding-bottom: 16px;
   }
 }

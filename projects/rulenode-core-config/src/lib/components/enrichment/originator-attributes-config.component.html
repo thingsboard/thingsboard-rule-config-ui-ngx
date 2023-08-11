@@ -1,15 +1,18 @@
-<section [formGroup]="originatorAttributesConfigForm" fxLayout="column">
-  <tb-fieldset-component [label]="'tb.rulenode.originator-attributes' | translate" required="true">
-    <tb-select-attributes class ='select-attributes' formControlName="attributesControl"
-                          popupHelpLink="rulenode/originator_attributes_node_fields_templatization"></tb-select-attributes>
+<section class="flex column gap-16"  [formGroup]="originatorAttributesConfigForm" fxLayout="column">
+  <tb-fieldset-component [errorEnable]="originatorAttributesConfigForm.get('attributesControl').touched &&
+       originatorAttributesConfigForm.get('attributesControl').hasError('atLeastOneRequired')"
+                         [errorText]="'tb.rulenode.at-least-one-field-required' | translate"
+                         [label]="'tb.rulenode.originator-attributes' | translate" required="true">
+    <div class="flex column gap-22">
+      <tb-select-attributes (focusout)="touched()" class='select-attributes' formControlName="attributesControl"
+                            popupHelpLink="rulenode/originator_attributes_node_fields_templatization"></tb-select-attributes>
+      <tb-msg-metadata-chip [labelText]="'tb.rulenode.add-originator-attributes-to' | translate" formControlName="fetchTo">
+      </tb-msg-metadata-chip>
+    </div>
   </tb-fieldset-component>
-  <tb-slide-toggle class="failure-slide-toggle"
+  <tb-slide-toggle class="tb-form-row no-padding"
                    formControlName="tellFailureIfAbsent"
                    [slideToggleName]="'tb.rulenode.tell-failure' | translate"
                    [slideToggleTooltip]="'tb.rulenode.tell-failure-tooltip' | translate">
   </tb-slide-toggle>
-  <tb-msg-metadata-chip
-    [labelText]="'tb.rulenode.add-originator-attributes-to' | translate"
-    formControlName="fetchTo"
-  ></tb-msg-metadata-chip>
 </section>

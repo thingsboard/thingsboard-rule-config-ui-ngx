@@ -1,10 +1,5 @@
-:host ::ng-deep {
-  .slide-toggles-block {
-    .slide-toggle {
-      margin: 12px 0;
-    }
-  }
+:host {
   .period-input {
-    margin-top: 20px;
+    padding: 0 16px;
   }
 }

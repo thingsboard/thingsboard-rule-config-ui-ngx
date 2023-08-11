@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import { AppState } from '@core/public-api';
+import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { Store } from '@ngrx/store';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { PerimeterType, perimeterTypeTranslations, RangeUnit, rangeUnitTranslations } from '../../rulenode-core-config.models';
 
 @Component({
   selector: 'tb-filter-node-gps-geofencing-config',
   templateUrl: './gps-geo-filter-config.component.html',
-  styleUrls: []
+  styleUrls: ['./gps-geo-filter-config.component.scss', '../../../../style.scss']
 })
 export class GpsGeoFilterConfigComponent extends RuleNodeConfigurationComponent {
 
-  geoFilterConfigForm: UntypedFormGroup;
+  geoFilterConfigForm: FormGroup;
 
   perimeterType = PerimeterType;
   perimeterTypes = Object.keys(PerimeterType);
@@ -21,27 +21,45 @@ export class GpsGeoFilterConfigComponent extends RuleNodeConfigurationComponent 
   rangeUnits = Object.keys(RangeUnit);
   rangeUnitTranslationMap = rangeUnitTranslations;
 
+  public defaultPaddingEnable = true;
+
   constructor(protected store: Store<AppState>,
-              private fb: UntypedFormBuilder) {
+              private fb: FormBuilder) {
     super(store);
   }
 
-  protected configForm(): UntypedFormGroup {
+  protected configForm(): FormGroup {
     return this.geoFilterConfigForm;
+  }
+
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    return {
+      latitudeKeyName: isDefinedAndNotNull(configuration?.latitudeKeyName) ? configuration.latitudeKeyName : null,
+      longitudeKeyName: isDefinedAndNotNull(configuration?.longitudeKeyName) ? configuration.longitudeKeyName : null,
+      perimeterType: isDefinedAndNotNull(configuration?.perimeterType) ? configuration.perimeterType : null,
+      fetchPerimeterInfoFromMessageMetadata: isDefinedAndNotNull(configuration?.fetchPerimeterInfoFromMessageMetadata) ?
+          configuration.fetchPerimeterInfoFromMessageMetadata : false,
+      perimeterKeyName: isDefinedAndNotNull(configuration?.perimeterKeyName) ? configuration.perimeterKeyName : null,
+      centerLatitude: isDefinedAndNotNull(configuration?.centerLatitude) ? configuration.centerLatitude : null,
+      centerLongitude: isDefinedAndNotNull(configuration?.centerLongitude) ? configuration.centerLongitude : null,
+      range: isDefinedAndNotNull(configuration?.range) ? configuration.range : null,
+      rangeUnit: isDefinedAndNotNull(configuration?.rangeUnit) ? configuration.rangeUnit : null,
+      polygonsDefinition: isDefinedAndNotNull(configuration?.polygonsDefinition) ? configuration.polygonsDefinition : null
+    };
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.geoFilterConfigForm = this.fb.group({
-      latitudeKeyName: [configuration ? configuration.latitudeKeyName : null, [Validators.required]],
-      longitudeKeyName: [configuration ? configuration.longitudeKeyName : null, [Validators.required]],
-      perimeterType: [configuration ? configuration.perimeterType : null, [Validators.required]],
-      fetchPerimeterInfoFromMessageMetadata: [configuration ? configuration.fetchPerimeterInfoFromMessageMetadata : false, []],
-      perimeterKeyName: [configuration ? configuration.perimeterKeyName : null, []],
-      centerLatitude: [configuration ? configuration.centerLatitude : null, []],
-      centerLongitude: [configuration ? configuration.centerLatitude : null, []],
-      range: [configuration ? configuration.range : null, []],
-      rangeUnit: [configuration ? configuration.rangeUnit : null, []],
-      polygonsDefinition: [configuration ? configuration.polygonsDefinition : null, []]
+      latitudeKeyName: [configuration.latitudeKeyName, [Validators.required]],
+      longitudeKeyName: [configuration.longitudeKeyName, [Validators.required]],
+      perimeterType: [configuration.perimeterType, [Validators.required]],
+      fetchPerimeterInfoFromMessageMetadata: [configuration.fetchPerimeterInfoFromMessageMetadata , []],
+      perimeterKeyName: [configuration.perimeterKeyName, []],
+      centerLatitude: [configuration.centerLatitude, []],
+      centerLongitude: [configuration.centerLongitude, []],
+      range: [configuration.range, []],
+      rangeUnit: [configuration.rangeUnit, []],
+      polygonsDefinition: [configuration.polygonsDefinition, []]
     });
   }
 
@@ -64,11 +82,15 @@ export class GpsGeoFilterConfigComponent extends RuleNodeConfigurationComponent 
         Validators.min(-180), Validators.max(180)]);
       this.geoFilterConfigForm.get('range').setValidators([Validators.required, Validators.min(0)]);
       this.geoFilterConfigForm.get('rangeUnit').setValidators([Validators.required]);
+
+      this.defaultPaddingEnable = false;
     } else {
       this.geoFilterConfigForm.get('centerLatitude').setValidators([]);
       this.geoFilterConfigForm.get('centerLongitude').setValidators([]);
       this.geoFilterConfigForm.get('range').setValidators([]);
       this.geoFilterConfigForm.get('rangeUnit').setValidators([]);
+
+      this.defaultPaddingEnable = true;
     }
     if (!fetchPerimeterInfoFromMessageMetadata && perimeterType === PerimeterType.POLYGON) {
       this.geoFilterConfigForm.get('polygonsDefinition').setValidators([Validators.required]);

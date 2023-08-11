@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '@core/core.state';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { coerceBoolean } from '@shared/public-api';
 
 @Component({
   selector: 'tb-slide-toggle',
@@ -20,6 +21,9 @@ export class SlideToggleComponent implements  OnInit, ControlValueAccessor, OnDe
 
   @Input() slideToggleName: string;
   @Input() slideToggleTooltip: string;
+  @Input()
+  @coerceBoolean()
+  defaultPadding = true;
 
   private propagateChange;
   private destroy$ = new Subject();

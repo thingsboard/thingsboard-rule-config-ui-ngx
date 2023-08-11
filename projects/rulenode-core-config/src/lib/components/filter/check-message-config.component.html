@@ -1,40 +1,26 @@
 <section [formGroup]="checkMessageConfigForm" fxLayout="column">
-  <mat-form-field class="mat-block" subscriptSizing="dynamic">
-    <mat-label translate>tb.rulenode.data-keys</mat-label>
-    <mat-chip-grid #messageNamesChipList>
-      <mat-chip-row
-        *ngFor="let messageName of checkMessageConfigForm.get('messageNames').value;"
-        (removed)="removeMessageName(messageName)">
-        {{messageName}}
-        <mat-icon matChipRemove>close</mat-icon>
-      </mat-chip-row>
-      <input matInput type="text"
-             [matChipInputFor]="messageNamesChipList"
-             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-             (matChipInputTokenEnd)="addMessageName($event)"
-             [matChipInputAddOnBlur]="true">
-    </mat-chip-grid>
-    <mat-hint translate>tb.rulenode.separator-hint</mat-hint>
-  </mat-form-field>
-  <mat-form-field class="mat-block" subscriptSizing="dynamic">
-    <mat-label translate>tb.rulenode.metadata-keys</mat-label>
-    <mat-chip-grid #metadataNamesChipList>
-      <mat-chip-row
-        *ngFor="let metadataName of checkMessageConfigForm.get('metadataNames').value;"
-        (removed)="removeMetadataName(metadataName)">
-        {{metadataName}}
-        <mat-icon matChipRemove>close</mat-icon>
-      </mat-chip-row>
-      <input matInput type="text"
-             [matChipInputFor]="metadataNamesChipList"
-             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-             (matChipInputTokenEnd)="addMetadataName($event)"
-             [matChipInputAddOnBlur]="true">
-    </mat-chip-grid>
-    <mat-hint translate>tb.rulenode.separator-hint</mat-hint>
-  </mat-form-field>
-  <mat-checkbox fxFlex formControlName="checkAllKeys">
-    {{ 'tb.rulenode.check-all-keys' | translate }}
-  </mat-checkbox>
-  <div class="tb-hint" translate>tb.rulenode.check-all-keys-hint</div>
+  <tb-fieldset-component [errorEnable]="checkMessageConfigForm.touched && checkMessageConfigForm.hasError('atLeastOne')"
+                         [errorText]="'tb.rulenode.at-least-one-field-required' | translate" required
+                         [label]="'tb.rulenode.fields-to-check' | translate">
+    <tb-string-items-list (focusout)="touched()"
+                          class="mat-block" editable
+                          [label]="'tb.rulenode.data-keys' | translate"
+                          [placeholder]="'tb.rulenode.add-message-field' | translate"
+                          formControlName="messageNames">
+      <mat-icon matSuffix class="mat-primary margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
+                matTooltip="{{ 'tb.rulenode.chip-help' | translate }}">help</mat-icon>
+    </tb-string-items-list>
+    <tb-string-items-list (focusout)="touched()"
+                          class="mat-block" editable
+                          [label]="'tb.rulenode.metadata-keys' | translate"
+                          [placeholder]="'tb.rulenode.add-metadata-field' | translate"
+                          formControlName="metadataNames">
+      <mat-icon matSuffix class="mat-primary margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
+                matTooltip="{{ 'tb.rulenode.chip-help' | translate }}">help</mat-icon>
+    </tb-string-items-list>
+    <tb-slide-toggle defaultPadding="false"
+                     [slideToggleName]="'tb.rulenode.check-all-keys' | translate"
+                     [slideToggleTooltip]="'tb.rulenode.check-all-keys-tooltip' | translate" fxFlex formControlName="checkAllKeys">
+    </tb-slide-toggle>
+  </tb-fieldset-component>
 </section>

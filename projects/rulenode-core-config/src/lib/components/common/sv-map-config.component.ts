@@ -23,7 +23,7 @@ import { SvMapOption } from '../../rulenode-core-config.models';
 @Component({
   selector: 'tb-sv-map-config',
   templateUrl: './sv-map-config.component.html',
-  styleUrls: ['./sv-map-config.component.scss'],
+  styleUrls: ['./sv-map-config.component.scss', '../../../../style.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -142,6 +142,19 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
       this.updateModel();
     });
   }
+
+  public errorTrigger() {
+    const keyVals = this.keyValsFormArray();
+    for (const keyVal of keyVals.controls) {
+      for (const controlName of Object.keys(keyVal.value)) {
+        if (keyVal.get(controlName).touched && keyVal.get(controlName).invalid) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
 
   public filterSelectOptions(keyValControl?) {
     const deleteFieldsArray = [];

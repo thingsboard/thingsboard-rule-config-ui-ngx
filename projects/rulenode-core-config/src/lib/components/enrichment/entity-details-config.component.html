@@ -1,49 +1,13 @@
 <section [formGroup]="entityDetailsConfigForm" fxLayout="column">
-  <mat-form-field class="mat-block entity-fields-list">
-    <mat-label>{{ 'tb.rulenode.entity-details' | translate }}</mat-label>
-    <mat-chip-grid #detailsChipList formControlName="detailsList">
-      <mat-chip-row
-        *ngFor="let details of detailsList;"
-        (removed)="removeDetailsField(details)">
-        <span>
-          <strong>{{entityDetailsTranslationsMap.get(details) | translate}}</strong>
-        </span>
-        <mat-icon matChipRemove>close</mat-icon>
-      </mat-chip-row>
-      <input matInput type="text"
-             #detailsInput
-             (focusin)="onEntityDetailsInputFocus()"
-             [formControl]="detailsFormControl"
-             matAutocompleteOrigin
-             #origin="matAutocompleteOrigin"
-             [matAutocompleteConnectedTo]="origin"
-             [matAutocomplete]="detailsAutocomplete"
-             [matChipInputFor]="detailsChipList">
-    </mat-chip-grid>
-    <button *ngIf="entityDetailsConfigForm.get('detailsList').value?.length > 1"
-            type="button"
-            matTooltip="{{'tb.rulenode.clear-selected-details' | translate}}"
-            matSuffix mat-icon-button
-            (click)="clearChipGrid()">
-      <mat-icon color="primary" class="material-icons">close</mat-icon>
-    </button>
-    <mat-autocomplete #detailsAutocomplete="matAutocomplete"
-                      class="tb-autocomplete"
-                      (optionSelected)="detailsFieldSelected($event)"
-                      [displayWith]="displayDetailsFn">
-      <mat-option *ngFor="let details of filteredEntityDetails | async" [value]="details">
-        <span [innerHTML]="entityDetailsTranslationsMap.get(details) | translate | highlight:searchText"></span>
-      </mat-option>
-      <mat-option *ngIf="(filteredEntityDetails | async)?.length === 0" [value]="null" class="tb-not-found">
-        <div class="tb-not-found-content" (click)="$event.stopPropagation()">
-          <div>
-            <span>{{ 'tb.rulenode.no-entity-details-matching' | translate }}</span>
-          </div>
-        </div>
-      </mat-option>
-    </mat-autocomplete>
-    <mat-error *ngIf="entityDetailsConfigForm.get('detailsList').hasError('required')">{{ 'tb.rulenode.entity-details-list-empty' | translate }}</mat-error>
-  </mat-form-field>
+  <tb-string-items-list [predefinedValues]="predefinedValues"
+                        class="mat-block" required
+                        [label]="'tb.rulenode.select-details' | translate"
+                        [placeholder]="'tb.rulenode.add-detail' | translate"
+                        [requiredText]="'tb.rulenode.entity-details-list-empty' | translate"
+                        formControlName="detailsList">
+    <mat-icon matSuffix class="mat-primary margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
+              matTooltip="{{ 'tb.rulenode.chip-help' | translate }}">help</mat-icon>
+  </tb-string-items-list>
   <tb-msg-metadata-chip
     [labelText]="'tb.rulenode.add-selected-details-to' | translate"
     formControlName="fetchTo"

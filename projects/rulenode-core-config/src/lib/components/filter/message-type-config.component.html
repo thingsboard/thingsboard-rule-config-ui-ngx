@@ -1,7 +1,7 @@
 <section [formGroup]="messageTypeConfigForm" fxLayout="column">
   <tb-message-types-config
     required
-    label="tb.rulenode.message-types-filter"
+    [label]="'tb.rulenode.select-message-types' | translate"
     formControlName="messageTypes"
   ></tb-message-types-config>
 </section>

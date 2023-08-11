@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { coerceBoolean } from '@shared/public-api';
+import { inputNames } from '@angular/cdk/schematics';
 
 @Component({
   selector: 'tb-fieldset-component',
@@ -13,4 +14,13 @@ export class FieldsetComponent {
   @coerceBoolean()
   required = false;
 
+  @Input() errorText: string;
+
+  @Input()
+  @coerceBoolean()
+  errorEnable = false;
+
+  @Input()
+  @coerceBoolean()
+  defaultBottomPadding = true;
 }

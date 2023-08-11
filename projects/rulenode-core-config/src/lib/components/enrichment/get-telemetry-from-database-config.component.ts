@@ -25,7 +25,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'tb-enrichment-node-get-telemetry-from-database',
   templateUrl: './get-telemetry-from-database-config.component.html',
-  styleUrls: ['./get-telemetry-from-database-config.component.scss']
+  styleUrls: ['./get-telemetry-from-database-config.component.scss', '../../../../style.scss']
 })
 export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurationComponent {
 
@@ -75,7 +75,7 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.getTelemetryFromDatabaseConfigForm = this.fb.group({
-      latestTsKeyNames: [configuration.latestTsKeyNames, []],
+      latestTsKeyNames: [configuration.latestTsKeyNames, [Validators.required]],
       aggregation: [configuration.aggregation, [Validators.required]],
       fetchMode: [configuration.fetchMode, [Validators.required]],
       orderBy: [configuration.orderBy, []],
@@ -226,5 +226,10 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
     if (input) {
       input.value = '';
     }
+  }
+
+  public defaultPaddingEnable() {
+    return this.getTelemetryFromDatabaseConfigForm.get('fetchMode').value === FetchMode.ALL &&
+        this.getTelemetryFromDatabaseConfigForm.get('aggregation').value === AggregationType.NONE;
   }
 }

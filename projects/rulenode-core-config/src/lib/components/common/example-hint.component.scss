@@ -1,0 +1,12 @@
+:host {
+  .custom-styles {
+    padding: 12px;
+    background: #FAFAFA;
+    border-radius: 6px;
+
+    .see-example {
+      display: flex;
+      flex-shrink: 0;
+    }
+  }
+}

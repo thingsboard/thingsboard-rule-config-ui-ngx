@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'tb-enrichment-node-tenant-attributes-config',
   templateUrl: './tenant-attributes-config.component.html',
-  styleUrls: ['./tenant-attributes-config.component.scss']
+  styleUrls: ['./tenant-attributes-config.component.scss', '../../../../style.scss']
 })
 export class TenantAttributesConfigComponent extends RuleNodeConfigurationComponent {
 
@@ -32,10 +32,6 @@ export class TenantAttributesConfigComponent extends RuleNodeConfigurationCompon
 
   protected configForm(): FormGroup {
     return this.tenantAttributesConfigForm;
-  }
-
-  public toggleChange(value) {
-    this.tenantAttributesConfigForm.get('dataToFetch').patchValue(value, {emitEvent: true});
   }
 
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {

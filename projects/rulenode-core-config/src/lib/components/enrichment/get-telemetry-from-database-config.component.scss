@@ -1,48 +1,48 @@
-:host ::ng-deep{
-  label.tb-title {
-    margin-bottom: -10px;
-  }
-  .fetch-interval {
-    margin-top: 12px;
+:host {
+
+    .see-example {
+      display: inline-block;
+    }
+
 
     .interval-slide-toggle {
-      width: 100%;
       margin: 4px 0 16px;
     }
-    .input-block {
-      width: 100%;
-    }
-  }
 
-  .interval-description {
-    text-align: center;
-    font-size: 12px;
-    color: #3d3d3d;
-    margin-bottom: 9px;
-    font-weight: 500;
-  }
-
-  .fetch-strategy-fieldset {
-    margin-top: 12px;
-
-
-    .fetch-strategy-block {
-      margin-top: 8px;
+    .description-block {
+      display: flex;
       align-items: center;
-      width: 100%;
+      background: #F7F7F7;
+      border-radius: 4px;
+      border: 1px solid #EAEAEA;
 
-      .fetch-mod-toggle {
-        margin-bottom: 12px;
-        width: 630px;
+      &.description-error-background {
+        background: #FDF7F7;
       }
 
-      .input-block {
-        width: 100%;
-        
-        .additional-inputs {
-          margin-bottom: 16px;
-        }
+      .description-icon {
+        font-size: 24px;
+        height: 24px;
+        width: 24px;
+        color: #D9D9D9;
+        margin: 2px;
+      }
+
+      .description-text {
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: 0.25px;
+        margin: 6px;
+      }
+
+      .description-error-color {
+        color: var(--mdc-theme-error, #f44336);
       }
     }
-  }
+
+    .fetch-mod-toggle {
+      max-width: 630px;
+      width: 100%;
+    }
 }
+
