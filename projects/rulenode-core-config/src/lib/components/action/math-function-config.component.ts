@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import {
-  ArgumentTypeMap,
+  ArgumentTypeResultMap,
   ArgumentTypeResult,
   AttributeScopeMap,
   AttributeScopeResult,
@@ -22,7 +22,7 @@ export class MathFunctionConfigComponent extends RuleNodeConfigurationComponent 
 
   MathFunction = MathFunction;
   ArgumentTypeResult = ArgumentTypeResult;
-  argumentTypeResultMap = ArgumentTypeMap;
+  argumentTypeResultMap = ArgumentTypeResultMap;
   attributeScopeMap = AttributeScopeMap;
   argumentsResult = Object.values(ArgumentTypeResult);
   attributeScopeResult = Object.values(AttributeScopeResult);
