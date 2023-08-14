@@ -13,6 +13,16 @@
       margin: 0;
     }
   }
+
+  @media screen and (max-width: 959px) {
+    .chip-listbox {
+      max-width: 360px;
+
+      .toggle-column {
+        flex-direction: column;
+      }
+    }
+  }
 }
 
 :host ::ng-deep {
