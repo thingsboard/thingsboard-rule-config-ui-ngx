@@ -7,6 +7,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
         rulenode: {
           'create-entity-if-not-exists': 'Create new entity if not exists',
           'create-entity-if-not-exists-hint': 'Create a new entity set above if it does not exist.',
+          'select-device-connectivity-event': 'Select device connectivity event',
           'entity-name-pattern': 'Name pattern',
           'entity-name-pattern-required': 'Name pattern is required',
           'entity-type-pattern': 'Type pattern',
