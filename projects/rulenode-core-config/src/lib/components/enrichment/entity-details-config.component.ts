@@ -39,7 +39,7 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
   }
 
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
-    let fetchTo;
+    let fetchTo: FetchTo;
     if (isDefinedAndNotNull(configuration?.addToMetadata)) {
       if (configuration.addToMetadata) {
         fetchTo = FetchTo.METADATA;
@@ -63,7 +63,7 @@ export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.entityDetailsConfigForm = this.fb.group({
       detailsList: [configuration.detailsList, [Validators.required]],
-      fetchTo:  [configuration.fetchTo, []]
+      fetchTo: [configuration.fetchTo, []]
     });
   }
 }

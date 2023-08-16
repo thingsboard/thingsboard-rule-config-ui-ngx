@@ -1,5 +1,7 @@
 <section [formGroup]="checkRelationConfigForm" fxLayout="column">
-  <tb-fieldset-component defaultBottomPadding="false" [label]="'tb.rulenode.relation-search-parameters' | translate" required="true">
+  <tb-fieldset-component defaultBottomPadding="false"
+                         [label]="'tb.rulenode.relation-search-parameters' | translate"
+                         required="true">
     <div fxFlex fxLayout="column">
       <mat-form-field class="mat-block">
         <mat-label>{{ 'relation.direction' | translate }}</mat-label>
@@ -15,8 +17,8 @@
         formControlName="relationType">
       </tb-relation-type-autocomplete>
       <tb-slide-toggle defaultPadding="false" class="slide-toggle" fxFlex formControlName="checkForSingleEntity"
-        [slideToggleName]="'tb.rulenode.check-relation-to-specific-entity' | translate"
-        [slideToggleTooltip]="'tb.rulenode.check-relation-to-specific-entity-tooltip' | translate">
+                       [slideToggleName]="'tb.rulenode.check-relation-to-specific-entity' | translate"
+                       [slideToggleTooltip]="'tb.rulenode.check-relation-to-specific-entity-tooltip' | translate">
       </tb-slide-toggle>
       <div *ngIf="checkRelationConfigForm.get('checkForSingleEntity').value">
         <tb-entity-type-select

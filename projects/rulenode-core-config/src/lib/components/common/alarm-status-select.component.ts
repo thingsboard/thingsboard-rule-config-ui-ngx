@@ -7,63 +7,64 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
-    selector: 'tb-alarm-status-select',
-    templateUrl: './alarm-status-select.component.html',
-    styleUrls: ['./alarm-status-select.component.scss'],
-    providers: [{
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: forwardRef(() => AlarmStatusSelectComponent),
-        multi: true
-    }]
+  selector: 'tb-alarm-status-select',
+  templateUrl: './alarm-status-select.component.html',
+  styleUrls: ['./alarm-status-select.component.scss'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => AlarmStatusSelectComponent),
+    multi: true
+  }]
 })
 
-export class AlarmStatusSelectComponent extends PageComponent implements OnInit, ControlValueAccessor, OnDestroy{
+export class AlarmStatusSelectComponent extends PageComponent implements OnInit, ControlValueAccessor, OnDestroy {
 
-    public alarmStatusGroup: FormGroup;
+  public alarmStatusGroup: FormGroup;
 
-    private propagateChange = null;
-    private destroy$ = new Subject<void>();
+  private propagateChange = null;
+  private destroy$ = new Subject<void>();
 
-    readonly alarmStatus = AlarmStatus;
-    readonly alarmStatusTranslations = alarmStatusTranslations;
-    constructor(protected store: Store<AppState>,
-                private fb: FormBuilder) {
-        super(store);
+  readonly alarmStatus = AlarmStatus;
+  readonly alarmStatusTranslations = alarmStatusTranslations;
+
+  constructor(protected store: Store<AppState>,
+              private fb: FormBuilder) {
+    super(store);
+  }
+
+  ngOnInit(): void {
+    this.alarmStatusGroup = this.fb.group({
+      alarmStatus: [null, []]
+    });
+
+    this.alarmStatusGroup.get('alarmStatus').valueChanges.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe((value) => {
+      this.propagateChange(value);
+    });
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    if (isDisabled) {
+      this.alarmStatusGroup.disable({emitEvent: false});
+    } else {
+      this.alarmStatusGroup.enable({emitEvent: false});
     }
+  }
 
-    ngOnInit(): void {
-       this.alarmStatusGroup = this.fb.group({
-           alarmStatus: [null, []]
-       });
+  registerOnChange(fn: any): void {
+    this.propagateChange = fn;
+  }
 
-       this.alarmStatusGroup.get('alarmStatus').valueChanges.pipe(
-           takeUntil(this.destroy$)
-       ).subscribe((value) => {
-           this.propagateChange(value);
-       });
-    }
+  registerOnTouched(fn: any): void {
+  }
 
-    setDisabledState(isDisabled: boolean): void {
-        if (isDisabled) {
-            this.alarmStatusGroup.disable({emitEvent: false});
-        } else {
-            this.alarmStatusGroup.enable({emitEvent: false});
-        }
-    }
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
-    registerOnChange(fn: any): void {
-        this.propagateChange = fn;
-    }
-
-    registerOnTouched(fn: any): void {
-    }
-
-    ngOnDestroy() {
-        this.destroy$.next();
-        this.destroy$.complete();
-    }
-
-    writeValue(value): void {
-        this.alarmStatusGroup.get('alarmStatus').patchValue(value, {emitEvent: false});
-    }
+  writeValue(value: Array<AlarmStatus>): void {
+    this.alarmStatusGroup.get('alarmStatus').patchValue(value, {emitEvent: false});
+  }
 }

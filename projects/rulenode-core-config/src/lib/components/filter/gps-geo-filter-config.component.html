@@ -1,5 +1,7 @@
 <section class="flex column gap-12" [formGroup]="geoFilterConfigForm" fxLayout="column">
-  <tb-fieldset-component defaultBottomPadding="false" required="true" [label]="'tb.rulenode.coordinate-field-names' | translate">
+  <tb-fieldset-component defaultBottomPadding="false"
+                         required="true"
+                         [label]="'tb.rulenode.coordinate-field-names' | translate">
     <div fxFlex fxLayout="row" fxLayoutGap="16px">
       <mat-form-field fxFlex="50" class="mat-block">
         <mat-label>{{ 'tb.rulenode.latitude-field-name' | translate }}</mat-label>
@@ -18,7 +20,8 @@
     </div>
     <div class="tb-hint">{{ 'tb.rulenode.coordinate-field-hint' | translate }}</div>
   </tb-fieldset-component>
-  <tb-fieldset-component [defaultBottomPadding]="defaultPaddingEnable" required [label]="'tb.rulenode.geofence-configuration' | translate">
+  <tb-fieldset-component [defaultBottomPadding]="defaultPaddingEnable" required
+                         [label]="'tb.rulenode.geofence-configuration' | translate">
     <mat-form-field fxFlex class="mat-block">
       <mat-label>{{ 'tb.rulenode.perimeter-type' | translate }}</mat-label>
       <mat-select formControlName="perimeterType" required>
@@ -27,7 +30,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <tb-slide-toggle fxFlex class="slide-toggle"  formControlName="fetchPerimeterInfoFromMessageMetadata"
+    <tb-slide-toggle fxFlex class="slide-toggle" formControlName="fetchPerimeterInfoFromMessageMetadata"
                      defaultPadding="false"
                      [slideToggleName]="'tb.rulenode.fetch-perimeter-info-from-metadata' | translate"
                      [slideToggleTooltip]="'tb.rulenode.fetch-perimeter-info-from-metadata-tooltip' | translate :
@@ -85,7 +88,9 @@
     <div fxLayout="row" *ngIf="geoFilterConfigForm.get('perimeterType').value === perimeterType.POLYGON &&
                            !geoFilterConfigForm.get('fetchPerimeterInfoFromMessageMetadata').value">
       <div fxLayout="column" fxFlex="100">
-        <mat-form-field class="mat-block" hintLabel="{{'tb.rulenode.polygon-definition-hint' | translate}}" subscriptSizing="dynamic">
+        <mat-form-field class="mat-block"
+                        hintLabel="{{'tb.rulenode.polygon-definition-hint' | translate}}"
+                        subscriptSizing="dynamic">
           <mat-label>{{ 'tb.rulenode.polygon-definition' | translate }}</mat-label>
           <input matInput formControlName="polygonsDefinition" required>
           <mat-error *ngIf="geoFilterConfigForm.get('polygonsDefinition').hasError('required')">

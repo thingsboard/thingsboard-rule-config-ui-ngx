@@ -81,7 +81,7 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
       serialNumber: 'sn'
     };
 
-    let dataToFetch;
+    let dataToFetch: DataToFetch;
     if (isDefinedAndNotNull(configuration?.telemetry)) {
       dataToFetch = configuration.telemetry ? DataToFetch.LATEST_TELEMETRY : DataToFetch.ATTRIBUTES;
     } else {
@@ -110,7 +110,7 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
     };
   }
 
-  public selectTranslation(latestTelemetryTranslation, attributesTranslation) {
+  public selectTranslation(latestTelemetryTranslation: string, attributesTranslation: string) {
     if (this.relatedAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY) {
       return latestTelemetryTranslation;
     } else {

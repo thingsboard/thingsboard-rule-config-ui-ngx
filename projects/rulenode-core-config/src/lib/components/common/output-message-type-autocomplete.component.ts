@@ -17,7 +17,7 @@ import { SubscriptSizing } from '@angular/material/form-field';
   }]
 })
 
-export class OutputMessageTypeAutocompleteComponent implements  OnInit {
+export class OutputMessageTypeAutocompleteComponent implements OnInit {
 
   @ViewChild('messageTypeInput', {static: true}) messageTypeInput: ElementRef;
 
@@ -36,7 +36,7 @@ export class OutputMessageTypeAutocompleteComponent implements  OnInit {
   constructor(private store: Store<AppState>,
               private fb: FormBuilder) {
     this.messageTypeFormGroup = this.fb.group({
-      messageType: [null,  [Validators.required, Validators.maxLength(255)]]
+      messageType: [null, [Validators.required, Validators.maxLength(255)]]
     });
   }
 
@@ -56,7 +56,7 @@ export class OutputMessageTypeAutocompleteComponent implements  OnInit {
           this.updateView(value);
         }),
         map(value => value ? value : ''),
-        mergeMap(type => this.fetchMessageTypes(type) )
+        mergeMap(type => this.fetchMessageTypes(type))
       );
   }
 
@@ -88,7 +88,7 @@ export class OutputMessageTypeAutocompleteComponent implements  OnInit {
   fetchMessageTypes(searchText?: string, strictMatch: boolean = false): Observable<Array<string>> {
     this.searchText = searchText;
     return of(this.messageTypes).pipe(
-      map(messageTypes => messageTypes.filter( messageType => {
+      map(messageTypes => messageTypes.filter(messageType => {
         if (strictMatch) {
           return searchText ? messageType === searchText : false;
         } else {

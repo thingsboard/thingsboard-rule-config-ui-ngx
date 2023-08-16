@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AppState, isDefinedAndNotNull, isObject, } from '@core/public-api';
 import { Store } from '@ngrx/store';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { TranslateService } from '@ngx-translate/core';
 import { FetchTo } from '../../rulenode-core-config.models';
@@ -51,7 +51,7 @@ export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationCo
     return {
       fetchTo: isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA,
       tellFailureIfAbsent: isDefinedAndNotNull(configuration?.tellFailureIfAbsent) ? configuration.tellFailureIfAbsent : false,
-      attributesControl : isDefinedAndNotNull(configuration?.attributesControl) ? configuration.attributesControl : null
+      attributesControl: isDefinedAndNotNull(configuration?.attributesControl) ? configuration.attributesControl : null
     };
   }
 

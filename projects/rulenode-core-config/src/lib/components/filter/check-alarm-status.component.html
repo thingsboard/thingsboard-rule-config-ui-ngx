@@ -2,7 +2,7 @@
   <tb-fieldset-component required
                          [errorText]="'tb.rulenode.alarm-required' | translate"
                          [errorEnable]="alarmStatusConfigForm.get('alarmStatusList').invalid"
-                         [label]= "'tb.rulenode.alarm-status' | translate">
+                         [label]="'tb.rulenode.alarm-status' | translate">
     <tb-alarm-status-select class="alarm-status" formControlName="alarmStatusList"></tb-alarm-status-select>
   </tb-fieldset-component>
 </section>

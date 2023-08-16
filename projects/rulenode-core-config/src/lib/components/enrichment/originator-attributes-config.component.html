@@ -1,4 +1,4 @@
-<section class="flex column gap-16"  [formGroup]="originatorAttributesConfigForm" fxLayout="column">
+<section class="flex column gap-16" [formGroup]="originatorAttributesConfigForm" fxLayout="column">
   <tb-fieldset-component [errorEnable]="originatorAttributesConfigForm.get('attributesControl').touched &&
        originatorAttributesConfigForm.get('attributesControl').hasError('atLeastOneRequired')"
                          [errorText]="'tb.rulenode.at-least-one-field-required' | translate"
@@ -6,7 +6,8 @@
     <div class="flex column gap-22">
       <tb-select-attributes (focusout)="touched()" class='select-attributes' formControlName="attributesControl"
                             popupHelpLink="rulenode/originator_attributes_node_fields_templatization"></tb-select-attributes>
-      <tb-msg-metadata-chip [labelText]="'tb.rulenode.add-originator-attributes-to' | translate" formControlName="fetchTo">
+      <tb-msg-metadata-chip [labelText]="'tb.rulenode.add-originator-attributes-to' | translate"
+                            formControlName="fetchTo">
       </tb-msg-metadata-chip>
     </div>
   </tb-fieldset-component>

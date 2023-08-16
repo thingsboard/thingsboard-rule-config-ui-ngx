@@ -9,13 +9,14 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'tb-enrichment-node-calculate-delta-config',
   templateUrl: './calculate-delta-config.component.html',
-  styleUrls: ['./calcaulate-delta-config.component.scss', '../../../../style.scss']
+  styleUrls: ['./calculate-delta-config.component.scss', '../../../../style.scss']
 })
 export class CalculateDeltaConfigComponent extends RuleNodeConfigurationComponent {
 
   calculateDeltaConfigForm: FormGroup;
 
   separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
+
   constructor(protected store: Store<AppState>,
               public translate: TranslateService,
               private fb: FormBuilder) {

@@ -14,7 +14,7 @@
             <div class="tb-form-table-row"
                  *ngFor="let keyValControl of keyValsFormArray().controls; let $index = index;">
               <mat-form-field class="tb-inline-field field-space" appearance="outline" subscriptSizing="dynamic">
-                <input  [placeholder]="keyText+'*'" [formControl]="keyValControl.get('key')" matInput/>
+                <input [placeholder]="keyText+'*'" [formControl]="keyValControl.get('key')" matInput/>
               </mat-form-field>
               <mat-form-field class="tb-inline-field field-space" appearance="outline" subscriptSizing="dynamic">
                 <input [placeholder]="valText+'*'" [formControl]="keyValControl.get('value')" matInput/>

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, ViewChild } from '@angular/core';
-import { AppState, NodeScriptTestService, getCurrentAuthState, isDefinedAndNotNull } from '@core/public-api';
+import { AppState, getCurrentAuthState, isDefinedAndNotNull, NodeScriptTestService } from '@core/public-api';
 import {
   DebugRuleNodeEventBody,
   JsFuncComponent,
@@ -61,7 +61,9 @@ export class ScriptConfigComponent extends RuleNodeConfigurationComponent {
     if (scriptLang === ScriptLanguage.TBEL && !this.tbelEnabled) {
       scriptLang = ScriptLanguage.JS;
       this.scriptConfigForm.get('scriptLang').patchValue(scriptLang, {emitEvent: false});
-      setTimeout(() => {this.scriptConfigForm.updateValueAndValidity({emitEvent: true});});
+      setTimeout(() => {
+        this.scriptConfigForm.updateValueAndValidity({emitEvent: true});
+      });
     }
     this.scriptConfigForm.get('jsScript').setValidators(scriptLang === ScriptLanguage.JS ? [Validators.required] : []);
     this.scriptConfigForm.get('jsScript').updateValueAndValidity({emitEvent});

@@ -15,6 +15,7 @@ export class OriginatorFieldsConfigComponent extends RuleNodeConfigurationCompon
 
   originatorFieldsConfigForm: FormGroup;
   public originatorFields: SvMapOption[] = [];
+
   constructor(protected store: Store<AppState>,
               private fb: FormBuilder,
               private translate: TranslateService) {

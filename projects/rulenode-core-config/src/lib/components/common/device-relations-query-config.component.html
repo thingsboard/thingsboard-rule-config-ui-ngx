@@ -2,7 +2,7 @@
   <div fxLayoutGap="24px" fxLayout="row">
     <mat-form-field class="mat-block" subscriptSizing="dynamic" fxFlex="50" style="min-width: 100px;">
       <mat-label translate>relation.direction</mat-label>
-      <mat-select required matInput formControlName="direction">
+      <mat-select required formControlName="direction">
         <mat-option *ngFor="let type of directionTypes" [value]="type">
           {{ directionTypeTranslations.get(type) | translate }}
         </mat-option>

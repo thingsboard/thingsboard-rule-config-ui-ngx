@@ -22,7 +22,7 @@ export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComp
               private translate: TranslateService) {
     super(store);
     for (const key of dataToFetchTranslations.keys()) {
-      if(key !== DataToFetch.FIELDS) {
+      if (key !== DataToFetch.FIELDS) {
         this.fetchToData.push({
           value: key,
           name: this.translate.instant(dataToFetchTranslations.get(key as DataToFetch))
@@ -34,6 +34,7 @@ export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComp
   protected configForm(): FormGroup {
     return this.customerAttributesConfigForm;
   }
+
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
     const filteDataMapping = {};
     for (const key of Object.keys(configuration.dataMapping)) {
@@ -44,7 +45,7 @@ export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComp
   }
 
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
-    let dataToFetch;
+    let dataToFetch: DataToFetch;
     if (isDefinedAndNotNull(configuration?.telemetry)) {
       dataToFetch = configuration.telemetry ? DataToFetch.LATEST_TELEMETRY : DataToFetch.ATTRIBUTES;
     } else {
@@ -65,7 +66,7 @@ export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComp
     };
   }
 
-  public selectTranslation(latestTelemetryTranslation, attributesTranslation) {
+  public selectTranslation(latestTelemetryTranslation: string, attributesTranslation: string) {
     if (this.customerAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY) {
       return latestTelemetryTranslation;
     } else {

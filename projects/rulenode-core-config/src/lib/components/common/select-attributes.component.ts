@@ -4,10 +4,11 @@ import {
   FormBuilder,
   FormGroup,
   NG_VALIDATORS,
-  NG_VALUE_ACCESSOR, ValidationErrors, ValidatorFn, Validators
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
 } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { AppState } from '@core/core.state';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
@@ -28,9 +29,9 @@ import { TranslateService } from '@ngx-translate/core';
   }]
 })
 
-export class SelectAttributesComponent implements  OnInit, ControlValueAccessor, OnDestroy {
+export class SelectAttributesComponent implements OnInit, ControlValueAccessor, OnDestroy {
 
-  private propagateChange;
+  private propagateChange = (v: any) => { };
   private destroy$ = new Subject();
 
   public attributeControlGroup: FormGroup;
@@ -38,9 +39,9 @@ export class SelectAttributesComponent implements  OnInit, ControlValueAccessor,
 
   @Input() popupHelpLink: string;
 
-  constructor(private store: Store<AppState>,
-              public translate: TranslateService,
-              private fb: FormBuilder) {}
+  constructor(public translate: TranslateService,
+              private fb: FormBuilder) {
+  }
 
   ngOnInit(): void {
     this.attributeControlGroup = this.fb.group({
@@ -49,8 +50,10 @@ export class SelectAttributesComponent implements  OnInit, ControlValueAccessor,
       serverAttributeNames: [null, []],
       latestTsKeyNames: [null, []],
       getLatestValueWithTs: [false, []]
-    }, {validators: this.atLeastOne(Validators.required, ['clientAttributeNames', 'sharedAttributeNames',
-        'serverAttributeNames', 'latestTsKeyNames'])});
+    }, {
+      validators: this.atLeastOne(Validators.required, ['clientAttributeNames', 'sharedAttributeNames',
+        'serverAttributeNames', 'latestTsKeyNames'])
+    });
 
     this.attributeControlGroup.valueChanges.pipe(
       takeUntil(this.destroy$)
@@ -60,7 +63,7 @@ export class SelectAttributesComponent implements  OnInit, ControlValueAccessor,
   }
 
   validate() {
-    if(this.attributeControlGroup.valid) {
+    if (this.attributeControlGroup.valid) {
       return null;
     } else {
       return {atLeastOneRequired: true};
@@ -85,8 +88,10 @@ export class SelectAttributesComponent implements  OnInit, ControlValueAccessor,
   registerOnChange(fn: any): void {
     this.propagateChange = fn;
   }
+
   registerOnTouched(fn: any): void {
   }
+
   setDisabledState(isDisabled: boolean): void {
     if (isDisabled) {
       this.attributeControlGroup.disable({emitEvent: false});

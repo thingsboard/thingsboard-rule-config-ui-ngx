@@ -18,9 +18,10 @@
       <mat-icon matSuffix class="mat-primary margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
                 matTooltip="{{ 'tb.rulenode.chip-help' | translate }}">help</mat-icon>
     </tb-string-items-list>
-    <tb-slide-toggle defaultPadding="false"
+    <tb-slide-toggle defaultPadding="false" fxFlex
                      [slideToggleName]="'tb.rulenode.check-all-keys' | translate"
-                     [slideToggleTooltip]="'tb.rulenode.check-all-keys-tooltip' | translate" fxFlex formControlName="checkAllKeys">
+                     [slideToggleTooltip]="'tb.rulenode.check-all-keys-tooltip' | translate"
+                     formControlName="checkAllKeys">
     </tb-slide-toggle>
   </tb-fieldset-component>
 </section>

@@ -14,7 +14,7 @@
             <div class="tb-form-table-row"
                  *ngFor="let keyValControl of keyValsFormArray().controls; let $index = index;">
               <mat-form-field class="tb-inline-field field-space" appearance="outline" subscriptSizing="dynamic">
-                <mat-select  [placeholder]="selectText"  [formControl]="keyValControl.get('key')" required>
+                <mat-select [placeholder]="selectText" [formControl]="keyValControl.get('key')" required>
                   <mat-option *ngFor="let option of filterSelectOptions(keyValControl)" [value]="option.value">
                     {{option.name}}
                   </mat-option>

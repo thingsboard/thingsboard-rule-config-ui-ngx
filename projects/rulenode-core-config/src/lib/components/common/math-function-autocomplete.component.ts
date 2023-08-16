@@ -1,12 +1,12 @@
 import { Component, ElementRef, forwardRef, Injector, Input, OnInit, ViewChild } from '@angular/core';
-import { ControlValueAccessor, UntypedFormBuilder, UntypedFormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { PageComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/public-api';
 import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { FunctionData, MathFunction, MathFunctionMap } from '../../rulenode-core-config.models';
-import { map, startWith, tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Component({
@@ -24,9 +24,11 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 export class MathFunctionAutocompleteComponent extends PageComponent implements ControlValueAccessor, OnInit {
 
   private requiredValue: boolean;
+
   get required(): boolean {
     return this.requiredValue;
   }
+
   @Input()
   set required(value: boolean) {
     this.requiredValue = coerceBooleanProperty(value);
@@ -92,7 +94,7 @@ export class MathFunctionAutocompleteComponent extends PageComponent implements 
   registerOnTouched(fn: any): void {
   }
 
-  setDisabledState?(isDisabled: boolean): void {
+  setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
     if (this.disabled) {
       this.mathFunctionForm.disable({emitEvent: false});

@@ -1,9 +1,10 @@
 <div fxLayout="column" [formGroup]="chipControlGroup">
   <div class="tb-form-row space-between" ngClass.xs="filters-row-mobile">
     <div class="name-style">{{ labelText }}</div>
-    <mat-chip-listbox  formControlName="chipControl">
-      <mat-chip-option *ngFor="let option of selectOptions" selectable="{{ chipControlGroup.get('chipControl').value !== option.value }}" color="primary"
-      [value]="option.value">{{ option.name }}</mat-chip-option>
+    <mat-chip-listbox formControlName="chipControl">
+      <mat-chip-option *ngFor="let option of selectOptions"
+                       selectable="{{ chipControlGroup.get('chipControl').value !== option.value }}" color="primary"
+                       [value]="option.value">{{ option.name }}</mat-chip-option>
     </mat-chip-listbox>
   </div>
 </div>

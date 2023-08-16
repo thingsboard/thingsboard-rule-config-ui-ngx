@@ -1,11 +1,11 @@
 import { Component, EventEmitter, ViewChild } from '@angular/core';
 import { AppState, getCurrentAuthState, isDefinedAndNotNull, NodeScriptTestService } from '@core/public-api';
 import {
+  DebugRuleNodeEventBody,
+  JsFuncComponent,
   RuleNodeConfiguration,
   RuleNodeConfigurationComponent,
-  JsFuncComponent,
-  ScriptLanguage,
-  DebugRuleNodeEventBody
+  ScriptLanguage
 } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
@@ -61,7 +61,9 @@ export class SwitchConfigComponent extends RuleNodeConfigurationComponent {
     if (scriptLang === ScriptLanguage.TBEL && !this.tbelEnabled) {
       scriptLang = ScriptLanguage.JS;
       this.switchConfigForm.get('scriptLang').patchValue(scriptLang, {emitEvent: false});
-      setTimeout(() => {this.switchConfigForm.updateValueAndValidity({emitEvent: true});});
+      setTimeout(() => {
+        this.switchConfigForm.updateValueAndValidity({emitEvent: true});
+      });
     }
     this.switchConfigForm.get('jsScript').setValidators(scriptLang === ScriptLanguage.JS ? [Validators.required] : []);
     this.switchConfigForm.get('jsScript').updateValueAndValidity({emitEvent});

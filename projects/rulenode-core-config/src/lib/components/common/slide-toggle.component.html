@@ -1,4 +1,6 @@
-<div  fxLayout="row" class="slide-toggle-container" [ngClass]="{'default-padding': defaultPadding}" [formGroup]="slideToggleControlGroup">
+<div fxLayout="row" class="slide-toggle-container"
+     [class]="{'default-padding': defaultPadding}"
+     [formGroup]="slideToggleControlGroup">
   <mat-slide-toggle class="slide-toggle" formControlName="slideToggleControl">
     {{ slideToggleName }}
   </mat-slide-toggle>

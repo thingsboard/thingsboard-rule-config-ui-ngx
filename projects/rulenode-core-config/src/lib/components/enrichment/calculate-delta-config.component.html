@@ -28,33 +28,33 @@
     </mat-error>
   </mat-form-field>
   <div class="flex column gap-12">
-      <tb-slide-toggle class="tb-form-row no-padding" formControlName="useCache"
-                       [slideToggleName]="'tb.rulenode.failure-if-delta-negative' | translate"
-                       [slideToggleTooltip]="'tb.rulenode.failure-if-delta-negative-tooltip' | translate">
-      </tb-slide-toggle>
-      <tb-slide-toggle class="tb-form-row no-padding" formControlName="tellFailureIfDeltaIsNegative"
-                       [slideToggleName]="'tb.rulenode.use-caching' | translate"
-                       [slideToggleTooltip]="'tb.rulenode.use-caching-tooltip' | translate:
+    <tb-slide-toggle class="tb-form-row no-padding" formControlName="useCache"
+                     [slideToggleName]="'tb.rulenode.failure-if-delta-negative' | translate"
+                     [slideToggleTooltip]="'tb.rulenode.failure-if-delta-negative-tooltip' | translate">
+    </tb-slide-toggle>
+    <tb-slide-toggle class="tb-form-row no-padding" formControlName="tellFailureIfDeltaIsNegative"
+                     [slideToggleName]="'tb.rulenode.use-caching' | translate"
+                     [slideToggleTooltip]="'tb.rulenode.use-caching-tooltip' | translate:
                        { inputValueKey: calculateDeltaConfigForm.get('inputValueKey').valid ?
                        calculateDeltaConfigForm.get('inputValueKey').value : 'tb.rulenode.input-value-key' | translate }">
-      </tb-slide-toggle>
-      <div class="tb-form-row no-padding">
-          <tb-slide-toggle formControlName="addPeriodBetweenMsgs"
-                           [slideToggleName]="'tb.rulenode.add-time-difference-between-readings' | translate:
+    </tb-slide-toggle>
+    <div class="tb-form-row no-padding">
+      <tb-slide-toggle formControlName="addPeriodBetweenMsgs"
+                       [slideToggleName]="'tb.rulenode.add-time-difference-between-readings' | translate:
                            { inputValueKey:  calculateDeltaConfigForm.get('inputValueKey').valid ?
                            calculateDeltaConfigForm.get('inputValueKey').value : 'tb.rulenode.input-value-key' | translate }"
-                           [slideToggleTooltip]="'tb.rulenode.add-time-difference-between-readings-tooltip' | translate:
+                       [slideToggleTooltip]="'tb.rulenode.add-time-difference-between-readings-tooltip' | translate:
                            { periodValueKey: (calculateDeltaConfigForm.get('periodValueKey').valid &&
                            calculateDeltaConfigForm.get('addPeriodBetweenMsgs').value) ? calculateDeltaConfigForm.get('periodValueKey').value :
                            'periodInMs' }">
-          </tb-slide-toggle>
-          <mat-form-field class="mat-block period-input" *ngIf="calculateDeltaConfigForm.get('addPeriodBetweenMsgs').value">
-            <mat-label>{{ 'tb.rulenode.period-value-key' | translate }}</mat-label>
-            <input required matInput formControlName="periodValueKey">
-            <mat-error *ngIf="calculateDeltaConfigForm.get('periodValueKey').hasError('required')">
-              {{ 'tb.rulenode.period-value-key-required' | translate }}
-            </mat-error>
-          </mat-form-field>
-      </div>
+      </tb-slide-toggle>
+      <mat-form-field class="mat-block period-input" *ngIf="calculateDeltaConfigForm.get('addPeriodBetweenMsgs').value">
+        <mat-label>{{ 'tb.rulenode.period-value-key' | translate }}</mat-label>
+        <input required matInput formControlName="periodValueKey">
+        <mat-error *ngIf="calculateDeltaConfigForm.get('periodValueKey').hasError('required')">
+          {{ 'tb.rulenode.period-value-key-required' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
   </div>
 </section>

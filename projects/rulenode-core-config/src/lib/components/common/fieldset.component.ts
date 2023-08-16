@@ -1,11 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { coerceBoolean } from '@shared/public-api';
-import { inputNames } from '@angular/cdk/schematics';
 
 @Component({
   selector: 'tb-fieldset-component',
   templateUrl: './fieldset.component.html',
-  styleUrls: [ './fieldset.component.scss' ]
+  styleUrls: ['./fieldset.component.scss']
 })
 export class FieldsetComponent {
   @Input() label;

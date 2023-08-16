@@ -1,4 +1,4 @@
-<div class="fields-group" [ngClass]="{'default-bottom-padding': defaultBottomPadding}" fxLayout="column" >
+<div class="fields-group" [ngClass]="{'default-bottom-padding': defaultBottomPadding}" fxLayout="column">
   <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
     <div *ngIf="label" class="group-title">{{ label }}{{ required ? '*' : '' }}</div>
     <div class="error" *ngIf="errorText && errorEnable">{{errorText}}</div>

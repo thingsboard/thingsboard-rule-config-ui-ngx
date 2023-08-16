@@ -11,7 +11,6 @@ import {
 } from '@shared/public-api';
 import { MatChipInputEvent } from '@angular/material/chips';
 import {
-  dataToFetchTranslations,
   deduplicationStrategiesHintTranslations,
   deduplicationStrategiesTranslations,
   FetchMode,
@@ -34,15 +33,15 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
   separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
 
   aggregationTypes = AggregationType;
-  aggregations = Object.keys(AggregationType);
+  aggregations: Array<AggregationType> = Object.values(AggregationType);
   aggregationTypesTranslations = aggregationTranslations;
 
   fetchMode = FetchMode;
 
-  samplingOrders = Object.keys(SamplingOrder);
+  samplingOrders: Array<SamplingOrder> = Object.values(SamplingOrder);
   samplingOrdersTranslate = samplingOrderTranslations;
 
-  timeUnits = Object.values(TimeUnit);
+  timeUnits: Array<TimeUnit> = Object.values(TimeUnit);
   timeUnitsTranslationMap = timeUnitTranslations;
 
   public deduplicationStrategiesHintTranslations = deduplicationStrategiesHintTranslations;
@@ -57,6 +56,7 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
     [TimeUnit.HOURS]: 3600000,
     [TimeUnit.DAYS]: 86400000,
   };
+
   constructor(protected store: Store<AppState>,
               public translate: TranslateService,
               private fb: FormBuilder) {
@@ -64,7 +64,7 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
     for (const key of deduplicationStrategiesTranslations.keys()) {
       this.headerOptions.push({
         value: key,
-        name:  this.translate.instant(deduplicationStrategiesTranslations.get(key))
+        name: this.translate.instant(deduplicationStrategiesTranslations.get(key))
       });
     }
   }
@@ -94,12 +94,12 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
 
 
   private intervalValidator = () => (control: AbstractControl): ValidationErrors | null => {
-      if (control.get('startInterval').value * this.timeUnitMap[control.get('startIntervalTimeUnit').value] <=
-        control.get('endInterval').value * this.timeUnitMap[control.get('endIntervalTimeUnit').value]) {
-        return {intervalError: true};
-      } else {
-        return null;
-      }
+    if (control.get('startInterval').value * this.timeUnitMap[control.get('startIntervalTimeUnit').value] <=
+      control.get('endInterval').value * this.timeUnitMap[control.get('endIntervalTimeUnit').value]) {
+      return {intervalError: true};
+    } else {
+      return null;
+    }
   };
 
 
@@ -230,6 +230,6 @@ export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurati
 
   public defaultPaddingEnable() {
     return this.getTelemetryFromDatabaseConfigForm.get('fetchMode').value === FetchMode.ALL &&
-        this.getTelemetryFromDatabaseConfigForm.get('aggregation').value === AggregationType.NONE;
+      this.getTelemetryFromDatabaseConfigForm.get('aggregation').value === AggregationType.NONE;
   }
 }

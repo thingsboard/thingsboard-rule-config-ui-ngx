@@ -18,7 +18,7 @@ export class CheckRelationConfigComponent extends RuleNodeConfigurationComponent
 
   checkRelationConfigForm: UntypedFormGroup;
 
-  entitySearchDirection = Object.keys(EntitySearchDirection);
+  entitySearchDirection: Array<EntitySearchDirection> = Object.values(EntitySearchDirection);
   entitySearchDirectionTranslationsMap = entitySearchDirectionTranslations;
 
   constructor(protected store: Store<AppState>,

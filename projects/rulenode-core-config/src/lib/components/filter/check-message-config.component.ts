@@ -51,6 +51,6 @@ export class CheckMessageConfigComponent extends RuleNodeConfigurationComponent 
 
   public touched() {
     this.checkMessageConfigForm.markAsTouched();
-    this.checkMessageConfigForm.updateValueAndValidity({emitEvent:true});
+    this.checkMessageConfigForm.updateValueAndValidity({emitEvent: true});
   }
 }

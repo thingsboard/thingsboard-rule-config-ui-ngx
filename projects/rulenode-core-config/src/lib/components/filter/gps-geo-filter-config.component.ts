@@ -3,7 +3,12 @@ import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
-import { PerimeterType, perimeterTypeTranslations, RangeUnit, rangeUnitTranslations } from '../../rulenode-core-config.models';
+import {
+  PerimeterType,
+  perimeterTypeTranslations,
+  RangeUnit,
+  rangeUnitTranslations
+} from '../../rulenode-core-config.models';
 
 @Component({
   selector: 'tb-filter-node-gps-geofencing-config',
@@ -15,10 +20,10 @@ export class GpsGeoFilterConfigComponent extends RuleNodeConfigurationComponent 
   geoFilterConfigForm: FormGroup;
 
   perimeterType = PerimeterType;
-  perimeterTypes = Object.keys(PerimeterType);
+  perimeterTypes: Array<PerimeterType> = Object.values(PerimeterType);
   perimeterTypeTranslationMap = perimeterTypeTranslations;
 
-  rangeUnits = Object.keys(RangeUnit);
+  rangeUnits: Array<RangeUnit> = Object.values(RangeUnit);
   rangeUnitTranslationMap = rangeUnitTranslations;
 
   public defaultPaddingEnable = true;
@@ -38,7 +43,7 @@ export class GpsGeoFilterConfigComponent extends RuleNodeConfigurationComponent 
       longitudeKeyName: isDefinedAndNotNull(configuration?.longitudeKeyName) ? configuration.longitudeKeyName : null,
       perimeterType: isDefinedAndNotNull(configuration?.perimeterType) ? configuration.perimeterType : null,
       fetchPerimeterInfoFromMessageMetadata: isDefinedAndNotNull(configuration?.fetchPerimeterInfoFromMessageMetadata) ?
-          configuration.fetchPerimeterInfoFromMessageMetadata : false,
+        configuration.fetchPerimeterInfoFromMessageMetadata : false,
       perimeterKeyName: isDefinedAndNotNull(configuration?.perimeterKeyName) ? configuration.perimeterKeyName : null,
       centerLatitude: isDefinedAndNotNull(configuration?.centerLatitude) ? configuration.centerLatitude : null,
       centerLongitude: isDefinedAndNotNull(configuration?.centerLongitude) ? configuration.centerLongitude : null,
@@ -53,7 +58,7 @@ export class GpsGeoFilterConfigComponent extends RuleNodeConfigurationComponent 
       latitudeKeyName: [configuration.latitudeKeyName, [Validators.required]],
       longitudeKeyName: [configuration.longitudeKeyName, [Validators.required]],
       perimeterType: [configuration.perimeterType, [Validators.required]],
-      fetchPerimeterInfoFromMessageMetadata: [configuration.fetchPerimeterInfoFromMessageMetadata , []],
+      fetchPerimeterInfoFromMessageMetadata: [configuration.fetchPerimeterInfoFromMessageMetadata, []],
       perimeterKeyName: [configuration.perimeterKeyName, []],
       centerLatitude: [configuration.centerLatitude, []],
       centerLongitude: [configuration.centerLongitude, []],

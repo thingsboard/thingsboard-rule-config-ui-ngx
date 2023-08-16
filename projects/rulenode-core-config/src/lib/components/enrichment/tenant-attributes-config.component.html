@@ -1,9 +1,9 @@
 <section [formGroup]="tenantAttributesConfigForm" fxLayout="column">
   <tb-fieldset-component [label]="'tb.rulenode.mapping-of-tenant' | translate">
     <div class="flex column gap-12">
-      <div  fxFlex fxLayoutAlign="center center">
+      <div fxFlex fxLayoutAlign="center center">
         <div class="fetch-to-data-toggle">
-          <tb-toggle-select class="fetch-to-data-toggle"  formControlName="dataToFetch" appearance="fill">
+          <tb-toggle-select class="fetch-to-data-toggle" formControlName="dataToFetch" appearance="fill">
             <tb-toggle-option *ngFor="let data of fetchToData" [value]="data.value">
               {{ data.name }}
             </tb-toggle-option>

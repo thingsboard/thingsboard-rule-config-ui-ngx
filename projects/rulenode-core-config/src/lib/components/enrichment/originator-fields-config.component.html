@@ -9,12 +9,12 @@
     [selectRequiredText]="'tb.rulenode.source-field-required' | translate"
     [valText]="'tb.rulenode.target-key' | translate"
     [valRequiredText]="'tb.rulenode.target-key-required' | translate"
-    [hintText] = "'tb.rulenode.originator-fields-sv-map-hint' | translate"
+    [hintText]="'tb.rulenode.originator-fields-sv-map-hint' | translate"
     popupHelpLink="rulenode/originator_fields_node_fields_templatization">
   </tb-sv-map-config>
   <tb-msg-metadata-chip class="msg-metadata-chip"
-    [labelText]="'tb.rulenode.add-mapped-originator-fields-to' | translate"
-    formControlName="fetchTo">
+                        [labelText]="'tb.rulenode.add-mapped-originator-fields-to' | translate"
+                        formControlName="fetchTo">
   </tb-msg-metadata-chip>
   <tb-slide-toggle class="tb-form-row no-padding"
                    formControlName="ignoreNullStrings"
