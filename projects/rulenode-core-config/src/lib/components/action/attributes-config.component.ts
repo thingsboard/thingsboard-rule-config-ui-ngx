@@ -30,7 +30,8 @@ export class AttributesConfigComponent extends RuleNodeConfigurationComponent {
     this.attributesConfigForm = this.fb.group({
       scope: [configuration ? configuration.scope : null, [Validators.required]],
       notifyDevice: [configuration ? configuration.notifyDevice : true, []],
-      sendAttributesUpdatedNotification: [configuration ? configuration.sendAttributesUpdatedNotification : false, []]
+      sendAttributesUpdatedNotification: [configuration ? configuration.sendAttributesUpdatedNotification : false, []],
+      updateAttributesOnValueChange: [configuration ? configuration.updateAttributesOnValueChange : false, []]
     });
 
     this.attributesConfigForm.get('scope').valueChanges.subscribe((value) => {
@@ -40,6 +41,7 @@ export class AttributesConfigComponent extends RuleNodeConfigurationComponent {
       if (value === AttributeScope.CLIENT_SCOPE) {
         this.attributesConfigForm.get('sendAttributesUpdatedNotification').patchValue(false, {emitEvent: false});
       }
+      this.attributesConfigForm.get('updateAttributesOnValueChange').patchValue(false, {emitEvent: false});
     });
   }
 
