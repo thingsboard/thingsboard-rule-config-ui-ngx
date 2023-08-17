@@ -1,9 +1,13 @@
-<section [formGroup]="originatorTypeConfigForm" fxLayout="column">
-  <label translate class="tb-title no-padding tb-required">tb.rulenode.originator-types-filter</label>
+<section [formGroup]="originatorTypeConfigForm">
   <tb-entity-type-list fxFlex
                        formControlName="originatorTypes"
                        [allowedEntityTypes]="allowedEntityTypes"
                        [ignoreAuthorityFilter]="true"
+                       [emptyInputPlaceholder]="'tb.rulenode.add-entity-type' | translate"
+                       [filledInputPlaceholder]="'tb.rulenode.add-entity-type' | translate"
+                       [label]="'tb.rulenode.select-entity-types' | translate"
                        required>
+    <mat-icon matSuffix class="mat-primary margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
+              matTooltip="{{ 'tb.rulenode.chip-help' | translate }}">help</mat-icon>
   </tb-entity-type-list>
 </section>

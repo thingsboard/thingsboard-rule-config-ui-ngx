@@ -1,10 +1,15 @@
 import { Component, forwardRef, Injector, Input, OnInit } from '@angular/core';
 import {
   AbstractControl,
-  ControlValueAccessor, UntypedFormArray,
-  UntypedFormBuilder, UntypedFormControl,
-  UntypedFormGroup, NG_VALIDATORS,
-  NG_VALUE_ACCESSOR, NgControl, Validator,
+  ControlValueAccessor,
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  NgControl,
+  Validator,
   Validators
 } from '@angular/forms';
 import { PageComponent } from '@shared/public-api';
@@ -50,15 +55,17 @@ export class KvMapConfigOldComponent extends PageComponent implements ControlVal
   @Input() hintText: string;
 
   private requiredValue: boolean;
+
   get required(): boolean {
     return this.requiredValue;
   }
+
   @Input()
   set required(value: boolean) {
     this.requiredValue = coerceBooleanProperty(value);
   }
 
-  kvListFormGroup: UntypedFormGroup;
+  kvListFormGroup: FormGroup;
 
   ngControl: NgControl;
 
@@ -69,7 +76,7 @@ export class KvMapConfigOldComponent extends PageComponent implements ControlVal
   constructor(protected store: Store<AppState>,
               public translate: TranslateService,
               public injector: Injector,
-              private fb: UntypedFormBuilder) {
+              private fb: FormBuilder) {
     super(store);
   }
 
@@ -83,8 +90,8 @@ export class KvMapConfigOldComponent extends PageComponent implements ControlVal
       this.fb.array([]));
   }
 
-  keyValsFormArray(): UntypedFormArray {
-    return this.kvListFormGroup.get('keyVals') as UntypedFormArray;
+  keyValsFormArray(): FormArray {
+    return this.kvListFormGroup.get('keyVals') as FormArray;
   }
 
   registerOnChange(fn: any): void {
@@ -94,7 +101,7 @@ export class KvMapConfigOldComponent extends PageComponent implements ControlVal
   registerOnTouched(fn: any): void {
   }
 
-  setDisabledState?(isDisabled: boolean): void {
+  setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
     if (this.disabled) {
       this.kvListFormGroup.disable({emitEvent: false});
@@ -103,7 +110,7 @@ export class KvMapConfigOldComponent extends PageComponent implements ControlVal
     }
   }
 
-  writeValue(keyValMap: {[key: string]: string}): void {
+  writeValue(keyValMap: { [key: string]: string }): void {
     if (this.valueChangeSubscription) {
       this.valueChangeSubscription.unsubscribe();
     }
@@ -125,19 +132,19 @@ export class KvMapConfigOldComponent extends PageComponent implements ControlVal
   }
 
   public removeKeyVal(index: number) {
-    (this.kvListFormGroup.get('keyVals') as UntypedFormArray).removeAt(index);
+    (this.kvListFormGroup.get('keyVals') as FormArray).removeAt(index);
   }
 
   public addKeyVal() {
-    const keyValsFormArray = this.kvListFormGroup.get('keyVals') as UntypedFormArray;
+    const keyValsFormArray = this.kvListFormGroup.get('keyVals') as FormArray;
     keyValsFormArray.push(this.fb.group({
       key: ['', [Validators.required]],
       value: ['', [Validators.required]]
     }));
   }
 
-  public validate(c: UntypedFormControl) {
-    const kvList: {key: string; value: string}[] = this.kvListFormGroup.get('keyVals').value;
+  public validate(c: FormControl) {
+    const kvList: { key: string; value: string }[] = this.kvListFormGroup.get('keyVals').value;
     if (!kvList.length && this.required) {
       return {
         kvMapRequired: true
@@ -153,7 +160,7 @@ export class KvMapConfigOldComponent extends PageComponent implements ControlVal
         if (kv.key === kv.value) {
           return {
             uniqueKeyValuePair: true
-          }
+          };
         }
       }
     }
@@ -161,7 +168,7 @@ export class KvMapConfigOldComponent extends PageComponent implements ControlVal
   }
 
   private updateModel() {
-    const kvList: {key: string; value: string}[] = this.kvListFormGroup.get('keyVals').value;
+    const kvList: { key: string; value: string }[] = this.kvListFormGroup.get('keyVals').value;
     if (this.required && !kvList.length || !this.kvListFormGroup.valid) {
       this.propagateChange(null);
     } else {

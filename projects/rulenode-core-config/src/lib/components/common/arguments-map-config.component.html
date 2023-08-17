@@ -40,8 +40,10 @@
                                 *ngIf="argumentControl.get('type').value && argumentControl.get('type').value !== ArgumentType.CONSTANT">
                   <mat-label translate>tb.rulenode.argument-key-field-input</mat-label>
                   <input [formControl]="argumentControl.get('key')" matInput required/>
-                  <mat-icon class="mat-primary" aria-hidden="false" aria-label="help-icon" matSuffix style="cursor:pointer;"
-                            matTooltip="{{ 'tb.rulenode.math-templatization-tooltip' | translate }}">help</mat-icon>
+                  <mat-icon class="mat-primary" aria-hidden="false" aria-label="help-icon" matSuffix
+                            style="cursor:pointer;"
+                            matTooltip="{{ 'tb.rulenode.math-templatization-tooltip' | translate }}">help
+                  </mat-icon>
                   <mat-error *ngIf="argumentControl.get('key').hasError('required')" translate>
                     tb.rulenode.argument-key-field-input-required
                   </mat-error>
@@ -60,23 +62,24 @@
                 </mat-form-field>
               </div>
               <div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutGap.gt-xs="16px">
-                  <mat-form-field *ngIf="argumentControl.get('type').value === ArgumentType.ATTRIBUTE"
-                                  fxFlex="50" class="mat-block">
-                    <mat-label translate>tb.rulenode.attribute-scope-field-input</mat-label>
-                    <mat-select required [formControl]="argumentControl.get('attributeScope')">
-                      <mat-option *ngFor="let scope of attributeScope" [value]="scope">
-                        {{ attributeScopeMap.get(scope) | translate }}
-                      </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="argumentControl.get('attributeScope').hasError('required')" translate>
-                      tb.rulenode.attribute-scope-field-input-required
-                    </mat-error>
-                  </mat-form-field>
-                  <mat-form-field *ngIf="argumentControl.get('type').value && argumentControl.get('type').value !== ArgumentType.CONSTANT"
-                                  fxFlex="50" floatLabel="always" class="mat-block">
-                    <mat-label translate>tb.rulenode.default-value-field-input</mat-label>
-                    <input [formControl]="argumentControl.get('defaultValue')" matInput/>
-                  </mat-form-field>
+                <mat-form-field *ngIf="argumentControl.get('type').value === ArgumentType.ATTRIBUTE"
+                                fxFlex="50" class="mat-block">
+                  <mat-label translate>tb.rulenode.attribute-scope-field-input</mat-label>
+                  <mat-select required [formControl]="argumentControl.get('attributeScope')">
+                    <mat-option *ngFor="let scope of attributeScope" [value]="scope">
+                      {{ attributeScopeMap.get(scope) | translate }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="argumentControl.get('attributeScope').hasError('required')" translate>
+                    tb.rulenode.attribute-scope-field-input-required
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field
+                  *ngIf="argumentControl.get('type').value && argumentControl.get('type').value !== ArgumentType.CONSTANT"
+                  fxFlex="50" floatLabel="always" class="mat-block">
+                  <mat-label translate>tb.rulenode.default-value-field-input</mat-label>
+                  <input [formControl]="argumentControl.get('defaultValue')" matInput/>
+                </mat-form-field>
               </div>
             </div>
             <button *ngIf="!disabled" mat-icon-button color="primary" style="min-width: 40px;"

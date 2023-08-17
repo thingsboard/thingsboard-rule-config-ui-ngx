@@ -1,20 +1,25 @@
-<section [formGroup]="relatedAttributesConfigForm" fxLayout="column">
+<section [formGroup]="relatedAttributesConfigForm" class="tb-form-panel no-padding no-border">
   <tb-relations-query-config
     required
     formControlName="relationsQuery">
   </tb-relations-query-config>
-  <tb-fieldset-component class="fetch-data-block" [label]="'tb.rulenode.data-to-fetch' | translate">
-    <tb-toggle-header class="fetch-to-data-toggle" ignoreMdLgSize="true" (valueChange)="toggleChange($event)"
-                      appearance="fill" [options]="fetchToData" name="widgetConfigHeader" useSelectOnMdLg="false"
-                      [value]="relatedAttributesConfigForm.get('dataToFetch').value"
-    >
-    </tb-toggle-header>
+  <div class="tb-form-panel stroked">
+    <div class="tb-form-panel-title tb-required" translate>tb.rulenode.data-to-fetch</div>
+    <div class="toggle-block">
+      <div class="fetch-to-data-toggle">
+        <tb-toggle-select formControlName="dataToFetch" appearance="fill">
+          <tb-toggle-option *ngFor="let data of fetchToData" [value]="data.value">
+            {{ data.name }}
+          </tb-toggle-option>
+        </tb-toggle-select>
+      </div>
+    </div>
     <tb-kv-map-config
       *ngIf="relatedAttributesConfigForm.get('dataToFetch').value !== DataToFetch.FIELDS; else fields"
       required
-      formControlName="dataMapping"
+      formControlName="kvMap"
       [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
-      [labelText] = "selectTranslation('tb.rulenode.latest-telemetry-mapping','tb.rulenode.attributes-mapping') | translate"
+      [labelText]="selectTranslation('tb.rulenode.latest-telemetry-mapping','tb.rulenode.attributes-mapping') | translate"
       [keyText]="selectTranslation('tb.rulenode.source-telemetry','tb.rulenode.source-attribute') | translate"
       [keyRequiredText]="selectTranslation('tb.rulenode.source-telemetry-required','tb.rulenode.source-attribute-required') | translate"
       [valText]="'tb.rulenode.target-key' | translate"
@@ -29,7 +34,7 @@
         [labelText]="'tb.rulenode.fields-mapping' | translate"
         targetKeyPrefix="relatedEntity"
         [selectOptions]="originatorFields"
-        formControlName="dataMapping"
+        formControlName="svMap"
         [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
         [selectText]="'tb.rulenode.source-field' | translate"
         [selectRequiredText]="'tb.rulenode.source-field-required' | translate"
@@ -39,8 +44,8 @@
         popupHelpLink="rulenode/related_entity_data_node_fields_templatization">
       </tb-sv-map-config>
     </ng-template>
-    <tb-msg-metadata-chip formControlName="fetchTo" class="msg-metadata-chip"
+    <tb-msg-metadata-chip formControlName="fetchTo"
                           [labelText]="msgMetadataLabelTranslations.get(relatedAttributesConfigForm.get('dataToFetch').value) | translate">
-      </tb-msg-metadata-chip>
-  </tb-fieldset-component>
+    </tb-msg-metadata-chip>
+  </div>
 </section>

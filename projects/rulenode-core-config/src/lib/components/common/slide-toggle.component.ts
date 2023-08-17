@@ -1,9 +1,8 @@
 import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { AppState } from '@core/core.state';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { coerceBoolean } from '@shared/public-api';
 
 @Component({
   selector: 'tb-slide-toggle',
@@ -16,22 +15,22 @@ import { Subject } from 'rxjs';
   }]
 })
 
-export class SlideToggleComponent implements  OnInit, ControlValueAccessor, OnDestroy {
+export class SlideToggleComponent implements OnInit, ControlValueAccessor, OnDestroy {
 
   @Input() slideToggleName: string;
   @Input() slideToggleTooltip: string;
 
-  private propagateChange;
-  private destroy$ = new Subject();
+  private propagateChange = (v: any) => { };
+  private destroy$ = new Subject<void>();
 
   public slideToggleControlGroup: FormGroup;
 
-  constructor(private store: Store<AppState>,
-              private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+  }
 
   ngOnInit(): void {
     this.slideToggleControlGroup = this.fb.group({
-      slideToggleControl: [null,  []]
+      slideToggleControl: [null, []]
     });
 
     this.slideToggleControlGroup.get('slideToggleControl').valueChanges.pipe(
@@ -49,8 +48,10 @@ export class SlideToggleComponent implements  OnInit, ControlValueAccessor, OnDe
   registerOnChange(fn: any): void {
     this.propagateChange = fn;
   }
+
   registerOnTouched(fn: any): void {
   }
+
   setDisabledState(isDisabled: boolean): void {
     if (isDisabled) {
       this.slideToggleControlGroup.disable({emitEvent: false});

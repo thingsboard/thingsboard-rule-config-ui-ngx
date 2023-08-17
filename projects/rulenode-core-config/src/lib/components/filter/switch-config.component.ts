@@ -1,11 +1,11 @@
 import { Component, EventEmitter, ViewChild } from '@angular/core';
-import { AppState, getCurrentAuthState, NodeScriptTestService } from '@core/public-api';
+import { AppState, getCurrentAuthState, isDefinedAndNotNull, NodeScriptTestService } from '@core/public-api';
 import {
+  DebugRuleNodeEventBody,
+  JsFuncComponent,
   RuleNodeConfiguration,
   RuleNodeConfigurationComponent,
-  JsFuncComponent,
-  ScriptLanguage,
-  DebugRuleNodeEventBody
+  ScriptLanguage
 } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
@@ -46,9 +46,9 @@ export class SwitchConfigComponent extends RuleNodeConfigurationComponent {
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.switchConfigForm = this.fb.group({
-      scriptLang: [configuration ? configuration.scriptLang : ScriptLanguage.JS, [Validators.required]],
-      jsScript: [configuration ? configuration.jsScript : null, []],
-      tbelScript: [configuration ? configuration.tbelScript : null, []]
+      scriptLang: [configuration.scriptLang, [Validators.required]],
+      jsScript: [configuration.jsScript, []],
+      tbelScript: [configuration.tbelScript, []]
     });
   }
 
@@ -61,7 +61,9 @@ export class SwitchConfigComponent extends RuleNodeConfigurationComponent {
     if (scriptLang === ScriptLanguage.TBEL && !this.tbelEnabled) {
       scriptLang = ScriptLanguage.JS;
       this.switchConfigForm.get('scriptLang').patchValue(scriptLang, {emitEvent: false});
-      setTimeout(() => {this.switchConfigForm.updateValueAndValidity({emitEvent: true});});
+      setTimeout(() => {
+        this.switchConfigForm.updateValueAndValidity({emitEvent: true});
+      });
     }
     this.switchConfigForm.get('jsScript').setValidators(scriptLang === ScriptLanguage.JS ? [Validators.required] : []);
     this.switchConfigForm.get('jsScript').updateValueAndValidity({emitEvent});
@@ -75,7 +77,11 @@ export class SwitchConfigComponent extends RuleNodeConfigurationComponent {
         configuration.scriptLang = ScriptLanguage.JS;
       }
     }
-    return configuration;
+    return {
+      scriptLang: isDefinedAndNotNull(configuration?.scriptLang) ? configuration.scriptLang : ScriptLanguage.JS,
+      jsScript: isDefinedAndNotNull(configuration?.jsScript) ? configuration.jsScript : null,
+      tbelScript: isDefinedAndNotNull(configuration?.tbelScript) ? configuration.tbelScript : null
+    };
   }
 
   testScript(debugEventBody?: DebugRuleNodeEventBody) {

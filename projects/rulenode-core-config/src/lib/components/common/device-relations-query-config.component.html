@@ -1,14 +1,14 @@
 <section fxLayout="column" [formGroup]="deviceRelationsQueryFormGroup">
-  <div fxLayoutGap="24px" fxLayout="row" class="relation-level">
-    <mat-form-field class="mat-block" subscriptSizing="dynamic" fxFlex="50" style="min-width: 100px;">
+  <div fxLayoutGap="22px" fxLayout="row">
+    <mat-form-field class="mat-block" subscriptSizing="dynamic" fxFlex="50" style="min-width: 100px;" hideRequiredMarker>
       <mat-label translate>relation.direction</mat-label>
-      <mat-select required matInput formControlName="direction">
+      <mat-select required formControlName="direction">
         <mat-option *ngFor="let type of directionTypes" [value]="type">
           {{ directionTypeTranslations.get(type) | translate }}
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field fxFlex="50" floatLabel="always" subscriptSizing="dynamic" class="mat-block">
+    <mat-form-field fxFlex="50" floatLabel="always" class="mat-block">
       <mat-label translate>tb.rulenode.max-relation-level</mat-label>
       <input matInput
              type="number"
@@ -27,10 +27,8 @@
                    [slideToggleTooltip]="'tb.rulenode.last-level-device-relation-tooltip' | translate">
   </tb-slide-toggle>
   <tb-relation-type-autocomplete
-    [label]="'tb.rulenode.type' | translate"
+    [label]="'tb.rulenode.relation-type' | translate"
     floatLabel="always"
-    subscriptSizing="dynamic"
-    class="relation-type-autocomplete"
     fxFlex
     formControlName="relationType">
   </tb-relation-type-autocomplete>
@@ -38,6 +36,10 @@
     required
     [label]="'tb.rulenode.device-profiles' | translate"
     [entityType]="entityType.DEVICE"
+    [emptyInputPlaceholder]="'tb.rulenode.add-entity-type' | translate"
+    [filledInputPlaceholder]="'tb.rulenode.add-entity-type' | translate"
     formControlName="deviceTypes">
+    <mat-icon matSuffix class="mat-primary margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
+              matTooltip="{{ 'tb.rulenode.chip-help' | translate }}">help</mat-icon>
   </tb-entity-subtype-list>
 </section>

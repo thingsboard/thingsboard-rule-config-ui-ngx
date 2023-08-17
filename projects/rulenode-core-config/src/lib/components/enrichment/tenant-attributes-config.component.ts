@@ -21,7 +21,7 @@ export class TenantAttributesConfigComponent extends RuleNodeConfigurationCompon
               private translate: TranslateService) {
     super(store);
     for (const key of dataToFetchTranslations.keys()) {
-      if(key !== DataToFetch.FIELDS) {
+      if (key !== DataToFetch.FIELDS) {
         this.fetchToData.push({
           value: key,
           name: this.translate.instant(dataToFetchTranslations.get(key as DataToFetch))
@@ -34,12 +34,8 @@ export class TenantAttributesConfigComponent extends RuleNodeConfigurationCompon
     return this.tenantAttributesConfigForm;
   }
 
-  public toggleChange(value) {
-    this.tenantAttributesConfigForm.get('dataToFetch').patchValue(value, {emitEvent: true});
-  }
-
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
-    let dataToFetch;
+    let dataToFetch: DataToFetch;
     if (isDefinedAndNotNull(configuration?.telemetry)) {
       dataToFetch = configuration.telemetry ? DataToFetch.LATEST_TELEMETRY : DataToFetch.ATTRIBUTES;
     } else {
@@ -60,7 +56,7 @@ export class TenantAttributesConfigComponent extends RuleNodeConfigurationCompon
     };
   }
 
-  public selectTranslation(latestTelemetryTranslation, attributesTranslation) {
+  public selectTranslation(latestTelemetryTranslation: string, attributesTranslation: string) {
     if (this.tenantAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY) {
       return latestTelemetryTranslation;
     } else {

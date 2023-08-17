@@ -54,9 +54,11 @@ export class CredentialsConfigComponent extends PageComponent implements Control
   subscriptions: Subscription[] = [];
 
   private requiredValue: boolean;
+
   get required(): boolean {
     return this.requiredValue;
   }
+
   @Input()
   set required(value: boolean) {
     this.requiredValue = coerceBooleanProperty(value);
@@ -195,7 +197,7 @@ export class CredentialsConfigComponent extends PageComponent implements Control
   protected updateValidators(emitEvent: boolean = false) {
     const credentialsTypeValue: credentialsType = this.credentialsConfigFormGroup.get('type').value;
     if (emitEvent) {
-      this.credentialsConfigFormGroup.reset({ type: credentialsTypeValue }, {emitEvent: false});
+      this.credentialsConfigFormGroup.reset({type: credentialsTypeValue}, {emitEvent: false});
     }
     this.credentialsConfigFormGroup.setValidators([]);
     this.credentialsConfigFormGroup.get('username').setValidators([]);

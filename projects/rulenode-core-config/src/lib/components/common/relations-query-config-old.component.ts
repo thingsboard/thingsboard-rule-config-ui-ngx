@@ -1,5 +1,5 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
-import { ControlValueAccessor, UntypedFormBuilder, UntypedFormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { EntitySearchDirection, entitySearchDirectionTranslations, PageComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/public-api';
@@ -23,9 +23,11 @@ export class RelationsQueryConfigOldComponent extends PageComponent implements C
   @Input() disabled: boolean;
 
   private requiredValue: boolean;
+
   get required(): boolean {
     return this.requiredValue;
   }
+
   @Input()
   set required(value: boolean) {
     this.requiredValue = coerceBooleanProperty(value);
@@ -34,12 +36,12 @@ export class RelationsQueryConfigOldComponent extends PageComponent implements C
   directionTypes = Object.keys(EntitySearchDirection);
   directionTypeTranslations = entitySearchDirectionTranslations;
 
-  relationsQueryFormGroup: UntypedFormGroup;
+  relationsQueryFormGroup: FormGroup;
 
   private propagateChange = null;
 
   constructor(protected store: Store<AppState>,
-              private fb: UntypedFormBuilder) {
+              private fb: FormBuilder) {
     super(store);
   }
 
@@ -66,7 +68,7 @@ export class RelationsQueryConfigOldComponent extends PageComponent implements C
   registerOnTouched(fn: any): void {
   }
 
-  setDisabledState?(isDisabled: boolean): void {
+  setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
     if (this.disabled) {
       this.relationsQueryFormGroup.disable({emitEvent: false});

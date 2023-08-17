@@ -15,9 +15,10 @@ import { KvMapConfigOldComponent } from './kv-map-config-old.component';
 import { MsgMetadataChipComponent } from './msg-metadata-chip.component';
 import { SlideToggleComponent } from './slide-toggle.component';
 import { SvMapConfigComponent } from './sv-map-config.component';
-import { FieldsetComponent } from './fieldset.component';
 import { RelationsQueryConfigOldComponent } from './relations-query-config-old.component';
 import { SelectAttributesComponent } from './select-attributes.component';
+import { AlarmStatusSelectComponent } from './alarm-status-select.component';
+import { ExampleHintComponent } from './example-hint.component';
 
 @NgModule({
   declarations: [
@@ -34,9 +35,10 @@ import { SelectAttributesComponent } from './select-attributes.component';
     MsgMetadataChipComponent,
     SlideToggleComponent,
     SvMapConfigComponent,
-    FieldsetComponent,
     RelationsQueryConfigOldComponent,
-    SelectAttributesComponent
+    SelectAttributesComponent,
+    AlarmStatusSelectComponent,
+    ExampleHintComponent
   ],
   imports: [
     CommonModule,
@@ -57,9 +59,10 @@ import { SelectAttributesComponent } from './select-attributes.component';
     MsgMetadataChipComponent,
     SlideToggleComponent,
     SvMapConfigComponent,
-    FieldsetComponent,
     RelationsQueryConfigOldComponent,
-    SelectAttributesComponent
+    SelectAttributesComponent,
+    AlarmStatusSelectComponent,
+    ExampleHintComponent
   ]
 })
 

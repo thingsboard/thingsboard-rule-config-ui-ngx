@@ -8,13 +8,13 @@ import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'tb-enrichment-node-originator-fields-config',
-  templateUrl: './originator-fields-config.component.html',
-  styleUrls: ['./originator-fields-config.component.scss']
+  templateUrl: './originator-fields-config.component.html'
 })
 export class OriginatorFieldsConfigComponent extends RuleNodeConfigurationComponent {
 
   originatorFieldsConfigForm: FormGroup;
   public originatorFields: SvMapOption[] = [];
+
   constructor(protected store: Store<AppState>,
               private fb: FormBuilder,
               private translate: TranslateService) {

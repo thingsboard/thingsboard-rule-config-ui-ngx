@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, ElementRef, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { LinkLabel, MessageType, messageTypeNames, PageComponent, TruncatePipe } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormBuilder, FormGroup } from '@angular/forms';
+import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatChipGrid, MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
@@ -14,7 +14,6 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 @Component({
   selector: 'tb-message-types-config',
   templateUrl: './message-types-config.component.html',
-  styleUrls: [],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -23,14 +22,16 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
     }
   ]
 })
-export class MessageTypesConfigComponent extends PageComponent implements ControlValueAccessor, OnInit, AfterViewInit {
+export class MessageTypesConfigComponent extends PageComponent implements ControlValueAccessor, OnInit {
 
   messageTypeConfigForm: FormGroup;
 
   private requiredValue: boolean;
+
   get required(): boolean {
     return this.requiredValue;
   }
+
   @Input()
   set required(value: boolean) {
     this.requiredValue = coerceBooleanProperty(value);
@@ -40,7 +41,7 @@ export class MessageTypesConfigComponent extends PageComponent implements Contro
   label: string;
 
   @Input()
-  placeholder = 'tb.rulenode.message-type';
+  placeholder = 'tb.rulenode.add-message-type';
 
   @Input()
   disabled: boolean;
@@ -91,12 +92,10 @@ export class MessageTypesConfigComponent extends PageComponent implements Contro
       .pipe(
         startWith(''),
         map((value) => value ? value : ''),
-        mergeMap(name => this.fetchMessageTypes(name) ),
+        mergeMap(name => this.fetchMessageTypes(name)),
         share()
       );
   }
-
-  ngAfterViewInit(): void {}
 
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
@@ -133,7 +132,7 @@ export class MessageTypesConfigComponent extends PageComponent implements Contro
   }
 
   textIsNotEmpty(text: string): boolean {
-    return (text && text != null && text.length > 0) ? true : false;
+    return text && text.length > 0;
   }
 
   createMessageType($event: Event, value: string) {
@@ -157,7 +156,7 @@ export class MessageTypesConfigComponent extends PageComponent implements Contro
 
   private transformMessageType(value: string) {
     if ((value || '').trim()) {
-      let newMessageType: LinkLabel = null;
+      let newMessageType: LinkLabel;
       const messageTypeName = value.trim();
       const existingMessageType = this.messageTypesList.find(messageType => messageType.name === messageTypeName);
       if (existingMessageType) {

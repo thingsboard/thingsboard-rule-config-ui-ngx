@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppState } from '@core/public-api';
+import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { EntityType, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
@@ -7,7 +7,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 @Component({
   selector: 'tb-filter-node-originator-type-config',
   templateUrl: './originator-type-config.component.html',
-  styleUrls: []
+  styleUrls: ['../../../../style.scss']
 })
 export class OriginatorTypeConfigComponent extends RuleNodeConfigurationComponent {
 
@@ -34,9 +34,15 @@ export class OriginatorTypeConfigComponent extends RuleNodeConfigurationComponen
     return this.originatorTypeConfigForm;
   }
 
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    return {
+      originatorTypes: isDefinedAndNotNull(configuration?.originatorTypes) ? configuration.originatorTypes : null
+    };
+  }
+
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.originatorTypeConfigForm = this.fb.group({
-      originatorTypes: [configuration ? configuration.originatorTypes : null, [Validators.required]]
+      originatorTypes: [configuration.originatorTypes, [Validators.required]]
     });
   }
 
