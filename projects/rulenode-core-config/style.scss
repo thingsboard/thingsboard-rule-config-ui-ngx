@@ -1,33 +1,14 @@
 :host {
-  .flex {
-    display: flex;
-
-    &.column {
-      flex-direction: column;
-    }
-
-    &.row {
-      flex-direction: row;
-    }
-
-    &.gap-8 {
-      gap: 8px;
-    }
-
-    &.gap-12 {
-      gap: 12px;
-    }
-
-    &.gap-16 {
-      gap: 16px;
-    }
-
-    &.gap-22 {
-      gap: 22px;
-    }
-  }
-
   .margin-8 {
     margin: 8px;
+  }
+
+  .tb-error {
+    letter-spacing: 0.25px;
+    color: var(--mdc-theme-error, #f44336);
+  }
+
+  .tb-required::after {
+    content: "*";
   }
 }

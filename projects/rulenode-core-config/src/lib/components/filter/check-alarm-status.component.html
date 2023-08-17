@@ -1,10 +1,11 @@
-<section [formGroup]="alarmStatusConfigForm" fxLayout="column">
-  <tb-fieldset-component required
-                         [errorText]="'tb.rulenode.alarm-required' | translate"
-                         [errorEnable]="alarmStatusConfigForm.get('alarmStatusList').invalid"
-                         [label]="'tb.rulenode.alarm-status' | translate">
-    <tb-alarm-status-select class="alarm-status" formControlName="alarmStatusList"></tb-alarm-status-select>
-  </tb-fieldset-component>
+<section [formGroup]="alarmStatusConfigForm" class="tb-form-panel stroked">
+  <div class="tb-form-row no-padding no-border space-between">
+    <div class="tb-form-panel-title tb-required" translate>tb.rulenode.alarm-status</div>
+    <div class="tb-form-panel-hint tb-error" translate [hidden]="alarmStatusConfigForm.get('alarmStatusList').valid">
+      tb.rulenode.alarm-required
+    </div>
+  </div>
+  <tb-alarm-status-select formControlName="alarmStatusList"></tb-alarm-status-select>
 </section>
 
 

@@ -1,4 +1,4 @@
-<div class="flex column gap-22" [formGroup]="attributeControlGroup">
+<div class="tb-form-panel no-padding no-border" [formGroup]="attributeControlGroup">
   <tb-example-hint [hintText]="'tb.rulenode.kv-map-pattern-hint' | translate"
                    [popupHelpLink]="popupHelpLink"></tb-example-hint>
   <tb-string-items-list subscriptSizing="dynamic" class="mat-block" editable
@@ -22,7 +22,7 @@
     <ng-container matSuffix *ngTemplateOutlet="helpIcon"></ng-container>
   </tb-string-items-list>
   <tb-slide-toggle *ngIf="attributeControlGroup.get('latestTsKeyNames').value?.length > 0"
-                   formControlName="getLatestValueWithTs" defaultPadding="false"
+                   formControlName="getLatestValueWithTs"
                    [slideToggleName]="'tb.rulenode.fetch-latest-telemetry-with-timestamp' | translate"
                    [slideToggleTooltip]="'tb.rulenode.fetch-latest-telemetry-with-timestamp-tooltip' | translate:
                          { latestTsKeyName:  attributeControlGroup.get('latestTsKeyNames').value[0]}">

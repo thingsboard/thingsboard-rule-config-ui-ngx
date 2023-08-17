@@ -8,7 +8,6 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'tb-msg-metadata-chip',
   templateUrl: './msg-metadata-chip.component.html',
-  styleUrls: ['./msg-metadata-chip.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => MsgMetadataChipComponent),

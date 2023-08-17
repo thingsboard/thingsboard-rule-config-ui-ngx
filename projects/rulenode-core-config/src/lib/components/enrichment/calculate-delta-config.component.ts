@@ -8,8 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'tb-enrichment-node-calculate-delta-config',
-  templateUrl: './calculate-delta-config.component.html',
-  styleUrls: ['./calculate-delta-config.component.scss', '../../../../style.scss']
+  templateUrl: './calculate-delta-config.component.html'
 })
 export class CalculateDeltaConfigComponent extends RuleNodeConfigurationComponent {
 

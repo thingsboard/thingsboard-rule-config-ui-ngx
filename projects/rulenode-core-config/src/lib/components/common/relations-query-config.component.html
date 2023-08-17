@@ -1,40 +1,39 @@
-<section fxLayout="column" [formGroup]="relationsQueryFormGroup">
-  <tb-fieldset-component [label]="'tb.rulenode.relations-query' | translate" required="true">
-    <div style="width: 100%;">
-      <div fxLayoutGap="16px" fxLayout="row">
-        <mat-form-field fxFlex="50" class="mat-block" style="min-width: 100px;">
-          <mat-label translate>relation.direction</mat-label>
-          <mat-select required formControlName="direction">
-            <mat-option *ngFor="let type of directionTypes" [value]="type">
-              {{ directionTypeTranslations.get(type) | translate }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field fxFlex="50" floatLabel="always" class="mat-block">
-          <mat-label translate>tb.rulenode.max-relation-level</mat-label>
-          <input matInput
-                 type="number"
-                 min="1"
-                 step="1"
-                 placeholder="{{ 'tb.rulenode.unlimited-level' | translate }}"
-                 formControlName="maxLevel">
-          <mat-error *ngIf="relationsQueryFormGroup.get('maxLevel').hasError('min')">
-            {{ 'tb.rulenode.max-relation-level-error' | translate }}
-          </mat-error>
-        </mat-form-field>
-      </div>
-      <tb-slide-toggle *ngIf="relationsQueryFormGroup.get('maxLevel').value > 1"
-                       class="last-level-slide-toggle"
-                       defaultPadding="false"
-                       formControlName="fetchLastLevelOnly"
-                       [slideToggleName]="'alias.last-level-relation' | translate"
-                       [slideToggleTooltip]="'tb.rulenode.last-level-relation-tooltip' | translate">
-      </tb-slide-toggle>
-      <tb-fieldset-component [label]="'relation.relation-filters' | translate">
-        <tb-relation-filters
-          formControlName="filters"
-        ></tb-relation-filters>
-      </tb-fieldset-component>
+<section [formGroup]="relationsQueryFormGroup" class="tb-form-panel stroked">
+  <div class="tb-form-panel-title tb-required" translate>tb.rulenode.relations-query</div>
+  <section>
+    <div fxLayoutGap="16px" fxLayout="row">
+      <mat-form-field fxFlex="50" class="mat-block" style="min-width: 100px;" hideRequiredMarker>
+        <mat-label translate>relation.direction</mat-label>
+        <mat-select required formControlName="direction">
+          <mat-option *ngFor="let type of directionTypes" [value]="type">
+            {{ directionTypeTranslations.get(type) | translate }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field fxFlex="50" floatLabel="always" class="mat-block">
+        <mat-label translate>tb.rulenode.max-relation-level</mat-label>
+        <input matInput
+               type="number"
+               min="1"
+               step="1"
+               placeholder="{{ 'tb.rulenode.unlimited-level' | translate }}"
+               formControlName="maxLevel">
+        <mat-error *ngIf="relationsQueryFormGroup.get('maxLevel').hasError('min')">
+          {{ 'tb.rulenode.max-relation-level-error' | translate }}
+        </mat-error>
+      </mat-form-field>
     </div>
-  </tb-fieldset-component>
+    <tb-slide-toggle *ngIf="relationsQueryFormGroup.get('maxLevel').value > 1"
+                     class="last-level-slide-toggle"
+                     formControlName="fetchLastLevelOnly"
+                     [slideToggleName]="'alias.last-level-relation' | translate"
+                     [slideToggleTooltip]="'tb.rulenode.last-level-relation-tooltip' | translate">
+    </tb-slide-toggle>
+  </section>
+  <section [formGroup]="relationsQueryFormGroup" class="tb-form-panel stroked">
+    <div class="tb-form-panel-title" translate>relation.relation-filters</div>
+    <tb-relation-filters
+      formControlName="filters">
+    </tb-relation-filters>
+  </section>
 </section>

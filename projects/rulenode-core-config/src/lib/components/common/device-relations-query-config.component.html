@@ -1,6 +1,6 @@
 <section fxLayout="column" [formGroup]="deviceRelationsQueryFormGroup">
-  <div fxLayoutGap="24px" fxLayout="row">
-    <mat-form-field class="mat-block" subscriptSizing="dynamic" fxFlex="50" style="min-width: 100px;">
+  <div fxLayoutGap="22px" fxLayout="row">
+    <mat-form-field class="mat-block" subscriptSizing="dynamic" fxFlex="50" style="min-width: 100px;" hideRequiredMarker>
       <mat-label translate>relation.direction</mat-label>
       <mat-select required formControlName="direction">
         <mat-option *ngFor="let type of directionTypes" [value]="type">
@@ -29,8 +29,6 @@
   <tb-relation-type-autocomplete
     [label]="'tb.rulenode.relation-type' | translate"
     floatLabel="always"
-    subscriptSizing="dynamic"
-    class="relation-type-autocomplete"
     fxFlex
     formControlName="relationType">
   </tb-relation-type-autocomplete>

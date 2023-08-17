@@ -1,39 +1,37 @@
-<section [formGroup]="checkRelationConfigForm" fxLayout="column">
-  <tb-fieldset-component defaultBottomPadding="false"
-                         [label]="'tb.rulenode.relation-search-parameters' | translate"
-                         required="true">
-    <div fxFlex fxLayout="column">
-      <mat-form-field class="mat-block">
-        <mat-label>{{ 'relation.direction' | translate }}</mat-label>
-        <mat-select formControlName="direction" required>
-          <mat-option *ngFor="let direction of entitySearchDirection" [value]="direction">
-            {{ entitySearchDirectionTranslationsMap.get(direction) | translate }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <tb-relation-type-autocomplete
+<section [formGroup]="checkRelationConfigForm" class="tb-form-panel stroked no-padding-bottom">
+  <div class="tb-form-panel-title tb-required" translate>tb.rulenode.relation-search-parameters</div>
+  <div fxLayout="column">
+    <mat-form-field class="mat-block" hideRequiredMarker>
+      <mat-label>{{ 'relation.direction' | translate }}</mat-label>
+      <mat-select formControlName="direction" required>
+        <mat-option *ngFor="let direction of entitySearchDirection" [value]="direction">
+          {{ entitySearchDirectionTranslationsMap.get(direction) | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <tb-relation-type-autocomplete
+      required
+      [label]="'tb.rulenode.relation-type' | translate"
+      formControlName="relationType">
+    </tb-relation-type-autocomplete>
+    <tb-slide-toggle class="slide-toggle" formControlName="checkForSingleEntity"
+                     [slideToggleName]="'tb.rulenode.check-relation-to-specific-entity' | translate"
+                     [slideToggleTooltip]="'tb.rulenode.check-relation-to-specific-entity-tooltip' | translate">
+    </tb-slide-toggle>
+    <div *ngIf="checkRelationConfigForm.get('checkForSingleEntity').value" fxLayout="row" fxLayoutGap="16px">
+      <tb-entity-type-select
+        style="min-width: 100px;"
+        showLabel
         required
-        [label]="'tb.rulenode.relation-type' | translate"
-        formControlName="relationType">
-      </tb-relation-type-autocomplete>
-      <tb-slide-toggle defaultPadding="false" class="slide-toggle" fxFlex formControlName="checkForSingleEntity"
-                       [slideToggleName]="'tb.rulenode.check-relation-to-specific-entity' | translate"
-                       [slideToggleTooltip]="'tb.rulenode.check-relation-to-specific-entity-tooltip' | translate">
-      </tb-slide-toggle>
-      <div *ngIf="checkRelationConfigForm.get('checkForSingleEntity').value">
-        <tb-entity-type-select
-          showLabel
-          required
-          formControlName="entityType">
-        </tb-entity-type-select>
-        <tb-entity-autocomplete
-          fxFlex
-          required
-          *ngIf="checkRelationConfigForm.get('entityType').value"
-          [entityType]="checkRelationConfigForm.get('entityType').value"
-          formControlName="entityId">
-        </tb-entity-autocomplete>
-      </div>
+        formControlName="entityType">
+      </tb-entity-type-select>
+      <tb-entity-autocomplete
+        fxFlex
+        required
+        *ngIf="checkRelationConfigForm.get('entityType').value"
+        [entityType]="checkRelationConfigForm.get('entityType').value"
+        formControlName="entityId">
+      </tb-entity-autocomplete>
     </div>
-  </tb-fieldset-component>
+  </div>
 </section>

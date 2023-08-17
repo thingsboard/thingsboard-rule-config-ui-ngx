@@ -1,27 +1,29 @@
-<section [formGroup]="checkMessageConfigForm" fxLayout="column">
-  <tb-fieldset-component [errorEnable]="checkMessageConfigForm.touched && checkMessageConfigForm.hasError('atLeastOne')"
-                         [errorText]="'tb.rulenode.at-least-one-field-required' | translate" required
-                         [label]="'tb.rulenode.fields-to-check' | translate">
-    <tb-string-items-list (focusout)="touched()"
-                          class="mat-block" editable
-                          [label]="'tb.rulenode.data-keys' | translate"
-                          [placeholder]="'tb.rulenode.add-message-field' | translate"
-                          formControlName="messageNames">
-      <mat-icon matSuffix class="mat-primary margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
-                matTooltip="{{ 'tb.rulenode.chip-help' | translate }}">help</mat-icon>
-    </tb-string-items-list>
-    <tb-string-items-list (focusout)="touched()"
-                          class="mat-block" editable
-                          [label]="'tb.rulenode.metadata-keys' | translate"
-                          [placeholder]="'tb.rulenode.add-metadata-field' | translate"
-                          formControlName="metadataNames">
-      <mat-icon matSuffix class="mat-primary margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
-                matTooltip="{{ 'tb.rulenode.chip-help' | translate }}">help</mat-icon>
-    </tb-string-items-list>
-    <tb-slide-toggle defaultPadding="false" fxFlex
-                     [slideToggleName]="'tb.rulenode.check-all-keys' | translate"
-                     [slideToggleTooltip]="'tb.rulenode.check-all-keys-tooltip' | translate"
-                     formControlName="checkAllKeys">
-    </tb-slide-toggle>
-  </tb-fieldset-component>
+<section [formGroup]="checkMessageConfigForm" class="tb-form-panel stroked">
+  <div class="tb-form-row no-padding no-border space-between">
+    <div class="tb-form-panel-title tb-required" translate>tb.rulenode.fields-to-check</div>
+    <div class="tb-form-panel-hint tb-error" translate [hidden]="!(checkMessageConfigForm.touched && checkMessageConfigForm.hasError('atLeastOne'))">
+      tb.rulenode.at-least-one-field-required
+    </div>
+  </div>
+  <tb-string-items-list (focusout)="touched()"
+                        class="mat-block" editable subscriptSizing="dynamic"
+                        [label]="'tb.rulenode.data-keys' | translate"
+                        [placeholder]="'tb.rulenode.add-message-field' | translate"
+                        formControlName="messageNames">
+    <mat-icon matSuffix class="mat-primary margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
+              matTooltip="{{ 'tb.rulenode.chip-help' | translate }}">help</mat-icon>
+  </tb-string-items-list>
+  <tb-string-items-list (focusout)="touched()"
+                        class="mat-block" editable subscriptSizing="dynamic"
+                        [label]="'tb.rulenode.metadata-keys' | translate"
+                        [placeholder]="'tb.rulenode.add-metadata-field' | translate"
+                        formControlName="metadataNames">
+    <mat-icon matSuffix class="mat-primary margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
+              matTooltip="{{ 'tb.rulenode.chip-help' | translate }}">help</mat-icon>
+  </tb-string-items-list>
+  <tb-slide-toggle fxFlex
+                   [slideToggleName]="'tb.rulenode.check-all-keys' | translate"
+                   [slideToggleTooltip]="'tb.rulenode.check-all-keys-tooltip' | translate"
+                   formControlName="checkAllKeys">
+  </tb-slide-toggle>
 </section>

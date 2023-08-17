@@ -1,15 +1,18 @@
-<section [formGroup]="entityDetailsConfigForm" fxLayout="column">
+<section [formGroup]="entityDetailsConfigForm">
   <tb-string-items-list [predefinedValues]="predefinedValues"
                         class="mat-block" required
                         [label]="'tb.rulenode.select-details' | translate"
                         [placeholder]="'tb.rulenode.add-detail' | translate"
                         [requiredText]="'tb.rulenode.entity-details-list-empty' | translate"
                         formControlName="detailsList">
-    <mat-icon matSuffix class="mat-primary margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
-              matTooltip="{{ 'tb.rulenode.chip-help' | translate }}">help</mat-icon>
+    <mat-icon matSuffix class="margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
+              color="primary"
+              matTooltip="{{ 'tb.rulenode.chip-help' | translate }}">
+      help
+    </mat-icon>
   </tb-string-items-list>
   <tb-msg-metadata-chip
     [labelText]="'tb.rulenode.add-selected-details-to' | translate"
-    formControlName="fetchTo"
-  ></tb-msg-metadata-chip>
+    formControlName="fetchTo">
+  </tb-msg-metadata-chip>
 </section>

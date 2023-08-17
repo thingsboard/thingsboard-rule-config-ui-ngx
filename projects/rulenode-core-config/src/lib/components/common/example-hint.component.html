@@ -1,11 +1,10 @@
-<div [hidden]="!hintText" class="tb-hint justify-center custom-styles">
-  <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="20px">
-    <div>{{ hintText }}</div>
-    <div *ngIf="popupHelpLink" class="see-example" tb-help-popup="{{ popupHelpLink }}"
-         hintMode
-         tb-help-popup-placement="right"
-         trigger-style="letter-spacing:0.25px; font-size:12px"
-         [tb-help-popup-style]="{maxWidth: '820px'}"
-         trigger-text="{{ 'tb.key-val.see-examples' | translate }}"></div>
+<div [hidden]="!hintText" class="tb-form-hint tb-primary-fill custom-styles">
+  <div>{{ hintText }}</div>
+  <div *ngIf="popupHelpLink" class="see-example" tb-help-popup="{{ popupHelpLink }}"
+       hintMode
+       tb-help-popup-placement="right"
+       trigger-style="letter-spacing:0.25px; font-size:12px"
+       [tb-help-popup-style]="{maxWidth: '820px'}"
+       trigger-text="{{ 'tb.key-val.see-examples' | translate }}">
   </div>
 </div>

@@ -19,9 +19,6 @@ export class SlideToggleComponent implements OnInit, ControlValueAccessor, OnDes
 
   @Input() slideToggleName: string;
   @Input() slideToggleTooltip: string;
-  @Input()
-  @coerceBoolean()
-  defaultPadding = true;
 
   private propagateChange = (v: any) => { };
   private destroy$ = new Subject<void>();

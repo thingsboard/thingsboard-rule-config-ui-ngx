@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'tb-enrichment-node-customer-attributes-config',
   templateUrl: './customer-attributes-config.component.html',
-  styleUrls: ['./customer-attributes-config.component.scss', '../../../../style.scss']
+  styleUrls: ['./customer-attributes-config.component.scss']
 })
 export class CustomerAttributesConfigComponent extends RuleNodeConfigurationComponent {
 

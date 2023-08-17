@@ -1,23 +1,17 @@
 :host {
   .slide-toggle-container {
+    display: flex;
     align-items: center;
     gap: 8px;
 
     .tooltip-icon {
-      width: 18px;
-      height: 18px;
-      line-height: 18px;
-      font-size: 18px;
       color: #E0E0E0;
+      overflow: visible;
     }
 
     .tooltip-icon:hover {
       color: #9E9E9E;
     }
-  }
-
-  .default-padding {
-    padding: 16px;
   }
 }
 
