@@ -511,6 +511,8 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'skip-latest-persistence': 'Skip latest persistence',
           'use-server-ts': 'Use server ts',
           'use-server-ts-hint': 'Enable this setting to use the timestamp of the message processing instead of the timestamp from the message. Useful for all sorts of sequential processing if you merge messages from multiple sources (devices, assets, etc).',
+          'update-latest-on-value-change': 'Update latest on value change',
+          'update-latest-on-value-change-hint': 'Only update the latest value if it differs from the previous one. This configuration affects only latest and has no impact on historical timeseries.',
           'kv-map-pattern-hint': 'All input fields support templatization. Use $[messageKey] to extract value from the message body and ${metadataKey} to extract value from the message metadata.',
           'shared-scope': 'Shared scope',
           'server-scope': 'Server scope',
