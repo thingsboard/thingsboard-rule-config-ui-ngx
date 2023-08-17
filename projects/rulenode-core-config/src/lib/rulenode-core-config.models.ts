@@ -226,11 +226,11 @@ export interface RelationsQuery {
 }
 
 export interface FunctionData {
-  value: MathFunction,
-  name: string,
-  description: string,
-  minArgs: number,
-  maxArgs: number,
+  value: MathFunction;
+  name: string;
+  description: string;
+  minArgs: number;
+  maxArgs: number;
 }
 
 export enum MathFunction {
@@ -626,18 +626,18 @@ export const MathFunctionMap  = new Map<MathFunction, FunctionData>(
   ]);
 
 export enum ArgumentType {
+  MESSAGE_BODY = 'MESSAGE_BODY',
+  MESSAGE_METADATA = 'MESSAGE_METADATA',
   ATTRIBUTE = 'ATTRIBUTE',
   TIME_SERIES = 'TIME_SERIES',
-  CONSTANT = 'CONSTANT',
-  MESSAGE_BODY = 'MESSAGE_BODY',
-  MESSAGE_METADATA = 'MESSAGE_METADATA'
+  CONSTANT = 'CONSTANT'
 }
 
 export enum ArgumentTypeResult {
-  ATTRIBUTE = 'ATTRIBUTE',
-  TIME_SERIES = 'TIME_SERIES',
   MESSAGE_BODY = 'MESSAGE_BODY',
-  MESSAGE_METADATA = 'MESSAGE_METADATA'
+  MESSAGE_METADATA = 'MESSAGE_METADATA',
+  ATTRIBUTE = 'ATTRIBUTE',
+  TIME_SERIES = 'TIME_SERIES'
 }
 
 export enum FetchTo {
@@ -650,12 +650,78 @@ export const FetchToTranslation = new Map<FetchTo, string>([
     [FetchTo.METADATA, 'tb.rulenode.metadata'],
 ]);
 
-export const ArgumentTypeMap  = new Map<ArgumentType, string>([
-  [ArgumentType.ATTRIBUTE, 'tb.rulenode.attribute-type'],
-  [ArgumentType.TIME_SERIES, 'tb.rulenode.time-series-type'],
-  [ArgumentType.CONSTANT, 'tb.rulenode.constant-type'],
-  [ArgumentType.MESSAGE_BODY, 'tb.rulenode.message-body-type'],
-  [ArgumentType.MESSAGE_METADATA, 'tb.rulenode.message-metadata-type']
+export interface ArgumentTypeData {
+  name: string;
+  description: string;
+}
+
+export const ArgumentTypeMap = new Map<ArgumentType, ArgumentTypeData>([
+  [
+    ArgumentType.MESSAGE_BODY,
+    {
+      name: 'tb.rulenode.message-body-type',
+      description: 'Fetch argument value from incoming message'
+    }
+  ],
+  [
+    ArgumentType.MESSAGE_METADATA,
+    {
+      name: 'tb.rulenode.message-metadata-type',
+      description: 'Fetch argument value from incoming message metadata'
+    }
+  ],
+  [
+    ArgumentType.ATTRIBUTE,
+    {
+      name: 'tb.rulenode.attribute-type',
+      description: 'Fetch attribute value from database'
+    }
+  ],
+  [
+    ArgumentType.TIME_SERIES,
+    {
+      name: 'tb.rulenode.time-series-type',
+      description: 'Fetch latest time-series value from database'
+    }
+  ],
+  [
+    ArgumentType.CONSTANT,
+    {
+      name: 'tb.rulenode.constant-type',
+      description: 'Define constant value'
+    }
+  ]
+]);
+
+export const ArgumentTypeResultMap = new Map<ArgumentTypeResult, ArgumentTypeData>([
+  [
+    ArgumentTypeResult.MESSAGE_BODY,
+    {
+      name: 'tb.rulenode.message-body-type',
+      description: 'Add result to the outgoing message'
+    }
+  ],
+  [
+    ArgumentTypeResult.MESSAGE_METADATA,
+    {
+      name: 'tb.rulenode.message-metadata-type',
+      description: 'Add result to the outgoing message metadata'
+    }
+  ],
+  [
+    ArgumentTypeResult.ATTRIBUTE,
+    {
+      name: 'tb.rulenode.attribute-type',
+      description: 'Store result as an entity attribute in the database'
+    }
+  ],
+  [
+    ArgumentTypeResult.TIME_SERIES,
+    {
+      name: 'tb.rulenode.time-series-type',
+      description: 'Store result as an entity time-series in the database'
+    }
+  ]
 ]);
 
 export const ArgumentName = ['x', 'y', 'z', 'a', 'b', 'c', 'd', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't'];

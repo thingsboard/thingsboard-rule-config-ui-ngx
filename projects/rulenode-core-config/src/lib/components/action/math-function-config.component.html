@@ -24,18 +24,25 @@
   <fieldset class="fields-group" fxLayout="column" fxLayoutGap="8px">
     <legend class="group-title" translate>tb.rulenode.result-title</legend>
     <div formGroupName="result">
+      <mat-form-field fxFlex class="mat-block">
+        <mat-label translate>tb.rulenode.type-field-input</mat-label>
+        <mat-select formControlName="type" required>
+          <mat-select-trigger>
+            {{ argumentTypeResultMap.get(mathFunctionConfigForm.get('result.type').value)?.name | translate }}
+          </mat-select-trigger>
+          <mat-option *ngFor="let argument of argumentsResult" [value]="argument"
+                      style="border-bottom: 1px solid #eee;">
+            {{ argumentTypeResultMap.get(argument).name | translate }}
+            <small style="display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+              {{ argumentTypeResultMap.get(argument).description }}
+            </small>
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="mathFunctionConfigForm.get('result.type').hasError('required')" translate>
+          tb.rulenode.type-field-input-required
+        </mat-error>
+      </mat-form-field>
       <div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutGap.gt-xs="16px">
-        <mat-form-field fxFlex class="mat-block">
-          <mat-label translate>tb.rulenode.type-field-input</mat-label>
-          <mat-select formControlName="type" required>
-            <mat-option *ngFor="let argument of argumentsResult" [value]="argument">
-              {{ argumentTypeResultMap.get(argument) | translate }}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="mathFunctionConfigForm.get('result.type').hasError('required')" translate>
-            tb.rulenode.type-field-input-required
-          </mat-error>
-        </mat-form-field>
         <mat-form-field fxFlex class="mat-block" *ngIf="mathFunctionConfigForm.get('result').get('type').value === ArgumentTypeResult.ATTRIBUTE">
           <mat-label translate>tb.rulenode.attribute-scope-field-input</mat-label>
           <mat-select required formControlName="attributeScope">
@@ -63,12 +70,11 @@
                  type="number"/>
           <mat-hint [innerHTML]="'tb.rulenode.number-floating-point-field-input-hint' | translate | safeHtml"></mat-hint>
         </mat-form-field>
-        <div fxFlex></div>
       </div>
       <div *ngIf="[ArgumentTypeResult.ATTRIBUTE, ArgumentTypeResult.TIME_SERIES].includes(mathFunctionConfigForm.get('result').get('type').value)"
            fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap.gt-xs="16px" style="padding-top: 16px;">
         <mat-checkbox formControlName="addToBody">
-          {{'tb.rulenode.add-to-body-field-input' | translate }}
+          {{'tb.rulenode.add-to-message-field-input' | translate }}
         </mat-checkbox>
         <mat-checkbox formControlName="addToMetadata">
           {{'tb.rulenode.add-to-metadata-field-input' | translate}}

@@ -74,7 +74,7 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
   ngControl: NgControl;
 
   attributeScopeMap = AttributeScopeMap;
-  argumentTypeResultMap = ArgumentTypeMap;
+  argumentTypeMap = ArgumentTypeMap;
   arguments = Object.values(ArgumentType);
   attributeScope = Object.values(AttributeScope);
 
