@@ -13,10 +13,12 @@
       required
       formControlName="relationType">
     </tb-relation-type-autocomplete>
-    <tb-slide-toggle class="slide-toggle" formControlName="checkForSingleEntity"
-                     [slideToggleName]="'tb.rulenode.check-relation-to-specific-entity' | translate"
-                     [slideToggleTooltip]="'tb.rulenode.check-relation-to-specific-entity-tooltip' | translate">
-    </tb-slide-toggle>
+    <div tb-hint-tooltip-icon="{{ 'tb.rulenode.check-relation-to-specific-entity-tooltip' | translate }}"
+         class="tb-form-row no-border no-padding slide-toggle">
+      <mat-slide-toggle class="mat-slide" formControlName="checkForSingleEntity">
+        {{ 'tb.rulenode.check-relation-to-specific-entity' | translate }}
+      </mat-slide-toggle>
+    </div>
     <div *ngIf="checkRelationConfigForm.get('checkForSingleEntity').value" fxLayout="row" fxLayoutGap="16px">
       <tb-entity-type-select
         style="min-width: 100px;"

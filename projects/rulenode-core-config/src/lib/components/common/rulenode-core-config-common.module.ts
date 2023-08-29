@@ -13,7 +13,6 @@ import { MathFunctionAutocompleteComponent } from './math-function-autocomplete.
 import { OutputMessageTypeAutocompleteComponent } from './output-message-type-autocomplete.component';
 import { KvMapConfigOldComponent } from './kv-map-config-old.component';
 import { MsgMetadataChipComponent } from './msg-metadata-chip.component';
-import { SlideToggleComponent } from './slide-toggle.component';
 import { SvMapConfigComponent } from './sv-map-config.component';
 import { RelationsQueryConfigOldComponent } from './relations-query-config-old.component';
 import { SelectAttributesComponent } from './select-attributes.component';
@@ -33,7 +32,6 @@ import { ExampleHintComponent } from './example-hint.component';
     OutputMessageTypeAutocompleteComponent,
     KvMapConfigOldComponent,
     MsgMetadataChipComponent,
-    SlideToggleComponent,
     SvMapConfigComponent,
     RelationsQueryConfigOldComponent,
     SelectAttributesComponent,
@@ -57,7 +55,6 @@ import { ExampleHintComponent } from './example-hint.component';
     OutputMessageTypeAutocompleteComponent,
     KvMapConfigOldComponent,
     MsgMetadataChipComponent,
-    SlideToggleComponent,
     SvMapConfigComponent,
     RelationsQueryConfigOldComponent,
     SelectAttributesComponent,

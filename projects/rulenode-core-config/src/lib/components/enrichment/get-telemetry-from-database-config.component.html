@@ -16,10 +16,12 @@
   </tb-string-items-list>
   <div class="tb-form-panel stroked">
     <div class="tb-form-panel-title tb-required" translate>tb.rulenode.fetch-interval</div>
-    <tb-slide-toggle formControlName="useMetadataIntervalPatterns"
-                     [slideToggleName]="'tb.rulenode.use-metadata-dynamic-interval' | translate"
-                     [slideToggleTooltip]="'tb.rulenode.use-metadata-dynamic-interval-tooltip' | translate">
-    </tb-slide-toggle>
+    <div tb-hint-tooltip-icon="{{ 'tb.rulenode.use-metadata-dynamic-interval-tooltip' | translate }}"
+         class="tb-form-row no-border no-padding">
+      <mat-slide-toggle class="mat-slide" formControlName="useMetadataIntervalPatterns">
+        {{ 'tb.rulenode.use-metadata-dynamic-interval' | translate }}
+      </mat-slide-toggle>
+    </div>
     <div formGroupName="interval" fxLayout="column"
          *ngIf="getTelemetryFromDatabaseConfigForm.get('useMetadataIntervalPatterns').value === false; else intervalPattern">
       <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="16px">

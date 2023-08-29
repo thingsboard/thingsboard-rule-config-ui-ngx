@@ -21,11 +21,13 @@
       </mat-error>
     </mat-form-field>
   </div>
-  <tb-slide-toggle *ngIf="deviceRelationsQueryFormGroup.get('maxLevel').value > 1"
-                   class="last-level-slide-toggle"
-                   [slideToggleName]="'alias.last-level-relation' | translate"
-                   [slideToggleTooltip]="'tb.rulenode.last-level-device-relation-tooltip' | translate">
-  </tb-slide-toggle>
+  <div tb-hint-tooltip-icon="{{ 'tb.rulenode.last-level-device-relation-tooltip' | translate }}"
+       *ngIf="deviceRelationsQueryFormGroup.get('maxLevel').value > 1"
+       class="tb-form-row no-border no-padding last-level-slide-toggle">
+    <mat-slide-toggle class="mat-slide" formControlName="fetchLastLevelOnly">
+      {{ 'alias.last-level-relation' | translate }}
+    </mat-slide-toggle>
+  </div>
   <tb-relation-type-autocomplete
     fxFlex
     formControlName="relationType">

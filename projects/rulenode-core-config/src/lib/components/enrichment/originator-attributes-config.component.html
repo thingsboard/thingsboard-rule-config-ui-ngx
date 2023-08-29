@@ -16,9 +16,10 @@
                           formControlName="fetchTo">
     </tb-msg-metadata-chip>
   </div>
-  <tb-slide-toggle class="tb-form-panel stroked"
-                   formControlName="tellFailureIfAbsent"
-                   [slideToggleName]="'tb.rulenode.tell-failure' | translate"
-                   [slideToggleTooltip]="'tb.rulenode.tell-failure-tooltip' | translate">
-  </tb-slide-toggle>
+  <div tb-hint-tooltip-icon="{{ 'tb.rulenode.tell-failure-tooltip' | translate }}"
+       class="tb-form-row same-padding" style="height: 56px">
+    <mat-slide-toggle class="mat-slide" formControlName="tellFailureIfAbsent">
+      {{ 'tb.rulenode.tell-failure' | translate }}
+    </mat-slide-toggle>
+  </div>
 </section>

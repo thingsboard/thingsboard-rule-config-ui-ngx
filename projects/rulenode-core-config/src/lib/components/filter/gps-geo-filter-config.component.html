@@ -32,12 +32,14 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <tb-slide-toggle fxFlex class="slide-toggle" formControlName="fetchPerimeterInfoFromMessageMetadata"
-                       [slideToggleName]="'tb.rulenode.fetch-perimeter-info-from-metadata' | translate"
-                       [slideToggleTooltip]="'tb.rulenode.fetch-perimeter-info-from-metadata-tooltip' | translate :
-                     {perimeterKeyName: geoFilterConfigForm.get('perimeterKeyName').valid ?
-                     geoFilterConfigForm.get('perimeterKeyName').value : 'ss_perimeter'}">
-      </tb-slide-toggle>
+      <div tb-hint-tooltip-icon="{{ 'tb.rulenode.fetch-perimeter-info-from-metadata-tooltip' | translate :
+                     { perimeterKeyName: geoFilterConfigForm.get('perimeterKeyName').valid ?
+                              geoFilterConfigForm.get('perimeterKeyName').value : 'ss_perimeter'} }}"
+           class="tb-form-row no-border no-padding slide-toggle">
+        <mat-slide-toggle class="mat-slide" formControlName="fetchPerimeterInfoFromMessageMetadata">
+          {{ 'tb.rulenode.fetch-perimeter-info-from-metadata' | translate }}
+        </mat-slide-toggle>
+      </div>
       <mat-form-field *ngIf="geoFilterConfigForm.get('fetchPerimeterInfoFromMessageMetadata').value" class="mat-block">
         <mat-label>{{ 'tb.rulenode.perimeter-key-name' | translate }}</mat-label>
         <input matInput formControlName="perimeterKeyName" required>

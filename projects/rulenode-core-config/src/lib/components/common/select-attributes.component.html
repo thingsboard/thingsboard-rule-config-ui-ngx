@@ -21,12 +21,14 @@
                         [label]="'tb.rulenode.latest-telemetry' | translate" formControlName="latestTsKeyNames">
     <ng-container matSuffix *ngTemplateOutlet="helpIcon"></ng-container>
   </tb-string-items-list>
-  <tb-slide-toggle *ngIf="attributeControlGroup.get('latestTsKeyNames').value?.length > 0"
-                   formControlName="getLatestValueWithTs"
-                   [slideToggleName]="'tb.rulenode.fetch-latest-telemetry-with-timestamp' | translate"
-                   [slideToggleTooltip]="'tb.rulenode.fetch-latest-telemetry-with-timestamp-tooltip' | translate:
-                         { latestTsKeyName:  attributeControlGroup.get('latestTsKeyNames').value[0]}">
-  </tb-slide-toggle>
+  <div tb-hint-tooltip-icon="{{ 'tb.rulenode.fetch-latest-telemetry-with-timestamp-tooltip' | translate:
+                         { latestTsKeyName:  attributeControlGroup.get('latestTsKeyNames').value[0]} }}"
+       *ngIf="attributeControlGroup.get('latestTsKeyNames').value?.length > 0"
+       class="tb-form-row no-border no-padding">
+    <mat-slide-toggle class="mat-slide" formControlName="getLatestValueWithTs">
+      {{ 'tb.rulenode.fetch-latest-telemetry-with-timestamp' | translate }}
+    </mat-slide-toggle>
+  </div>
 </div>
 
 <ng-template #helpIcon>
