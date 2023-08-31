@@ -1,16 +1,28 @@
-<section [formGroup]="tenantAttributesConfigForm" fxLayout="column">
-  <label translate class="tb-title tb-required">tb.rulenode.attr-mapping</label>
-  <mat-checkbox fxFlex formControlName="telemetry">
-    {{ 'tb.rulenode.latest-telemetry' | translate }}
-  </mat-checkbox>
+<section [formGroup]="tenantAttributesConfigForm" class="tb-form-panel stroked">
+  <div class="tb-form-panel-title" translate>tb.rulenode.mapping-of-tenant-fields</div>
+  <div fxFlex fxLayoutAlign="center center">
+    <div class="fetch-to-data-toggle">
+      <tb-toggle-select class="fetch-to-data-toggle" formControlName="dataToFetch" appearance="fill">
+        <tb-toggle-option *ngFor="let data of fetchToData" [value]="data.value">
+          {{ data.name }}
+        </tb-toggle-option>
+      </tb-toggle-select>
+    </div>
+  </div>
   <tb-kv-map-config
     required
-    formControlName="attrMapping"
-    requiredText="tb.rulenode.attr-mapping-required"
-    keyText="{{ tenantAttributesConfigForm.get('telemetry').value ? 'tb.rulenode.source-telemetry' : 'tb.rulenode.source-attribute' }}"
-    keyRequiredText="{{ tenantAttributesConfigForm.get('telemetry').value ? 'tb.rulenode.source-telemetry-required' : 'tb.rulenode.source-attribute-required' }}"
-    valText="tb.rulenode.target-attribute"
-    valRequiredText="tb.rulenode.target-attribute-required"
-    hintText="tb.rulenode.kv-map-pattern-hint">
+    formControlName="dataMapping"
+    [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
+    [labelText]="selectTranslation('tb.rulenode.latest-telemetry-mapping', 'tb.rulenode.attributes-mapping') | translate"
+    [keyText]="selectTranslation('tb.rulenode.source-telemetry', 'tb.rulenode.source-attribute') | translate"
+    [keyRequiredText]="selectTranslation('tb.rulenode.source-telemetry-required', 'tb.rulenode.source-attribute-required') | translate"
+    [valText]="'tb.rulenode.target-key' | translate"
+    [valRequiredText]="'tb.rulenode.target-key-required' | translate"
+    [hintText]="'tb.rulenode.kv-map-pattern-hint' | translate"
+    popupHelpLink="rulenode/tenant_attributes_node_fields_templatization">
   </tb-kv-map-config>
+  <tb-msg-metadata-chip formControlName="fetchTo"
+                        [labelText]="tenantAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY ?
+                        ('tb.rulenode.add-mapped-latest-telemetry-to' | translate) : ('tb.rulenode.add-mapped-attribute-to' | translate)">
+  </tb-msg-metadata-chip>
 </section>

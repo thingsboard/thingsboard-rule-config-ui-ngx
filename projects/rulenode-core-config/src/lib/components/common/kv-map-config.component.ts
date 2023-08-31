@@ -1,23 +1,27 @@
 import { Component, forwardRef, Injector, Input, OnInit } from '@angular/core';
 import {
   AbstractControl,
-  ControlValueAccessor, UntypedFormArray,
-  UntypedFormBuilder, UntypedFormControl,
-  UntypedFormGroup, NG_VALIDATORS,
-  NG_VALUE_ACCESSOR, NgControl, Validator,
+  ControlValueAccessor,
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  NgControl,
+  Validator,
   Validators
 } from '@angular/forms';
-import { PageComponent } from '@shared/public-api';
+import { coerceBoolean, PageComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/public-api';
 import { Subscription } from 'rxjs';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'tb-kv-map-config',
   templateUrl: './kv-map-config.component.html',
-  styleUrls: ['./kv-map-config.component.scss'],
+  styleUrls: ['./kv-map-config.component.scss', '../../../../style.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -33,9 +37,21 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class KvMapConfigComponent extends PageComponent implements ControlValueAccessor, OnInit, Validator {
 
-  @Input() disabled: boolean;
+  private propagateChange = null;
+  private valueChangeSubscription: Subscription = null;
 
-  @Input() uniqueKeyValuePairValidator: boolean;
+  kvListFormGroup: FormGroup;
+  ngControl: NgControl;
+
+  @Input()
+  @coerceBoolean()
+  disabled = false;
+
+  @Input()
+  @coerceBoolean()
+  uniqueKeyValuePairValidator = false;
+
+  @Input() labelText: string;
 
   @Input() requiredText: string;
 
@@ -49,27 +65,16 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
 
   @Input() hintText: string;
 
-  private requiredValue: boolean;
-  get required(): boolean {
-    return this.requiredValue;
-  }
+  @Input() popupHelpLink: string;
+
   @Input()
-  set required(value: boolean) {
-    this.requiredValue = coerceBooleanProperty(value);
-  }
-
-  kvListFormGroup: UntypedFormGroup;
-
-  ngControl: NgControl;
-
-  private propagateChange = null;
-
-  private valueChangeSubscription: Subscription = null;
+  @coerceBoolean()
+  required = false;
 
   constructor(protected store: Store<AppState>,
               public translate: TranslateService,
               public injector: Injector,
-              private fb: UntypedFormBuilder) {
+              private fb: FormBuilder) {
     super(store);
   }
 
@@ -83,8 +88,20 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
       this.fb.array([]));
   }
 
-  keyValsFormArray(): UntypedFormArray {
-    return this.kvListFormGroup.get('keyVals') as UntypedFormArray;
+  keyValsFormArray(): FormArray {
+    return this.kvListFormGroup.get('keyVals') as FormArray;
+  }
+
+  public errorTrigger() {
+    const keyVals = this.keyValsFormArray();
+    for (const keyVal of keyVals.controls) {
+      for (const controlName of Object.keys(keyVal.value)) {
+        if (keyVal.get(controlName).touched && keyVal.get(controlName).invalid) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   registerOnChange(fn: any): void {
@@ -94,7 +111,7 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
   registerOnTouched(fn: any): void {
   }
 
-  setDisabledState?(isDisabled: boolean): void {
+  setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
     if (this.disabled) {
       this.kvListFormGroup.disable({emitEvent: false});
@@ -103,7 +120,7 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
     }
   }
 
-  writeValue(keyValMap: {[key: string]: string}): void {
+  writeValue(keyValMap: { [key: string]: string }): void {
     if (this.valueChangeSubscription) {
       this.valueChangeSubscription.unsubscribe();
     }
@@ -112,8 +129,8 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
       for (const property of Object.keys(keyValMap)) {
         if (Object.prototype.hasOwnProperty.call(keyValMap, property)) {
           keyValsControls.push(this.fb.group({
-            key: [property, [Validators.required]],
-            value: [keyValMap[property], [Validators.required]]
+            key: [property, [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]],
+            value: [keyValMap[property], [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]]
           }));
         }
       }
@@ -125,19 +142,19 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
   }
 
   public removeKeyVal(index: number) {
-    (this.kvListFormGroup.get('keyVals') as UntypedFormArray).removeAt(index);
+    (this.kvListFormGroup.get('keyVals') as FormArray).removeAt(index);
   }
 
   public addKeyVal() {
-    const keyValsFormArray = this.kvListFormGroup.get('keyVals') as UntypedFormArray;
+    const keyValsFormArray = this.kvListFormGroup.get('keyVals') as FormArray;
     keyValsFormArray.push(this.fb.group({
-      key: ['', [Validators.required]],
-      value: ['', [Validators.required]]
+      key: ['', [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]],
+      value: ['', [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]]
     }));
   }
 
-  public validate(c: UntypedFormControl) {
-    const kvList: {key: string; value: string}[] = this.kvListFormGroup.get('keyVals').value;
+  public validate(c: FormControl) {
+    const kvList: { key: string; value: string }[] = this.kvListFormGroup.get('keyVals').value;
     if (!kvList.length && this.required) {
       return {
         kvMapRequired: true
@@ -153,7 +170,7 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
         if (kv.key === kv.value) {
           return {
             uniqueKeyValuePair: true
-          }
+          };
         }
       }
     }
@@ -161,7 +178,7 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
   }
 
   private updateModel() {
-    const kvList: {key: string; value: string}[] = this.kvListFormGroup.get('keyVals').value;
+    const kvList: { key: string; value: string }[] = this.kvListFormGroup.get('keyVals').value;
     if (this.required && !kvList.length || !this.kvListFormGroup.valid) {
       this.propagateChange(null);
     } else {

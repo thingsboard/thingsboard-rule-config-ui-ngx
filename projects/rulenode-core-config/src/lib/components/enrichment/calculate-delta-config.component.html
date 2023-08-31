@@ -1,44 +1,66 @@
-<section [formGroup]="calculateDeltaConfigForm" fxLayout="column">
-  <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="8px">
-    <mat-form-field class="mat-block" fxFlex="100" fxFlex.gt-sm="38">
-      <mat-label translate>tb.rulenode.input-value-key</mat-label>
-      <input required matInput formControlName="inputValueKey">
-      <mat-error *ngIf="calculateDeltaConfigForm.get('inputValueKey').hasError('required')">
+<section [formGroup]="calculateDeltaConfigForm">
+  <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="22px">
+    <mat-form-field class="mat-block" fxFlex>
+      <mat-label>{{ 'tb.rulenode.input-value-key' | translate }}</mat-label>
+      <input matInput formControlName="inputValueKey">
+      <mat-error *ngIf="calculateDeltaConfigForm.get('inputValueKey').hasError('required') ||
+      calculateDeltaConfigForm.get('inputValueKey').hasError('pattern')">
         {{ 'tb.rulenode.input-value-key-required' | translate }}
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="mat-block" fxFlex="100" fxFlex.gt-sm="38">
-      <mat-label translate>tb.rulenode.output-value-key</mat-label>
-      <input required matInput formControlName="outputValueKey">
-      <mat-error *ngIf="calculateDeltaConfigForm.get('outputValueKey').hasError('required')">
+    <mat-form-field class="mat-block" fxFlex>
+      <mat-label>{{ 'tb.rulenode.output-value-key' | translate }}</mat-label>
+      <input matInput formControlName="outputValueKey">
+      <mat-error *ngIf="calculateDeltaConfigForm.get('outputValueKey').hasError('required') ||
+      calculateDeltaConfigForm.get('inputValueKey').hasError('pattern')">
         {{ 'tb.rulenode.output-value-key-required' | translate }}
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="mat-block" fxFlex="100" fxFlex.gt-sm="24">
-      <mat-label translate>tb.rulenode.round</mat-label>
-      <input type="number" min="0" max="15" step="1" matInput formControlName="round">
-      <mat-error *ngIf="calculateDeltaConfigForm.get('round').hasError('min')">
-        {{ 'tb.rulenode.round-range' | translate }}
-      </mat-error>
-      <mat-error *ngIf="calculateDeltaConfigForm.get('round').hasError('max')">
-        {{ 'tb.rulenode.round-range' | translate }}
-      </mat-error>
-    </mat-form-field>
   </div>
-  <mat-checkbox formControlName="useCache">
-    {{ 'tb.rulenode.use-cache' | translate }}
-  </mat-checkbox>
-  <mat-checkbox formControlName="tellFailureIfDeltaIsNegative">
-    {{ 'tb.rulenode.tell-failure-if-delta-is-negative' | translate }}
-  </mat-checkbox>
-  <mat-checkbox formControlName="addPeriodBetweenMsgs">
-    {{ 'tb.rulenode.add-period-between-msgs' | translate }}
-  </mat-checkbox>
-  <mat-form-field class="mat-block" *ngIf="calculateDeltaConfigForm.get('addPeriodBetweenMsgs').value">
-    <mat-label translate>tb.rulenode.period-value-key</mat-label>
-    <input required matInput formControlName="periodValueKey">
-    <mat-error *ngIf="calculateDeltaConfigForm.get('periodValueKey').hasError('required')">
-      {{ 'tb.rulenode.period-value-key-required' | translate }}
+  <mat-form-field class="mat-block" fxFlex>
+    <mat-label>{{ 'tb.rulenode.number-of-digits-after-floating-point' | translate }}</mat-label>
+    <input type="number" min="0" max="15" step="1" matInput formControlName="round">
+    <mat-error *ngIf="calculateDeltaConfigForm.get('round').hasError('min')">
+      {{ 'tb.rulenode.number-of-digits-after-floating-point-range' | translate }}
+    </mat-error>
+    <mat-error *ngIf="calculateDeltaConfigForm.get('round').hasError('max')">
+      {{ 'tb.rulenode.number-of-digits-after-floating-point-range' | translate }}
     </mat-error>
   </mat-form-field>
+  <div class="tb-form-panel no-padding no-border">
+    <div tb-hint-tooltip-icon="{{ 'tb.rulenode.failure-if-delta-negative-tooltip' | translate }}"
+         class="tb-form-row same-padding" style="height: 56px">
+      <mat-slide-toggle class="mat-slide" formControlName="useCache">
+        {{ 'tb.rulenode.failure-if-delta-negative' | translate }}
+      </mat-slide-toggle>
+    </div>
+    <div tb-hint-tooltip-icon="{{ 'tb.rulenode.use-caching-tooltip' | translate :
+                       { inputValueKey: calculateDeltaConfigForm.get('inputValueKey').valid ?
+                                calculateDeltaConfigForm.get('inputValueKey').value : 'tb.rulenode.input-value-key' | translate } }}"
+         class="tb-form-row same-padding" style="height: 56px">
+      <mat-slide-toggle class="mat-slide" formControlName="tellFailureIfDeltaIsNegative">
+        {{ 'tb.rulenode.use-caching' | translate }}
+      </mat-slide-toggle>
+    </div>
+    <div class="tb-form-panel stroked" [class.no-padding-bottom]="calculateDeltaConfigForm.get('addPeriodBetweenMsgs').value">
+      <div tb-hint-tooltip-icon="{{ 'tb.rulenode.add-time-difference-between-readings-tooltip' | translate:
+                           { periodValueKey: (calculateDeltaConfigForm.get('periodValueKey').valid &&
+                           calculateDeltaConfigForm.get('addPeriodBetweenMsgs').value) ? calculateDeltaConfigForm.get('periodValueKey').value :
+                           'periodInMs' } }}"
+           class="tb-form-row no-border no-padding">
+        <mat-slide-toggle class="mat-slide" formControlName="addPeriodBetweenMsgs">
+          {{ 'tb.rulenode.add-time-difference-between-readings' | translate:
+          { inputValueKey: calculateDeltaConfigForm.get('inputValueKey').valid ?
+                     calculateDeltaConfigForm.get('inputValueKey').value : 'tb.rulenode.input-value-key' | translate } }}
+        </mat-slide-toggle>
+      </div>
+      <mat-form-field class="mat-block" *ngIf="calculateDeltaConfigForm.get('addPeriodBetweenMsgs').value">
+        <mat-label>{{ 'tb.rulenode.period-value-key' | translate }}</mat-label>
+        <input required matInput formControlName="periodValueKey">
+        <mat-error *ngIf="calculateDeltaConfigForm.get('periodValueKey').hasError('required')">
+          {{ 'tb.rulenode.period-value-key-required' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
 </section>

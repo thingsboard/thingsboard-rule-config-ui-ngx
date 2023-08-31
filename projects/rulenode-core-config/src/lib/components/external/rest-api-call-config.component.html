@@ -84,14 +84,14 @@
   </mat-form-field>
   <label translate class="tb-title">tb.rulenode.headers</label>
   <div class="tb-hint" [innerHTML]="'tb.rulenode.headers-hint' | translate | safeHtml"></div>
-  <tb-kv-map-config
+  <tb-kv-map-config-old
     required="false"
     formControlName="headers"
     keyText="tb.rulenode.header"
     keyRequiredText="tb.rulenode.header-required"
     valText="tb.rulenode.value"
     valRequiredText="tb.rulenode.value-required">
-  </tb-kv-map-config>
+  </tb-kv-map-config-old>
   <mat-checkbox formControlName="useRedisQueueForMsgPersistence">
     {{ 'tb.rulenode.use-redis-queue' | translate }}
   </mat-checkbox>

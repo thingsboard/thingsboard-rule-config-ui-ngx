@@ -27,10 +27,10 @@
   </div>
   <section fxLayout="column" *ngIf="changeOriginatorConfigForm.get('originatorSource').value === originatorSource.RELATED">
     <label translate class="tb-title tb-required">tb.rulenode.relations-query</label>
-    <tb-relations-query-config
+    <tb-relations-query-config-old
       required
       formControlName="relationsQuery"
       style="padding-bottom: 15px;">
-    </tb-relations-query-config>
+    </tb-relations-query-config-old>
   </section>
 </section>

@@ -1,0 +1,8 @@
+<div [formGroup]="chipControlGroup" class="tb-form-row space-between" ngClass.xs="filters-row-mobile">
+  <div class="fixed-title-width">{{ labelText }}</div>
+  <mat-chip-listbox formControlName="chipControl">
+    <mat-chip-option *ngFor="let option of selectOptions"
+                     selectable="{{ chipControlGroup.get('chipControl').value !== option.value }}" color="primary"
+                     [value]="option.value">{{ option.name }}</mat-chip-option>
+  </mat-chip-listbox>
+</div>

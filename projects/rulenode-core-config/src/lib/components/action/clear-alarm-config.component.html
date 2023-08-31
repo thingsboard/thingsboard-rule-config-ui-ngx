@@ -7,6 +7,14 @@
               [functionArgs]="['msg', 'metadata', 'msgType']"
               helpId="rulenode/clear_alarm_node_script_fn"
               noValidate="true">
+    <button toolbarSuffixButton
+            mat-icon-button
+            matTooltip="{{ testScriptLabel | translate }}"
+            matTooltipPosition="above"
+            class="tb-mat-32"
+            (click)="testScript()">
+      <mat-icon class="material-icons" color="primary">bug_report</mat-icon>
+    </button>
   </tb-js-func>
   <tb-js-func *ngIf="clearAlarmConfigForm.get('scriptLang').value === scriptLanguage.TBEL"
               #tbelFuncComponent
@@ -17,10 +25,18 @@
               [scriptLanguage]="scriptLanguage.TBEL"
               helpId="rulenode/tbel/clear_alarm_node_script_fn"
               noValidate="true">
+    <button toolbarSuffixButton
+            mat-icon-button
+            matTooltip="{{ testScriptLabel | translate }}"
+            matTooltipPosition="above"
+            class="tb-mat-32"
+            (click)="testScript()">
+      <mat-icon class="material-icons" color="primary">bug_report</mat-icon>
+    </button>
   </tb-js-func>
   <div fxLayout="row" style="padding-bottom: 16px;">
     <button mat-button mat-raised-button color="primary" (click)="testScript()">
-      {{ 'tb.rulenode.test-details-function' | translate }}
+      {{ testScriptLabel | translate }}
     </button>
   </div>
   <mat-form-field class="mat-block" subscriptSizing="dynamic">

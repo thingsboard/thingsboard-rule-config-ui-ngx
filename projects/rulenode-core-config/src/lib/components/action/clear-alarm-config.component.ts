@@ -1,6 +1,12 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, EventEmitter, ViewChild } from '@angular/core';
 import { AppState, getCurrentAuthState, NodeScriptTestService } from '@core/public-api';
-import { JsFuncComponent, RuleNodeConfiguration, RuleNodeConfigurationComponent, ScriptLanguage } from '@shared/public-api';
+import {
+  DebugRuleNodeEventBody,
+  JsFuncComponent,
+  RuleNodeConfiguration,
+  RuleNodeConfigurationComponent,
+  ScriptLanguage
+} from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -20,6 +26,12 @@ export class ClearAlarmConfigComponent extends RuleNodeConfigurationComponent {
   tbelEnabled = getCurrentAuthState(this.store).tbelEnabled;
 
   scriptLanguage = ScriptLanguage;
+
+  changeScript: EventEmitter<void> = new EventEmitter<void>();
+
+  readonly hasScript = true;
+
+  readonly testScriptLabel = 'tb.rulenode.test-details-function';
 
   constructor(protected store: Store<AppState>,
               private fb: UntypedFormBuilder,
@@ -50,7 +62,7 @@ export class ClearAlarmConfigComponent extends RuleNodeConfigurationComponent {
     if (scriptLang === ScriptLanguage.TBEL && !this.tbelEnabled) {
       scriptLang = ScriptLanguage.JS;
       this.clearAlarmConfigForm.get('scriptLang').patchValue(scriptLang, {emitEvent: false});
-      setTimeout(() => {this.clearAlarmConfigForm.updateValueAndValidity({emitEvent: true})});
+      setTimeout(() => {this.clearAlarmConfigForm.updateValueAndValidity({emitEvent: true});});
     }
     this.clearAlarmConfigForm.get('alarmDetailsBuildJs').setValidators(scriptLang === ScriptLanguage.JS ? [Validators.required] : []);
     this.clearAlarmConfigForm.get('alarmDetailsBuildJs').updateValueAndValidity({emitEvent});
@@ -67,7 +79,7 @@ export class ClearAlarmConfigComponent extends RuleNodeConfigurationComponent {
     return configuration;
   }
 
-  testScript() {
+  testScript(debugEventBody?: DebugRuleNodeEventBody) {
     const scriptLang: ScriptLanguage = this.clearAlarmConfigForm.get('scriptLang').value;
     const scriptField = scriptLang === ScriptLanguage.JS ? 'alarmDetailsBuildJs' : 'alarmDetailsBuildTbel';
     const helpId = scriptLang === ScriptLanguage.JS ? 'rulenode/clear_alarm_node_script_fn' : 'rulenode/tbel/clear_alarm_node_script_fn';
@@ -80,10 +92,12 @@ export class ClearAlarmConfigComponent extends RuleNodeConfigurationComponent {
       ['msg', 'metadata', 'msgType'],
       this.ruleNodeId,
       helpId,
-      scriptLang
+      scriptLang,
+      debugEventBody
     ).subscribe((theScript) => {
       if (theScript) {
         this.clearAlarmConfigForm.get(scriptField).setValue(theScript);
+        this.changeScript.emit();
       }
     });
   }

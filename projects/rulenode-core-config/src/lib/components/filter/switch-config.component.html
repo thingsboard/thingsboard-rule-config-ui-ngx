@@ -1,4 +1,4 @@
-<section [formGroup]="switchConfigForm" fxLayout="column">
+<section [formGroup]="switchConfigForm">
   <tb-script-lang formControlName="scriptLang" *ngIf="tbelEnabled"></tb-script-lang>
   <tb-js-func *ngIf="switchConfigForm.get('scriptLang').value === scriptLanguage.JS"
               #jsFuncComponent
@@ -7,6 +7,14 @@
               [functionArgs]="['msg', 'metadata', 'msgType']"
               helpId="rulenode/switch_node_script_fn"
               noValidate="true">
+    <button toolbarSuffixButton
+            mat-icon-button
+            matTooltip="{{ testScriptLabel | translate }}"
+            matTooltipPosition="above"
+            class="tb-mat-32"
+            (click)="testScript()">
+      <mat-icon class="material-icons" color="primary">bug_report</mat-icon>
+    </button>
   </tb-js-func>
   <tb-js-func *ngIf="switchConfigForm.get('scriptLang').value === scriptLanguage.TBEL"
               #tbelFuncComponent
@@ -17,10 +25,16 @@
               [scriptLanguage]="scriptLanguage.TBEL"
               helpId="rulenode/tbel/switch_node_script_fn"
               noValidate="true">
-  </tb-js-func>
-  <div fxLayout="row">
-    <button mat-button mat-raised-button color="primary" (click)="testScript()">
-      {{ 'tb.rulenode.test-switch-function' | translate }}
+    <button toolbarSuffixButton
+            mat-icon-button
+            matTooltip="{{ testScriptLabel | translate }}"
+            matTooltipPosition="above"
+            class="tb-mat-32"
+            (click)="testScript()">
+      <mat-icon class="material-icons" color="primary">bug_report</mat-icon>
     </button>
-  </div>
+  </tb-js-func>
+  <button mat-button mat-raised-button color="primary" (click)="testScript()">
+    {{ testScriptLabel | translate }}
+  </button>
 </section>

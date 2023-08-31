@@ -7,6 +7,14 @@
               [functionArgs]="['msg', 'metadata', 'msgType']"
               helpId="rulenode/log_node_script_fn"
               noValidate="true">
+    <button toolbarSuffixButton
+            mat-icon-button
+            matTooltip="{{ testScriptLabel | translate }}"
+            matTooltipPosition="above"
+            class="tb-mat-32"
+            (click)="testScript()">
+      <mat-icon class="material-icons" color="primary">bug_report</mat-icon>
+    </button>
   </tb-js-func>
   <tb-js-func *ngIf="logConfigForm.get('scriptLang').value === scriptLanguage.TBEL"
               #tbelFuncComponent
@@ -17,10 +25,18 @@
               [scriptLanguage]="scriptLanguage.TBEL"
               helpId="rulenode/tbel/log_node_script_fn"
               noValidate="true">
+    <button toolbarSuffixButton
+            mat-icon-button
+            matTooltip="{{ testScriptLabel | translate }}"
+            matTooltipPosition="above"
+            class="tb-mat-32"
+            (click)="testScript()">
+      <mat-icon class="material-icons" color="primary">bug_report</mat-icon>
+    </button>
   </tb-js-func>
   <div fxLayout="row">
     <button mat-button mat-raised-button color="primary" (click)="testScript()">
-      {{ 'tb.rulenode.test-to-string-function' | translate }}
+      {{ testScriptLabel | translate }}
     </button>
   </div>
 </section>

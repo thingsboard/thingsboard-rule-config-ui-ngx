@@ -40,6 +40,14 @@
               [functionArgs]="['prevMsg', 'prevMetadata', 'prevMsgType']"
               helpId="rulenode/generator_node_script_fn"
               noValidate="true">
+    <button toolbarSuffixButton
+            mat-icon-button
+            matTooltip="{{ testScriptLabel | translate }}"
+            matTooltipPosition="above"
+            class="tb-mat-32"
+            (click)="testScript()">
+      <mat-icon class="material-icons" color="primary">bug_report</mat-icon>
+    </button>
   </tb-js-func>
   <tb-js-func *ngIf="generatorConfigForm.get('scriptLang').value === scriptLanguage.TBEL"
               #tbelFuncComponent
@@ -50,10 +58,18 @@
               [scriptLanguage]="scriptLanguage.TBEL"
               helpId="rulenode/tbel/generator_node_script_fn"
               noValidate="true">
+    <button toolbarSuffixButton
+            mat-icon-button
+            matTooltip="{{ testScriptLabel | translate }}"
+            matTooltipPosition="above"
+            class="tb-mat-32"
+            (click)="testScript()">
+      <mat-icon class="material-icons" color="primary">bug_report</mat-icon>
+    </button>
   </tb-js-func>
   <div fxLayout="row" style="padding-bottom: 16px;">
     <button mat-button mat-raised-button color="primary" (click)="testScript()">
-      {{ 'tb.rulenode.test-generator-function' | translate }}
+      {{ testScriptLabel | translate }}
     </button>
   </div>
 </section>

@@ -1,5 +1,5 @@
 <mat-form-field [formGroup]="messageTypeConfigForm" style="width: 100%;">
-  <mat-label *ngIf="label" translate>{{ label }}</mat-label>
+  <mat-label *ngIf="label">{{ label }}</mat-label>
   <mat-chip-grid #chipList [required]="required">
     <mat-chip-row
       *ngFor="let messageType of messageTypes"
@@ -34,8 +34,9 @@
         </div>
         <ng-template #searchNotEmpty>
                 <span>
-                  {{ translate.get('tb.rulenode.no-message-type-matching',
-                  {messageType: truncate.transform(searchText, true, 6, &apos;...&apos;)}) | async }}
+                  {{ 'tb.rulenode.no-message-type-matching' | translate :
+                  {messageType: truncate.transform(searchText, true, 6, &apos;...&apos;)}
+                  }}
                 </span>
         </ng-template>
         <span>
@@ -44,7 +45,9 @@
       </div>
     </mat-option>
   </mat-autocomplete>
+  <mat-icon class="mat-primary cursor-pointer" aria-hidden="false" aria-label="help-icon" matSuffix
+            matTooltip="{{ 'tb.rulenode.chip-help' | translate }}">help</mat-icon>
   <mat-error *ngIf="chipList.errorState">
-    {{ 'tb.rulenode.message-types-required' | translate }}
+    {{ 'tb.rulenode.select-message-types-required' | translate }}
   </mat-error>
 </mat-form-field>

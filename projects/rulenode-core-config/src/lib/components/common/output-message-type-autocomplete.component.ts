@@ -1,5 +1,5 @@
 import { Component, ElementRef, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { map, mergeMap, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
@@ -17,7 +17,7 @@ import { SubscriptSizing } from '@angular/material/form-field';
   }]
 })
 
-export class OutputMessageTypeAutocompleteComponent implements  OnInit {
+export class OutputMessageTypeAutocompleteComponent implements OnInit {
 
   @ViewChild('messageTypeInput', {static: true}) messageTypeInput: ElementRef;
 
@@ -26,7 +26,7 @@ export class OutputMessageTypeAutocompleteComponent implements  OnInit {
   @Input()
   subscriptSizing: SubscriptSizing = 'fixed';
 
-  messageTypeFormGroup: UntypedFormGroup;
+  messageTypeFormGroup: FormGroup;
   outputMessageTypes: Observable<Array<string>>;
   private modelValue: string | null;
   private searchText = '';
@@ -34,9 +34,9 @@ export class OutputMessageTypeAutocompleteComponent implements  OnInit {
   private messageTypes = ['POST_ATTRIBUTES_REQUEST', 'POST_TELEMETRY_REQUEST'];
 
   constructor(private store: Store<AppState>,
-              private fb: UntypedFormBuilder) {
+              private fb: FormBuilder) {
     this.messageTypeFormGroup = this.fb.group({
-      messageType: [null,  [Validators.required, Validators.maxLength(255)]]
+      messageType: [null, [Validators.required, Validators.maxLength(255)]]
     });
   }
 
@@ -56,7 +56,7 @@ export class OutputMessageTypeAutocompleteComponent implements  OnInit {
           this.updateView(value);
         }),
         map(value => value ? value : ''),
-        mergeMap(type => this.fetchMessageTypes(type) )
+        mergeMap(type => this.fetchMessageTypes(type))
       );
   }
 
@@ -88,7 +88,7 @@ export class OutputMessageTypeAutocompleteComponent implements  OnInit {
   fetchMessageTypes(searchText?: string, strictMatch: boolean = false): Observable<Array<string>> {
     this.searchText = searchText;
     return of(this.messageTypes).pipe(
-      map(messageTypes => messageTypes.filter( messageType => {
+      map(messageTypes => messageTypes.filter(messageType => {
         if (strictMatch) {
           return searchText ? messageType === searchText : false;
         } else {

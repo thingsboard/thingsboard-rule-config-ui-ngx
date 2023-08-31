@@ -1,6 +1,12 @@
-import { Component, ViewChild } from '@angular/core';
-import { AppState, NodeScriptTestService, getCurrentAuthState } from '@core/public-api';
-import { JsFuncComponent, RuleNodeConfiguration, RuleNodeConfigurationComponent, ScriptLanguage } from '@shared/public-api';
+import { Component, EventEmitter, ViewChild } from '@angular/core';
+import { AppState, getCurrentAuthState, isDefinedAndNotNull, NodeScriptTestService } from '@core/public-api';
+import {
+  DebugRuleNodeEventBody,
+  JsFuncComponent,
+  RuleNodeConfiguration,
+  RuleNodeConfigurationComponent,
+  ScriptLanguage
+} from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -21,6 +27,12 @@ export class ScriptConfigComponent extends RuleNodeConfigurationComponent {
 
   scriptLanguage = ScriptLanguage;
 
+  changeScript: EventEmitter<void> = new EventEmitter<void>();
+
+  readonly hasScript = true;
+
+  readonly testScriptLabel = 'tb.rulenode.test-filter-function';
+
   constructor(protected store: Store<AppState>,
               private fb: UntypedFormBuilder,
               private nodeScriptTestService: NodeScriptTestService,
@@ -34,9 +46,9 @@ export class ScriptConfigComponent extends RuleNodeConfigurationComponent {
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.scriptConfigForm = this.fb.group({
-      scriptLang: [configuration ? configuration.scriptLang : ScriptLanguage.JS, [Validators.required]],
-      jsScript: [configuration ? configuration.jsScript : null, []],
-      tbelScript: [configuration ? configuration.tbelScript : null, []]
+      scriptLang: [configuration.scriptLang, [Validators.required]],
+      jsScript: [configuration.jsScript, []],
+      tbelScript: [configuration.tbelScript, []]
     });
   }
 
@@ -49,7 +61,9 @@ export class ScriptConfigComponent extends RuleNodeConfigurationComponent {
     if (scriptLang === ScriptLanguage.TBEL && !this.tbelEnabled) {
       scriptLang = ScriptLanguage.JS;
       this.scriptConfigForm.get('scriptLang').patchValue(scriptLang, {emitEvent: false});
-      setTimeout(() => {this.scriptConfigForm.updateValueAndValidity({emitEvent: true})});
+      setTimeout(() => {
+        this.scriptConfigForm.updateValueAndValidity({emitEvent: true});
+      });
     }
     this.scriptConfigForm.get('jsScript').setValidators(scriptLang === ScriptLanguage.JS ? [Validators.required] : []);
     this.scriptConfigForm.get('jsScript').updateValueAndValidity({emitEvent});
@@ -63,10 +77,14 @@ export class ScriptConfigComponent extends RuleNodeConfigurationComponent {
         configuration.scriptLang = ScriptLanguage.JS;
       }
     }
-    return configuration;
+    return {
+      scriptLang: isDefinedAndNotNull(configuration?.scriptLang) ? configuration.scriptLang : ScriptLanguage.JS,
+      jsScript: isDefinedAndNotNull(configuration?.jsScript) ? configuration.jsScript : null,
+      tbelScript: isDefinedAndNotNull(configuration?.tbelScript) ? configuration.tbelScript : null
+    };
   }
 
-  testScript() {
+  testScript(debugEventBody?: DebugRuleNodeEventBody) {
     const scriptLang: ScriptLanguage = this.scriptConfigForm.get('scriptLang').value;
     const scriptField = scriptLang === ScriptLanguage.JS ? 'jsScript' : 'tbelScript';
     const helpId = scriptLang === ScriptLanguage.JS ? 'rulenode/filter_node_script_fn' : 'rulenode/tbel/filter_node_script_fn';
@@ -79,10 +97,12 @@ export class ScriptConfigComponent extends RuleNodeConfigurationComponent {
       ['msg', 'metadata', 'msgType'],
       this.ruleNodeId,
       helpId,
-      scriptLang
+      scriptLang,
+      debugEventBody
     ).subscribe((theScript) => {
       if (theScript) {
         this.scriptConfigForm.get(scriptField).setValue(theScript);
+        this.changeScript.emit();
       }
     });
   }

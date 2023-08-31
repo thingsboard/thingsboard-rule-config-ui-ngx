@@ -1,17 +1,14 @@
 <section fxLayout="column" [formGroup]="deviceRelationsQueryFormGroup">
-  <mat-checkbox formControlName="fetchLastLevelOnly" style="padding-bottom: 16px;">
-    {{ 'alias.last-level-relation' | translate }}
-  </mat-checkbox>
-  <div fxLayoutGap="8px" fxLayout="row">
-    <mat-form-field class="mat-block" style="min-width: 100px;">
+  <div fxLayoutGap="22px" fxLayout="row">
+    <mat-form-field class="mat-block" subscriptSizing="dynamic" fxFlex="50" style="min-width: 100px;" hideRequiredMarker>
       <mat-label translate>relation.direction</mat-label>
-      <mat-select required matInput formControlName="direction">
+      <mat-select required formControlName="direction">
         <mat-option *ngFor="let type of directionTypes" [value]="type">
           {{ directionTypeTranslations.get(type) | translate }}
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field fxFlex floatLabel="always" class="mat-block">
+    <mat-form-field fxFlex="50" floatLabel="always" class="mat-block">
       <mat-label translate>tb.rulenode.max-relation-level</mat-label>
       <input matInput
              type="number"
@@ -19,17 +16,30 @@
              step="1"
              placeholder="{{ 'tb.rulenode.unlimited-level' | translate }}"
              formControlName="maxLevel">
+      <mat-error *ngIf="deviceRelationsQueryFormGroup.get('maxLevel').hasError('min')">
+        {{ 'tb.rulenode.max-relation-level-error' | translate }}
+      </mat-error>
     </mat-form-field>
   </div>
-  <div class="mat-caption" style="color: rgba(0,0,0,0.57);" translate>relation.relation-type</div>
+  <div tb-hint-tooltip-icon="{{ 'tb.rulenode.last-level-device-relation-tooltip' | translate }}"
+       *ngIf="deviceRelationsQueryFormGroup.get('maxLevel').value > 1"
+       class="tb-form-row no-border no-padding last-level-slide-toggle">
+    <mat-slide-toggle class="mat-slide" formControlName="fetchLastLevelOnly">
+      {{ 'alias.last-level-relation' | translate }}
+    </mat-slide-toggle>
+  </div>
   <tb-relation-type-autocomplete
     fxFlex
     formControlName="relationType">
   </tb-relation-type-autocomplete>
-  <div class="mat-caption tb-required" style="color: rgba(0,0,0,0.57);" translate>device.device-types</div>
   <tb-entity-subtype-list
     required
+    [label]="'tb.rulenode.device-profiles' | translate"
     [entityType]="entityType.DEVICE"
+    [emptyInputPlaceholder]="'tb.rulenode.add-entity-type' | translate"
+    [filledInputPlaceholder]="'tb.rulenode.add-entity-type' | translate"
     formControlName="deviceTypes">
+    <mat-icon matSuffix class="mat-primary margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
+              matTooltip="{{ 'tb.rulenode.chip-help' | translate }}">help</mat-icon>
   </tb-entity-subtype-list>
 </section>

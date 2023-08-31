@@ -1,0 +1,53 @@
+<section fxLayout="column" class="tb-kv-map-config" [formGroup]="kvListFormGroup">
+  <div class="header" fxFlex fxLayout="row" fxLayoutGap="8px">
+    <span class="cell" fxFlex>{{ keyText | translate }}</span>
+    <span class="cell" fxFlex>{{ valText | translate }}</span>
+    <span [fxShow]="!disabled" style="width: 52px;" innerHTML="&nbsp"></span>
+  </div>
+  <div class="body">
+    <div class="row" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px"
+         formArrayName="keyVals"
+         *ngFor="let keyValControl of keyValsFormArray().controls; let $index = index">
+      <mat-form-field fxFlex class="cell mat-block">
+        <input [formControl]="keyValControl.get('key')" matInput required
+               placeholder="{{ keyText | translate }}"/>
+        <mat-error *ngIf="keyValControl.get('key').hasError('required')">
+          {{ keyRequiredText | translate }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex class="cell mat-block">
+        <input [formControl]="keyValControl.get('value')" matInput required
+               placeholder="{{ valText | translate }}"/>
+        <mat-error *ngIf="keyValControl.get('value').hasError('required')">
+          {{ valRequiredText | translate }}
+        </mat-error>
+      </mat-form-field>
+      <button mat-icon-button color="primary"
+              [fxShow]="!disabled"
+              type="button"
+              (click)="removeKeyVal($index)"
+              [disabled]="isLoading$ | async"
+              matTooltip="{{ 'tb.key-val.remove-entry' | translate }}"
+              matTooltipPosition="above">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div *ngIf="hintText" class="tb-hint" [innerHTML]="hintText | translate | safeHtml"></div>
+  </div>
+  <tb-error [error]="ngControl.hasError('kvMapRequired') || ngControl.hasError('uniqueKeyValuePair') ?
+                     (ngControl.hasError('kvMapRequired') ? translate.instant(requiredText) :
+                     translate.instant('tb.key-val.unique-key-value-pair-error', {keyText: translate.instant(keyText),
+                     valText: translate.instant(valText)})) : ''"></tb-error>
+  <div style="margin-top: 16px;">
+    <button mat-button mat-raised-button color="primary"
+            [fxShow]="!disabled"
+            [disabled]="isLoading$ | async"
+            (click)="addKeyVal()"
+            type="button"
+            matTooltip="{{ 'tb.key-val.add-entry' | translate }}"
+            matTooltipPosition="above">
+      <mat-icon>add</mat-icon>
+      {{ 'action.add' | translate }}
+    </button>
+  </div>
+</section>
