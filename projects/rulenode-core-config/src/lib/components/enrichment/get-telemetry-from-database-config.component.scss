@@ -42,10 +42,13 @@
       }
     }
   }
+  .item-center {
+    align-items: center;
 
-  .fetch-mod-toggle {
-    max-width: 630px;
-    width: 100%;
+    .fetch-mod-toggle {
+      max-width: 630px;
+      width: 100%;
+    }
   }
 }
 
