@@ -73,7 +73,7 @@
                   <mat-form-field *ngIf="argumentControl.get('type').value && argumentControl.get('type').value !== ArgumentType.CONSTANT"
                                   fxFlex="50" floatLabel="always" class="mat-block">
                     <mat-label translate>tb.rulenode.default-value-field-input</mat-label>
-                    <input [formControl]="argumentControl.get('defaultValue')" matInput/>
+                    <input [formControl]="argumentControl.get('defaultValue')" matInput step="1" type="number"/>
                   </mat-form-field>
               </div>
             </div>

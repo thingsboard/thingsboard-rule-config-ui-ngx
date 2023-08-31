@@ -540,7 +540,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'add-to-metadata-field-input': 'Add to message metadata',
           'custom-expression-field-input': 'Mathematical Expression',
           'custom-expression-field-input-required': 'Mathematical expression is required',
-          'custom-expression-field-input-hint': 'Hint: specify a mathematical expression to evaluate. For example, transform Fahrenheit to Celsius using <i>(x - 32) / 1.8)</i>',
+          'custom-expression-field-input-hint': 'Hint: specify a mathematical expression to evaluate. Default expression demonstrates how to transform Fahrenheit to Celsius',
           'retained-message': 'Retained',
           'message-template': 'Message template',
           'message-template-required': 'Message template is required',
