@@ -7,7 +7,6 @@ import { DeviceRelationsQueryConfigComponent } from './device-relations-query-co
 import { RelationsQueryConfigComponent } from './relations-query-config.component';
 import { MessageTypesConfigComponent } from './message-types-config.component';
 import { CredentialsConfigComponent } from './credentials-config.component';
-import { SafeHtmlPipe } from './safe-html.pipe';
 import { ArgumentsMapConfigComponent } from './arguments-map-config.component';
 import { MathFunctionAutocompleteComponent } from './math-function-autocomplete.component';
 import { OutputMessageTypeAutocompleteComponent } from './output-message-type-autocomplete.component';
@@ -26,7 +25,6 @@ import { ExampleHintComponent } from './example-hint.component';
     RelationsQueryConfigComponent,
     MessageTypesConfigComponent,
     CredentialsConfigComponent,
-    SafeHtmlPipe,
     ArgumentsMapConfigComponent,
     MathFunctionAutocompleteComponent,
     OutputMessageTypeAutocompleteComponent,
@@ -49,7 +47,6 @@ import { ExampleHintComponent } from './example-hint.component';
     RelationsQueryConfigComponent,
     MessageTypesConfigComponent,
     CredentialsConfigComponent,
-    SafeHtmlPipe,
     ArgumentsMapConfigComponent,
     MathFunctionAutocompleteComponent,
     OutputMessageTypeAutocompleteComponent,

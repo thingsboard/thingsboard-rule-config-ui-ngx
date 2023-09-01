@@ -78,7 +78,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'copy-from': 'Copy from',
           'data-to-metadata': 'Data to metadata',
           'metadata-to-data': 'Metadata to data',
-          'use-regular-expression-hint': 'Hint: use regular expression to copy keys by pattern',
+          'use-regular-expression-hint': 'Use regular expression to copy keys by pattern',
           interval: 'Interval',
           'interval-required': 'Interval is required',
           'interval-hint': 'Deduplication interval in seconds.',
@@ -243,7 +243,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'value-required': 'Value is required',
           'topic-pattern': 'Topic pattern',
           'key-pattern': 'Key pattern',
-          'key-pattern-hint': 'Hint: Optional. If a valid partition number is specified, it will be used when sending the record. ' +
+          'key-pattern-hint': 'Optional. If a valid partition number is specified, it will be used when sending the record. ' +
                               'If no partition is specified, the key will be used instead. '+
                               'If neither is specified, a partition will be assigned in a round-robin fashion.',
           'topic-pattern-required': 'Topic pattern is required',
@@ -316,14 +316,14 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'connect-timeout-required': 'Connection timeout is required.',
           'connect-timeout-range': 'Connection timeout should be in a range from 1 to 200.',
           'client-id': 'Client ID',
-          'client-id-hint': 'Hint: Optional. Leave empty for auto-generated Client ID. Be careful when specifying the Client ID. ' +
+          'client-id-hint': 'Optional. Leave empty for auto-generated Client ID. Be careful when specifying the Client ID. ' +
               'Majority of the MQTT brokers will not allow multiple connections with the same Client ID. ' +
               'To connect to such brokers, your mqtt Client ID must be unique. ' +
               'When platform is running in a micro-services mode, the copy of rule node is launched in each micro-service. ' +
               'This will automatically lead to multiple mqtt clients with the same ID and may cause failures of the rule node. ' +
               'To avoid such failures enable "Add Service ID as suffix to Client ID" option below.',
           'append-client-id-suffix': 'Add Service ID as suffix to Client ID',
-          'client-id-suffix-hint': 'Hint: Optional. Applied when "Client ID" specified explicitly. ' +
+          'client-id-suffix-hint': 'Optional. Applied when "Client ID" specified explicitly. ' +
             'If selected then Service ID will be added to Client ID as a suffix. ' +
             'Helps to avoid failures when platform is running in a micro-services mode.',
           'device-id':'Device ID',
@@ -520,7 +520,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'period-value-key': 'Period value key',
           'period-value-key-required': 'Period value key is required.',
           'general-pattern-hint': 'Use ${metadataKey} for value from metadata, $[messageKey] for value from message body.',
-          'alarm-severity-pattern-hint': 'Hint: use <code><span style="color: #000;">$&#123;</span>metadataKey<span style="color: #000;">&#125;</span></code> ' +
+          'alarm-severity-pattern-hint': 'Use <code><span style="color: #000;">$&#123;</span>metadataKey<span style="color: #000;">&#125;</span></code> ' +
             'for value from metadata, <code><span style="color: #000;">$[</span>messageKey<span style="color: #000;">]</span></code> ' +
             'for value from message body. Alarm severity should be system (CRITICAL, MAJOR etc.)',
           'output-node-name-hint': 'The <b>rule node name</b> corresponds to the <b>relation type</b> of the output message, and it is used to forward messages to other rule nodes in the caller rule chain.',
@@ -556,12 +556,12 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'add-entity-type': 'Add entity type',
           'key-field-input-required': 'Key is required.',
           'number-floating-point-field-input': 'Number of digits after floating point',
-          'number-floating-point-field-input-hint': 'Hint: use <i>0</i> to convert result to integer',
+          'number-floating-point-field-input-hint': 'Use <i>0</i> to convert result to integer',
           'add-to-message-field-input': 'Add to message',
           'add-to-metadata-field-input': 'Add to metadata',
           'custom-expression-field-input': 'Mathematical Expression',
           'custom-expression-field-input-required': 'Mathematical expression is required',
-          'custom-expression-field-input-hint': 'Hint: specify a mathematical expression to evaluate. Default expression demonstrates how to transform Fahrenheit to Celsius',
+          'custom-expression-field-input-hint': 'Specify a mathematical expression to evaluate. Default expression demonstrates how to transform Fahrenheit to Celsius',
           'retained-message': 'Retained',
           'attributes-mapping': 'Attributes mapping',
           'latest-telemetry-mapping': 'Latest telemetry mapping',

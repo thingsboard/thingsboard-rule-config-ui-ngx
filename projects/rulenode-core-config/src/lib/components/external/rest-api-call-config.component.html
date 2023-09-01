@@ -5,7 +5,7 @@
     <mat-error *ngIf="restApiCallConfigForm.get('restEndpointUrlPattern').hasError('required')">
       {{ 'tb.rulenode.endpoint-url-pattern-required' | translate }}
     </mat-error>
-    <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
+    <mat-hint translate>tb.rulenode.general-pattern-hint</mat-hint>
   </mat-form-field>
   <mat-form-field class="mat-block">
     <mat-label translate>tb.rulenode.request-method</mat-label>
@@ -83,7 +83,7 @@
     <mat-hint translate>tb.rulenode.max-parallel-requests-count-hint</mat-hint>
   </mat-form-field>
   <label translate class="tb-title">tb.rulenode.headers</label>
-  <div class="tb-hint" [innerHTML]="'tb.rulenode.headers-hint' | translate | safeHtml"></div>
+  <div class="tb-hint" [innerHTML]="'tb.rulenode.headers-hint' | translate | safe: 'html'">  </div>
   <tb-kv-map-config-old
     required="false"
     formControlName="headers"

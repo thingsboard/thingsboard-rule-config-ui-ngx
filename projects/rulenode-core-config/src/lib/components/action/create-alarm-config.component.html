@@ -55,7 +55,7 @@
       <mat-error *ngIf="createAlarmConfigForm.get('alarmType').hasError('required')">
         {{ 'tb.rulenode.alarm-type-required' | translate }}
       </mat-error>
-      <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
+      <mat-hint translate>tb.rulenode.general-pattern-hint</mat-hint>
     </mat-form-field>
     <mat-checkbox formControlName="dynamicSeverity">
       {{ 'tb.rulenode.use-alarm-severity-pattern' | translate }}
@@ -77,7 +77,7 @@
       <mat-error *ngIf="createAlarmConfigForm.get('severity').hasError('required')">
         {{ 'tb.rulenode.alarm-severity-required' | translate }}
       </mat-error>
-      <mat-hint [innerHTML]="'tb.rulenode.alarm-severity-pattern-hint' | translate | safeHtml"></mat-hint>
+      <mat-hint [innerHTML]="'tb.rulenode.alarm-severity-pattern-hint' | translate | safe: 'html'"></mat-hint>
     </mat-form-field>
     <mat-checkbox formControlName="propagate">
       {{ 'tb.rulenode.propagate' | translate }}
