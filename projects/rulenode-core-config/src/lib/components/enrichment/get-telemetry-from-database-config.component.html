@@ -11,7 +11,7 @@
          [tb-help-popup-style]="{maxWidth: '820px'}"
          trigger-text="{{ 'tb.key-val.see-examples' | translate }}"></div>
     <mat-icon matSuffix class="mat-primary margin-8" aria-hidden="false" aria-label="help-icon" style="cursor:pointer;"
-              matTooltip="{{ 'tb.rulenode.chip-help' | translate }}">help
+              matTooltip="{{ 'tb.rulenode.chip-help' | translate: { inputName: 'tb.rulenode.timeseries-key' | translate } }}">help
     </mat-icon>
   </tb-string-items-list>
   <div class="tb-form-panel stroked">
@@ -114,15 +114,17 @@
   </div>
   <div class="tb-form-panel stroked">
     <div class="tb-form-panel-title tb-required" translate>tb.rulenode.fetch-strategy</div>
-    <div class="fetch-mod-toggle">
-      <tb-toggle-select formControlName="fetchMode" appearance="fill">
-        <tb-toggle-option *ngFor="let data of headerOptions" [value]="data.value">
-          {{ data.name }}
-        </tb-toggle-option>
-      </tb-toggle-select>
-    </div>
-    <div class="tb-hint">
-      {{ deduplicationStrategiesHintTranslations.get(getTelemetryFromDatabaseConfigForm.get('fetchMode').value) | translate }}
+    <div class="tb-form-panel no-border no-padding item-center">
+      <div class="fetch-mod-toggle">
+        <tb-toggle-select formControlName="fetchMode" appearance="fill">
+          <tb-toggle-option *ngFor="let data of headerOptions" [value]="data.value">
+            {{ data.name }}
+          </tb-toggle-option>
+        </tb-toggle-select>
+      </div>
+      <div class="tb-hint">
+        {{ deduplicationStrategiesHintTranslations.get(getTelemetryFromDatabaseConfigForm.get('fetchMode').value) | translate }}
+      </div>
     </div>
     <div *ngIf="getTelemetryFromDatabaseConfigForm.get('fetchMode').value === fetchMode.ALL">
       <mat-form-field class="mat-block" hideRequiredMarker

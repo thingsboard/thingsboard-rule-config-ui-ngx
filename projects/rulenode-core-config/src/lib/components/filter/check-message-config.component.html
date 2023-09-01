@@ -11,7 +11,7 @@
                         [placeholder]="'tb.rulenode.add-message-field' | translate"
                         formControlName="messageNames">
     <mat-icon matSuffix class="mat-primary margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
-              matTooltip="{{ 'tb.rulenode.chip-help' | translate }}">help</mat-icon>
+              matTooltip="{{ 'tb.rulenode.chip-help' | translate: { inputName: 'tb.rulenode.field-name' | translate } }}">help</mat-icon>
   </tb-string-items-list>
   <tb-string-items-list (focusout)="touched()"
                         class="mat-block" editable subscriptSizing="dynamic"
@@ -19,7 +19,7 @@
                         [placeholder]="'tb.rulenode.add-metadata-field' | translate"
                         formControlName="metadataNames">
     <mat-icon matSuffix class="mat-primary margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
-              matTooltip="{{ 'tb.rulenode.chip-help' | translate }}">help</mat-icon>
+              matTooltip="{{ 'tb.rulenode.chip-help' | translate: { inputName: 'tb.rulenode.field-name' | translate } }}">help</mat-icon>
   </tb-string-items-list>
   <div tb-hint-tooltip-icon="{{ 'tb.rulenode.check-all-keys-tooltip' | translate }}"
        class="tb-form-row no-border no-padding">
