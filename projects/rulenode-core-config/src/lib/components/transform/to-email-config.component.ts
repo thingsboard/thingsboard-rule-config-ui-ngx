@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppState } from '@core/public-api';
+import { AppState, isNotEmptyStr } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
@@ -36,20 +36,21 @@ export class ToEmailConfigComponent extends RuleNodeConfigurationComponent {
       bccTemplate: [configuration ? configuration.bccTemplate : null, []],
       subjectTemplate: [configuration ? configuration.subjectTemplate : null, [Validators.required]],
       mailBodyType: [configuration ? configuration.mailBodyType : null],
-      isHtmlTemplate: [configuration ? configuration.isHtmlTemplate : null],
+      isHtmlTemplate: [configuration ? configuration.isHtmlTemplate : null, [Validators.required]],
       bodyTemplate: [configuration ? configuration.bodyTemplate : null, [Validators.required]],
     });
+  }
 
-    this.toEmailConfigForm.get('mailBodyType').valueChanges.pipe(
-      startWith([configuration?.subjectTemplate])
-    ).subscribe((mailBodyType) => {
-      if (mailBodyType === 'dynamic') {
-        this.toEmailConfigForm.get('isHtmlTemplate').patchValue('', {emitEvent: false});
-        this.toEmailConfigForm.get('isHtmlTemplate').setValidators(Validators.required);
-      } else {
-        this.toEmailConfigForm.get('isHtmlTemplate').clearValidators();
-      }
-      this.toEmailConfigForm.get('isHtmlTemplate').updateValueAndValidity();
-    });
+  protected updateValidators(emitEvent: boolean) {
+    if (this.toEmailConfigForm.get('mailBodyType').value === 'dynamic') {
+      this.toEmailConfigForm.get('isHtmlTemplate').enable({emitEvent: false});
+    } else {
+      this.toEmailConfigForm.get('isHtmlTemplate').disable({emitEvent: false});
+    }
+    this.toEmailConfigForm.get('isHtmlTemplate').updateValueAndValidity({emitEvent})
+  }
+
+  protected validatorTriggers(): string[] {
+    return ['mailBodyType'];
   }
 }
