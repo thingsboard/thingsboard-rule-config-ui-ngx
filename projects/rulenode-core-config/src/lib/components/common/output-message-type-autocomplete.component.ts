@@ -54,7 +54,7 @@ export class OutputMessageTypeAutocompleteComponent extends PageComponent implem
               private fb: FormBuilder) {
     super(store);
     this.messageTypeFormGroup = this.fb.group({
-      messageType: [null, [Validators.maxLength(256)]]
+      messageType: [null, [Validators.maxLength(255)]]
     });
   }
 
@@ -132,7 +132,7 @@ export class OutputMessageTypeAutocompleteComponent extends PageComponent implem
 
   private updateValidators() {
     this.messageTypeFormGroup.get('messageType').setValidators(
-        this.required ? [Validators.required, Validators.maxLength(256)] : [Validators.maxLength(256)]
+        this.required ? [Validators.required, Validators.maxLength(255)] : [Validators.maxLength(255)]
     );
     this.messageTypeFormGroup.get('messageType').updateValueAndValidity({emitEvent: false});
   }
