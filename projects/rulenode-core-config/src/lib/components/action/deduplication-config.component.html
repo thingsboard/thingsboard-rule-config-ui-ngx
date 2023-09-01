@@ -27,6 +27,7 @@
   <div  *ngIf="deduplicationConfigForm.get('strategy').value === deduplicationStrategie.ALL">
     <tb-output-message-type-autocomplete
       formControlName="outMsgType"
+      required
       autocompleteHint="tb.rulenode.output-msg-type-hint"
       subscriptSizing="dynamic">
     </tb-output-message-type-autocomplete>
