@@ -1,9 +1,10 @@
 <mat-form-field [formGroup]="messageTypeFormGroup" class="mat-block" subscriptSizing="{{subscriptSizing}}">
-  <input matInput type="text" placeholder="{{'tb.rulenode.output-message-type' | translate}}"
+  <mat-label>{{'tb.rulenode.output-message-type' | translate}}</mat-label>
+  <input matInput type="text"
          #messageTypeInput
          formControlName="messageType"
          (focusin)="onFocus()"
-         required
+         [required]="required"
          [matAutocomplete]="messageTypeAutocomplete">
   <button *ngIf="messageTypeFormGroup.get('messageType').value"
           type="button"
@@ -16,7 +17,7 @@
     #messageTypeAutocomplete="matAutocomplete"
     [displayWith]="displayMessageTypeFn">
     <mat-option *ngFor="let msgType of outputMessageTypes | async" [value]="msgType">
-      <span>{{msgType}}</span>
+      <span [innerHTML]="msgType | highlight:searchText"></span>
     </mat-option>
   </mat-autocomplete>
   <mat-hint *ngIf="autocompleteHint">{{autocompleteHint | translate}}</mat-hint>
