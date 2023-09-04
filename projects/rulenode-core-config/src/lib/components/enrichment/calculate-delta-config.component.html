@@ -29,16 +29,16 @@
   </mat-form-field>
   <div class="tb-form-panel no-padding no-border">
     <div tb-hint-tooltip-icon="{{ 'tb.rulenode.failure-if-delta-negative-tooltip' | translate }}"
-         class="tb-form-row same-padding" style="height: 56px">
-      <mat-slide-toggle class="mat-slide" formControlName="useCache">
+         class="tb-form-row same-padding">
+      <mat-slide-toggle class="mat-slide margin" formControlName="useCache">
         {{ 'tb.rulenode.failure-if-delta-negative' | translate }}
       </mat-slide-toggle>
     </div>
     <div tb-hint-tooltip-icon="{{ 'tb.rulenode.use-caching-tooltip' | translate :
                        { inputValueKey: calculateDeltaConfigForm.get('inputValueKey').valid ?
                                 calculateDeltaConfigForm.get('inputValueKey').value : 'tb.rulenode.input-value-key' | translate } }}"
-         class="tb-form-row same-padding" style="height: 56px">
-      <mat-slide-toggle class="mat-slide" formControlName="tellFailureIfDeltaIsNegative">
+         class="tb-form-row same-padding">
+      <mat-slide-toggle class="mat-slide margin" formControlName="tellFailureIfDeltaIsNegative">
         {{ 'tb.rulenode.use-caching' | translate }}
       </mat-slide-toggle>
     </div>
