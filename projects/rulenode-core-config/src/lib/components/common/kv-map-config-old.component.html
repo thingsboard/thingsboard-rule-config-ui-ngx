@@ -32,7 +32,7 @@
         <mat-icon>close</mat-icon>
       </button>
     </div>
-    <div *ngIf="hintText" class="tb-hint" [innerHTML]="hintText | translate | safeHtml"></div>
+    <div *ngIf="hintText" class="tb-hint" [innerHTML]="hintText | translate | safe: 'html'"></div>
   </div>
   <tb-error [error]="ngControl.hasError('kvMapRequired') || ngControl.hasError('uniqueKeyValuePair') ?
                      (ngControl.hasError('kvMapRequired') ? translate.instant(requiredText) :

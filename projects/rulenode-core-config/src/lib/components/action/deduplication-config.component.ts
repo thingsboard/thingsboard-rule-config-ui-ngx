@@ -1,11 +1,9 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent, ServiceType } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { FetchMode, deduplicationStrategiesTranslations } from '../../rulenode-core-config.models';
+import { deduplicationStrategiesTranslations, FetchMode } from '../../rulenode-core-config.models';
 
 @Component({
   selector: 'tb-action-node-msg-deduplication-config',
@@ -13,8 +11,7 @@ import { FetchMode, deduplicationStrategiesTranslations } from '../../rulenode-c
   styleUrls: ['./deduplication-config.component.scss']
 })
 
-export class DeduplicationConfigComponent extends RuleNodeConfigurationComponent implements OnDestroy{
-  private destroy$ = new Subject<void>();
+export class DeduplicationConfigComponent extends RuleNodeConfigurationComponent {
 
   public serviceType = ServiceType.TB_RULE_ENGINE;
   public deduplicationConfigForm: UntypedFormGroup;
@@ -43,34 +40,21 @@ export class DeduplicationConfigComponent extends RuleNodeConfigurationComponent
       maxRetries: [isDefinedAndNotNull(configuration?.maxRetries) ? configuration.maxRetries : null,
         [Validators.required, Validators.min(0), Validators.max(100)]]
     });
-
-    this.deduplicationConfigForm.get('strategy').valueChanges.pipe(
-      takeUntil(this.destroy$)
-    ).subscribe((value) => {
-      this.enableControl(value);
-    });
   }
 
   protected updateValidators(emitEvent: boolean) {
-    this.enableControl(this.deduplicationConfigForm.get('strategy').value);
-  }
-
-  protected validatorTriggers(): string[] {
-    return ['strategy'];
-  }
-
-  private enableControl(strategy) {
-    if (strategy === this.deduplicationStrategie.ALL) {
+    if (this.deduplicationConfigForm.get('strategy').value === this.deduplicationStrategie.ALL) {
       this.deduplicationConfigForm.get('outMsgType').enable({emitEvent: false});
       this.deduplicationConfigForm.get('queueName').enable({emitEvent: false});
     } else {
       this.deduplicationConfigForm.get('outMsgType').disable({emitEvent: false});
       this.deduplicationConfigForm.get('queueName').disable({emitEvent: false});
     }
+    this.deduplicationConfigForm.get('outMsgType').updateValueAndValidity({emitEvent});
+    this.deduplicationConfigForm.get('queueName').updateValueAndValidity({emitEvent});
   }
 
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
+  protected validatorTriggers(): string[] {
+    return ['strategy'];
   }
 }

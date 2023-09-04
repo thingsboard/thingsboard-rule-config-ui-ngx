@@ -1,0 +1,14 @@
+:host {
+  .margin-8 {
+    margin: 8px;
+  }
+
+  .tb-error {
+    letter-spacing: 0.25px;
+    color: var(--mdc-theme-error, #f44336);
+  }
+
+  .tb-required::after {
+    content: "*";
+  }
+}

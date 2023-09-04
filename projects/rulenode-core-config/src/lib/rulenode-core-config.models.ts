@@ -226,11 +226,11 @@ export interface RelationsQuery {
 }
 
 export interface FunctionData {
-  value: MathFunction,
-  name: string,
-  description: string,
-  minArgs: number,
-  maxArgs: number,
+  value: MathFunction;
+  name: string;
+  description: string;
+  minArgs: number;
+  maxArgs: number;
 }
 
 export enum MathFunction {
@@ -651,8 +651,8 @@ export const FetchToTranslation = new Map<FetchTo, string>([
 ]);
 
 export interface ArgumentTypeData {
-  name: string,
-  description: string
+  name: string;
+  description: string;
 }
 
 export const ArgumentTypeMap = new Map<ArgumentType, ArgumentTypeData>([

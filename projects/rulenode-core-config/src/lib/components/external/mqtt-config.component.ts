@@ -10,11 +10,9 @@ import { Subscription } from 'rxjs';
   templateUrl: './mqtt-config.component.html',
   styleUrls: ['./mqtt-config.component.scss']
 })
-export class MqttConfigComponent extends RuleNodeConfigurationComponent implements OnDestroy {
+export class MqttConfigComponent extends RuleNodeConfigurationComponent {
 
   mqttConfigForm: UntypedFormGroup;
-
-  private subscriptions: Subscription[] = [];
 
   constructor(protected store: Store<AppState>,
               private fb: UntypedFormBuilder) {
@@ -42,19 +40,18 @@ export class MqttConfigComponent extends RuleNodeConfigurationComponent implemen
       ssl: [configuration ? configuration.ssl : false, []],
       credentials: [configuration ? configuration.credentials : null, []]
     });
-
-    this.subscriptions.push(
-      this.mqttConfigForm.get('clientId').valueChanges.subscribe((clientIdValue) => {
-        if (isNotEmptyStr(clientIdValue)) {
-          this.mqttConfigForm.get('appendClientIdSuffix').enable({emitEvent: false});
-        } else {
-          this.mqttConfigForm.get('appendClientIdSuffix').disable({emitEvent: false});
-        }
-      })
-    );
   }
 
-  ngOnDestroy() {
-    this.subscriptions.forEach(s => s.unsubscribe());
+  protected updateValidators(emitEvent: boolean) {
+    if (isNotEmptyStr(this.mqttConfigForm.get('clientId').value)) {
+      this.mqttConfigForm.get('appendClientIdSuffix').enable({emitEvent: false});
+    } else {
+      this.mqttConfigForm.get('appendClientIdSuffix').disable({emitEvent: false});
+    }
+    this.mqttConfigForm.get('appendClientIdSuffix').updateValueAndValidity({emitEvent});
+  }
+
+  protected validatorTriggers(): string[] {
+    return ['clientId'];
   }
 }

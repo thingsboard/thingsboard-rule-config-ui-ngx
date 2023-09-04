@@ -5,7 +5,7 @@
     <mat-error *ngIf="azureIotHubConfigForm.get('topicPattern').hasError('required')">
       {{ 'tb.rulenode.topic-required' | translate }}
     </mat-error>
-    <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
+    <mat-hint translate>tb.rulenode.general-pattern-hint</mat-hint>
   </mat-form-field>
   <mat-form-field class="mat-block">
     <mat-label translate>tb.rulenode.hostname</mat-label>

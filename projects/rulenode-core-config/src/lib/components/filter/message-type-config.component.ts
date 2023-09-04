@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppState } from '@core/public-api';
+import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
@@ -22,9 +22,15 @@ export class MessageTypeConfigComponent extends RuleNodeConfigurationComponent {
     return this.messageTypeConfigForm;
   }
 
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    return {
+      messageTypes: isDefinedAndNotNull(configuration?.messageTypes) ? configuration.messageTypes : null
+    };
+  }
+
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.messageTypeConfigForm = this.fb.group({
-      messageTypes: [configuration ? configuration.messageTypes : null, [Validators.required]]
+      messageTypes: [configuration.messageTypes, [Validators.required]]
     });
   }
 }

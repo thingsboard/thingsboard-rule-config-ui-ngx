@@ -23,6 +23,6 @@
              [matChipInputAddOnBlur]="true">
     </mat-chip-grid>
     <mat-error *ngIf="deleteKeysConfigForm.get('keys').hasError('required')">{{ 'tb.rulenode.keys-required' | translate }}</mat-error>
-    <mat-hint [innerHTML]="'tb.rulenode.use-regular-expression-delete-hint' | translate | safeHtml"></mat-hint>
+    <mat-hint translate>tb.rulenode.use-regular-expression-delete-hint</mat-hint>
   </mat-form-field>
 </section>

@@ -1,14 +1,11 @@
 :host {
-  .fetch-data-block {
-    margin-top: 12px;
+  .toggle-block {
+    display: flex;
+    place-content: center;
 
     .fetch-to-data-toggle {
-      margin-bottom: 12px;
-      width: 630px;
-    }
-
-    .msg-metadata-chip {
-      margin-bottom: 12px;
+      max-width: 630px;
+      width: 100%;
     }
   }
 }

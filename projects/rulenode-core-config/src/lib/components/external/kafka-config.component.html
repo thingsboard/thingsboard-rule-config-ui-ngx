@@ -5,12 +5,12 @@
     <mat-error *ngIf="kafkaConfigForm.get('topicPattern').hasError('required')">
       {{ 'tb.rulenode.topic-pattern-required' | translate }}
     </mat-error>
-    <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
+    <mat-hint translate>tb.rulenode.general-pattern-hint</mat-hint>
   </mat-form-field>
   <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.key-pattern</mat-label>
     <input matInput formControlName="keyPattern">
-    <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
+    <mat-hint translate>tb.rulenode.general-pattern-hint</mat-hint>
   </mat-form-field>
   <div class="tb-hint" translate>tb.rulenode.key-pattern-hint</div>
   <mat-form-field class="mat-block">
