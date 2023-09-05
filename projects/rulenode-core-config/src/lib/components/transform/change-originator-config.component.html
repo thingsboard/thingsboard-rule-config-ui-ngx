@@ -7,26 +7,37 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <div *ngIf="changeOriginatorConfigForm.get('originatorSource').value === 'ENTITY'" fxLayout="row" fxLayoutGap="8px">
-    <tb-entity-type-select
-      showLabel
-      style="min-width: 100px;"
-      required
-      [allowedEntityTypes] = "allowedEntityTypes"
-      formControlName="entityType">
-    </tb-entity-type-select>
-    <mat-form-field *ngIf="changeOriginatorConfigForm.get('entityType').value" fxFlex class="mat-block" style="padding-bottom: 40px;">
-      <mat-label translate>tb.rulenode.entity-name-pattern</mat-label>
-      <input required matInput formControlName="entityNamePattern">
-      <mat-error *ngIf="changeOriginatorConfigForm.get('entityNamePattern').hasError('required') ||
-                        changeOriginatorConfigForm.get('entityNamePattern').hasError('pattern')">
-        {{ 'tb.rulenode.entity-name-pattern-required' | translate }}
-      </mat-error>
-      <mat-hint translate>tb.rulenode.general-pattern-hint</mat-hint>
-    </mat-form-field>
+  <div [class]="changeOriginatorConfigForm.get('entityType').value ? 'tb-form-panel stroked' : ''"
+        *ngIf="changeOriginatorConfigForm.get('originatorSource').value === 'ENTITY'"
+        fxLayout="column" fxLayoutGap="8px">
+    <div class="tb-form-panel no-padding no-border">
+      <tb-example-hint [hintText]="'tb.rulenode.general-pattern-hint' | translate"
+                        *ngIf="changeOriginatorConfigForm.get('entityType').value"
+                        popupHelpLink="rulenode/originator_telemetry_node_fields_templatization">
+      </tb-example-hint>
+    </div>
+    <div fxLayout="row" fxLayoutGap="16px">
+      <tb-entity-type-select
+        showLabel
+        fxFlex
+        required
+        [allowedEntityTypes] = "allowedEntityTypes"
+        formControlName="entityType">
+      </tb-entity-type-select>
+      <mat-form-field *ngIf="changeOriginatorConfigForm.get('entityType').value" fxFlex class="mat-block">
+        <mat-label translate>tb.rulenode.entity-name-pattern</mat-label>
+        <input required matInput formControlName="entityNamePattern">
+        <mat-error *ngIf="changeOriginatorConfigForm.get('entityNamePattern').hasError('required') ||
+                          changeOriginatorConfigForm.get('entityNamePattern').hasError('pattern')">
+          {{ 'tb.rulenode.entity-name-pattern-required' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
   </div>
-  <section fxLayout="column" *ngIf="changeOriginatorConfigForm.get('originatorSource').value === originatorSource.RELATED">
-    <label translate class="tb-title tb-required">tb.rulenode.relations-query</label>
+  <section class="tb-form-panel stroked no-gap"
+            fxLayout="column"
+            *ngIf="changeOriginatorConfigForm.get('originatorSource').value === originatorSource.RELATED">
+    <label translate class="tb-title tb-required tb-title__bold">tb.rulenode.relations-query</label>
     <tb-relations-query-config-old
       required
       formControlName="relationsQuery"

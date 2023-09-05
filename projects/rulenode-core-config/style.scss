@@ -8,7 +8,28 @@
     color: var(--mdc-theme-error, #f44336);
   }
 
-  .tb-required::after {
-    content: "*";
-  }
+
+
+  // .tb-required::after {
+  //   content: "*";
+  // }
+}
+
+.tb-title.tb-title__bold {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: rgba(0, 0, 0, .87);
+}
+
+tb-relation-filters span.tp-prompt {
+  font-size: 14px;
+}
+
+.no-gap {
+  gap: 0;
+}
+
+.pb-16 {
+  padding-bottom: 16px;
 }
