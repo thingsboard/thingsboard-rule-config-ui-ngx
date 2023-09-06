@@ -69,6 +69,10 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
 
   @Input()
   @coerceBoolean()
+  isHasExampleHint = true;
+
+  @Input()
+  @coerceBoolean()
   required = false;
 
   constructor(protected store: Store<AppState>,

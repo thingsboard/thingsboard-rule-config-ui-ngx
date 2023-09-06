@@ -21,21 +21,8 @@
               matTooltip="{{ 'tb.rulenode.chip-help' | translate: { inputName: 'tb.rulenode.entity-type' | translate } }}">help</mat-icon>
     </mat-form-field>
   </div>
-  <div class="mat-caption" fxLayout="column">
-    <div class="tb-form-row space-between" ngClass.xs="filters-row-mobile">
-      <div class="fixed-title-width fields-heading-inserted">{{'tb.rulenode.copy-from' | translate}}</div>
-      <mat-chip-listbox formControlName="fromMetadata">
-        <mat-chip-option selectable="true"
-                        color="primary"
-                        [value]="false">
-          {{'tb.rulenode.data-to-metadata' | translate}}
-        </mat-chip-option>
-        <mat-chip-option selectable="true"
-                        color="primary"
-                        [value]="true">
-          {{'tb.rulenode.metadata-to-data' | translate}}
-        </mat-chip-option>
-      </mat-chip-listbox>
-    </div>
-  </div>
+  <tb-msg-metadata-chip
+    [labelText]="('tb.rulenode.copy-from' | translate)"
+    formControlName="fromMetadata">
+  </tb-msg-metadata-chip>
 </section>

@@ -1,21 +1,18 @@
-<section [formGroup]="renameKeysConfigForm">
-  <div class="mat-caption" style="margin-bottom: 8px">{{ 'tb.rulenode.rename-keys-in' | translate }}</div>
-  <mat-radio-group formControlName="fromMetadata" fxLayout="row" fxLayoutGap="16px" style="margin-bottom: 16px;">
-    <mat-radio-button [value]="false" color="primary" >
-      <span>{{'tb.rulenode.data' | translate}}</span>
-    </mat-radio-button>
-    <mat-radio-button [value]="true" color="primary">
-      <span>{{'tb.rulenode.metadata' | translate}}</span>
-    </mat-radio-button>
-  </mat-radio-group>
-  <tb-kv-map-config-old
+<section [formGroup]="renameKeysConfigForm" fxLayout="column" fxLayoutGap="16px">
+  <tb-kv-map-config
     required
+    isHasExampleHint="false"
+    labelText="{{'tb.rulenode.rename-keys-mapping' | translate}}"
     formControlName="renameKeysMapping"
     uniqueKeyValuePairValidator = "true"
-    requiredText="tb.rulenode.attr-mapping-required"
-    keyText="tb.rulenode.key-name"
-    keyRequiredText="tb.rulenode.key-name-required"
-    valText="tb.rulenode.new-key-name"
-    valRequiredText="tb.rulenode.new-key-name-required">
-  </tb-kv-map-config-old>
+    requiredText="{{'tb.rulenode.attr-mapping-required' | translate}}"
+    keyText="{{'tb.rulenode.key-name' | translate}}"
+    keyRequiredText="{{'tb.rulenode.key-name-required' | translate}}"
+    valText="{{'tb.rulenode.new-key-name' | translate}}"
+    valRequiredText="{{'tb.rulenode.new-key-name-required' | translate}}">
+  </tb-kv-map-config>
+  <tb-msg-metadata-chip
+    [labelText]="('tb.rulenode.rename-keys-in' | translate)"
+    formControlName="fromMetadata">
+  </tb-msg-metadata-chip>
 </section>
