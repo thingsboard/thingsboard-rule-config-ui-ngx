@@ -34,7 +34,14 @@
       </mat-form-field>
     </div>
   </div>
-  <section class="tb-form-panel stroked no-gap"
+  <section fxLayout="column"
+           *ngIf="changeOriginatorConfigForm.get('originatorSource').value === originatorSource.RELATED">
+    <tb-relations-query-config
+      required
+      formControlName="relationsQuery">
+    </tb-relations-query-config>
+  </section>
+  <!-- <section class="tb-form-panel stroked no-gap"
             fxLayout="column"
             *ngIf="changeOriginatorConfigForm.get('originatorSource').value === originatorSource.RELATED">
     <label translate class="tb-title tb-required tb-title__bold">tb.rulenode.relations-query</label>
@@ -43,5 +50,6 @@
       formControlName="relationsQuery"
       style="padding-bottom: 15px;">
     </tb-relations-query-config-old>
-  </section>
+   -->
+
 </section>

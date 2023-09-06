@@ -8,17 +8,9 @@
     color: var(--mdc-theme-error, #f44336);
   }
 
-}
-
-.tb-title.tb-title__bold {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
-  color: rgba(0, 0, 0, .87);
-}
-
-tb-relation-filters span.tp-prompt {
-  font-size: 14px;
+  .tb-required::after {
+    content: "*";
+  }
 }
 
 .no-gap {
