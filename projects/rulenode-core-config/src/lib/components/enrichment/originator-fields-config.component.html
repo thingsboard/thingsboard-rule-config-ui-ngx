@@ -15,9 +15,8 @@
   <tb-msg-metadata-chip [labelText]="'tb.rulenode.add-mapped-originator-fields-to' | translate"
                         formControlName="fetchTo">
   </tb-msg-metadata-chip>
-  <div tb-hint-tooltip-icon="{{ 'tb.rulenode.skip-empty-fields-tooltip' | translate }}"
-       class="tb-form-row same-padding" style="height: 56px">
-    <mat-slide-toggle class="mat-slide" formControlName="ignoreNullStrings">
+  <div tb-hint-tooltip-icon="{{ 'tb.rulenode.skip-empty-fields-tooltip' | translate }}" class="tb-form-row same-padding">
+    <mat-slide-toggle class="mat-slide margin" formControlName="ignoreNullStrings">
       {{ 'tb.rulenode.skip-empty-fields' | translate }}
     </mat-slide-toggle>
   </div>

@@ -12,3 +12,18 @@
     content: "*";
   }
 }
+
+.no-gap {
+  gap: 0;
+}
+
+.pb-16 {
+  padding-bottom: 16px;
+}
+
+.fields-heading-inserted {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: rgba(0, 0, 0, .76);
+}
