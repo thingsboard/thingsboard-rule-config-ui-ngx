@@ -1,81 +1,83 @@
-<section [formGroup]="deduplicationConfigForm" fxLayout="column">
-  <mat-form-field class="mat-block" subscriptSizing="dynamic">
+<section [formGroup]="deduplicationConfigForm" fxLayoutGap="16px" fxLayout="column">
+  <mat-form-field class="mat-block pb-16" subscriptSizing="dynamic" fxLayoutGap="16px">
     <mat-label>{{'tb.rulenode.interval' | translate}}</mat-label>
     <input type = 'number' required matInput formControlName="interval">
-    <mat-hint>{{'tb.rulenode.interval-hint' | translate}}</mat-hint>
     <mat-error *ngIf="deduplicationConfigForm.get('interval').hasError('required')">
       {{'tb.rulenode.interval-required' | translate}}
     </mat-error>
     <mat-error *ngIf="deduplicationConfigForm.get('interval').hasError('min')">
       {{'tb.rulenode.interval-min-error' | translate}}
     </mat-error>
+    <mat-icon matSuffix class="mat-primary margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
+              matTooltip="{{ 'tb.rulenode.interval-hint' | translate }}">help</mat-icon>
   </mat-form-field>
-  <mat-form-field class="mat-block" subscriptSizing="dynamic">
-    <mat-label>{{'tb.rulenode.strategy' | translate}}</mat-label>
-    <mat-select formControlName="strategy" required>
-      <mat-option *ngFor="let strategy of deduplicationStrategies" [value]="strategy">
+  <div class="tb-form-panel stroked pb-16">
+    <div class="tb-form-panel-title  tb-required" style="max-width: 100px;" translate>tb.rulenode.strategy</div>
+    <tb-toggle-select class="fetch-to-data-toggle" formControlName="strategy" appearance="fill">
+      <tb-toggle-option *ngFor="let strategy of deduplicationStrategies" [value]="strategy">
         {{ deduplicationStrategiesTranslations.get(strategy) | translate }}
-      </mat-option>
-    </mat-select>
-    <mat-hint *ngIf="deduplicationConfigForm.get('strategy').value === 'ALL'" innerHTML="{{'tb.rulenode.strategy-all-hint' | translate}}"></mat-hint>
-    <mat-hint *ngIf="deduplicationConfigForm.get('strategy').value === 'FIRST'">{{'tb.rulenode.strategy-first-hint' | translate}}</mat-hint>
-    <mat-hint *ngIf="deduplicationConfigForm.get('strategy').value === 'LAST'">{{'tb.rulenode.strategy-last-hint' | translate}}</mat-hint>
-    <mat-error *ngIf="deduplicationConfigForm.get('strategy').hasError('required')">
-      {{'tb.rulenode.strategy-required' | translate}}
-    </mat-error>
-  </mat-form-field>
-  <div  *ngIf="deduplicationConfigForm.get('strategy').value === deduplicationStrategie.ALL">
-    <tb-output-message-type-autocomplete
-      required
-      formControlName="outMsgType"
-      autocompleteHint="tb.rulenode.output-msg-type-hint"
-      subscriptSizing="dynamic">
-    </tb-output-message-type-autocomplete>
-    <tb-queue-autocomplete
-      required
-      [queueType]="serviceType"
-      formControlName="queueName"
-      autocompleteHint="tb.rulenode.queue-name-hint"
-      subscriptSizing="dynamic">
-    </tb-queue-autocomplete>
+      </tb-toggle-option>
+    </tb-toggle-select>
+    <div *ngIf="deduplicationConfigForm.get('strategy').value === 'ALL'" class="cutted-padding-and-centered tb-hint" translate>
+      tb.rulenode.strategy-all-hint
+    </div>
+    <div *ngIf="deduplicationConfigForm.get('strategy').value === 'FIRST'" class="cutted-padding-and-centered tb-hint" translate>
+      tb.rulenode.strategy-first-hint
+    </div>
+    <div *ngIf="deduplicationConfigForm.get('strategy').value === 'LAST'" class="cutted-padding-and-centered tb-hint" translate>
+      tb.rulenode.strategy-last-hint
+    </div>
+    <div fxLayout="column" fxLayoutGap="16px" *ngIf="deduplicationConfigForm.get('strategy').value === deduplicationStrategie.ALL">
+      <tb-output-message-type-autocomplete
+        required
+        formControlName="outMsgType"
+        autocompleteHint=""
+        subscriptSizing="dynamic">
+      </tb-output-message-type-autocomplete>
+      <tb-queue-autocomplete
+        required
+        [queueType]="serviceType"
+        formControlName="queueName"
+        autocompleteHint=""
+        subscriptSizing="dynamic">
+      </tb-queue-autocomplete>
+    </div>
   </div>
-  <mat-expansion-panel class="advanced-settings">
-    <mat-expansion-panel-header style="height: 48px;">
-      <mat-panel-title>
-        <div fxFlex fxLayout="row" fxLayoutAlign="end center">
-          <div class="tb-small">Advanced settings</div>
-        </div>
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-    <ng-template matExpansionPanelContent>
-      <mat-form-field class="mat-block" subscriptSizing="dynamic">
-        <mat-label>{{'tb.rulenode.max-pending-msgs' | translate}}</mat-label>
-        <input type = 'number' required matInput formControlName="maxPendingMsgs">
-        <mat-hint>{{'tb.rulenode.max-pending-msgs-hint' | translate}}</mat-hint>
-        <mat-error *ngIf="deduplicationConfigForm.get('maxPendingMsgs').hasError('required')">
-          {{'tb.rulenode.max-pending-msgs-required' | translate}}
-        </mat-error>
-        <mat-error *ngIf="deduplicationConfigForm.get('maxPendingMsgs').hasError('max')">
-          {{'tb.rulenode.max-pending-msgs-max-error' | translate}}
-        </mat-error>
-        <mat-error *ngIf="deduplicationConfigForm.get('maxPendingMsgs').hasError('min')">
-          {{'tb.rulenode.max-pending-msgs-min-error' | translate}}
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="mat-block" subscriptSizing="dynamic">
-        <mat-label>{{'tb.rulenode.max-retries' | translate}}</mat-label>
-        <input type = 'number' required matInput formControlName="maxRetries">
-        <mat-hint>{{'tb.rulenode.max-retries-hint' | translate}}</mat-hint>
-        <mat-error *ngIf="deduplicationConfigForm.get('maxRetries').hasError('required')">
-          {{'tb.rulenode.max-retries-required' | translate}}
-        </mat-error>
-        <mat-error *ngIf="deduplicationConfigForm.get('maxRetries').hasError('max')">
-          {{'tb.rulenode.max-retries-max-error' | translate}}
-        </mat-error>
-        <mat-error *ngIf="deduplicationConfigForm.get('maxRetries').hasError('min')">
-          {{'tb.rulenode.max-retries-min-error' | translate}}
-        </mat-error>
-      </mat-form-field>
-    </ng-template>
-  </mat-expansion-panel>
+  <section class="tb-form-panel stroked">
+    <div class="tb-form-panel-title" translate>Advanced settings</div>
+    <section>
+      <div fxLayout="row" fxLayoutGap="16px">
+        <mat-form-field class="mat-block" fxFlex="50" subscriptSizing="dynamic">
+          <mat-label>{{'tb.rulenode.max-pending-msgs' | translate}}</mat-label>
+          <input type = 'number' required matInput formControlName="maxPendingMsgs">
+          <mat-error *ngIf="deduplicationConfigForm.get('maxPendingMsgs').hasError('required')">
+            {{'tb.rulenode.max-pending-msgs-required' | translate}}
+          </mat-error>
+          <mat-error *ngIf="deduplicationConfigForm.get('maxPendingMsgs').hasError('max')">
+            {{'tb.rulenode.max-pending-msgs-max-error' | translate}}
+          </mat-error>
+          <mat-error *ngIf="deduplicationConfigForm.get('maxPendingMsgs').hasError('min')">
+            {{'tb.rulenode.max-pending-msgs-min-error' | translate}}
+          </mat-error>
+          <mat-icon matSuffix class="mat-primary margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
+              matTooltip="{{ 'tb.rulenode.max-pending-msgs-hint' | translate }}">help</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="mat-block" fxFlex="50" subscriptSizing="dynamic">
+          <mat-label>{{'tb.rulenode.max-retries' | translate}}</mat-label>
+          <input type = 'number' required matInput formControlName="maxRetries">
+          <mat-error *ngIf="deduplicationConfigForm.get('maxRetries').hasError('required')">
+            {{'tb.rulenode.max-retries-required' | translate}}
+          </mat-error>
+          <mat-error *ngIf="deduplicationConfigForm.get('maxRetries').hasError('max')">
+            {{'tb.rulenode.max-retries-max-error' | translate}}
+          </mat-error>
+          <mat-error *ngIf="deduplicationConfigForm.get('maxRetries').hasError('min')">
+            {{'tb.rulenode.max-retries-min-error' | translate}}
+          </mat-error>
+          <mat-icon matSuffix class="mat-primary margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
+              matTooltip="{{ 'tb.rulenode.max-retries-hint' | translate }}">help</mat-icon>
+        </mat-form-field>
+      </div>
+    </section>
+  </section>
 </section>
