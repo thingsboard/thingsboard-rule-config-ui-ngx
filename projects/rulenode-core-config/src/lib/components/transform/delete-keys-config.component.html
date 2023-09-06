@@ -1,28 +1,63 @@
-<section [formGroup]="deleteKeysConfigForm" fxLayout="column">
-  <div class="mat-caption" style="margin-bottom: 8px">{{'tb.rulenode.delete-from' | translate}}</div>
-  <mat-radio-group formControlName="fromMetadata" fxLayout="row" fxLayoutGap="16px">
+<section [formGroup]="deleteKeysConfigForm" fxLayout="column" fxLayoutGap="16px">
+  <div class="mat-caption pb-16" fxLayout="column">
+    <mat-form-field class="mat-block" subscriptSizing="dynamic">
+      <mat-label>{{ 'tb.rulenode.keys' | translate }}</mat-label>
+      <mat-chip-grid formControlName="keys" #attributeChipList>
+        <mat-chip-row
+          *ngFor="let key of deleteKeysConfigForm.get('keys').value;"
+          (removed)="removeKey(key)">
+          {{key}}
+          <mat-icon matChipRemove>close</mat-icon>
+        </mat-chip-row>
+        <input matInput class="tb-title tb-required" type="text" placeholder="{{ 'tb.rulenode.keys' | translate }}"
+              [matChipInputFor]="attributeChipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="addKey($event)"
+              [matChipInputAddOnBlur]="true"
+              required>
+      </mat-chip-grid>
+      <mat-error *ngIf="deleteKeysConfigForm.get('keys').hasError('required')">{{ 'tb.rulenode.keys-required' | translate }}</mat-error>
+      <!-- <mat-hint translate>tb.rulenode.use-regular-expression-delete-hint</mat-hint> -->
+      <mat-icon matSuffix class="mat-primary margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
+              matTooltip="{{ 'tb.rulenode.use-regular-expression-delete-hint' | translate }}">help</mat-icon>
+    </mat-form-field>
+  </div>
+
+
+  <!-- <div class="mat-caption" fxLayout="column">{{'tb.rulenode.delete-from' | translate}}</div> -->
+
+
+  <div class="tb-form-row space-between" ngClass.xs="filters-row-mobile">
+    <div class="fixed-title-width fields-heading-inserted">{{'tb.rulenode.delete-from' | translate}}</div>
+    <mat-chip-listbox formControlName="fromMetadata">
+      <mat-chip-option selectable="true"
+                      color="primary"
+                      [value]="false">
+        {{'tb.rulenode.data' | translate}}
+      </mat-chip-option>
+      <mat-chip-option selectable="true"
+                      color="primary"
+                      [value]="true">
+        {{'tb.rulenode.metadata' | translate}}
+      </mat-chip-option>
+    </mat-chip-listbox>
+  </div>
+
+
+
+
+
+
+  <!-- <mat-radio-group formControlName="fromMetadata" fxLayout="row" fxLayoutGap="16px">
     <mat-radio-button [value]="false" color="primary" >
       <span>{{'tb.rulenode.data' | translate}}</span>
     </mat-radio-button>
     <mat-radio-button [value]="true" color="primary">
       <span>{{'tb.rulenode.metadata' | translate}}</span>
     </mat-radio-button>
-  </mat-radio-group>
-  <mat-form-field class="mat-block" subscriptSizing="dynamic">
-    <mat-chip-grid formControlName="keys" #attributeChipList>
-      <mat-chip-row
-        *ngFor="let key of deleteKeysConfigForm.get('keys').value;"
-        (removed)="removeKey(key)">
-        {{key}}
-        <mat-icon matChipRemove>close</mat-icon>
-      </mat-chip-row>
-      <input matInput type="text" placeholder="{{ 'tb.rulenode.keys' | translate }}"
-             [matChipInputFor]="attributeChipList"
-             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-             (matChipInputTokenEnd)="addKey($event)"
-             [matChipInputAddOnBlur]="true">
-    </mat-chip-grid>
-    <mat-error *ngIf="deleteKeysConfigForm.get('keys').hasError('required')">{{ 'tb.rulenode.keys-required' | translate }}</mat-error>
-    <mat-hint translate>tb.rulenode.use-regular-expression-delete-hint</mat-hint>
-  </mat-form-field>
+  </mat-radio-group> -->
+
+
+
+
 </section>
