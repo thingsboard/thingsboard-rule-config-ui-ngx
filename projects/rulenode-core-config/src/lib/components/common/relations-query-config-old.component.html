@@ -1,4 +1,7 @@
 <section fxLayout="column" [formGroup]="relationsQueryFormGroup">
+  <mat-checkbox formControlName="fetchLastLevelOnly">
+    {{ 'alias.last-level-relation' | translate }}
+  </mat-checkbox>
   <div fxLayoutGap="8px" fxLayout="row">
     <mat-form-field class="mat-block" style="min-width: 100px;">
       <mat-label translate>relation.direction</mat-label>
@@ -18,19 +21,8 @@
              formControlName="maxLevel">
     </mat-form-field>
   </div>
-  <div class="pb-16" fxLayout="row">
-    <div tb-hint-tooltip-icon="{{ 'tb.rulenode.last-level-relation-tooltip' | translate }}"
-          *ngIf="relationsQueryFormGroup.get('maxLevel').value > 1"
-          class="tb-form-row no-border no-padding last-level-slide-toggle">
-      <mat-slide-toggle class="mat-slide" formControlName="fetchLastLevelOnly">
-        {{ 'alias.last-level-relation' | translate }}
-      </mat-slide-toggle>
-    </div>
-  </div>
-  <div fxLayout="column" class="tb-form-panel stroked">
-    <div class="mat-caption tb-title tb-title__bold" translate>relation.relation-filters</div>
-    <tb-relation-filters
-      formControlName="filters"
-    ></tb-relation-filters>
-  </div>
-</section> 
+  <div class="mat-caption" style="color: #6e6e6e;" translate>relation.relation-filters</div>
+  <tb-relation-filters
+    formControlName="filters"
+  ></tb-relation-filters>
+</section>
