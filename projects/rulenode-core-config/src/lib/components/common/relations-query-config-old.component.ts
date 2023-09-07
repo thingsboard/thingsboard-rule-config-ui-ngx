@@ -9,7 +9,7 @@ import { RelationsQuery } from '../../rulenode-core-config.models';
 @Component({
   selector: 'tb-relations-query-config-old',
   templateUrl: './relations-query-config-old.component.html',
-  styleUrls: ['../../../../style.scss'],
+  styleUrls: [],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

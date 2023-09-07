@@ -9,6 +9,7 @@ import { CopyKeysConfigComponent } from './copy-keys-config.component';
 import { RenameKeysConfigComponent } from './rename-keys-config.component';
 import { NodeJsonPathConfigComponent } from './node-json-path-config.component';
 import { DeleteKeysConfigComponent } from './delete-keys-config.component';
+import { DeduplicationConfigComponent } from './deduplication-config.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DeleteKeysConfigComponent } from './delete-keys-config.component';
     CopyKeysConfigComponent,
     RenameKeysConfigComponent,
     NodeJsonPathConfigComponent,
-    DeleteKeysConfigComponent
+    DeleteKeysConfigComponent,
+    DeduplicationConfigComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { DeleteKeysConfigComponent } from './delete-keys-config.component';
     CopyKeysConfigComponent,
     RenameKeysConfigComponent,
     NodeJsonPathConfigComponent,
-    DeleteKeysConfigComponent
+    DeleteKeysConfigComponent,
+    DeduplicationConfigComponent
   ]
 })
 export class RulenodeCoreConfigTransformModule {

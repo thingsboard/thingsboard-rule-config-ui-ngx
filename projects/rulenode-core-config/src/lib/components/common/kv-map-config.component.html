@@ -44,5 +44,5 @@
       {{ 'tb.key-val.add-mapping-entry' | translate }}
     </button>
   </div>
-  <tb-example-hint [hintText]="hintText" [popupHelpLink]="popupHelpLink" *ngIf="isHasExampleHint"></tb-example-hint>
+  <tb-example-hint [hintText]="hintText" [popupHelpLink]="popupHelpLink" *ngIf="popupHelpLink || hintText"></tb-example-hint>
 </section>
