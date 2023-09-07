@@ -1,26 +1,16 @@
 <section [formGroup]="deleteKeysConfigForm" fxLayout="column" fxLayoutGap="16px">
-  <div class="mat-caption pb-16" fxLayout="column">
-    <mat-form-field class="mat-block" subscriptSizing="dynamic">
-      <mat-label>{{ 'tb.rulenode.keys' | translate }}</mat-label>
-      <mat-chip-grid formControlName="keys" #attributeChipList>
-        <mat-chip-row
-          *ngFor="let key of deleteKeysConfigForm.get('keys').value;"
-          (removed)="removeKey(key)">
-          {{key}}
-          <mat-icon matChipRemove>close</mat-icon>
-        </mat-chip-row>
-        <input matInput class="tb-title tb-required" type="text" placeholder="{{ 'tb.rulenode.keys' | translate }}"
-              [matChipInputFor]="attributeChipList"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              (matChipInputTokenEnd)="addKey($event)"
-              [matChipInputAddOnBlur]="true"
-              required>
-      </mat-chip-grid>
-      <mat-error *ngIf="deleteKeysConfigForm.get('keys').hasError('required')">{{ 'tb.rulenode.keys-required' | translate }}</mat-error>
-      <mat-icon matSuffix class="mat-primary margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
-              matTooltip="{{ 'tb.rulenode.use-regular-expression-delete-hint' | translate }}">help</mat-icon>
-    </mat-form-field>
-  </div>
+  <tb-string-items-list class="mat-block"
+                        required
+                        [label]="'tb.rulenode.keys' | translate"
+                        [placeholder]="'tb.rulenode.add-keys' | translate"
+                        [requiredText]="'tb.rulenode.keys-required' | translate"
+                        formControlName="keys">
+    <mat-icon matSuffix class="margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
+              color="primary"
+              matTooltip="{{ 'tb.rulenode.use-regular-expression-delete-hint' | translate }}">
+      help
+    </mat-icon>
+  </tb-string-items-list>
   <tb-msg-metadata-chip
     [labelText]="('tb.rulenode.delete-from' | translate)"
     formControlName="fromMetadata">

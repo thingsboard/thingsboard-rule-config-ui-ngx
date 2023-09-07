@@ -638,7 +638,9 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'slack-api-token-required': 'Slack API token is required',
           'fields-cant-be-equal': "Fields can't be equal",
           'rename-keys-mapping': 'Rename keys mapping',
-          'template-rules-hint': 'Both input fields support templatization. Use $[messageKey] to extract value from the message and ${metadataKey} to extract value from the metadata.'
+          'add-keys': 'Add keys',
+          'template-rules-hint':
+              'Both input fields support templatization. Use $[messageKey] to extract value from the message and ${metadataKey} to extract value from the metadata.'
         },
         'key-val': {
           key: 'Key',

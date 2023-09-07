@@ -9,7 +9,7 @@ import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 @Component({
   selector: 'tb-transformation-node-delete-keys-config',
   templateUrl: './delete-keys-config.component.html',
-  styleUrls: []
+  styleUrls: ['../../../../style.scss']
 })
 
 export class DeleteKeysConfigComponent extends RuleNodeConfigurationComponent{

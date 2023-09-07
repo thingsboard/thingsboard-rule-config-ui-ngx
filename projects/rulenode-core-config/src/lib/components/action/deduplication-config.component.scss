@@ -13,10 +13,6 @@
   .mat-expansion-panel-header:not([aria-disabled='true']):hover { background: white; }
 }
 
-.tb-required::after {
-  content: "*";
-}
-
 .cutted-padding-and-centered {
   padding-bottom: 0;
   text-align: center;
