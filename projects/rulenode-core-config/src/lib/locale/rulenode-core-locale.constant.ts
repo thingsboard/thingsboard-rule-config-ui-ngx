@@ -5,6 +5,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
     const enUS = {
       tb: {
         rulenode: {
+          'advanced-settings': 'Advanced settings',
           'create-entity-if-not-exists': 'Create new entity if not exists',
           'create-entity-if-not-exists-hint': 'Create a new entity set above if it does not exist.',
           'entity-name-pattern': 'Name pattern',
@@ -631,7 +632,10 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'message-template-required': 'Message template is required',
           'use-system-slack-settings': 'Use system slack settings',
           'slack-api-token': 'Slack API token',
-          'slack-api-token-required': 'Slack API token is required'
+          'slack-api-token-required': 'Slack API token is required',
+          'fields-cant-be-equal': "Fields can't be equal",
+          'rename-keys-mapping': 'Rename keys mapping',
+          'template-rules-hint': 'Both input fields support templatization. Use $[messageKey] to extract value from the message and ${metadataKey} to extract value from the metadata.'
         },
         'key-val': {
           key: 'Key',

@@ -8,7 +8,7 @@ import { startWith } from 'rxjs/operators';
 @Component({
   selector: 'tb-transformation-node-to-email-config',
   templateUrl: './to-email-config.component.html',
-  styleUrls: []
+  styleUrls: ['../../../../style.scss']
 })
 export class ToEmailConfigComponent extends RuleNodeConfigurationComponent {
 

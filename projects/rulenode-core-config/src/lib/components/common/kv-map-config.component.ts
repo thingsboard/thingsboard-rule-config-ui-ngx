@@ -42,6 +42,7 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
 
   kvListFormGroup: FormGroup;
   ngControl: NgControl;
+  areEqualError = false;
 
   @Input()
   @coerceBoolean()
@@ -94,6 +95,10 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
 
   keyValsFormArray(): FormArray {
     return this.kvListFormGroup.get('keyVals') as FormArray;
+  }
+
+  public equalErrorChecking(keyValControl) {
+    return this.areEqualError = keyValControl.value.key === keyValControl.value.value && this.uniqueKeyValuePairValidator;
   }
 
   public errorTrigger() {

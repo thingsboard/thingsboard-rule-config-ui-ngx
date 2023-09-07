@@ -1,57 +1,86 @@
-<section [formGroup]="toEmailConfigForm" fxLayout="column">
-  <mat-form-field class="mat-block" subscriptSizing="dynamic">
-    <mat-label translate>tb.rulenode.from-template</mat-label>
-    <textarea required matInput formControlName="fromTemplate" rows="2"></textarea>
-    <mat-error *ngIf="toEmailConfigForm.get('fromTemplate').hasError('required')">
-      {{ 'tb.rulenode.from-template-required' | translate }}
-    </mat-error>
-    <mat-hint translate>tb.rulenode.general-pattern-hint</mat-hint>
-  </mat-form-field>
-  <mat-form-field class="mat-block" subscriptSizing="dynamic">
-    <mat-label translate>tb.rulenode.to-template</mat-label>
-    <textarea required matInput formControlName="toTemplate" rows="2"></textarea>
-    <mat-error *ngIf="toEmailConfigForm.get('toTemplate').hasError('required')">
-      {{ 'tb.rulenode.to-template-required' | translate }}
-    </mat-error>
-    <mat-hint [innerHTML]="'tb.rulenode.mail-address-list-template-hint' | translate | safe: 'html'"></mat-hint>
-  </mat-form-field>
-  <mat-form-field class="mat-block" subscriptSizing="dynamic">
-    <mat-label translate>tb.rulenode.cc-template</mat-label>
-    <textarea matInput formControlName="ccTemplate" rows="2"></textarea>
-    <mat-hint [innerHTML]="'tb.rulenode.mail-address-list-template-hint' | translate | safe: 'html'"></mat-hint>
-  </mat-form-field>
-  <mat-form-field class="mat-block" subscriptSizing="dynamic">
-    <mat-label translate>tb.rulenode.bcc-template</mat-label>
-    <textarea matInput formControlName="bccTemplate" rows="2"></textarea>
-    <mat-hint [innerHTML]="'tb.rulenode.mail-address-list-template-hint' | translate | safe: 'html'"></mat-hint>
-  </mat-form-field>
-  <mat-form-field class="mat-block" subscriptSizing="dynamic">
-    <mat-label translate>tb.rulenode.subject-template</mat-label>
-    <textarea required matInput formControlName="subjectTemplate" rows="2"></textarea>
-    <mat-error *ngIf="toEmailConfigForm.get('subjectTemplate').hasError('required')">
-      {{ 'tb.rulenode.subject-template-required' | translate }}
-    </mat-error>
-    <mat-hint translate>tb.rulenode.general-pattern-hint</mat-hint>
-  </mat-form-field>
-  <mat-form-field class="mat-block">
-    <mat-label translate>tb.rulenode.mail-body-type</mat-label>
-    <mat-select formControlName="mailBodyType">
-      <mat-option *ngFor="let type of mailBodyTypes" [value]="type.value">
-        {{ type.name | translate }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field class="mat-block" *ngIf="toEmailConfigForm.get('mailBodyType').value === 'dynamic'" subscriptSizing="dynamic">
-    <mat-label translate>tb.rulenode.dynamic-mail-body-type</mat-label>
-    <input required matInput formControlName="isHtmlTemplate">
-    <mat-hint translate>tb.rulenode.general-pattern-hint</mat-hint>
-  </mat-form-field>
-  <mat-form-field class="mat-block" subscriptSizing="dynamic">
-    <mat-label translate>tb.rulenode.body-template</mat-label>
-    <textarea required matInput formControlName="bodyTemplate" rows="6"></textarea>
-    <mat-error *ngIf="toEmailConfigForm.get('bodyTemplate').hasError('required')">
-      {{ 'tb.rulenode.body-template-required' | translate }}
-    </mat-error>
-    <mat-hint translate>tb.rulenode.general-pattern-hint</mat-hint>
-  </mat-form-field>
+<section [formGroup]="toEmailConfigForm" fxLayout="column" fxLayoutGap="8px">
+
+
+
+  <div class="tb-form-panel stroked" fxLayout="column" fxLayoutGap="8px">
+    <div class="tb-form-panel no-padding no-border">
+      <tb-example-hint [hintText]="'tb.rulenode.template-rules-hint' | translate"
+                        popupHelpLink="rulenode/originator_telemetry_node_fields_templatization">
+      </tb-example-hint>
+    </div>
+    <div fxLayout="row" fxLayoutGap="16px">
+      <mat-form-field class="mat-block" subscriptSizing="dynamic" fxFlex="50">
+        <mat-label translate>tb.rulenode.from-template</mat-label>
+        <textarea required matInput formControlName="fromTemplate" rows="1"></textarea>
+        <mat-error *ngIf="toEmailConfigForm.get('fromTemplate').hasError('required')">
+          {{ 'tb.rulenode.from-template-required' | translate }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="mat-block" subscriptSizing="dynamic" fxFlex="50">
+        <mat-label translate>tb.rulenode.to-template</mat-label>
+        <textarea required matInput formControlName="toTemplate" rows="1"></textarea>
+        <mat-error *ngIf="toEmailConfigForm.get('toTemplate').hasError('required')">
+          {{ 'tb.rulenode.to-template-required' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+
+
+  <div class="tb-form-panel stroked" fxLayout="column" fxLayoutGap="8px">
+    <div class="tb-form-panel no-padding no-border">
+      <tb-example-hint [hintText]="'tb.rulenode.template-rules-hint' | translate"
+                        popupHelpLink="rulenode/originator_telemetry_node_fields_templatization">
+      </tb-example-hint>
+    </div>
+    <div fxLayout="row" fxLayoutGap="16px">
+      <mat-form-field class="mat-block" subscriptSizing="dynamic" fxFlex="50">
+        <mat-label translate>tb.rulenode.cc-template</mat-label>
+        <textarea matInput formControlName="ccTemplate" rows="1"></textarea>
+      </mat-form-field>
+      <mat-form-field class="mat-block" subscriptSizing="dynamic" fxFlex="50">
+        <mat-label translate>tb.rulenode.bcc-template</mat-label>
+        <textarea matInput formControlName="bccTemplate" rows="1"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+
+
+
+  <div class="tb-form-panel stroked" fxLayout="column" fxLayoutGap="8px">
+    <div class="tb-form-panel no-padding no-border">
+      <tb-example-hint [hintText]="'tb.rulenode.kv-map-pattern-hint' | translate"
+                        popupHelpLink="rulenode/originator_telemetry_node_fields_templatization">
+      </tb-example-hint>
+    </div>
+    <div fxLayout="column">
+      <mat-form-field class="mat-block pb-16" subscriptSizing="dynamic">
+        <mat-label translate>tb.rulenode.subject-template</mat-label>
+        <textarea required matInput formControlName="subjectTemplate" rows="1"></textarea>
+        <mat-error *ngIf="toEmailConfigForm.get('subjectTemplate').hasError('required')">
+          {{ 'tb.rulenode.subject-template-required' | translate }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="at-block">
+        <mat-label translate>tb.rulenode.mail-body-type</mat-label>
+        <mat-select formControlName="mailBodyType">
+          <mat-option *ngFor="let type of mailBodyTypes" [value]="type.value">
+            {{ type.name | translate }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="mat-block" *ngIf="toEmailConfigForm.get('mailBodyType').value === 'dynamic'" subscriptSizing="dynamic">
+        <mat-label translate>tb.rulenode.dynamic-mail-body-type</mat-label>
+        <input required matInput formControlName="isHtmlTemplate">
+      </mat-form-field>
+      <mat-form-field class="mat-block" subscriptSizing="dynamic">
+        <mat-label translate>tb.rulenode.body-template</mat-label>
+        <textarea required matInput formControlName="bodyTemplate" rows="1"></textarea>
+        <mat-error *ngIf="toEmailConfigForm.get('bodyTemplate').hasError('required')">
+          {{ 'tb.rulenode.body-template-required' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
 </section>
