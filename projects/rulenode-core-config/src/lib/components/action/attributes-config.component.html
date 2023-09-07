@@ -7,16 +7,28 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <div *ngIf="attributesConfigForm.get('scope').value === attributeScopeMap.SHARED_SCOPE">
-    <mat-checkbox formControlName="notifyDevice">
-      {{ 'tb.rulenode.notify-device' | translate }}
-    </mat-checkbox>
-    <div class="tb-hint" translate>tb.rulenode.notify-device-hint</div>
-  </div>
-  <div *ngIf="attributesConfigForm.get('scope').value !== attributeScopeMap.CLIENT_SCOPE">
-    <mat-checkbox formControlName="sendAttributesUpdatedNotification">
-      {{ 'tb.rulenode.send-attributes-updated-notification' | translate }}
-    </mat-checkbox>
-    <div class="tb-hint" translate>tb.rulenode.send-attributes-updated-notification-hint</div>
+  <div class="tb-form-panel no-padding no-border">
+    <div tb-hint-tooltip-icon="{{ (attributesConfigForm.get('updateAttributesOnlyOnValueChange').value
+                                     ? 'tb.rulenode.update-attributes-only-on-value-change-hint-enabled'
+                                     : 'tb.rulenode.update-attributes-only-on-value-change-hint') | translate }}"
+         class="tb-form-row same-padding">
+      <mat-slide-toggle class="mat-slide margin" formControlName="updateAttributesOnlyOnValueChange">
+        {{ 'tb.rulenode.update-attributes-only-on-value-change' | translate }}
+      </mat-slide-toggle>
+    </div>
+    <div tb-hint-tooltip-icon="{{ 'tb.rulenode.send-attributes-updated-notification-hint' | translate }}"
+         *ngIf="attributesConfigForm.get('scope').value !== attributeScopeMap.CLIENT_SCOPE"
+         class="tb-form-row same-padding">
+      <mat-slide-toggle class="mat-slide margin" formControlName="sendAttributesUpdatedNotification">
+        {{ 'tb.rulenode.send-attributes-updated-notification' | translate }}
+      </mat-slide-toggle>
+    </div>
+    <div tb-hint-tooltip-icon="{{ 'tb.rulenode.notify-device-hint' | translate }}"
+         *ngIf="attributesConfigForm.get('scope').value === attributeScopeMap.SHARED_SCOPE"
+         class="tb-form-row same-padding">
+      <mat-slide-toggle class="mat-slide margin" formControlName="notifyDevice">
+        {{ 'tb.rulenode.notify-device' | translate }}
+      </mat-slide-toggle>
+    </div>
   </div>
 </section>
