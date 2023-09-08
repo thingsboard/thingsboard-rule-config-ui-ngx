@@ -46,7 +46,7 @@
       </tb-example-hint>
     </div>
     <div fxLayout="column">
-      <mat-form-field class="mat-block pb-16" subscriptSizing="dynamic">
+      <mat-form-field class="mat-block" subscriptSizing="dynamic">
         <mat-label translate>tb.rulenode.subject-template</mat-label>
         <textarea required matInput formControlName="subjectTemplate" rows="1"></textarea>
         <mat-error *ngIf="toEmailConfigForm.get('subjectTemplate').hasError('required')">

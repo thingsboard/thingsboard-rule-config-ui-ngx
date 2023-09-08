@@ -1,5 +1,5 @@
-<section [formGroup]="changeOriginatorConfigForm" fxLayout="column">
-  <mat-form-field class="mat-block">
+<section [formGroup]="changeOriginatorConfigForm" class="tb-form-panel no-border no-padding">
+  <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.originator-source</mat-label>
     <mat-select formControlName="originatorSource" required>
       <mat-option *ngFor="let source of originatorSources" [value]="source">
@@ -7,24 +7,21 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <div [class]="changeOriginatorConfigForm.get('entityType').value ? 'tb-form-panel stroked' : ''"
-        *ngIf="changeOriginatorConfigForm.get('originatorSource').value === 'ENTITY'"
-        fxLayout="column" fxLayoutGap="8px">
-    <div class="tb-form-panel no-padding no-border">
-      <tb-example-hint [hintText]="'tb.rulenode.general-pattern-hint' | translate"
-                        *ngIf="changeOriginatorConfigForm.get('entityType').value"
-                        popupHelpLink="rulenode/originator_telemetry_node_fields_templatization">
-      </tb-example-hint>
-    </div>
-    <div fxLayout="row" fxLayoutGap="16px">
+  <div [class]="changeOriginatorConfigForm.get('entityType').value ? 'tb-form-panel stroked no-padding-bottom' : ''"
+        *ngIf="changeOriginatorConfigForm.get('originatorSource').value === 'ENTITY'">
+    <tb-example-hint [hintText]="'tb.rulenode.general-pattern-hint' | translate"
+                      *ngIf="changeOriginatorConfigForm.get('entityType').value"
+                      popupHelpLink="rulenode/originator_telemetry_node_fields_templatization">
+    </tb-example-hint>
+    <div class="tb-form-panel no-border no-padding" fxLayout="row">
       <tb-entity-type-select
         showLabel
-        fxFlex
         required
         [allowedEntityTypes] = "allowedEntityTypes"
-        formControlName="entityType">
+        formControlName="entityType"
+        fxFlex="50">
       </tb-entity-type-select>
-      <mat-form-field *ngIf="changeOriginatorConfigForm.get('entityType').value" fxFlex class="mat-block">
+      <mat-form-field *ngIf="changeOriginatorConfigForm.get('entityType').value" fxFlex="50">
         <mat-label translate>tb.rulenode.entity-name-pattern</mat-label>
         <input required matInput formControlName="entityNamePattern">
         <mat-error *ngIf="changeOriginatorConfigForm.get('entityNamePattern').hasError('required') ||
@@ -34,8 +31,7 @@
       </mat-form-field>
     </div>
   </div>
-  <section fxLayout="column"
-           *ngIf="changeOriginatorConfigForm.get('originatorSource').value === originatorSource.RELATED">
+  <section *ngIf="changeOriginatorConfigForm.get('originatorSource').value === originatorSource.RELATED">
     <tb-relations-query-config
       required
       formControlName="relationsQuery">

@@ -8,7 +8,7 @@ import { OriginatorSource, originatorSourceTranslations } from '../../rulenode-c
 @Component({
   selector: 'tb-transformation-node-change-originator-config',
   templateUrl: './change-originator-config.component.html',
-  styleUrls: ['../../../../style.scss']
+  styleUrls: []
 })
 export class ChangeOriginatorConfigComponent extends RuleNodeConfigurationComponent {
 

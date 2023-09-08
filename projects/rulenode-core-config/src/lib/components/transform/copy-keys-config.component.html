@@ -1,26 +1,24 @@
-<section [formGroup]="copyKeysConfigForm" fxLayout="column">
-  <div class="mat-caption pb-16" fxLayout="column">
-    <mat-form-field class="mat-block"  subscriptSizing="dynamic" >
-      <mat-label>{{ 'tb.rulenode.keys' | translate }}</mat-label>
-      <mat-chip-grid formControlName="keys" #attributeChipList >
-        <mat-chip-row
-          *ngFor="let key of copyKeysConfigForm.get('keys').value;"
-          (removed)="removeKey(key)">
-          {{key}}
-          <mat-icon matChipRemove>close</mat-icon>
-        </mat-chip-row>
-        <input matInput class="tb-title tb-required" type="text" placeholder="{{ 'tb.rulenode.keys' | translate }}"
-              [matChipInputFor]="attributeChipList"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              (matChipInputTokenEnd)="addKey($event)"
-              [matChipInputAddOnBlur]="true"
-              required>
-      </mat-chip-grid>
-      <mat-error *ngIf="copyKeysConfigForm.get('keys').hasError('required')">{{ 'tb.rulenode.keys-required' | translate }}</mat-error>
-      <mat-icon matSuffix class="mat-primary margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
-              matTooltip="{{ 'tb.rulenode.chip-help' | translate: { inputName: 'tb.rulenode.entity-type' | translate } }}">help</mat-icon>
-    </mat-form-field>
-  </div>
+<section [formGroup]="copyKeysConfigForm">
+  <mat-form-field class="mat-block">
+    <mat-label>{{ 'tb.rulenode.keys' | translate }}</mat-label>
+    <mat-chip-grid formControlName="keys" #attributeChipList >
+      <mat-chip-row
+        *ngFor="let key of copyKeysConfigForm.get('keys').value;"
+        (removed)="removeKey(key)">
+        {{key}}
+        <mat-icon matChipRemove>close</mat-icon>
+      </mat-chip-row>
+      <input matInput class="tb-title tb-required" type="text" placeholder="{{ 'tb.rulenode.keys' | translate }}"
+            [matChipInputFor]="attributeChipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="addKey($event)"
+            [matChipInputAddOnBlur]="true"
+            required>
+    </mat-chip-grid>
+    <mat-error *ngIf="copyKeysConfigForm.get('keys').hasError('required')">{{ 'tb.rulenode.keys-required' | translate }}</mat-error>
+    <mat-icon matSuffix class="mat-primary margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
+            matTooltip="{{ 'tb.rulenode.chip-help' | translate: { inputName: 'tb.rulenode.entity-type' | translate } }}">help</mat-icon>
+  </mat-form-field>
   <tb-msg-metadata-chip
     [labelText]="('tb.rulenode.copy-from' | translate)"
     formControlName="fromMetadata">

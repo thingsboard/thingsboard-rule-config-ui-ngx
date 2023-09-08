@@ -9,7 +9,7 @@ import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 @Component({
   selector: 'tb-transformation-node-copy-keys-config',
   templateUrl: './copy-keys-config.component.html',
-  styleUrls: ['../../../../style.scss']
+  styleUrls: []
 })
 
 export class CopyKeysConfigComponent extends RuleNodeConfigurationComponent{

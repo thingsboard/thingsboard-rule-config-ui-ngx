@@ -1,5 +1,5 @@
-<section [formGroup]="jsonPathConfigForm" fxLayout="column">
-  <mat-form-field subscriptSizing="dynamic">
+<section [formGroup]="jsonPathConfigForm">
+  <mat-form-field subscriptSizing="dynamic" class="mat-block">
     <mat-label>{{ 'tb.rulenode.json-path-expression' | translate }}</mat-label>
     <input matInput formControlName="jsonPath" required/>
     <mat-hint>{{ 'tb.rulenode.json-path-expression-hint' | translate }}</mat-hint>
