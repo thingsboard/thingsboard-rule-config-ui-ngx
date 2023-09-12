@@ -12,29 +12,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
     selector: 'tb-action-node-device-state-config',
     templateUrl: './device-state-config.component.html',
-    styleUrls: ['./device-state-config.component.scss']
+    styleUrls: []
 })
 export class DeviceStateConfigComponent extends RuleNodeConfigurationComponent {
 
     deviceState: FormGroup;
 
-    public eventOptions = [
-        {
-            value: MessageType.CONNECT_EVENT,
-            name: messageTypeNames.get(MessageType.CONNECT_EVENT)
-        },
-        {
-            value: MessageType.ACTIVITY_EVENT,
-            name: messageTypeNames.get(MessageType.ACTIVITY_EVENT)
-        },
-        {
-            value: MessageType.DISCONNECT_EVENT,
-            name: messageTypeNames.get(MessageType.DISCONNECT_EVENT)
-        },
-        {
-            value: MessageType.INACTIVITY_EVENT,
-            name: messageTypeNames.get(MessageType.INACTIVITY_EVENT)
-        }
+    public messageTypeNames = messageTypeNames;
+    public eventOptions: MessageType[] = [
+        MessageType.CONNECT_EVENT,
+        MessageType.ACTIVITY_EVENT,
+        MessageType.DISCONNECT_EVENT,
+        MessageType.INACTIVITY_EVENT
     ];
 
     constructor(protected store: Store<AppState>,

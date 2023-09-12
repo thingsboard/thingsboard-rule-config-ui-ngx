@@ -1,9 +1,9 @@
 <section [formGroup]="deviceState">
-    <mat-form-field class="connectivity-selector" subscriptSizing="dynamic">
+    <mat-form-field class="mat-block" subscriptSizing="dynamic">
         <mat-label>{{ 'tb.rulenode.select-device-connectivity-event' | translate }}</mat-label>
         <mat-select formControlName="event">
-            <mat-option *ngFor="let eventOption of eventOptions" [value]="eventOption.value">
-                {{ eventOption.name }}
+            <mat-option *ngFor="let eventOption of eventOptions" [value]="eventOption">
+                {{ messageTypeNames.get(eventOption) }}
             </mat-option>
         </mat-select>
     </mat-form-field>
