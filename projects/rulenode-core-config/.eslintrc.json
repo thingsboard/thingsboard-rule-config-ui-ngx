@@ -10,7 +10,7 @@
       ],
       "parserOptions": {
         "project": [
-          "tsconfig.lib.json"
+          "projects/rulenode-core-config/tsconfig.lib.json"
         ],
         "createDefaultProgram": true
       },
