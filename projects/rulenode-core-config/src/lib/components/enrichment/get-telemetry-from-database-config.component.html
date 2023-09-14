@@ -70,7 +70,7 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <div class="description-block" [class.error]="getTelemetryFromDatabaseConfigForm.get('interval').invalid">
+      <div class="description-block tb-primary-fill" [class.error]="getTelemetryFromDatabaseConfigForm.get('interval').invalid">
         <mat-icon class="description-icon">error_outline</mat-icon>
         <div class="description-text">
           <ng-container *ngIf="getTelemetryFromDatabaseConfigForm.get('interval').valid; else invalidText">
@@ -106,7 +106,7 @@
             {{ 'tb.rulenode.end-interval-required' | translate }}
           </mat-error>
         </mat-form-field>
-        <tb-example-hint  [hintText]="'tb.rulenode.metadata-dynamic-interval-hint' | translate"
+        <tb-example-hint [hintText]="'tb.rulenode.metadata-dynamic-interval-hint' | translate"
                          popupHelpLink="rulenode/originator_telemetry_node_fields_templatization">
         </tb-example-hint>
       </div>
@@ -122,7 +122,7 @@
           </tb-toggle-option>
         </tb-toggle-select>
       </div>
-      <div class="tb-hint">
+      <div class="tb-form-hint tb-primary-fill">
         {{ deduplicationStrategiesHintTranslations.get(getTelemetryFromDatabaseConfigForm.get('fetchMode').value) | translate }}
       </div>
     </div>

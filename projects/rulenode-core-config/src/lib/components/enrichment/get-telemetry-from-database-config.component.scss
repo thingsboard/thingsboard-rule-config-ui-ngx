@@ -4,14 +4,9 @@
     display: inline-block;
   }
 
-  .tb-hint {
-    padding-bottom: 0;
-  }
-
   .description-block {
     display: flex;
     align-items: center;
-    background: #F7F7F7;
     border-radius: 6px;
     border: 1px solid #EAEAEA;
 
@@ -34,7 +29,6 @@
     }
 
     &.error {
-      background: #FDF7F7;
       color: var(--mdc-theme-error, #f44336);
 
       .description-icon {

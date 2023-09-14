@@ -49,8 +49,7 @@ export class CheckMessageConfigComponent extends RuleNodeConfigurationComponent 
     }, {validators: this.atLeastOne(Validators.required, ['messageNames', 'metadataNames'])});
   }
 
-  public touched() {
-    this.checkMessageConfigForm.markAsTouched();
-    this.checkMessageConfigForm.updateValueAndValidity({emitEvent: true});
+  get touchedValidationControl(): boolean {
+    return ['messageNames', 'metadataNames'].some(name => this.checkMessageConfigForm.get(name).touched);
   }
 }
