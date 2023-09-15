@@ -25,10 +25,6 @@ export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationCo
     return this.originatorAttributesConfigForm;
   }
 
-  public touched() {
-    this.originatorAttributesConfigForm.get('attributesControl').markAsTouched();
-  }
-
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.originatorAttributesConfigForm = this.fb.group({
       tellFailureIfAbsent: [configuration.tellFailureIfAbsent, []],

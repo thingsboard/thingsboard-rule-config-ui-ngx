@@ -8,8 +8,7 @@
         tb.rulenode.at-least-one-field-required
       </div>
     </div>
-    <tb-select-attributes (focusout)="touched()"
-                          formControlName="attributesControl"
+    <tb-select-attributes formControlName="attributesControl"
                           popupHelpLink="rulenode/originator_attributes_node_fields_templatization">
     </tb-select-attributes>
     <tb-msg-metadata-chip [labelText]="'tb.rulenode.add-originator-attributes-to' | translate"
