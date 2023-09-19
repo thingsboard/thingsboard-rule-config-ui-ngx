@@ -2,21 +2,25 @@
   <tb-example-hint [hintText]="'tb.rulenode.kv-map-pattern-hint' | translate"
                    [popupHelpLink]="popupHelpLink"></tb-example-hint>
   <tb-string-items-list subscriptSizing="dynamic" class="mat-block" editable
+                        (focusout)="onTouched()"
                         [placeholder]="'tb.rulenode.add-attribute-key' | translate"
                         [label]="'tb.rulenode.client-attributes' | translate" formControlName="clientAttributeNames">
     <ng-container matSuffix *ngTemplateOutlet="helpIcon"></ng-container>
   </tb-string-items-list>
   <tb-string-items-list subscriptSizing="dynamic" class="mat-block" editable
+                        (focusout)="onTouched()"
                         [placeholder]="'tb.rulenode.add-attribute-key' | translate"
                         [label]="'tb.rulenode.shared-attributes' | translate" formControlName="sharedAttributeNames">
     <ng-container matSuffix *ngTemplateOutlet="helpIcon"></ng-container>
   </tb-string-items-list>
   <tb-string-items-list subscriptSizing="dynamic" class="mat-block" editable
+                        (focusout)="onTouched()"
                         [placeholder]="'tb.rulenode.add-attribute-key' | translate"
                         [label]="'tb.rulenode.server-attributes' | translate" formControlName="serverAttributeNames">
     <ng-container matSuffix *ngTemplateOutlet="helpIcon"></ng-container>
   </tb-string-items-list>
   <tb-string-items-list subscriptSizing="dynamic" editable class="mat-block"
+                        (focusout)="onTouched()"
                         [placeholder]="'tb.rulenode.add-telemetry-key' | translate"
                         [label]="'tb.rulenode.latest-telemetry' | translate" formControlName="latestTsKeyNames">
     <ng-container matSuffix *ngTemplateOutlet="helpIcon"></ng-container>

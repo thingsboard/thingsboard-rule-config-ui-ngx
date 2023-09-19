@@ -34,10 +34,6 @@ export class DeviceAttributesConfigComponent extends RuleNodeConfigurationCompon
     });
   }
 
-  public touched() {
-    this.deviceAttributesConfigForm.get('attributesControl').markAsTouched();
-  }
-
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
     if (isObject(configuration)) {
       configuration.attributesControl = {

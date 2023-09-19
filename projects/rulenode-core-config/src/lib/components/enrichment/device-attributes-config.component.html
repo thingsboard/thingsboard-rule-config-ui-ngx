@@ -15,8 +15,7 @@
         tb.rulenode.at-least-one-field-required
       </div>
     </div>
-    <tb-select-attributes (focusout)="touched()"
-                          formControlName="attributesControl"
+    <tb-select-attributes formControlName="attributesControl"
                           popupHelpLink="rulenode/related_device_attributes_node_fields_templatization"></tb-select-attributes>
     <tb-msg-metadata-chip formControlName="fetchTo"
                           [labelText]="'tb.rulenode.add-selected-attributes-to' | translate"></tb-msg-metadata-chip>

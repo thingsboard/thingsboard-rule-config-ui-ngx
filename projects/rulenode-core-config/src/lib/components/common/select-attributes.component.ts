@@ -36,6 +36,7 @@ export class SelectAttributesComponent implements OnInit, ControlValueAccessor, 
 
   public attributeControlGroup: FormGroup;
   public separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
+  public onTouched = () => {};
 
   @Input() popupHelpLink: string;
 
@@ -90,6 +91,7 @@ export class SelectAttributesComponent implements OnInit, ControlValueAccessor, 
   }
 
   registerOnTouched(fn: any): void {
+    this.onTouched = fn;
   }
 
   setDisabledState(isDisabled: boolean): void {
