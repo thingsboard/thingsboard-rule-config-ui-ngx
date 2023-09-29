@@ -5,6 +5,8 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
     const enUS = {
       tb: {
         rulenode: {
+          id: 'Id',
+          'additional-info': 'Additional Info',
           'create-entity-if-not-exists': 'Create new entity if not exists',
           'create-entity-if-not-exists-hint': 'Create a new entity set above if it does not exist.',
           'entity-name-pattern': 'Name pattern',
