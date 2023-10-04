@@ -1,4 +1,4 @@
-import { EntitySearchDirection, EntityTypeFilter } from '@shared/public-api';
+import { EntityField, entityFields, EntitySearchDirection, EntityTypeFilter } from '@shared/public-api';
 
 export enum OriginatorSource {
   CUSTOMER = 'CUSTOMER',
@@ -17,6 +17,26 @@ export const originatorSourceTranslations = new Map<OriginatorSource, string>(
     [OriginatorSource.ENTITY, 'tb.rulenode.originator-entity'],
   ]
 );
+
+export const allowedOriginatorFields: EntityField[] = [
+    entityFields.createdTime,
+    entityFields.name,
+    entityFields.type,
+    entityFields.firstName,
+    entityFields.lastName,
+    entityFields.email,
+    entityFields.title,
+    entityFields.country,
+    entityFields.state,
+    entityFields.city,
+    entityFields.address,
+    entityFields.address2,
+    entityFields.zip,
+    entityFields.phone,
+    entityFields.label,
+    {value: 'id', name: 'tb.rulenode.id', keyName: 'id'},
+    {value: 'additionalInfo', name: 'tb.rulenode.additional-info', keyName: 'additionalInfo'}
+];
 
 export enum PerimeterType {
   CIRCLE = 'CIRCLE',
