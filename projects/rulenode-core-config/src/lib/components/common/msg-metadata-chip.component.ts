@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FetchToTranslation } from '../../rulenode-core-config.models';
+import { FetchTo, FetchToTranslationMap } from '../../rulenode-core-config.models';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
@@ -18,24 +18,19 @@ import { TranslateService } from '@ngx-translate/core';
 export class MsgMetadataChipComponent implements OnInit, ControlValueAccessor, OnDestroy {
 
   @Input() labelText: string;
+  @Input() translation: Map<FetchTo, string> = FetchToTranslationMap;
 
-  private propagateChange = (v: any) => { };
+  private propagateChange: (value: any) => void = () => {};
   private destroy$ = new Subject<void>();
 
   public chipControlGroup: FormGroup;
   public selectOptions = [];
 
   constructor(private fb: FormBuilder,
-              private translate: TranslateService) {
-    for (const key of FetchToTranslation.keys()) {
-      this.selectOptions.push({
-        value: key,
-        name: this.translate.instant(FetchToTranslation.get(key))
-      });
-    }
-  }
+              private translate: TranslateService) {}
 
   ngOnInit(): void {
+    this.initOptions();
     this.chipControlGroup = this.fb.group({
       chipControl: [null, []]
     });
@@ -48,6 +43,20 @@ export class MsgMetadataChipComponent implements OnInit, ControlValueAccessor, O
         }
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  initOptions() {
+    for (const key of this.translation.keys()) {
+      this.selectOptions.push({
+        value: key,
+        name: this.translate.instant(this.translation.get(key))
+      });
+    }
   }
 
   writeValue(value: string | null): void {
@@ -67,10 +76,5 @@ export class MsgMetadataChipComponent implements OnInit, ControlValueAccessor, O
     } else {
       this.chipControlGroup.enable({emitEvent: false});
     }
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }

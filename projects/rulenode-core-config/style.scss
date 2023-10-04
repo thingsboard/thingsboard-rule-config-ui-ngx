@@ -1,3 +1,5 @@
+@import './constants';
+
 :host {
   .margin-8 {
     margin: 8px;
@@ -10,5 +12,18 @@
 
   .tb-required::after {
     content: "*";
+  }
+}
+
+.same-width-component-row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 16px;
+  @media #{$mat-xs} {
+    gap: 8px;
+  }
+
+  & > * {
+    flex: 1;
   }
 }

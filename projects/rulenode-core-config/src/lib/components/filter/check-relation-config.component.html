@@ -19,9 +19,8 @@
         {{ 'tb.rulenode.check-relation-to-specific-entity' | translate }}
       </mat-slide-toggle>
     </div>
-    <div *ngIf="checkRelationConfigForm.get('checkForSingleEntity').value" fxLayout="row" fxLayoutGap="16px">
+    <div *ngIf="checkRelationConfigForm.get('checkForSingleEntity').value" class="same-width-component-row">
       <tb-entity-type-select
-        style="min-width: 100px;"
         showLabel
         required
         formControlName="entityType">

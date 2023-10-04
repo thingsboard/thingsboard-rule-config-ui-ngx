@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'tb-transformation-node-json-path-config',
@@ -12,14 +12,14 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 
 export class NodeJsonPathConfigComponent extends RuleNodeConfigurationComponent {
 
-  jsonPathConfigForm: UntypedFormGroup;
+  jsonPathConfigForm: FormGroup;
 
   constructor(protected store: Store<AppState>,
-              private fb: UntypedFormBuilder) {
+              private fb: FormBuilder) {
     super(store);
   }
 
-  protected configForm(): UntypedFormGroup {
+  protected configForm(): FormGroup {
     return this.jsonPathConfigForm;
   }
 

@@ -1,30 +1,33 @@
-<mat-form-field [formGroup]="messageTypeFormGroup" class="mat-block" subscriptSizing="{{subscriptSizing}}">
-  <mat-label>{{'tb.rulenode.output-message-type' | translate}}</mat-label>
-  <input matInput type="text"
-         #messageTypeInput
-         formControlName="messageType"
-         (focusin)="onFocus()"
-         [required]="required"
-         [matAutocomplete]="messageTypeAutocomplete">
-  <button *ngIf="messageTypeFormGroup.get('messageType').value"
-          type="button"
-          matSuffix mat-icon-button aria-label="Clear"
-          (click)="clear()">
-    <mat-icon class="material-icons">close</mat-icon>
-  </button>
-  <mat-autocomplete
-    class="tb-autocomplete"
-    #messageTypeAutocomplete="matAutocomplete"
-    [displayWith]="displayMessageTypeFn">
-    <mat-option *ngFor="let msgType of outputMessageTypes | async" [value]="msgType">
-      <span [innerHTML]="msgType | highlight:searchText"></span>
-    </mat-option>
-  </mat-autocomplete>
-  <mat-hint *ngIf="autocompleteHint">{{autocompleteHint | translate}}</mat-hint>
-  <mat-error *ngIf="messageTypeFormGroup.get('messageType').hasError('required')">
-    {{ 'tb.rulenode.output-message-type-required' | translate }}
-  </mat-error>
-  <mat-error *ngIf="messageTypeFormGroup.get('messageType').hasError('maxlength')">
-    {{ 'tb.rulenode.output-message-type-max-length' | translate }}
-  </mat-error>
-</mat-form-field>
+<section class="tb-form-row no-border no-padding tb-standard-fields column-xs" [formGroup]="messageTypeFormGroup">
+  <mat-form-field class="flex" subscriptSizing="{{ subscriptSizing }}">
+    <mat-label>{{'tb.rulenode.output-message-type' | translate}}</mat-label>
+    <mat-select formControlName="messageTypeAlias">
+      <mat-option *ngFor="let msgType of messageTypes" [value]="msgType">
+        {{msgType.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="flex" subscriptSizing="{{ subscriptSizing }}">
+    <mat-label>{{'tb.rulenode.message-type-value' | translate}}</mat-label>
+    <input matInput type="text" formControlName="messageType">
+    <button type="button"
+            matSuffix
+            mat-icon-button
+            aria-label="Copy"
+            *ngIf="messageTypeFormGroup.get('messageType').value"
+            ngxClipboard
+            [cbContent]="messageTypeFormGroup.get('messageType').value"
+            matTooltip="{{ 'tb.rulenode.copy-message-type' | translate }}">
+      <mat-icon aria-hidden="false"
+                aria-label="help-icon">content_copy
+      </mat-icon>
+    </button>
+    <mat-error *ngIf="messageTypeFormGroup.get('messageType').hasError('required')">
+      {{ 'tb.rulenode.message-type-value-required' | translate }}
+    </mat-error>
+    <mat-error *ngIf="messageTypeFormGroup.get('messageType').hasError('maxlength')">
+      {{ 'tb.rulenode.message-type-value-max-length' | translate }}
+    </mat-error>
+  </mat-form-field>
+</section>
+

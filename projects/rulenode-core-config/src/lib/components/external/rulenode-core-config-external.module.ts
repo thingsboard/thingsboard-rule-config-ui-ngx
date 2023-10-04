@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 import { SnsConfigComponent } from './sns-config.component';
 import { SqsConfigComponent } from './sqs-config.component';
 import { PubSubConfigComponent } from './pubsub-config.component';

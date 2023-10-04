@@ -1,28 +1,19 @@
-<section [formGroup]="copyKeysConfigForm" fxLayout="column">
-  <div class="mat-caption" style="margin-bottom: 8px">{{'tb.rulenode.copy-from' | translate}}</div>
-  <mat-radio-group formControlName="fromMetadata" fxLayout="row" fxLayoutGap="16px">
-    <mat-radio-button [value]="false" color="primary" >
-      <span>{{'tb.rulenode.data-to-metadata' | translate}}</span>
-    </mat-radio-button>
-    <mat-radio-button [value]="true" color="primary">
-      <span>{{'tb.rulenode.metadata-to-data' | translate}}</span>
-    </mat-radio-button>
-  </mat-radio-group>
-  <mat-form-field class="mat-block" subscriptSizing="dynamic">
-    <mat-chip-grid formControlName="keys" #attributeChipList>
-      <mat-chip-row
-        *ngFor="let key of copyKeysConfigForm.get('keys').value;"
-        (removed)="removeKey(key)">
-        {{key}}
-        <mat-icon matChipRemove>close</mat-icon>
-      </mat-chip-row>
-      <input matInput type="text" placeholder="{{ 'tb.rulenode.keys' | translate }}"
-             [matChipInputFor]="attributeChipList"
-             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-             (matChipInputTokenEnd)="addKey($event)"
-             [matChipInputAddOnBlur]="true">
-    </mat-chip-grid>
-    <mat-error *ngIf="copyKeysConfigForm.get('keys').hasError('required')">{{ 'tb.rulenode.keys-required' | translate }}</mat-error>
-    <mat-hint translate>tb.rulenode.use-regular-expression-hint</mat-hint>
-  </mat-form-field>
+<section [formGroup]="copyKeysConfigForm" class="tb-form-panel no-padding no-border">
+  <tb-msg-metadata-chip
+    [labelText]="('tb.key-val.copy-key-values-from' | translate)"
+    [translation]="translation"
+    formControlName="fromMetadata">
+  </tb-msg-metadata-chip>
+  <tb-string-items-list class="mat-block"
+                        required
+                        [label]="'tb.rulenode.keys' | translate"
+                        [placeholder]="'tb.rulenode.add-keys' | translate"
+                        [requiredText]="'tb.key-val.at-least-one-key-error' | translate"
+                        formControlName="keys">
+    <mat-icon matSuffix class="margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
+              color="primary"
+              matTooltip="{{ 'tb.rulenode.use-regular-expression-hint' | translate }}">
+      help
+    </mat-icon>
+  </tb-string-items-list>
 </section>
