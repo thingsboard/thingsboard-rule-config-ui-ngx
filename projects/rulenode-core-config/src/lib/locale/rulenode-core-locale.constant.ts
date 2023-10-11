@@ -569,6 +569,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'type-field-input-required': 'Type is required.',
           'key-field-input': 'Key',
           'add-entity-type': 'Add entity type',
+          'add-device-profile': 'Add device profile',
           'key-field-input-required': 'Key is required.',
           'number-floating-point-field-input': 'Number of digits after floating point',
           'number-floating-point-field-input-hint': 'Use <i>0</i> to convert result to integer',
