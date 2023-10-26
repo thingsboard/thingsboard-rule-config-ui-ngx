@@ -17,7 +17,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'tb-enrichment-node-related-attributes-config',
   templateUrl: './related-attributes-config.component.html',
-  styleUrls: ['./related-attributes-config.component.scss']
+  styleUrls: ['./related-attributes-config.component.scss', '../../../../style.scss']
 })
 export class RelatedAttributesConfigComponent extends RuleNodeConfigurationComponent implements OnDestroy {
 
@@ -30,14 +30,6 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
   public fetchToData = [];
 
   private destroy$ = new Subject<void>();
-  private defaultKvMap = {
-    serialNumber: 'sn'
-  };
-  private defaultSvMap = {
-    [entityFields.name.value]: `relatedEntity${this.translate.instant(entityFields.name.name)}`
-  };
-
-  private dataToFetchPrevValue = '';
 
   constructor(protected store: Store<AppState>,
               private fb: FormBuilder,
@@ -57,30 +49,43 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
     }
   }
 
-  public toggleChange(value) {
-    this.relatedAttributesConfigForm.get('dataToFetch').patchValue(value, {emitEvent: true});
-  }
-
-
   protected configForm(): FormGroup {
     return this.relatedAttributesConfigForm;
   }
 
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    if (configuration.dataToFetch === DataToFetch.FIELDS) {
+      configuration.dataMapping = configuration.svMap;
+      delete configuration.svMap;
+    } else {
+      configuration.dataMapping = configuration.kvMap;
+      delete configuration.kvMap;
+    }
+
     const filteDataMapping = {};
     for (const key of Object.keys(configuration.dataMapping)) {
       filteDataMapping[key.trim()] = configuration.dataMapping[key];
     }
     configuration.dataMapping = filteDataMapping;
+    delete configuration.svMap;
+    delete configuration.kvMap;
+
     return deepTrim(configuration);
   }
 
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    let svMap = {
+      [entityFields.name.value]: `relatedEntity${this.translate.instant(entityFields.name.name)}`
+    };
+    let kvMap = {
+      serialNumber: 'sn'
+    };
 
+    let dataToFetch: DataToFetch;
     if (isDefinedAndNotNull(configuration?.telemetry)) {
-      this.dataToFetchPrevValue = configuration.telemetry ? DataToFetch.LATEST_TELEMETRY : DataToFetch.ATTRIBUTES;
+      dataToFetch = configuration.telemetry ? DataToFetch.LATEST_TELEMETRY : DataToFetch.ATTRIBUTES;
     } else {
-      this.dataToFetchPrevValue = isDefinedAndNotNull(configuration?.dataToFetch) ? configuration.dataToFetch : DataToFetch.ATTRIBUTES;
+      dataToFetch = isDefinedAndNotNull(configuration?.dataToFetch) ? configuration.dataToFetch : DataToFetch.ATTRIBUTES;
     }
 
     let dataMapping;
@@ -90,15 +95,22 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
       dataMapping = isDefinedAndNotNull(configuration?.dataMapping) ? configuration.dataMapping : null;
     }
 
+    if (dataToFetch === DataToFetch.FIELDS) {
+      svMap = dataMapping;
+    } else {
+      kvMap = dataMapping;
+    }
+
     return {
       relationsQuery: isDefinedAndNotNull(configuration?.relationsQuery) ? configuration.relationsQuery : null,
-      dataToFetch: this.dataToFetchPrevValue,
-      dataMapping,
+      dataToFetch,
+      svMap,
+      kvMap,
       fetchTo: isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA
     };
   }
 
-  public selectTranslation(latestTelemetryTranslation, attributesTranslation) {
+  public selectTranslation(latestTelemetryTranslation: string, attributesTranslation: string) {
     if (this.relatedAttributesConfigForm.get('dataToFetch').value === DataToFetch.LATEST_TELEMETRY) {
       return latestTelemetryTranslation;
     } else {
@@ -110,7 +122,8 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
     this.relatedAttributesConfigForm = this.fb.group({
       relationsQuery: [configuration.relationsQuery, [Validators.required]],
       dataToFetch: [configuration.dataToFetch, []],
-      dataMapping: [configuration.dataMapping, [Validators.required]],
+      kvMap: [configuration.kvMap, []],
+      svMap: [configuration.svMap, []],
       fetchTo: [configuration.fetchTo, []]
     });
 
@@ -118,12 +131,16 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
       takeUntil(this.destroy$)
     ).subscribe((value) => {
       if (value === DataToFetch.FIELDS) {
-        this.relatedAttributesConfigForm.get('dataMapping').patchValue(this.defaultSvMap, {emitEvent: false});
+        this.relatedAttributesConfigForm.get('svMap').setValidators(Validators.required);
+        this.relatedAttributesConfigForm.get('svMap').updateValueAndValidity();
+        this.relatedAttributesConfigForm.get('kvMap').clearValidators();
+        this.relatedAttributesConfigForm.get('kvMap').updateValueAndValidity();
+      } else {
+        this.relatedAttributesConfigForm.get('kvMap').setValidators(Validators.required);
+        this.relatedAttributesConfigForm.get('kvMap').updateValueAndValidity();
+        this.relatedAttributesConfigForm.get('svMap').clearValidators();
+        this.relatedAttributesConfigForm.get('svMap').updateValueAndValidity();
       }
-      if (value !== DataToFetch.FIELDS && this.dataToFetchPrevValue === DataToFetch.FIELDS) {
-        this.relatedAttributesConfigForm.get('dataMapping').patchValue(this.defaultKvMap, {emitEvent: false});
-      }
-      this.dataToFetchPrevValue = value;
     });
   }
 

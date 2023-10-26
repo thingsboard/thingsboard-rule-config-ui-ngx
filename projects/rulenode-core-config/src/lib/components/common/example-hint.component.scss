@@ -1,0 +1,12 @@
+:host {
+  .space-between {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+
+    .see-example {
+      display: flex;
+      flex-shrink: 0;
+    }
+  }
+}

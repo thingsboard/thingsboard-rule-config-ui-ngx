@@ -1,28 +1,28 @@
 import { Component } from '@angular/core';
 import { AppState, deepTrim, isDefinedAndNotNull } from '@core/public-api';
-import { entityFields, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
+import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FetchTo, SvMapOption } from '../../rulenode-core-config.models';
+import { FetchTo, SvMapOption, allowedOriginatorFields } from '../../rulenode-core-config.models';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'tb-enrichment-node-originator-fields-config',
-  templateUrl: './originator-fields-config.component.html',
-  styleUrls: ['./originator-fields-config.component.scss']
+  templateUrl: './originator-fields-config.component.html'
 })
 export class OriginatorFieldsConfigComponent extends RuleNodeConfigurationComponent {
 
   originatorFieldsConfigForm: FormGroup;
   public originatorFields: SvMapOption[] = [];
+
   constructor(protected store: Store<AppState>,
               private fb: FormBuilder,
               private translate: TranslateService) {
     super(store);
-    for (const field of Object.keys(entityFields)) {
+    for (const field of allowedOriginatorFields) {
       this.originatorFields.push({
-        value: entityFields[field].value,
-        name: this.translate.instant(entityFields[field].name)
+        value: field.value,
+        name: this.translate.instant(field.name)
       });
     }
   }

@@ -22,7 +22,7 @@
                         changeOriginatorConfigForm.get('entityNamePattern').hasError('pattern')">
         {{ 'tb.rulenode.entity-name-pattern-required' | translate }}
       </mat-error>
-      <mat-hint [innerHTML]="'tb.rulenode.general-pattern-hint' | translate | safeHtml"></mat-hint>
+      <mat-hint translate>tb.rulenode.general-pattern-hint</mat-hint>
     </mat-form-field>
   </div>
   <section fxLayout="column" *ngIf="changeOriginatorConfigForm.get('originatorSource').value === originatorSource.RELATED">

@@ -2,13 +2,13 @@ import { Component, forwardRef, Injector, Input, OnInit } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
-  NG_VALIDATORS,
-  NG_VALUE_ACCESSOR,
-  NgControl,
   FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  NgControl,
   Validator,
   Validators
 } from '@angular/forms';
@@ -21,7 +21,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'tb-kv-map-config',
   templateUrl: './kv-map-config.component.html',
-  styleUrls: ['./kv-map-config.component.scss'],
+  styleUrls: ['./kv-map-config.component.scss', '../../../../style.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -92,6 +92,18 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
     return this.kvListFormGroup.get('keyVals') as FormArray;
   }
 
+  public errorTrigger() {
+    const keyVals = this.keyValsFormArray();
+    for (const keyVal of keyVals.controls) {
+      for (const controlName of Object.keys(keyVal.value)) {
+        if (keyVal.get(controlName).touched && keyVal.get(controlName).invalid) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   registerOnChange(fn: any): void {
     this.propagateChange = fn;
   }
@@ -99,7 +111,7 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
   registerOnTouched(fn: any): void {
   }
 
-  setDisabledState?(isDisabled: boolean): void {
+  setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
     if (this.disabled) {
       this.kvListFormGroup.disable({emitEvent: false});
@@ -108,7 +120,7 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
     }
   }
 
-  writeValue(keyValMap: {[key: string]: string}): void {
+  writeValue(keyValMap: { [key: string]: string }): void {
     if (this.valueChangeSubscription) {
       this.valueChangeSubscription.unsubscribe();
     }
@@ -142,7 +154,7 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
   }
 
   public validate(c: FormControl) {
-    const kvList: {key: string; value: string}[] = this.kvListFormGroup.get('keyVals').value;
+    const kvList: { key: string; value: string }[] = this.kvListFormGroup.get('keyVals').value;
     if (!kvList.length && this.required) {
       return {
         kvMapRequired: true
@@ -166,7 +178,7 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
   }
 
   private updateModel() {
-    const kvList: {key: string; value: string}[] = this.kvListFormGroup.get('keyVals').value;
+    const kvList: { key: string; value: string }[] = this.kvListFormGroup.get('keyVals').value;
     if (this.required && !kvList.length || !this.kvListFormGroup.valid) {
       this.propagateChange(null);
     } else {

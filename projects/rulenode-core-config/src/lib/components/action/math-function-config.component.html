@@ -18,7 +18,7 @@
       <mat-error *ngIf="mathFunctionConfigForm.get('customFunction').hasError('required')" translate>
         tb.rulenode.custom-expression-field-input-required
       </mat-error>
-      <mat-hint [innerHTML]="'tb.rulenode.custom-expression-field-input-hint' | translate | safeHtml"></mat-hint>
+      <mat-hint translate>tb.rulenode.custom-expression-field-input-hint</mat-hint>
     </mat-form-field>
   </fieldset>
   <fieldset class="fields-group" fxLayout="column" fxLayoutGap="8px">
@@ -68,7 +68,7 @@
                  matInput
                  step="1" min="0"
                  type="number"/>
-          <mat-hint [innerHTML]="'tb.rulenode.number-floating-point-field-input-hint' | translate | safeHtml"></mat-hint>
+          <mat-hint [innerHTML]="'tb.rulenode.number-floating-point-field-input-hint' | translate | safe: 'html'"></mat-hint>
         </mat-form-field>
       </div>
       <div *ngIf="[ArgumentTypeResult.ATTRIBUTE, ArgumentTypeResult.TIME_SERIES].includes(mathFunctionConfigForm.get('result').get('type').value)"

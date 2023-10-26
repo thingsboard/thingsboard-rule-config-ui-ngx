@@ -23,7 +23,7 @@ import { SvMapOption } from '../../rulenode-core-config.models';
 @Component({
   selector: 'tb-sv-map-config',
   templateUrl: './sv-map-config.component.html',
-  styleUrls: ['./sv-map-config.component.scss'],
+  styleUrls: ['./sv-map-config.component.scss', '../../../../style.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -108,7 +108,7 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
   registerOnTouched(fn: any): void {
   }
 
-  setDisabledState?(isDisabled: boolean): void {
+  setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
     if (this.disabled) {
       this.svListFormGroup.disable({emitEvent: false});
@@ -117,7 +117,7 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
     }
   }
 
-  writeValue(keyValMap: {[key: string]: string}): void {
+  writeValue(keyValMap: { [key: string]: string }): void {
     if (this.valueChangeSubscription) {
       this.valueChangeSubscription.unsubscribe();
     }
@@ -134,16 +134,29 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
     }
     this.svListFormGroup.setControl('keyVals', this.fb.array(keyValsControls));
     for (const formGroup of this.keyValsFormArray().controls) {
-      this.keyChangeSubscribe(formGroup);
+      this.keyChangeSubscribe(formGroup as FormGroup);
     }
     this.valueChangeSubscription = this.svListFormGroup.valueChanges.pipe(
       takeUntil(this.destroy$)
-    ).subscribe((value) => {
+    ).subscribe(() => {
       this.updateModel();
     });
   }
 
-  public filterSelectOptions(keyValControl?) {
+  public errorTrigger() {
+    const keyVals = this.keyValsFormArray();
+    for (const keyVal of keyVals.controls) {
+      for (const controlName of Object.keys(keyVal.value)) {
+        if (keyVal.get(controlName).touched && keyVal.get(controlName).invalid) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+
+  public filterSelectOptions(keyValControl?: AbstractControl) {
     const deleteFieldsArray = [];
     for (const fieldMap of this.svListFormGroup.get('keyVals').value) {
       const findDeleteField = this.selectOptions.find((field) => field.value === fieldMap.key);
@@ -175,10 +188,10 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
       key: ['', [Validators.required]],
       value: ['', [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]]
     }));
-    this.keyChangeSubscribe(keyValsFormArray.controls[keyValsFormArray.length - 1]);
+    this.keyChangeSubscribe(keyValsFormArray.at(keyValsFormArray.length - 1) as FormGroup);
   }
 
-  private keyChangeSubscribe(formGroup) {
+  private keyChangeSubscribe(formGroup: FormGroup) {
     this.sourceFieldSubcritption.push(formGroup.get('key').valueChanges.pipe(
       takeUntil(this.destroy$)
     ).subscribe((value) => {
@@ -187,7 +200,7 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
   }
 
   public validate(c: FormControl) {
-    const svList: {key: string; value: string}[] = this.svListFormGroup.get('keyVals').value;
+    const svList: { key: string; value: string }[] = this.svListFormGroup.get('keyVals').value;
     if (!svList.length && this.required) {
       return {
         svMapRequired: true
@@ -202,7 +215,7 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
   }
 
   private updateModel() {
-    const svList: {key: string; value: string}[] = this.svListFormGroup.get('keyVals').value;
+    const svList: { key: string; value: string }[] = this.svListFormGroup.get('keyVals').value;
     if (this.required && !svList.length || !this.svListFormGroup.valid) {
       this.propagateChange(null);
     } else {

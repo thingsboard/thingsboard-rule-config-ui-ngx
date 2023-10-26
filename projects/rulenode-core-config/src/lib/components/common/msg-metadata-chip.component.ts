@@ -1,7 +1,5 @@
 import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { AppState } from '@core/core.state';
 import { FetchToTranslation } from '../../rulenode-core-config.models';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -10,7 +8,6 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'tb-msg-metadata-chip',
   templateUrl: './msg-metadata-chip.component.html',
-  styleUrls: ['./msg-metadata-chip.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => MsgMetadataChipComponent),
@@ -18,30 +15,29 @@ import { TranslateService } from '@ngx-translate/core';
   }]
 })
 
-export class MsgMetadataChipComponent implements  OnInit, ControlValueAccessor, OnDestroy {
+export class MsgMetadataChipComponent implements OnInit, ControlValueAccessor, OnDestroy {
 
   @Input() labelText: string;
 
-  private propagateChange;
+  private propagateChange = (v: any) => { };
   private destroy$ = new Subject<void>();
 
   public chipControlGroup: FormGroup;
   public selectOptions = [];
 
-  constructor(private store: Store<AppState>,
-              private fb: FormBuilder,
+  constructor(private fb: FormBuilder,
               private translate: TranslateService) {
-     for (const key of FetchToTranslation.keys()) {
-       this.selectOptions.push({
-         value: key,
-         name: this.translate.instant(FetchToTranslation.get(key))
-       });
-     }
+    for (const key of FetchToTranslation.keys()) {
+      this.selectOptions.push({
+        value: key,
+        name: this.translate.instant(FetchToTranslation.get(key))
+      });
+    }
   }
 
   ngOnInit(): void {
     this.chipControlGroup = this.fb.group({
-      chipControl: [null,  []]
+      chipControl: [null, []]
     });
 
     this.chipControlGroup.get('chipControl').valueChanges.pipe(
@@ -61,8 +57,10 @@ export class MsgMetadataChipComponent implements  OnInit, ControlValueAccessor, 
   registerOnChange(fn: any): void {
     this.propagateChange = fn;
   }
+
   registerOnTouched(fn: any): void {
   }
+
   setDisabledState(isDisabled: boolean): void {
     if (isDisabled) {
       this.chipControlGroup.disable({emitEvent: false});

@@ -9,7 +9,7 @@ import { FetchTo } from '../../rulenode-core-config.models';
 @Component({
   selector: 'tb-enrichment-node-device-attributes-config',
   templateUrl: './device-attributes-config.component.html',
-  styleUrls: ['./device-attributes-config.component.scss']
+  styleUrls: ['../../../../style.scss']
 })
 export class DeviceAttributesConfigComponent extends RuleNodeConfigurationComponent {
 
@@ -37,7 +37,7 @@ export class DeviceAttributesConfigComponent extends RuleNodeConfigurationCompon
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
     if (isObject(configuration)) {
       configuration.attributesControl = {
-        clientAttributeNames:  isDefinedAndNotNull(configuration?.clientAttributeNames) ? configuration.clientAttributeNames : null,
+        clientAttributeNames: isDefinedAndNotNull(configuration?.clientAttributeNames) ? configuration.clientAttributeNames : null,
         latestTsKeyNames: isDefinedAndNotNull(configuration?.latestTsKeyNames) ? configuration.latestTsKeyNames : null,
         serverAttributeNames: isDefinedAndNotNull(configuration?.serverAttributeNames) ? configuration.serverAttributeNames : null,
         sharedAttributeNames: isDefinedAndNotNull(configuration?.sharedAttributeNames) ? configuration.sharedAttributeNames : null,

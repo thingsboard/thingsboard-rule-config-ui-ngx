@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AppState, isDefinedAndNotNull, isObject, } from '@core/public-api';
 import { Store } from '@ngrx/store';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { TranslateService } from '@ngx-translate/core';
 import { FetchTo } from '../../rulenode-core-config.models';
@@ -9,7 +9,7 @@ import { FetchTo } from '../../rulenode-core-config.models';
 @Component({
   selector: 'tb-enrichment-node-originator-attributes-config',
   templateUrl: './originator-attributes-config.component.html',
-  styleUrls: ['./originator-attributes-config.component.scss']
+  styleUrls: ['../../../../style.scss']
 })
 export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationComponent {
 
@@ -36,7 +36,7 @@ export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationCo
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
     if (isObject(configuration)) {
       configuration.attributesControl = {
-        clientAttributeNames:  isDefinedAndNotNull(configuration?.clientAttributeNames) ? configuration.clientAttributeNames : null,
+        clientAttributeNames: isDefinedAndNotNull(configuration?.clientAttributeNames) ? configuration.clientAttributeNames : null,
         latestTsKeyNames: isDefinedAndNotNull(configuration?.latestTsKeyNames) ? configuration.latestTsKeyNames : null,
         serverAttributeNames: isDefinedAndNotNull(configuration?.serverAttributeNames) ? configuration.serverAttributeNames : null,
         sharedAttributeNames: isDefinedAndNotNull(configuration?.sharedAttributeNames) ? configuration.sharedAttributeNames : null,
@@ -47,7 +47,7 @@ export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationCo
     return {
       fetchTo: isDefinedAndNotNull(configuration?.fetchTo) ? configuration.fetchTo : FetchTo.METADATA,
       tellFailureIfAbsent: isDefinedAndNotNull(configuration?.tellFailureIfAbsent) ? configuration.tellFailureIfAbsent : false,
-      attributesControl : isDefinedAndNotNull(configuration?.attributesControl) ? configuration.attributesControl : null
+      attributesControl: isDefinedAndNotNull(configuration?.attributesControl) ? configuration.attributesControl : null
     };
   }
 

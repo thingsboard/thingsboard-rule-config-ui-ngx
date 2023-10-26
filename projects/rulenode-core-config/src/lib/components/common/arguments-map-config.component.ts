@@ -49,9 +49,11 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
   @Input() disabled: boolean;
 
   private functionValue: MathFunction;
+
   get function(): MathFunction {
     return this.functionValue;
   }
+
   @Input()
   set function(funcName: MathFunction) {
     if (funcName && this.functionValue !== funcName) {

@@ -47,8 +47,10 @@
                                 *ngIf="argumentControl.get('type').value && argumentControl.get('type').value !== ArgumentType.CONSTANT">
                   <mat-label translate>tb.rulenode.argument-key-field-input</mat-label>
                   <input [formControl]="argumentControl.get('key')" matInput required/>
-                  <mat-icon class="mat-primary" aria-hidden="false" aria-label="help-icon" matSuffix style="cursor:pointer;"
-                            matTooltip="{{ 'tb.rulenode.math-templatization-tooltip' | translate }}">help</mat-icon>
+                  <mat-icon class="mat-primary cursor-pointer" aria-hidden="false" aria-label="help-icon" matSuffix
+                            matTooltip="{{ 'tb.rulenode.math-templatization-tooltip' | translate }}">
+                    help
+                  </mat-icon>
                   <mat-error *ngIf="argumentControl.get('key').hasError('required')" translate>
                     tb.rulenode.argument-key-field-input-required
                   </mat-error>
@@ -68,7 +70,7 @@
                 <mat-form-field *ngIf="argumentControl.get('type').value && argumentControl.get('type').value !== ArgumentType.CONSTANT"
                                 fxFlex="50" floatLabel="always" class="mat-block">
                   <mat-label translate>tb.rulenode.default-value-field-input</mat-label>
-                  <input [formControl]="argumentControl.get('defaultValue')" matInput/>
+                  <input [formControl]="argumentControl.get('defaultValue')" matInput step="1" type="number"/>
                 </mat-form-field>
               </div>
               <mat-form-field *ngIf="argumentControl.get('type').value === ArgumentType.ATTRIBUTE" class="mat-block">

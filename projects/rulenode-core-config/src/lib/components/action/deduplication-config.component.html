@@ -26,6 +26,7 @@
   </mat-form-field>
   <div  *ngIf="deduplicationConfigForm.get('strategy').value === deduplicationStrategie.ALL">
     <tb-output-message-type-autocomplete
+      required
       formControlName="outMsgType"
       autocompleteHint="tb.rulenode.output-msg-type-hint"
       subscriptSizing="dynamic">
