@@ -15,7 +15,7 @@
     </mat-icon>
   </tb-string-items-list>
   <div class="tb-form-panel stroked">
-    <div class="tb-form-panel-title tb-required" translate>tb.rulenode.fetch-interval</div>
+    <div class="tb-form-panel-title" translate>tb.rulenode.fetch-interval</div>
     <div tb-hint-tooltip-icon="{{ 'tb.rulenode.use-metadata-dynamic-interval-tooltip' | translate }}"
          class="tb-form-row no-border no-padding">
       <mat-slide-toggle class="mat-slide" formControlName="useMetadataIntervalPatterns">
@@ -113,7 +113,7 @@
     </ng-template>
   </div>
   <div class="tb-form-panel stroked">
-    <div class="tb-form-panel-title tb-required" translate>tb.rulenode.fetch-strategy</div>
+    <div class="tb-form-panel-title" translate>tb.rulenode.fetch-strategy</div>
     <div class="tb-form-panel no-border no-padding item-center">
       <div class="fetch-mod-toggle">
         <tb-toggle-select formControlName="fetchMode" appearance="fill">
@@ -122,7 +122,7 @@
           </tb-toggle-option>
         </tb-toggle-select>
       </div>
-      <div class="tb-form-hint tb-primary-fill">
+      <div class="tb-form-hint tb-primary-fill hint-container">
         {{ deduplicationStrategiesHintTranslations.get(getTelemetryFromDatabaseConfigForm.get('fetchMode').value) | translate }}
       </div>
     </div>

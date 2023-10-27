@@ -1,11 +1,11 @@
 <section [formGroup]="checkRelationConfigForm" class="tb-form-panel stroked no-padding-bottom">
-  <div class="tb-form-panel-title tb-required" translate>tb.rulenode.relation-search-parameters</div>
+  <div class="tb-form-panel-title" translate>tb.rulenode.relation-search-parameters</div>
   <div fxLayout="column">
     <mat-form-field class="mat-block" hideRequiredMarker>
       <mat-label>{{ 'relation.direction' | translate }}</mat-label>
       <mat-select formControlName="direction" required>
         <mat-option *ngFor="let direction of entitySearchDirection" [value]="direction">
-          {{ entitySearchDirectionTranslationsMap.get(direction) | translate }}
+          {{ entitySearchDirectionTranslationsMap.get(direction) | translate }} <span translate>tb.rulenode.relations-query-config-direction-suffix</span>
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -21,7 +21,7 @@
     </div>
     <div *ngIf="checkRelationConfigForm.get('checkForSingleEntity').value" fxLayout="row" fxLayoutGap="16px">
       <tb-entity-type-select
-        style="min-width: 100px;"
+        style="min-width: 100px; flex: 1;"
         showLabel
         required
         formControlName="entityType">
