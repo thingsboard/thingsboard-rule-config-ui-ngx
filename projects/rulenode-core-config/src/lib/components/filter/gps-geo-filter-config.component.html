@@ -1,6 +1,6 @@
 <section [formGroup]="geoFilterConfigForm" class="tb-form-panel no-border no-padding">
   <section class="tb-form-panel stroked">
-    <div class="tb-form-panel-title tb-required" translate>tb.rulenode.coordinate-field-names</div>
+    <div class="tb-form-panel-title" translate>tb.rulenode.coordinate-field-names</div>
     <section>
       <div fxLayout="row" fxLayoutGap="16px">
         <mat-form-field fxFlex="50" class="mat-block">
@@ -22,7 +22,7 @@
     </section>
   </section>
   <section class="tb-form-panel stroked" [class.no-padding-bottom]="!defaultPaddingEnable">
-    <div class="tb-form-panel-title tb-required" translate>tb.rulenode.geofence-configuration</div>
+    <div class="tb-form-panel-title" translate>tb.rulenode.geofence-configuration</div>
     <section fxLayout="column">
       <mat-form-field fxFlex class="mat-block">
         <mat-label>{{ 'tb.rulenode.perimeter-type' | translate }}</mat-label>
@@ -32,7 +32,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <div tb-hint-tooltip-icon="{{ 'tb.rulenode.fetch-perimeter-info-from-metadata-tooltip' | translate :
+      <div tb-hint-tooltip-icon="{{ 'tb.rulenode.fetch-parameter-info-from-metadata-hint' | translate :
                      { perimeterKeyName: geoFilterConfigForm.get('perimeterKeyName').valid ?
                               geoFilterConfigForm.get('perimeterKeyName').value : 'ss_perimeter'} }}"
            class="tb-form-row no-border no-padding slide-toggle">

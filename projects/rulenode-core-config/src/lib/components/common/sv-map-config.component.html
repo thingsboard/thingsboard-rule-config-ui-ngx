@@ -1,6 +1,6 @@
 <section [formGroup]="svListFormGroup" class="tb-form-panel stroked">
   <div class="tb-form-row no-padding no-border space-between">
-    <div class="tb-form-panel-title tb-required" translate>tb.rulenode.originator-fields-mapping</div>
+    <div class="tb-form-panel-title">{{ labelText }}</div>
     <div class="tb-form-panel-hint tb-error" translate [hidden]="!errorTrigger()">
       tb.rulenode.map-fields-required
     </div>
