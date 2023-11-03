@@ -4,6 +4,7 @@ import { entityFields, RuleNodeConfiguration, RuleNodeConfigurationComponent } f
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
+  allowedOriginatorFields,
   DataToFetch,
   dataToFetchTranslations,
   FetchTo,
@@ -35,10 +36,10 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
               private fb: FormBuilder,
               private translate: TranslateService) {
     super(store);
-    for (const field of Object.keys(entityFields)) {
+    for (const field of Object.keys(allowedOriginatorFields)) {
       this.originatorFields.push({
-        value: entityFields[field].value,
-        name: this.translate.instant(entityFields[field].name)
+        value: allowedOriginatorFields[field].value,
+        name: this.translate.instant(allowedOriginatorFields[field].name)
       });
     }
     for (const key of dataToFetchTranslations.keys()) {

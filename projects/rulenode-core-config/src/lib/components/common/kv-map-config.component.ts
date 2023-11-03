@@ -180,7 +180,13 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
   private updateModel() {
     const kvList: { key: string; value: string }[] = this.kvListFormGroup.get('keyVals').value;
     if (this.required && !kvList.length || !this.kvListFormGroup.valid) {
-      this.propagateChange(null);
+      if (!kvList.length) {
+        this.propagateChange({'serialNumber':'sn'});
+      } else {
+        this.propagateChange({
+          [kvList['key'] ? kvList['key'] : 'serialNumber']: kvList['value'] ? kvList['value'] : 'sn'
+        });
+      }
     } else {
       const keyValMap: { [key: string]: string } = {};
       kvList.forEach((entry) => {

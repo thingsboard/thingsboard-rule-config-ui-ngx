@@ -18,7 +18,7 @@ import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { Subject, Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { takeUntil } from 'rxjs/operators';
-import { SvMapOption } from '../../rulenode-core-config.models';
+import { originatorFieldsMappingValues, SvMapOption } from '../../rulenode-core-config.models';
 
 @Component({
   selector: 'tb-sv-map-config',
@@ -195,7 +195,8 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
     this.sourceFieldSubcritption.push(formGroup.get('key').valueChanges.pipe(
       takeUntil(this.destroy$)
     ).subscribe((value) => {
-      formGroup.get('value').patchValue(this.targetKeyPrefix + value[0].toUpperCase() + value.slice(1));
+      const mappedValue = originatorFieldsMappingValues.get(value);
+      formGroup.get('value').patchValue(this.targetKeyPrefix + mappedValue[0].toUpperCase() + mappedValue.slice(1));
     }));
   }
 
@@ -217,7 +218,19 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
   private updateModel() {
     const svList: { key: string; value: string }[] = this.svListFormGroup.get('keyVals').value;
     if (this.required && !svList.length || !this.svListFormGroup.valid) {
-      this.propagateChange(null);
+      if (!svList.length) {
+        this.propagateChange({'name': originatorFieldsMappingValues.get('name')})
+      } else {
+        const keyName = svList['value']
+                ? svList['value']
+                : svList['key']
+                  ? originatorFieldsMappingValues.get(svList['key'])
+                  : originatorFieldsMappingValues.get('name');
+        const insertableValue = this.targetKeyPrefix + keyName[0].toUpperCase() + keyName.slice(1)
+        this.propagateChange({
+          [svList['key'] ? svList['key'] : 'name']: insertableValue
+        });
+      }
     } else {
       const keyValMap: { [key: string]: string } = {};
       svList.forEach((entry) => {

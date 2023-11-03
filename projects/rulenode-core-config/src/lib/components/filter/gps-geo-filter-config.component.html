@@ -24,17 +24,23 @@
   <section class="tb-form-panel stroked" [class.no-padding-bottom]="!defaultPaddingEnable">
     <div class="tb-form-panel-title" translate>tb.rulenode.geofence-configuration</div>
     <section fxLayout="column">
-      <mat-form-field fxFlex class="mat-block">
+      <mat-form-field fxFlex class="mat-block" hideRequiredMarker>
         <mat-label>{{ 'tb.rulenode.perimeter-type' | translate }}</mat-label>
-        <mat-select formControlName="perimeterType" required>
+        <mat-select formControlName="perimeterType">
           <mat-option *ngFor="let type of perimeterTypes" [value]="type">
             {{ perimeterTypeTranslationMap.get(type) | translate }}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <div tb-hint-tooltip-icon="{{ 'tb.rulenode.fetch-parameter-info-from-metadata-hint' | translate :
-                     { perimeterKeyName: geoFilterConfigForm.get('perimeterKeyName').valid ?
-                              geoFilterConfigForm.get('perimeterKeyName').value : 'ss_perimeter'} }}"
+      <div tb-hint-tooltip-icon="{{ geoFilterConfigForm.get('perimeterType').value === perimeterType.CIRCLE
+        ? ('tb.rulenode.fetch-circle-parameter-info-from-metadata-hint'
+            | translate : { perimeterKeyName: geoFilterConfigForm.get('perimeterKeyName').valid
+                              ? geoFilterConfigForm.get('perimeterKeyName').value
+                              : 'ss_perimeter'})
+        : ('tb.rulenode.fetch-poligon-parameter-info-from-metadata-hint'
+            | translate : { perimeterKeyName: geoFilterConfigForm.get('perimeterKeyName').valid
+                              ? geoFilterConfigForm.get('perimeterKeyName').value
+                              : 'ss_perimeter'}) }}"
            class="tb-form-row no-border no-padding slide-toggle">
         <mat-slide-toggle class="mat-slide" formControlName="fetchPerimeterInfoFromMessageMetadata">
           {{ 'tb.rulenode.fetch-perimeter-info-from-metadata' | translate }}
