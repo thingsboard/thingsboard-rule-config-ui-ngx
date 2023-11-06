@@ -238,7 +238,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'use-simple-client-http-factory': 'Use simple client HTTP factory',
           'ignore-request-body': 'Without request body',
           'parse-to-plain-text': 'Parse to plain text',
-          'parse-to-plain-text-hint': 'If selected, request body message payload will be transformed from JSON string to plain text, e.g. msg = "Hello,\\t\"world\"" will be parsed to Hello, "world"',
+          'parse-to-plain-text-hint': 'If selected, request body message payload will be transformed from JSON string to plain text, e.g. msg = "Hello,\\t\\"world\\"" will be parsed to Hello, "world"',
           'read-timeout': 'Read timeout in millis',
           'read-timeout-hint': 'The value of 0 means an infinite timeout',
           'max-parallel-requests-count': 'Max number of parallel requests',
