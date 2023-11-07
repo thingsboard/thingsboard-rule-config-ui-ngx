@@ -17,7 +17,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'tb-enrichment-node-related-attributes-config',
   templateUrl: './related-attributes-config.component.html',
-  styleUrls: ['./related-attributes-config.component.scss', '../../../../style.scss']
+  styleUrls: ['../../../../style.scss']
 })
 export class RelatedAttributesConfigComponent extends RuleNodeConfigurationComponent implements OnDestroy {
 
@@ -47,6 +47,11 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
         name: this.translate.instant(dataToFetchTranslations.get(key as DataToFetch))
       });
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   protected configForm(): FormGroup {
@@ -144,10 +149,5 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
 
   protected validatorTriggers(): string[] {
     return ['dataToFetch'];
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }

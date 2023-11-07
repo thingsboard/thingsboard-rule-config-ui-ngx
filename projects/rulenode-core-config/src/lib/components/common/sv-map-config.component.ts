@@ -238,7 +238,7 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
   private updateModel() {
     const svList: { key: string; value: string }[] = this.svListFormGroup.get('keyVals').value;
     if (this.required && !svList.length || !this.svListFormGroup.valid) {
-      svList[0] ? this.propagateChange({[svList[0].key]:svList[0].value}) : this.propagateChange({'':''});
+      this.propagateChange(null);
     } else {
       const keyValMap: { [key: string]: string } = {};
       svList.forEach((entry) => {

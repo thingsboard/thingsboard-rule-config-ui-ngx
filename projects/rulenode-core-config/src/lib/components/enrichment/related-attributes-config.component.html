@@ -5,15 +5,11 @@
   </tb-relations-query-config>
   <div class="tb-form-panel stroked">
     <div class="tb-form-panel-title" translate>tb.rulenode.data-to-fetch</div>
-    <div class="toggle-block">
-      <div class="fetch-to-data-toggle">
-        <tb-toggle-select formControlName="dataToFetch" appearance="fill">
-          <tb-toggle-option *ngFor="let data of fetchToData" [value]="data.value">
-            {{ data.name }}
-          </tb-toggle-option>
-        </tb-toggle-select>
-      </div>
-    </div>
+    <tb-toggle-select formControlName="dataToFetch" appearance="fill">
+      <tb-toggle-option *ngFor="let data of fetchToData" [value]="data.value">
+        {{ data.name }}
+      </tb-toggle-option>
+    </tb-toggle-select>
     <tb-kv-map-config
       [hidden]="relatedAttributesConfigForm.get('dataToFetch').value === DataToFetch.FIELDS"
       required
