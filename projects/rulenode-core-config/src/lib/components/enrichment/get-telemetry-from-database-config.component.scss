@@ -41,16 +41,12 @@
     align-items: center;
 
     .fetch-mod-toggle {
-      max-width: 630px;
       width: 100%;
     }
   }
 
   .hint-container {
-    width: 95%;
-    @media #{$mat-lt-md} {
-      width: 100%;
-    }
+    width: 100%;
   }
 }
 

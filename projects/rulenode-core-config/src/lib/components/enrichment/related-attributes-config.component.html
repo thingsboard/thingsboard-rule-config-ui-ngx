@@ -5,17 +5,13 @@
   </tb-relations-query-config>
   <div class="tb-form-panel stroked">
     <div class="tb-form-panel-title" translate>tb.rulenode.data-to-fetch</div>
-    <div class="toggle-block">
-      <div class="fetch-to-data-toggle">
-        <tb-toggle-select formControlName="dataToFetch" appearance="fill">
-          <tb-toggle-option *ngFor="let data of fetchToData" [value]="data.value">
-            {{ data.name }}
-          </tb-toggle-option>
-        </tb-toggle-select>
-      </div>
-    </div>
+    <tb-toggle-select formControlName="dataToFetch" appearance="fill">
+      <tb-toggle-option *ngFor="let data of fetchToData" [value]="data.value">
+        {{ data.name }}
+      </tb-toggle-option>
+    </tb-toggle-select>
     <tb-kv-map-config
-      *ngIf="relatedAttributesConfigForm.get('dataToFetch').value !== DataToFetch.FIELDS; else fields"
+      [hidden]="relatedAttributesConfigForm.get('dataToFetch').value === DataToFetch.FIELDS"
       required
       formControlName="kvMap"
       [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
@@ -27,23 +23,21 @@
       [hintText]="'tb.rulenode.kv-map-pattern-hint' | translate"
       popupHelpLink="rulenode/related_entity_data_node_fields_templatization">
     </tb-kv-map-config>
-    <ng-template #fields>
-      <tb-sv-map-config
-        *ngIf="relatedAttributesConfigForm.get('dataToFetch').value === DataToFetch.FIELDS"
-        required
-        [labelText]="'tb.rulenode.fields-mapping' | translate"
-        targetKeyPrefix="relatedEntity"
-        [selectOptions]="originatorFields"
-        formControlName="svMap"
-        [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
-        [selectText]="'tb.rulenode.source-field' | translate"
-        [selectRequiredText]="'tb.rulenode.source-field-required' | translate"
-        [valText]="'tb.rulenode.target-key' | translate"
-        [valRequiredText]="'tb.rulenode.target-key-required' | translate"
-        [hintText]="'tb.rulenode.sv-map-hint' | translate"
-        popupHelpLink="rulenode/related_entity_data_node_fields_templatization">
-      </tb-sv-map-config>
-    </ng-template>
+    <tb-sv-map-config
+      [hidden]="relatedAttributesConfigForm.get('dataToFetch').value !== DataToFetch.FIELDS"
+      required
+      [labelText]="'tb.rulenode.fields-mapping' | translate"
+      targetKeyPrefix="relatedEntity"
+      [selectOptions]="originatorFields"
+      formControlName="svMap"
+      [requiredText]="'tb.rulenode.attr-mapping-required' | translate"
+      [selectText]="'tb.rulenode.source-field' | translate"
+      [selectRequiredText]="'tb.rulenode.source-field-required' | translate"
+      [valText]="'tb.rulenode.target-key' | translate"
+      [valRequiredText]="'tb.rulenode.target-key-required' | translate"
+      [hintText]="'tb.rulenode.sv-map-hint' | translate"
+      popupHelpLink="rulenode/related_entity_data_node_fields_templatization">
+    </tb-sv-map-config>
     <tb-msg-metadata-chip formControlName="fetchTo"
                           [labelText]="msgMetadataLabelTranslations.get(relatedAttributesConfigForm.get('dataToFetch').value) | translate">
     </tb-msg-metadata-chip>

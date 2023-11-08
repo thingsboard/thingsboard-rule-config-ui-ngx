@@ -1,8 +1,11 @@
 <section [formGroup]="svListFormGroup" class="tb-form-panel stroked">
   <div class="tb-form-row no-padding no-border space-between">
     <div class="tb-form-panel-title">{{ labelText }}</div>
-    <div class="tb-form-panel-hint tb-error" translate [hidden]="!errorTrigger()">
+    <div class="tb-form-panel-hint tb-error" translate *ngIf="svListFormGroup.hasError('required')">
       tb.rulenode.map-fields-required
+    </div>
+    <div class="tb-form-panel-hint tb-error" translate *ngIf="svListFormGroup.hasError('svMapRequired')">
+      {{ requiredText }}
     </div>
   </div>
   <div class="tb-form-panel no-border no-padding">
