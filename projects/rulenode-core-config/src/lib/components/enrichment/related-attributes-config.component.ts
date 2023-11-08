@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppState, deepTrim, isDefinedAndNotNull } from '@core/public-api';
 import { entityFields, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
@@ -11,7 +11,6 @@ import {
   msgMetadataLabelTranslations,
   SvMapOption
 } from '../../rulenode-core-config.models';
-import { Subject } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -19,7 +18,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './related-attributes-config.component.html',
   styleUrls: ['../../../../style.scss']
 })
-export class RelatedAttributesConfigComponent extends RuleNodeConfigurationComponent implements OnDestroy {
+export class RelatedAttributesConfigComponent extends RuleNodeConfigurationComponent {
 
   relatedAttributesConfigForm: FormGroup;
 
@@ -28,8 +27,6 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
   public msgMetadataLabelTranslations = msgMetadataLabelTranslations;
   public originatorFields: SvMapOption[] = [];
   public fetchToData = [];
-
-  private destroy$ = new Subject<void>();
 
   constructor(protected store: Store<AppState>,
               private fb: FormBuilder,
@@ -47,11 +44,6 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
         name: this.translate.instant(dataToFetchTranslations.get(key as DataToFetch))
       });
     }
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 
   protected configForm(): FormGroup {
@@ -135,6 +127,10 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
     });
   }
 
+  protected validatorTriggers(): string[] {
+    return ['dataToFetch'];
+  }
+
   protected updateValidators(emitEvent: boolean) {
     if (this.relatedAttributesConfigForm.get('dataToFetch').value === DataToFetch.FIELDS) {
       this.relatedAttributesConfigForm.get('svMap').enable({emitEvent: false});
@@ -145,9 +141,5 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
       this.relatedAttributesConfigForm.get('kvMap').enable({emitEvent: false});
       this.relatedAttributesConfigForm.get('kvMap').updateValueAndValidity();
     }
-  }
-
-  protected validatorTriggers(): string[] {
-    return ['dataToFetch'];
   }
 }
