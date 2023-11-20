@@ -9,6 +9,8 @@ export class ExampleHintComponent {
   @Input() hintText: string;
 
   @Input() popupHelpLink: string;
+
+  @Input() textAlign: string = 'left';
 }
 
 

@@ -13,11 +13,11 @@ import { deduplicationStrategiesTranslations, FetchMode } from '../../rulenode-c
 
 export class DeduplicationConfigComponent extends RuleNodeConfigurationComponent {
 
-  public serviceType = ServiceType.TB_RULE_ENGINE;
-  public deduplicationConfigForm: UntypedFormGroup;
-  public deduplicationStrategie = FetchMode;
-  public deduplicationStrategies = Object.keys(this.deduplicationStrategie);
-  public deduplicationStrategiesTranslations = deduplicationStrategiesTranslations;
+  serviceType = ServiceType.TB_RULE_ENGINE;
+  deduplicationConfigForm: UntypedFormGroup;
+  deduplicationStrategie = FetchMode;
+  deduplicationStrategies = Object.keys(this.deduplicationStrategie);
+  deduplicationStrategiesTranslations = deduplicationStrategiesTranslations;
 
   constructor(protected store: Store<AppState>,
               private fb: UntypedFormBuilder) {
@@ -42,10 +42,20 @@ export class DeduplicationConfigComponent extends RuleNodeConfigurationComponent
     });
   }
 
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    if (!configuration) {
+      configuration = {};
+    }
+    if (!configuration.outMsgType) {
+      configuration.outMsgType = 'POST_TELEMETRY_REQUEST';
+    }
+    return super.prepareInputConfig(configuration);
+  }
+
   protected updateValidators(emitEvent: boolean) {
     if (this.deduplicationConfigForm.get('strategy').value === this.deduplicationStrategie.ALL) {
-      this.deduplicationConfigForm.get('outMsgType').enable({emitEvent: false});
       this.deduplicationConfigForm.get('queueName').enable({emitEvent: false});
+      this.deduplicationConfigForm.get('outMsgType').enable({emitEvent: false});
     } else {
       this.deduplicationConfigForm.get('outMsgType').disable({emitEvent: false});
       this.deduplicationConfigForm.get('queueName').disable({emitEvent: false});

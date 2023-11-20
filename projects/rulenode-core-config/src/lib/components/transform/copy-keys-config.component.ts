@@ -2,28 +2,37 @@ import { Component } from '@angular/core';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { AppState } from '@core/public-api';
+import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
+import { FetchTo, FetchFromToTranslation } from '../../rulenode-core-config.models';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'tb-transformation-node-copy-keys-config',
   templateUrl: './copy-keys-config.component.html',
-  styleUrls: []
+  styleUrls: ['../../../../style.scss']
 })
 
 export class CopyKeysConfigComponent extends RuleNodeConfigurationComponent{
   copyKeysConfigForm: UntypedFormGroup;
-  separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
+  fromMetadata = [];
+  translation = FetchFromToTranslation;
 
   constructor(protected store: Store<AppState>,
-              private fb: UntypedFormBuilder) {
+              private fb: UntypedFormBuilder,
+              private translate: TranslateService) {
     super(store);
+    for (const key of this.translation.keys()) {
+      this.fromMetadata.push({
+        value: key,
+        name: this.translate.instant(this.translation.get(key))
+      });
+    }
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.copyKeysConfigForm = this.fb.group({
-      fromMetadata: [configuration ? configuration.fromMetadata : null, [Validators.required]],
+      fromMetadata: [configuration.fromMetadata , [Validators.required]],
       keys: [configuration ? configuration.keys : null, [Validators.required]]
     });
   }
@@ -39,6 +48,21 @@ export class CopyKeysConfigComponent extends RuleNodeConfigurationComponent{
       keys.splice(index, 1);
       this.copyKeysConfigForm.get('keys').patchValue(keys, {emitEvent: true});
     }
+  }
+
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    let fromMetadata: FetchTo;
+
+    if (isDefinedAndNotNull(configuration?.fromMetadata)) {
+      fromMetadata = configuration.fromMetadata ? FetchTo.METADATA : FetchTo.DATA;
+    } else {
+      fromMetadata = isDefinedAndNotNull(configuration?.fromMetadata) ? configuration.fromMetadata : FetchTo.DATA;
+    }
+
+    return {
+      keys: isDefinedAndNotNull(configuration?.keys) ? configuration.keys : null,
+      fromMetadata
+    };
   }
 
   addKey(event: MatChipInputEvent): void {

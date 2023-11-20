@@ -1,5 +1,7 @@
 <div [hidden]="!hintText" class="tb-form-hint tb-primary-fill space-between">
-  <div>{{ hintText }}</div>
+  <div [innerHTML]=" hintText | translate | safe: 'html'"
+        [ngStyle]="{ 'text-align': textAlign}"
+        class="hint-text"></div>
   <div *ngIf="popupHelpLink" class="see-example" tb-help-popup="{{ popupHelpLink }}"
        hintMode
        tb-help-popup-placement="right"

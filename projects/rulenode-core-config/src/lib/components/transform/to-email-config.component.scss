@@ -1,0 +1,18 @@
+:host {
+    .input-buttom-double-hint {
+        display: inline-flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 100%;
+
+        & .see-example {
+            display: flex;
+            flex-shrink: 0;
+            padding-right: 16px;
+        }
+    }
+
+    textarea.tb-enable-vertical-resize {
+        resize: vertical;
+    }
+}

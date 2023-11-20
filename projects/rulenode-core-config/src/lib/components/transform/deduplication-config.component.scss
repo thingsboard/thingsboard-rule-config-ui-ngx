@@ -11,4 +11,10 @@
   }
   .mat-expansion-panel:not(.mat-expanded)
   .mat-expansion-panel-header:not([aria-disabled='true']):hover { background: white; }
+
+  .tb-deduplication-cofig-expansion-panel mat-expansion-panel-header {
+    transform: translateY(7px);
+    padding: 0 16px;
+    font-size: 16px;
+  }
 }
