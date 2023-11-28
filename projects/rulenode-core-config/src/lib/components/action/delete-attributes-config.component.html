@@ -8,7 +8,7 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field class="mat-block" subscriptSizing="dynamic">
+  <mat-form-field class="mat-block tb-title tb-required" subscriptSizing="dynamic">
     <mat-chip-grid formControlName="keys" #attributeChipList>
       <mat-chip-row
         *ngFor="let key of deleteAttributesConfigForm.get('keys').value;"
