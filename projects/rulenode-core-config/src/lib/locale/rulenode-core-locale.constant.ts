@@ -655,7 +655,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'use-system-slack-settings': 'Use system slack settings',
           'slack-api-token': 'Slack API token',
           'slack-api-token-required': 'Slack API token is required',
-          'rename-keys-mapping': 'Rename keys mapping',
+          'keys-mapping': 'keys mapping',
           'add-key': 'Add key',
           recipients: 'Recipients',
           'message-subject-and-content': 'Message subject and content',

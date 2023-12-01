@@ -11,7 +11,7 @@
   </div>
   <tb-kv-map-config
     required
-    labelText="{{'tb.rulenode.rename-keys-mapping' | translate}}"
+    labelText="{{ translation.get(renameKeysConfigForm.get('fromMetadata').value) | translate }} {{'tb.rulenode.keys-mapping' | translate}}"
     formControlName="renameKeysMapping"
     uniqueKeyValuePairValidator
     requiredText="{{'tb.rulenode.attr-mapping-required' | translate}}"
