@@ -2,39 +2,23 @@ import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { EntityType, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-<<<<<<< HEAD
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   OriginatorSource,
-  originatorSourceDescTranslationMap,
-=======
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import {
-  OriginatorSource,
   originatorSourceDescTranslations,
->>>>>>> master
   originatorSourceTranslations
 } from '../../rulenode-core-config.models';
 
 @Component({
   selector: 'tb-transformation-node-change-originator-config',
-<<<<<<< HEAD
-  templateUrl: './change-originator-config.component.html',
-  styleUrls: ['../../../../style.scss']
-=======
   templateUrl: './change-originator-config.component.html'
->>>>>>> master
 })
 export class ChangeOriginatorConfigComponent extends RuleNodeConfigurationComponent {
 
   originatorSource = OriginatorSource;
   originatorSources = Object.keys(OriginatorSource) as OriginatorSource[];
   originatorSourceTranslationMap = originatorSourceTranslations;
-<<<<<<< HEAD
-  originatorSourceDescTranslationMap = originatorSourceDescTranslationMap;
-=======
   originatorSourceDescTranslationMap = originatorSourceDescTranslations;
->>>>>>> master
 
   changeOriginatorConfigForm: FormGroup;
 
