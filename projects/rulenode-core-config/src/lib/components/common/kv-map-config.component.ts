@@ -13,11 +13,9 @@ import {
   ValidatorFn,
   Validators
 } from '@angular/forms';
-import { coerceBoolean, PageComponent } from '@shared/public-api';
-import { Store } from '@ngrx/store';
-import { AppState, isEqual } from '@core/public-api';
+import { coerceBoolean } from '@shared/public-api';
+import { isEqual } from '@core/public-api';
 import { Subject, takeUntil } from 'rxjs';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'tb-kv-map-config',
