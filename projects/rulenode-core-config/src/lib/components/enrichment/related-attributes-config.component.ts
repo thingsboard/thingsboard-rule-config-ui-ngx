@@ -1,25 +1,24 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppState, deepTrim, isDefinedAndNotNull } from '@core/public-api';
 import { entityFields, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
+  allowedOriginatorFields,
   DataToFetch,
   dataToFetchTranslations,
   FetchTo,
   msgMetadataLabelTranslations,
   SvMapOption
 } from '../../rulenode-core-config.models';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'tb-enrichment-node-related-attributes-config',
   templateUrl: './related-attributes-config.component.html',
-  styleUrls: ['./related-attributes-config.component.scss', '../../../../style.scss']
+  styleUrls: ['../../../../style.scss']
 })
-export class RelatedAttributesConfigComponent extends RuleNodeConfigurationComponent implements OnDestroy {
+export class RelatedAttributesConfigComponent extends RuleNodeConfigurationComponent {
 
   relatedAttributesConfigForm: FormGroup;
 
@@ -29,16 +28,14 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
   public originatorFields: SvMapOption[] = [];
   public fetchToData = [];
 
-  private destroy$ = new Subject<void>();
-
   constructor(protected store: Store<AppState>,
               private fb: FormBuilder,
               private translate: TranslateService) {
     super(store);
-    for (const field of Object.keys(entityFields)) {
+    for (const field of Object.keys(allowedOriginatorFields)) {
       this.originatorFields.push({
-        value: entityFields[field].value,
-        name: this.translate.instant(entityFields[field].name)
+        value: allowedOriginatorFields[field].value,
+        name: this.translate.instant(allowedOriginatorFields[field].name)
       });
     }
     for (const key of dataToFetchTranslations.keys()) {
@@ -63,8 +60,10 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
     }
 
     const filteDataMapping = {};
-    for (const key of Object.keys(configuration.dataMapping)) {
-      filteDataMapping[key.trim()] = configuration.dataMapping[key];
+    if (configuration && configuration.dataMapping) {
+      for (const key of Object.keys(configuration.dataMapping)) {
+        filteDataMapping[key.trim()] = configuration.dataMapping[key];
+      }
     }
     configuration.dataMapping = filteDataMapping;
     delete configuration.svMap;
@@ -122,30 +121,25 @@ export class RelatedAttributesConfigComponent extends RuleNodeConfigurationCompo
     this.relatedAttributesConfigForm = this.fb.group({
       relationsQuery: [configuration.relationsQuery, [Validators.required]],
       dataToFetch: [configuration.dataToFetch, []],
-      kvMap: [configuration.kvMap, []],
-      svMap: [configuration.svMap, []],
+      kvMap: [configuration.kvMap, [Validators.required]],
+      svMap: [configuration.svMap, [Validators.required]],
       fetchTo: [configuration.fetchTo, []]
-    });
-
-    this.relatedAttributesConfigForm.get('dataToFetch').valueChanges.pipe(
-      takeUntil(this.destroy$)
-    ).subscribe((value) => {
-      if (value === DataToFetch.FIELDS) {
-        this.relatedAttributesConfigForm.get('svMap').setValidators(Validators.required);
-        this.relatedAttributesConfigForm.get('svMap').updateValueAndValidity();
-        this.relatedAttributesConfigForm.get('kvMap').clearValidators();
-        this.relatedAttributesConfigForm.get('kvMap').updateValueAndValidity();
-      } else {
-        this.relatedAttributesConfigForm.get('kvMap').setValidators(Validators.required);
-        this.relatedAttributesConfigForm.get('kvMap').updateValueAndValidity();
-        this.relatedAttributesConfigForm.get('svMap').clearValidators();
-        this.relatedAttributesConfigForm.get('svMap').updateValueAndValidity();
-      }
     });
   }
 
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
+  protected validatorTriggers(): string[] {
+    return ['dataToFetch'];
+  }
+
+  protected updateValidators(emitEvent: boolean) {
+    if (this.relatedAttributesConfigForm.get('dataToFetch').value === DataToFetch.FIELDS) {
+      this.relatedAttributesConfigForm.get('svMap').enable({emitEvent: false});
+      this.relatedAttributesConfigForm.get('kvMap').disable({emitEvent: false});
+      this.relatedAttributesConfigForm.get('svMap').updateValueAndValidity();
+    } else {
+      this.relatedAttributesConfigForm.get('svMap').disable({emitEvent: false});
+      this.relatedAttributesConfigForm.get('kvMap').enable({emitEvent: false});
+      this.relatedAttributesConfigForm.get('kvMap').updateValueAndValidity();
+    }
   }
 }

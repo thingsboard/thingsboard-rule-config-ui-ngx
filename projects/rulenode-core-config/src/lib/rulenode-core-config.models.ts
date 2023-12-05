@@ -31,7 +31,7 @@ export const originatorSourceDescTranslationMap = new Map<OriginatorSource, stri
 export const allowedOriginatorFields: EntityField[] = [
     entityFields.createdTime,
     entityFields.name,
-    entityFields.type,
+    {value: 'type', name: 'tb.rulenode.profile-name', keyName: 'originatorProfileName'},
     entityFields.firstName,
     entityFields.lastName,
     entityFields.email,
@@ -47,6 +47,28 @@ export const allowedOriginatorFields: EntityField[] = [
     {value: 'id', name: 'tb.rulenode.id', keyName: 'id'},
     {value: 'additionalInfo', name: 'tb.rulenode.additional-info', keyName: 'additionalInfo'}
 ];
+
+export const OriginatorFieldsMappingValues = new Map<string, string>(
+  [
+    ['type', 'profileName'],
+    ['createdTime', 'createdTime'],
+    ['name', 'name'],
+    ['firstName', 'firstName'],
+    ['lastName', 'lastName'],
+    ['email', 'email'],
+    ['title', 'title'],
+    ['country', 'country'],
+    ['state', 'state'],
+    ['city', 'city'],
+    ['address', 'address'],
+    ['address2', 'address2'],
+    ['zip', 'zip'],
+    ['phone', 'phone'],
+    ['label', 'label'],
+    ['id', 'id'],
+    ['additionalInfo', 'additionalInfo'],
+  ]
+);
 
 export enum PerimeterType {
   CIRCLE = 'CIRCLE',

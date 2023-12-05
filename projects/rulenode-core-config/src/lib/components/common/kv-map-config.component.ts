@@ -13,7 +13,7 @@ import {
   ValidatorFn,
   Validators
 } from '@angular/forms';
-import { coerceBoolean } from '@shared/public-api';
+import { coerceBoolean, PageComponent } from '@shared/public-api';
 import { isEqual } from '@core/public-api';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -34,9 +34,9 @@ import { Subject, takeUntil } from 'rxjs';
     }
   ]
 })
-export class KvMapConfigComponent implements ControlValueAccessor, OnInit, Validator, OnDestroy {
+export class KvMapConfigComponent implements ControlValueAccessor, OnInit, OnDestroy, Validator {
 
-  private propagateChange: (value: any) => void = () => {};
+  private propagateChange = null;
   private destroy$ = new Subject<void>();
 
   kvListFormGroup: FormGroup;
@@ -79,15 +79,21 @@ export class KvMapConfigComponent implements ControlValueAccessor, OnInit, Valid
     if (this.ngControl != null) {
       this.ngControl.valueAccessor = this;
     }
+
     this.kvListFormGroup = this.fb.group({
       keyVals: this.fb.array([])
-    }, {validators: this.propagateNestedErrors});
+    }, {validators: [this.propagateNestedErrors, this.oneMapRequiredValidator]});
 
     this.kvListFormGroup.valueChanges
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this.updateModel();
       });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   keyValsFormArray(): FormArray {
@@ -110,17 +116,20 @@ export class KvMapConfigComponent implements ControlValueAccessor, OnInit, Valid
     }
   }
 
-  duplicateValuesValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null =>
-    control.controls.key.value === control.controls.value.value && this.uniqueKeyValuePairValidator
+  private duplicateValuesValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null =>
+    control.controls.key.value === control.controls.value.value
       ? { uniqueKeyValuePair: true }
       : null;
 
-  propagateNestedErrors: ValidatorFn = (controls: FormArray | FormGroup | AbstractControl): ValidationErrors | null => {
+  private oneMapRequiredValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => control.get('keyVals').value.length;
+
+
+  private propagateNestedErrors: ValidatorFn = (controls: FormArray | FormGroup | AbstractControl): ValidationErrors | null => {
     if (this.kvListFormGroup && this.kvListFormGroup.get('keyVals') && this.kvListFormGroup.get('keyVals')?.status === 'VALID') {
       return null;
     }
     const errors = {};
-    if (this.kvListFormGroup) {this.kvListFormGroup.setErrors(null);}
+    if (this.kvListFormGroup) {this.kvListFormGroup.setErrors(null)};
     if (controls instanceof FormArray || controls instanceof FormGroup) {
       if (controls.errors) {
         for (const errorKey of Object.keys(controls.errors)) {
@@ -147,32 +156,31 @@ export class KvMapConfigComponent implements ControlValueAccessor, OnInit, Valid
     return !isEqual(errors, {}) ? errors : null;
   };
 
-
   writeValue(keyValMap: { [key: string]: string }): void {
-    const keyValsControls: Array<AbstractControl> = [];
-    if (keyValMap) {
-      for (const property of Object.keys(keyValMap)) {
-        if (Object.prototype.hasOwnProperty.call(keyValMap, property)) {
-          keyValsControls.push(this.fb.group({
-            key: [property, [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]],
-            value: [keyValMap[property], [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]]
-          }, {validators: this.duplicateValuesValidator}));
-        }
-      }
+    const keyValuesData = Object.keys(keyValMap).map(key => ({key, value: keyValMap[key]}));
+    if (this.keyValsFormArray().length === keyValuesData.length) {
+      this.keyValsFormArray().patchValue(keyValuesData, {emitEvent: false})
+    } else {
+      const keyValsControls: Array<FormGroup> = [];
+      keyValuesData.forEach(data => {
+        keyValsControls.push(this.fb.group({
+          key: [data.key, [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]],
+          value: [data.value, [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]]
+        }, {validators: this.uniqueKeyValuePairValidator ? [this.duplicateValuesValidator] : []}));
+      })
+      this.kvListFormGroup.setControl('keyVals', this.fb.array(keyValsControls, this.propagateNestedErrors), {emitEvent: false});
     }
-    this.kvListFormGroup.setControl('keyVals', this.fb.array(keyValsControls, this.propagateNestedErrors), {emitEvent: false});
   }
 
   public removeKeyVal(index: number) {
-    (this.kvListFormGroup.get('keyVals') as FormArray).removeAt(index);
+    this.keyValsFormArray().removeAt(index);
   }
 
   public addKeyVal() {
-    const keyValsFormArray = this.kvListFormGroup.get('keyVals') as FormArray;
-    keyValsFormArray.push(this.fb.group({
+    this.keyValsFormArray().push(this.fb.group({
       key: ['', [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]],
       value: ['', [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]]
-    }, {validators: this.duplicateValuesValidator}));
+    }, {validators: this.uniqueKeyValuePairValidator ? [this.duplicateValuesValidator] : []}));
   }
 
   public validate() {
@@ -210,10 +218,5 @@ export class KvMapConfigComponent implements ControlValueAccessor, OnInit, Valid
       });
       this.propagateChange(keyValMap);
     }
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }

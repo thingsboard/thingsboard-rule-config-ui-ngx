@@ -21,10 +21,10 @@
   <mat-checkbox *ngIf="!restApiCallConfigForm.get('enableProxy').value" formControlName="useSimpleClientHttpFactory">
     {{ 'tb.rulenode.use-simple-client-http-factory' | translate }}
   </mat-checkbox>
-  <mat-checkbox formControlName="trimDoubleQuotes">
-    {{ 'tb.rulenode.trim-double-quotes' | translate }}
+  <mat-checkbox formControlName="parseToPlainText">
+    {{ 'tb.rulenode.parse-to-plain-text' | translate }}
   </mat-checkbox>
-  <div class="tb-hint" style="padding-bottom: 5px;" translate>tb.rulenode.trim-double-quotes-hint</div>
+  <div class="tb-hint" style="padding-bottom: 5px;" translate>tb.rulenode.parse-to-plain-text-hint</div>
   <mat-checkbox formControlName="ignoreRequestBody">
     {{ 'tb.rulenode.ignore-request-body' | translate }}
   </mat-checkbox>
