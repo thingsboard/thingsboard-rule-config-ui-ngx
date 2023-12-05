@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'tb-transformation-node-to-email-config',
@@ -11,7 +11,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 })
 export class ToEmailConfigComponent extends RuleNodeConfigurationComponent {
 
-  toEmailConfigForm: UntypedFormGroup;
+  toEmailConfigForm: FormGroup;
   mailBodyTypes = [
     {
       name: 'tb.mail-body-type.plain-text',
@@ -31,11 +31,11 @@ export class ToEmailConfigComponent extends RuleNodeConfigurationComponent {
   ];
 
   constructor(protected store: Store<AppState>,
-              private fb: UntypedFormBuilder) {
+              private fb: FormBuilder) {
     super(store);
   }
 
-  protected configForm(): UntypedFormGroup {
+  protected configForm(): FormGroup {
     return this.toEmailConfigForm;
   }
 

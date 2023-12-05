@@ -1,7 +1,7 @@
 <section [formGroup]="deduplicationConfigForm">
   <mat-form-field class="mat-block">
     <mat-label>{{'tb.rulenode.interval' | translate}}</mat-label>
-    <input type = 'number' required matInput formControlName="interval">
+    <input type='number' required matInput formControlName="interval">
     <mat-error *ngIf="deduplicationConfigForm.get('interval').hasError('required')">
       {{'tb.rulenode.interval-required' | translate}}
     </mat-error>

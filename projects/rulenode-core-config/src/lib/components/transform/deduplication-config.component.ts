@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent, ServiceType } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { deduplicationStrategiesTranslations, FetchMode } from '../../rulenode-core-config.models';
 
 @Component({
@@ -13,17 +13,17 @@ import { deduplicationStrategiesTranslations, FetchMode } from '../../rulenode-c
 export class DeduplicationConfigComponent extends RuleNodeConfigurationComponent {
 
   serviceType = ServiceType.TB_RULE_ENGINE;
-  deduplicationConfigForm: UntypedFormGroup;
+  deduplicationConfigForm: FormGroup;
   deduplicationStrategie = FetchMode;
   deduplicationStrategies = Object.keys(this.deduplicationStrategie);
   deduplicationStrategiesTranslations = deduplicationStrategiesTranslations;
 
   constructor(protected store: Store<AppState>,
-              private fb: UntypedFormBuilder) {
+              private fb: FormBuilder) {
     super(store);
   }
 
-  protected configForm(): UntypedFormGroup {
+  protected configForm(): FormGroup {
     return this.deduplicationConfigForm;
   }
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { FetchFromToTranslation, FetchTo } from '../../rulenode-core-config.models';
@@ -13,12 +13,12 @@ import { TranslateService } from '@ngx-translate/core';
 })
 
 export class CopyKeysConfigComponent extends RuleNodeConfigurationComponent{
-  copyKeysConfigForm: UntypedFormGroup;
+  copyKeysConfigForm: FormGroup;
   fromMetadata = [];
   translation = FetchFromToTranslation;
 
   constructor(protected store: Store<AppState>,
-              private fb: UntypedFormBuilder,
+              private fb: FormBuilder,
               private translate: TranslateService) {
     super(store);
     for (const key of this.translation.keys()) {
@@ -36,7 +36,7 @@ export class CopyKeysConfigComponent extends RuleNodeConfigurationComponent{
     });
   }
 
-  protected configForm(): UntypedFormGroup {
+  protected configForm(): FormGroup {
     return this.copyKeysConfigForm;
   }
 

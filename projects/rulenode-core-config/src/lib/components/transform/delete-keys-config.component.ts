@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { FetchTo, FetchToTranslation } from '../../rulenode-core-config.models';
@@ -12,13 +12,14 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['../../../../style.scss']
 })
 
-export class DeleteKeysConfigComponent extends RuleNodeConfigurationComponent{
-  deleteKeysConfigForm: UntypedFormGroup;
+export class DeleteKeysConfigComponent extends RuleNodeConfigurationComponent {
+
+  deleteKeysConfigForm: FormGroup;
   fromMetadata = [];
   translation = FetchToTranslation;
 
   constructor(protected store: Store<AppState>,
-              private fb: UntypedFormBuilder,
+              private fb: FormBuilder,
               private translate: TranslateService) {
     super(store);
     for (const key of this.translation.keys()) {
@@ -51,7 +52,7 @@ export class DeleteKeysConfigComponent extends RuleNodeConfigurationComponent{
     };
   }
 
-  protected configForm(): UntypedFormGroup {
+  protected configForm(): FormGroup {
     return this.deleteKeysConfigForm;
   }
 }
