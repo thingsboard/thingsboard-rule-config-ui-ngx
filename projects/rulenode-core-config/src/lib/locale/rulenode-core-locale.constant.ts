@@ -153,7 +153,6 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'attr-mapping-required': 'At least one mapping entry should be specified.',
           'fields-mapping': 'Fields mapping',
           'relations-query-config-direction-suffix': 'originator',
-          'add-device-profile': 'Add device profile',
           'profile-name': 'Profile name',
           'fetch-circle-parameter-info-from-metadata-hint': 'Metadata field \'{{perimeterKeyName}}\' should be defined in next format: {"latitude":48.196, "longitude":24.6532, "radius":100.0, "radiusUnit":"METER"}',
           'fetch-poligon-parameter-info-from-metadata-hint': 'Metadata field \'{{perimeterKeyName}}\' should be defined in next format: [[48.19736,24.65235],[48.19800,24.65060],...,[48.19849,24.65420]]',
