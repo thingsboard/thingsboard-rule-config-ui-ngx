@@ -4,7 +4,7 @@
       <mat-label translate>relation.direction</mat-label>
       <mat-select required formControlName="direction">
         <mat-option *ngFor="let type of directionTypes" [value]="type">
-          {{ directionTypeTranslations.get(type) | translate }}
+          {{ directionTypeTranslations.get(type) | translate }} <span translate>tb.rulenode.relations-query-config-direction-suffix</span>
         </mat-option>
       </mat-select>
     </mat-form-field>

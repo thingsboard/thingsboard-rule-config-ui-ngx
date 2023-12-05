@@ -9,16 +9,18 @@ import {
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   NgControl,
+  ValidationErrors,
   Validator,
+  ValidatorFn,
   Validators
 } from '@angular/forms';
 import { coerceBoolean, PageComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { AppState, isDefinedAndNotNull } from '@core/public-api';
+import { AppState, isDefinedAndNotNull, isEqual } from '@core/public-api';
 import { Subject, Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { takeUntil } from 'rxjs/operators';
-import { SvMapOption } from '../../rulenode-core-config.models';
+import { OriginatorFieldsMappingValues, SvMapOption } from '../../rulenode-core-config.models';
 
 @Component({
   selector: 'tb-sv-map-config',
@@ -42,7 +44,6 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
   private destroy$ = new Subject<void>();
   private sourceFieldSubcritption: Subscription[] = [];
   private propagateChange = null;
-  private valueChangeSubscription: Subscription = null;
 
   svListFormGroup: FormGroup;
   ngControl: NgControl;
@@ -87,18 +88,25 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
     if (this.ngControl != null) {
       this.ngControl.valueAccessor = this;
     }
-    this.svListFormGroup = this.fb.group({});
-    this.svListFormGroup.addControl('keyVals',
-      this.fb.array([]));
-  }
 
-  keyValsFormArray(): FormArray {
-    return this.svListFormGroup.get('keyVals') as FormArray;
+    this.svListFormGroup = this.fb.group({
+      keyVals: this.fb.array([])
+    }, {validators: [this.propagateNestedErrors, this.oneMapRequiredValidator]});
+
+    this.svListFormGroup.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.updateModel();
+      });
   }
 
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  keyValsFormArray(): FormArray {
+    return this.svListFormGroup.get('keyVals') as FormArray;
   }
 
   registerOnChange(fn: any): void {
@@ -117,44 +125,57 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
     }
   }
 
+  private oneMapRequiredValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => control.get('keyVals').value.length;
+
+  private propagateNestedErrors: ValidatorFn = (controls: FormArray | FormGroup | AbstractControl): ValidationErrors | null => {
+    if (this.svListFormGroup && this.svListFormGroup.get('keyVals') && this.svListFormGroup.get('keyVals')?.status === 'VALID') {
+      return null;
+    }
+    const errors = {};
+    if (this.svListFormGroup) {this.svListFormGroup.setErrors(null);}
+    if (controls instanceof FormArray || controls instanceof FormGroup) {
+      if (controls.errors) {
+        for (const errorKey of Object.keys(controls.errors)) {
+          errors[errorKey] = true;
+        }
+      }
+      for (const control of Object.keys(controls.controls)) {
+        const innerErrors = this.propagateNestedErrors(controls.controls[control]);
+        if (innerErrors && Object.keys(innerErrors).length) {
+          for (const errorKey of Object.keys(innerErrors)) {
+            errors[errorKey] = true;
+          }
+        }
+      }
+      return errors;
+    } else {
+      if (controls.errors) {
+        for (const errorKey of Object.keys(controls.errors)) {
+          errors[errorKey] = true;
+        }
+      }
+    }
+    return !isEqual(errors, {}) ? errors : null;
+  };
+
   writeValue(keyValMap: { [key: string]: string }): void {
-    if (this.valueChangeSubscription) {
-      this.valueChangeSubscription.unsubscribe();
-    }
-    const keyValsControls: Array<AbstractControl> = [];
-    if (keyValMap) {
-      for (const property of Object.keys(keyValMap)) {
-        if (Object.prototype.hasOwnProperty.call(keyValMap, property)) {
-          keyValsControls.push(this.fb.group({
-            key: [property, [Validators.required]],
-            value: [keyValMap[property], [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]]
-          }));
-        }
+    const keyValuesData = Object.keys(keyValMap).map(key => ({key, value: keyValMap[key]}));
+    if (this.keyValsFormArray().length === keyValuesData.length) {
+      this.keyValsFormArray().patchValue(keyValuesData, {emitEvent: false})
+    } else {
+      const keyValsControls: Array<FormGroup> = [];
+      keyValuesData.forEach(data => {
+        keyValsControls.push(this.fb.group({
+          key: [data.key, [Validators.required, ]],
+          value: [data.value, [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]]
+        }));
+      });
+      this.svListFormGroup.setControl('keyVals', this.fb.array(keyValsControls, this.propagateNestedErrors), {emitEvent: false});
+      for (const formGroup of this.keyValsFormArray().controls) {
+        this.keyChangeSubscribe(formGroup as FormGroup);
       }
     }
-    this.svListFormGroup.setControl('keyVals', this.fb.array(keyValsControls));
-    for (const formGroup of this.keyValsFormArray().controls) {
-      this.keyChangeSubscribe(formGroup as FormGroup);
-    }
-    this.valueChangeSubscription = this.svListFormGroup.valueChanges.pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(() => {
-      this.updateModel();
-    });
   }
-
-  public errorTrigger() {
-    const keyVals = this.keyValsFormArray();
-    for (const keyVal of keyVals.controls) {
-      for (const controlName of Object.keys(keyVal.value)) {
-        if (keyVal.get(controlName).touched && keyVal.get(controlName).invalid) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-
 
   public filterSelectOptions(keyValControl?: AbstractControl) {
     const deleteFieldsArray = [];
@@ -177,25 +198,25 @@ export class SvMapConfigComponent extends PageComponent implements ControlValueA
   }
 
   public removeKeyVal(index: number) {
-    (this.svListFormGroup.get('keyVals') as FormArray).removeAt(index);
+    this.keyValsFormArray().removeAt(index);
     this.sourceFieldSubcritption[index].unsubscribe();
     this.sourceFieldSubcritption.splice(index, 1);
   }
 
   public addKeyVal() {
-    const keyValsFormArray = this.svListFormGroup.get('keyVals') as FormArray;
-    keyValsFormArray.push(this.fb.group({
+    this.keyValsFormArray().push(this.fb.group({
       key: ['', [Validators.required]],
       value: ['', [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]]
     }));
-    this.keyChangeSubscribe(keyValsFormArray.at(keyValsFormArray.length - 1) as FormGroup);
+    this.keyChangeSubscribe(this.keyValsFormArray().at(this.keyValsFormArray().length - 1) as FormGroup);
   }
 
   private keyChangeSubscribe(formGroup: FormGroup) {
     this.sourceFieldSubcritption.push(formGroup.get('key').valueChanges.pipe(
       takeUntil(this.destroy$)
     ).subscribe((value) => {
-      formGroup.get('value').patchValue(this.targetKeyPrefix + value[0].toUpperCase() + value.slice(1));
+      const mappedValue = OriginatorFieldsMappingValues.get(value);
+      formGroup.get('value').patchValue(this.targetKeyPrefix + mappedValue[0].toUpperCase() + mappedValue.slice(1));
     }));
   }
 

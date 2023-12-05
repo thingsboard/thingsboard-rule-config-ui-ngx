@@ -12,6 +12,8 @@
 
   .tb-required::after {
     content: "*";
+    font-size: 16px;
+    color: #000000de;
   }
 }
 
