@@ -60,5 +60,11 @@
   <mat-checkbox formControlName="ssl">
     {{ 'tb.rulenode.enable-ssl' | translate }}
   </mat-checkbox>
+
+  <tb-queue-autocomplete
+    [queueType]="serviceType"
+    formControlName="queueName">
+  </tb-queue-autocomplete>
+
   <tb-credentials-config formControlName="credentials" [passwordFieldRequired]="false"></tb-credentials-config>
 </section>

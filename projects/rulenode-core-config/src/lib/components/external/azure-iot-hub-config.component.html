@@ -21,6 +21,12 @@
       {{ 'tb.rulenode.device-id-required' | translate }}
     </mat-error>
   </mat-form-field>
+
+  <tb-queue-autocomplete
+    [queueType]="serviceType"
+    formControlName="queueName">
+  </tb-queue-autocomplete>
+
   <mat-accordion>
     <mat-expansion-panel class="tb-mqtt-credentials-panel-group">
       <mat-expansion-panel-header>

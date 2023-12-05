@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
-import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
+import { RuleNodeConfiguration, RuleNodeConfigurationComponent, ServiceType } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AzureIotHubCredentialsType, azureIotHubCredentialsTypes, azureIotHubCredentialsTypeTranslations } from '../../rulenode-core-config.models';
@@ -16,6 +16,8 @@ export class AzureIotHubConfigComponent extends RuleNodeConfigurationComponent {
 
   allAzureIotHubCredentialsTypes = azureIotHubCredentialsTypes;
   azureIotHubCredentialsTypeTranslationsMap = azureIotHubCredentialsTypeTranslations;
+
+  serviceType = ServiceType.TB_RULE_ENGINE;
 
   constructor(protected store: Store<AppState>,
               private fb: UntypedFormBuilder) {
@@ -48,7 +50,8 @@ export class AzureIotHubConfigComponent extends RuleNodeConfigurationComponent {
           certFileName: [configuration && configuration.credentials ? configuration.credentials.certFileName : null, []],
           password: [configuration && configuration.credentials ? configuration.credentials.password : null, []],
         }
-      )
+      ),
+      queueName: [configuration ? configuration.queueName : null, []]
     });
   }
 

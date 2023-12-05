@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { AppState, isNotEmptyStr } from '@core/public-api';
-import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
+import { RuleNodeConfiguration, RuleNodeConfigurationComponent, ServiceType } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -13,6 +13,8 @@ import { Subscription } from 'rxjs';
 export class MqttConfigComponent extends RuleNodeConfigurationComponent {
 
   mqttConfigForm: UntypedFormGroup;
+
+  serviceType = ServiceType.TB_RULE_ENGINE;
 
   constructor(protected store: Store<AppState>,
               private fb: UntypedFormBuilder) {
@@ -38,7 +40,8 @@ export class MqttConfigComponent extends RuleNodeConfigurationComponent {
       cleanSession: [configuration ? configuration.cleanSession : false, []],
       retainedMessage: [configuration ? configuration.retainedMessage : false, []],
       ssl: [configuration ? configuration.ssl : false, []],
-      credentials: [configuration ? configuration.credentials : null, []]
+      credentials: [configuration ? configuration.credentials : null, []],
+      queueName: [configuration ? configuration.queueName : null, []]
     });
   }
 
