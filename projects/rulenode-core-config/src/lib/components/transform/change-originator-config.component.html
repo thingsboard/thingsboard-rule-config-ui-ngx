@@ -12,7 +12,7 @@
           {{ originatorSourceTranslationMap.get(source) | translate }}
         </span>
         <br>
-        <small matListItemMeta [ngClass]="{ 'selected': source === changeOriginatorConfigForm.get('originatorSource').value }">
+        <small matListItemMeta style="color: inherit">
           {{ originatorSourceDescTranslationMap.get(source) | translate }}
         </small>
       </mat-option>

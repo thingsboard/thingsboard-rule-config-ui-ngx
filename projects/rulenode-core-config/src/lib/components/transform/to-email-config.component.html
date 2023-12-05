@@ -9,7 +9,7 @@
           {{ 'tb.rulenode.email-from-template-hint' | translate }}
         </mat-hint>
         <mat-hint align="end">
-          <div class="input-buttom-double-hint">
+          <div class="input-bottom-double-hint">
             <div class="see-example"
                 hintMode
                 tb-help-popup="{{'rulenode/to_email_node_fields_templatization'}}"
@@ -68,7 +68,7 @@
     <tb-example-hint [hintText]="'tb.rulenode.kv-map-pattern-hint' | translate"
                       popupHelpLink="rulenode/to_email_node_fields_templatization">
     </tb-example-hint>
-    <div class="tb-form-panel no-border no-padding">
+    <section>
       <mat-form-field class="mat-block">
         <mat-label translate>tb.rulenode.subject-template</mat-label>
         <textarea required
@@ -94,7 +94,7 @@
               {{ type.name | translate }}
             </span>
             <br>
-            <small matListItemMeta [ngClass]="{ 'selected': type.value === toEmailConfigForm.get('mailBodyType').value }">
+            <small matListItemMeta style="color: inherit">
               {{ type.description | translate }}
             </small>
           </mat-option>
@@ -117,6 +117,6 @@
           {{ 'tb.rulenode.body-template-required' | translate }}
         </mat-error>
       </mat-form-field>
-    </div>
+    </section>
   </div>
 </section>

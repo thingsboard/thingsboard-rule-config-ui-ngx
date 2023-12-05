@@ -1,18 +1,14 @@
 :host {
-    .input-buttom-double-hint {
-        display: inline-flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        width: 100%;
+  .input-bottom-double-hint {
+    display: inline-flex;
 
-        & .see-example {
-            display: flex;
-            flex-shrink: 0;
-            padding-right: 16px;
-        }
+    & .see-example {
+      flex-shrink: 0;
+      padding-right: 16px;
     }
+  }
 
-    textarea.tb-enable-vertical-resize {
-        resize: vertical;
-    }
+  textarea.tb-enable-vertical-resize {
+    resize: vertical;
+  }
 }

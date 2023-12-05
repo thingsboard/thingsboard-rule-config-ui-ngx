@@ -129,7 +129,9 @@ export class KvMapConfigComponent implements ControlValueAccessor, OnInit, Valid
       return null;
     }
     const errors = {};
-    if (this.kvListFormGroup) {this.kvListFormGroup.setErrors(null)};
+    if (this.kvListFormGroup) {
+      this.kvListFormGroup.setErrors(null);
+    }
     if (controls instanceof FormArray || controls instanceof FormGroup) {
       if (controls.errors) {
         for (const errorKey of Object.keys(controls.errors)) {
@@ -159,7 +161,7 @@ export class KvMapConfigComponent implements ControlValueAccessor, OnInit, Valid
   writeValue(keyValMap: { [key: string]: string }): void {
     const keyValuesData = Object.keys(keyValMap).map(key => ({key, value: keyValMap[key]}));
     if (this.keyValsFormArray().length === keyValuesData.length) {
-      this.keyValsFormArray().patchValue(keyValuesData, {emitEvent: false})
+      this.keyValsFormArray().patchValue(keyValuesData, {emitEvent: false});
     } else {
       const keyValsControls: Array<FormGroup> = [];
       keyValuesData.forEach(data => {
@@ -167,7 +169,7 @@ export class KvMapConfigComponent implements ControlValueAccessor, OnInit, Valid
           key: [data.key, [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]],
           value: [data.value, [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]]
         }, {validators: this.uniqueKeyValuePairValidator ? [this.duplicateValuesValidator] : []}));
-      })
+      });
       this.kvListFormGroup.setControl('keyVals', this.fb.array(keyValsControls, this.propagateNestedErrors), {emitEvent: false});
     }
   }

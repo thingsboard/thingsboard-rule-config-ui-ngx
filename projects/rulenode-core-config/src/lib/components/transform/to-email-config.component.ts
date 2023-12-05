@@ -7,7 +7,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 @Component({
   selector: 'tb-transformation-node-to-email-config',
   templateUrl: './to-email-config.component.html',
-  styleUrls: ['../../../../style.scss', './to-email-config.component.scss']
+  styleUrls: ['./to-email-config.component.scss']
 })
 export class ToEmailConfigComponent extends RuleNodeConfigurationComponent {
 

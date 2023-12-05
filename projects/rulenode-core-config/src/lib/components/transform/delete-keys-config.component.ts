@@ -3,7 +3,6 @@ import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/p
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState, isDefinedAndNotNull } from '@core/public-api';
-import { MatChipInputEvent } from '@angular/material/chips';
 import { FetchTo, FetchToTranslation } from '../../rulenode-core-config.models';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -54,33 +53,5 @@ export class DeleteKeysConfigComponent extends RuleNodeConfigurationComponent{
 
   protected configForm(): UntypedFormGroup {
     return this.deleteKeysConfigForm;
-  }
-
-  removeKey(key: string): void {
-    const keys: string[] = this.deleteKeysConfigForm.get('keys').value;
-    const index = keys.indexOf(key);
-    if (index >= 0) {
-      keys.splice(index, 1);
-      this.deleteKeysConfigForm.get('keys').patchValue(keys, {emitEvent: true});
-    }
-  }
-
-  addKey(event: MatChipInputEvent): void {
-    const input = event.input;
-    let value = event.value;
-    if ((value || '').trim()) {
-      value = value.trim();
-      let keys: string[] = this.deleteKeysConfigForm.get('keys').value;
-      if (!keys || keys.indexOf(value) === -1) {
-        if (!keys) {
-          keys = [];
-        }
-        keys.push(value);
-        this.deleteKeysConfigForm.get('keys').patchValue(keys, {emitEvent: true});
-      }
-    }
-    if (input) {
-      input.value = '';
-    }
   }
 }

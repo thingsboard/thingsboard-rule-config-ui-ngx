@@ -3,12 +3,15 @@ import { AppState } from '@core/public-api';
 import { EntityType, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { OriginatorSource, originatorSourceDescTranslations, originatorSourceTranslations } from '../../rulenode-core-config.models';
+import {
+  OriginatorSource,
+  originatorSourceDescTranslations,
+  originatorSourceTranslations
+} from '../../rulenode-core-config.models';
 
 @Component({
   selector: 'tb-transformation-node-change-originator-config',
-  templateUrl: './change-originator-config.component.html',
-  styleUrls: ['../../../../style.scss']
+  templateUrl: './change-originator-config.component.html'
 })
 export class ChangeOriginatorConfigComponent extends RuleNodeConfigurationComponent {
 

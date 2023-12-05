@@ -3,8 +3,7 @@ import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/p
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState, isDefinedAndNotNull } from '@core/public-api';
-import { MatChipInputEvent } from '@angular/material/chips';
-import { FetchTo, FetchFromToTranslation } from '../../rulenode-core-config.models';
+import { FetchFromToTranslation, FetchTo } from '../../rulenode-core-config.models';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -41,15 +40,6 @@ export class CopyKeysConfigComponent extends RuleNodeConfigurationComponent{
     return this.copyKeysConfigForm;
   }
 
-  removeKey(key: string): void {
-    const keys: string[] = this.copyKeysConfigForm.get('keys').value;
-    const index = keys.indexOf(key);
-    if (index >= 0) {
-      keys.splice(index, 1);
-      this.copyKeysConfigForm.get('keys').patchValue(keys, {emitEvent: true});
-    }
-  }
-
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
     let fromMetadata: FetchTo;
 
@@ -63,24 +53,5 @@ export class CopyKeysConfigComponent extends RuleNodeConfigurationComponent{
       keys: isDefinedAndNotNull(configuration?.keys) ? configuration.keys : null,
       fromMetadata
     };
-  }
-
-  addKey(event: MatChipInputEvent): void {
-    const input = event.input;
-    let value = event.value;
-    if ((value || '').trim()) {
-      value = value.trim();
-      let keys: string[] = this.copyKeysConfigForm.get('keys').value;
-      if (!keys || keys.indexOf(value) === -1) {
-        if (!keys) {
-          keys = [];
-        }
-        keys.push(value);
-        this.copyKeysConfigForm.get('keys').patchValue(keys, {emitEvent: true});
-      }
-    }
-    if (input) {
-      input.value = '';
-    }
   }
 }
