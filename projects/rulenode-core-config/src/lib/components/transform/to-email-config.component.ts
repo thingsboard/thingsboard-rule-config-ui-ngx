@@ -24,7 +24,7 @@ export class ToEmailConfigComponent extends RuleNodeConfigurationComponent {
       value: 'true',
     },
     {
-      name: 'tb.mail-body-type.dynamic',
+      name: 'tb.mail-body-type.use-body-type-template',
       description: 'tb.mail-body-type.dynamic-text-description',
       value: 'dynamic',
     }

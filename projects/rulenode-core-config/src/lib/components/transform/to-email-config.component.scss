@@ -1,7 +1,11 @@
 :host {
-  .see-example {
-    display: inline-block;
-    width: max-content;
+  .input-bottom-double-hint {
+    display: inline-flex;
+
+    & .see-example {
+      flex-shrink: 0;
+      padding-right: 16px;
+    }
   }
 
   textarea.tb-enable-vertical-resize {

@@ -3,7 +3,7 @@ import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/p
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState, isDefinedAndNotNull } from '@core/public-api';
-import { FetchTo, FetchToTranslationMap } from '../../rulenode-core-config.models';
+import { FetchTo, FetchToTranslation } from '../../rulenode-core-config.models';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -16,7 +16,7 @@ export class DeleteKeysConfigComponent extends RuleNodeConfigurationComponent {
 
   deleteKeysConfigForm: FormGroup;
   fromMetadata = [];
-  translation = FetchToTranslationMap;
+  translation = FetchToTranslation;
 
   constructor(protected store: Store<AppState>,
               private fb: FormBuilder,

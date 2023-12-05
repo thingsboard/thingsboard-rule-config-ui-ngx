@@ -3,7 +3,11 @@ import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/p
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState, isDefinedAndNotNull } from '@core/public-api';
+<<<<<<< HEAD
 import { FetchFromToTranslationMap, FetchTo } from '../../rulenode-core-config.models';
+=======
+import { FetchFromToTranslation, FetchTo } from '../../rulenode-core-config.models';
+>>>>>>> master
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -12,6 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['../../../../style.scss']
 })
 
+<<<<<<< HEAD
 export class CopyKeysConfigComponent extends RuleNodeConfigurationComponent {
 
   copyKeysConfigForm: FormGroup;
@@ -20,6 +25,15 @@ export class CopyKeysConfigComponent extends RuleNodeConfigurationComponent {
 
   constructor(protected store: Store<AppState>,
               private fb: FormBuilder,
+=======
+export class CopyKeysConfigComponent extends RuleNodeConfigurationComponent{
+  copyKeysConfigForm: UntypedFormGroup;
+  fromMetadata = [];
+  translation = FetchFromToTranslation;
+
+  constructor(protected store: Store<AppState>,
+              private fb: UntypedFormBuilder,
+>>>>>>> master
               private translate: TranslateService) {
     super(store);
     for (const key of this.translation.keys()) {
@@ -32,7 +46,11 @@ export class CopyKeysConfigComponent extends RuleNodeConfigurationComponent {
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.copyKeysConfigForm = this.fb.group({
+<<<<<<< HEAD
       fromMetadata: [configuration.fromMetadata, [Validators.required]],
+=======
+      fromMetadata: [configuration.fromMetadata , [Validators.required]],
+>>>>>>> master
       keys: [configuration ? configuration.keys : null, [Validators.required]]
     });
   }

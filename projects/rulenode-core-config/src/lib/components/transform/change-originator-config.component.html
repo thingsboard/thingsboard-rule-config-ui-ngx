@@ -1,6 +1,6 @@
 <section [formGroup]="changeOriginatorConfigForm" class="tb-form-panel no-border no-padding">
-  <mat-form-field class="mat-block" subscriptSizing="dynamic">
-    <mat-label translate>tb.rulenode.originator-source</mat-label>
+  <mat-form-field class="mat-block" subscriptSizing="dynamic" hideRequiredMarker>
+    <mat-label translate>tb.rulenode.new-originator</mat-label>
     <mat-select formControlName="originatorSource" required>
       <mat-select-trigger>
         <span *ngIf="originatorSourceTranslationMap.get(changeOriginatorConfigForm.get('originatorSource').value)">
@@ -12,23 +12,22 @@
           {{ originatorSourceTranslationMap.get(source) | translate }}
         </span>
         <br>
-        <small matListItemMeta
-               [ngClass]="{ 'selected': source === changeOriginatorConfigForm.get('originatorSource').value }">
+        <small matListItemMeta style="color: inherit">
           {{ originatorSourceDescTranslationMap.get(source) | translate }}
         </small>
       </mat-option>
     </mat-select>
   </mat-form-field>
   <div class="tb-form-panel stroked no-padding-bottom"
-       *ngIf="changeOriginatorConfigForm.get('originatorSource').value === 'ENTITY'">
+        *ngIf="changeOriginatorConfigForm.get('originatorSource').value === 'ENTITY'">
     <tb-example-hint [hintText]="'tb.rulenode.entity-name-pattern-hint' | translate"
-                     popupHelpLink="rulenode/originator_telemetry_node_fields_templatization">
+                      popupHelpLink="rulenode/change_originator_node_fields_templatization">
     </tb-example-hint>
     <div class="tb-form-row no-border no-padding tb-standard-fields">
       <tb-entity-type-select
         showLabel
         required
-        [allowedEntityTypes]="allowedEntityTypes"
+        [allowedEntityTypes] = "allowedEntityTypes"
         formControlName="entityType"
         class="mat-mdc-form-field flex">
       </tb-entity-type-select>
@@ -44,7 +43,7 @@
   </div>
   <tb-relations-query-config
     required
-    formControlName="relationsQuery"
-    *ngIf="changeOriginatorConfigForm.get('originatorSource').value === originatorSource.RELATED">
+    *ngIf="changeOriginatorConfigForm.get('originatorSource').value === originatorSource.RELATED"
+    formControlName="relationsQuery">
   </tb-relations-query-config>
 </section>

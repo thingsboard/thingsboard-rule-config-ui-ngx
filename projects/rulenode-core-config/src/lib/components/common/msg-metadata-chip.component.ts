@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FetchTo, FetchToTranslationMap } from '../../rulenode-core-config.models';
+import { FetchTo, FetchToTranslation } from '../../rulenode-core-config.models';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
@@ -18,7 +18,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class MsgMetadataChipComponent implements OnInit, ControlValueAccessor, OnDestroy {
 
   @Input() labelText: string;
-  @Input() translation: Map<FetchTo, string> = FetchToTranslationMap;
+  @Input() translation: Map<FetchTo, string> = FetchToTranslation;
 
   private propagateChange: (value: any) => void = () => {};
   private destroy$ = new Subject<void>();

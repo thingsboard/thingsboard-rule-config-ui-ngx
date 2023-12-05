@@ -34,9 +34,9 @@ import { Subject, takeUntil } from 'rxjs';
     }
   ]
 })
-export class KvMapConfigComponent implements ControlValueAccessor, OnInit, OnDestroy, Validator {
+export class KvMapConfigComponent implements ControlValueAccessor, OnInit, Validator, OnDestroy {
 
-  private propagateChange = null;
+  private propagateChange: (value: any) => void = () => {};
   private destroy$ = new Subject<void>();
 
   kvListFormGroup: FormGroup;
@@ -118,7 +118,7 @@ export class KvMapConfigComponent implements ControlValueAccessor, OnInit, OnDes
 
   private duplicateValuesValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null =>
     control.controls.key.value === control.controls.value.value
-      ? { uniqueKeyValuePair: true }
+      ? control.controls.key.value && control.controls.value.value ? { uniqueKeyValuePair: true } : null
       : null;
 
   private oneMapRequiredValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => control.get('keyVals').value.length;
@@ -129,7 +129,9 @@ export class KvMapConfigComponent implements ControlValueAccessor, OnInit, OnDes
       return null;
     }
     const errors = {};
-    if (this.kvListFormGroup) {this.kvListFormGroup.setErrors(null)};
+    if (this.kvListFormGroup) {
+      this.kvListFormGroup.setErrors(null);
+    }
     if (controls instanceof FormArray || controls instanceof FormGroup) {
       if (controls.errors) {
         for (const errorKey of Object.keys(controls.errors)) {
@@ -159,7 +161,7 @@ export class KvMapConfigComponent implements ControlValueAccessor, OnInit, OnDes
   writeValue(keyValMap: { [key: string]: string }): void {
     const keyValuesData = Object.keys(keyValMap).map(key => ({key, value: keyValMap[key]}));
     if (this.keyValsFormArray().length === keyValuesData.length) {
-      this.keyValsFormArray().patchValue(keyValuesData, {emitEvent: false})
+      this.keyValsFormArray().patchValue(keyValuesData, {emitEvent: false});
     } else {
       const keyValsControls: Array<FormGroup> = [];
       keyValuesData.forEach(data => {
@@ -167,7 +169,7 @@ export class KvMapConfigComponent implements ControlValueAccessor, OnInit, OnDes
           key: [data.key, [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]],
           value: [data.value, [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]]
         }, {validators: this.uniqueKeyValuePairValidator ? [this.duplicateValuesValidator] : []}));
-      })
+      });
       this.kvListFormGroup.setControl('keyVals', this.fb.array(keyValsControls, this.propagateNestedErrors), {emitEvent: false});
     }
   }

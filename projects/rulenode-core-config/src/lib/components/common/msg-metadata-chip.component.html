@@ -1,4 +1,4 @@
-<div [formGroup]="chipControlGroup" class="tb-form-row space-between" ngClass.xs="filters-row-mobile">
+<div [formGroup]="chipControlGroup" class="tb-form-row space-between">
   <div class="fixed-title-width">{{ labelText }}</div>
   <mat-chip-listbox formControlName="chipControl">
     <mat-chip-option *ngFor="let option of selectOptions"

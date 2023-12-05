@@ -9,13 +9,15 @@
           {{ 'tb.rulenode.email-from-template-hint' | translate }}
         </mat-hint>
         <mat-hint align="end">
-          <div hintMode
-               class="see-example"
-               tb-help-popup="{{'rulenode/originator_telemetry_node_fields_templatization'}}"
-               tb-help-popup-placement="right"
-               trigger-style="letter-spacing:0.25px; font-size:12px;"
-               [tb-help-popup-style]="{maxWidth: '820px'}"
-               trigger-text="{{ 'tb.key-val.see-examples' | translate }}"></div>
+          <div class="input-bottom-double-hint">
+            <div class="see-example"
+                hintMode
+                tb-help-popup="{{'rulenode/to_email_node_fields_templatization'}}"
+                tb-help-popup-placement="right"
+                trigger-style="letter-spacing:0.25px; font-size:12px;"
+                [tb-help-popup-style]="{maxWidth: '820px'}"
+                trigger-text="{{ 'tb.key-val.see-examples' | translate }}"></div>
+          </div>
         </mat-hint>
         <mat-error *ngIf="toEmailConfigForm.get('fromTemplate').hasError('required')">
           {{ 'tb.rulenode.from-template-required' | translate }}
@@ -27,7 +29,7 @@
     <div class="tb-form-panel no-padding no-border">
       <div class="tb-form-panel-title" translate>tb.rulenode.recipients</div>
       <tb-example-hint [hintText]="'tb.rulenode.recipients-block-main-hint' | translate"
-                       popupHelpLink="rulenode/originator_telemetry_node_fields_templatization">
+                        popupHelpLink="rulenode/to_email_node_fields_templatization">
       </tb-example-hint>
     </div>
     <div class="tb-form-row no-border no-padding tb-standard-fields">
@@ -64,9 +66,9 @@
   <div class="tb-form-panel stroked">
     <div class="tb-form-panel-title" translate>tb.rulenode.message-subject-and-content</div>
     <tb-example-hint [hintText]="'tb.rulenode.kv-map-pattern-hint' | translate"
-                     popupHelpLink="rulenode/originator_telemetry_node_fields_templatization">
+                      popupHelpLink="rulenode/to_email_node_fields_templatization">
     </tb-example-hint>
-    <div class="tb-form-panel no-border no-padding">
+    <section>
       <mat-form-field class="mat-block">
         <mat-label translate>tb.rulenode.subject-template</mat-label>
         <textarea required
@@ -92,16 +94,16 @@
               {{ type.name | translate }}
             </span>
             <br>
-            <small matListItemMeta
-                   [ngClass]="{ 'selected': type.value === toEmailConfigForm.get('mailBodyType').value }">
+            <small matListItemMeta style="color: inherit">
               {{ type.description | translate }}
             </small>
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="mat-block" *ngIf="toEmailConfigForm.get('mailBodyType').value === 'dynamic'">
-        <mat-label translate>tb.rulenode.dynamic-mail-body-type</mat-label>
+        <mat-label translate>tb.rulenode.body-type-template</mat-label>
         <input required matInput formControlName="isHtmlTemplate">
+        <mat-hint translate>tb.mail-body-type.after-template-evaluation-hint</mat-hint>
       </mat-form-field>
       <mat-form-field class="mat-block">
         <mat-label translate>tb.rulenode.body-template</mat-label>
@@ -115,6 +117,6 @@
           {{ 'tb.rulenode.body-template-required' | translate }}
         </mat-error>
       </mat-form-field>
-    </div>
+    </section>
   </div>
 </section>

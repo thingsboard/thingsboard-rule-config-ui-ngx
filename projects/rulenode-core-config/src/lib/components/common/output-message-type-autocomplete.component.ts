@@ -61,11 +61,11 @@ export class OutputMessageTypeAutocompleteComponent implements ControlValueAcces
 
   messageTypes: MessageType[] = [
     {
-      name: 'Post attributes request',
+      name: 'Post attributes',
       value: 'POST_ATTRIBUTES_REQUEST'
     },
     {
-      name: 'Post telemetry request',
+      name: 'Post telemetry',
       value: 'POST_TELEMETRY_REQUEST'
     },
     {
