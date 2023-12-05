@@ -4,7 +4,6 @@ import {
   ControlValueAccessor,
   FormArray,
   FormBuilder,
-  FormControl,
   FormGroup,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
@@ -14,11 +13,9 @@ import {
   ValidatorFn,
   Validators
 } from '@angular/forms';
-import { coerceBoolean, PageComponent } from '@shared/public-api';
-import { Store } from '@ngrx/store';
-import { AppState, isEqual } from '@core/public-api';
+import { coerceBoolean } from '@shared/public-api';
+import { isEqual } from '@core/public-api';
 import { Subject, takeUntil } from 'rxjs';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'tb-kv-map-config',
@@ -37,9 +34,9 @@ import { TranslateService } from '@ngx-translate/core';
     }
   ]
 })
-export class KvMapConfigComponent extends PageComponent implements ControlValueAccessor, OnInit, OnDestroy, Validator {
+export class KvMapConfigComponent implements ControlValueAccessor, OnInit, Validator, OnDestroy {
 
-  private propagateChange = null;
+  private propagateChange: (value: any) => void = () => {};
   private destroy$ = new Subject<void>();
 
   kvListFormGroup: FormGroup;
@@ -73,11 +70,8 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
   @coerceBoolean()
   required = false;
 
-  constructor(protected store: Store<AppState>,
-              public translate: TranslateService,
-              public injector: Injector,
+  constructor(private injector: Injector,
               private fb: FormBuilder) {
-    super(store);
   }
 
   ngOnInit(): void {
@@ -124,7 +118,7 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
 
   private duplicateValuesValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null =>
     control.controls.key.value === control.controls.value.value
-      ? { uniqueKeyValuePair: true }
+      ? control.controls.key.value && control.controls.value.value ? { uniqueKeyValuePair: true } : null
       : null;
 
   private oneMapRequiredValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => control.get('keyVals').value.length;
@@ -135,7 +129,9 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
       return null;
     }
     const errors = {};
-    if (this.kvListFormGroup) {this.kvListFormGroup.setErrors(null)};
+    if (this.kvListFormGroup) {
+      this.kvListFormGroup.setErrors(null);
+    }
     if (controls instanceof FormArray || controls instanceof FormGroup) {
       if (controls.errors) {
         for (const errorKey of Object.keys(controls.errors)) {
@@ -165,7 +161,7 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
   writeValue(keyValMap: { [key: string]: string }): void {
     const keyValuesData = Object.keys(keyValMap).map(key => ({key, value: keyValMap[key]}));
     if (this.keyValsFormArray().length === keyValuesData.length) {
-      this.keyValsFormArray().patchValue(keyValuesData, {emitEvent: false})
+      this.keyValsFormArray().patchValue(keyValuesData, {emitEvent: false});
     } else {
       const keyValsControls: Array<FormGroup> = [];
       keyValuesData.forEach(data => {
@@ -173,7 +169,7 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
           key: [data.key, [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]],
           value: [data.value, [Validators.required, Validators.pattern(/(?:.|\s)*\S(&:.|\s)*/)]]
         }, {validators: this.uniqueKeyValuePairValidator ? [this.duplicateValuesValidator] : []}));
-      })
+      });
       this.kvListFormGroup.setControl('keyVals', this.fb.array(keyValsControls, this.propagateNestedErrors), {emitEvent: false});
     }
   }
@@ -189,7 +185,7 @@ export class KvMapConfigComponent extends PageComponent implements ControlValueA
     }, {validators: this.uniqueKeyValuePairValidator ? [this.duplicateValuesValidator] : []}));
   }
 
-  public validate(c: FormControl) {
+  public validate() {
     const kvList: { key: string; value: string }[] = this.kvListFormGroup.get('keyVals').value;
     if (!kvList.length && this.required) {
       return {

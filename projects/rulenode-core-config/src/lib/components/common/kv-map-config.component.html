@@ -32,11 +32,11 @@
             <input [placeholder]="valText+'*'" [formControl]="keyValControl.get('value')" matInput/>
           </mat-form-field>
           <div class="tb-form-table-row-cell-buttons">
-            <button [ngClass]="{'tb-hidden': keyValsFormArray().controls.length === 1}"
+            <button [class.tb-hidden]="keyValsFormArray().controls.length === 1"
                     type="button"
                     mat-icon-button
                     (click)="removeKeyVal($index)"
-                    [disabled]="isLoading$ | async"
+                    [disabled]="disabled"
                     matTooltip="{{ 'tb.key-val.remove-mapping-entry' | translate }}"
                     matTooltipPosition="above">
               <mat-icon>delete</mat-icon>
@@ -51,5 +51,5 @@
       {{ 'tb.key-val.add-mapping-entry' | translate }}
     </button>
   </div>
-  <tb-example-hint [hintText]="hintText" [popupHelpLink]="popupHelpLink"></tb-example-hint>
+  <tb-example-hint [hintText]="hintText" [popupHelpLink]="popupHelpLink" *ngIf="popupHelpLink || hintText"></tb-example-hint>
 </section>

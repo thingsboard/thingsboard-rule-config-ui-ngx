@@ -8,6 +8,12 @@ export enum OriginatorSource {
   ENTITY = 'ENTITY'
 }
 
+export interface OriginatorValuesDescriptions {
+  value: OriginatorSource;
+  name: string;
+  description: string;
+}
+
 export const originatorSourceTranslations = new Map<OriginatorSource, string>(
   [
     [OriginatorSource.CUSTOMER, 'tb.rulenode.originator-customer'],
@@ -18,6 +24,15 @@ export const originatorSourceTranslations = new Map<OriginatorSource, string>(
   ]
 );
 
+export const originatorSourceDescTranslations = new Map<OriginatorSource, string>(
+  [
+    [OriginatorSource.CUSTOMER, 'tb.rulenode.originator-customer-desc'],
+    [OriginatorSource.TENANT, 'tb.rulenode.originator-tenant-desc'],
+    [OriginatorSource.RELATED, 'tb.rulenode.originator-related-entity-desc'],
+    [OriginatorSource.ALARM_ORIGINATOR, 'tb.rulenode.originator-alarm-originator-desc'],
+    [OriginatorSource.ENTITY, 'tb.rulenode.originator-entity-by-name-pattern-desc'],
+  ]
+);
 export const allowedOriginatorFields: EntityField[] = [
     entityFields.createdTime,
     entityFields.name,
@@ -687,9 +702,24 @@ export enum FetchTo {
   METADATA = 'METADATA'
 }
 
+export const FetchFromToTranslation = new Map<FetchTo, string>([
+    [FetchTo.DATA, 'tb.rulenode.message-to-metadata'],
+    [FetchTo.METADATA, 'tb.rulenode.metadata-to-message'],
+]);
+
+export const FetchFromTranslation = new Map<FetchTo, string>([
+    [FetchTo.DATA, 'tb.rulenode.from-message'],
+    [FetchTo.METADATA, 'tb.rulenode.from-metadata'],
+]);
+
 export const FetchToTranslation = new Map<FetchTo, string>([
     [FetchTo.DATA, 'tb.rulenode.message'],
     [FetchTo.METADATA, 'tb.rulenode.metadata'],
+]);
+
+export const FetchToRenameTranslation = new Map<FetchTo, string>([
+    [FetchTo.DATA, 'tb.rulenode.message'],
+    [FetchTo.METADATA, 'tb.rulenode.message-metadata'],
 ]);
 
 export interface ArgumentTypeData {

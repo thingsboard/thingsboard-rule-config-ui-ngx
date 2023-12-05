@@ -2,61 +2,56 @@ import { Component } from '@angular/core';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { AppState } from '@core/public-api';
-import { MatChipInputEvent } from '@angular/material/chips';
-import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
+import { AppState, isDefinedAndNotNull } from '@core/public-api';
+import { FetchTo, FetchToTranslation } from '../../rulenode-core-config.models';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'tb-transformation-node-delete-keys-config',
   templateUrl: './delete-keys-config.component.html',
-  styleUrls: []
+  styleUrls: ['../../../../style.scss']
 })
 
 export class DeleteKeysConfigComponent extends RuleNodeConfigurationComponent{
   deleteKeysConfigForm: UntypedFormGroup;
-  separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
+  fromMetadata = [];
+  translation = FetchToTranslation;
 
   constructor(protected store: Store<AppState>,
-              private fb: UntypedFormBuilder) {
+              private fb: UntypedFormBuilder,
+              private translate: TranslateService) {
     super(store);
+    for (const key of this.translation.keys()) {
+      this.fromMetadata.push({
+        value: key,
+        name: this.translate.instant(this.translation.get(key))
+      });
+    }
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.deleteKeysConfigForm = this.fb.group({
-      fromMetadata: [configuration ? configuration.fromMetadata : null, [Validators.required]],
+      dataToFetch: [configuration.fromMetadata, [Validators.required]],
       keys: [configuration ? configuration.keys : null, [Validators.required]]
     });
   }
 
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    let dataToFetch: FetchTo;
+
+    if (isDefinedAndNotNull(configuration?.fromMetadata)) {
+      dataToFetch = configuration.fromMetadata ? FetchTo.METADATA : FetchTo.DATA;
+    } else {
+      dataToFetch = isDefinedAndNotNull(configuration?.dataToFetch) ? configuration.dataToFetch : FetchTo.DATA;
+    }
+
+    return {
+      keys: isDefinedAndNotNull(configuration?.keys) ? configuration.keys : null,
+      dataToFetch
+    };
+  }
+
   protected configForm(): UntypedFormGroup {
     return this.deleteKeysConfigForm;
-  }
-
-  removeKey(key: string): void {
-    const keys: string[] = this.deleteKeysConfigForm.get('keys').value;
-    const index = keys.indexOf(key);
-    if (index >= 0) {
-      keys.splice(index, 1);
-      this.deleteKeysConfigForm.get('keys').patchValue(keys, {emitEvent: true});
-    }
-  }
-
-  addKey(event: MatChipInputEvent): void {
-    const input = event.input;
-    let value = event.value;
-    if ((value || '').trim()) {
-      value = value.trim();
-      let keys: string[] = this.deleteKeysConfigForm.get('keys').value;
-      if (!keys || keys.indexOf(value) === -1) {
-        if (!keys) {
-          keys = [];
-        }
-        keys.push(value);
-        this.deleteKeysConfigForm.get('keys').patchValue(keys, {emitEvent: true});
-      }
-    }
-    if (input) {
-      input.value = '';
-    }
   }
 }

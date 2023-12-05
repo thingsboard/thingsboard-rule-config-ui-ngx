@@ -1,31 +1,48 @@
-import { Component, ElementRef, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
-import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
-import { Observable, of } from 'rxjs';
-import { map, mergeMap, tap } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
-import { AppState } from '@app/core/core.state';
+import { Component, forwardRef, Input, OnDestroy } from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormBuilder,
+  FormGroup,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  Validator,
+  Validators
+} from '@angular/forms';
 import { SubscriptSizing } from '@angular/material/form-field';
-import { coerceBoolean, PageComponent } from '@shared/public-api';
+import { coerceBoolean } from '@shared/public-api';
+import { Subject, takeUntil } from 'rxjs';
+
+interface MessageType {
+  name: string;
+  value: string;
+}
 
 @Component({
   selector: 'tb-output-message-type-autocomplete',
   templateUrl: './output-message-type-autocomplete.component.html',
   styleUrls: [],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => OutputMessageTypeAutocompleteComponent),
-    multi: true
-  }]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => OutputMessageTypeAutocompleteComponent),
+      multi: true
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => OutputMessageTypeAutocompleteComponent),
+      multi: true
+    }
+  ]
 })
 
-export class OutputMessageTypeAutocompleteComponent extends PageComponent implements OnInit, ControlValueAccessor {
-
-  @ViewChild('messageTypeInput', {static: true}) messageTypeInput: ElementRef;
-
-  @Input() autocompleteHint: string;
+export class OutputMessageTypeAutocompleteComponent implements ControlValueAccessor, Validator, OnDestroy {
 
   @Input()
   subscriptSizing: SubscriptSizing = 'fixed';
+
+  @Input()
+  @coerceBoolean()
+  disabled: boolean;
 
   @Input()
   @coerceBoolean()
@@ -41,21 +58,43 @@ export class OutputMessageTypeAutocompleteComponent extends PageComponent implem
   }
 
   messageTypeFormGroup: FormGroup;
-  outputMessageTypes: Observable<Array<string>>;
-  searchText = '';
+
+  messageTypes: MessageType[] = [
+    {
+      name: 'Post attributes',
+      value: 'POST_ATTRIBUTES_REQUEST'
+    },
+    {
+      name: 'Post telemetry',
+      value: 'POST_TELEMETRY_REQUEST'
+    },
+    {
+      name: 'Custom',
+      value: ''
+    },
+  ];
 
   private modelValue: string | null;
-  private dirty = false;
   private requiredValue: boolean;
-  private messageTypes = ['POST_ATTRIBUTES_REQUEST', 'POST_TELEMETRY_REQUEST'];
-  private propagateChange = (v: any) => { };
+  private propagateChange: (value: any) => void = () => {};
+  private destroy$ = new Subject<void>();
 
-  constructor(protected store: Store<AppState>,
-              private fb: FormBuilder) {
-    super(store);
+  constructor(private fb: FormBuilder) {
     this.messageTypeFormGroup = this.fb.group({
-      messageType: [null, [Validators.maxLength(255)]]
+      messageTypeAlias: [null, [Validators.required]],
+      messageType: [{value: null, disabled: true}, [Validators.maxLength(255)]]
     });
+    this.messageTypeFormGroup.get('messageTypeAlias').valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(value => this.updateMessageTypeValue(value));
+    this.messageTypeFormGroup.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.updateView());
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   registerOnTouched(fn: any): void {
@@ -65,68 +104,42 @@ export class OutputMessageTypeAutocompleteComponent extends PageComponent implem
     this.propagateChange = fn;
   }
 
-  ngOnInit() {
-    this.outputMessageTypes = this.messageTypeFormGroup.get('messageType').valueChanges
-      .pipe(
-        tap(value => {
-          this.updateView(value);
-        }),
-        map(value => value ? value : ''),
-        mergeMap(type => this.fetchMessageTypes(type))
-      );
-  }
-
   writeValue(value: string | null): void {
-    this.searchText = '';
     this.modelValue = value;
+    let findMessage = this.messageTypes.find(msgType => msgType.value === value);
+    if (!findMessage) {
+      findMessage = this.messageTypes.find(msgType => msgType.value === '');
+    }
+    this.messageTypeFormGroup.get('messageTypeAlias').patchValue(findMessage, {emitEvent: false});
     this.messageTypeFormGroup.get('messageType').patchValue(value, {emitEvent: false});
-    this.dirty = true;
   }
 
-  onFocus() {
-    if (this.dirty) {
-      this.messageTypeFormGroup.get('messageType').updateValueAndValidity({onlySelf: true, emitEvent: true});
-      this.dirty = false;
+  validate() {
+    if (!this.messageTypeFormGroup.valid) {
+      return {
+        messageTypeInvalid: true
+      };
     }
-  }
-
-  updateView(value: string | null) {
-    if (this.modelValue !== value) {
-      this.modelValue = value;
-      this.propagateChange(this.modelValue);
-    }
-  }
-
-  displayMessageTypeFn(messageType?: string): string | undefined {
-    return messageType ? messageType : undefined;
-  }
-
-  fetchMessageTypes(searchText?: string, strictMatch: boolean = false): Observable<Array<string>> {
-    this.searchText = searchText;
-    return of(this.messageTypes).pipe(
-      map(messageTypes => messageTypes.filter(messageType => {
-        if (strictMatch) {
-          return searchText ? messageType === searchText : false;
-        } else {
-          return searchText ? messageType.toUpperCase().startsWith(searchText.toUpperCase()) : true;
-        }
-      }))
-    );
-  }
-
-  clear() {
-    this.messageTypeFormGroup.get('messageType').patchValue(null, {emitEvent: true});
-    setTimeout(() => {
-      this.messageTypeInput.nativeElement.blur();
-      this.messageTypeInput.nativeElement.focus();
-    }, 0);
+    return null;
   }
 
   setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
     if (isDisabled) {
       this.messageTypeFormGroup.disable({emitEvent: false});
     } else {
       this.messageTypeFormGroup.enable({emitEvent: false});
+      if (this.messageTypeFormGroup.get('messageTypeAlias').value?.name !== 'Custom') {
+        this.messageTypeFormGroup.get('messageType').disable({emitEvent: false});
+      }
+    }
+  }
+
+  private updateView() {
+    const value = this.messageTypeFormGroup.getRawValue().messageType;
+    if (this.modelValue !== value) {
+      this.modelValue = value;
+      this.propagateChange(this.modelValue);
     }
   }
 
@@ -135,6 +148,15 @@ export class OutputMessageTypeAutocompleteComponent extends PageComponent implem
         this.required ? [Validators.required, Validators.maxLength(255)] : [Validators.maxLength(255)]
     );
     this.messageTypeFormGroup.get('messageType').updateValueAndValidity({emitEvent: false});
+  }
+
+  private updateMessageTypeValue(choseMessageType: MessageType) {
+    if (choseMessageType?.name !== 'Custom') {
+      this.messageTypeFormGroup.get('messageType').disable({emitEvent: false});
+    } else {
+      this.messageTypeFormGroup.get('messageType').enable({emitEvent: false});
+    }
+    this.messageTypeFormGroup.get('messageType').patchValue(choseMessageType.value ?? null);
   }
 
 }

@@ -25,7 +25,6 @@ import { PushToEdgeConfigComponent } from './push-to-edge-config.component';
 import { PushToCloudConfigComponent } from './push-to-cloud-config.component';
 import { DeleteAttributesConfigComponent } from './delete-attributes-config.component';
 import { MathFunctionConfigComponent } from './math-function-config.component';
-import { DeduplicationConfigComponent } from './deduplication-config.component';
 
 @NgModule({
   declarations: [
@@ -50,8 +49,7 @@ import { DeduplicationConfigComponent } from './deduplication-config.component';
     DeviceProfileConfigComponent,
     PushToEdgeConfigComponent,
     PushToCloudConfigComponent,
-    MathFunctionConfigComponent,
-    DeduplicationConfigComponent
+    MathFunctionConfigComponent
   ],
   imports: [
     CommonModule,
@@ -81,8 +79,7 @@ import { DeduplicationConfigComponent } from './deduplication-config.component';
     DeviceProfileConfigComponent,
     PushToEdgeConfigComponent,
     PushToCloudConfigComponent,
-    MathFunctionConfigComponent,
-    DeduplicationConfigComponent
+    MathFunctionConfigComponent
   ]
 })
 export class RuleNodeCoreConfigActionModule {
