@@ -68,7 +68,7 @@ export class SelectAttributesComponent implements OnInit, ControlValueAccessor, 
     const formatValue = {};
     for (const key in propagateValue) {
       if (key === 'getLatestValueWithTs') {
-        formatValue[key] = propagateValue;
+        formatValue[key] = propagateValue[key];
       } else {
         formatValue[key] = isDefinedAndNotNull(propagateValue[key]) ? propagateValue[key] : [];
       }
