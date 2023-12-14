@@ -15,7 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class DeleteKeysConfigComponent extends RuleNodeConfigurationComponent {
 
   deleteKeysConfigForm: FormGroup;
-  fromMetadata = [];
+  deleteFrom = [];
   translation = FetchToTranslation;
 
   constructor(protected store: Store<AppState>,
@@ -23,7 +23,7 @@ export class DeleteKeysConfigComponent extends RuleNodeConfigurationComponent {
               private translate: TranslateService) {
     super(store);
     for (const key of this.translation.keys()) {
-      this.fromMetadata.push({
+      this.deleteFrom.push({
         value: key,
         name: this.translate.instant(this.translation.get(key))
       });
@@ -32,23 +32,25 @@ export class DeleteKeysConfigComponent extends RuleNodeConfigurationComponent {
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.deleteKeysConfigForm = this.fb.group({
-      dataToFetch: [configuration.fromMetadata, [Validators.required]],
+      deleteFrom: [configuration.deleteFrom, [Validators.required]],
       keys: [configuration ? configuration.keys : null, [Validators.required]]
     });
   }
 
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
-    let dataToFetch: FetchTo;
+    let deleteFrom: FetchTo;
 
     if (isDefinedAndNotNull(configuration?.fromMetadata)) {
-      dataToFetch = configuration.fromMetadata ? FetchTo.METADATA : FetchTo.DATA;
+      deleteFrom = configuration.fromMetadata ? FetchTo.METADATA : FetchTo.DATA;
+    } else if (isDefinedAndNotNull(configuration?.deleteFrom)) {
+      deleteFrom = configuration?.deleteFrom;
     } else {
-      dataToFetch = isDefinedAndNotNull(configuration?.dataToFetch) ? configuration.dataToFetch : FetchTo.DATA;
+      deleteFrom = FetchTo.DATA;
     }
 
     return {
       keys: isDefinedAndNotNull(configuration?.keys) ? configuration.keys : null,
-      dataToFetch
+      deleteFrom
     };
   }
 
