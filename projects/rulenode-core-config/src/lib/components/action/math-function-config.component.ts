@@ -57,6 +57,9 @@ export class MathFunctionConfigComponent extends RuleNodeConfigurationComponent 
     const resultType: ArgumentTypeResult = this.mathFunctionConfigForm.get('result.type').value;
     if (operation === MathFunction.CUSTOM) {
       this.mathFunctionConfigForm.get('customFunction').enable({emitEvent: false});
+      if (this.mathFunctionConfigForm.get('customFunction').value === null) {
+        this.mathFunctionConfigForm.get('customFunction').patchValue('(x - 32) / 1.8', {emitEvent: false});
+      }
     } else {
       this.mathFunctionConfigForm.get('customFunction').disable({emitEvent: false});
     }
