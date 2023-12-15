@@ -6,7 +6,7 @@
               [formGroup]="argumentsFormGroup"
               (cdkDropListDropped)="onDrop($event)"
               [cdkDropListDisabled]="disabled">
-      <mat-list-item *ngFor="let argumentControl of argumentsFormArray().controls; let $index = index"
+      <mat-list-item *ngFor="let argumentControl of argumentsFormArray.controls; let $index = index"
                      formArrayName="arguments"
                      cdkDrag class="tb-argument tb-draggable"
                      [cdkDragDisabled]="disabled"
@@ -96,12 +96,12 @@
       </mat-list-item>
     </mat-list>
   </div>
-  <div *ngIf="!argumentsFormArray().controls.length">
+  <div *ngIf="!argumentsFormArray.length">
       <span translate fxLayoutAlign="center center"
             class="tb-prompt">tb.rulenode.no-arguments-prompt</span>
   </div>
   <button mat-button mat-raised-button color="primary"
-          [disabled]="argumentsFormArray().value.length >= maxArgs"
+          [disabled]="argumentsFormArray.length >= maxArgs"
           (click)="addArgument()"
           type="button"
           matTooltipPosition="above">
