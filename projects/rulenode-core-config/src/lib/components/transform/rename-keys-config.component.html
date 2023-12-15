@@ -2,8 +2,8 @@
   <div class="tb-form-panel-title" translate>tb.rulenode.rename-keys-in</div>
   <div class="fx-centered">
     <div class="fetch-to-data-toggle">
-      <tb-toggle-select class="fetch-to-data-toggle" formControlName="fromMetadata" appearance="fill">
-        <tb-toggle-option *ngFor="let data of fromMetadata" [value]="data.value">
+      <tb-toggle-select class="fetch-to-data-toggle" formControlName="renameIn" appearance="fill">
+        <tb-toggle-option *ngFor="let data of renameIn" [value]="data.value">
           {{ data.name }}
         </tb-toggle-option>
       </tb-toggle-select>
@@ -11,7 +11,7 @@
   </div>
   <tb-kv-map-config
     required
-    labelText="{{ translation.get(renameKeysConfigForm.get('fromMetadata').value) | translate }} {{'tb.rulenode.keys-mapping' | translate}}"
+    labelText="{{ translation.get(renameKeysConfigForm.get('renameIn').value) | translate }} {{'tb.rulenode.keys-mapping' | translate}}"
     formControlName="renameKeysMapping"
     uniqueKeyValuePairValidator
     requiredText="{{'tb.rulenode.attr-mapping-required' | translate}}"

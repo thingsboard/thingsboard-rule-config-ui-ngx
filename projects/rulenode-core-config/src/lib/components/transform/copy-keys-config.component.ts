@@ -14,7 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class CopyKeysConfigComponent extends RuleNodeConfigurationComponent{
   copyKeysConfigForm: FormGroup;
-  fromMetadata = [];
+  copyFrom = [];
   translation = FetchFromToTranslation;
 
   constructor(protected store: Store<AppState>,
@@ -22,7 +22,7 @@ export class CopyKeysConfigComponent extends RuleNodeConfigurationComponent{
               private translate: TranslateService) {
     super(store);
     for (const key of this.translation.keys()) {
-      this.fromMetadata.push({
+      this.copyFrom.push({
         value: key,
         name: this.translate.instant(this.translation.get(key))
       });
@@ -31,7 +31,7 @@ export class CopyKeysConfigComponent extends RuleNodeConfigurationComponent{
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.copyKeysConfigForm = this.fb.group({
-      fromMetadata: [configuration.fromMetadata , [Validators.required]],
+      copyFrom: [configuration.copyFrom , [Validators.required]],
       keys: [configuration ? configuration.keys : null, [Validators.required]]
     });
   }
@@ -41,17 +41,19 @@ export class CopyKeysConfigComponent extends RuleNodeConfigurationComponent{
   }
 
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
-    let fromMetadata: FetchTo;
+    let copyFrom: FetchTo;
 
     if (isDefinedAndNotNull(configuration?.fromMetadata)) {
-      fromMetadata = configuration.fromMetadata ? FetchTo.METADATA : FetchTo.DATA;
+      copyFrom = configuration.copyFrom ? FetchTo.METADATA : FetchTo.DATA;
+    } else if (isDefinedAndNotNull(configuration?.copyFrom)) {
+      copyFrom = configuration.copyFrom;
     } else {
-      fromMetadata = isDefinedAndNotNull(configuration?.fromMetadata) ? configuration.fromMetadata : FetchTo.DATA;
+      copyFrom = FetchTo.DATA;
     }
 
     return {
       keys: isDefinedAndNotNull(configuration?.keys) ? configuration.keys : null,
-      fromMetadata
+      copyFrom
     };
   }
 }

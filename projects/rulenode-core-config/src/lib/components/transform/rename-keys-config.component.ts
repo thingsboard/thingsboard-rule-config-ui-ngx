@@ -13,7 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class RenameKeysConfigComponent extends RuleNodeConfigurationComponent {
   renameKeysConfigForm: FormGroup;
-  fromMetadata = [];
+  renameIn = [];
   translation = FetchToRenameTranslation;
 
   constructor(protected store: Store<AppState>,
@@ -21,7 +21,7 @@ export class RenameKeysConfigComponent extends RuleNodeConfigurationComponent {
               private translate: TranslateService) {
     super(store);
     for (const key of this.translation.keys()) {
-      this.fromMetadata.push({
+      this.renameIn.push({
         value: key,
         name: this.translate.instant(this.translation.get(key))
       });
@@ -34,30 +34,25 @@ export class RenameKeysConfigComponent extends RuleNodeConfigurationComponent {
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.renameKeysConfigForm = this.fb.group({
-      fromMetadata: [configuration ? configuration.fromMetadata : null, [Validators.required]],
+      renameIn: [configuration ? configuration.renameIn : null, [Validators.required]],
       renameKeysMapping: [configuration ? configuration.renameKeysMapping : null, [Validators.required]]
     });
   }
 
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
-    let fromMetadata: FetchTo;
+    let renameIn: FetchTo;
+
     if (isDefinedAndNotNull(configuration?.fromMetadata)) {
-      if (configuration.fromMetadata) {
-        fromMetadata = FetchTo.METADATA;
-      } else {
-        fromMetadata = FetchTo.DATA;
-      }
+      renameIn = configuration.fromMetadata ? FetchTo.METADATA : FetchTo.DATA;
+    } else if (isDefinedAndNotNull(configuration?.renameIn)) {
+      renameIn = configuration?.renameIn;
     } else {
-      if (configuration?.fromMetadata) {
-        fromMetadata = configuration.fromMetadata;
-      } else {
-        fromMetadata = FetchTo.DATA;
-      }
+      renameIn = FetchTo.DATA;
     }
 
     return {
       renameKeysMapping: isDefinedAndNotNull(configuration?.renameKeysMapping) ? configuration.renameKeysMapping : null,
-      fromMetadata
+      renameIn
     };
   }
 }
