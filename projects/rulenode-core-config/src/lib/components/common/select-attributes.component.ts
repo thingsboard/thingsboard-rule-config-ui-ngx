@@ -13,6 +13,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 import { TranslateService } from '@ngx-translate/core';
+import { isDefinedAndNotNull } from '@core/public-api';
 
 @Component({
   selector: 'tb-select-attributes',
@@ -46,10 +47,10 @@ export class SelectAttributesComponent implements OnInit, ControlValueAccessor, 
 
   ngOnInit(): void {
     this.attributeControlGroup = this.fb.group({
-      clientAttributeNames: [null, []],
-      sharedAttributeNames: [null, []],
-      serverAttributeNames: [null, []],
-      latestTsKeyNames: [null, []],
+      clientAttributeNames: [[], []],
+      sharedAttributeNames: [[], []],
+      serverAttributeNames: [[], []],
+      latestTsKeyNames: [[], []],
       getLatestValueWithTs: [false, []]
     }, {
       validators: this.atLeastOne(Validators.required, ['clientAttributeNames', 'sharedAttributeNames',
@@ -59,9 +60,22 @@ export class SelectAttributesComponent implements OnInit, ControlValueAccessor, 
     this.attributeControlGroup.valueChanges.pipe(
       takeUntil(this.destroy$)
     ).subscribe((value) => {
-      this.propagateChange(value);
+      this.propagateChange(this.preparePropagateValue(value));
     });
   }
+
+  private preparePropagateValue(propagateValue: {[key: string]: string[] | boolean | null}): {[key: string]: string[] | boolean } {
+    const formatValue = {};
+    for (const key in propagateValue) {
+      if (key === 'getLatestValueWithTs') {
+        formatValue[key] = propagateValue[key];
+      } else {
+        formatValue[key] = isDefinedAndNotNull(propagateValue[key]) ? propagateValue[key] : [];
+      }
+    };
+
+    return formatValue;
+  };
 
   validate() {
     if (this.attributeControlGroup.valid) {
