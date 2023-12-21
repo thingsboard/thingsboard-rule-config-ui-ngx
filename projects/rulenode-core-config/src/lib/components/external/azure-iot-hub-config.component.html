@@ -24,7 +24,7 @@
   <mat-accordion>
     <mat-expansion-panel class="tb-mqtt-credentials-panel-group">
       <mat-expansion-panel-header>
-        <mat-panel-title translate>tb.rulenode.credentials</mat-panel-title>
+        <mat-panel-title class="tb-required" translate>tb.rulenode.credentials</mat-panel-title>
         <mat-panel-description>
           {{ azureIotHubCredentialsTypeTranslationsMap.get(azureIotHubConfigForm.get('credentials.type').value) | translate }}
         </mat-panel-description>
