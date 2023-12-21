@@ -9,6 +9,7 @@
     </mat-select>
   </mat-form-field>
   <mat-form-field class="mat-block" subscriptSizing="dynamic">
+    <mat-label>{{ 'tb.rulenode.attributes-keys' | translate }}</mat-label>
     <mat-chip-grid formControlName="keys" #attributeChipList>
       <mat-chip-row
         *ngFor="let key of deleteAttributesConfigForm.get('keys').value;"
@@ -16,7 +17,7 @@
         {{key}}
         <mat-icon matChipRemove>close</mat-icon>
       </mat-chip-row>
-      <input matInput type="text" placeholder="{{ 'tb.rulenode.attributes-keys' | translate }}"
+      <input matInput type="text"
              [matChipInputFor]="attributeChipList"
              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
              (matChipInputTokenEnd)="addKey($event)"

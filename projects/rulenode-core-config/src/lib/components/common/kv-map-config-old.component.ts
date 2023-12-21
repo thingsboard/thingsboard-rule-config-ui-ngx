@@ -22,7 +22,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'tb-kv-map-config-old',
   templateUrl: './kv-map-config-old.component.html',
-  styleUrls: ['./kv-map-config-old.component.scss'],
+  styleUrls: ['./kv-map-config-old.component.scss', '../../../../style.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
