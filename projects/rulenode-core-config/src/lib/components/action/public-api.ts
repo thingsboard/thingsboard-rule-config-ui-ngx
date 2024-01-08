@@ -1,6 +1,5 @@
 export * from './assign-customer-config.component';
 export * from './attributes-config.component';
-export * from './check-point-config.component';
 export * from './clear-alarm-config.component';
 export * from './create-alarm-config.component';
 export * from './create-relation-config.component';

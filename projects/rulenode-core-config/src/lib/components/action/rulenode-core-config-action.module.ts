@@ -19,7 +19,6 @@ import { RpcReplyConfigComponent } from './rpc-reply-config.component';
 import { SaveToCustomTableConfigComponent } from './save-to-custom-table-config.component';
 import { RulenodeCoreConfigCommonModule } from '../common/rulenode-core-config-common.module';
 import { UnassignCustomerConfigComponent } from './unassign-customer-config.component';
-import { CheckPointConfigComponent } from './check-point-config.component';
 import { DeviceProfileConfigComponent } from './device-profile-config.component';
 import { PushToEdgeConfigComponent } from './push-to-edge-config.component';
 import { PushToCloudConfigComponent } from './push-to-cloud-config.component';
@@ -45,7 +44,6 @@ import { MathFunctionConfigComponent } from './math-function-config.component';
     RpcReplyConfigComponent,
     SaveToCustomTableConfigComponent,
     UnassignCustomerConfigComponent,
-    CheckPointConfigComponent,
     DeviceProfileConfigComponent,
     PushToEdgeConfigComponent,
     PushToCloudConfigComponent,
@@ -75,7 +73,6 @@ import { MathFunctionConfigComponent } from './math-function-config.component';
     RpcReplyConfigComponent,
     SaveToCustomTableConfigComponent,
     UnassignCustomerConfigComponent,
-    CheckPointConfigComponent,
     DeviceProfileConfigComponent,
     PushToEdgeConfigComponent,
     PushToCloudConfigComponent,
