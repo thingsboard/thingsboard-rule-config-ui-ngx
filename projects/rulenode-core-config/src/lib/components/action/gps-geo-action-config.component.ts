@@ -5,7 +5,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import {
   PerimeterType,
-  perimeterTypeTranslations,
+  perimeterTypeTranslations, PresenceMonitoringStrategiesData,
   RangeUnit,
   rangeUnitTranslations,
   TimeUnit,
@@ -15,7 +15,7 @@ import {
 @Component({
   selector: 'tb-action-node-gps-geofencing-config',
   templateUrl: './gps-geo-action-config.component.html',
-  styleUrls: []
+  styleUrls: ['./gps-geo-action-config.component.scss', '../../../../style.scss']
 })
 export class GpsGeoActionConfigComponent extends RuleNodeConfigurationComponent {
 
@@ -28,8 +28,13 @@ export class GpsGeoActionConfigComponent extends RuleNodeConfigurationComponent 
   rangeUnits = Object.keys(RangeUnit);
   rangeUnitTranslationMap = rangeUnitTranslations;
 
+  presenceMonitoringStrategies = PresenceMonitoringStrategiesData;
+  presenceMonitoringStrategyKeys = Array.from(this.presenceMonitoringStrategies.keys());
+
   timeUnits = Object.keys(TimeUnit);
   timeUnitsTranslationMap = timeUnitTranslations;
+
+  public defaultPaddingEnable = true;
 
   constructor(protected store: Store<AppState>,
               private fb: UntypedFormBuilder) {
@@ -42,6 +47,8 @@ export class GpsGeoActionConfigComponent extends RuleNodeConfigurationComponent 
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.geoActionConfigForm = this.fb.group({
+      presenceMonitoringStrategyOnEachMessage: [configuration ? configuration.presenceMonitoringStrategyOnEachMessage : false,
+        [Validators.required]],
       latitudeKeyName: [configuration ? configuration.latitudeKeyName : null, [Validators.required]],
       longitudeKeyName: [configuration ? configuration.longitudeKeyName : null, [Validators.required]],
       perimeterType: [configuration ? configuration.perimeterType : null, [Validators.required]],
@@ -62,7 +69,7 @@ export class GpsGeoActionConfigComponent extends RuleNodeConfigurationComponent 
   }
 
   protected validatorTriggers(): string[] {
-    return ['fetchPerimeterInfoFromMessageMetadata', 'perimeterType'];
+    return ['fetchPerimeterInfoFromMessageMetadata', 'perimeterType', 'presenceMonitoringStrategyOnEachMessage'];
   }
 
   protected updateValidators(emitEvent: boolean) {
