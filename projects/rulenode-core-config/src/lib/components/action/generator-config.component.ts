@@ -5,8 +5,7 @@ import {
   JsFuncComponent,
   RuleNodeConfiguration,
   RuleNodeConfigurationComponent,
-  ScriptLanguage,
-  ServiceType
+  ScriptLanguage
 } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
@@ -34,8 +33,6 @@ export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
 
   readonly testScriptLabel = 'tb.rulenode.test-generator-function';
 
-  serviceType = ServiceType.TB_RULE_ENGINE;
-
   constructor(protected store: Store<AppState>,
               private fb: UntypedFormBuilder,
               private nodeScriptTestService: NodeScriptTestService,
@@ -54,8 +51,7 @@ export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
       originator: [configuration ? configuration.originator : null, []],
       scriptLang: [configuration ? configuration.scriptLang : ScriptLanguage.JS, [Validators.required]],
       jsScript: [configuration ? configuration.jsScript : null, []],
-      tbelScript: [configuration ? configuration.tbelScript : null, []],
-      queueName: [configuration ? configuration.queueName : null, []]
+      tbelScript: [configuration ? configuration.tbelScript : null, []]
     });
   }
 
