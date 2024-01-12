@@ -69,7 +69,7 @@ export class GpsGeoActionConfigComponent extends RuleNodeConfigurationComponent 
   }
 
   protected validatorTriggers(): string[] {
-    return ['fetchPerimeterInfoFromMessageMetadata', 'perimeterType', 'presenceMonitoringStrategyOnEachMessage'];
+    return ['fetchPerimeterInfoFromMessageMetadata', 'perimeterType'];
   }
 
   protected updateValidators(emitEvent: boolean) {
@@ -87,11 +87,15 @@ export class GpsGeoActionConfigComponent extends RuleNodeConfigurationComponent 
         Validators.min(-180), Validators.max(180)]);
       this.geoActionConfigForm.get('range').setValidators([Validators.required, Validators.min(0)]);
       this.geoActionConfigForm.get('rangeUnit').setValidators([Validators.required]);
+
+      this.defaultPaddingEnable = false;
     } else {
       this.geoActionConfigForm.get('centerLatitude').setValidators([]);
       this.geoActionConfigForm.get('centerLongitude').setValidators([]);
       this.geoActionConfigForm.get('range').setValidators([]);
       this.geoActionConfigForm.get('rangeUnit').setValidators([]);
+
+      this.defaultPaddingEnable = true;
     }
     if (!fetchPerimeterInfoFromMessageMetadata && perimeterType === PerimeterType.POLYGON) {
       this.geoActionConfigForm.get('polygonsDefinition').setValidators([Validators.required]);
