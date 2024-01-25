@@ -114,18 +114,18 @@
   <section class="tb-form-panel stroked no-padding-bottom">
     <div fxLayout="column" fxLayout.gt-sm="row"  fxLayoutGap.lt-md="16px" fxLayoutAlign="space-between">
       <div class="tb-form-panel-title">{{ 'tb.rulenode.presence-monitoring-strategy' | translate }}</div>
-      <tb-toggle-select class="fetch-to-data-toggle" formControlName="presenceMonitoringStrategyOnEachMessage" appearance="fill" >
+      <tb-toggle-select class="fetch-to-data-toggle" formControlName="reportPresenceStatusOnEachMessage" appearance="fill" >
         <tb-toggle-option *ngFor="let strategy of presenceMonitoringStrategyKeys" [value]="presenceMonitoringStrategies.get(strategy).value">
           {{ presenceMonitoringStrategies.get(strategy).name | translate }}
         </tb-toggle-option>
       </tb-toggle-select>
     </div>
-    <div class="tb-form-hint tb-primary-fill"> {{ geoActionConfigForm.get('presenceMonitoringStrategyOnEachMessage').value === false ?
+    <div class="tb-form-hint tb-primary-fill"> {{ geoActionConfigForm.get('reportPresenceStatusOnEachMessage').value === false ?
         ('tb.rulenode.presence-monitoring-strategy-on-first-message-hint' | translate) :
         ('tb.rulenode.presence-monitoring-strategy-on-each-message-hint' | translate) }}
     </div>
     <section fxLayout="column">
-      <div *ngIf="geoActionConfigForm.get('presenceMonitoringStrategyOnEachMessage').value === false">
+      <div *ngIf="geoActionConfigForm.get('reportPresenceStatusOnEachMessage').value === false">
         <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="8px">
           <mat-form-field fxFlex class="mat-block">
             <mat-label translate>tb.rulenode.min-inside-duration</mat-label>

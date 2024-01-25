@@ -47,7 +47,7 @@ export class GpsGeoActionConfigComponent extends RuleNodeConfigurationComponent 
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.geoActionConfigForm = this.fb.group({
-      presenceMonitoringStrategyOnEachMessage: [configuration ? configuration.presenceMonitoringStrategyOnEachMessage : false,
+      reportPresenceStatusOnEachMessage: [configuration ? configuration.reportPresenceStatusOnEachMessage : true,
         [Validators.required]],
       latitudeKeyName: [configuration ? configuration.latitudeKeyName : null, [Validators.required]],
       longitudeKeyName: [configuration ? configuration.longitudeKeyName : null, [Validators.required]],

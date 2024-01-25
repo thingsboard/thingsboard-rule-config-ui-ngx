@@ -825,17 +825,17 @@ export interface PresenceMonitoringStrategyData {
 }
 export const PresenceMonitoringStrategiesData = new Map<PresenceMonitoringStrategy, PresenceMonitoringStrategyData>([
   [
-    PresenceMonitoringStrategy.ON_FIRST_MESSAGE,
-    {
-      value: false,
-      name: 'tb.rulenode.presence-monitoring-strategy-on-first-message'
-    }
-  ],
-  [
     PresenceMonitoringStrategy.ON_EACH_MESSAGE,
     {
       value: true,
       name: 'tb.rulenode.presence-monitoring-strategy-on-each-message'
+    }
+  ],
+  [
+    PresenceMonitoringStrategy.ON_FIRST_MESSAGE,
+    {
+      value: false,
+      name: 'tb.rulenode.presence-monitoring-strategy-on-first-message'
     }
   ]
 ]);
