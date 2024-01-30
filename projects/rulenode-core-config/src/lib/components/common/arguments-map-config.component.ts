@@ -1,4 +1,4 @@
-import { Component, forwardRef, Injector, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
 import {
   ControlValueAccessor,
   FormArray,
@@ -15,7 +15,6 @@ import { PageComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { AppState } from '@core/public-api';
 import { Subscription } from 'rxjs';
-import { TranslateService } from '@ngx-translate/core';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import {
   ArgumentName,
@@ -83,17 +82,11 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
   private valueChangeSubscription: Subscription[] = [];
 
   constructor(protected store: Store<AppState>,
-              public translate: TranslateService,
-              public injector: Injector,
               private fb: FormBuilder) {
     super(store);
   }
 
   ngOnInit(): void {
-    this.ngControl = this.injector.get(NgControl);
-    if (this.ngControl != null) {
-      this.ngControl.valueAccessor = this;
-    }
     this.argumentsFormGroup = this.fb.group({
       arguments: this.fb.array([])
     });
@@ -106,14 +99,14 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
   }
 
   public onDrop(event: CdkDragDrop<string[]>) {
-    const columnsFormArray = this.argumentsFormArray();
+    const columnsFormArray = this.argumentsFormArray;
     const columnForm = columnsFormArray.at(event.previousIndex);
     columnsFormArray.removeAt(event.previousIndex);
     columnsFormArray.insert(event.currentIndex, columnForm);
     this.updateArgumentNames();
   }
 
-  argumentsFormArray(): FormArray {
+  get argumentsFormArray(): FormArray {
     return this.argumentsFormGroup.get('arguments') as FormArray;
   }
 
@@ -130,7 +123,7 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
       this.argumentsFormGroup.disable({emitEvent: false});
     } else {
       this.argumentsFormGroup.enable({emitEvent: false});
-      (this.argumentsFormGroup.get('arguments') as FormArray).controls
+      this.argumentsFormArray.controls
         .forEach((control: FormGroup) => this.updateArgumentControlValidators(control));
     }
   }
@@ -154,12 +147,12 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
 
 
   public removeArgument(index: number) {
-    (this.argumentsFormGroup.get('arguments') as FormArray).removeAt(index);
+    this.argumentsFormArray.removeAt(index);
     this.updateArgumentNames();
   }
 
   public addArgument(emitEvent = true) {
-    const argumentsFormArray = this.argumentsFormGroup.get('arguments') as FormArray;
+    const argumentsFormArray = this.argumentsFormArray;
     const argumentControl = this.createArgumentControl(null, argumentsFormArray.length);
     argumentsFormArray.push(argumentControl, {emitEvent});
   }
@@ -181,10 +174,10 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
     }
     if (this.argumentsFormGroup) {
       this.argumentsFormGroup.get('arguments').setValidators([Validators.minLength(this.minArgs), Validators.maxLength(this.maxArgs)]);
-      if (this.argumentsFormGroup.get('arguments').value.length > this.maxArgs) {
-        (this.argumentsFormGroup.get('arguments') as FormArray).controls.length = this.maxArgs;
+      while (this.argumentsFormArray.length > this.maxArgs) {
+        this.removeArgument(this.maxArgs - 1);
       }
-      while (this.argumentsFormGroup.get('arguments').value.length < this.minArgs) {
+      while (this.argumentsFormArray.length < this.minArgs) {
         this.addArgument(emitEvent);
       }
       this.argumentsFormGroup.get('arguments').updateValueAndValidity({emitEvent: false});
@@ -223,14 +216,13 @@ export class ArgumentsMapConfigComponent extends PageComponent implements Contro
   }
 
   private updateArgumentNames() {
-    const argumentsFormArray = this.argumentsFormGroup.get('arguments') as FormArray;
-    argumentsFormArray.controls.forEach((argumentControl, argumentIndex) => {
+    this.argumentsFormArray.controls.forEach((argumentControl, argumentIndex) => {
       argumentControl.get('name').setValue(ArgumentName[argumentIndex]);
     });
   }
 
   private updateModel() {
-    const argumentsForm = this.argumentsFormGroup.get('arguments').value;
+    const argumentsForm = this.argumentsFormArray.value;
     if (!argumentsForm.length || !this.argumentsFormGroup.valid) {
       this.propagateChange(null);
     } else {

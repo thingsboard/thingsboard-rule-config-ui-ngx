@@ -27,11 +27,6 @@
     </tb-entity-select>
   </div>
 
-  <tb-queue-autocomplete
-    [queueType]="serviceType"
-    formControlName="queueName">
-  </tb-queue-autocomplete>
-
   <tb-script-lang formControlName="scriptLang" *ngIf="tbelEnabled"></tb-script-lang>
   <tb-js-func *ngIf="generatorConfigForm.get('scriptLang').value === scriptLanguage.JS"
               #jsFuncComponent

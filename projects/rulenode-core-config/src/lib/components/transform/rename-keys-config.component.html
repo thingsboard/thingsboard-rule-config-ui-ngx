@@ -1,21 +1,23 @@
-<section [formGroup]="renameKeysConfigForm">
-  <div class="mat-caption" style="margin-bottom: 8px">{{ 'tb.rulenode.rename-keys-in' | translate }}</div>
-  <mat-radio-group formControlName="fromMetadata" fxLayout="row" fxLayoutGap="16px" style="margin-bottom: 16px;">
-    <mat-radio-button [value]="false" color="primary" >
-      <span>{{'tb.rulenode.data' | translate}}</span>
-    </mat-radio-button>
-    <mat-radio-button [value]="true" color="primary">
-      <span>{{'tb.rulenode.metadata' | translate}}</span>
-    </mat-radio-button>
-  </mat-radio-group>
-  <tb-kv-map-config-old
+<section [formGroup]="renameKeysConfigForm" class="tb-form-panel stroked">
+  <div class="tb-form-panel-title" translate>tb.rulenode.rename-keys-in</div>
+  <div class="fx-centered">
+    <div class="fetch-to-data-toggle">
+      <tb-toggle-select class="fetch-to-data-toggle" formControlName="renameIn" appearance="fill">
+        <tb-toggle-option *ngFor="let data of renameIn" [value]="data.value">
+          {{ data.name }}
+        </tb-toggle-option>
+      </tb-toggle-select>
+    </div>
+  </div>
+  <tb-kv-map-config
     required
+    labelText="{{ translation.get(renameKeysConfigForm.get('renameIn').value) | translate }} {{'tb.rulenode.keys-mapping' | translate}}"
     formControlName="renameKeysMapping"
-    uniqueKeyValuePairValidator = "true"
-    requiredText="tb.rulenode.attr-mapping-required"
-    keyText="tb.rulenode.key-name"
-    keyRequiredText="tb.rulenode.key-name-required"
-    valText="tb.rulenode.new-key-name"
-    valRequiredText="tb.rulenode.new-key-name-required">
-  </tb-kv-map-config-old>
+    uniqueKeyValuePairValidator
+    requiredText="{{'tb.rulenode.attr-mapping-required' | translate}}"
+    keyText="{{'tb.rulenode.current-key-name' | translate}}"
+    keyRequiredText="{{'tb.rulenode.key-name-required' | translate}}"
+    valText="{{'tb.rulenode.new-key-name' | translate}}"
+    valRequiredText="{{'tb.rulenode.new-key-name-required' | translate}}">
+  </tb-kv-map-config>
 </section>

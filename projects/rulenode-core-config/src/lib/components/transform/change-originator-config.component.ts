@@ -2,30 +2,34 @@ import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import { EntityType, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { OriginatorSource, originatorSourceTranslations } from '../../rulenode-core-config.models';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  OriginatorSource,
+  originatorSourceDescTranslations,
+  originatorSourceTranslations
+} from '../../rulenode-core-config.models';
 
 @Component({
   selector: 'tb-transformation-node-change-originator-config',
-  templateUrl: './change-originator-config.component.html',
-  styleUrls: []
+  templateUrl: './change-originator-config.component.html'
 })
 export class ChangeOriginatorConfigComponent extends RuleNodeConfigurationComponent {
 
   originatorSource = OriginatorSource;
-  originatorSources = Object.keys(OriginatorSource);
+  originatorSources = Object.keys(OriginatorSource) as OriginatorSource[];
   originatorSourceTranslationMap = originatorSourceTranslations;
+  originatorSourceDescTranslationMap = originatorSourceDescTranslations;
 
-  changeOriginatorConfigForm: UntypedFormGroup;
+  changeOriginatorConfigForm: FormGroup;
 
   allowedEntityTypes = [EntityType.DEVICE, EntityType.ASSET, EntityType.ENTITY_VIEW, EntityType.USER, EntityType.EDGE];
 
   constructor(protected store: Store<AppState>,
-              private fb: UntypedFormBuilder) {
+              private fb: FormBuilder) {
     super(store);
   }
 
-  protected configForm(): UntypedFormGroup {
+  protected configForm(): FormGroup {
     return this.changeOriginatorConfigForm;
   }
 

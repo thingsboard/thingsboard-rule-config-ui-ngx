@@ -4,7 +4,7 @@
       <mat-label translate>relation.direction</mat-label>
       <mat-select required formControlName="direction">
         <mat-option *ngFor="let type of directionTypes" [value]="type">
-          {{ directionTypeTranslations.get(type) | translate }}
+          {{ directionTypeTranslations.get(type) | translate }} <span translate>tb.rulenode.relations-query-config-direction-suffix</span>
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -36,8 +36,8 @@
     required
     [label]="'tb.rulenode.device-profiles' | translate"
     [entityType]="entityType.DEVICE"
-    [emptyInputPlaceholder]="'tb.rulenode.add-entity-type' | translate"
-    [filledInputPlaceholder]="'tb.rulenode.add-entity-type' | translate"
+    [emptyInputPlaceholder]="'tb.rulenode.add-device-profile' | translate"
+    [filledInputPlaceholder]="'tb.rulenode.add-device-profile' | translate"
     formControlName="deviceTypes">
     <mat-icon matSuffix class="mat-primary margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
               matTooltip="{{ 'tb.rulenode.chip-help' | translate: { inputName: 'tb.rulenode.device-profile' | translate } }}">help</mat-icon>

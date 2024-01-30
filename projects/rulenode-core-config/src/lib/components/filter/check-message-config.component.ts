@@ -24,11 +24,20 @@ export class CheckMessageConfigComponent extends RuleNodeConfigurationComponent 
 
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
     return {
-      messageNames: isDefinedAndNotNull(configuration?.messageNames) ? configuration.messageNames : null,
-      metadataNames: isDefinedAndNotNull(configuration?.metadataNames) ? configuration.metadataNames : null,
+      messageNames: isDefinedAndNotNull(configuration?.messageNames) ? configuration.messageNames : [],
+      metadataNames: isDefinedAndNotNull(configuration?.metadataNames) ? configuration.metadataNames : [],
       checkAllKeys: isDefinedAndNotNull(configuration?.checkAllKeys) ? configuration.checkAllKeys : false
     };
   }
+
+  protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    return {
+      messageNames: isDefinedAndNotNull(configuration?.messageNames) ? configuration.messageNames : [],
+      metadataNames: isDefinedAndNotNull(configuration?.metadataNames) ? configuration.metadataNames : [],
+      checkAllKeys: configuration.checkAllKeys
+    };
+  }
+
 
   private atLeastOne(validator: ValidatorFn, controls: string[] = null) {
     return (group: FormGroup): ValidationErrors | null => {

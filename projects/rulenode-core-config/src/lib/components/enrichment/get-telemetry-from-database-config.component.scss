@@ -1,3 +1,4 @@
+@import '../../../scss/constants.scss';
 :host {
 
   .see-example {
@@ -40,9 +41,12 @@
     align-items: center;
 
     .fetch-mod-toggle {
-      max-width: 630px;
       width: 100%;
     }
+  }
+
+  .hint-container {
+    width: 100%;
   }
 }
 

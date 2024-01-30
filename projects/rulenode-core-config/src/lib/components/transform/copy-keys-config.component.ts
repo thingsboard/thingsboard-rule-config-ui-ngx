@@ -1,62 +1,59 @@
 import { Component } from '@angular/core';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { AppState } from '@core/public-api';
-import { MatChipInputEvent } from '@angular/material/chips';
-import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
+import { AppState, isDefinedAndNotNull } from '@core/public-api';
+import { FetchFromToTranslation, FetchTo } from '../../rulenode-core-config.models';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'tb-transformation-node-copy-keys-config',
   templateUrl: './copy-keys-config.component.html',
-  styleUrls: []
+  styleUrls: ['../../../../style.scss']
 })
 
 export class CopyKeysConfigComponent extends RuleNodeConfigurationComponent{
-  copyKeysConfigForm: UntypedFormGroup;
-  separatorKeysCodes = [ENTER, COMMA, SEMICOLON];
+  copyKeysConfigForm: FormGroup;
+  copyFrom = [];
+  translation = FetchFromToTranslation;
 
   constructor(protected store: Store<AppState>,
-              private fb: UntypedFormBuilder) {
+              private fb: FormBuilder,
+              private translate: TranslateService) {
     super(store);
+    for (const key of this.translation.keys()) {
+      this.copyFrom.push({
+        value: key,
+        name: this.translate.instant(this.translation.get(key))
+      });
+    }
   }
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.copyKeysConfigForm = this.fb.group({
-      fromMetadata: [configuration ? configuration.fromMetadata : null, [Validators.required]],
+      copyFrom: [configuration.copyFrom , [Validators.required]],
       keys: [configuration ? configuration.keys : null, [Validators.required]]
     });
   }
 
-  protected configForm(): UntypedFormGroup {
+  protected configForm(): FormGroup {
     return this.copyKeysConfigForm;
   }
 
-  removeKey(key: string): void {
-    const keys: string[] = this.copyKeysConfigForm.get('keys').value;
-    const index = keys.indexOf(key);
-    if (index >= 0) {
-      keys.splice(index, 1);
-      this.copyKeysConfigForm.get('keys').patchValue(keys, {emitEvent: true});
-    }
-  }
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    let copyFrom: FetchTo;
 
-  addKey(event: MatChipInputEvent): void {
-    const input = event.input;
-    let value = event.value;
-    if ((value || '').trim()) {
-      value = value.trim();
-      let keys: string[] = this.copyKeysConfigForm.get('keys').value;
-      if (!keys || keys.indexOf(value) === -1) {
-        if (!keys) {
-          keys = [];
-        }
-        keys.push(value);
-        this.copyKeysConfigForm.get('keys').patchValue(keys, {emitEvent: true});
-      }
+    if (isDefinedAndNotNull(configuration?.fromMetadata)) {
+      copyFrom = configuration.copyFrom ? FetchTo.METADATA : FetchTo.DATA;
+    } else if (isDefinedAndNotNull(configuration?.copyFrom)) {
+      copyFrom = configuration.copyFrom;
+    } else {
+      copyFrom = FetchTo.DATA;
     }
-    if (input) {
-      input.value = '';
-    }
+
+    return {
+      keys: isDefinedAndNotNull(configuration?.keys) ? configuration.keys : null,
+      copyFrom
+    };
   }
 }

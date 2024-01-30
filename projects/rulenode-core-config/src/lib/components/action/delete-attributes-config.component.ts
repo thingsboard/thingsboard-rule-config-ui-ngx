@@ -13,7 +13,7 @@ import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes';
 @Component({
   selector: 'tb-action-node-delete-attributes-config',
   templateUrl: './delete-attributes-config.component.html',
-  styleUrls: []
+  styleUrls: ['../../../../style.scss']
 })
 export class DeleteAttributesConfigComponent extends RuleNodeConfigurationComponent {
   @ViewChild('attributeChipList') attributeChipList: MatChipGrid;

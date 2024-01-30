@@ -1,8 +1,18 @@
 <section [formGroup]="kvListFormGroup" class="tb-form-panel stroked">
   <div class="tb-form-row no-padding no-border space-between">
-    <div class="tb-form-panel-title tb-required">{{ labelText }}</div>
-    <div class="tb-form-panel-hint tb-error" translate [hidden]="!errorTrigger()">
+    <div class="tb-form-panel-title">{{ labelText }}</div>
+    <div class="tb-form-panel-hint tb-error" translate *ngIf="kvListFormGroup.hasError('kvMapRequired')">
+      {{ requiredText }}
+    </div>
+    <div class="tb-form-panel-hint tb-error" translate *ngIf="kvListFormGroup.hasError('required')">
       tb.rulenode.map-fields-required
+    </div>
+    <div class="tb-form-panel-hint tb-error" translate *ngIf="kvListFormGroup.hasError('uniqueKeyValuePair')">
+      {{ 'tb.key-val.unique-key-value-pair-error' | translate:
+            {
+              valText: valText,
+              keyText: keyText
+            } }}
     </div>
   </div>
   <div class="tb-form-panel no-border no-padding">
@@ -22,11 +32,11 @@
             <input [placeholder]="valText+'*'" [formControl]="keyValControl.get('value')" matInput/>
           </mat-form-field>
           <div class="tb-form-table-row-cell-buttons">
-            <button [ngClass]="{'tb-hidden': keyValsFormArray().controls.length === 1}"
+            <button [class.tb-hidden]="keyValsFormArray().controls.length === 1"
                     type="button"
                     mat-icon-button
                     (click)="removeKeyVal($index)"
-                    [disabled]="isLoading$ | async"
+                    [disabled]="disabled"
                     matTooltip="{{ 'tb.key-val.remove-mapping-entry' | translate }}"
                     matTooltipPosition="above">
               <mat-icon>delete</mat-icon>
@@ -41,5 +51,5 @@
       {{ 'tb.key-val.add-mapping-entry' | translate }}
     </button>
   </div>
-  <tb-example-hint [hintText]="hintText" [popupHelpLink]="popupHelpLink"></tb-example-hint>
+  <tb-example-hint [hintText]="hintText" [popupHelpLink]="popupHelpLink" *ngIf="popupHelpLink || hintText"></tb-example-hint>
 </section>

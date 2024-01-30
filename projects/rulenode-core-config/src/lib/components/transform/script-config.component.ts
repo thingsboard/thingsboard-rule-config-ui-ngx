@@ -8,7 +8,7 @@ import {
   ScriptLanguage
 } from '@shared/public-api';
 import { Store } from '@ngrx/store';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -21,7 +21,7 @@ export class TransformScriptConfigComponent extends RuleNodeConfigurationCompone
   @ViewChild('jsFuncComponent', {static: false}) jsFuncComponent: JsFuncComponent;
   @ViewChild('tbelFuncComponent', {static: false}) tbelFuncComponent: JsFuncComponent;
 
-  scriptConfigForm: UntypedFormGroup;
+  scriptConfigForm: FormGroup;
 
   tbelEnabled = getCurrentAuthState(this.store).tbelEnabled;
 
@@ -34,13 +34,13 @@ export class TransformScriptConfigComponent extends RuleNodeConfigurationCompone
   readonly testScriptLabel = 'tb.rulenode.test-transformer-function';
 
   constructor(protected store: Store<AppState>,
-              private fb: UntypedFormBuilder,
+              private fb: FormBuilder,
               private nodeScriptTestService: NodeScriptTestService,
               private translate: TranslateService) {
     super(store);
   }
 
-  protected configForm(): UntypedFormGroup {
+  protected configForm(): FormGroup {
     return this.scriptConfigForm;
   }
 
@@ -61,7 +61,9 @@ export class TransformScriptConfigComponent extends RuleNodeConfigurationCompone
     if (scriptLang === ScriptLanguage.TBEL && !this.tbelEnabled) {
       scriptLang = ScriptLanguage.JS;
       this.scriptConfigForm.get('scriptLang').patchValue(scriptLang, {emitEvent: false});
-      setTimeout(() => {this.scriptConfigForm.updateValueAndValidity({emitEvent: true});});
+      setTimeout(() => {
+        this.scriptConfigForm.updateValueAndValidity({emitEvent: true});
+      });
     }
     this.scriptConfigForm.get('jsScript').setValidators(scriptLang === ScriptLanguage.JS ? [Validators.required] : []);
     this.scriptConfigForm.get('jsScript').updateValueAndValidity({emitEvent});
