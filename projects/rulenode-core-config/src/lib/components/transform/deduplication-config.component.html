@@ -8,7 +8,7 @@
     <mat-error *ngIf="deduplicationConfigForm.get('interval').hasError('min')">
       {{'tb.rulenode.interval-min-error' | translate}}
     </mat-error>
-    <mat-icon matSuffix [className]="'help-icon margin-8 cursor-pointer'" aria-hidden="false" aria-label="help-icon"
+    <mat-icon matSuffix class="help-icon margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
               color="primary"
               matTooltip="{{ 'tb.rulenode.interval-hint' | translate }}">help</mat-icon>
   </mat-form-field>
@@ -56,7 +56,7 @@
             <mat-error *ngIf="deduplicationConfigForm.get('maxPendingMsgs').hasError('min')">
               {{'tb.rulenode.max-pending-msgs-min-error' | translate}}
             </mat-error>
-            <mat-icon matSuffix [className]="'mat-primary help-icon margin-8 cursor-pointer'" aria-hidden="false" aria-label="help-icon"
+            <mat-icon matSuffix class="help-icon margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
                       color="primary"
                       matTooltip="{{ 'tb.rulenode.max-pending-msgs-hint' | translate }}">help</mat-icon>
           </mat-form-field>
@@ -72,7 +72,7 @@
             <mat-error *ngIf="deduplicationConfigForm.get('maxRetries').hasError('min')">
               {{'tb.rulenode.max-retries-min-error' | translate}}
             </mat-error>
-            <mat-icon matSuffix [className]="'mat-primary help-icon margin-8 cursor-pointer'" aria-hidden="false" aria-label="help-icon"
+            <mat-icon matSuffix class="help-icon margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
                       color="primary"
                       matTooltip="{{ 'tb.rulenode.max-retries-hint' | translate }}">help</mat-icon>
           </mat-form-field>

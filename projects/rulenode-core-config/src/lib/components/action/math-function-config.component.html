@@ -54,7 +54,7 @@
         <mat-form-field fxFlex floatLabel="always" class="mat-block">
           <mat-label translate>tb.rulenode.key-field-input</mat-label>
           <input matInput formControlName="key" required/>
-          <mat-icon [className]="'help-icon margin-8 cursor-pointer'" aria-hidden="false" aria-label="help-icon" matSuffix
+          <mat-icon class="help-icon margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon" matSuffix
                     color="primary"
                     matTooltip="{{ 'tb.rulenode.math-templatization-tooltip' | translate }}">help</mat-icon>
           <mat-error *ngIf="mathFunctionConfigForm.get('result.key').hasError('required')" translate>
