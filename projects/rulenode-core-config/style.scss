@@ -15,6 +15,16 @@
     font-size: 16px;
     color: #000000de;
   }
+
+  .help-icon {
+    color: #000000;
+    opacity: .38;
+
+    &:hover {
+      color: $tb-primary-color;
+      opacity: unset;
+    }
+  }
 }
 
 .same-width-component-row {
@@ -27,15 +37,5 @@
 
   & > * {
     flex: 1;
-  }
-}
-
-::ng-deep .tb-default tb-rule-node-config mat-form-field .mdc-text-field .mat-mdc-form-field-icon-suffix .mat-icon.mat-primary {
-  color: #000000;
-  opacity: .38;
-
-  &:hover {
-    color: $tb-primary-color;
-    opacity: unset;
   }
 }

@@ -45,7 +45,8 @@
       </div>
     </mat-option>
   </mat-autocomplete>
-  <mat-icon class="mat-primary cursor-pointer" aria-hidden="false" aria-label="help-icon" matSuffix
+  <mat-icon [className]="'help-icon margin-8 cursor-pointer'" aria-hidden="false" aria-label="help-icon" matSuffix
+            color="primary"
             matTooltip="{{ 'tb.rulenode.chip-help' | translate: { inputName: 'tb.rulenode.message-type' | translate } }}">help</mat-icon>
   <mat-error *ngIf="chipList.errorState">
     {{ 'tb.rulenode.select-message-types-required' | translate }}

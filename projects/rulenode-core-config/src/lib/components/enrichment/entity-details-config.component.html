@@ -5,7 +5,7 @@
                         [placeholder]="'tb.rulenode.add-detail' | translate"
                         [requiredText]="'tb.rulenode.entity-details-list-empty' | translate"
                         formControlName="detailsList">
-    <mat-icon matSuffix class="margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
+    <mat-icon matSuffix [className]="'help-icon margin-8 cursor-pointer'" aria-hidden="false" aria-label="help-icon"
               color="primary"
               matTooltip="{{ 'tb.rulenode.chip-help' | translate: { inputName: 'tb.rulenode.detail' | translate } }}">
       help

@@ -9,14 +9,14 @@
                         [label]="'tb.rulenode.data-keys' | translate"
                         [placeholder]="'tb.rulenode.add-message-field' | translate"
                         formControlName="messageNames">
-    <mat-icon matSuffix color="primary" class="margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
+    <mat-icon matSuffix color="primary" [className]="'help-icon margin-8 cursor-pointer'" aria-hidden="false" aria-label="help-icon"
               matTooltip="{{ 'tb.rulenode.chip-help' | translate: { inputName: 'tb.rulenode.field-name' | translate } }}">help</mat-icon>
   </tb-string-items-list>
   <tb-string-items-list editable subscriptSizing="dynamic"
                         [label]="'tb.rulenode.metadata-keys' | translate"
                         [placeholder]="'tb.rulenode.add-metadata-field' | translate"
                         formControlName="metadataNames">
-    <mat-icon matSuffix color="primary" class="margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
+    <mat-icon matSuffix color="primary" [className]="'help-icon margin-8 cursor-pointer'" aria-hidden="false" aria-label="help-icon"
               matTooltip="{{ 'tb.rulenode.chip-help' | translate: { inputName: 'tb.rulenode.field-name' | translate } }}">help</mat-icon>
   </tb-string-items-list>
   <div tb-hint-tooltip-icon="{{ 'tb.rulenode.check-all-keys-tooltip' | translate }}"
