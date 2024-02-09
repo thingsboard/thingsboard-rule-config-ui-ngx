@@ -22,7 +22,8 @@ export class OriginatorTypeConfigComponent extends RuleNodeConfigurationComponen
     EntityType.USER,
     EntityType.DASHBOARD,
     EntityType.RULE_CHAIN,
-    EntityType.RULE_NODE
+    EntityType.RULE_NODE,
+    EntityType.EDGE
   ];
 
   constructor(protected store: Store<AppState>,
