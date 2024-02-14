@@ -814,3 +814,28 @@ export const AttributeScopeMap  = new Map<AttributeScope, string>([
   [AttributeScope.SERVER_SCOPE, 'tb.rulenode.server-scope'],
   [AttributeScope.CLIENT_SCOPE, 'tb.rulenode.client-scope']
 ]);
+
+export enum PresenceMonitoringStrategy {
+  ON_FIRST_MESSAGE = 'ON_FIRST_MESSAGE',
+  ON_EACH_MESSAGE = 'ON_EACH_MESSAGE'
+}
+export interface PresenceMonitoringStrategyData {
+  value: boolean;
+  name: string;
+}
+export const PresenceMonitoringStrategiesData = new Map<PresenceMonitoringStrategy, PresenceMonitoringStrategyData>([
+  [
+    PresenceMonitoringStrategy.ON_EACH_MESSAGE,
+    {
+      value: true,
+      name: 'tb.rulenode.presence-monitoring-strategy-on-each-message'
+    }
+  ],
+  [
+    PresenceMonitoringStrategy.ON_FIRST_MESSAGE,
+    {
+      value: false,
+      name: 'tb.rulenode.presence-monitoring-strategy-on-first-message'
+    }
+  ]
+]);
