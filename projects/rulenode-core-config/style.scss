@@ -15,6 +15,17 @@
     font-size: 16px;
     color: #000000de;
   }
+
+  .help-icon {
+    color: #000000;
+    opacity: .38;
+    padding: unset;
+
+    &:hover {
+      color: $tb-primary-color;
+      opacity: unset;
+    }
+  }
 }
 
 .same-width-component-row {

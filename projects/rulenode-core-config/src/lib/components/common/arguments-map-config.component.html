@@ -47,7 +47,8 @@
                                 *ngIf="argumentControl.get('type').value && argumentControl.get('type').value !== ArgumentType.CONSTANT">
                   <mat-label translate>tb.rulenode.argument-key-field-input</mat-label>
                   <input [formControl]="argumentControl.get('key')" matInput required/>
-                  <mat-icon class="mat-primary cursor-pointer" aria-hidden="false" aria-label="help-icon" matSuffix
+                  <mat-icon class="help-icon margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon" matSuffix
+                            color="primary"
                             matTooltip="{{ 'tb.rulenode.math-templatization-tooltip' | translate }}">
                     help
                   </mat-icon>
