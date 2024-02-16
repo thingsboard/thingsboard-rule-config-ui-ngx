@@ -10,6 +10,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'advanced-settings': 'Advanced settings',
           'create-entity-if-not-exists': 'Create new entity if not exists',
           'create-entity-if-not-exists-hint': 'Create a new entity set above if it does not exist.',
+          'select-device-connectivity-event': 'Select device connectivity event',
           'entity-name-pattern': 'Name pattern',
           'entity-name-pattern-required': 'Name pattern is required',
           'entity-name-pattern-hint': 'Name pattern field support templatization. Use $[messageKey] to extract value from the message and ${metadataKey} to extract value from the metadata.',
