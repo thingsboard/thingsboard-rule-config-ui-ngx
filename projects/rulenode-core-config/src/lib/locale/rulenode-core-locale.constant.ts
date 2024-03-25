@@ -673,7 +673,10 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'originator-alarm-originator-desc': 'Use alarm originator as new originator. Only if incoming message originator is alarm entity.',
           'originator-entity-by-name-pattern-desc': 'Use entity fetched from DB as new originator. Lookup based on entity type and specified name pattern.',
           'email-from-template-hint': 'Use $[messageKey] to extract value from the message and ${metadataKey} to extract value from the metadata.',
-          'recipients-block-main-hint': 'Comma-separated address list. All input fields support templatization. Use $[messageKey] to extract value from the message and ${metadataKey} to extract value from the metadata.'
+          'recipients-block-main-hint': 'Comma-separated address list. All input fields support templatization. Use $[messageKey] to extract value from the message and ${metadataKey} to extract value from the metadata.',
+          'exclude-zero-deltas' : 'Exclude zero deltas from outbound message',
+          'exclude-zero-deltas-hint' : 'If enabled, the "{{outputValueKey}}" output key will be added to the outbound message if its value is not zero.',
+          'exclude-zero-deltas-time-difference-hint' : 'If enabled, the "{{outputValueKey}}" and "{{periodValueKey}}" output keys will be added to the outbound message only if the "{{outputValueKey}}" value is not zero.'
         },
         'key-val': {
           key: 'Key',
