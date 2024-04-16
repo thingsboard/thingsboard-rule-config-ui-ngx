@@ -42,8 +42,7 @@ export class CreateRelationConfigComponent extends RuleNodeConfigurationComponen
       relationType: [configuration ? configuration.relationType : null, [Validators.required]],
       createEntityIfNotExists: [configuration ? configuration.createEntityIfNotExists : false, []],
       removeCurrentRelations: [configuration ? configuration.removeCurrentRelations : false, []],
-      changeOriginatorToRelatedEntity: [configuration ? configuration.changeOriginatorToRelatedEntity : false, []],
-      entityCacheExpiration: [configuration ? configuration.entityCacheExpiration : null, [Validators.required, Validators.min(0)]],
+      changeOriginatorToRelatedEntity: [configuration ? configuration.changeOriginatorToRelatedEntity : false, []]
     });
   }
 

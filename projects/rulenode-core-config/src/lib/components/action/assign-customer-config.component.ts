@@ -25,8 +25,7 @@ export class AssignCustomerConfigComponent extends RuleNodeConfigurationComponen
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.assignCustomerConfigForm = this.fb.group({
       customerNamePattern: [configuration ? configuration.customerNamePattern : null, [Validators.required, Validators.pattern(/.*\S.*/)]],
-      createCustomerIfNotExists: [configuration ? configuration.createCustomerIfNotExists : false, []],
-      customerCacheExpiration: [configuration ? configuration.customerCacheExpiration : null, [Validators.required, Validators.min(0)]]
+      createCustomerIfNotExists: [configuration ? configuration.createCustomerIfNotExists : false, []]
     });
   }
 

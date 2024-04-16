@@ -39,8 +39,7 @@ export class DeleteRelationConfigComponent extends RuleNodeConfigurationComponen
       direction: [configuration ? configuration.direction : null, [Validators.required]],
       entityType: [configuration ? configuration.entityType : null, []],
       entityNamePattern: [configuration ? configuration.entityNamePattern : null, []],
-      relationType: [configuration ? configuration.relationType : null, [Validators.required]],
-      entityCacheExpiration: [configuration ? configuration.entityCacheExpiration : null, [Validators.required, Validators.min(0)]],
+      relationType: [configuration ? configuration.relationType : null, [Validators.required]]
     });
   }
 

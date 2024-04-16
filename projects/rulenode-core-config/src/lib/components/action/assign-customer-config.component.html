@@ -11,15 +11,4 @@
   <mat-checkbox fxFlex formControlName="createCustomerIfNotExists">
     {{ 'tb.rulenode.create-customer-if-not-exists' | translate }}
   </mat-checkbox>
-  <mat-form-field class="mat-block" subscriptSizing="dynamic">
-    <mat-label translate>tb.rulenode.customer-cache-expiration</mat-label>
-    <input required type="number" min="0" step="1" matInput formControlName="customerCacheExpiration">
-    <mat-error *ngIf="assignCustomerConfigForm.get('customerCacheExpiration').hasError('required')">
-      {{ 'tb.rulenode.customer-cache-expiration-required' | translate }}
-    </mat-error>
-    <mat-error *ngIf="assignCustomerConfigForm.get('customerCacheExpiration').hasError('min')">
-      {{ 'tb.rulenode.customer-cache-expiration-range' | translate }}
-    </mat-error>
-    <mat-hint translate>tb.rulenode.customer-cache-expiration-hint</mat-hint>
-  </mat-form-field>
 </section>
