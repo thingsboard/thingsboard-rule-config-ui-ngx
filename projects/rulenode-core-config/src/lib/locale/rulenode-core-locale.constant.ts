@@ -673,7 +673,9 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'originator-alarm-originator-desc': 'Use alarm originator as new originator. Only if incoming message originator is alarm entity.',
           'originator-entity-by-name-pattern-desc': 'Use entity fetched from DB as new originator. Lookup based on entity type and specified name pattern.',
           'email-from-template-hint': 'Use $[messageKey] to extract value from the message and ${metadataKey} to extract value from the metadata.',
-          'recipients-block-main-hint': 'Comma-separated address list. All input fields support templatization. Use $[messageKey] to extract value from the message and ${metadataKey} to extract value from the metadata.'
+          'recipients-block-main-hint': 'Comma-separated address list. All input fields support templatization. Use $[messageKey] to extract value from the message and ${metadataKey} to extract value from the metadata.',
+          'forward-msg-default-rule-chain': 'Forward message to the originator\'s default rule chain',
+          'forward-msg-default-rule-chain-tooltip': 'If enabled, message will be forwarded to the originator\'s default rule chain or root rule chain if originator doesn\'t support the default rule chain definition.'
         },
         'key-val': {
           key: 'Key',

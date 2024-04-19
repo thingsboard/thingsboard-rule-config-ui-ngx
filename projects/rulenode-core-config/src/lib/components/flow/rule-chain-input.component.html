@@ -1,8 +1,17 @@
 <section [formGroup]="ruleChainInputConfigForm" fxLayout="column">
-  <tb-entity-autocomplete required
-                          [excludeEntityIds]="[ruleChainId]"
-                          [entityType]="entityType.RULE_CHAIN"
-                          [entitySubtype]="ruleChainType"
-                          formControlName="ruleChainId">
-  </tb-entity-autocomplete>
+  <div class="tb-form-panel no-padding no-border">
+    <div tb-hint-tooltip-icon="{{ 'tb.rulenode.forward-msg-default-rule-chain-tooltip' | translate }}"
+         class="tb-form-row no-border">
+      <mat-slide-toggle class="mat-slide" formControlName="forwardMsgToDefaultRuleChain">
+        {{ 'tb.rulenode.forward-msg-default-rule-chain' | translate }}
+      </mat-slide-toggle>
+    </div>
+    <tb-entity-autocomplete [fxHide]="ruleChainInputConfigForm.get('forwardMsgToDefaultRuleChain').value"
+                            required
+                            [excludeEntityIds]="[ruleChainId]"
+                            [entityType]="entityType.RULE_CHAIN"
+                            [entitySubtype]="ruleChainType"
+                            formControlName="ruleChainId">
+    </tb-entity-autocomplete>
+  </div>
 </section>

@@ -3,6 +3,7 @@ import { AppState } from '@core/public-api';
 import { EntityType, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { PerimeterType } from '../../rulenode-core-config.models';
 
 @Component({
   selector: 'tb-flow-node-rule-chain-input-config',
@@ -26,8 +27,23 @@ export class RuleChainInputComponent extends RuleNodeConfigurationComponent {
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.ruleChainInputConfigForm = this.fb.group({
-      ruleChainId: [configuration ? configuration.ruleChainId : null, [Validators.required]]
+      forwardMsgToDefaultRuleChain: [configuration ? configuration?.forwardMsgToDefaultRuleChain : false, []],
+      ruleChainId: [configuration ? configuration.ruleChainId : null, []]
     });
+  }
+
+  protected validatorTriggers(): string[] {
+    return ['forwardMsgToDefaultRuleChain'];
+  }
+
+  protected updateValidators(emitEvent: boolean) {
+    const forwardMsgToDefaultRuleChain: boolean = this.ruleChainInputConfigForm.get('forwardMsgToDefaultRuleChain').value;
+    if (forwardMsgToDefaultRuleChain) {
+      this.ruleChainInputConfigForm.get('ruleChainId').setValidators([]);
+    } else {
+      this.ruleChainInputConfigForm.get('ruleChainId').setValidators([Validators.required]);
+    }
+    this.ruleChainInputConfigForm.get('ruleChainId').updateValueAndValidity({emitEvent});
   }
 
 }
