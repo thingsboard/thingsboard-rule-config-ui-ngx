@@ -3,7 +3,6 @@ import { AppState } from '@core/public-api';
 import { EntityType, RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { PerimeterType } from '../../rulenode-core-config.models';
 
 @Component({
   selector: 'tb-flow-node-rule-chain-input-config',
