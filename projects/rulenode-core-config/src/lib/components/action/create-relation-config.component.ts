@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import {
   EntitySearchDirection,
-  entitySearchDirectionTranslations,
   EntityType,
   RuleNodeConfiguration,
   RuleNodeConfigurationComponent
@@ -18,9 +17,26 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 export class CreateRelationConfigComponent extends RuleNodeConfigurationComponent {
 
   directionTypes = Object.keys(EntitySearchDirection);
-  directionTypeTranslations = entitySearchDirectionTranslations;
+  directionTypeTranslations  = new Map<EntitySearchDirection, string>(
+    [
+      [EntitySearchDirection.FROM, 'tb.rulenode.search-direction-from'],
+      [EntitySearchDirection.TO, 'tb.rulenode.search-direction-to'],
+    ]
+  );
 
   entityType = EntityType;
+
+  entityTypeNamePatternTranslation = new Map<EntityType, string>(
+    [
+      [EntityType.DEVICE, 'tb.rulenode.device-name-pattern'],
+      [EntityType.ASSET, 'tb.rulenode.asset-name-pattern'],
+      [EntityType.ENTITY_VIEW, 'tb.rulenode.entity-view-name-pattern'],
+      [EntityType.CUSTOMER, 'tb.rulenode.customer-title-pattern'],
+      [EntityType.USER, 'tb.rulenode.user-name-pattern'],
+      [EntityType.DASHBOARD, 'tb.rulenode.dashboard-name-pattern'],
+      [EntityType.EDGE, 'tb.rulenode.edge-name-pattern']
+    ]
+  );
 
   createRelationConfigForm: UntypedFormGroup;
 
@@ -42,13 +58,12 @@ export class CreateRelationConfigComponent extends RuleNodeConfigurationComponen
       relationType: [configuration ? configuration.relationType : null, [Validators.required]],
       createEntityIfNotExists: [configuration ? configuration.createEntityIfNotExists : false, []],
       removeCurrentRelations: [configuration ? configuration.removeCurrentRelations : false, []],
-      changeOriginatorToRelatedEntity: [configuration ? configuration.changeOriginatorToRelatedEntity : false, []],
-      entityCacheExpiration: [configuration ? configuration.entityCacheExpiration : null, [Validators.required, Validators.min(0)]],
+      changeOriginatorToRelatedEntity: [configuration ? configuration.changeOriginatorToRelatedEntity : false, []]
     });
   }
 
   protected validatorTriggers(): string[] {
-    return ['entityType'];
+    return ['entityType', 'createEntityIfNotExists'];
   }
 
   protected updateValidators(emitEvent: boolean) {
@@ -59,7 +74,11 @@ export class CreateRelationConfigComponent extends RuleNodeConfigurationComponen
       this.createRelationConfigForm.get('entityNamePattern').setValidators([]);
     }
     if (entityType && (entityType === EntityType.DEVICE || entityType === EntityType.ASSET)) {
-      this.createRelationConfigForm.get('entityTypePattern').setValidators([Validators.required, Validators.pattern(/.*\S.*/)]);
+      const validators = [Validators.pattern(/.*\S.*/)]
+      if (this.createRelationConfigForm.get('createEntityIfNotExists').value) {
+        validators.push(Validators.required);
+      }
+      this.createRelationConfigForm.get('entityTypePattern').setValidators(validators);
     } else {
       this.createRelationConfigForm.get('entityTypePattern').setValidators([]);
     }

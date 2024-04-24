@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AppState } from '@core/public-api';
 import {
   EntitySearchDirection,
-  entitySearchDirectionTranslations,
   EntityType,
   RuleNodeConfiguration,
   RuleNodeConfigurationComponent
@@ -18,7 +17,25 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 export class DeleteRelationConfigComponent extends RuleNodeConfigurationComponent {
 
   directionTypes = Object.keys(EntitySearchDirection);
-  directionTypeTranslations = entitySearchDirectionTranslations;
+
+  directionTypeTranslations  = new Map<EntitySearchDirection, string>(
+    [
+      [EntitySearchDirection.FROM, 'tb.rulenode.del-relation-direction-from'],
+      [EntitySearchDirection.TO, 'tb.rulenode.del-relation-direction-to'],
+    ]
+  );
+
+  entityTypeNamePatternTranslation = new Map<EntityType, string>(
+    [
+      [EntityType.DEVICE, 'tb.rulenode.device-name-pattern'],
+      [EntityType.ASSET, 'tb.rulenode.asset-name-pattern'],
+      [EntityType.ENTITY_VIEW, 'tb.rulenode.entity-view-name-pattern'],
+      [EntityType.CUSTOMER, 'tb.rulenode.customer-title-pattern'],
+      [EntityType.USER, 'tb.rulenode.user-name-pattern'],
+      [EntityType.DASHBOARD, 'tb.rulenode.dashboard-name-pattern'],
+      [EntityType.EDGE, 'tb.rulenode.edge-name-pattern']
+    ]
+  );
 
   entityType = EntityType;
 
@@ -39,8 +56,7 @@ export class DeleteRelationConfigComponent extends RuleNodeConfigurationComponen
       direction: [configuration ? configuration.direction : null, [Validators.required]],
       entityType: [configuration ? configuration.entityType : null, []],
       entityNamePattern: [configuration ? configuration.entityNamePattern : null, []],
-      relationType: [configuration ? configuration.relationType : null, [Validators.required]],
-      entityCacheExpiration: [configuration ? configuration.entityCacheExpiration : null, [Validators.required, Validators.min(0)]],
+      relationType: [configuration ? configuration.relationType : null, [Validators.required]]
     });
   }
 
@@ -56,7 +72,7 @@ export class DeleteRelationConfigComponent extends RuleNodeConfigurationComponen
     } else {
       this.deleteRelationConfigForm.get('entityType').setValidators([]);
     }
-    if (deleteForSingleEntity && entityType) {
+    if (deleteForSingleEntity && entityType && entityType !== EntityType.TENANT) {
       this.deleteRelationConfigForm.get('entityNamePattern').setValidators([Validators.required, Validators.pattern(/.*\S.*/)]);
     } else {
       this.deleteRelationConfigForm.get('entityNamePattern').setValidators([]);
