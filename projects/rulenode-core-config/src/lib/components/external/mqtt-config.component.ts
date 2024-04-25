@@ -35,6 +35,7 @@ export class MqttConfigComponent extends RuleNodeConfigurationComponent {
         value: configuration ? configuration.appendClientIdSuffix : false,
         disabled: !(configuration && isNotEmptyStr(configuration.clientId))
       }, []],
+      parseToPlainText: [configuration ? configuration.parseToPlainText : false, []],
       cleanSession: [configuration ? configuration.cleanSession : false, []],
       retainedMessage: [configuration ? configuration.retainedMessage : false, []],
       ssl: [configuration ? configuration.ssl : false, []],

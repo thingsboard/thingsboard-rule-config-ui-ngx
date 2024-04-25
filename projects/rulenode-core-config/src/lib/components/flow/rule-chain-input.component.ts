@@ -26,8 +26,23 @@ export class RuleChainInputComponent extends RuleNodeConfigurationComponent {
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.ruleChainInputConfigForm = this.fb.group({
-      ruleChainId: [configuration ? configuration.ruleChainId : null, [Validators.required]]
+      forwardMsgToDefaultRuleChain: [configuration ? configuration?.forwardMsgToDefaultRuleChain : false, []],
+      ruleChainId: [configuration ? configuration.ruleChainId : null, []]
     });
+  }
+
+  protected validatorTriggers(): string[] {
+    return ['forwardMsgToDefaultRuleChain'];
+  }
+
+  protected updateValidators(emitEvent: boolean) {
+    const forwardMsgToDefaultRuleChain: boolean = this.ruleChainInputConfigForm.get('forwardMsgToDefaultRuleChain').value;
+    if (forwardMsgToDefaultRuleChain) {
+      this.ruleChainInputConfigForm.get('ruleChainId').setValidators([]);
+    } else {
+      this.ruleChainInputConfigForm.get('ruleChainId').setValidators([Validators.required]);
+    }
+    this.ruleChainInputConfigForm.get('ruleChainId').updateValueAndValidity({emitEvent});
   }
 
 }
