@@ -1,50 +1,44 @@
-<section [formGroup]="deleteRelationConfigForm" fxLayout="column">
-  <mat-checkbox formControlName="deleteForSingleEntity">
-    {{ 'tb.rulenode.delete-relation-to-specific-entity' | translate }}
-  </mat-checkbox>
-  <div class="tb-hint" style="padding-bottom: 16px;" translate>tb.rulenode.delete-relation-hint</div>
-  <mat-form-field class="mat-block" style="min-width: 100px;">
-    <mat-label translate>relation.direction</mat-label>
-    <mat-select required matInput formControlName="direction">
-      <mat-option *ngFor="let type of directionTypes" [value]="type">
-        {{ directionTypeTranslations.get(type) | translate }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <div *ngIf="deleteRelationConfigForm.get('deleteForSingleEntity').value" fxLayout="row" fxLayoutGap="8px">
-    <tb-entity-type-select
-      showLabel
-      style="min-width: 100px;"
-      required
-      formControlName="entityType">
-    </tb-entity-type-select>
-    <mat-form-field *ngIf="deleteRelationConfigForm.get('entityType').value" fxFlex class="mat-block" subscriptSizing="dynamic">
-      <mat-label translate>tb.rulenode.entity-name-pattern</mat-label>
-      <input required matInput formControlName="entityNamePattern">
-      <mat-error *ngIf="deleteRelationConfigForm.get('entityNamePattern').hasError('required') ||
-                        deleteRelationConfigForm.get('entityNamePattern').hasError('pattern')">
-        {{ 'tb.rulenode.entity-name-pattern-required' | translate }}
-      </mat-error>
-      <mat-hint translate>tb.rulenode.general-pattern-hint</mat-hint>
-    </mat-form-field>
+<section [formGroup]="deleteRelationConfigForm" class="tb-form-panel no-padding no-border">
+  <div class="tb-form-panel stroked no-padding-bottom">
+    <div class="tb-form-panel-title" translate>tb.rulenode.relation-parameters</div>
+    <div fxLayout="column">
+      <mat-form-field class="mat-block" hideRequiredMarker>
+        <mat-label translate>relation.direction</mat-label>
+        <mat-select required matInput formControlName="direction">
+          <mat-option *ngFor="let type of directionTypes" [value]="type">
+            {{ directionTypeTranslations.get(type) | translate }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <tb-relation-type-autocomplete
+        required
+        formControlName="relationType">
+      </tb-relation-type-autocomplete>
+    </div>
   </div>
-  <mat-form-field class="mat-block" subscriptSizing="dynamic">
-    <mat-label translate>tb.rulenode.relation-type-pattern</mat-label>
-    <input required matInput formControlName="relationType">
-    <mat-error *ngIf="deleteRelationConfigForm.get('relationType').hasError('required')">
-      {{ 'tb.rulenode.relation-type-pattern-required' | translate }}
-    </mat-error>
-    <mat-hint translate>tb.rulenode.general-pattern-hint</mat-hint>
-  </mat-form-field>
-  <mat-form-field class="mat-block" subscriptSizing="dynamic">
-    <mat-label translate>tb.rulenode.entity-cache-expiration</mat-label>
-    <input required type="number" min="0" step="1" matInput formControlName="entityCacheExpiration">
-    <mat-error *ngIf="deleteRelationConfigForm.get('entityCacheExpiration').hasError('required')">
-      {{ 'tb.rulenode.entity-cache-expiration-required' | translate }}
-    </mat-error>
-    <mat-error *ngIf="deleteRelationConfigForm.get('entityCacheExpiration').hasError('min')">
-      {{ 'tb.rulenode.entity-cache-expiration-range' | translate }}
-    </mat-error>
-    <mat-hint translate>tb.rulenode.entity-cache-expiration-hint</mat-hint>
-  </mat-form-field>
+  <div class="tb-form-panel stroked">
+    <div tb-hint-tooltip-icon="{{ 'tb.rulenode.delete-relation-with-specific-entity-hint' | translate }}"
+         class="tb-form-row no-border no-padding">
+      <mat-slide-toggle class="mat-slide" formControlName="deleteForSingleEntity">
+        {{ 'tb.rulenode.delete-relation-with-specific-entity' | translate }}
+      </mat-slide-toggle>
+    </div>
+    <div *ngIf="deleteRelationConfigForm.get('deleteForSingleEntity').value">
+      <div fxLayout="row" fxLayoutGap="10px">
+        <tb-entity-type-select
+          fxFlex
+          showLabel
+          required
+          formControlName="entityType">
+        </tb-entity-type-select>
+        <mat-form-field *ngIf="deleteRelationConfigForm.get('entityType').value && deleteRelationConfigForm.get('entityType').value !== entityType.TENANT"
+                        fxFlex class="mat-block">
+          <mat-label>{{ entityTypeNamePatternTranslation.get(deleteRelationConfigForm.get('entityType').value) | translate }}</mat-label>
+          <input required matInput formControlName="entityNamePattern">
+        </mat-form-field>
+      </div>
+      <tb-example-hint *ngIf="deleteRelationConfigForm.get('entityType').value && deleteRelationConfigForm.get('entityType').value !== entityType.TENANT"
+                       [hintText]="'tb.rulenode.kv-map-single-pattern-hint'"></tb-example-hint>
+    </div>
+  </div>
 </section>

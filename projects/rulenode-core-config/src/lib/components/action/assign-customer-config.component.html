@@ -1,25 +1,18 @@
 <section [formGroup]="assignCustomerConfigForm" fxLayout="column">
-  <mat-form-field class="mat-block" subscriptSizing="dynamic">
-    <mat-label translate>tb.rulenode.customer-name-pattern</mat-label>
-    <input required matInput formControlName="customerNamePattern">
-    <mat-error *ngIf="assignCustomerConfigForm.get('customerNamePattern').hasError('required') ||
-                      assignCustomerConfigForm.get('customerNamePattern').hasError('pattern')">
-      {{ 'tb.rulenode.customer-name-pattern-required' | translate }}
-    </mat-error>
-    <mat-hint translate>tb.rulenode.general-pattern-hint</mat-hint>
-  </mat-form-field>
-  <mat-checkbox fxFlex formControlName="createCustomerIfNotExists">
-    {{ 'tb.rulenode.create-customer-if-not-exists' | translate }}
-  </mat-checkbox>
-  <mat-form-field class="mat-block" subscriptSizing="dynamic">
-    <mat-label translate>tb.rulenode.customer-cache-expiration</mat-label>
-    <input required type="number" min="0" step="1" matInput formControlName="customerCacheExpiration">
-    <mat-error *ngIf="assignCustomerConfigForm.get('customerCacheExpiration').hasError('required')">
-      {{ 'tb.rulenode.customer-cache-expiration-required' | translate }}
-    </mat-error>
-    <mat-error *ngIf="assignCustomerConfigForm.get('customerCacheExpiration').hasError('min')">
-      {{ 'tb.rulenode.customer-cache-expiration-range' | translate }}
-    </mat-error>
-    <mat-hint translate>tb.rulenode.customer-cache-expiration-hint</mat-hint>
-  </mat-form-field>
+  <div class="tb-form-panel no-padding no-border">
+    <mat-form-field class="mat-block" subscriptSizing="dynamic">
+      <mat-label translate>tb.rulenode.customer-name-pattern</mat-label>
+      <input required matInput formControlName="customerNamePattern">
+      <mat-error *ngIf="assignCustomerConfigForm.get('customerNamePattern').hasError('required') ||
+                        assignCustomerConfigForm.get('customerNamePattern').hasError('pattern')">
+        {{ 'tb.rulenode.customer-name-pattern-required' | translate }}
+      </mat-error>
+      <mat-hint translate>tb.rulenode.general-pattern-hint</mat-hint>
+    </mat-form-field>
+    <div class="tb-form-row">
+      <mat-slide-toggle class="mat-slide" formControlName="createCustomerIfNotExists">
+        {{ 'tb.rulenode.create-customer-if-not-exists' | translate }}
+      </mat-slide-toggle>
+    </div>
+  </div>
 </section>
