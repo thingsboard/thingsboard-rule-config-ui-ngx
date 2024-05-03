@@ -39,6 +39,9 @@ export class DeleteRelationConfigComponent extends RuleNodeConfigurationComponen
 
   entityType = EntityType;
 
+  allowedEntityTypes = [EntityType.DEVICE, EntityType.ASSET, EntityType.ENTITY_VIEW, EntityType.TENANT,
+    EntityType.CUSTOMER, EntityType.USER, EntityType.DASHBOARD, EntityType.EDGE];
+
   deleteRelationConfigForm: UntypedFormGroup;
 
   constructor(protected store: Store<AppState>,
