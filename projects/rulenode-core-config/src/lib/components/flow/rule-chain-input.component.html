@@ -6,8 +6,7 @@
         {{ 'tb.rulenode.forward-msg-default-rule-chain' | translate }}
       </mat-slide-toggle>
     </div>
-    <tb-entity-autocomplete [fxHide]="ruleChainInputConfigForm.get('forwardMsgToDefaultRuleChain').value"
-                            required
+    <tb-entity-autocomplete required
                             [excludeEntityIds]="[ruleChainId]"
                             [entityType]="entityType.RULE_CHAIN"
                             [entitySubtype]="ruleChainType"
