@@ -687,7 +687,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'email-from-template-hint': 'Use $[messageKey] to extract value from the message and ${metadataKey} to extract value from the metadata.',
           'recipients-block-main-hint': 'Comma-separated address list. All input fields support templatization. Use $[messageKey] to extract value from the message and ${metadataKey} to extract value from the metadata.',
           'forward-msg-default-rule-chain': 'Forward message to the originator\'s default rule chain',
-          'forward-msg-default-rule-chain-tooltip': 'If enabled, message will be forwarded to the originator\'s default rule chain or root rule chain if originator doesn\'t support the default rule chain definition.',
+          'forward-msg-default-rule-chain-tooltip': 'If enabled, message will be forwarded to the originator\'s default rule chain, or rule chain from configuration, if originator has no default rule chain defined in the entity profile.',
           'exclude-zero-deltas' : 'Exclude zero deltas from outbound message',
           'exclude-zero-deltas-hint' : 'If enabled, the "{{outputValueKey}}" output key will be added to the outbound message if its value is not zero.',
           'exclude-zero-deltas-time-difference-hint' : 'If enabled, the "{{outputValueKey}}" and "{{periodValueKey}}" output keys will be added to the outbound message only if the "{{outputValueKey}}" value is not zero.',
