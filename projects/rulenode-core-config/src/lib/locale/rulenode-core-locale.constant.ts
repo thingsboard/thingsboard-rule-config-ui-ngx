@@ -251,6 +251,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'mail-body-type': 'Mail body type',
           'body-type-template': 'Body type template',
           'request-id-metadata-attribute': 'Request Id Metadata attribute name',
+          'service-id-metadata-attribute': 'Service Id Metadata attribute name',
           'timeout-sec': 'Timeout in seconds',
           'timeout-required': 'Timeout is required',
           'min-timeout-message': 'Only 0 minimum timeout value is allowed.',
