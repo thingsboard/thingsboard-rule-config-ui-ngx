@@ -44,20 +44,16 @@ export class RestApiCallConfigComponent extends RuleNodeConfigurationComponent {
       readTimeoutMs: [configuration ? configuration.readTimeoutMs : null, []],
       maxParallelRequestsCount: [configuration ? configuration.maxParallelRequestsCount : null, [Validators.min(0)]],
       headers: [configuration ? configuration.headers : null, []],
-      useRedisQueueForMsgPersistence: [configuration ? configuration.useRedisQueueForMsgPersistence : false, []],
-      trimQueue: [configuration ? configuration.trimQueue : false, []],
-      maxQueueSize: [configuration ? configuration.maxQueueSize : null, []],
       credentials: [configuration ? configuration.credentials : null, []]
     });
   }
 
   protected validatorTriggers(): string[] {
-    return ['useSimpleClientHttpFactory', 'useRedisQueueForMsgPersistence', 'enableProxy', 'useSystemProxyProperties'];
+    return ['useSimpleClientHttpFactory', 'enableProxy', 'useSystemProxyProperties'];
   }
 
   protected updateValidators(emitEvent: boolean) {
     const useSimpleClientHttpFactory: boolean = this.restApiCallConfigForm.get('useSimpleClientHttpFactory').value;
-    const useRedisQueueForMsgPersistence: boolean = this.restApiCallConfigForm.get('useRedisQueueForMsgPersistence').value;
     const enableProxy: boolean = this.restApiCallConfigForm.get('enableProxy').value;
     const useSystemProxyProperties: boolean = this.restApiCallConfigForm.get('useSystemProxyProperties').value;
 
@@ -76,13 +72,7 @@ export class RestApiCallConfigComponent extends RuleNodeConfigurationComponent {
       }
     }
 
-    if (useRedisQueueForMsgPersistence) {
-      this.restApiCallConfigForm.get('maxQueueSize').setValidators([Validators.min(0)]);
-    } else {
-      this.restApiCallConfigForm.get('maxQueueSize').setValidators([]);
-    }
     this.restApiCallConfigForm.get('readTimeoutMs').updateValueAndValidity({emitEvent});
-    this.restApiCallConfigForm.get('maxQueueSize').updateValueAndValidity({emitEvent});
     this.restApiCallConfigForm.get('proxyHost').updateValueAndValidity({emitEvent});
     this.restApiCallConfigForm.get('proxyPort').updateValueAndValidity({emitEvent});
     this.restApiCallConfigForm.get('credentials').updateValueAndValidity({emitEvent});
