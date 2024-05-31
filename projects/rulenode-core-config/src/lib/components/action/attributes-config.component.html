@@ -46,14 +46,14 @@
       <div tb-hint-tooltip-icon="{{ 'tb.rulenode.send-attributes-updated-notification-hint' | translate }}"
            *ngIf="attributesConfigForm.get('scope').value !== attributeScopeMap.CLIENT_SCOPE"
            class="tb-form-row no-border no-padding">
-        <mat-slide-toggle class="mat-slide margin" formControlName="sendAttributesUpdatedNotification">
+        <mat-slide-toggle class="mat-slide" formControlName="sendAttributesUpdatedNotification">
           {{ 'tb.rulenode.send-attributes-updated-notification' | translate }}
         </mat-slide-toggle>
       </div>
       <div tb-hint-tooltip-icon="{{ 'tb.rulenode.notify-device-on-update-hint' | translate }}"
            *ngIf="attributesConfigForm.get('scope').value === attributeScopeMap.SHARED_SCOPE"
            class="tb-form-row no-border no-padding">
-        <mat-slide-toggle class="mat-slide margin" formControlName="notifyDevice">
+        <mat-slide-toggle class="mat-slide" formControlName="notifyDevice">
           {{ 'tb.rulenode.notify-device' | translate }}
         </mat-slide-toggle>
       </div>
