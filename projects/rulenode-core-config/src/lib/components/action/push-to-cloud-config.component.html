@@ -1,10 +1,32 @@
-<section [formGroup]="pushToCloudConfigForm" fxLayout="column">
-  <mat-form-field fxFlex class="mat-block">
-    <mat-label translate>attribute.attributes-scope</mat-label>
-    <mat-select formControlName="scope" required>
-      <mat-option *ngFor="let scope of attributeScopes" [value]="scope">
-        {{ telemetryTypeTranslationsMap.get(scope) | translate }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+<section [formGroup]="pushToCloudConfigForm" class="tb-form-panel no-border no-padding">
+  <div class="tb-form-panel stroked">
+    <tb-example-hint [hintText]="'tb.rulenode.attributes-scope-hint'">
+    </tb-example-hint>
+    <div class="tb-form-row no-border no-padding tb-standard-fields">
+      <mat-form-field class="flex">
+        <mat-label>{{ 'tb.rulenode.attributes-scope' | translate }}</mat-label>
+        <mat-select required
+                    class="tb-entity-type-select" matInput formControlName="scope">
+          <mat-option *ngFor="let scope of attributeScopes" [value]="scope">
+            {{ telemetryTypeTranslationsMap.get(scope) | translate }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="flex">
+        <mat-label>{{ 'tb.rulenode.attributes-scope-value' | translate }}</mat-label>
+        <input type="text" matInput readonly disabled [ngModel]="pushToCloudConfigForm.get('scope').value" [ngModelOptions]="{standalone: true}">
+        <button type="button"
+                matSuffix
+                mat-icon-button
+                aria-label="Copy"
+                ngxClipboard
+                [cbContent]="pushToCloudConfigForm.get('scope').value"
+                matTooltip="{{ 'tb.rulenode.attributes-scope-value-copy' | translate }}">
+          <mat-icon aria-hidden="false"
+                    aria-label="help-icon">content_copy
+          </mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </div>
 </section>
