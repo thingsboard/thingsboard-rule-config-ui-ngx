@@ -17,6 +17,7 @@ export * from './rpc-request-config.component';
 export * from './save-to-custom-table-config.component';
 export * from './timeseries-config.component';
 export * from './unassign-customer-config.component';
+export * from './send-rest-api-call-reply-config.component';
 export * from  './delete-attributes-config.component';
 export * from './math-function-config.component';
 export * from './device-state-config.component';

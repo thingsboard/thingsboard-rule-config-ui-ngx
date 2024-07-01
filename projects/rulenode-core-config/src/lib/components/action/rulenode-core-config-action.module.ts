@@ -25,6 +25,7 @@ import { PushToCloudConfigComponent } from './push-to-cloud-config.component';
 import { DeleteAttributesConfigComponent } from './delete-attributes-config.component';
 import { MathFunctionConfigComponent } from './math-function-config.component';
 import { DeviceStateConfigComponent } from './device-state-config.component';
+import { SendRestApiCallReplyConfigComponent } from './send-rest-api-call-reply-config.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { DeviceStateConfigComponent } from './device-state-config.component';
     RpcReplyConfigComponent,
     SaveToCustomTableConfigComponent,
     UnassignCustomerConfigComponent,
+    SendRestApiCallReplyConfigComponent,
     DeviceProfileConfigComponent,
     PushToEdgeConfigComponent,
     PushToCloudConfigComponent,
@@ -75,6 +77,7 @@ import { DeviceStateConfigComponent } from './device-state-config.component';
     RpcReplyConfigComponent,
     SaveToCustomTableConfigComponent,
     UnassignCustomerConfigComponent,
+    SendRestApiCallReplyConfigComponent,
     DeviceProfileConfigComponent,
     PushToEdgeConfigComponent,
     PushToCloudConfigComponent,
