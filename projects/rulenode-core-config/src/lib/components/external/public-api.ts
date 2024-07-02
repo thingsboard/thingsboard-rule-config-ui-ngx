@@ -10,5 +10,6 @@ export * from './send-sms-config.component';
 export * from './slack-config.component';
 export * from './sns-config.component';
 export * from './sqs-config.component';
+export * from './lambda-config.component';
 
 export * from './rulenode-core-config-external.module';
