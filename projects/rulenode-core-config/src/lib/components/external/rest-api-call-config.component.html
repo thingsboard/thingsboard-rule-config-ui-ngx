@@ -92,17 +92,5 @@
     valText="tb.rulenode.value"
     valRequiredText="tb.rulenode.value-required">
   </tb-kv-map-config-old>
-  <mat-checkbox formControlName="useRedisQueueForMsgPersistence">
-    {{ 'tb.rulenode.use-redis-queue' | translate }}
-  </mat-checkbox>
-  <div fxLayout="column" *ngIf="restApiCallConfigForm.get('useRedisQueueForMsgPersistence').value === true">
-    <mat-checkbox formControlName="trimQueue">
-      {{ 'tb.rulenode.trim-redis-queue' | translate }}
-    </mat-checkbox>
-    <mat-form-field class="mat-block">
-      <mat-label translate>tb.rulenode.redis-queue-max-size</mat-label>
-      <input type="number" step="1" min="0" matInput formControlName="maxQueueSize">
-    </mat-form-field>
-  </div>
   <tb-credentials-config formControlName="credentials" [disableCertPemCredentials]="restApiCallConfigForm.get('useSimpleClientHttpFactory').value"></tb-credentials-config>
 </section>

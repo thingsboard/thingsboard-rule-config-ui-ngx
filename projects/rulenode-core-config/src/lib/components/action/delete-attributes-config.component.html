@@ -1,13 +1,35 @@
-<section [formGroup]="deleteAttributesConfigForm" fxLayout="column">
-  <mat-form-field>
-    <mat-label>{{ 'attribute.attributes-scope' | translate }}</mat-label>
-    <mat-select required
-                class="tb-entity-type-select" matInput formControlName="scope">
-      <mat-option *ngFor="let scope of attributeScopes" [value]="scope">
-        {{ telemetryTypeTranslationsMap.get(scope) | translate }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+<section [formGroup]="deleteAttributesConfigForm" class="tb-form-panel no-border no-padding">
+  <div class="tb-form-panel stroked">
+    <tb-example-hint [hintText]="'tb.rulenode.attributes-scope-hint'">
+    </tb-example-hint>
+    <div class="tb-form-row no-border no-padding tb-standard-fields">
+      <mat-form-field class="flex">
+        <mat-label>{{ 'tb.rulenode.attributes-scope' | translate }}</mat-label>
+        <mat-select required
+                    class="tb-entity-type-select" matInput formControlName="scope">
+          <mat-option *ngFor="let scope of attributeScopes" [value]="scope">
+            {{ telemetryTypeTranslationsMap.get(scope) | translate }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="flex">
+        <mat-label>{{ 'tb.rulenode.attributes-scope-value' | translate }}</mat-label>
+        <input type="text" matInput readonly disabled [ngModel]="deleteAttributesConfigForm.get('scope').value" [ngModelOptions]="{standalone: true}">
+        <button type="button"
+                matSuffix
+                mat-icon-button
+                aria-label="Copy"
+                ngxClipboard
+                [cbContent]="deleteAttributesConfigForm.get('scope').value"
+                matTooltip="{{ 'tb.rulenode.attributes-scope-value-copy' | translate }}">
+          <mat-icon aria-hidden="false"
+                    aria-label="help-icon">content_copy
+          </mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </div>
+
   <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label>{{ 'tb.rulenode.attributes-keys' | translate }}</mat-label>
     <mat-chip-grid formControlName="keys" #attributeChipList>
@@ -26,14 +48,25 @@
     <mat-error *ngIf="deleteAttributesConfigForm.get('keys').hasError('required')">{{ 'tb.rulenode.attributes-keys-required' | translate }}</mat-error>
     <mat-hint translate>tb.rulenode.general-pattern-hint</mat-hint>
   </mat-form-field>
-  <mat-checkbox formControlName="sendAttributesDeletedNotification">
-    {{ 'tb.rulenode.send-attributes-deleted-notification' | translate }}
-  </mat-checkbox>
-  <div class="tb-hint" translate>tb.rulenode.send-attributes-deleted-notification-hint</div>
-  <div *ngIf="deleteAttributesConfigForm.get('scope').value === attributeScopeMap.SHARED_SCOPE">
-    <mat-checkbox formControlName="notifyDevice">
-      {{ 'tb.rulenode.notify-device' | translate }}
-    </mat-checkbox>
-    <div class="tb-hint" translate>tb.rulenode.notify-device-on-delete-hint</div>
-  </div>
+
+  <section class="tb-form-panel stroked">
+    <mat-expansion-panel class="tb-settings">
+      <mat-expansion-panel-header>
+        <mat-panel-title translate>tb.rulenode.advanced-settings</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div tb-hint-tooltip-icon="{{ 'tb.rulenode.send-attributes-deleted-notification-hint' | translate }}"
+           class="tb-form-row no-border no-padding">
+        <mat-slide-toggle class="mat-slide" formControlName="sendAttributesDeletedNotification">
+          {{ 'tb.rulenode.send-attributes-deleted-notification' | translate }}
+        </mat-slide-toggle>
+      </div>
+      <div tb-hint-tooltip-icon="{{ 'tb.rulenode.notify-device-on-delete-hint' | translate }}"
+           *ngIf="deleteAttributesConfigForm.get('scope').value === attributeScopeMap.SHARED_SCOPE"
+           class="tb-form-row no-border no-padding">
+        <mat-slide-toggle class="mat-slide" formControlName="notifyDevice">
+          {{ 'tb.rulenode.notify-device' | translate }}
+        </mat-slide-toggle>
+      </div>
+    </mat-expansion-panel>
+  </section>
 </section>

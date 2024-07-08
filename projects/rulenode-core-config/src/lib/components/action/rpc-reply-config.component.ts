@@ -24,6 +24,8 @@ export class RpcReplyConfigComponent extends RuleNodeConfigurationComponent {
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.rpcReplyConfigForm = this.fb.group({
+      serviceIdMetaDataAttribute: [configuration ? configuration.serviceIdMetaDataAttribute : null, []],
+      sessionIdMetaDataAttribute: [configuration ? configuration.sessionIdMetaDataAttribute : null, []],
       requestIdMetaDataAttribute: [configuration ? configuration.requestIdMetaDataAttribute : null, []]
     });
   }

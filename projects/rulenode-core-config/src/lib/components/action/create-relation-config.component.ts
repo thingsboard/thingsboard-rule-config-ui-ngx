@@ -38,6 +38,9 @@ export class CreateRelationConfigComponent extends RuleNodeConfigurationComponen
     ]
   );
 
+  allowedEntityTypes = [EntityType.DEVICE, EntityType.ASSET, EntityType.ENTITY_VIEW, EntityType.TENANT,
+    EntityType.CUSTOMER, EntityType.USER, EntityType.DASHBOARD, EntityType.EDGE];
+
   createRelationConfigForm: UntypedFormGroup;
 
   constructor(protected store: Store<AppState>,
