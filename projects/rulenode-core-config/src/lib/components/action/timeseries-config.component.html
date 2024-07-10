@@ -1,7 +1,14 @@
-<section [formGroup]="timeseriesConfigForm" fxLayout="column">
+<section [formGroup]="timeseriesConfigForm" class="tb-form-panel no-border no-padding">
   <mat-form-field fxFlex class="mat-block">
     <mat-label translate>tb.rulenode.default-ttl</mat-label>
     <input type="number" min="0" step="1" matInput formControlName="defaultTTL" required>
+    <mat-icon class="help-icon margin-8 cursor-pointer"
+              aria-hidden="false"
+              aria-label="help-icon"
+              matSuffix
+              matTooltip="{{ 'tb.rulenode.default-ttl-hint' | translate }}">
+      help
+    </mat-icon>
     <mat-error *ngIf="timeseriesConfigForm.get('defaultTTL').hasError('required')">
       {{ 'tb.rulenode.default-ttl-required' | translate }}
     </mat-error>
@@ -9,11 +16,18 @@
       {{ 'tb.rulenode.min-default-ttl-message' | translate }}
     </mat-error>
   </mat-form-field>
-  <mat-checkbox fxFlex formControlName="skipLatestPersistence">
-    {{ 'tb.rulenode.skip-latest-persistence' | translate }}
-  </mat-checkbox>
-  <mat-checkbox fxFlex formControlName="useServerTs">
-    {{ 'tb.rulenode.use-server-ts' | translate }}
-  </mat-checkbox>
-  <div class="tb-hint" translate>tb.rulenode.use-server-ts-hint</div>
+  <div class="tb-form-panel stroked">
+    <div tb-hint-tooltip-icon="{{ 'tb.rulenode.use-server-ts-hint' | translate}}"
+         class="tb-form-row no-border no-padding">
+      <mat-slide-toggle class="mat-slide" formControlName="useServerTs">
+        {{ 'tb.rulenode.use-server-ts' | translate }}
+      </mat-slide-toggle>
+    </div>
+    <div tb-hint-tooltip-icon="{{ 'tb.rulenode.skip-latest-persistence-hint' | translate}}"
+         class="tb-form-row no-border no-padding">
+      <mat-slide-toggle class="mat-slide" formControlName="skipLatestPersistence">
+        {{ 'tb.rulenode.skip-latest-persistence' | translate }}
+      </mat-slide-toggle>
+    </div>
+  </div>
 </section>
