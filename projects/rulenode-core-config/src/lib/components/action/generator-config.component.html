@@ -27,14 +27,12 @@
 
   <div class="tb-form-panel no-padding-bottom stroked">
     <div class="tb-form-panel-title" translate>tb.rulenode.originator</div>
-    <div class="tb-form-row no-border no-padding tb-standard-fields">
-      <tb-entity-select fxFlex
-                        required="true"
-                        useAliasEntityTypes="true"
-                        [allowedEntityTypes]="allowedEntityTypes"
-                        formControlName="originator">
-      </tb-entity-select>
-    </div>
+    <tb-entity-select fxFlex
+                      required="true"
+                      useAliasEntityTypes="true"
+                      [allowedEntityTypes]="allowedEntityTypes"
+                      formControlName="originator">
+    </tb-entity-select>
   </div>
   <div class="tb-form-panel no-padding-bottom stroked">
     <div class="tb-form-panel-title" translate>tb.rulenode.generator-function</div>
@@ -45,7 +43,7 @@
                 [functionArgs]="['prevMsg', 'prevMetadata', 'prevMsgType']"
                 helpId="rulenode/generator_node_script_fn"
                 noValidate="true">
-      <tb-script-lang toolbarSuffixScriptLang formControlName="scriptLang" *ngIf="tbelEnabled"></tb-script-lang>
+      <tb-script-lang toolbarSuffixScriptLang shortLang formControlName="scriptLang" *ngIf="tbelEnabled"></tb-script-lang>
       <button toolbarSuffixButton
               mat-icon-button
               matTooltip="{{ testScriptLabel | translate }}"
@@ -64,7 +62,7 @@
                 [scriptLanguage]="scriptLanguage.TBEL"
                 helpId="rulenode/tbel/generator_node_script_fn"
                 noValidate="true">
-      <tb-script-lang toolbarSuffixScriptLang formControlName="scriptLang"></tb-script-lang>
+      <tb-script-lang toolbarSuffixScriptLang shortLang formControlName="scriptLang"></tb-script-lang>
       <button toolbarSuffixButton
               mat-icon-button
               matTooltip="{{ testScriptLabel | translate }}"
