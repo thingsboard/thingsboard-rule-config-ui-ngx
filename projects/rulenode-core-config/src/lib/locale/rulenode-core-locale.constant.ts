@@ -197,6 +197,8 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'min-message-count-message': 'Only 0 minimum message count is allowed.',
           'period-seconds': 'Generation frequency in seconds',
           'period-seconds-required': 'Period is required.',
+          'script-lang-tbel': 'TBEL',
+          'script-lang-js': 'JS',
           'use-metadata-period-in-seconds-patterns': 'Use period in seconds pattern',
           'use-metadata-period-in-seconds-patterns-hint':
             'If selected, rule node use period in seconds interval pattern from message metadata or data ' +

@@ -43,7 +43,14 @@
                 [functionArgs]="['prevMsg', 'prevMetadata', 'prevMsgType']"
                 helpId="rulenode/generator_node_script_fn"
                 noValidate="true">
-      <tb-script-lang toolbarSuffixScriptLang shortLang formControlName="scriptLang" *ngIf="tbelEnabled"></tb-script-lang>
+      <tb-toggle-select toolbarPrefixButton formControlName="scriptLang" appearance="fill" *ngIf="tbelEnabled">
+        <tb-toggle-option [value]="scriptLanguage.TBEL">
+          {{ 'tb.rulenode.script-lang-tbel' | translate }}
+        </tb-toggle-option>
+        <tb-toggle-option [value]="scriptLanguage.JS">
+          {{ 'tb.rulenode.script-lang-js' | translate }}
+        </tb-toggle-option>
+      </tb-toggle-select>
       <button toolbarSuffixButton
               mat-icon-button
               matTooltip="{{ testScriptLabel | translate }}"
@@ -62,7 +69,14 @@
                 [scriptLanguage]="scriptLanguage.TBEL"
                 helpId="rulenode/tbel/generator_node_script_fn"
                 noValidate="true">
-      <tb-script-lang toolbarSuffixScriptLang shortLang formControlName="scriptLang"></tb-script-lang>
+      <tb-toggle-select toolbarPrefixButton formControlName="scriptLang" appearance="fill">
+        <tb-toggle-option [value]="scriptLanguage.TBEL">
+          {{ 'tb.rulenode.script-lang-tbel' | translate }}
+        </tb-toggle-option>
+        <tb-toggle-option [value]="scriptLanguage.JS">
+          {{ 'tb.rulenode.script-lang-js' | translate }}
+        </tb-toggle-option>
+      </tb-toggle-select>
       <button toolbarSuffixButton
               mat-icon-button
               matTooltip="{{ testScriptLabel | translate }}"
