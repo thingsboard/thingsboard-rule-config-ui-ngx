@@ -1,7 +1,9 @@
 import { Component, EventEmitter, ViewChild } from '@angular/core';
 import { AppState, getCurrentAuthState, NodeScriptTestService } from '@core/public-api';
 import {
+  AliasEntityType,
   DebugRuleNodeEventBody,
+  EntityType,
   JsFuncComponent,
   RuleNodeConfiguration,
   RuleNodeConfigurationComponent,
@@ -14,7 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'tb-action-node-generator-config',
   templateUrl: './generator-config.component.html',
-  styleUrls: []
+  styleUrls: ['generator-config.component.scss']
 })
 export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
 
@@ -28,6 +30,11 @@ export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
   scriptLanguage = ScriptLanguage;
 
   changeScript: EventEmitter<void> = new EventEmitter<void>();
+
+  allowedEntityTypes = [
+    EntityType.DEVICE, EntityType.ASSET, EntityType.ENTITY_VIEW, EntityType.CUSTOMER,
+    EntityType.USER, EntityType.DASHBOARD, AliasEntityType.CURRENT_TENANT, AliasEntityType.CURRENT_RULE_NODE
+  ];
 
   readonly hasScript = true;
 
