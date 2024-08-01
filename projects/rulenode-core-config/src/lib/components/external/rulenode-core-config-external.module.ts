@@ -15,11 +15,13 @@ import { SharedModule } from '@shared/public-api';
 import { HomeComponentsModule } from '@home/components/public-api';
 import { RulenodeCoreConfigCommonModule } from '../common/rulenode-core-config-common.module';
 import { SlackConfigComponent } from './slack-config.component';
+import { LambdaConfigComponent } from './lambda-config.component';
 
 @NgModule({
   declarations: [
     SnsConfigComponent,
     SqsConfigComponent,
+    LambdaConfigComponent,
     PubSubConfigComponent,
     KafkaConfigComponent,
     MqttConfigComponent,
@@ -40,6 +42,7 @@ import { SlackConfigComponent } from './slack-config.component';
   exports: [
     SnsConfigComponent,
     SqsConfigComponent,
+    LambdaConfigComponent,
     PubSubConfigComponent,
     KafkaConfigComponent,
     MqttConfigComponent,
