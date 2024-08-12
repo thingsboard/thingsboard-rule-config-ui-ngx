@@ -24,9 +24,23 @@ export class DeviceProfileConfigComponent extends RuleNodeConfigurationComponent
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.deviceProfile = this.fb.group({
-      persistAlarmRulesState: [configuration ? configuration.persistAlarmRulesState : false, Validators.required],
-      fetchAlarmRulesStateOnStart: [configuration ? configuration.fetchAlarmRulesStateOnStart : false, Validators.required]
+      persistAlarmRulesState: [configuration ? configuration.persistAlarmRulesState : false],
+      fetchAlarmRulesStateOnStart: [configuration ? configuration.fetchAlarmRulesStateOnStart : false]
     });
+  }
+
+  protected validatorTriggers(): string[] {
+    return ['persistAlarmRulesState'];
+  }
+
+  protected updateValidators(emitEvent: boolean) {
+    if (this.deviceProfile.get('persistAlarmRulesState').value) {
+      this.deviceProfile.get('fetchAlarmRulesStateOnStart').enable({emitEvent: false});
+    } else {
+      this.deviceProfile.get('fetchAlarmRulesStateOnStart').setValue(false, {emitEvent: false});
+      this.deviceProfile.get('fetchAlarmRulesStateOnStart').disable({emitEvent: false});
+    }
+    this.deviceProfile.get('fetchAlarmRulesStateOnStart').updateValueAndValidity({emitEvent});
   }
 
 }

@@ -1,8 +1,15 @@
-<section [formGroup]="deviceProfile" fxLayout="column">
-  <mat-checkbox fxFlex formControlName="persistAlarmRulesState">
-    {{ 'tb.rulenode.persist-alarm-rules' | translate }}
-  </mat-checkbox>
-  <mat-checkbox fxFlex formControlName="fetchAlarmRulesStateOnStart">
-    {{ 'tb.rulenode.fetch-alarm-rules' | translate }}
-  </mat-checkbox>
+<section [formGroup]="deviceProfile" class="tb-form-panel stroked">
+  <div class="tb-form-hint tb-primary-fill" translate>tb.rulenode.device-profile-node-hint</div>
+  <div tb-hint-tooltip-icon="{{'tb.rulenode.persist-alarm-rules-hint' | translate }}"
+       class="tb-form-row no-border no-padding slide-toggle">
+    <mat-slide-toggle class="mat-slide" formControlName="persistAlarmRulesState">
+      {{ 'tb.rulenode.persist-alarm-rules' | translate }}
+    </mat-slide-toggle>
+  </div>
+  <div tb-hint-tooltip-icon="{{'tb.rulenode.fetch-alarm-rules-hint' | translate }}"
+       class="tb-form-row no-border no-padding slide-toggle">
+    <mat-slide-toggle class="mat-slide" formControlName="fetchAlarmRulesStateOnStart">
+      {{ 'tb.rulenode.fetch-alarm-rules' | translate }}
+    </mat-slide-toggle>
+  </div>
 </section>
