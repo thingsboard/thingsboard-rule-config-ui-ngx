@@ -716,7 +716,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'connection-timeout': 'Connection timeout',
           'connection-timeout-required': 'Connection timeout is required.',
           'connection-timeout-min': 'Min connection timeout is 0.',
-          'connection-timeout-hint': 'Rule node forces failure of message processing if AWS Lambda function execution raises exception.',
+          'connection-timeout-hint': 'The amount of time to wait in seconds when initially establishing a connection before giving up and timing out. A value of 0 means infinity, and is not recommended.',
           'request-timeout': 'Request timeout',
           'request-timeout-required': 'Request timeout is required',
           'request-timeout-min': 'Min request timeout is 0',

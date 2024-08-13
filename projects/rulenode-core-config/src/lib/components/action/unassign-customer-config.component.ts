@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { AppState } from '@core/public-api';
+import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { isNotEmptyStr } from '@core/utils';
 
 @Component({
   selector: 'tb-action-node-un-assign-to-customer-config',
@@ -22,20 +23,27 @@ export class UnassignCustomerConfigComponent extends RuleNodeConfigurationCompon
     return this.unassignCustomerConfigForm;
   }
 
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    return {
+      customerNamePattern: isDefinedAndNotNull(configuration?.customerNamePattern) ? configuration.customerNamePattern : null,
+      unassignFromCustomer: isDefinedAndNotNull(configuration?.customerNamePattern),
+    };
+  }
+
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.unassignCustomerConfigForm = this.fb.group({
-      customerNamePattern: [configuration ? configuration.customerNamePattern : null, []],
-      createCustomerIfNotExists: [configuration ? configuration?.createCustomerIfNotExists : false, []]
+      customerNamePattern: [configuration.customerNamePattern , []],
+      unassignFromCustomer: [configuration.unassignFromCustomer, []]
     });
   }
 
   protected validatorTriggers(): string[] {
-    return ['createCustomerIfNotExists'];
+    return ['unassignFromCustomer'];
   }
 
   protected updateValidators(emitEvent: boolean) {
-    const createCustomerIfNotExists: boolean = this.unassignCustomerConfigForm.get('createCustomerIfNotExists').value;
-    if (createCustomerIfNotExists) {
+    const unassignFromCustomer: boolean = this.unassignCustomerConfigForm.get('unassignFromCustomer').value;
+    if (unassignFromCustomer) {
       this.unassignCustomerConfigForm.get('customerNamePattern').setValidators([Validators.required, Validators.pattern(/.*\S.*/)]);
     } else {
       this.unassignCustomerConfigForm.get('customerNamePattern').setValidators([]);
@@ -44,7 +52,8 @@ export class UnassignCustomerConfigComponent extends RuleNodeConfigurationCompon
   }
 
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
-    configuration.customerNamePattern = configuration.customerNamePattern.trim();
-    return configuration;
+    return {
+      customerNamePattern: configuration.unassignFromCustomer ? configuration.customerNamePattern.trim() : null
+    };
   }
 }
