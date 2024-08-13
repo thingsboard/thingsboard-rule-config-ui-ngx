@@ -3,7 +3,6 @@ import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { isNotEmptyStr } from '@core/utils';
 
 @Component({
   selector: 'tb-action-node-un-assign-to-customer-config',
