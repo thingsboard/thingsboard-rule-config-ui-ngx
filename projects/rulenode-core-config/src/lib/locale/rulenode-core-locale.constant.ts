@@ -275,6 +275,8 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'read-timeout-hint': 'The value of 0 means an infinite timeout',
           'max-parallel-requests-count': 'Max number of parallel requests',
           'max-parallel-requests-count-hint': 'The value of 0 specifies no limit in parallel processing',
+          'max-response-size': 'Max response size (in KB)',
+          'max-response-size-hint': 'The maximum amount of memory allocated for buffering data when decoding or encoding HTTP messages, such as JSON or XML payloads',
           headers: 'Headers',
           'headers-hint': 'Use <code><span style="color: #000;">$&#123;</span>metadataKey<span style="color: #000;">&#125;</span></code> ' +
             'for value from metadata, <code><span style="color: #000;">$[</span>messageKey<span style="color: #000;">]</span></code> ' +

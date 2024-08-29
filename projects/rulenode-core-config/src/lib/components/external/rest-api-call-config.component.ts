@@ -44,7 +44,8 @@ export class RestApiCallConfigComponent extends RuleNodeConfigurationComponent {
       readTimeoutMs: [configuration ? configuration.readTimeoutMs : null, []],
       maxParallelRequestsCount: [configuration ? configuration.maxParallelRequestsCount : null, [Validators.min(0)]],
       headers: [configuration ? configuration.headers : null, []],
-      credentials: [configuration ? configuration.credentials : null, []]
+      credentials: [configuration ? configuration.credentials : null, []],
+      maxInMemoryBufferSizeInKb: [configuration ? configuration.maxInMemoryBufferSizeInKb : null, [Validators.min(1)]]
     });
   }
 
