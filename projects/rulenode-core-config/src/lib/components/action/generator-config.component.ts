@@ -33,8 +33,12 @@ export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
 
   allowedEntityTypes = [
     EntityType.DEVICE, EntityType.ASSET, EntityType.ENTITY_VIEW, EntityType.CUSTOMER,
-    EntityType.USER, EntityType.DASHBOARD, AliasEntityType.CURRENT_TENANT, AliasEntityType.CURRENT_RULE_NODE
+    EntityType.USER, EntityType.DASHBOARD, AliasEntityType.CURRENT_TENANT
   ];
+
+  additionEntityTypes = {
+    CURRENT_RULE_NODE: this.translate.instant('tb.rulenode.current-rule-node')
+  };
 
   readonly hasScript = true;
 

@@ -4,8 +4,11 @@
       min-width: 120px;
       height: 24px !important;
       .mat-button-toggle {
+        font-size: 0;
         .mat-button-toggle-button {
           height: 20px!important;
+          line-height: 20px !important;
+          border: none !important;
           .mat-button-toggle-label-content {
             font-size: 14px !important;
             line-height: 20px !important;
