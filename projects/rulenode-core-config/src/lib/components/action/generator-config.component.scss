@@ -1,0 +1,33 @@
+:host {
+  ::ng-deep {
+    .mat-button-toggle-group {
+      min-width: 120px;
+      height: 24px !important;
+      .mat-button-toggle {
+        .mat-button-toggle-button {
+          height: 20px!important;
+          .mat-button-toggle-label-content {
+            font-size: 14px !important;
+            line-height: 20px !important;
+          }
+        }
+      }
+    }
+    .tb-entity-select {
+      @media screen and (min-width: 599px) {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+      }
+      tb-entity-type-select {
+        flex: 1;
+      }
+      tb-entity-autocomplete {
+        flex: 1;
+        mat-form-field {
+          width: 100% !important;
+        }
+      }
+    }
+  }
+}
