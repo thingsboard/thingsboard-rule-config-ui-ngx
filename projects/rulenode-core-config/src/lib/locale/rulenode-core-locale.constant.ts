@@ -272,6 +272,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'endpoint-url-pattern': 'Endpoint URL pattern',
           'endpoint-url-pattern-required': 'Endpoint URL pattern is required',
           'request-method': 'Request method',
+          'close-connection-after-each-request': 'Close connection after each request/response cycle',
           'use-simple-client-http-factory': 'Use simple client HTTP factory',
           'ignore-request-body': 'Without request body',
           'parse-to-plain-text': 'Parse to plain text',

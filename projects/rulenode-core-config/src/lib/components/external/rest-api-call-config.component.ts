@@ -31,6 +31,7 @@ export class RestApiCallConfigComponent extends RuleNodeConfigurationComponent {
     this.restApiCallConfigForm = this.fb.group({
       restEndpointUrlPattern: [configuration ? configuration.restEndpointUrlPattern : null, [Validators.required]],
       requestMethod: [configuration ? configuration.requestMethod : null, [Validators.required]],
+      closeConnectionAfterEachRequest: [configuration ? configuration.closeConnectionAfterEachRequest : false, []],
       useSimpleClientHttpFactory: [configuration ? configuration.useSimpleClientHttpFactory : false, []],
       parseToPlainText: [configuration ? configuration.parseToPlainText : false, []],
       ignoreRequestBody: [configuration ? configuration.ignoreRequestBody : false, []],
