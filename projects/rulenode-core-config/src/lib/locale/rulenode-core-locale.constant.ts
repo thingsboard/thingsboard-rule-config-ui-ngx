@@ -262,6 +262,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'mail-body-type': 'Mail body type',
           'body-type-template': 'Body type template',
           'reply-routing-configuration': 'Reply Routing Configuration',
+          'rpc-reply-routing-configuration-hint': 'These configuration parameters specify the metadata key names used to identify the service, session, and request for sending a reply back.',
           'reply-routing-configuration-hint': 'These configuration parameters specify the metadata key names used to identify the service and request for sending a reply back.',
           'request-id-metadata-attribute': 'Request Id',
           'service-id-metadata-attribute': 'Service Id',
