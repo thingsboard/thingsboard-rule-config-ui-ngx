@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
-import { AppState } from '@core/public-api';
+import { AppState, isDefinedAndNotNull } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { TimeUnit } from '../../rulenode-core-config.models';
+import { Observable, of } from 'rxjs';
+import { map, mergeMap, share, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'tb-action-node-msg-delay-config',
@@ -12,6 +15,11 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 export class MsgDelayConfigComponent extends RuleNodeConfigurationComponent {
 
   msgDelayConfigForm: UntypedFormGroup;
+
+  timeUnitMap = [TimeUnit.SECONDS, TimeUnit.MINUTES, TimeUnit.HOURS];
+
+  filteredTimeUnits: Observable<Array<TimeUnit>>;
+  searchText = '';
 
   constructor(protected store: Store<AppState>,
               private fb: UntypedFormBuilder) {
@@ -24,29 +32,37 @@ export class MsgDelayConfigComponent extends RuleNodeConfigurationComponent {
 
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.msgDelayConfigForm = this.fb.group({
-      useMetadataPeriodInSecondsPatterns: [configuration ? configuration.useMetadataPeriodInSecondsPatterns : false, []],
-      periodInSeconds: [configuration ? configuration.periodInSeconds : null, []],
-      periodInSecondsPattern: [configuration ? configuration.periodInSecondsPattern : null, []],
+      period: [configuration ? configuration.period : '60', [Validators.required]],
+      timeUnit: [configuration ? configuration.timeUnit : TimeUnit.SECONDS, Validators.required],
       maxPendingMsgs: [configuration ? configuration.maxPendingMsgs : null,
         [Validators.required, Validators.min(1), Validators.max(100000)]],
     });
+
+    this.filteredTimeUnits = this.msgDelayConfigForm.get('timeUnit').valueChanges
+      .pipe(
+        startWith(''),
+        map((value) => value ? value : ''),
+        mergeMap(unit => this.fetchMessageTypes(unit)),
+        share()
+      );
   }
 
-  protected validatorTriggers(): string[] {
-    return ['useMetadataPeriodInSecondsPatterns'];
+  protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
+    return {
+      period: isDefinedAndNotNull(configuration?.period) ? configuration.period : '60',
+      timeUnit: isDefinedAndNotNull(configuration?.timeUnit) ? configuration.timeUnit : TimeUnit.SECONDS,
+      maxPendingMsgs: isDefinedAndNotNull(configuration?.maxPendingMsgs) ? configuration.maxPendingMsgs : 1000,
+    };
   }
 
-  protected updateValidators(emitEvent: boolean) {
-    const useMetadataPeriodInSecondsPatterns: boolean = this.msgDelayConfigForm.get('useMetadataPeriodInSecondsPatterns').value;
-    if (useMetadataPeriodInSecondsPatterns) {
-      this.msgDelayConfigForm.get('periodInSecondsPattern').setValidators([Validators.required]);
-      this.msgDelayConfigForm.get('periodInSeconds').setValidators([]);
+  private fetchMessageTypes(searchText?: string): Observable<Array<TimeUnit>> {
+    this.searchText = searchText;
+    if (this.searchText && this.searchText.length) {
+      const search = this.searchText.toUpperCase();
+      return of(this.timeUnitMap.filter(messageType => messageType.toUpperCase().includes(search)));
     } else {
-      this.msgDelayConfigForm.get('periodInSecondsPattern').setValidators([]);
-      this.msgDelayConfigForm.get('periodInSeconds').setValidators([Validators.required, Validators.min(0)]);
+      return of(this.timeUnitMap);
     }
-    this.msgDelayConfigForm.get('periodInSecondsPattern').updateValueAndValidity({emitEvent});
-    this.msgDelayConfigForm.get('periodInSeconds').updateValueAndValidity({emitEvent});
   }
 
 }
