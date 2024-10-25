@@ -9,7 +9,7 @@ import { FetchTo } from '../../rulenode-core-config.models';
 @Component({
   selector: 'tb-enrichment-node-device-attributes-config',
   templateUrl: './device-attributes-config.component.html',
-  styleUrls: ['../../../../style.scss']
+  styleUrls: []
 })
 export class DeviceAttributesConfigComponent extends RuleNodeConfigurationComponent {
 

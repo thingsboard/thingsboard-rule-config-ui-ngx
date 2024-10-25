@@ -16,7 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'tb-enrichment-node-related-attributes-config',
   templateUrl: './related-attributes-config.component.html',
-  styleUrls: ['../../../../style.scss']
+  styleUrls: []
 })
 export class RelatedAttributesConfigComponent extends RuleNodeConfigurationComponent {
 

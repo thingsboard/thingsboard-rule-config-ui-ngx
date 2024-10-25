@@ -20,7 +20,7 @@ import { Subject, takeUntil } from 'rxjs';
 @Component({
   selector: 'tb-kv-map-config',
   templateUrl: './kv-map-config.component.html',
-  styleUrls: ['./kv-map-config.component.scss', '../../../../style.scss'],
+  styleUrls: ['./kv-map-config.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

@@ -8,7 +8,7 @@ import { AzureIotHubCredentialsType, azureIotHubCredentialsTypes, azureIotHubCre
 @Component({
   selector: 'tb-external-node-azure-iot-hub-config',
   templateUrl: './azure-iot-hub-config.component.html',
-  styleUrls: ['./mqtt-config.component.scss', '../../../../style.scss']
+  styleUrls: ['./mqtt-config.component.scss']
 })
 export class AzureIotHubConfigComponent extends RuleNodeConfigurationComponent {
 

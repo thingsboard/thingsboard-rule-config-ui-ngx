@@ -7,7 +7,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 @Component({
   selector: 'tb-external-node-lambda-config',
   templateUrl: './lambda-config.component.html',
-  styleUrls: ['../../../../style.scss']
+  styleUrls: []
 })
 export class LambdaConfigComponent extends RuleNodeConfigurationComponent {
 

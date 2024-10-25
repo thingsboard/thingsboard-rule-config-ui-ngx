@@ -25,7 +25,7 @@ import { OriginatorFieldsMappingValues, SvMapOption } from '../../rulenode-core-
 @Component({
   selector: 'tb-sv-map-config',
   templateUrl: './sv-map-config.component.html',
-  styleUrls: ['./sv-map-config.component.scss', '../../../../style.scss'],
+  styleUrls: ['./sv-map-config.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

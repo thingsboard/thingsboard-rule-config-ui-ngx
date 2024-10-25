@@ -14,7 +14,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 @Component({
   selector: 'tb-message-types-config',
   templateUrl: './message-types-config.component.html',
-  styleUrls: ['../../../../style.scss'],
+  styleUrls: [],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

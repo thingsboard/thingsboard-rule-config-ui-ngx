@@ -15,7 +15,7 @@ import {
 @Component({
   selector: 'tb-action-node-gps-geofencing-config',
   templateUrl: './gps-geo-action-config.component.html',
-  styleUrls: ['./gps-geo-action-config.component.scss', '../../../../style.scss']
+  styleUrls: ['./gps-geo-action-config.component.scss']
 })
 export class GpsGeoActionConfigComponent extends RuleNodeConfigurationComponent {
 

@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'tb-filter-node-check-alarm-status-config',
   templateUrl: './check-alarm-status.component.html',
-  styleUrls: ['../../../../style.scss']
+  styleUrls: []
 })
 export class CheckAlarmStatusComponent extends RuleNodeConfigurationComponent {
   alarmStatusConfigForm: FormGroup;
