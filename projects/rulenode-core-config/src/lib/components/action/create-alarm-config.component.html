@@ -1,11 +1,11 @@
-<section [formGroup]="createAlarmConfigForm" fxLayout="column">
+<section [formGroup]="createAlarmConfigForm" class="flex flex-col">
   <mat-checkbox formControlName="useMessageAlarmData">
     {{ 'tb.rulenode.use-message-alarm-data' | translate }}
   </mat-checkbox>
   <mat-checkbox formControlName="overwriteAlarmDetails" *ngIf="createAlarmConfigForm.get('useMessageAlarmData').value === true">
     {{ 'tb.rulenode.overwrite-alarm-details' | translate }}
   </mat-checkbox>
-  <section fxLayout="column" *ngIf="createAlarmConfigForm.get('useMessageAlarmData').value === false ||
+  <section class="flex flex-col" *ngIf="createAlarmConfigForm.get('useMessageAlarmData').value === false ||
                                     createAlarmConfigForm.get('overwriteAlarmDetails').value === true">
     <tb-script-lang formControlName="scriptLang" *ngIf="tbelEnabled"></tb-script-lang>
     <tb-js-func *ngIf="createAlarmConfigForm.get('scriptLang').value === scriptLanguage.JS"
@@ -42,14 +42,14 @@
         <mat-icon class="material-icons" color="primary">bug_report</mat-icon>
       </button>
     </tb-js-func>
-    <div fxLayout="row" style="padding-bottom: 16px;">
+    <div class="flex flex-row" style="padding-bottom: 16px;">
       <button mat-button mat-raised-button color="primary" (click)="testScript()">
         {{ testScriptLabel | translate }}
       </button>
     </div>
   </section>
-  <section fxLayout="column" *ngIf="createAlarmConfigForm.get('useMessageAlarmData').value === false">
-    <mat-form-field fxFlex subscriptSizing="dynamic">
+  <section class="flex flex-col" *ngIf="createAlarmConfigForm.get('useMessageAlarmData').value === false">
+    <mat-form-field class="flex-1" subscriptSizing="dynamic">
       <mat-label translate>tb.rulenode.alarm-type</mat-label>
       <input required matInput formControlName="alarmType">
       <mat-error *ngIf="createAlarmConfigForm.get('alarmType').hasError('required')">
@@ -60,7 +60,7 @@
     <mat-checkbox formControlName="dynamicSeverity">
       {{ 'tb.rulenode.use-alarm-severity-pattern' | translate }}
     </mat-checkbox>
-    <mat-form-field fxFlex *ngIf="!createAlarmConfigForm.get('dynamicSeverity').value">
+    <mat-form-field class="flex-1" *ngIf="!createAlarmConfigForm.get('dynamicSeverity').value">
       <mat-label translate>tb.rulenode.alarm-severity</mat-label>
       <mat-select formControlName="severity" required>
         <mat-option *ngFor="let severity of alarmSeverities" [value]="severity">
@@ -71,7 +71,7 @@
         {{ 'tb.rulenode.alarm-severity-required' | translate }}
       </mat-error>
     </mat-form-field>
-    <mat-form-field fxFlex *ngIf="createAlarmConfigForm.get('dynamicSeverity').value" subscriptSizing="dynamic">
+    <mat-form-field class="flex-1" *ngIf="createAlarmConfigForm.get('dynamicSeverity').value" subscriptSizing="dynamic">
       <mat-label translate>tb.rulenode.alarm-severity-pattern</mat-label>
       <input matInput formControlName="severity" required>
       <mat-error *ngIf="createAlarmConfigForm.get('severity').hasError('required')">

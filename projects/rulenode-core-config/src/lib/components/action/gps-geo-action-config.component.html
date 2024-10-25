@@ -2,15 +2,15 @@
   <section class="tb-form-panel stroked">
     <div class="tb-form-panel-title" translate>tb.rulenode.coordinate-field-names</div>
     <section>
-      <div fxLayout="row" fxLayoutGap="16px">
-        <mat-form-field fxFlex="50" class="mat-block">
+      <div class="flex flex-row gap-4">
+        <mat-form-field class="mat-block max-w-50% flex-full">
           <mat-label>{{ 'tb.rulenode.latitude-field-name' | translate }}</mat-label>
           <input matInput formControlName="latitudeKeyName" required>
           <mat-error *ngIf="geoActionConfigForm.get('latitudeKeyName').hasError('required')">
             {{ 'tb.rulenode.latitude-field-name-required' | translate }}
           </mat-error>
         </mat-form-field>
-        <mat-form-field fxFlex="50" class="mat-block">
+        <mat-form-field class="mat-block max-w-50% flex-full">
           <mat-label>{{ 'tb.rulenode.longitude-field-name' | translate }}</mat-label>
           <input matInput formControlName="longitudeKeyName" required>
           <mat-error *ngIf="geoActionConfigForm.get('longitudeKeyName').hasError('required')">
@@ -23,8 +23,8 @@
   </section>
   <section class="tb-form-panel stroked" [class.no-padding-bottom]="!defaultPaddingEnable">
     <div class="tb-form-panel-title" translate>tb.rulenode.geofence-configuration</div>
-    <section fxLayout="column">
-      <mat-form-field fxFlex class="mat-block" hideRequiredMarker>
+    <section class="flex flex-col">
+      <mat-form-field class="mat-block flex-1" hideRequiredMarker>
         <mat-label>{{ 'tb.rulenode.perimeter-type' | translate }}</mat-label>
         <mat-select formControlName="perimeterType">
           <mat-option *ngFor="let type of perimeterTypes" [value]="type">
@@ -54,18 +54,18 @@
         </mat-error>
         <mat-hint>{{ 'tb.rulenode.perimeter-key-name-hint' | translate }}</mat-hint>
       </mat-form-field>
-      <div fxLayout="column"
+      <div class="flex flex-col"
            *ngIf="geoActionConfigForm.get('perimeterType').value === perimeterType.CIRCLE &&
               !geoActionConfigForm.get('fetchPerimeterInfoFromMessageMetadata').value">
-        <div fxLayout="row" fxLayoutGap="16px">
-          <mat-form-field fxFlex>
+        <div class="flex flex-row gap-4">
+          <mat-form-field class="flex-1">
             <mat-label>{{ 'tb.rulenode.circle-center-latitude' | translate }}</mat-label>
             <input type="number" min="-90" max="90" step="0.1" matInput formControlName="centerLatitude" required>
             <mat-error *ngIf="geoActionConfigForm.get('centerLatitude').hasError('required')">
               {{ 'tb.rulenode.circle-center-latitude-required' | translate }}
             </mat-error>
           </mat-form-field>
-          <mat-form-field fxFlex>
+          <mat-form-field class="flex-1">
             <mat-label>{{ 'tb.rulenode.circle-center-longitude' | translate }}</mat-label>
             <input type="number" min="-180" max="180" step="0.1" matInput formControlName="centerLongitude" required>
             <mat-error *ngIf="geoActionConfigForm.get('centerLongitude').hasError('required')">
@@ -73,15 +73,15 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <div fxLayout="row" fxLayoutGap="16px">
-          <mat-form-field fxFlex>
+        <div class="flex flex-row gap-4">
+          <mat-form-field class="flex-1">
             <mat-label>{{ 'tb.rulenode.range' | translate }}</mat-label>
             <input type="number" min="0" step="0.1" matInput formControlName="range" required>
             <mat-error *ngIf="geoActionConfigForm.get('range').hasError('required')">
               {{ 'tb.rulenode.range-required' | translate }}
             </mat-error>
           </mat-form-field>
-          <mat-form-field fxFlex>
+          <mat-form-field class="flex-1">
             <mat-label>{{ 'tb.rulenode.range-units' | translate }}</mat-label>
             <mat-select formControlName="rangeUnit" required>
               <mat-option *ngFor="let type of rangeUnits" [value]="type">
@@ -94,7 +94,7 @@
           </mat-form-field>
         </div>
       </div>
-      <div fxLayout="column" *ngIf="geoActionConfigForm.get('perimeterType').value === perimeterType.POLYGON &&
+      <div class="flex flex-col" *ngIf="geoActionConfigForm.get('perimeterType').value === perimeterType.POLYGON &&
                                  !geoActionConfigForm.get('fetchPerimeterInfoFromMessageMetadata').value">
         <mat-form-field class="mat-block" subscriptSizing="dynamic">
           <mat-label translate>tb.rulenode.polygon-definition</mat-label>
@@ -112,7 +112,7 @@
     </section>
   </section>
   <section class="tb-form-panel stroked no-padding-bottom">
-    <div fxLayout="column" fxLayout.gt-sm="row"  fxLayoutGap.lt-md="16px" fxLayoutAlign="space-between">
+    <div class="flex flex-col items-stretch justify-between gt-sm:flex-row lt-md:gap-4">
       <div class="tb-form-panel-title">{{ 'tb.rulenode.presence-monitoring-strategy' | translate }}</div>
       <tb-toggle-select class="fetch-to-data-toggle" formControlName="reportPresenceStatusOnEachMessage" appearance="fill" >
         <tb-toggle-option *ngFor="let strategy of presenceMonitoringStrategyKeys" [value]="presenceMonitoringStrategies.get(strategy).value">
@@ -124,10 +124,10 @@
         ('tb.rulenode.presence-monitoring-strategy-on-first-message-hint' | translate) :
         ('tb.rulenode.presence-monitoring-strategy-on-each-message-hint' | translate) }}
     </div>
-    <section fxLayout="column">
+    <section class="flex flex-col">
       <div *ngIf="geoActionConfigForm.get('reportPresenceStatusOnEachMessage').value === false">
-        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="8px">
-          <mat-form-field fxFlex class="mat-block">
+        <div class="flex flex-col gt-sm:flex-row gt-sm:gap-2">
+          <mat-form-field class="mat-block flex-1">
             <mat-label translate>tb.rulenode.min-inside-duration</mat-label>
             <input type="number" step="1" min="1" max="2147483647" matInput formControlName="minInsideDuration" required>
             <mat-error *ngIf="geoActionConfigForm.get('minInsideDuration').hasError('required')">
@@ -140,7 +140,7 @@
               {{ 'tb.rulenode.time-value-range' | translate }}
             </mat-error>
           </mat-form-field>
-          <mat-form-field fxFlex class="mat-block">
+          <mat-form-field class="mat-block flex-1">
             <mat-label translate>tb.rulenode.min-inside-duration-time-unit</mat-label>
             <mat-select formControlName="minInsideDurationTimeUnit" required>
               <mat-option *ngFor="let timeUnit of timeUnits" [value]="timeUnit">
@@ -149,8 +149,8 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="8px">
-          <mat-form-field fxFlex class="mat-block">
+        <div class="flex flex-col gt-sm:flex-row gt-sm:gap-2">
+          <mat-form-field class="mat-block flex-1">
             <mat-label translate>tb.rulenode.min-outside-duration</mat-label>
             <input type="number" step="1" min="1" max="2147483647" matInput formControlName="minOutsideDuration" required>
             <mat-error *ngIf="geoActionConfigForm.get('minOutsideDuration').hasError('required')">
@@ -163,7 +163,7 @@
               {{ 'tb.rulenode.time-value-range' | translate }}
             </mat-error>
           </mat-form-field>
-          <mat-form-field fxFlex class="mat-block">
+          <mat-form-field class="mat-block flex-1">
             <mat-label translate>tb.rulenode.min-outside-duration-time-unit</mat-label>
             <mat-select formControlName="minOutsideDurationTimeUnit" required>
               <mat-option *ngFor="let timeUnit of timeUnits" [value]="timeUnit">

@@ -27,7 +27,7 @@
 
   <div class="tb-form-panel no-padding-bottom stroked">
     <div class="tb-form-panel-title" translate>tb.rulenode.originator</div>
-    <tb-entity-select fxFlex
+    <tb-entity-select class="flex-1"
                       required="true"
                       useAliasEntityTypes="true"
                       [allowedEntityTypes]="allowedEntityTypes"
@@ -90,7 +90,7 @@
           <mat-icon class="material-icons" color="primary">bug_report</mat-icon>
         </button>
       </tb-js-func>
-      <div fxLayout="row" style="padding-bottom: 16px;">
+      <div class="flex flex-row" style="padding-bottom: 16px;">
         <button mat-button mat-raised-button color="primary" (click)="testScript()">
           {{ testScriptLabel | translate }}
         </button>
