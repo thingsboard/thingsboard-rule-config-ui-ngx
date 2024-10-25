@@ -7,7 +7,7 @@
     "postinstall": "tsc -p tsconfig.builders.json --skipLibCheck"
   },
   "dependencies": {
-    "@angular-devkit/architect": "^0.1502.4",
+    "@angular-devkit/architect": "0.1802.7",
     "rxjs": "~7.8.1",
     "typescript": "~5.5.4"
   },
