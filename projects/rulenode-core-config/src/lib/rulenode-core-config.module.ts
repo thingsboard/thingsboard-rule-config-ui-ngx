@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  TranslateService
-} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import addRuleNodeCoreLocaleEnglish from './locale/rulenode-core-locale.constant';
 import { EmptyConfigComponent } from './components/empty-config.component';
 import { SharedModule } from '@shared/public-api';
@@ -12,6 +10,7 @@ import { RulenodeCoreConfigEnrichmentModule } from './components/enrichment/rule
 import { RulenodeCoreConfigExternalModule } from './components/external/rulenode-core-config-external.module';
 import { RulenodeCoreConfigTransformModule } from './components/transform/rulenode-core-config-transform.module';
 import { RuleNodeCoreConfigFlowModule } from './components/flow/rulenode-core-config-flow.module';
+import { addLibraryStyles } from './lib-styles';
 
 @NgModule({
   declarations: [
@@ -35,6 +34,7 @@ export class RuleNodeCoreConfigModule {
 
   constructor(translate: TranslateService) {
     addRuleNodeCoreLocaleEnglish(translate);
+    addLibraryStyles('tb-rule-node-core-config-css');
   }
 
 }

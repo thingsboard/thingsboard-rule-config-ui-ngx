@@ -1,6 +1,6 @@
 @import './constants';
 
-:host {
+.tb-default tb-rule-node-config {
   .margin-8 {
     margin: 8px;
   }
@@ -26,17 +26,21 @@
       opacity: unset;
     }
   }
+
+  .same-width-component-row {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 16px;
+    @media #{$mat-xs} {
+      gap: 8px;
+    }
+
+    & > * {
+      flex: 1;
+    }
+  }
 }
 
-.same-width-component-row {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 16px;
-  @media #{$mat-xs} {
-    gap: 8px;
-  }
-
-  & > * {
-    flex: 1;
-  }
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
