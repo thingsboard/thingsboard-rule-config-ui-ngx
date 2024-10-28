@@ -1,21 +1,21 @@
-<section fxLayout="column" class="tb-kv-map-config" [formGroup]="kvListFormGroup">
-  <div class="header" fxFlex fxLayout="row" fxLayoutGap="8px">
-    <span class="cell tb-required" fxFlex>{{ keyText | translate }}</span>
-    <span class="cell tb-required" fxFlex>{{ valText | translate }}</span>
-    <span [fxShow]="!disabled" style="width: 52px;" innerHTML="&nbsp"></span>
+<section class="tb-kv-map-config flex flex-col" [formGroup]="kvListFormGroup">
+  <div class="header flex flex-1 flex-row gap-2">
+    <span class="cell tb-required flex-1">{{ keyText | translate }}</span>
+    <span class="cell tb-required flex-1">{{ valText | translate }}</span>
+    <span [class.!hidden]="disabled" style="width: 52px;" innerHTML="&nbsp"></span>
   </div>
   <div class="body">
-    <div class="row" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px"
+    <div class="row flex flex-row items-center justify-start gap-2"
          formArrayName="keyVals"
          *ngFor="let keyValControl of keyValsFormArray().controls; let $index = index">
-      <mat-form-field fxFlex class="cell mat-block">
+      <mat-form-field class="cell mat-block flex-1">
         <input [formControl]="keyValControl.get('key')" matInput required
                placeholder="{{ keyText | translate }}"/>
         <mat-error *ngIf="keyValControl.get('key').hasError('required')">
           {{ keyRequiredText | translate }}
         </mat-error>
       </mat-form-field>
-      <mat-form-field fxFlex class="cell mat-block">
+      <mat-form-field class="cell mat-block flex-1">
         <input [formControl]="keyValControl.get('value')" matInput required
                placeholder="{{ valText | translate }}"/>
         <mat-error *ngIf="keyValControl.get('value').hasError('required')">
@@ -23,7 +23,7 @@
         </mat-error>
       </mat-form-field>
       <button mat-icon-button color="primary"
-              [fxShow]="!disabled"
+              [class.!hidden]="disabled"
               type="button"
               (click)="removeKeyVal($index)"
               [disabled]="isLoading$ | async"
@@ -40,7 +40,7 @@
                      valText: translate.instant(valText)})) : ''"></tb-error>
   <div style="margin-top: 16px;">
     <button mat-button mat-raised-button color="primary"
-            [fxShow]="!disabled"
+            [class.!hidden]="disabled"
             [disabled]="isLoading$ | async"
             (click)="addKeyVal()"
             type="button"

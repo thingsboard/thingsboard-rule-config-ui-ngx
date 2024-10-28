@@ -1,4 +1,4 @@
-<section [formGroup]="kafkaConfigForm" fxLayout="column">
+<section [formGroup]="kafkaConfigForm" class="flex flex-col">
   <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.topic-pattern</mat-label>
     <input required matInput formControlName="topicPattern">
@@ -79,11 +79,11 @@
     valText="tb.rulenode.value"
     valRequiredText="tb.rulenode.value-required">
   </tb-kv-map-config-old>
-  <mat-checkbox fxFlex formControlName="addMetadataKeyValuesAsKafkaHeaders">
+  <mat-checkbox class="flex-1" formControlName="addMetadataKeyValuesAsKafkaHeaders">
     {{ 'tb.rulenode.add-metadata-key-values-as-kafka-headers' | translate }}
   </mat-checkbox>
   <div class="tb-hint" translate>tb.rulenode.add-metadata-key-values-as-kafka-headers-hint</div>
-  <mat-form-field fxFlex class="mat-block" *ngIf="kafkaConfigForm.get('addMetadataKeyValuesAsKafkaHeaders').value">
+  <mat-form-field class="mat-block flex-1" *ngIf="kafkaConfigForm.get('addMetadataKeyValuesAsKafkaHeaders').value">
     <mat-label translate>tb.rulenode.charset-encoding</mat-label>
     <mat-select formControlName="kafkaHeadersCharset" required>
       <mat-option *ngFor="let charset of ToByteStandartCharsetTypesValues" [value]="charset">

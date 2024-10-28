@@ -1,4 +1,4 @@
-<section [formGroup]="restApiCallConfigForm" fxLayout="column">
+<section [formGroup]="restApiCallConfigForm" class="flex flex-col">
   <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.endpoint-url-pattern</mat-label>
     <input required matInput formControlName="restEndpointUrlPattern">
@@ -33,8 +33,8 @@
       {{ 'tb.rulenode.use-system-proxy-properties' | translate }}
     </mat-checkbox>
     <div *ngIf="!restApiCallConfigForm.get('useSystemProxyProperties').value">
-      <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="8px">
-        <mat-form-field class="mat-block" fxFlex="100" fxFlex.gt-sm="10">
+      <div class="gt-sm:flex gt-sm:flex-row gt-sm:gap-2">
+        <mat-form-field class="mat-block gt-sm:max-w-10% gt-sm:flex-full">
           <mat-label translate>tb.rulenode.proxy-scheme</mat-label>
           <mat-select formControlName="proxyScheme">
             <mat-option *ngFor="let proxyScheme of proxySchemes" [value]="proxyScheme">
@@ -42,14 +42,14 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="md-block" fxFlex="100" fxFlex.gt-sm="50">
+        <mat-form-field class="md-block gt-sm:max-w-50% gt-sm:flex-full">
           <mat-label translate>tb.rulenode.proxy-host</mat-label>
           <input matInput required formControlName="proxyHost">
           <mat-error *ngIf="restApiCallConfigForm.get('proxyHost').hasError('required')">
             {{ 'tb.rulenode.proxy-host-required' | translate }}
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="mat-block" fxFlex="100" fxFlex.gt-sm="40">
+        <mat-form-field class="mat-block gt-sm:max-w-40% gt-sm:flex-full">
           <mat-label translate>tb.rulenode.proxy-port</mat-label>
           <input matInput required formControlName="proxyPort" type="number" step="1">
           <mat-error *ngIf="restApiCallConfigForm.get('proxyPort').hasError('required')">

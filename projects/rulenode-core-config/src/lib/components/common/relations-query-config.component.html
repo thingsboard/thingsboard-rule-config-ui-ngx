@@ -1,8 +1,8 @@
 <section [formGroup]="relationsQueryFormGroup" class="tb-form-panel stroked">
   <div class="tb-form-panel-title tb-required" translate>tb.rulenode.relations-query</div>
   <section>
-    <div fxLayoutGap="16px" fxLayout="row">
-      <mat-form-field fxFlex="50" class="mat-block" style="min-width: 100px;" hideRequiredMarker>
+    <div class="flex flex-row gap-4">
+      <mat-form-field class="mat-block max-w-50% flex-full" style="min-width: 100px;" hideRequiredMarker>
         <mat-label translate>relation.direction</mat-label>
         <mat-select required formControlName="direction">
           <mat-option *ngFor="let type of directionTypes" [value]="type">
@@ -10,7 +10,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field fxFlex="50" floatLabel="always" class="mat-block">
+      <mat-form-field floatLabel="always" class="mat-block max-w-50% flex-full">
         <mat-label translate>tb.rulenode.max-relation-level</mat-label>
         <input matInput
                type="number"

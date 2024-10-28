@@ -1,6 +1,6 @@
 <section [formGroup]="calculateDeltaConfigForm">
-  <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="22px">
-    <mat-form-field class="mat-block" fxFlex>
+  <div class="gt-sm:flex gt-sm:flex-row gt-sm:gap-5.5">
+    <mat-form-field class="mat-block flex-1">
       <mat-label>{{ 'tb.rulenode.input-value-key' | translate }}</mat-label>
       <input matInput formControlName="inputValueKey">
       <mat-error *ngIf="calculateDeltaConfigForm.get('inputValueKey').hasError('required') ||
@@ -8,7 +8,7 @@
         {{ 'tb.rulenode.input-value-key-required' | translate }}
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="mat-block" fxFlex>
+    <mat-form-field class="mat-block flex-1">
       <mat-label>{{ 'tb.rulenode.output-value-key' | translate }}</mat-label>
       <input matInput formControlName="outputValueKey">
       <mat-error *ngIf="calculateDeltaConfigForm.get('outputValueKey').hasError('required') ||
@@ -17,7 +17,7 @@
       </mat-error>
     </mat-form-field>
   </div>
-  <mat-form-field class="mat-block" fxFlex>
+  <mat-form-field class="mat-block flex-1">
     <mat-label>{{ 'tb.rulenode.number-of-digits-after-floating-point' | translate }}</mat-label>
     <input type="number" min="0" max="15" step="1" matInput formControlName="round">
     <mat-error *ngIf="calculateDeltaConfigForm.get('round').hasError('min')">

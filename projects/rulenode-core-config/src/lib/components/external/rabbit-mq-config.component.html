@@ -1,4 +1,4 @@
-<section [formGroup]="rabbitMqConfigForm" fxLayout="column">
+<section [formGroup]="rabbitMqConfigForm" class="flex flex-col">
   <mat-form-field class="mat-block">
     <mat-label translate>tb.rulenode.exchange-name-pattern</mat-label>
     <input matInput formControlName="exchangeNamePattern">
@@ -15,15 +15,15 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="8px">
-    <mat-form-field fxFlex="100" fxFlex.gt-sm="60" class="mat-block">
+  <div class="gt-sm:flex gt-sm:flex-row gt-sm:gap-2">
+    <mat-form-field class="mat-block gt-sm:max-w-60% gt-sm:flex-full">
       <mat-label translate>tb.rulenode.host</mat-label>
       <input required matInput formControlName="host">
       <mat-error *ngIf="rabbitMqConfigForm.get('host').hasError('required')">
         {{ 'tb.rulenode.host-required' | translate }}
       </mat-error>
     </mat-form-field>
-    <mat-form-field fxFlex="100" fxFlex.gt-sm="40" class="mat-block">
+    <mat-form-field class="mat-block gt-sm:max-w-40% gt-sm:flex-full">
       <mat-label translate>tb.rulenode.port</mat-label>
       <input required type="number" step="1" min="1" max="65535" matInput formControlName="port">
       <mat-error *ngIf="rabbitMqConfigForm.get('port').hasError('required')">
