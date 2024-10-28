@@ -6,6 +6,9 @@ import { resolve } from 'path';
 import { from, Observable } from 'rxjs';
 import { mapTo, switchMap, tap } from 'rxjs/operators';
 import { NgPackagr, ngPackagr } from 'ng-packagr';
+import { existsSync } from 'fs';
+import { watch } from 'chokidar';
+import { execSync } from 'child_process';
 
 interface StaticServeOptions extends NgPackagrBuilderOptions {
   staticServeConfig: string;
@@ -35,10 +38,37 @@ async function initialize(
   return packager;
 }
 
+function watchStyles(options: StaticServeOptions,
+                     context: BuilderContext) {
+  const styleScss = resolve(context.workspaceRoot, 'projects', context.target.project, 'style.scss');
+  if (existsSync(styleScss)) {
+    const styleCompScss = resolve(context.workspaceRoot, 'projects', context.target.project, 'style.comp.scss');
+    context.logger.info(`==> Watching library styles: ${styleScss}`);
+    const postcss = resolve(context.workspaceRoot, 'node_modules', '.bin', 'postcss');
+    watch(styleScss).on('change', () => {
+      const compileStyleScssCommand = `${postcss} ${styleScss} -o ${styleCompScss}`;
+      executeCliCommand(context, compileStyleScssCommand, 'Compile style.scss')
+    });
+  }
+}
+
+function executeCliCommand(context: BuilderContext,
+                          cliCommand: string, description: string) {
+  try {
+    execSync(cliCommand, {
+      stdio: 'inherit'
+    });
+  } catch (err) {
+    context.logger.error(`==> ${description} failed`, err);
+    process.exit(1);
+  }
+}
+
 export function execute(
   options: StaticServeOptions,
   context: BuilderContext,
 ): Observable<BuilderOutput> {
+  watchStyles(options, context);
   return from(initialize(options, context.workspaceRoot)).pipe(
     switchMap(packager => {
       return packager.watch().pipe(
