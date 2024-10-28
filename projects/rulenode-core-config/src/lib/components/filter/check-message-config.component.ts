@@ -7,7 +7,7 @@ import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/p
 @Component({
   selector: 'tb-filter-node-check-message-config',
   templateUrl: './check-message-config.component.html',
-  styleUrls: ['../../../../style.scss']
+  styleUrls: []
 })
 export class CheckMessageConfigComponent extends RuleNodeConfigurationComponent {
 

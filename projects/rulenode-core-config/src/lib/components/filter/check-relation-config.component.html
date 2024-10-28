@@ -1,6 +1,6 @@
 <section [formGroup]="checkRelationConfigForm" class="tb-form-panel stroked no-padding-bottom">
   <div class="tb-form-panel-title" translate>tb.rulenode.relation-search-parameters</div>
-  <div fxLayout="column">
+  <div class="flex flex-col">
     <mat-form-field class="mat-block" hideRequiredMarker>
       <mat-label>{{ 'relation.direction' | translate }}</mat-label>
       <mat-select formControlName="direction" required>
@@ -27,7 +27,7 @@
         formControlName="entityType">
       </tb-entity-type-select>
       <tb-entity-autocomplete
-        fxFlex
+        class="flex-1"
         required
         *ngIf="checkRelationConfigForm.get('entityType').value"
         [entityType]="checkRelationConfigForm.get('entityType').value"

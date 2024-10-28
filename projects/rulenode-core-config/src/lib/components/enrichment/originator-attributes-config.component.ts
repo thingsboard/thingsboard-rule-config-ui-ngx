@@ -9,7 +9,7 @@ import { FetchTo } from '../../rulenode-core-config.models';
 @Component({
   selector: 'tb-enrichment-node-originator-attributes-config',
   templateUrl: './originator-attributes-config.component.html',
-  styleUrls: ['../../../../style.scss']
+  styleUrls: []
 })
 export class OriginatorAttributesConfigComponent extends RuleNodeConfigurationComponent {
 

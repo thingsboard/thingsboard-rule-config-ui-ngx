@@ -46,3 +46,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Compiled Scss
+
+style.comp.scss

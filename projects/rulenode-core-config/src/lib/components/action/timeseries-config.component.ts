@@ -7,7 +7,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 @Component({
   selector: 'tb-action-node-timeseries-config',
   templateUrl: './timeseries-config.component.html',
-  styleUrls: ['../../../../style.scss']
+  styleUrls: []
 })
 export class TimeseriesConfigComponent extends RuleNodeConfigurationComponent {
 

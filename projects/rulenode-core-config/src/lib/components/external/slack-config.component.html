@@ -1,5 +1,5 @@
-<section [formGroup]="slackConfigForm" fxLayout="column">
-  <mat-form-field fxFlex class="mat-block">
+<section [formGroup]="slackConfigForm" class="flex flex-col">
+  <mat-form-field class="mat-block flex-1">
     <mat-label translate>tb.rulenode.message-template</mat-label>
     <input required matInput formControlName="messageTemplate">
     <mat-error *ngIf="slackConfigForm.get('messageTemplate').hasError('required')">

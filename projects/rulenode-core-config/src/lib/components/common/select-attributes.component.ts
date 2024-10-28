@@ -18,7 +18,7 @@ import { isDefinedAndNotNull } from '@core/public-api';
 @Component({
   selector: 'tb-select-attributes',
   templateUrl: './select-attributes.component.html',
-  styleUrls: ['../../../../style.scss'],
+  styleUrls: [],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => SelectAttributesComponent),

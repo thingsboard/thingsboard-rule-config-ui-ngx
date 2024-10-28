@@ -8,7 +8,7 @@ import { deduplicationStrategiesTranslations, FetchMode } from '../../rulenode-c
 @Component({
   selector: 'tb-action-node-msg-deduplication-config',
   templateUrl: './deduplication-config.component.html',
-  styleUrls: ['../../../../style.scss']
+  styleUrls: []
 })
 
 export class DeduplicationConfigComponent extends RuleNodeConfigurationComponent {

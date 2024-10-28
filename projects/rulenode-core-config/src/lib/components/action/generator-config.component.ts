@@ -1,5 +1,5 @@
 import { Component, EventEmitter, ViewChild } from '@angular/core';
-import { AppState, getCurrentAuthState, NodeScriptTestService } from '@core/public-api';
+import { AppState, getCurrentAuthState, isDefinedAndNotNull, NodeScriptTestService } from '@core/public-api';
 import {
   AliasEntityType,
   DebugRuleNodeEventBody,
@@ -33,11 +33,12 @@ export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
 
   allowedEntityTypes = [
     EntityType.DEVICE, EntityType.ASSET, EntityType.ENTITY_VIEW, EntityType.CUSTOMER,
-    EntityType.USER, EntityType.DASHBOARD, AliasEntityType.CURRENT_TENANT
+    EntityType.USER, EntityType.DASHBOARD
   ];
 
   additionEntityTypes = {
-    CURRENT_RULE_NODE: this.translate.instant('tb.rulenode.current-rule-node')
+    TENANT: this.translate.instant('tb.rulenode.current-tenant'),
+    RULE_NODE: this.translate.instant('tb.rulenode.current-rule-node')
   };
 
   readonly hasScript = true;
@@ -59,7 +60,7 @@ export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
     this.generatorConfigForm = this.fb.group({
       msgCount: [configuration ? configuration.msgCount : null, [Validators.required, Validators.min(0)]],
       periodInSeconds: [configuration ? configuration.periodInSeconds : null, [Validators.required, Validators.min(1)]],
-      originator: [configuration ? configuration.originator : null, []],
+      originator: [configuration ? configuration.originator : {id: null, entityType: EntityType.RULE_NODE}, []],
       scriptLang: [configuration ? configuration.scriptLang : ScriptLanguage.JS, [Validators.required]],
       jsScript: [configuration ? configuration.jsScript : null, []],
       tbelScript: [configuration ? configuration.tbelScript : null, []]
@@ -84,21 +85,17 @@ export class GeneratorConfigComponent extends RuleNodeConfigurationComponent {
   }
 
   protected prepareInputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {
-    if (configuration) {
-      if (!configuration.scriptLang) {
-        configuration.scriptLang = ScriptLanguage.JS;
-      }
-      if (configuration.originatorId && configuration.originatorType) {
-        configuration.originator = {
-          id: configuration.originatorId, entityType: configuration.originatorType
-        };
-      } else {
-        configuration.originator = null;
-      }
-      delete configuration.originatorId;
-      delete configuration.originatorType;
-    }
-    return configuration;
+    return {
+      msgCount: isDefinedAndNotNull(configuration?.msgCount) ? configuration?.msgCount : 0,
+      periodInSeconds: isDefinedAndNotNull(configuration?.periodInSeconds) ? configuration?.periodInSeconds : 1,
+      originator: {
+        id: isDefinedAndNotNull(configuration?.originatorId) ? configuration?.originatorId : null,
+        entityType: isDefinedAndNotNull(configuration?.originatorType) ? configuration?.originatorType :  EntityType.RULE_NODE
+      },
+      scriptLang: isDefinedAndNotNull(configuration?.scriptLang) ? configuration?.scriptLang : ScriptLanguage.JS,
+      tbelScript: isDefinedAndNotNull(configuration?.tbelScript) ? configuration?.tbelScript : null,
+      jsScript: isDefinedAndNotNull(configuration?.jsScript) ? configuration?.jsScript : null,
+    };
   }
 
   protected prepareOutputConfig(configuration: RuleNodeConfiguration): RuleNodeConfiguration {

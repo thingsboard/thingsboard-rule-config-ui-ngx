@@ -215,6 +215,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'message-metadata': 'Message metadata',
           generate: 'Generate',
           'current-rule-node': 'Current Rule Node',
+          'current-tenant': 'Current Tenant',
           'generator-function': 'Generator function',
           'test-generator-function': 'Test generator function',
           generator: 'Generator',

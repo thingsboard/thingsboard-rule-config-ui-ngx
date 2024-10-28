@@ -1,18 +1,18 @@
-<section [formGroup]="alarmStatusGroup" fxLayout="column" fxLayoutAlign="center center">
-  <mat-chip-listbox multiple formControlName="alarmStatus" class="chip-listbox" fxLayout="column">
+<section [formGroup]="alarmStatusGroup" class="flex flex-col items-center justify-center">
+  <mat-chip-listbox multiple formControlName="alarmStatus" class="chip-listbox flex flex-col">
     <div class="toggle-column">
-      <mat-chip-option fxFlex class="option" [value]="alarmStatus.ACTIVE_UNACK">
+      <mat-chip-option class="option flex-1" [value]="alarmStatus.ACTIVE_UNACK">
         {{ alarmStatusTranslations.get(alarmStatus.ACTIVE_UNACK) | translate }}
       </mat-chip-option>
-      <mat-chip-option fxFlex class="option" [value]="alarmStatus.ACTIVE_ACK">
+      <mat-chip-option class="option flex-1" [value]="alarmStatus.ACTIVE_ACK">
         {{ alarmStatusTranslations.get(alarmStatus.ACTIVE_ACK) | translate }}
       </mat-chip-option>
     </div>
     <div class="toggle-column">
-      <mat-chip-option fxFlex class="option" [value]="alarmStatus.CLEARED_UNACK">
+      <mat-chip-option class="option flex-1" [value]="alarmStatus.CLEARED_UNACK">
         {{ alarmStatusTranslations.get(alarmStatus.CLEARED_UNACK) | translate }}
       </mat-chip-option>
-      <mat-chip-option fxFlex class="option" [value]="alarmStatus.CLEARED_ACK">
+      <mat-chip-option class="option flex-1" [value]="alarmStatus.CLEARED_ACK">
         {{ alarmStatusTranslations.get(alarmStatus.CLEARED_ACK) | translate }}
       </mat-chip-option>
     </div>

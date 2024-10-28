@@ -24,7 +24,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'tb-enrichment-node-get-telemetry-from-database',
   templateUrl: './get-telemetry-from-database-config.component.html',
-  styleUrls: ['./get-telemetry-from-database-config.component.scss', '../../../../style.scss']
+  styleUrls: ['./get-telemetry-from-database-config.component.scss']
 })
 export class GetTelemetryFromDatabaseConfigComponent extends RuleNodeConfigurationComponent {
 

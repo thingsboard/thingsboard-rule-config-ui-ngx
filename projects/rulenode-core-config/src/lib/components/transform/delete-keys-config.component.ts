@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'tb-transformation-node-delete-keys-config',
   templateUrl: './delete-keys-config.component.html',
-  styleUrls: ['../../../../style.scss']
+  styleUrls: []
 })
 
 export class DeleteKeysConfigComponent extends RuleNodeConfigurationComponent {

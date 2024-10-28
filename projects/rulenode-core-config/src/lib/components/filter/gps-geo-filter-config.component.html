@@ -2,15 +2,15 @@
   <section class="tb-form-panel stroked">
     <div class="tb-form-panel-title" translate>tb.rulenode.coordinate-field-names</div>
     <section>
-      <div fxLayout="row" fxLayoutGap="16px">
-        <mat-form-field fxFlex="50" class="mat-block">
+      <div class="flex flex-row gap-4">
+        <mat-form-field class="mat-block max-w-50% flex-full">
           <mat-label>{{ 'tb.rulenode.latitude-field-name' | translate }}</mat-label>
           <input matInput formControlName="latitudeKeyName" required>
           <mat-error *ngIf="geoFilterConfigForm.get('latitudeKeyName').hasError('required')">
             {{ 'tb.rulenode.latitude-field-name-required' | translate }}
           </mat-error>
         </mat-form-field>
-        <mat-form-field fxFlex="50" class="mat-block">
+        <mat-form-field class="mat-block max-w-50% flex-full">
           <mat-label>{{ 'tb.rulenode.longitude-field-name' | translate }}</mat-label>
           <input matInput formControlName="longitudeKeyName" required>
           <mat-error *ngIf="geoFilterConfigForm.get('longitudeKeyName').hasError('required')">
@@ -23,8 +23,8 @@
   </section>
   <section class="tb-form-panel stroked" [class.no-padding-bottom]="!defaultPaddingEnable">
     <div class="tb-form-panel-title" translate>tb.rulenode.geofence-configuration</div>
-    <section fxLayout="column">
-      <mat-form-field fxFlex class="mat-block" hideRequiredMarker>
+    <section class="flex flex-col">
+      <mat-form-field class="mat-block flex-1" hideRequiredMarker>
         <mat-label>{{ 'tb.rulenode.perimeter-type' | translate }}</mat-label>
         <mat-select formControlName="perimeterType">
           <mat-option *ngFor="let type of perimeterTypes" [value]="type">
@@ -54,18 +54,18 @@
         </mat-error>
         <mat-hint>{{ 'tb.rulenode.perimeter-key-name-hint' | translate }}</mat-hint>
       </mat-form-field>
-      <div fxLayout="column"
+      <div class="flex flex-col"
            *ngIf="geoFilterConfigForm.get('perimeterType').value === perimeterType.CIRCLE &&
                     !geoFilterConfigForm.get('fetchPerimeterInfoFromMessageMetadata').value">
-        <div fxLayout="row" fxLayoutGap="16px">
-          <mat-form-field fxFlex>
+        <div class="flex flex-row gap-4">
+          <mat-form-field class="flex-1">
             <mat-label>{{ 'tb.rulenode.circle-center-latitude' | translate }}</mat-label>
             <input type="number" min="-90" max="90" step="0.1" matInput formControlName="centerLatitude" required>
             <mat-error *ngIf="geoFilterConfigForm.get('centerLatitude').hasError('required')">
               {{ 'tb.rulenode.circle-center-latitude-required' | translate }}
             </mat-error>
           </mat-form-field>
-          <mat-form-field fxFlex>
+          <mat-form-field class="flex-1">
             <mat-label>{{ 'tb.rulenode.circle-center-longitude' | translate }}</mat-label>
             <input type="number" min="-180" max="180" step="0.1" matInput formControlName="centerLongitude" required>
             <mat-error *ngIf="geoFilterConfigForm.get('centerLongitude').hasError('required')">
@@ -73,15 +73,15 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <div fxLayout="row" fxLayoutGap="16px">
-          <mat-form-field fxFlex>
+        <div class="flex flex-row gap-4">
+          <mat-form-field class="flex-1">
             <mat-label>{{ 'tb.rulenode.range' | translate }}</mat-label>
             <input type="number" min="0" step="0.1" matInput formControlName="range" required>
             <mat-error *ngIf="geoFilterConfigForm.get('range').hasError('required')">
               {{ 'tb.rulenode.range-required' | translate }}
             </mat-error>
           </mat-form-field>
-          <mat-form-field fxFlex>
+          <mat-form-field class="flex-1">
             <mat-label>{{ 'tb.rulenode.range-units' | translate }}</mat-label>
             <mat-select formControlName="rangeUnit" required>
               <mat-option *ngFor="let type of rangeUnits" [value]="type">

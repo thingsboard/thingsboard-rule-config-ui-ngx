@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'tb-enrichment-node-entity-details-config',
   templateUrl: './entity-details-config.component.html',
-  styleUrls: ['../../../../style.scss']
+  styleUrls: []
 })
 
 export class EntityDetailsConfigComponent extends RuleNodeConfigurationComponent implements OnInit {

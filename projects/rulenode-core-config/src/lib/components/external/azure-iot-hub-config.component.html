@@ -1,4 +1,4 @@
-<section [formGroup]="azureIotHubConfigForm" fxLayout="column">
+<section [formGroup]="azureIotHubConfigForm"  class="flex flex-col">
   <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.topic</mat-label>
     <input required matInput formControlName="topicPattern">
@@ -29,7 +29,7 @@
           {{ azureIotHubCredentialsTypeTranslationsMap.get(azureIotHubConfigForm.get('credentials.type').value) | translate }}
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <section formGroupName="credentials" fxLayout="column">
+      <section formGroupName="credentials" class="flex flex-col">
         <mat-form-field class="mat-block">
           <mat-label translate>tb.rulenode.credentials-type</mat-label>
           <mat-select formControlName="type" required>
@@ -41,7 +41,7 @@
             {{ 'tb.rulenode.credentials-type-required' | translate }}
           </mat-error>
         </mat-form-field>
-        <section fxLayout="column" [ngSwitch]="azureIotHubConfigForm.get('credentials.type').value">
+        <section class="flex flex-col" [ngSwitch]="azureIotHubConfigForm.get('credentials.type').value">
           <ng-template ngSwitchCase="anonymous">
           </ng-template>
           <ng-template ngSwitchCase="sas">

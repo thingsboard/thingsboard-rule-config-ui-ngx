@@ -27,7 +27,7 @@
 
   <div class="tb-form-panel no-padding-bottom stroked">
     <div class="tb-form-panel-title" translate>tb.rulenode.originator</div>
-    <tb-entity-select fxFlex
+    <tb-entity-select class="flex-1"
                       required="true"
                       useAliasEntityTypes="true"
                       [allowedEntityTypes]="allowedEntityTypes"
@@ -35,62 +35,66 @@
                       formControlName="originator">
     </tb-entity-select>
   </div>
-  <div class="tb-form-panel no-padding-bottom stroked">
-    <div class="tb-form-panel-title" translate>tb.rulenode.generator-function</div>
-    <tb-js-func *ngIf="generatorConfigForm.get('scriptLang').value === scriptLanguage.JS"
-                #jsFuncComponent
-                formControlName="jsScript"
-                functionName="Generate"
-                [functionArgs]="['prevMsg', 'prevMetadata', 'prevMsgType']"
-                helpId="rulenode/generator_node_script_fn"
-                noValidate="true">
-      <tb-toggle-select toolbarPrefixButton formControlName="scriptLang" appearance="fill" *ngIf="tbelEnabled">
-        <tb-toggle-option [value]="scriptLanguage.TBEL">
-          {{ 'tb.rulenode.script-lang-tbel' | translate }}
-        </tb-toggle-option>
-        <tb-toggle-option [value]="scriptLanguage.JS">
-          {{ 'tb.rulenode.script-lang-js' | translate }}
-        </tb-toggle-option>
-      </tb-toggle-select>
-      <button toolbarSuffixButton
-              mat-icon-button
-              matTooltip="{{ testScriptLabel | translate }}"
-              matTooltipPosition="above"
-              class="tb-mat-32"
-              (click)="testScript()">
-        <mat-icon class="material-icons" color="primary">bug_report</mat-icon>
-      </button>
-    </tb-js-func>
-    <tb-js-func *ngIf="generatorConfigForm.get('scriptLang').value === scriptLanguage.TBEL"
-                #tbelFuncComponent
-                formControlName="tbelScript"
-                functionName="Generate"
-                [functionArgs]="['prevMsg', 'prevMetadata', 'prevMsgType']"
-                [disableUndefinedCheck]="true"
-                [scriptLanguage]="scriptLanguage.TBEL"
-                helpId="rulenode/tbel/generator_node_script_fn"
-                noValidate="true">
-      <tb-toggle-select toolbarPrefixButton formControlName="scriptLang" appearance="fill">
-        <tb-toggle-option [value]="scriptLanguage.TBEL">
-          {{ 'tb.rulenode.script-lang-tbel' | translate }}
-        </tb-toggle-option>
-        <tb-toggle-option [value]="scriptLanguage.JS">
-          {{ 'tb.rulenode.script-lang-js' | translate }}
-        </tb-toggle-option>
-      </tb-toggle-select>
-      <button toolbarSuffixButton
-              mat-icon-button
-              matTooltip="{{ testScriptLabel | translate }}"
-              matTooltipPosition="above"
-              class="tb-mat-32"
-              (click)="testScript()">
-        <mat-icon class="material-icons" color="primary">bug_report</mat-icon>
-      </button>
-    </tb-js-func>
-    <div fxLayout="row" style="padding-bottom: 16px;">
-      <button mat-button mat-raised-button color="primary" (click)="testScript()">
-        {{ testScriptLabel | translate }}
-      </button>
-    </div>
+  <div class="tb-form-panel stroked">
+    <mat-expansion-panel class="tb-settings" expanded>
+      <mat-expansion-panel-header>
+        <mat-panel-title translate>tb.rulenode.generator-function</mat-panel-title>
+      </mat-expansion-panel-header>
+      <tb-js-func *ngIf="generatorConfigForm.get('scriptLang').value === scriptLanguage.JS"
+                  #jsFuncComponent
+                  formControlName="jsScript"
+                  functionName="Generate"
+                  [functionArgs]="['prevMsg', 'prevMetadata', 'prevMsgType']"
+                  helpId="rulenode/generator_node_script_fn"
+                  noValidate="true">
+        <tb-toggle-select toolbarPrefixButton formControlName="scriptLang" appearance="fill" *ngIf="tbelEnabled">
+          <tb-toggle-option [value]="scriptLanguage.TBEL">
+            {{ 'tb.rulenode.script-lang-tbel' | translate }}
+          </tb-toggle-option>
+          <tb-toggle-option [value]="scriptLanguage.JS">
+            {{ 'tb.rulenode.script-lang-js' | translate }}
+          </tb-toggle-option>
+        </tb-toggle-select>
+        <button toolbarSuffixButton
+                mat-icon-button
+                matTooltip="{{ testScriptLabel | translate }}"
+                matTooltipPosition="above"
+                class="tb-mat-32"
+                (click)="testScript()">
+          <mat-icon class="material-icons" color="primary">bug_report</mat-icon>
+        </button>
+      </tb-js-func>
+      <tb-js-func *ngIf="generatorConfigForm.get('scriptLang').value === scriptLanguage.TBEL"
+                  #tbelFuncComponent
+                  formControlName="tbelScript"
+                  functionName="Generate"
+                  [functionArgs]="['prevMsg', 'prevMetadata', 'prevMsgType']"
+                  [disableUndefinedCheck]="true"
+                  [scriptLanguage]="scriptLanguage.TBEL"
+                  helpId="rulenode/tbel/generator_node_script_fn"
+                  noValidate="true">
+        <tb-toggle-select toolbarPrefixButton formControlName="scriptLang" appearance="fill">
+          <tb-toggle-option [value]="scriptLanguage.TBEL">
+            {{ 'tb.rulenode.script-lang-tbel' | translate }}
+          </tb-toggle-option>
+          <tb-toggle-option [value]="scriptLanguage.JS">
+            {{ 'tb.rulenode.script-lang-js' | translate }}
+          </tb-toggle-option>
+        </tb-toggle-select>
+        <button toolbarSuffixButton
+                mat-icon-button
+                matTooltip="{{ testScriptLabel | translate }}"
+                matTooltipPosition="above"
+                class="tb-mat-32"
+                (click)="testScript()">
+          <mat-icon class="material-icons" color="primary">bug_report</mat-icon>
+        </button>
+      </tb-js-func>
+      <div class="flex flex-row" style="padding-bottom: 16px;">
+        <button mat-button mat-raised-button color="primary" (click)="testScript()">
+          {{ testScriptLabel | translate }}
+        </button>
+      </div>
+    </mat-expansion-panel>
   </div>
 </section>

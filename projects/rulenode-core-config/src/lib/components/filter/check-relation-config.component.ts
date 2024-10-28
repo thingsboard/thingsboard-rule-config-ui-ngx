@@ -12,7 +12,7 @@ import {
 @Component({
   selector: 'tb-filter-node-check-relation-config',
   templateUrl: './check-relation-config.component.html',
-  styleUrls: ['./check-relation-config.component.scss', '../../../../style.scss']
+  styleUrls: ['./check-relation-config.component.scss']
 })
 export class CheckRelationConfigComponent extends RuleNodeConfigurationComponent {
 

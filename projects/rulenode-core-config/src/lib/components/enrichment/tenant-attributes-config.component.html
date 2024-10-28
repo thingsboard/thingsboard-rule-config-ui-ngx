@@ -1,6 +1,6 @@
 <section [formGroup]="tenantAttributesConfigForm" class="tb-form-panel stroked">
   <div class="tb-form-panel-title" translate>tb.rulenode.mapping-of-tenant</div>
-  <div fxFlex fxLayoutAlign="center center">
+  <div class="flex flex-1 items-center justify-center">
     <div class="fetch-to-data-toggle">
       <tb-toggle-select class="fetch-to-data-toggle" formControlName="dataToFetch" appearance="fill">
         <tb-toggle-option *ngFor="let data of fetchToData" [value]="data.value">

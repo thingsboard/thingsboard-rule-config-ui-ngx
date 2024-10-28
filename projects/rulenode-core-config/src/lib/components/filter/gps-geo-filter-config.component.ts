@@ -13,7 +13,7 @@ import {
 @Component({
   selector: 'tb-filter-node-gps-geofencing-config',
   templateUrl: './gps-geo-filter-config.component.html',
-  styleUrls: ['./gps-geo-filter-config.component.scss', '../../../../style.scss']
+  styleUrls: ['./gps-geo-filter-config.component.scss']
 })
 export class GpsGeoFilterConfigComponent extends RuleNodeConfigurationComponent {
 

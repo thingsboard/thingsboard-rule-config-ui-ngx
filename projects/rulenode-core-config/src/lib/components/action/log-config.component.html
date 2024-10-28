@@ -1,4 +1,4 @@
-<section [formGroup]="logConfigForm" fxLayout="column">
+<section [formGroup]="logConfigForm" class="flex flex-col">
   <tb-script-lang formControlName="scriptLang" *ngIf="tbelEnabled"></tb-script-lang>
   <tb-js-func *ngIf="logConfigForm.get('scriptLang').value === scriptLanguage.JS"
               #jsFuncComponent
@@ -34,7 +34,7 @@
       <mat-icon class="material-icons" color="primary">bug_report</mat-icon>
     </button>
   </tb-js-func>
-  <div fxLayout="row">
+  <div class="flex flex-row">
     <button mat-button mat-raised-button color="primary" (click)="testScript()">
       {{ testScriptLabel | translate }}
     </button>

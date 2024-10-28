@@ -1,4 +1,4 @@
-<section [formGroup]="mqttConfigForm" fxLayout="column">
+<section [formGroup]="mqttConfigForm" class="flex flex-col">
   <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.topic-pattern</mat-label>
     <input required matInput formControlName="topicPattern">
@@ -7,15 +7,15 @@
     </mat-error>
     <mat-hint translate>tb.rulenode.general-pattern-hint</mat-hint>
   </mat-form-field>
-  <div fxFlex fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="8px">
-    <mat-form-field fxFlex="60" class="mat-block">
+  <div class="flex flex-1 flex-col gt-sm:flex-row gt-sm:gap-2">
+    <mat-form-field class="mat-block gt-sm:max-w-60% gt-sm:flex-full">
       <mat-label translate>tb.rulenode.host</mat-label>
       <input required matInput formControlName="host">
       <mat-error *ngIf="mqttConfigForm.get('host').hasError('required')">
         {{ 'tb.rulenode.host-required' | translate }}
       </mat-error>
     </mat-form-field>
-    <mat-form-field fxFlex="40" class="mat-block">
+    <mat-form-field class="mat-block gt-sm:max-w-40% gt-sm:flex-full">
       <mat-label translate>tb.rulenode.port</mat-label>
       <input required type="number" step="1" min="1" max="65535" matInput formControlName="port">
       <mat-error *ngIf="mqttConfigForm.get('port').hasError('required')">
@@ -28,7 +28,7 @@
         {{ 'tb.rulenode.port-range' | translate }}
       </mat-error>
     </mat-form-field>
-    <mat-form-field fxFlex="40" class="mat-block">
+    <mat-form-field class="mat-block gt-sm:max-w-40% gt-sm:flex-full">
       <mat-label translate>tb.rulenode.connect-timeout</mat-label>
       <input required type="number" step="1" min="1" max="200" matInput formControlName="connectTimeoutSec">
       <mat-error *ngIf="mqttConfigForm.get('connectTimeoutSec').hasError('required')">
