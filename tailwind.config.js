@@ -13,9 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+const fs = require('fs');
+const path = require("path");
+
+const loadTbClasses = () => {
+  const tbClassesJson = path.resolve(path.join('.', 'dist', 'tbClasses.json'));
+  const data = fs.readFileSync(tbClassesJson, 'utf8');
+  return JSON.parse(data);
+}
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  important: ".tb-default tb-rule-node-config",
+  important: ".tb-default",
   content: [
     "./src/**/*.{html,ts}",
     "./projects/rulenode-core-config/src/**/*.{html,ts}",
@@ -168,11 +178,13 @@ module.exports = {
     },
   },
   safelist: [],
+  blocklist: loadTbClasses(),
   corePlugins: {
     preflight: false,
     filter: false,
     transform: false,
-    blur: false
+    blur: false,
+    borderRadius: false
   },
   experimental: {
     optimizeUniversalDefaults: true,

@@ -3,7 +3,7 @@
   "version": "3.9.0",
   "scripts": {
     "ng": "ng",
-    "start": "node --max_old_space_size=8048 ./node_modules/@angular/cli/bin/ng serve",
+    "start": "yarn run build:scss && node --max_old_space_size=8048 ./node_modules/@angular/cli/bin/ng serve",
     "build:scss": "npx postcss ./projects/rulenode-core-config/style.scss -o ./projects/rulenode-core-config/style.comp.scss",
     "build": "yarn run build:scss && ng build && node install.js",
     "e2e": "ng e2e",
@@ -53,6 +53,7 @@
     "postcss": "^8.4.47",
     "postcss-cli": "^11.0.0",
     "postcss-scss": "^4.0.9",
+    "postcss-selector-parser": "^7.0.0",
     "postinstall-prepare": "^2.0.0",
     "prettier": "^2.8.3",
     "rxjs": "~7.8.1",

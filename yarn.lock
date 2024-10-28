@@ -283,13 +283,6 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/flex-layout@^15.0.0-beta.42":
-  version "15.0.0-beta.42"
-  resolved "https://registry.yarnpkg.com/@angular/flex-layout/-/flex-layout-15.0.0-beta.42.tgz#ad5e1dda32ee6280ba73765be10fd916c222e38e"
-  integrity sha512-cTAPVMMxnyIFwpZwdq0PL5mdP9Qh+R8MB7ZBezVaN3Rz2fRrkagzKpLvPX3TFzepXrvHBdpKsU4b8u+NxEC/6g==
-  dependencies:
-    tslib "^2.3.0"
-
 "@angular/forms@18.2.6":
   version "18.2.6"
   resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-18.2.6.tgz#39dff9354a7228e30e220c1d5a147abd4a881f53"
@@ -7839,6 +7832,14 @@ postcss-selector-parser@^6.0.11, postcss-selector-parser@^6.0.2, postcss-selecto
     cssesc "^3.0.0"
     util-deprecate "^1.0.2"
 
+postcss-selector-parser@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-7.0.0.tgz#41bd8b56f177c093ca49435f65731befe25d6b9c"
+  integrity sha512-9RbEr1Y7FFfptd/1eEdntyjMwLeghW1bHX9GWjXo19vx4ytPQhANltvVxDggzJl7mnWM+dX28kb6cyS/4iQjlQ==
+  dependencies:
+    cssesc "^3.0.0"
+    util-deprecate "^1.0.2"
+
 postcss-value-parser@^4.0.0, postcss-value-parser@^4.1.0, postcss-value-parser@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz#723c09920836ba6d3e5af019f92bc0971c02e514"
@@ -8958,13 +8959,12 @@ thingies@^1.20.0:
 
 "thingsboard@https://github.com/thingsboard/thingsboard-ui-types.git#release/3.9":
   version "3.9.0"
-  resolved "https://github.com/thingsboard/thingsboard-ui-types.git#9a7349125cd6bbb57cb35052aafbe56d08e49271"
+  resolved "https://github.com/thingsboard/thingsboard-ui-types.git#714dd5106bbbf5185a0e40b88841bc5955040de2"
   dependencies:
     "@angular/animations" "18.2.6"
     "@angular/cdk" "18.2.6"
     "@angular/common" "18.2.6"
     "@angular/core" "18.2.6"
-    "@angular/flex-layout" "^15.0.0-beta.42"
     "@angular/forms" "18.2.6"
     "@angular/material" "18.2.6"
     "@angular/platform-browser" "18.2.6"
