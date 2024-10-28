@@ -52,6 +52,9 @@
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
+    "compilationMode": "experimental-local",
+    "supportTestBed": false,
+    "supportJitMode": false,
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,

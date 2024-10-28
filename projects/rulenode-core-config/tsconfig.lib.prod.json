@@ -3,10 +3,5 @@
   "extends": "./tsconfig.lib.json",
   "compilerOptions": {
     "declarationMap": false
-  },
-  "angularCompilerOptions": {
-    "compilationMode": "experimental-local",
-    "supportTestBed": false,
-    "supportJitMode": false
   }
 }
