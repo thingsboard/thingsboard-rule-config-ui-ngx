@@ -74,18 +74,30 @@
   <mat-form-field *ngIf="!restApiCallConfigForm.get('useSimpleClientHttpFactory').value || restApiCallConfigForm.get('enableProxy').value" class="mat-block"
                   subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.read-timeout</mat-label>
-    <input type="number" step="1" min="0" matInput formControlName="readTimeoutMs">
+    <input type="text" min="0" [max]="IntLimit" inputmode="numeric" pattern="[0-9]*" matInput formControlName="readTimeoutMs">
     <mat-hint translate>tb.rulenode.read-timeout-hint</mat-hint>
+    <mat-error
+      *ngIf="restApiCallConfigForm.get('readTimeoutMs').hasError('max')">
+      {{ 'tb.rulenode.int-range' | translate }}
+    </mat-error>
   </mat-form-field>
   <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.max-parallel-requests-count</mat-label>
-    <input type="number" step="1" min="0" matInput formControlName="maxParallelRequestsCount">
+    <input type="text" min="0" [max]="IntLimit" inputmode="numeric" pattern="[0-9]*" matInput formControlName="maxParallelRequestsCount">
     <mat-hint translate>tb.rulenode.max-parallel-requests-count-hint</mat-hint>
+    <mat-error
+      *ngIf="restApiCallConfigForm.get('maxParallelRequestsCount').hasError('max')">
+      {{ 'tb.rulenode.int-range' | translate }}
+    </mat-error>
   </mat-form-field>
   <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.max-response-size</mat-label>
-    <input type="number" step="1" min="1" matInput formControlName="maxInMemoryBufferSizeInKb">
+    <input type="text" min="1" [max]="MemoryBufferSizeInKbLimit" inputmode="numeric" pattern="[0-9]*" matInput formControlName="maxInMemoryBufferSizeInKb">
     <mat-hint translate>tb.rulenode.max-response-size-hint</mat-hint>
+    <mat-error
+      *ngIf="restApiCallConfigForm.get('maxInMemoryBufferSizeInKb').hasError('min') || restApiCallConfigForm.get('maxInMemoryBufferSizeInKb').hasError('max')">
+      {{ 'tb.rulenode.memory-buffer-size-range' | translate: { max: MemoryBufferSizeInKbLimit } }}
+    </mat-error>
   </mat-form-field>
   <label translate class="tb-title">tb.rulenode.headers</label>
   <div class="tb-hint" [innerHTML]="'tb.rulenode.headers-hint' | translate | safe: 'html'">  </div>

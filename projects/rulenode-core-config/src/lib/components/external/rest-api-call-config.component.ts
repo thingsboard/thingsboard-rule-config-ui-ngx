@@ -3,7 +3,7 @@ import { AppState } from '@core/public-api';
 import { RuleNodeConfiguration, RuleNodeConfigurationComponent } from '@shared/public-api';
 import { Store } from '@ngrx/store';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { HttpRequestType } from '../../rulenode-core-config.models';
+import { HttpRequestType, IntLimit } from '../../rulenode-core-config.models';
 
 @Component({
   selector: 'tb-external-node-rest-api-call-config',
@@ -14,9 +14,10 @@ export class RestApiCallConfigComponent extends RuleNodeConfigurationComponent {
 
   restApiCallConfigForm: UntypedFormGroup;
 
-  proxySchemes: string[] = ['http', 'https'];
-
-  httpRequestTypes = Object.keys(HttpRequestType);
+  readonly proxySchemes: string[] = ['http', 'https'];
+  readonly httpRequestTypes = Object.keys(HttpRequestType);
+  readonly MemoryBufferSizeInKbLimit = 25000;
+  readonly IntLimit = IntLimit;
 
   constructor(protected store: Store<AppState>,
               private fb: UntypedFormBuilder) {
@@ -41,11 +42,11 @@ export class RestApiCallConfigComponent extends RuleNodeConfigurationComponent {
       proxyPort: [configuration ? configuration.proxyPort : null, []],
       proxyUser: [configuration ? configuration.proxyUser :null, []],
       proxyPassword: [configuration ? configuration.proxyPassword :null, []],
-      readTimeoutMs: [configuration ? configuration.readTimeoutMs : null, []],
-      maxParallelRequestsCount: [configuration ? configuration.maxParallelRequestsCount : null, [Validators.min(0)]],
+      readTimeoutMs: [configuration ? configuration.readTimeoutMs : null, [Validators.min(0), Validators.max(IntLimit)]],
+      maxParallelRequestsCount: [configuration ? configuration.maxParallelRequestsCount : null, [Validators.min(0), Validators.max(IntLimit)]],
       headers: [configuration ? configuration.headers : null, []],
       credentials: [configuration ? configuration.credentials : null, []],
-      maxInMemoryBufferSizeInKb: [configuration ? configuration.maxInMemoryBufferSizeInKb : null, [Validators.min(1)]]
+      maxInMemoryBufferSizeInKb: [configuration ? configuration.maxInMemoryBufferSizeInKb : null, [Validators.min(1), Validators.max(this.MemoryBufferSizeInKbLimit)]]
     });
   }
 
@@ -69,7 +70,7 @@ export class RestApiCallConfigComponent extends RuleNodeConfigurationComponent {
       if (useSimpleClientHttpFactory) {
         this.restApiCallConfigForm.get('readTimeoutMs').setValidators([]);
       } else {
-        this.restApiCallConfigForm.get('readTimeoutMs').setValidators([Validators.min(0)]);
+        this.restApiCallConfigForm.get('readTimeoutMs').setValidators([Validators.min(0), Validators.max(IntLimit)]);
       }
     }
 
