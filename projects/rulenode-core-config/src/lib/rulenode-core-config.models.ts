@@ -839,3 +839,5 @@ export const PresenceMonitoringStrategiesData = new Map<PresenceMonitoringStrate
     }
   ]
 ]);
+
+export const IntLimit = 2147483648;
