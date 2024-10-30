@@ -13,10 +13,10 @@
       <mat-form-field floatLabel="always" class="mat-block max-w-50% flex-full">
         <mat-label translate>tb.rulenode.max-relation-level</mat-label>
         <input matInput
-               type="number"
+               type="text"
                pattern="[0-9]*"
                min="1"
-               step="1"
+               inputmode="numeric"
                placeholder="{{ 'tb.rulenode.unlimited-level' | translate }}"
                formControlName="maxLevel">
         <mat-error *ngIf="relationsQueryFormGroup.get('maxLevel').hasError('min')">
