@@ -147,6 +147,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'device-relations-query': 'Device relations query',
           'max-relation-level': 'Max relation level',
           'max-relation-level-error': 'Value should be greater than 0 or unspecified.',
+          'max-relation-level-invalid': 'Value should be an integer.',
           'relation-type': 'Relation type',
           'relation-type-pattern': 'Relation type pattern',
           'relation-type-pattern-required': 'Relation type pattern is required',
