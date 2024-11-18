@@ -198,7 +198,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'message-count-required': 'Generated messages limit is required.',
           'min-message-count-message': 'Only 0 minimum message count is allowed.',
           'period-seconds': 'Generation frequency in seconds',
-          'period-seconds-required': 'Period is required.',
+          'period-seconds-required': 'Generation frequency is required.',
           'script-lang-tbel': 'TBEL',
           'script-lang-js': 'JS',
           'use-metadata-period-in-seconds-patterns': 'Use period in seconds pattern',
