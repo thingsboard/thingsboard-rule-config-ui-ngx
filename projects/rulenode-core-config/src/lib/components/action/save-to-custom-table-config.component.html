@@ -25,9 +25,10 @@
     [valRequiredText]="'tb.rulenode.table-col-required' | translate"
     [hintText]="'tb.rulenode.fields-mapping-hint'">
   </tb-kv-map-config>
-  <mat-form-field class="mat-block flex-1" subscriptSizing="dynamic">
+  <mat-form-field class="mat-block flex-1">
     <mat-label translate>tb.rulenode.default-ttl</mat-label>
     <input type="number" min="0" step="1" matInput formControlName="defaultTtl" required>
+    <mat-hint translate>tb.rulenode.default-ttl-zero-hint</mat-hint>
     <mat-error *ngIf="saveToCustomTableConfigForm.get('defaultTtl').hasError('min')">
       {{ 'tb.rulenode.min-default-ttl-message' | translate }}
     </mat-error>

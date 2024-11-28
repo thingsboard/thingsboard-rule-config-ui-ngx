@@ -193,6 +193,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'default-ttl': 'Default TTL in seconds',
           'default-ttl-required': 'Default TTL is required.',
           'default-ttl-hint': 'Rule node will fetch Time-to-Live (TTL) value from the message metadata. If no value is present, it defaults to the TTL specified in the configuration. If the value is set to 0, the TTL from the tenant profile configuration will be applied.',
+          'default-ttl-zero-hint': 'TTL will not be applied if its value is set to 0.',
           'min-default-ttl-message': 'Only 0 minimum TTL is allowed.',
           'generation-parameters': 'Generation parameters',
           'message-count': 'Generated messages limit (0 - unlimited)',
