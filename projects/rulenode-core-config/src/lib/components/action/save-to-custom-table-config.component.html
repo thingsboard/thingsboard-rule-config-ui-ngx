@@ -1,21 +1,39 @@
-<section [formGroup]="saveToCustomTableConfigForm" class="flex flex-col">
+<section [formGroup]="saveToCustomTableConfigForm" class="tb-form-panel no-border no-padding">
   <mat-form-field class="mat-block" subscriptSizing="dynamic">
     <mat-label translate>tb.rulenode.custom-table-name</mat-label>
     <input required matInput formControlName="tableName">
+    <mat-icon class="help-icon margin-8 cursor-pointer"
+              aria-hidden="false"
+              aria-label="help-icon"
+              matSuffix
+              matTooltip="{{ 'tb.rulenode.custom-table-hint' | translate }}">
+      help
+    </mat-icon>
     <mat-error *ngIf="saveToCustomTableConfigForm.get('tableName').hasError('required') ||
                       saveToCustomTableConfigForm.get('tableName').hasError('pattern')">
       {{ 'tb.rulenode.custom-table-name-required' | translate }}
     </mat-error>
-    <mat-hint translate>tb.rulenode.custom-table-hint</mat-hint>
   </mat-form-field>
-  <label translate class="tb-title tb-required">tb.rulenode.fields-mapping</label>
-  <tb-kv-map-config-old
+  <tb-kv-map-config
     required
     formControlName="fieldsMapping"
-    requiredText="tb.rulenode.fields-mapping-required"
-    keyText="tb.rulenode.message-field"
-    keyRequiredText="tb.rulenode.message-field-required"
-    valText="tb.rulenode.table-col"
-    valRequiredText="tb.rulenode.table-col-required">
-  </tb-kv-map-config-old>
+    [labelText]="'tb.rulenode.fields-mapping' | translate"
+    [requiredText]="'tb.rulenode.fields-mapping-required' | translate"
+    [keyText]="'tb.rulenode.message-field' | translate"
+    [keyRequiredText]="'tb.rulenode.message-field-required' | translate"
+    [valText]="'tb.rulenode.table-col' | translate"
+    [valRequiredText]="'tb.rulenode.table-col-required' | translate"
+    [hintText]="'tb.rulenode.fields-mapping-hint'">
+  </tb-kv-map-config>
+  <mat-form-field class="mat-block flex-1">
+    <mat-label translate>tb.rulenode.default-ttl</mat-label>
+    <input type="number" min="0" step="1" matInput formControlName="defaultTtl" required>
+    <mat-hint translate>tb.rulenode.default-ttl-zero-hint</mat-hint>
+    <mat-error *ngIf="saveToCustomTableConfigForm.get('defaultTtl').hasError('min')">
+      {{ 'tb.rulenode.min-default-ttl-message' | translate }}
+    </mat-error>
+    <mat-error *ngIf="saveToCustomTableConfigForm.get('defaultTtl').hasError('required')">
+      {{ 'tb.rulenode.default-ttl-required' | translate }}
+    </mat-error>
+  </mat-form-field>
 </section>

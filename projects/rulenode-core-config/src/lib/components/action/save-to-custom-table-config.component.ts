@@ -25,7 +25,8 @@ export class SaveToCustomTableConfigComponent extends RuleNodeConfigurationCompo
   protected onConfigurationSet(configuration: RuleNodeConfiguration) {
     this.saveToCustomTableConfigForm = this.fb.group({
       tableName: [configuration ? configuration.tableName : null, [Validators.required, Validators.pattern(/.*\S.*/)]],
-      fieldsMapping: [configuration ? configuration.fieldsMapping : null, [Validators.required]]
+      fieldsMapping: [configuration ? configuration.fieldsMapping : null, [Validators.required]],
+      defaultTtl: [configuration ? configuration.defaultTtl : 0, [Validators.required, Validators.min(0)]]
     });
   }
 
