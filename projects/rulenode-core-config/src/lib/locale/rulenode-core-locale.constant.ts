@@ -207,8 +207,11 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'use-metadata-period-in-seconds-patterns-hint':
             'If selected, rule node use period in seconds interval pattern from message metadata or data ' +
             'assuming that intervals are in the seconds.',
-          'period-in-seconds-pattern': 'Period in seconds pattern',
-          'period-in-seconds-pattern-required': 'Period in seconds pattern is required',
+          'period-value': 'Period value',
+          'period-value-required': 'Period value is required',
+          'period-time-unit': 'Period time unit',
+          'period-time-unit-hint': 'Only SECONDS, MINUTES and HOURS time units are supported.',
+          'period-time-unit-required': 'Period time unit is required',
           'min-period-seconds-message': 'Only 1 second minimum period is allowed.',
           originator: 'Originator',
           'message-body': 'Message body',
@@ -466,6 +469,7 @@ export default function addRuleNodeCoreLocaleEnglish(translate: TranslateService
           'use-system-sms-settings': 'Use system SMS provider settings',
           'min-period-0-seconds-message': 'Only 0 second minimum period is allowed.',
           'max-pending-messages': 'Maximum pending messages',
+          'max-pending-messages-hint': 'Maximum number of messages that can be delayed at once. If this limit is reached, incoming messages will be routed via Failure chain.',
           'max-pending-messages-required': 'Maximum pending messages is required.',
           'max-pending-messages-range': 'Maximum pending messages should be in a range from 1 to 100000.',
           'originator-types-filter': 'Originator types filter',

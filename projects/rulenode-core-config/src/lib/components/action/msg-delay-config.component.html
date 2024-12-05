@@ -1,32 +1,40 @@
-<section [formGroup]="msgDelayConfigForm" class="flex flex-col">
-  <mat-checkbox formControlName="useMetadataPeriodInSecondsPatterns">
-    {{ 'tb.rulenode.use-metadata-period-in-seconds-patterns' | translate }}
-  </mat-checkbox>
-  <div class="tb-hint" translate>tb.rulenode.use-metadata-period-in-seconds-patterns-hint</div>
-  <mat-form-field *ngIf="msgDelayConfigForm.get('useMetadataPeriodInSecondsPatterns').value !== true; else periodInSecondsPattern"
-                  class="mat-block">
-    <mat-label translate>tb.rulenode.period-seconds</mat-label>
-    <input required type="number" min="0" step="1" matInput formControlName="periodInSeconds">
-    <mat-error *ngIf="msgDelayConfigForm.get('periodInSeconds').hasError('required')">
-      {{ 'tb.rulenode.period-seconds-required' | translate }}
-    </mat-error>
-    <mat-error *ngIf="msgDelayConfigForm.get('periodInSeconds').hasError('min')">
-      {{ 'tb.rulenode.min-period-0-seconds-message' | translate }}
-    </mat-error>
-  </mat-form-field>
-  <ng-template #periodInSecondsPattern>
-    <mat-form-field class="mat-block" subscriptSizing="dynamic">
-      <mat-label translate>tb.rulenode.period-in-seconds-pattern</mat-label>
-      <input required matInput formControlName="periodInSecondsPattern">
-      <mat-error *ngIf="msgDelayConfigForm.get('periodInSecondsPattern').hasError('required')">
-        {{ 'tb.rulenode.period-in-seconds-pattern-required' | translate }}
-      </mat-error>
-      <mat-hint translate>tb.rulenode.general-pattern-hint</mat-hint>
-    </mat-form-field>
-  </ng-template>
+<section [formGroup]="msgDelayConfigForm" class="tb-form-panel no-border no-padding">
+  <div class="tb-form-panel stroked">
+    <tb-example-hint [hintText]="'tb.rulenode.attributes-scope-hint'">
+    </tb-example-hint>
+    <div class="tb-form-row no-border no-padding tb-standard-fields">
+      <mat-form-field class="flex" subscriptSizing="dynamic">
+        <mat-label translate>tb.rulenode.period-value</mat-label>
+        <input required matInput formControlName="period">
+        <mat-error *ngIf="msgDelayConfigForm.get('period').hasError('required')">
+          {{ 'tb.rulenode.period-value-required' | translate }}
+        </mat-error>
+        <mat-hint></mat-hint>
+      </mat-form-field>
+      <mat-form-field class="flex" subscriptSizing="dynamic">
+        <mat-label translate>tb.rulenode.period-time-unit</mat-label>
+        <input required matInput formControlName="timeUnit" [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let timeUnit of filteredTimeUnits | async" [value]="timeUnit">
+            <span [innerHTML]="timeUnit | highlight:searchText"></span>
+          </mat-option>
+        </mat-autocomplete>
+        <mat-icon matSuffix class="help-icon margin-8 cursor-pointer" aria-hidden="false" aria-label="help-icon"
+                  color="primary"
+                  matTooltip="{{ 'tb.rulenode.period-time-unit-hint' | translate }}">
+          help
+        </mat-icon>
+        <mat-error *ngIf="msgDelayConfigForm.get('timeUnit').hasError('required')">
+          {{ 'tb.rulenode.period-time-unit-required' | translate }}
+        </mat-error>
+        <mat-hint></mat-hint>
+      </mat-form-field>
+    </div>
+  </div>
   <mat-form-field class="mat-block">
     <mat-label translate>tb.rulenode.max-pending-messages</mat-label>
     <input required type="number" min="1" max="100000" step="1" matInput formControlName="maxPendingMsgs">
+    <mat-hint translate>tb.rulenode.max-pending-messages-hint</mat-hint>
     <mat-error *ngIf="msgDelayConfigForm.get('maxPendingMsgs').hasError('required')">
       {{ 'tb.rulenode.max-pending-messages-required' | translate }}
     </mat-error>
