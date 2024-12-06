@@ -13,13 +13,13 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field class="flex">
-        <mat-label translate>tb.rulenode.period-seconds</mat-label>
+        <mat-label translate>tb.rulenode.generation-frequency-seconds</mat-label>
         <input required type="number" min="1" step="1" matInput formControlName="periodInSeconds">
         <mat-error *ngIf="generatorConfigForm.get('periodInSeconds').hasError('required')">
-          {{ 'tb.rulenode.period-seconds-required' | translate }}
+          {{ 'tb.rulenode.generation-frequency-required' | translate }}
         </mat-error>
         <mat-error *ngIf="generatorConfigForm.get('periodInSeconds').hasError('min')">
-          {{ 'tb.rulenode.min-period-seconds-message' | translate }}
+          {{ 'tb.rulenode.min-generation-frequency-message' | translate }}
         </mat-error>
       </mat-form-field>
     </div>
