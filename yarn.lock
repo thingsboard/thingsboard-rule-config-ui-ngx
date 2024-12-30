@@ -9181,7 +9181,7 @@ thingies@^1.20.0:
 
 "thingsboard@https://github.com/thingsboard/thingsboard-ui-types.git#release/3.9":
   version "3.9.0"
-  resolved "https://github.com/thingsboard/thingsboard-ui-types.git#7421d17d8dc78334e43a0ec03afcc2970ac8c761"
+  resolved "https://github.com/thingsboard/thingsboard-ui-types.git#02d6f772b69cef000924d96debed32669d92ee63"
   dependencies:
     "@angular/animations" "18.2.13"
     "@angular/cdk" "18.2.14"
